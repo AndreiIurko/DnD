@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
-import com.andreyyurko.dnd.data.Spell
+import com.andreyyurko.dnd.data.SpellSpecificLanguage
 
 class SpellsListAdapter : RecyclerView.Adapter<SpellsListAdapter.ViewHolder>() {
 
-    var spellsList : List<Spell> = listOf(Spell(
+    var spellsList : List<SpellSpecificLanguage> = listOf(SpellSpecificLanguage(
         name = "I will kill you",
         level = "100",
         text = "kills everyone within range",
@@ -18,9 +18,9 @@ class SpellsListAdapter : RecyclerView.Adapter<SpellsListAdapter.ViewHolder>() {
     ))
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val spellNameTextView = itemView.findViewById<TextView>(R.id.nameTextView)
-        val spellLevelTextView = itemView.findViewById<TextView>(R.id.levelTextView)
-        val spellDescriptionTextView = itemView.findViewById<TextView>(R.id.descriptionTextView)
+        val spellNameTextView: TextView = itemView.findViewById(R.id.nameTextView)
+        val spellLevelTextView: TextView = itemView.findViewById(R.id.levelTextView)
+        val spellDescriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

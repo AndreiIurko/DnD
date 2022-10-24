@@ -49,6 +49,7 @@ dependencies {
     def moshiVersion = '1.12.0'
     implementation "com.squareup.moshi:moshi:$moshiVersion"
     implementation "com.squareup.moshi:moshi-adapters:$moshiVersion"
+    implementation("com.squareup.moshi:moshi-kotlin:$moshiVersion")
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
     // AndroidX.
     def lifecycleVersion = "2.4.0"
