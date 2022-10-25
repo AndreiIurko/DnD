@@ -49,6 +49,13 @@ class SpellsListFragment : BaseFragment(R.layout.fragment_spells_list) {
                 }
             }
         }
+
+        viewBinding.searchButton.setOnClickListener {
+            (viewBinding.spellsRecyclerView.adapter as SpellsListAdapter).apply {
+                setShownSpellList(viewBinding.searchEditText.text.toString())
+                notifyDataSetChanged()
+            }
+        }
     }
 
     private fun setupRecyclerView(): SpellsListAdapter {
@@ -68,6 +75,7 @@ class SpellsListFragment : BaseFragment(R.layout.fragment_spells_list) {
             is SpellsListViewModel.LoadSpellsActionState.Data -> {
                 (viewBinding.spellsRecyclerView.adapter as SpellsListAdapter).apply {
                     spellsList = viewState.spells
+                    setShownSpellList()
                     notifyDataSetChanged()
                 }
             }

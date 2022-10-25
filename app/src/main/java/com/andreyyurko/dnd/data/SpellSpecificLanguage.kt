@@ -3,6 +3,9 @@ package com.andreyyurko.dnd.data
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+interface Properties {
+    val properties: List<String>
+}
 
 data class SpellSpecificLanguage(
     val name: String = "",
@@ -15,4 +18,6 @@ data class SpellSpecificLanguage(
     val components: String = "",
     val duration: String = "",
     val source: String = ""
-)
+) : Properties {
+    override val properties get() = listOf(name, level, text, school, castingTime, range, materials, components, duration, source)
+}

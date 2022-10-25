@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Dnd</string>
+    <string name="spell_name">Название: %1$s</string>
+    <string name="spell_level_and_school">%1$s уровень, %2$s</string>
+    <string name="fragment_spell_list_search_edit_text_hint">Поиск заклинания</string>
+    <string name="fragment_spells_list_search_button">Найти</string>
 </resources>
