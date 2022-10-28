@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andreyyurko.dnd.data.SpellSpecificLanguage
+import com.andreyyurko.dnd.utils.SpellsFavoritesHolder
 import com.andreyyurko.dnd.utils.SpellsParser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -15,8 +16,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SpellsListViewModel @Inject constructor(
-    private val spellsParser: SpellsParser
+    private val spellsParser: SpellsParser,
 ) : ViewModel() {
+
+    @Inject
+    lateinit var spellsFavoritesHolder: SpellsFavoritesHolder
 
     companion object {
         const val LOG_TAG = "SpellsListViewModel"
@@ -49,6 +53,13 @@ class SpellsListViewModel @Inject constructor(
                 _loadSpellsActionState.emit(LoadSpellsActionState.Error(error.message.toString()))
             }
         }
+    }
+    fun getFavoriteSpells(): MutableSet<SpellSpecificLanguage> {
+        return spellsFavoritesHolder.getFavoriteSpells()
+    }
+
+    fun saveFavoriteSpells() {
+        spellsFavoritesHolder.saveFavoritesSpells()
     }
 
 }

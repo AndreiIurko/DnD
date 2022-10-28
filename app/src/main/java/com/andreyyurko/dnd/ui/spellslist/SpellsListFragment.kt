@@ -1,7 +1,9 @@
 package com.andreyyurko.dnd.ui.spellslist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -40,6 +42,7 @@ class SpellsListFragment : BaseFragment(R.layout.fragment_spells_list) {
 
         setupRecyclerView()
 
+
         viewModel.parseSpells(context)
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -56,15 +59,42 @@ class SpellsListFragment : BaseFragment(R.layout.fragment_spells_list) {
                 notifyDataSetChanged()
             }
         }
+
+        viewBinding.favoritesButton.setOnClickListener {
+            if (viewBinding.spellsRecyclerView.visibility == View.VISIBLE) {
+                viewBinding.spellsRecyclerView.visibility = View.GONE
+                viewBinding.favoriteSpellsRecyclerView.visibility = View.VISIBLE
+                (viewBinding.favoriteSpellsRecyclerView.adapter  as SpellsListAdapter).apply {
+                    Log.d(LOG_TAG, viewModel.getFavoriteSpells().toList().toString())
+                    spellsList = viewModel.getFavoriteSpells().toList()
+                    setShownSpellList()
+                    notifyDataSetChanged()
+                }
+            }
+            else {
+                viewBinding.spellsRecyclerView.visibility = View.VISIBLE
+                viewBinding.favoriteSpellsRecyclerView.visibility = View.GONE
+            }
+        }
     }
 
-    private fun setupRecyclerView(): SpellsListAdapter {
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.saveFavoriteSpells()
+    }
+
+    private fun setupRecyclerView() {
         val recyclerView = viewBinding.spellsRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        val adapter = SpellsListAdapter()
+        val adapter = SpellsListAdapter(viewModel.spellsFavoritesHolder)
         recyclerView.adapter = adapter
         //recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
-        return adapter
+
+        val recyclerViewFavoriteSpells = viewBinding.favoriteSpellsRecyclerView
+        recyclerViewFavoriteSpells.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        val adapterFavoriteSpells = SpellsListAdapter(viewModel.spellsFavoritesHolder)
+        recyclerViewFavoriteSpells.adapter = adapterFavoriteSpells
+        recyclerViewFavoriteSpells.visibility = View.GONE
     }
 
     private fun renderViewState(viewState: SpellsListViewModel.LoadSpellsActionState) {

@@ -1,6 +1,7 @@
 package com.andreyyurko.dnd.ui.spellslist
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +10,12 @@ import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.SpellSpecificLanguage
+import com.andreyyurko.dnd.utils.SpellsFavoritesHolder
+import javax.inject.Inject
 
-class SpellsListAdapter : RecyclerView.Adapter<SpellsListAdapter.ViewHolder>() {
+class SpellsListAdapter @Inject constructor(
+    private val spellsFavoritesHolder: SpellsFavoritesHolder
+) : RecyclerView.Adapter<SpellsListAdapter.ViewHolder>() {
 
     var spellsList : List<SpellSpecificLanguage> = emptyList()
     var shownSpellList : List<SpellSpecificLanguage> = emptyList()
@@ -40,6 +45,15 @@ class SpellsListAdapter : RecyclerView.Adapter<SpellsListAdapter.ViewHolder>() {
             HtmlCompat.fromHtml(shownSpellList[position].school, HtmlCompat.FROM_HTML_MODE_LEGACY)
         )
         holder.spellDescriptionTextView.text = HtmlCompat.fromHtml(shownSpellList[position].text, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        holder.spellDescriptionTextView.setOnClickListener {
+            Log.d(LOG_TAG, shownSpellList[position].name)
+            if (spellsFavoritesHolder.getFavoriteSpells().contains(shownSpellList[position])) {
+                spellsFavoritesHolder.removeFavoriteSpell(shownSpellList[position])
+            }
+            else {
+                spellsFavoritesHolder.putFavoriteSpell(shownSpellList[position])
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -52,6 +66,10 @@ class SpellsListAdapter : RecyclerView.Adapter<SpellsListAdapter.ViewHolder>() {
             searchQuery = newSearchQuery
             shownSpellList = filterBySearch(shownSpellList, searchQuery)
         }
+    }
+
+    companion object {
+        const val LOG_TAG = "SpellsListAdapter"
     }
 
 }
