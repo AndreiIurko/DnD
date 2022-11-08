@@ -18,9 +18,7 @@ class SpellsListAdapter @Inject constructor(
 ) : RecyclerView.Adapter<SpellsListAdapter.ViewHolder>() {
 
     var spellsList : List<SpellSpecificLanguage> = emptyList()
-    var shownSpellList : List<SpellSpecificLanguage> = emptyList()
-
-    var searchQuery = ""
+    lateinit var viewModel: SpellsListViewModel
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val spellNameTextView: TextView = itemView.findViewById(R.id.nameTextView)
@@ -37,35 +35,29 @@ class SpellsListAdapter @Inject constructor(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.spellNameTextView.text = holder.context.getString(
             R.string.spell_name,
-            HtmlCompat.fromHtml(shownSpellList[position].name, HtmlCompat.FROM_HTML_MODE_LEGACY)
+            HtmlCompat.fromHtml(spellsList[position].name, HtmlCompat.FROM_HTML_MODE_LEGACY)
         )
         holder.spellLevelAndSchoolTextView.text =  holder.context.getString(
             R.string.spell_level_and_school,
-            HtmlCompat.fromHtml(shownSpellList[position].level, HtmlCompat.FROM_HTML_MODE_LEGACY),
-            HtmlCompat.fromHtml(shownSpellList[position].school, HtmlCompat.FROM_HTML_MODE_LEGACY)
+            HtmlCompat.fromHtml(spellsList[position].level, HtmlCompat.FROM_HTML_MODE_LEGACY),
+            HtmlCompat.fromHtml(spellsList[position].school, HtmlCompat.FROM_HTML_MODE_LEGACY)
         )
-        holder.spellDescriptionTextView.text = HtmlCompat.fromHtml(shownSpellList[position].text, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        holder.spellDescriptionTextView.text = HtmlCompat.fromHtml(spellsList[position].text, HtmlCompat.FROM_HTML_MODE_LEGACY)
         holder.spellDescriptionTextView.setOnClickListener {
-            Log.d(LOG_TAG, shownSpellList[position].name)
-            if (spellsFavoritesHolder.getFavoriteSpells().contains(shownSpellList[position])) {
-                spellsFavoritesHolder.removeFavoriteSpell(shownSpellList[position])
+            Log.d(LOG_TAG, spellsList[position].name)
+            if (spellsFavoritesHolder.getFavoriteSpells().contains(spellsList[position])) {
+                spellsFavoritesHolder.removeFavoriteSpell(spellsList[position])
+                viewModel.getFavoriteSpells()
             }
             else {
-                spellsFavoritesHolder.putFavoriteSpell(shownSpellList[position])
+                spellsFavoritesHolder.putFavoriteSpell(spellsList[position])
+                viewModel.getFavoriteSpells()
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return shownSpellList.size
-    }
-
-    fun setShownSpellList(newSearchQuery: String = searchQuery) {
-        shownSpellList = spellsList
-        if (newSearchQuery != searchQuery) {
-            searchQuery = newSearchQuery
-            shownSpellList = filterBySearch(shownSpellList, searchQuery)
-        }
+        return spellsList.size
     }
 
     companion object {

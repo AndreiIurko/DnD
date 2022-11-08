@@ -2,20 +2,26 @@ package com.andreyyurko.dnd.ui.spellslist
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.View
-import androidx.core.view.isVisible
+import android.widget.LinearLayout
+import android.widget.PopupMenu
+import android.widget.PopupWindow
+import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.andreyyurko.dnd.R
-import com.andreyyurko.dnd.ui.base.BaseFragment
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentSpellsListBinding
+import com.andreyyurko.dnd.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.applyInsetter
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class SpellsListFragment : BaseFragment(R.layout.fragment_spells_list) {
@@ -42,8 +48,8 @@ class SpellsListFragment : BaseFragment(R.layout.fragment_spells_list) {
 
         setupRecyclerView()
 
-
         viewModel.parseSpells(context)
+        viewModel.getFavoriteSpells()
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -55,26 +61,23 @@ class SpellsListFragment : BaseFragment(R.layout.fragment_spells_list) {
 
         viewBinding.searchButton.setOnClickListener {
             (viewBinding.spellsRecyclerView.adapter as SpellsListAdapter).apply {
-                setShownSpellList(viewBinding.searchEditText.text.toString())
-                notifyDataSetChanged()
+                viewModel.setShownSpellList(viewBinding.searchEditText.text.toString(), this)
             }
         }
 
-        viewBinding.favoritesButton.setOnClickListener {
-            if (viewBinding.spellsRecyclerView.visibility == View.VISIBLE) {
-                viewBinding.spellsRecyclerView.visibility = View.GONE
-                viewBinding.favoriteSpellsRecyclerView.visibility = View.VISIBLE
-                (viewBinding.favoriteSpellsRecyclerView.adapter  as SpellsListAdapter).apply {
-                    Log.d(LOG_TAG, viewModel.getFavoriteSpells().toList().toString())
-                    spellsList = viewModel.getFavoriteSpells().toList()
-                    setShownSpellList()
-                    notifyDataSetChanged()
+        /*viewBinding.menuButton.setOnClickListener {
+            when (viewModel.shownList) {
+                SpellsListViewModel.SpellListState.All -> {
+                    viewModel.shownList = SpellsListViewModel.SpellListState.Favorites
+                }
+                SpellsListViewModel.SpellListState.Favorites -> {
+                    viewModel.shownList = SpellsListViewModel.SpellListState.All
                 }
             }
-            else {
-                viewBinding.spellsRecyclerView.visibility = View.VISIBLE
-                viewBinding.favoriteSpellsRecyclerView.visibility = View.GONE
-            }
+            viewModel.setShownSpellList("", viewBinding.spellsRecyclerView.adapter as SpellsListAdapter)
+        }*/
+        viewBinding.menuButton.setOnClickListener {
+            setupPopupMenu()
         }
     }
 
@@ -87,14 +90,9 @@ class SpellsListFragment : BaseFragment(R.layout.fragment_spells_list) {
         val recyclerView = viewBinding.spellsRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         val adapter = SpellsListAdapter(viewModel.spellsFavoritesHolder)
+        adapter.viewModel = viewModel
         recyclerView.adapter = adapter
         //recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
-
-        val recyclerViewFavoriteSpells = viewBinding.favoriteSpellsRecyclerView
-        recyclerViewFavoriteSpells.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        val adapterFavoriteSpells = SpellsListAdapter(viewModel.spellsFavoritesHolder)
-        recyclerViewFavoriteSpells.adapter = adapterFavoriteSpells
-        recyclerViewFavoriteSpells.visibility = View.GONE
     }
 
     private fun renderViewState(viewState: SpellsListViewModel.LoadSpellsActionState) {
@@ -102,16 +100,46 @@ class SpellsListFragment : BaseFragment(R.layout.fragment_spells_list) {
             is SpellsListViewModel.LoadSpellsActionState.Loading -> {
                 // TODO: реализовать отображение загрузки
             }
-            is SpellsListViewModel.LoadSpellsActionState.Data -> {
+            is SpellsListViewModel.LoadSpellsActionState.Ok -> {
                 (viewBinding.spellsRecyclerView.adapter as SpellsListAdapter).apply {
-                    spellsList = viewState.spells
-                    setShownSpellList()
-                    notifyDataSetChanged()
+                    //spellsList = viewModel.allSpells
+                    //notifyDataSetChanged()
+                    viewModel.setShownSpellList("", this)
                 }
             }
             is SpellsListViewModel.LoadSpellsActionState.Error -> {
                 // TODO: реализовать показание ошибки
             }
+        }
+    }
+
+    private fun setupPopupMenu() {
+        val filtersMenuView = layoutInflater.inflate(R.layout.view_filters_for_spell_list, null)
+        val wid = LinearLayout.LayoutParams.WRAP_CONTENT
+        val high = LinearLayout.LayoutParams.WRAP_CONTENT
+        val focus = true
+        val filtersMenu = PopupWindow(filtersMenuView, wid, high, focus)
+        val showFavoritesButton = filtersMenuView.findViewById<TextView>(R.id.show_favorites_button)
+        when (viewModel.shownList) {
+            SpellsListViewModel.SpellListState.All -> {
+                showFavoritesButton.text = "Показать избранные"
+            }
+            SpellsListViewModel.SpellListState.Favorites -> {
+                showFavoritesButton.text = "Показать все"
+            }
+        }
+        filtersMenu.showAtLocation(view, Gravity.NO_GRAVITY, viewBinding.menuButton.x.toInt() - 350, viewBinding.menuButton.y.toInt() + 100)
+        showFavoritesButton.setOnClickListener {
+            when (viewModel.shownList) {
+                SpellsListViewModel.SpellListState.All -> {
+                    viewModel.shownList = SpellsListViewModel.SpellListState.Favorites
+                }
+                SpellsListViewModel.SpellListState.Favorites -> {
+                    viewModel.shownList = SpellsListViewModel.SpellListState.All
+                }
+            }
+            viewModel.setShownSpellList("", viewBinding.spellsRecyclerView.adapter as SpellsListAdapter)
+            filtersMenu.dismiss()
         }
     }
 }

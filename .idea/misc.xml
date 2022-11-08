@@ -6,6 +6,10 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3453125" />
         <entry key="app/src/main/res/layout/fragment_spells_list.xml" value="0.17395833333333333" />
         <entry key="app/src/main/res/layout/spell.xml" value="0.17395833333333333" />
+        <entry key="app/src/main/res/layout/spells_list_filter_menu.xml" value="0.17291666666666666" />
+        <entry key="app/src/main/res/layout/spells_list_filter_menu_window.xml" value="0.17291666666666666" />
+        <entry key="app/src/main/res/layout/view_filters_for_spell_list.xml" value="0.5" />
+        <entry key="app/src/main/res/menu/spells_filters.xml" value="0.1875" />
       </map>
     </option>
   </component>
