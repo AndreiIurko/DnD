@@ -65,17 +65,6 @@ class SpellsListFragment : BaseFragment(R.layout.fragment_spells_list) {
             }
         }
 
-        /*viewBinding.menuButton.setOnClickListener {
-            when (viewModel.shownList) {
-                SpellsListViewModel.SpellListState.All -> {
-                    viewModel.shownList = SpellsListViewModel.SpellListState.Favorites
-                }
-                SpellsListViewModel.SpellListState.Favorites -> {
-                    viewModel.shownList = SpellsListViewModel.SpellListState.All
-                }
-            }
-            viewModel.setShownSpellList("", viewBinding.spellsRecyclerView.adapter as SpellsListAdapter)
-        }*/
         viewBinding.menuButton.setOnClickListener {
             setupPopupMenu()
         }
