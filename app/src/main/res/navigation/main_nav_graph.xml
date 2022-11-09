@@ -12,11 +12,28 @@
         <action
             android:id="@+id/action_homeFragment_to_spellsListFragment"
             app:destination="@id/spellsListFragment" />
+        <action android:id="@+id/action_homeFragment_to_charactersListFragment"
+                app:destination="@id/charactersListFragment"/>
     </fragment>
 
     <fragment
         android:id="@+id/spellsListFragment"
         android:name="com.andreyyurko.dnd.ui.spellslist.SpellsListFragment"
         android:label="SpellsListFragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/charactersListFragment"
+        android:name="com.andreyyurko.dnd.ui.characterlist.CharacterListFragment"
+        android:label="CharacterListFragment">
+        <action android:id="@+id/action_charactersListFragment_to_characterMainFragment"
+                app:destination="@id/characterMainFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/characterMainFragment"
+        android:name="com.andreyyurko.dnd.ui.charactermain.CharacterMainFragment"
+        android:label="CharacterMainFragment">
+
     </fragment>
 </navigation>

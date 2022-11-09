@@ -42,7 +42,7 @@ class SpellsListFragment : BaseFragment(R.layout.fragment_spells_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewBinding.spellsRecyclerView.applyInsetter {
+        viewBinding.searchEditText.applyInsetter {
             type(statusBars = true) { margin() }
         }
 
