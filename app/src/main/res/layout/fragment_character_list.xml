@@ -28,6 +28,18 @@
             android:layout_marginTop="12dp"
     />
 
+    <ImageButton
+            android:id="@+id/addImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/charactersTextView"
+            app:layout_constraintBottom_toBottomOf="@id/charactersTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_baseline_add_36"
+            android:background="@color/white"
+            android:layout_marginEnd="24dp"
+    />
+
     <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="12dp"
             android:id="@+id/charactersRecyclerView"

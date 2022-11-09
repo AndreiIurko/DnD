@@ -7,5 +7,7 @@ abstract class CharacterAbility {
 
     abstract val nextAbilities : MutableList<CharacterAbility>
 
+    abstract val id: Int
+
     //TODO: разобраться с сохранением ability по отдельности
 }

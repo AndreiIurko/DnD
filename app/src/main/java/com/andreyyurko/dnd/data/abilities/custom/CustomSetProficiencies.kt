@@ -10,4 +10,6 @@ class CustomSetProficiencies : CharacterAbility() {
 
     override val nextAbilities: MutableList<CharacterAbility>
         get() = TODO("Not yet implemented")
+    override val id: Int
+        get() = TODO("Not yet implemented")
 }
