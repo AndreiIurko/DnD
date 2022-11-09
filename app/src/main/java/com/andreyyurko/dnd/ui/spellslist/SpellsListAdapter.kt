@@ -1,6 +1,7 @@
 package com.andreyyurko.dnd.ui.spellslist
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +10,15 @@ import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.SpellSpecificLanguage
+import com.andreyyurko.dnd.utils.SpellsFavoritesHolder
+import javax.inject.Inject
 
-class SpellsListAdapter : RecyclerView.Adapter<SpellsListAdapter.ViewHolder>() {
+class SpellsListAdapter @Inject constructor(
+    private val spellsFavoritesHolder: SpellsFavoritesHolder
+) : RecyclerView.Adapter<SpellsListAdapter.ViewHolder>() {
 
     var spellsList : List<SpellSpecificLanguage> = emptyList()
-    var shownSpellList : List<SpellSpecificLanguage> = emptyList()
-
-    var searchQuery = ""
+    lateinit var viewModel: SpellsListViewModel
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val spellNameTextView: TextView = itemView.findViewById(R.id.nameTextView)
@@ -32,26 +35,33 @@ class SpellsListAdapter : RecyclerView.Adapter<SpellsListAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.spellNameTextView.text = holder.context.getString(
             R.string.spell_name,
-            HtmlCompat.fromHtml(shownSpellList[position].name, HtmlCompat.FROM_HTML_MODE_LEGACY)
+            HtmlCompat.fromHtml(spellsList[position].name, HtmlCompat.FROM_HTML_MODE_LEGACY)
         )
         holder.spellLevelAndSchoolTextView.text =  holder.context.getString(
             R.string.spell_level_and_school,
-            HtmlCompat.fromHtml(shownSpellList[position].level, HtmlCompat.FROM_HTML_MODE_LEGACY),
-            HtmlCompat.fromHtml(shownSpellList[position].school, HtmlCompat.FROM_HTML_MODE_LEGACY)
+            HtmlCompat.fromHtml(spellsList[position].level, HtmlCompat.FROM_HTML_MODE_LEGACY),
+            HtmlCompat.fromHtml(spellsList[position].school, HtmlCompat.FROM_HTML_MODE_LEGACY)
         )
-        holder.spellDescriptionTextView.text = HtmlCompat.fromHtml(shownSpellList[position].text, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        holder.spellDescriptionTextView.text = HtmlCompat.fromHtml(spellsList[position].text, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        holder.spellDescriptionTextView.setOnClickListener {
+            Log.d(LOG_TAG, spellsList[position].name)
+            if (spellsFavoritesHolder.getFavoriteSpells().contains(spellsList[position])) {
+                spellsFavoritesHolder.removeFavoriteSpell(spellsList[position])
+                viewModel.getFavoriteSpells()
+            }
+            else {
+                spellsFavoritesHolder.putFavoriteSpell(spellsList[position])
+                viewModel.getFavoriteSpells()
+            }
+        }
     }
 
     override fun getItemCount(): Int {
-        return shownSpellList.size
+        return spellsList.size
     }
 
-    fun setShownSpellList(newSearchQuery: String = searchQuery) {
-        shownSpellList = spellsList
-        if (newSearchQuery != searchQuery) {
-            searchQuery = newSearchQuery
-            shownSpellList = filterBySearch(shownSpellList, searchQuery)
-        }
+    companion object {
+        const val LOG_TAG = "SpellsListAdapter"
     }
 
 }
