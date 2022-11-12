@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -12,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.characters.CharacterBriefInfo
 
-class CharacterListAdapter : RecyclerView.Adapter<CharacterListAdapter.ViewHolder>() {
+class CharacterListAdapter(
+    private val viewModel: CharacterListViewModel
+) : RecyclerView.Adapter<CharacterListAdapter.ViewHolder>() {
 
     var charactersList : List<CharacterBriefInfo> = emptyList()
 
@@ -21,6 +24,7 @@ class CharacterListAdapter : RecyclerView.Adapter<CharacterListAdapter.ViewHolde
         val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
         val classTextView: TextView = itemView.findViewById(R.id.classTextView)
         val levelTextView: TextView = itemView.findViewById(R.id.levelTextView)
+        val deleteImageButton: ImageButton = itemView.findViewById(R.id.deleteImageButton)
         val mainView: ConstraintLayout = itemView.findViewById(R.id.main)
         val context: Context = itemView.context
     }
@@ -39,7 +43,12 @@ class CharacterListAdapter : RecyclerView.Adapter<CharacterListAdapter.ViewHolde
         holder.classTextView.text = charactersList[position].characterClass
         holder.levelTextView.text = charactersList[position].level
         holder.mainView.setOnClickListener {
+            viewModel.setShownCharacter(charactersList[position].id)
             it.findNavController().navigate(R.id.characterMainFragment)
+        }
+        holder.deleteImageButton.setOnClickListener {
+            charactersList = viewModel.deleteCharacter(charactersList[position].id)
+            notifyDataSetChanged()
         }
     }
 }

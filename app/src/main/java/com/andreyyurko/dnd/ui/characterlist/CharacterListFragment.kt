@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentCharacterListBinding
@@ -33,14 +34,21 @@ class CharacterListFragment : Fragment(R.layout.fragment_character_list) {
             type(statusBars = true) { margin() }
         }
 
+        viewBinding.addImageButton.setOnClickListener {
+            viewModel.createNewCharacter()
+            val controller = findNavController()
+            controller.navigate(R.id.abilitiesFragment)
+        }
+
     }
 
     private fun setupRecyclerView() {
         val recyclerView = viewBinding.charactersRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        val adapter = CharacterListAdapter()
+        val adapter = CharacterListAdapter(viewModel)
         recyclerView.adapter = adapter
         adapter.apply {
+            viewModel.updateBriefInfo()
             charactersList = viewModel.charactersBriefInfo
             notifyDataSetChanged()
         }

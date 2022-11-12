@@ -19,11 +19,34 @@
                 android:hint="Имя"
         />
         <EditText
+                android:id="@+id/classEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:hint="Класс"
+        />
+        <EditText
+                android:id="@+id/raceEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:hint="Раса"
+        />
+        <EditText
+                android:id="@+id/levelEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:hint="Уровень"
+                android:inputType="numberDecimal"
+        />
+        <EditText
                 android:id="@+id/hitPointsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Максимум хитов"
+                android:inputType="numberDecimal"
         />
         <EditText
                 android:id="@+id/proficiencyEditText"
@@ -31,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Бонус мастерства"
+                android:inputType="numberDecimal"
         />
         <EditText
                 android:id="@+id/speedEditText"
@@ -38,6 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Скорость"
+                android:inputType="numberDecimal"
         />
         <EditText
                 android:id="@+id/initiativeEditText"
@@ -45,6 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Инициатива"
+                android:inputType="numberDecimal"
         />
         <EditText
                 android:id="@+id/acEditText"
@@ -52,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Класс доспеха"
+                android:inputType="numberDecimal"
         />
         <EditText
                 android:id="@+id/strEditText"
@@ -59,6 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Сила"
+                android:inputType="numberDecimal"
         />
         <EditText
                 android:id="@+id/dexEditText"
@@ -66,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Ловкость"
+                android:inputType="numberDecimal"
         />
         <EditText
                 android:id="@+id/conEditText"
@@ -73,6 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Телосложение"
+                android:inputType="numberDecimal"
         />
         <EditText
                 android:id="@+id/intEditText"
@@ -80,6 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Интеллект"
+                android:inputType="numberDecimal"
         />
         <EditText
                 android:id="@+id/wisEditText"
@@ -87,6 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Мудрость"
+                android:inputType="numberDecimal"
         />
         <EditText
                 android:id="@+id/chaEditText"
@@ -94,12 +126,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Харизма"
+                android:inputType="numberDecimal"
         />
         <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:columnCount="2"
                 android:rowCount="1"
+                android:layout_marginBottom="76dp"
         >
             <Button
                     android:id="@+id/cancelButton"

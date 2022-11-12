@@ -28,12 +28,19 @@
         android:label="CharacterListFragment">
         <action android:id="@+id/action_charactersListFragment_to_characterMainFragment"
                 app:destination="@id/characterMainFragment"/>
+        <action android:id="@+id/action_charactersListFragment_to_abilitiesFragment"
+                app:destination="@id/abilitiesFragment"/>
     </fragment>
 
     <fragment
         android:id="@+id/characterMainFragment"
         android:name="com.andreyyurko.dnd.ui.charactermain.CharacterMainFragment"
         android:label="CharacterMainFragment">
-
     </fragment>
+
+    <fragment
+        android:id="@+id/abilitiesFragment"
+        android:name="com.andreyyurko.dnd.ui.addcharacterfragments.abilitiesfragment.AbilitiesFragment"
+        android:label="AbilitiesFragment"/>
+
 </navigation>
