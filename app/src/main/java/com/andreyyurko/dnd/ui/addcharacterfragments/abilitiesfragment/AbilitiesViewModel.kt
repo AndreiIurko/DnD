@@ -2,7 +2,7 @@ package com.andreyyurko.dnd.ui.addcharacterfragments.abilitiesfragment
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.andreyyurko.dnd.data.abilities.custom.CustomChangeAbilities
+import com.andreyyurko.dnd.data.characters.CharacterInfo
 import com.andreyyurko.dnd.data.characters.mergeAllAbilities
 import com.andreyyurko.dnd.utils.CreateCharacterViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,13 +12,13 @@ class AbilitiesViewModel @Inject constructor(
     private val createCharacterViewModel: CreateCharacterViewModel
 ) : ViewModel() {
 
-    var characterAbility = CustomChangeAbilities()
+    var characterInfo = createCharacterViewModel.character.customAbilities.chosen_alternatives["abilityChange"]!!.data.characterInfo
 
     fun setAbility(name: String) {
-        createCharacterViewModel.character.customAbilities.customChangeAbilities = characterAbility
+        createCharacterViewModel.character.customAbilities.chosen_alternatives["abilityChange"]!!.data.characterInfo = characterInfo
+        createCharacterViewModel.character.customAbilities.merge(CharacterInfo())
         createCharacterViewModel.character = mergeAllAbilities(createCharacterViewModel.character)
         createCharacterViewModel.character.name = name
-        Log.d(LOG_TAG, characterAbility.characterInfo.toString())
         createCharacterViewModel.updateCharacter()
     }
 

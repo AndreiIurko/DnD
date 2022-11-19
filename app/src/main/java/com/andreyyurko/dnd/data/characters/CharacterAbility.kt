@@ -2,20 +2,6 @@ package com.andreyyurko.dnd.data.characters
 
 import android.util.Log
 
-open class CharacterAbility {
-
-    @Transient
-    open val nextAbilities : MutableList<CharacterAbility> = mutableListOf()
-
-    @Transient
-    open val id: Int = -1
-
-    @Transient
-    open var characterInfo : CharacterInfo = CharacterInfo()
-
-    //TODO: разобраться с сохранением ability по отдельности
-}
-
 fun merge(characterInfoFirst: CharacterInfo, characterInfoSecond: CharacterInfo): CharacterInfo {
     Log.d("merge", characterInfoFirst.toString())
     Log.d("merge", characterInfoSecond.toString())

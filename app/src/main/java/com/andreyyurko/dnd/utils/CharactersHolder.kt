@@ -80,10 +80,9 @@ class CharactersHolder @Inject constructor(
         if (characters.size != 0) character.id = characters.last().id + 1
         else character.id = 0
         characters.add(character)
-        for (character in characters) {
-            Log.d(LOG_TAG, character.characterInfo.toString())
+        for (character_i in characters) {
+            Log.d(LOG_TAG, character_i.characterInfo.toString())
         }
-
         saveCharacters()
         return character
     }
