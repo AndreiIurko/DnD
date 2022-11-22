@@ -27,7 +27,6 @@ class CreateCharacterViewModel @Inject constructor(
     }
 
     fun updateCharacter() {
-        Log.d(LOG_TAG, character.toString())
         charactersHolder.updateCharacter(character)
     }
 

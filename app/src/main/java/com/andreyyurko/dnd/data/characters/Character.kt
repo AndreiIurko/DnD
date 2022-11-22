@@ -1,11 +1,13 @@
 package com.andreyyurko.dnd.data.characters
 
+import android.util.Log
+
 open class AbilityNode(
     val name: String,
     var characterInfo: CharacterInfo,
     val alternatives: MutableMap<String, List<String>>,
-    val requirements: List<List<Triple<String, String, Int>>>,
-    val add_requirements: List<List<Triple<String, String, Int>>>
+    open val requirements: List<List<Triple<String, String, Int>>>,
+    open val add_requirements: List<List<Triple<String, String, Int>>>
 ) {
     constructor(name: String) : this(
         name = name,

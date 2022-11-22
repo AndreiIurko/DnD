@@ -29,13 +29,6 @@ class CharactersHolder @Inject constructor(
 
     private var characters : MutableList<Character> = mutableListOf()
 
-    private val moshi: Moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
-        .build()
-
-    private val adapter: JsonAdapter<Character> = moshi.adapter(Character::class.java)
-
-
     private var _initActionState = MutableStateFlow<InitializationState>(InitializationState.NotInitialized)
     val initActionState: Flow<InitializationState> get() = _initActionState.asStateFlow()
     fun initialize() {
@@ -80,9 +73,6 @@ class CharactersHolder @Inject constructor(
         if (characters.size != 0) character.id = characters.last().id + 1
         else character.id = 0
         characters.add(character)
-        for (character_i in characters) {
-            Log.d(LOG_TAG, character_i.characterInfo.toString())
-        }
         saveCharacters()
         return character
     }
