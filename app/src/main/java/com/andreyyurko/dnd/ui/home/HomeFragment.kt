@@ -21,5 +21,10 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             val controller = findNavController()
             controller.navigate(R.id.action_homeFragment_to_spellsListFragment)
         }
+
+        viewBinding.charactersListButton.setOnClickListener {
+            val controller = findNavController()
+            controller.navigate(R.id.charactersListFragment)
+        }
     }
 }
