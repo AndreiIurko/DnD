@@ -26,13 +26,13 @@ class AbilitiesFragment : Fragment(R.layout.fragment_abilities) {
         super.onViewCreated(view, savedInstanceState)
 
         viewBinding.cancelButton.setOnClickListener {
+            viewModel.deleteCharacter()
             findNavController().popBackStack()
         }
 
         viewBinding.submitButton.setOnClickListener {
             viewModel.characterInfo.ac = viewBinding.acEditText.text.toString().toInt()
             viewModel.characterInfo.hp = viewBinding.hitPointsEditText.text.toString().toInt()
-            viewModel.characterInfo.proficiencyBonus = viewBinding.proficiencyEditText.text.toString().toInt()
             viewModel.characterInfo.speed = viewBinding.speedEditText.text.toString().toInt()
             viewModel.characterInfo.initiativeBonus = viewBinding.initiativeEditText.text.toString().toInt()
             viewModel.characterInfo.strengthBonus = viewBinding.strEditText.text.toString().toInt()
@@ -41,11 +41,9 @@ class AbilitiesFragment : Fragment(R.layout.fragment_abilities) {
             viewModel.characterInfo.intelligenceBonus = viewBinding.intEditText.text.toString().toInt()
             viewModel.characterInfo.wisdomBonus = viewBinding.wisEditText.text.toString().toInt()
             viewModel.characterInfo.charismaBonus = viewBinding.chaEditText.text.toString().toInt()
-            viewModel.characterInfo.characterClass = viewBinding.classEditText.text.toString()
             viewModel.characterInfo.race = viewBinding.raceEditText.text.toString()
-            viewModel.characterInfo.level = viewBinding.levelEditText.text.toString().toInt()
             viewModel.setAbility(viewBinding.nameEditText.text.toString())
-            findNavController().popBackStack()
+            findNavController().navigate(R.id.classFragment)
         }
     }
 }

@@ -1,23 +1,20 @@
 package com.andreyyurko.dnd.utils
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.andreyyurko.dnd.data.characters.Character
-import com.andreyyurko.dnd.data.characters.CharacterBriefInfo
-import com.andreyyurko.dnd.data.characters.mergeAllAbilities
+import com.andreyyurko.dnd.data.characters.*
 import com.andreyyurko.dnd.db.DB
 import com.andreyyurko.dnd.db.DBProvider
 import com.google.gson.Gson
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.lang.reflect.Type
 import javax.inject.Inject
 import javax.inject.Singleton
+
 
 @Singleton
 class CharactersHolder @Inject constructor(
@@ -35,14 +32,27 @@ class CharactersHolder @Inject constructor(
         viewModelScope.launch {
             val charactersCount = db.getString(DB_CHARACTER_COUNT)?.toInt() ?: 0
             for (i in 0 until charactersCount) {
-                val characterJson = db.getString(DB_CHARACTER_ITEM + i.toString())
+                //val characterJson = db.getString(DB_CHARACTER_ITEM + i.toString())
                 //var character = characterJson?.let { adapter.fromJson(it) }
-                var character = Gson().fromJson(characterJson, Character::class.java)
+                /*var character = Gson().fromJson(characterJson, Character::class.java)
                 if (character != null) {
                     character.id = i
                     character = mergeAllAbilities(character)
                     characters.add(character)
-                }
+                }*/
+                val name = db.getString(DB_CHARACTER_NAME + i.toString())
+                val characterCustomAbilityNodeJson = db.getString(i.toString() + DB_CHARACTER_ABILITY_NODE + "customRoot")
+                val characterCustomAbilityNode = Gson().fromJson(characterCustomAbilityNodeJson, CharacterAbilityNode::class.java)
+                val classCharacterAbilityNode = loadCharacterNode("base_an", i)
+                var character = Character(
+                    id = i,
+                    name = name!!,
+                    characterInfo = CharacterInfo(),
+                    customAbilities = characterCustomAbilityNode,
+                    classAbilities = classCharacterAbilityNode
+                )
+                character = mergeAllAbilities(character)
+                characters.add(character)
             }
             _initActionState.emit(InitializationState.Initialized)
         }
@@ -104,14 +114,51 @@ class CharactersHolder @Inject constructor(
             val listOfStrings = mutableListOf<Pair<String, String>>()
             listOfStrings.add(Pair(DB_CHARACTER_COUNT, characters.size.toString()))
             for (i in characters.indices) {
-                //val characterJson = adapter.toJson(characters[i])
-                val characterJson = Gson().toJson(characters[i], Character::class.java)
-                listOfStrings.add(Pair(DB_CHARACTER_ITEM + i.toString(), characterJson))
+                //val characterJson = Gson().toJson(characters[i], Character::class.java)
+                //listOfStrings.add(Pair(DB_CHARACTER_ITEM + i.toString(), characterJson))
+                listOfStrings.add(Pair(DB_CHARACTER_NAME + i.toString(), characters[i].name))
+                val characterCustomAbilityNodeJson = Gson().toJson(characters[i].customAbilities, CharacterAbilityNode::class.java)
+                listOfStrings.add(Pair(
+                    i.toString() + DB_CHARACTER_ABILITY_NODE + characters[i].customAbilities.data.name,
+                    characterCustomAbilityNodeJson
+                ))
+                saveCharacterNode(characters[i].classAbilities, i)
             }
             db.putStringsAsync(
                 listOfStrings
             )
         }
+    }
+
+    private fun saveCharacterNode(characterAbilityNode: CharacterAbilityNode, characterId: Int) {
+        for (characterNode in characterAbilityNode.chosen_alternatives.values) {
+            saveCharacterNode(characterNode, characterId)
+        }
+        val chosenAlternativesNames : MutableMap<String, String> = mutableMapOf()
+        for (key in characterAbilityNode.chosen_alternatives.keys) {
+            characterAbilityNode.chosen_alternatives[key]?.apply {
+                chosenAlternativesNames[key] = this.data.name
+            }
+        }
+        val chosenAlternativesJson = Gson().toJson(chosenAlternativesNames)
+        db.putStringsAsync(listOf(
+            Pair(
+                characterId.toString() + DB_CHARACTER_ABILITY_NODE + characterAbilityNode.data.name,
+                chosenAlternativesJson
+            )
+        ))
+    }
+
+    private fun loadCharacterNode(name: String, id: Int) : CharacterAbilityNode{
+        val mapType: Type = object : TypeToken<Map<String, String>>() {}.type
+        val chosenAlternativesNamesJson = db.getString(id.toString() + DB_CHARACTER_ABILITY_NODE + name)
+        val chosenAlternatives = Gson().fromJson<Map<String, String>>(chosenAlternativesNamesJson, mapType)
+        val characterAbilityNode = CharacterAbilityNode(mapOfAn[name]!!)
+        for (key in chosenAlternatives.keys) {
+            val chosenNode = loadCharacterNode(chosenAlternatives[key]!!, id)
+            characterAbilityNode.chosen_alternatives[chosenAlternatives[key]!!] = chosenNode
+        }
+        return characterAbilityNode
     }
 
     fun getBriefInfo(): MutableList<CharacterBriefInfo> {
@@ -129,8 +176,11 @@ class CharactersHolder @Inject constructor(
 
     companion object {
         private const val DB_TAG = "charactersInfo"
+
         private const val DB_CHARACTER_COUNT = "CharacterCount"
-        private const val DB_CHARACTER_ITEM = "CharacterItem"
+        private const val DB_CHARACTER_NAME = "CharacterName="
+        private const val DB_CHARACTER_ABILITY_NODE = "_CharacterAbilityNode_"
+
         private const val LOG_TAG = "CharacterHolder"
     }
 

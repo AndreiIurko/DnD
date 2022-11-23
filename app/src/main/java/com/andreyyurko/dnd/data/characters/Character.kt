@@ -55,7 +55,11 @@ var baseAN: AbilityNode = AbilityNode(
 
 var barbarian1: AbilityNode = AbilityNodeLevel(
     "barbarian1",
-    CharacterInfo(),
+    CharacterInfo(
+        characterClass = "Варвар",
+        level = 1,
+        proficiencyBonus = 2
+    ),
     mutableMapOf(),
     listOf(listOf()),
     listOf(listOf()),
@@ -73,7 +77,11 @@ var barbarian2: AbilityNode = AbilityNodeLevel(
 
 var monk1: AbilityNode = AbilityNodeLevel(
     "monk1",
-    CharacterInfo(),
+    CharacterInfo(
+        characterClass = "Монах",
+        level = 1,
+        proficiencyBonus = 2
+    ),
     mutableMapOf(),
     listOf(listOf()),
     listOf(listOf()),

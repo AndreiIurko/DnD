@@ -22,6 +22,10 @@ class AbilitiesViewModel @Inject constructor(
         createCharacterViewModel.updateCharacter()
     }
 
+    fun deleteCharacter() {
+        createCharacterViewModel.deleteCharacter()
+    }
+
     companion object {
         const val LOG_TAG = "AbilitiesViewModel"
     }

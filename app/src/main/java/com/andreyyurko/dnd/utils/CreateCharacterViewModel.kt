@@ -30,6 +30,10 @@ class CreateCharacterViewModel @Inject constructor(
         charactersHolder.updateCharacter(character)
     }
 
+    fun deleteCharacter() {
+        charactersHolder.removeCharacterById(character.id)
+    }
+
     companion object {
         const val LOG_TAG = "CreateCharacterViewModel"
     }
