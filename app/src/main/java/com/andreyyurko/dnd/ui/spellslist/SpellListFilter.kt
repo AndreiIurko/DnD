@@ -8,7 +8,7 @@ fun filterBySearch(spells: List<SpellSpecificLanguage>, searchQueue: String): Mu
         for (property in spell.properties) {
             if (property.contains(searchQueue, ignoreCase = true)) {
                 modifiedSpellList.add(spell)
-                continue
+                break
             }
         }
     }

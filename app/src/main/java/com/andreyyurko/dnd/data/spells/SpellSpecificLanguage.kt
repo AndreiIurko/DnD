@@ -9,6 +9,7 @@ interface Properties {
 
 data class SpellSpecificLanguage(
     val name: String = "",
+    val engName: String = "",
     val level: String = "",
     val text: String = "",
     val school: String = "",
@@ -16,8 +17,9 @@ data class SpellSpecificLanguage(
     val range: String = "",
     val materials: String = "",
     val components: String = "",
+    val concentration: String = "",
     val duration: String = "",
     val source: String = ""
 ) : Properties {
-    override val properties get() = listOf(name, level, text, school, castingTime, range, materials, components, duration, source)
+    override val properties get() = listOf(name, engName, "$level уровень", text, school, castingTime, range, materials, components, concentration, duration, source)
 }
