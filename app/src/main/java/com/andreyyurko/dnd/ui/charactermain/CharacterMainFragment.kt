@@ -4,11 +4,14 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import androidx.core.animation.doOnEnd
 import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +20,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentCharacterMainBinding
+import com.andreyyurko.dnd.utils.onPressAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.applyInsetter
 
@@ -81,29 +85,47 @@ class CharacterMainFragment : Fragment(R.layout.fragment_character_main) {
         val characterMenu = PopupWindow(parent, wid, high, focus)
 
         val navController = (childFragmentManager.findFragmentById(R.id.mainFragmentNavigationHost) as NavHostFragment).navController
-        parent.findViewById<LinearLayout>(R.id.actionsLinearLayout).setOnClickListener {
-            navController.navigate(R.id.action_actionsFragment)
-            characterMenu.dismiss()
+        parent.findViewById<LinearLayout>(R.id.actionsLinearLayout).apply{
+            onPressAnimation(this)
+            this.setOnClickListener {
+                navController.navigate(R.id.action_actionsFragment)
+                characterMenu.dismiss()
+            }
         }
-        parent.findViewById<LinearLayout>(R.id.abilitiesLinearLayout).setOnClickListener {
-            navController.navigate(R.id.action_abilitiesFragment)
-            characterMenu.dismiss()
+        parent.findViewById<LinearLayout>(R.id.abilitiesLinearLayout).apply {
+            onPressAnimation(this)
+            this.setOnClickListener {
+                navController.navigate(R.id.action_abilitiesFragment)
+                characterMenu.dismiss()
+            }
         }
-        parent.findViewById<LinearLayout>(R.id.skillsLinearLayout).setOnClickListener {
-            navController.navigate(R.id.action_skillsFragment)
-            characterMenu.dismiss()
+        parent.findViewById<LinearLayout>(R.id.skillsLinearLayout).apply {
+            onPressAnimation(this)
+            this.setOnClickListener {
+                navController.navigate(R.id.action_skillsFragment)
+                characterMenu.dismiss()
+            }
         }
-        parent.findViewById<LinearLayout>(R.id.inventoryLinearLayout).setOnClickListener {
-            navController.navigate(R.id.action_inventoryFragment)
-            characterMenu.dismiss()
+        parent.findViewById<LinearLayout>(R.id.inventoryLinearLayout).apply {
+            onPressAnimation(this)
+            this.setOnClickListener {
+                navController.navigate(R.id.action_inventoryFragment)
+                characterMenu.dismiss()
+            }
         }
-        parent.findViewById<LinearLayout>(R.id.spellsLinearLayout).setOnClickListener {
-            navController.navigate(R.id.action_spellsFragment)
-            characterMenu.dismiss()
+        parent.findViewById<LinearLayout>(R.id.spellsLinearLayout).apply {
+            onPressAnimation(this)
+            this.setOnClickListener {
+                navController.navigate(R.id.action_spellsFragment)
+                characterMenu.dismiss()
+            }
         }
-        parent.findViewById<LinearLayout>(R.id.additionalInfoLinearLayout).setOnClickListener {
-            navController.navigate(R.id.action_additionalInfoFragment)
-            characterMenu.dismiss()
+        parent.findViewById<LinearLayout>(R.id.additionalInfoLinearLayout).apply {
+            onPressAnimation(this)
+            this.setOnClickListener {
+                navController.navigate(R.id.action_additionalInfoFragment)
+                characterMenu.dismiss()
+            }
         }
 
         characterMenu.animationStyle = androidx.appcompat.R.style.Animation_AppCompat_Dialog
