@@ -1,6 +1,7 @@
 package com.andreyyurko.dnd.data.characters
 
 import android.util.Log
+import com.andreyyurko.dnd.data.abilities.characterclass.*
 
 open class AbilityNode(
     val name: String,
@@ -34,15 +35,6 @@ open class AbilityNode(
     }
 }
 
-class AbilityNodeLevel (
-    name: String,
-    data: CharacterInfo,
-    alternatives: MutableMap<String, List<String>>,
-    requirements: List<List<Triple<String, String, Int>>>,
-    add_requirements: List<List<Triple<String, String, Int>>>,
-    var next_level: String?
-) : AbilityNode(name, data, alternatives, requirements, add_requirements)
-
 var baseAN: AbilityNode = AbilityNode(
     "base_an",
     CharacterInfo(),
@@ -51,50 +43,6 @@ var baseAN: AbilityNode = AbilityNode(
     ),
     listOf(listOf()),
     listOf(listOf())
-)
-
-var barbarian1: AbilityNode = AbilityNodeLevel(
-    "barbarian1",
-    CharacterInfo(
-        characterClass = "Варвар",
-        level = 1,
-        proficiencyBonus = 2
-    ),
-    mutableMapOf(),
-    listOf(listOf()),
-    listOf(listOf()),
-    "barbarian2"
-)
-
-var barbarian2: AbilityNode = AbilityNodeLevel(
-    "barbarian2",
-    CharacterInfo(),
-    mutableMapOf(),
-    listOf(listOf()),
-    listOf(listOf()),
-    null
-)
-
-var monk1: AbilityNode = AbilityNodeLevel(
-    "monk1",
-    CharacterInfo(
-        characterClass = "Монах",
-        level = 1,
-        proficiencyBonus = 2
-    ),
-    mutableMapOf(),
-    listOf(listOf()),
-    listOf(listOf()),
-    "monk2"
-)
-
-var monk2: AbilityNode = AbilityNodeLevel(
-    "monk2",
-    CharacterInfo(),
-    mutableMapOf(),
-    listOf(listOf()),
-    listOf(listOf()),
-    null
 )
 
 var mapOfAn: MutableMap<String, AbilityNode> = mutableMapOf(
@@ -130,21 +78,6 @@ open class CharacterAbilityNode(
         mapOfAn[choice]?.let {
             chosen_alternatives[option_name] = CharacterAbilityNode(it)
         }
-    }
-}
-
-class CharacterAbilityNodeLevel(
-    override val data: AbilityNodeLevel,
-    chosen_alternatives: MutableMap<String, CharacterAbilityNode>,
-    var next_level: CharacterAbilityNodeLevel?
-) : CharacterAbilityNode(data, chosen_alternatives) {
-    constructor(_data: AbilityNodeLevel) : this(
-        data = _data,
-        chosen_alternatives = mutableMapOf(),
-        next_level = null
-    )
-    fun levelUp() {
-        next_level = CharacterAbilityNodeLevel(mapOfAn[data.next_level] as AbilityNodeLevel)
     }
 }
 
