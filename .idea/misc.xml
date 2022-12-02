@@ -13,9 +13,16 @@
         <entry key="app/src/main/res/layout-land/fragment_character_main.xml" value="0.2923280423280423" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3453125" />
         <entry key="app/src/main/res/layout/character_list_item.xml" value="0.34427083333333336" />
+        <entry key="app/src/main/res/layout/character_menu.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_abilities.xml" value="0.34427083333333336" />
+        <entry key="app/src/main/res/layout/fragment_character_abilities.xml" value="0.17395833333333333" />
+        <entry key="app/src/main/res/layout/fragment_character_actions.xml" value="0.34427083333333336" />
+        <entry key="app/src/main/res/layout/fragment_character_additional_info.xml" value="0.34427083333333336" />
+        <entry key="app/src/main/res/layout/fragment_character_inventory.xml" value="0.34427083333333336" />
         <entry key="app/src/main/res/layout/fragment_character_list.xml" value="0.34427083333333336" />
         <entry key="app/src/main/res/layout/fragment_character_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_character_skills.xml" value="0.34427083333333336" />
+        <entry key="app/src/main/res/layout/fragment_character_spells.xml" value="0.34427083333333336" />
         <entry key="app/src/main/res/layout/fragment_class.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3453125" />
         <entry key="app/src/main/res/layout/fragment_spells_list.xml" value="0.17395833333333333" />
