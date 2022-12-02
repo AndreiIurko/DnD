@@ -3,7 +3,6 @@ package com.andreyyurko.dnd.utils
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.andreyyurko.dnd.data.Spell
 import com.andreyyurko.dnd.data.SpellSpecificLanguage
 import com.andreyyurko.dnd.db.DB
 import com.andreyyurko.dnd.db.DBProvider
@@ -52,13 +51,11 @@ class SpellsFavoritesHolder @Inject constructor(
 
     fun putFavoriteSpell(spell: SpellSpecificLanguage) {
         favoriteSpells.add(spell)
-        Log.d(LOG_TAG, favoriteSpells.toString())
         saveFavoritesSpells()
     }
 
     fun removeFavoriteSpell(spell: SpellSpecificLanguage) {
         favoriteSpells.remove(spell)
-        Log.d(LOG_TAG, favoriteSpells.toString())
         saveFavoritesSpells()
     }
 
