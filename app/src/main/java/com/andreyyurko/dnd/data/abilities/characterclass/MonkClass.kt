@@ -13,6 +13,7 @@ var monk1: AbilityNode = AbilityNodeLevel(
     mutableMapOf(),
     listOf(listOf()),
     listOf(listOf()),
+    "1-й уровень, способности монаха",
     "monk2"
 )
 
@@ -22,5 +23,6 @@ var monk2: AbilityNode = AbilityNodeLevel(
     mutableMapOf(),
     listOf(listOf()),
     listOf(listOf()),
+    "2-й уровень, способности монаха",
     null
 )

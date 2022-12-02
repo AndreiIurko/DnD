@@ -14,6 +14,7 @@ var barbarian1: AbilityNode = AbilityNodeLevel(
     mutableMapOf(),
     listOf(listOf()),
     listOf(listOf()),
+    "1-й уровень, способности варвара",
     "barbarian2"
 )
 
@@ -23,5 +24,6 @@ var barbarian2: AbilityNode = AbilityNodeLevel(
     mutableMapOf(),
     listOf(listOf()),
     listOf(listOf()),
+    "2-й уровень, способности варвара",
     null
 )

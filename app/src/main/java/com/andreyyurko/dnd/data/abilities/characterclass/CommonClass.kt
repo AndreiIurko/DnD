@@ -11,8 +11,9 @@ class AbilityNodeLevel (
     alternatives: MutableMap<String, List<String>>,
     requirements: List<List<Triple<String, String, Int>>>,
     add_requirements: List<List<Triple<String, String, Int>>>,
+    description: String,
     var next_level: String?
-) : AbilityNode(name, data, alternatives, requirements, add_requirements)
+) : AbilityNode(name, data, alternatives, requirements, add_requirements, description)
 
 class CharacterAbilityNodeLevel(
     override val data: AbilityNodeLevel,
