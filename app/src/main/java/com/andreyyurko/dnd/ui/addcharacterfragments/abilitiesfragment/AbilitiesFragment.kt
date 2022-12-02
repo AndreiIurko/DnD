@@ -26,26 +26,24 @@ class AbilitiesFragment : Fragment(R.layout.fragment_abilities) {
         super.onViewCreated(view, savedInstanceState)
 
         viewBinding.cancelButton.setOnClickListener {
+            viewModel.deleteCharacter()
             findNavController().popBackStack()
         }
 
         viewBinding.submitButton.setOnClickListener {
-            viewModel.characterAbility.characterInfo.ac = viewBinding.acEditText.text.toString().toInt()
-            viewModel.characterAbility.characterInfo.hp = viewBinding.hitPointsEditText.text.toString().toInt()
-            viewModel.characterAbility.characterInfo.proficiencyBonus = viewBinding.proficiencyEditText.text.toString().toInt()
-            viewModel.characterAbility.characterInfo.speed = viewBinding.speedEditText.text.toString().toInt()
-            viewModel.characterAbility.characterInfo.initiativeBonus = viewBinding.initiativeEditText.text.toString().toInt()
-            viewModel.characterAbility.characterInfo.strengthBonus = viewBinding.strEditText.text.toString().toInt()
-            viewModel.characterAbility.characterInfo.dexterityBonus = viewBinding.dexEditText.text.toString().toInt()
-            viewModel.characterAbility.characterInfo.constitutionBonus = viewBinding.conEditText.text.toString().toInt()
-            viewModel.characterAbility.characterInfo.intelligenceBonus = viewBinding.intEditText.text.toString().toInt()
-            viewModel.characterAbility.characterInfo.wisdomBonus = viewBinding.wisEditText.text.toString().toInt()
-            viewModel.characterAbility.characterInfo.charismaBonus = viewBinding.chaEditText.text.toString().toInt()
-            viewModel.characterAbility.characterInfo.characterClass = viewBinding.classEditText.text.toString()
-            viewModel.characterAbility.characterInfo.race = viewBinding.raceEditText.text.toString()
-            viewModel.characterAbility.characterInfo.level = viewBinding.levelEditText.text.toString().toInt()
+            viewModel.characterInfo.ac = viewBinding.acEditText.text.toString().toInt()
+            viewModel.characterInfo.hp = viewBinding.hitPointsEditText.text.toString().toInt()
+            viewModel.characterInfo.speed = viewBinding.speedEditText.text.toString().toInt()
+            viewModel.characterInfo.initiativeBonus = viewBinding.initiativeEditText.text.toString().toInt()
+            viewModel.characterInfo.strengthBonus = viewBinding.strEditText.text.toString().toInt()
+            viewModel.characterInfo.dexterityBonus = viewBinding.dexEditText.text.toString().toInt()
+            viewModel.characterInfo.constitutionBonus = viewBinding.conEditText.text.toString().toInt()
+            viewModel.characterInfo.intelligenceBonus = viewBinding.intEditText.text.toString().toInt()
+            viewModel.characterInfo.wisdomBonus = viewBinding.wisEditText.text.toString().toInt()
+            viewModel.characterInfo.charismaBonus = viewBinding.chaEditText.text.toString().toInt()
+            viewModel.characterInfo.race = viewBinding.raceEditText.text.toString()
             viewModel.setAbility(viewBinding.nameEditText.text.toString())
-            findNavController().popBackStack()
+            findNavController().navigate(R.id.classFragment)
         }
     }
 }

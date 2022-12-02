@@ -51,13 +51,11 @@ class SpellsFavoritesHolder @Inject constructor(
 
     fun putFavoriteSpell(spell: SpellSpecificLanguage) {
         favoriteSpells.add(spell)
-        Log.d(LOG_TAG, favoriteSpells.toString())
         saveFavoritesSpells()
     }
 
     fun removeFavoriteSpell(spell: SpellSpecificLanguage) {
         favoriteSpells.remove(spell)
-        Log.d(LOG_TAG, favoriteSpells.toString())
         saveFavoritesSpells()
     }
 
