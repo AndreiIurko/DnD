@@ -44,7 +44,6 @@ class SpellsListAdapter @Inject constructor(
         )
         holder.spellDescriptionTextView.text = HtmlCompat.fromHtml(spellsList[position].text, HtmlCompat.FROM_HTML_MODE_LEGACY)
         holder.spellDescriptionTextView.setOnClickListener {
-            Log.d(LOG_TAG, spellsList[position].name)
             if (spellsFavoritesHolder.getFavoriteSpells().contains(spellsList[position])) {
                 spellsFavoritesHolder.removeFavoriteSpell(spellsList[position])
                 viewModel.getFavoriteSpells()
