@@ -41,6 +41,13 @@
     <fragment
         android:id="@+id/abilitiesFragment"
         android:name="com.andreyyurko.dnd.ui.addcharacterfragments.abilitiesfragment.AbilitiesFragment"
-        android:label="AbilitiesFragment"/>
+        android:label="AbilitiesFragment">
+        <action android:id="@+id/action_abilitiesFragment_to_classFragment" app:destination="@id/classFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/classFragment"
+        android:name="com.andreyyurko.dnd.ui.addcharacterfragments.classfragment.ClassFragment"
+        android:label="ClassFragment"/>
 
 </navigation>

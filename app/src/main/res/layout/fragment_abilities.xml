@@ -19,13 +19,6 @@
                 android:hint="Имя"
         />
         <EditText
-                android:id="@+id/classEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Класс"
-        />
-        <EditText
                 android:id="@+id/raceEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -33,27 +26,11 @@
                 android:hint="Раса"
         />
         <EditText
-                android:id="@+id/levelEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Уровень"
-                android:inputType="numberDecimal"
-        />
-        <EditText
                 android:id="@+id/hitPointsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Максимум хитов"
-                android:inputType="numberDecimal"
-        />
-        <EditText
-                android:id="@+id/proficiencyEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Бонус мастерства"
                 android:inputType="numberDecimal"
         />
         <EditText

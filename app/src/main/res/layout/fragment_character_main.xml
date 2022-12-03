@@ -54,7 +54,7 @@
                 app:layout_constraintEnd_toStartOf="@id/menuButton"
                 android:layout_marginEnd="12dp"
                 android:layout_marginTop="24dp"
-                android:src="@drawable/ic_settings"
+                android:src="@drawable/ic_baseline_settings_24"
                 android:background="@color/white"/>
 
         <ImageView

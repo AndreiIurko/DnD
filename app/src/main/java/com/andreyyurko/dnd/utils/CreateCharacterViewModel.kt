@@ -2,8 +2,7 @@ package com.andreyyurko.dnd.utils
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.andreyyurko.dnd.data.characters.Character
-import com.andreyyurko.dnd.data.characters.CharacterInfo
+import com.andreyyurko.dnd.data.characters.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -16,15 +15,24 @@ class CreateCharacterViewModel @Inject constructor(
     fun createEmptyCharacter() {
         character = Character(
             id = -1,
-            abilities = emptyList(),
-            characterInfo = CharacterInfo()
         )
         character = charactersHolder.addCharacter(character)
+        createAbilityNode("customChangeAbility", "abilityChange_${character.id}")
+        charactersHolder.updateCharacter(character)
+    }
+
+    private fun createAbilityNode(optionName: String, nodeName: String) {
+        character.customAbilities.data.alternatives[optionName] = listOf(nodeName)
+        mapOfAn[nodeName] = AbilityNode(nodeName)
+        character.customAbilities.makeChoice(optionName, nodeName)
     }
 
     fun updateCharacter() {
-        Log.d(LOG_TAG, character.toString())
         charactersHolder.updateCharacter(character)
+    }
+
+    fun deleteCharacter() {
+        charactersHolder.removeCharacterById(character.id)
     }
 
     companion object {
