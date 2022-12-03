@@ -9,7 +9,7 @@ class AbilityNodeLevel (
     name: String,
     data: CharacterInfo,
     alternatives: MutableMap<String, List<String>>,
-    requirements: List<List<Triple<String, String, Int>>>,
+    requirements: (abilities: CharacterInfo) -> Boolean,
     add_requirements: List<List<Triple<String, String, Int>>>,
     description: String,
     var next_level: String?

@@ -11,7 +11,7 @@ var monk1: AbilityNode = AbilityNodeLevel(
         proficiencyBonus = 2
     ),
     mutableMapOf(),
-    listOf(listOf()),
+    {abilities: CharacterInfo -> true},
     listOf(listOf()),
     "1-й уровень, способности монаха",
     "monk2"
@@ -21,7 +21,7 @@ var monk2: AbilityNode = AbilityNodeLevel(
     "monk2",
     CharacterInfo(),
     mutableMapOf(),
-    listOf(listOf()),
+    {abilities: CharacterInfo -> true},
     listOf(listOf()),
     "2-й уровень, способности монаха",
     null

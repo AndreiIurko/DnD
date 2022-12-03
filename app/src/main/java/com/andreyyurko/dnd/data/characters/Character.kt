@@ -7,7 +7,7 @@ open class AbilityNode(
     val name: String,
     var characterInfo: CharacterInfo,
     val alternatives: MutableMap<String, List<String>>,
-    open val requirements: List<List<Triple<String, String, Int>>>,
+    val requirements: (abilities: CharacterInfo) -> Boolean,
     open val add_requirements: List<List<Triple<String, String, Int>>>,
     var description: String
 ) {
@@ -15,23 +15,23 @@ open class AbilityNode(
         name = name,
         characterInfo = CharacterInfo(),
         alternatives = mutableMapOf<String, List<String>>(),
-        requirements = listOf<List<Triple<String, String, Int>>>(),
+        requirements = { true },
         add_requirements = listOf<List<Triple<String, String, Int>>>(),
         description = ""
     )
     fun merge (abilities: CharacterInfo): CharacterInfo {
         return merge(abilities, characterInfo)
     }
-    fun isCorrect(): Boolean {
-        return true
+    fun isCorrect(abilities: CharacterInfo): Boolean {
+        return requirements(abilities)
     }
-    fun isAddable(): Boolean {
-        return isCorrect() and true
+    fun isAddable(abilities: CharacterInfo): Boolean {
+        return isCorrect(abilities) and true
     }
     fun showOptions(abilities: CharacterInfo, option_name: String): List<String> {
         val result: MutableList<String> = mutableListOf()
         for (option in alternatives[option_name]!!){
-            if (mapOfAn[option]!!.isAddable()) result.add(option)
+            if (mapOfAn[option]!!.isAddable(abilities)) result.add(option)
         }
         return result
     }
@@ -43,7 +43,7 @@ var baseAN: AbilityNode = AbilityNode(
     mutableMapOf(
         Pair("class", listOf("monk1", "barbarian1")),
     ),
-    listOf(listOf()),
+    {true},
     listOf(listOf()),
     description = "Base Ability Node, root of all AN"
 )

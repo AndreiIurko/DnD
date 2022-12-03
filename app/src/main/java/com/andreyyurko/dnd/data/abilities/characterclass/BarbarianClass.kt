@@ -12,7 +12,7 @@ var barbarian1: AbilityNode = AbilityNodeLevel(
         proficiencyBonus = 2
     ),
     mutableMapOf(),
-    listOf(listOf()),
+    {abilities: CharacterInfo -> false},
     listOf(listOf()),
     "1-й уровень, способности варвара",
     "barbarian2"
@@ -22,7 +22,7 @@ var barbarian2: AbilityNode = AbilityNodeLevel(
     "barbarian2",
     CharacterInfo(),
     mutableMapOf(),
-    listOf(listOf()),
+    {abilities: CharacterInfo -> true},
     listOf(listOf()),
     "2-й уровень, способности варвара",
     null
