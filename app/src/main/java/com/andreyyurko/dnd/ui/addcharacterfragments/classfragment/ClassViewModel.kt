@@ -10,7 +10,8 @@ import javax.inject.Inject
 class ClassViewModel @Inject constructor(
     private val createCharacterViewModel: CreateCharacterViewModel
 ) : ViewModel() {
-    val baseCAN = createCharacterViewModel.character.classAbilities
+    val character = createCharacterViewModel.character
+    val baseCAN = character.classAbilities
 
     fun makeChoice(choice: String) {
         baseCAN.makeChoice("class", choice)

@@ -6,11 +6,12 @@ import com.andreyyurko.dnd.data.characters.mapOfAn
 
 var barbarian1: AbilityNode = AbilityNodeLevel(
     "barbarian1",
-    CharacterInfo(
+    {abilities: CharacterInfo -> abilities},
+    /*CharacterInfo(
         characterClass = "Варвар",
         level = 1,
         proficiencyBonus = 2
-    ),
+    ),*/
     mutableMapOf(),
     {abilities: CharacterInfo -> false},
     listOf(listOf()),
@@ -20,7 +21,7 @@ var barbarian1: AbilityNode = AbilityNodeLevel(
 
 var barbarian2: AbilityNode = AbilityNodeLevel(
     "barbarian2",
-    CharacterInfo(),
+    {abilities: CharacterInfo -> abilities},
     mutableMapOf(),
     {abilities: CharacterInfo -> true},
     listOf(listOf()),

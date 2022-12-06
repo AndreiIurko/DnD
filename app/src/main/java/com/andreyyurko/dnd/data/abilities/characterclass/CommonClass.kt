@@ -7,13 +7,13 @@ import com.andreyyurko.dnd.data.characters.mapOfAn
 
 class AbilityNodeLevel (
     name: String,
-    data: CharacterInfo,
+    changesInCharacterInfo: (abilities: CharacterInfo) -> CharacterInfo,
     alternatives: MutableMap<String, List<String>>,
     requirements: (abilities: CharacterInfo) -> Boolean,
     add_requirements: List<List<Triple<String, String, Int>>>,
     description: String,
     var next_level: String?
-) : AbilityNode(name, data, alternatives, requirements, add_requirements, description)
+) : AbilityNode(name, changesInCharacterInfo, alternatives, requirements, add_requirements, description)
 
 class CharacterAbilityNodeLevel(
     override val data: AbilityNodeLevel,

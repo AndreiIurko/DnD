@@ -55,8 +55,8 @@ class CharacterMainFragment : Fragment(R.layout.fragment_character_main) {
         viewBinding.hpEditText.setText(viewModel.shownCharacter.characterInfo.hp.toString())
         viewBinding.proficiencyTextView.text = "+ ${viewModel.shownCharacter.characterInfo.proficiencyBonus}"
         viewBinding.speedTextView.text = "${viewModel.shownCharacter.characterInfo.speed}ft"
-        viewBinding.initiativeTextView.text = "+ ${viewModel.shownCharacter.characterInfo.initiativeBonus}"
-        viewBinding.acTextView.text = viewModel.shownCharacter.characterInfo.ac.toString()
+        viewBinding.initiativeTextView.text = "+ ${viewModel.shownCharacter.characterInfo.initiativeBonus(viewModel.shownCharacter.characterInfo)}"
+        viewBinding.acTextView.text = viewModel.shownCharacter.characterInfo.ac(viewModel.shownCharacter.characterInfo).toString()
         viewBinding.strTextView.text = viewModel.shownCharacter.characterInfo.strengthBonus.toString()
         viewBinding.dexTextView.text = viewModel.shownCharacter.characterInfo.dexterityBonus.toString()
         viewBinding.conTextView.text = viewModel.shownCharacter.characterInfo.constitutionBonus.toString()

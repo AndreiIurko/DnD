@@ -12,10 +12,10 @@ class AbilitiesViewModel @Inject constructor(
     private val createCharacterViewModel: CreateCharacterViewModel
 ) : ViewModel() {
 
-    var characterInfo = createCharacterViewModel.character.customAbilities.chosen_alternatives["customChangeAbility"]!!.data.characterInfo
+    //var characterInfo = createCharacterViewModel.character.customAbilities.chosen_alternatives["customChangeAbility"]!!.data.characterInfo
 
     fun setAbility(name: String) {
-        createCharacterViewModel.character.customAbilities.chosen_alternatives["customChangeAbility"]!!.data.characterInfo = characterInfo
+        //createCharacterViewModel.character.customAbilities.chosen_alternatives["customChangeAbility"]!!.data.characterInfo = characterInfo
         createCharacterViewModel.character.customAbilities.merge(CharacterInfo())
         createCharacterViewModel.character = mergeAllAbilities(createCharacterViewModel.character)
         createCharacterViewModel.character.name = name

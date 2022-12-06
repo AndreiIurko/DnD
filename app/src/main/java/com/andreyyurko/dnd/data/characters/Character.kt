@@ -5,7 +5,7 @@ import com.andreyyurko.dnd.data.abilities.characterclass.*
 
 open class AbilityNode(
     val name: String,
-    var characterInfo: CharacterInfo,
+    val changesInCharacterInfo: (abilities: CharacterInfo) -> CharacterInfo,
     val alternatives: MutableMap<String, List<String>>,
     val requirements: (abilities: CharacterInfo) -> Boolean,
     open val add_requirements: List<List<Triple<String, String, Int>>>,
@@ -13,14 +13,14 @@ open class AbilityNode(
 ) {
     constructor(name: String) : this(
         name = name,
-        characterInfo = CharacterInfo(),
+        changesInCharacterInfo = {abilities: CharacterInfo -> abilities},
         alternatives = mutableMapOf<String, List<String>>(),
         requirements = { true },
         add_requirements = listOf<List<Triple<String, String, Int>>>(),
         description = ""
     )
     fun merge (abilities: CharacterInfo): CharacterInfo {
-        return merge(abilities, characterInfo)
+        return changesInCharacterInfo(abilities)
     }
     fun isCorrect(abilities: CharacterInfo): Boolean {
         return requirements(abilities)
@@ -39,7 +39,7 @@ open class AbilityNode(
 
 var baseAN: AbilityNode = AbilityNode(
     "base_an",
-    CharacterInfo(),
+    {abilities: CharacterInfo -> abilities},
     mutableMapOf(
         Pair("class", listOf("monk1", "barbarian1")),
     ),
@@ -72,7 +72,7 @@ open class CharacterAbilityNode(
         }
         return result
     }
-    fun showOptions(abilities: CharacterInfo, option_name: String): List<String>? {
+    fun showOptions(abilities: CharacterInfo, option_name: String): List<String> {
         return data.showOptions(abilities, option_name)
     }
     fun makeChoice(option_name: String, choice: String){
