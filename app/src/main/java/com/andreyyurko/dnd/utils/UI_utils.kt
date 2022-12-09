@@ -16,8 +16,8 @@ fun onPressAnimation(view: View) {
                 fadeOut.start()
             }
             MotionEvent.ACTION_UP -> {
-                if (!(event.x > view.x && event.y > view.y && event.x < view.x + view.width && event.y < view.y + view.height)) {
-                    val fadeIn = ObjectAnimator.ofFloat(view, "alpha", view.alpha, 1f)
+                if (!(event.x > 0 && event.y > 0 && event.x < v.width && event.y < v.height)) {
+                    val fadeIn = ObjectAnimator.ofFloat(v, "alpha", v.alpha, 1f)
                     fadeIn.duration = 100
                     fadeIn.start()
                     return@setOnTouchListener true

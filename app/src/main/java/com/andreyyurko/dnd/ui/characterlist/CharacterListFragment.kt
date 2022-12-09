@@ -34,10 +34,18 @@ class CharacterListFragment : Fragment(R.layout.fragment_character_list) {
             type(statusBars = true) { margin() }
         }
 
+        viewBinding.addImageButton.applyInsetter {
+            type(statusBars = true) { margin() }
+        }
+
         viewBinding.addImageButton.setOnClickListener {
             viewModel.createNewCharacter()
             val controller = findNavController()
             controller.navigate(R.id.abilitiesFragment)
+        }
+
+        viewBinding.arrowBackImageButton.setOnClickListener {
+            findNavController().popBackStack()
         }
 
     }
