@@ -22,23 +22,9 @@ data class CharacterInfo(
     var weaponAdditionalProficiency: Set<Int> = emptySet(), //every item has an id
     var toolProficiency: Set<Int> = emptySet(), //every tool has an id
     var languageProficiency: Set<Languages> = emptySet(), //every language has an id
-    var ac: (abilities: CharacterInfo) -> Int =
-        {
-            abilities: CharacterInfo ->
-            10 + (abilities.dexterityBonus-10)/2
-        },
-    //var initiativeBonus: Int = 0,
-    var initiativeBonus: (abilities: CharacterInfo) -> Int =
-        {
-                abilities: CharacterInfo ->
-            (abilities.dexterityBonus-10)/2
-        },
+    var ac: Int = 0,
+    var initiativeBonus: Int = 0,
     var speed: Int = 0,
-    /*var hp: (abilities2: CharacterInfo) -> Int =
-        {
-            abilities2: CharacterInfo ->
-            8 + (abilities2.dexterityBonus-10)/2
-        },*/
     var hp: Int = 0,
     var damageResistances: Set<Int> = emptySet(),
     var damageImmunities: Set<Int> = emptySet(),
@@ -46,7 +32,7 @@ data class CharacterInfo(
     var inventory: List<EquipmentItem> = emptyList(),
 )
 
-fun merge(characterInfoFirst: CharacterInfo, characterInfoSecond: CharacterInfo): CharacterInfo {
+fun mergeCharacterInfo(characterInfoFirst: CharacterInfo, characterInfoSecond: CharacterInfo): CharacterInfo {
     val resultCharacterInfo = CharacterInfo()
 
     resultCharacterInfo.characterClass = characterInfoFirst.characterClass + characterInfoSecond.characterClass
@@ -60,17 +46,8 @@ fun merge(characterInfoFirst: CharacterInfo, characterInfoSecond: CharacterInfo)
     resultCharacterInfo.charismaBonus = characterInfoFirst.charismaBonus + characterInfoSecond.charismaBonus
     resultCharacterInfo.proficiencyBonus = characterInfoFirst.proficiencyBonus + characterInfoSecond.proficiencyBonus
     resultCharacterInfo.speed = characterInfoFirst.speed + characterInfoSecond.speed
-    //resultCharacterInfo.initiativeBonus = characterInfoFirst.initiativeBonus + characterInfoSecond.initiativeBonus
-    resultCharacterInfo.ac =
-        {
-                abilities: CharacterInfo ->
-                characterInfoFirst.ac(abilities) + characterInfoSecond.ac(abilities)
-        } //characterInfoFirst.ac() + characterInfoSecond.ac()
+    resultCharacterInfo.initiativeBonus = characterInfoFirst.initiativeBonus + characterInfoSecond.initiativeBonus
+    resultCharacterInfo.ac = characterInfoFirst.ac + characterInfoSecond.ac
     resultCharacterInfo.hp = characterInfoFirst.hp + characterInfoSecond.hp
-    /*resultCharacterInfo.hp =
-        {
-            8
-        }*/
-
     return resultCharacterInfo
 }

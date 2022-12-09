@@ -31,7 +31,7 @@ class AbilitiesFragment : Fragment(R.layout.fragment_abilities) {
         }
 
         viewBinding.submitButton.setOnClickListener {
-            /*viewModel.characterInfo.ac = viewBinding.acEditText.text.toString().toInt()
+            viewModel.characterInfo.ac = viewBinding.acEditText.text.toString().toInt()
             viewModel.characterInfo.hp = viewBinding.hitPointsEditText.text.toString().toInt()
             viewModel.characterInfo.speed = viewBinding.speedEditText.text.toString().toInt()
             viewModel.characterInfo.initiativeBonus = viewBinding.initiativeEditText.text.toString().toInt()
@@ -41,7 +41,7 @@ class AbilitiesFragment : Fragment(R.layout.fragment_abilities) {
             viewModel.characterInfo.intelligenceBonus = viewBinding.intEditText.text.toString().toInt()
             viewModel.characterInfo.wisdomBonus = viewBinding.wisEditText.text.toString().toInt()
             viewModel.characterInfo.charismaBonus = viewBinding.chaEditText.text.toString().toInt()
-            viewModel.characterInfo.race = viewBinding.raceEditText.text.toString()*/
+            viewModel.characterInfo.race = viewBinding.raceEditText.text.toString()
             viewModel.setAbility(viewBinding.nameEditText.text.toString())
             findNavController().navigate(R.id.classFragment)
         }

@@ -6,7 +6,12 @@ import com.andreyyurko.dnd.data.characters.mapOfAn
 
 var barbarian1: AbilityNode = AbilityNodeLevel(
     "barbarian1",
-    {abilities: CharacterInfo -> abilities},
+    {abilities: CharacterInfo ->
+        abilities.characterClass = abilities.characterClass + "Варвар"
+        abilities.level = abilities.level + 1
+        abilities.proficiencyBonus = abilities.proficiencyBonus + 1
+        abilities
+    },
     /*CharacterInfo(
         characterClass = "Варвар",
         level = 1,

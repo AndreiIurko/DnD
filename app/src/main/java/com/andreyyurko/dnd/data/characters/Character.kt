@@ -75,7 +75,7 @@ open class CharacterAbilityNode(
     fun showOptions(abilities: CharacterInfo, option_name: String): List<String> {
         return data.showOptions(abilities, option_name)
     }
-    fun makeChoice(option_name: String, choice: String){
+    fun makeChoice(option_name: String, choice: String) {
         //maybe we need to add some check.
         //And we also need to delete old children if clever kotlin didn't do it
         mapOfAn[choice]?.let {
@@ -88,13 +88,14 @@ data class Character(
     var id: Int,
     var name: String = "",
     var characterInfo: CharacterInfo = CharacterInfo(),
-    var customAbilities: CharacterAbilityNode = CharacterAbilityNode(AbilityNode("customRoot")),
+    var customAbilities: CharacterInfo = CharacterInfo(),
     var classAbilities: CharacterAbilityNode = CharacterAbilityNode(baseAN),
-    var abilities: List<CharacterAbilityNode> = listOf(customAbilities, classAbilities),
+    var abilities: List<CharacterAbilityNode> = listOf(classAbilities),
 )
 
 fun mergeAllAbilities(character: Character): Character {
     var characterInfo = CharacterInfo()
+    characterInfo = mergeCharacterInfo(characterInfo, character.customAbilities)
     for (ability in character.abilities) {
         characterInfo = ability.merge(characterInfo)
     }

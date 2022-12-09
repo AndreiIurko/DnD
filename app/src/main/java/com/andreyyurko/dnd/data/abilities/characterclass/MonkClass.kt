@@ -7,12 +7,8 @@ var monk1: AbilityNode = AbilityNodeLevel(
     "monk1",
     {abilities: CharacterInfo ->
         abilities.characterClass = "monk"
-        val old_ac = abilities.ac
-        abilities.ac = {
-            abilities_data: CharacterInfo ->
-            old_ac(abilities_data) + (abilities_data.wisdomBonus - 10) / 2
-        }
-        abilities.level++
+        abilities.ac = abilities.ac + (abilities.wisdomBonus - 10) / 2
+        abilities.level += 1
         abilities
     },
     /*CharacterInfo(
