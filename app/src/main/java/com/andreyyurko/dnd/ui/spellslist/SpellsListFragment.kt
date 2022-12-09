@@ -13,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
@@ -46,6 +47,14 @@ class SpellsListFragment : BaseFragment(R.layout.fragment_spells_list) {
             type(statusBars = true) { margin() }
         }
 
+        viewBinding.arrowBackImageButton.applyInsetter {
+            type(statusBars = true) { margin() }
+        }
+
+        viewBinding.menuButton.applyInsetter {
+            type(statusBars = true) { margin() }
+        }
+
         setupRecyclerView()
 
         viewModel.parseSpells(context)
@@ -67,6 +76,10 @@ class SpellsListFragment : BaseFragment(R.layout.fragment_spells_list) {
 
         viewBinding.menuButton.setOnClickListener {
             setupPopupMenu()
+        }
+
+        viewBinding.arrowBackImageButton.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 

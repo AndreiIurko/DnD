@@ -1,303 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-    >
+        android:id="@+id/sharedInfoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <ImageButton
-                android:id="@+id/arrowBackImageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_arrow_back_24"
-                android:background="@color/white"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"/>
+            android:id="@+id/arrowBackImageButton"
+            style="@style/Widget.DnD.ImageButton.Back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-                android:id="@+id/nameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:text="Имя"
-                android:textSize="24sp"
-                android:layout_marginTop="18dp"
-            />
+            android:id="@+id/nameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Имя"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@id/arrowBackImageButton"
+            app:layout_constraintEnd_toStartOf="@id/settingsButton"
+            app:layout_constraintStart_toEndOf="@id/arrowBackImageButton" />
 
         <ImageButton
-                android:id="@+id/menuButton"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="24dp"
-                android:layout_marginTop="24dp"
-                android:src="@drawable/ic_baseline_menu_24"
-                android:background="@color/white"/>
+            android:id="@+id/menuButton"
+            style="@style/Widget.DnD.ImageButton.Menu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-                android:id="@+id/settingsButton"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/menuButton"
-                android:layout_marginEnd="12dp"
-                android:layout_marginTop="24dp"
-                android:src="@drawable/ic_baseline_settings_24"
-                android:background="@color/white"/>
+            android:id="@+id/settingsButton"
+            style="@style/Widget.DnD.ImageButton.Settings"
+            app:layout_constraintEnd_toStartOf="@id/menuButton"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-                android:id="@+id/iconImageView"
-                android:layout_width="84dp"
-                android:layout_height="84dp"
-                android:src="@drawable/ic_launcher_background"
-                app:layout_constraintTop_toBottomOf="@id/nameTextView"
-                app:layout_constraintStart_toEndOf="@id/arrowBackImageButton"
-                android:layout_marginTop="6dp"
-        />
+            android:id="@+id/iconImageView"
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            android:layout_marginTop="6dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintStart_toEndOf="@id/arrowBackImageButton"
+            app:layout_constraintTop_toBottomOf="@id/nameTextView" />
 
         <TextView
-                android:id="@+id/hpTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/iconImageView"
-                app:layout_constraintStart_toEndOf="@id/iconImageView"
-                app:layout_constraintBottom_toTopOf="@id/classTextView"
-                android:layout_marginStart="24dp"
-                android:textSize="24sp"
-                android:text="HP"/>
+            android:id="@+id/hpTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="HP"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@id/classTextView"
+            app:layout_constraintStart_toEndOf="@id/iconImageView"
+            app:layout_constraintTop_toTopOf="@id/iconImageView" />
 
         <EditText
-                android:id="@+id/hpEditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/hpTextView"
-                app:layout_constraintStart_toEndOf="@id/hpTextView"
-                android:layout_marginStart="6dp"
-                android:text="0"
-                android:textSize="24sp"
-                android:background="@null"/>
+            android:id="@+id/hpEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:background="@null"
+            android:text="0"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@id/hpTextView"
+            app:layout_constraintTop_toTopOf="@id/hpTextView" />
 
         <TextView
-                android:id="@+id/classTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/hpTextView"
-                app:layout_constraintStart_toStartOf="@id/hpTextView"
-                app:layout_constraintBottom_toBottomOf="@id/iconImageView"
-                android:textSize="18sp"
-                android:text="Класс"/>
+            android:id="@+id/classTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Класс"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/iconImageView"
+            app:layout_constraintStart_toStartOf="@id/hpTextView"
+            app:layout_constraintTop_toBottomOf="@id/hpTextView" />
 
         <TextView
-                android:id="@+id/levelTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/hpTextView"
-                app:layout_constraintStart_toStartOf="@id/hpTextView"
-                android:layout_marginStart="156dp"
-                app:layout_constraintBottom_toBottomOf="@id/iconImageView"
-                android:textSize="18sp"
-                android:text="Уровень"/>
+            android:id="@+id/levelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="156dp"
+            android:text="Уровень"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/iconImageView"
+            app:layout_constraintStart_toStartOf="@id/hpTextView"
+            app:layout_constraintTop_toBottomOf="@id/hpTextView" />
 
         <GridLayout
-                android:id="@+id/topGridLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="4"
-                android:rowCount="2"
-                app:layout_constraintTop_toBottomOf="@id/iconImageView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="6dp">
-            <TextView
-                    android:id="@+id/proficiencyTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="24sp"
-                    android:text="+0"
-            />
-            <TextView
-                    android:id="@+id/speedTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="24sp"
-                    android:text="30ft"/>
-            <TextView
-                    android:id="@+id/initiativeTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="24sp"
-                    android:text="+2"/>
-            <TextView
-                    android:id="@+id/acTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="24sp"
-                    android:text="19"/>
-            <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="16sp"
-                    android:text="Маст"/>
-            <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="16sp"
-                    android:text="Скорость"/>
-            <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="16sp"
-                    android:text="Ини"/>
-            <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="16sp"
-                    android:text="КД"/>
-        </GridLayout>
+            android:id="@+id/topGridLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:columnCount="4"
+            android:rowCount="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iconImageView">
 
-        <GridLayout
-                android:id="@+id/skillsGridLayout"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/proficiencyTextView"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:columnCount="3"
-                android:rowCount="2"
-                app:layout_constraintTop_toBottomOf="@id/topGridLayout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginHorizontal="12dp"
-                android:layout_marginTop="24dp">
+                android:layout_columnWeight="1"
+                android:gravity="center"
+                android:text="+0"
+                android:textSize="24sp" />
+
             <TextView
-                    android:id="@+id/strTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="36sp"
-                    android:text="+0"
-            />
+                android:id="@+id/speedTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:gravity="center"
+                android:text="30ft"
+                android:textSize="24sp" />
+
             <TextView
-                    android:id="@+id/dexTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="36sp"
-                    android:text="+0"
-            />
+                android:id="@+id/initiativeTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:gravity="center"
+                android:text="+2"
+                android:textSize="24sp" />
+
             <TextView
-                    android:id="@+id/conTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="36sp"
-                    android:text="+0"
-            />
+                android:id="@+id/acTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:gravity="center"
+                android:text="19"
+                android:textSize="24sp" />
+
             <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="18sp"
-                    android:text="Сил"
-            />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:gravity="center"
+                android:text="Маст"
+                android:textSize="16sp" />
+
             <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="18sp"
-                    android:text="Лвк"
-            />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:gravity="center"
+                android:text="Скорость"
+                android:textSize="16sp" />
+
             <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="18sp"
-                    android:text="Тел"
-            />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:gravity="center"
+                android:text="Ини"
+                android:textSize="16sp" />
+
             <TextView
-                    android:id="@+id/intTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="36sp"
-                    android:text="+0"
-            />
-            <TextView
-                    android:id="@+id/wisTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="36sp"
-                    android:text="+0"
-            />
-            <TextView
-                    android:id="@+id/chaTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="36sp"
-                    android:text="+0"
-            />
-            <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="18sp"
-                    android:text="Инт"
-            />
-            <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="18sp"
-                    android:text="Мдр"
-            />
-            <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:gravity="center"
-                    android:textSize="18sp"
-                    android:text="Хар"
-            />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:gravity="center"
+                android:text="КД"
+                android:textSize="16sp" />
         </GridLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/mainFragmentNavigationHost"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:defaultNavHost="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sharedInfoContainer"
+        app:navGraph="@navigation/character_nav_graph"
+        tools:layout="@layout/fragment_character_skills" />
+
+    <View
+        android:id="@+id/popUpBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:background="@color/black" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

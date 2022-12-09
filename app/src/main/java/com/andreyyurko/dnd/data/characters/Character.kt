@@ -8,7 +8,8 @@ open class AbilityNode(
     var characterInfo: CharacterInfo,
     val alternatives: MutableMap<String, List<String>>,
     open val requirements: List<List<Triple<String, String, Int>>>,
-    open val add_requirements: List<List<Triple<String, String, Int>>>
+    open val add_requirements: List<List<Triple<String, String, Int>>>,
+    var description: String
 ) {
     constructor(name: String) : this(
         name = name,
@@ -16,6 +17,7 @@ open class AbilityNode(
         alternatives = mutableMapOf<String, List<String>>(),
         requirements = listOf<List<Triple<String, String, Int>>>(),
         add_requirements = listOf<List<Triple<String, String, Int>>>(),
+        description = ""
     )
     fun merge (abilities: CharacterInfo): CharacterInfo {
         return merge(abilities, characterInfo)
@@ -42,7 +44,8 @@ var baseAN: AbilityNode = AbilityNode(
         Pair("class", listOf("monk1", "barbarian1")),
     ),
     listOf(listOf()),
-    listOf(listOf())
+    listOf(listOf()),
+    description = "Base Ability Node, root of all AN"
 )
 
 var mapOfAn: MutableMap<String, AbilityNode> = mutableMapOf(
