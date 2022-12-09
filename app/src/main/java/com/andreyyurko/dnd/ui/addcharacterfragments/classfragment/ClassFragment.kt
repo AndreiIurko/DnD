@@ -49,7 +49,7 @@ class ClassFragment : Fragment(R.layout.fragment_class) {
         val wid = LinearLayout.LayoutParams.WRAP_CONTENT
         val high = LinearLayout.LayoutParams.WRAP_CONTENT
         val classChoiceList = PopupWindow(parent, wid, high, focus)
-        for (classChoice in viewModel.baseCAN.data.alternatives["class"]!!) {
+        for (classChoice in viewModel.baseCAN.showOptions(viewModel.character.characterInfo, "class")) {
             val classNameTextView = TextView(context)
             classNameTextView.isClickable = true
             classNameTextView.textSize = resources.displayMetrics.density * 10

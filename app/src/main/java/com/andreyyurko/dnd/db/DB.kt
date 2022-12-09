@@ -25,4 +25,6 @@ interface DB {
     fun putParcelablesAsync(data: List<Pair<String, Parcelable>>)
     
     fun putStringsAsync(data: List<Pair<String, String>>)
+
+    fun clearMemory()
 }

@@ -17,14 +17,6 @@ class CreateCharacterViewModel @Inject constructor(
             id = -1,
         )
         character = charactersHolder.addCharacter(character)
-        createAbilityNode("customChangeAbility", "abilityChange_${character.id}")
-        charactersHolder.updateCharacter(character)
-    }
-
-    private fun createAbilityNode(optionName: String, nodeName: String) {
-        character.customAbilities.data.alternatives[optionName] = listOf(nodeName)
-        mapOfAn[nodeName] = AbilityNode(nodeName)
-        character.customAbilities.makeChoice(optionName, nodeName)
     }
 
     fun updateCharacter() {

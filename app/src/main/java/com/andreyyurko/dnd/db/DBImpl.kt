@@ -81,4 +81,8 @@ internal class DBImpl(
         val request = OneTimeWorkRequestBuilder<ParcelableWriter>().setInputData(inputData.build()).build()
         WorkManager.getInstance(appContext).enqueue(request)
     }
+
+    override fun clearMemory() {
+        sp.edit().clear().apply()
+    }
 }

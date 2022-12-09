@@ -32,29 +32,23 @@ class CharactersHolder @Inject constructor(
         viewModelScope.launch {
             val charactersCount = db.getString(DB_CHARACTER_COUNT)?.toInt() ?: 0
             for (i in 0 until charactersCount) {
-                //val characterJson = db.getString(DB_CHARACTER_ITEM + i.toString())
-                //var character = characterJson?.let { adapter.fromJson(it) }
-                /*var character = Gson().fromJson(characterJson, Character::class.java)
-                if (character != null) {
-                    character.id = i
-                    character = mergeAllAbilities(character)
-                    characters.add(character)
-                }*/
                 val name = db.getString(DB_CHARACTER_NAME + i.toString())
-                val characterCustomAbilityNodeJson = db.getString(i.toString() + DB_CHARACTER_ABILITY_NODE + "customRoot")
-                val characterCustomAbilityNode = Gson().fromJson(characterCustomAbilityNodeJson, CharacterAbilityNode::class.java)
+                val characterCharacterInfoJson = db.getString(i.toString() + DB_CHARACTER_CUSTOM)
+                val characterCharacterInfo = Gson().fromJson(characterCharacterInfoJson, CharacterInfo::class.java)
                 val classCharacterAbilityNode = loadCharacterNode("base_an", i)
                 var character = Character(
                     id = i,
                     name = name!!,
                     characterInfo = CharacterInfo(),
-                    customAbilities = characterCustomAbilityNode,
+                    customAbilities = characterCharacterInfo,
                     classAbilities = classCharacterAbilityNode
                 )
+                character.characterInfo = mergeCharacterInfo(character.characterInfo, character.customAbilities)
                 character = mergeAllAbilities(character)
                 characters.add(character)
             }
             _initActionState.emit(InitializationState.Initialized)
+            //db.clearMemory()
         }
     }
 
@@ -117,10 +111,10 @@ class CharactersHolder @Inject constructor(
                 //val characterJson = Gson().toJson(characters[i], Character::class.java)
                 //listOfStrings.add(Pair(DB_CHARACTER_ITEM + i.toString(), characterJson))
                 listOfStrings.add(Pair(DB_CHARACTER_NAME + i.toString(), characters[i].name))
-                val characterCustomAbilityNodeJson = Gson().toJson(characters[i].customAbilities, CharacterAbilityNode::class.java)
+                val characterCharacterInfoJson = Gson().toJson(characters[i].customAbilities, CharacterInfo::class.java)
                 listOfStrings.add(Pair(
-                    i.toString() + DB_CHARACTER_ABILITY_NODE + characters[i].customAbilities.data.name,
-                    characterCustomAbilityNodeJson
+                    i.toString() + DB_CHARACTER_CUSTOM,
+                    characterCharacterInfoJson
                 ))
                 saveCharacterNode(characters[i].classAbilities, i)
             }
@@ -180,6 +174,7 @@ class CharactersHolder @Inject constructor(
         private const val DB_CHARACTER_COUNT = "CharacterCount"
         private const val DB_CHARACTER_NAME = "CharacterName="
         private const val DB_CHARACTER_ABILITY_NODE = "_CharacterAbilityNode_"
+        private const val DB_CHARACTER_CUSTOM = "_CharacterCustom"
 
         private const val LOG_TAG = "CharacterHolder"
     }

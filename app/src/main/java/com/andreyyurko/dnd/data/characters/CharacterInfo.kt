@@ -32,7 +32,7 @@ data class CharacterInfo(
     var inventory: List<EquipmentItem> = emptyList(),
 )
 
-fun merge(characterInfoFirst: CharacterInfo, characterInfoSecond: CharacterInfo): CharacterInfo {
+fun mergeCharacterInfo(characterInfoFirst: CharacterInfo, characterInfoSecond: CharacterInfo): CharacterInfo {
     val resultCharacterInfo = CharacterInfo()
 
     resultCharacterInfo.characterClass = characterInfoFirst.characterClass + characterInfoSecond.characterClass
@@ -49,6 +49,5 @@ fun merge(characterInfoFirst: CharacterInfo, characterInfoSecond: CharacterInfo)
     resultCharacterInfo.initiativeBonus = characterInfoFirst.initiativeBonus + characterInfoSecond.initiativeBonus
     resultCharacterInfo.ac = characterInfoFirst.ac + characterInfoSecond.ac
     resultCharacterInfo.hp = characterInfoFirst.hp + characterInfoSecond.hp
-
     return resultCharacterInfo
 }

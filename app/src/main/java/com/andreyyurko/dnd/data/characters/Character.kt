@@ -5,33 +5,33 @@ import com.andreyyurko.dnd.data.abilities.characterclass.*
 
 open class AbilityNode(
     val name: String,
-    var characterInfo: CharacterInfo,
+    val changesInCharacterInfo: (abilities: CharacterInfo) -> CharacterInfo,
     val alternatives: MutableMap<String, List<String>>,
-    open val requirements: List<List<Triple<String, String, Int>>>,
+    val requirements: (abilities: CharacterInfo) -> Boolean,
     open val add_requirements: List<List<Triple<String, String, Int>>>,
     var description: String
 ) {
     constructor(name: String) : this(
         name = name,
-        characterInfo = CharacterInfo(),
+        changesInCharacterInfo = {abilities: CharacterInfo -> abilities},
         alternatives = mutableMapOf<String, List<String>>(),
-        requirements = listOf<List<Triple<String, String, Int>>>(),
+        requirements = { true },
         add_requirements = listOf<List<Triple<String, String, Int>>>(),
         description = ""
     )
     fun merge (abilities: CharacterInfo): CharacterInfo {
-        return merge(abilities, characterInfo)
+        return changesInCharacterInfo(abilities)
     }
-    fun isCorrect(): Boolean {
-        return true
+    fun isCorrect(abilities: CharacterInfo): Boolean {
+        return requirements(abilities)
     }
-    fun isAddable(): Boolean {
-        return isCorrect() and true
+    fun isAddable(abilities: CharacterInfo): Boolean {
+        return isCorrect(abilities) and true
     }
     fun showOptions(abilities: CharacterInfo, option_name: String): List<String> {
         val result: MutableList<String> = mutableListOf()
         for (option in alternatives[option_name]!!){
-            if (mapOfAn[option]!!.isAddable()) result.add(option)
+            if (mapOfAn[option]!!.isAddable(abilities)) result.add(option)
         }
         return result
     }
@@ -39,11 +39,11 @@ open class AbilityNode(
 
 var baseAN: AbilityNode = AbilityNode(
     "base_an",
-    CharacterInfo(),
+    {abilities: CharacterInfo -> abilities},
     mutableMapOf(
         Pair("class", listOf("monk1", "barbarian1")),
     ),
-    listOf(listOf()),
+    {true},
     listOf(listOf()),
     description = "Base Ability Node, root of all AN"
 )
@@ -72,10 +72,10 @@ open class CharacterAbilityNode(
         }
         return result
     }
-    fun showOptions(abilities: CharacterInfo, option_name: String): List<String>? {
+    fun showOptions(abilities: CharacterInfo, option_name: String): List<String> {
         return data.showOptions(abilities, option_name)
     }
-    fun makeChoice(option_name: String, choice: String){
+    fun makeChoice(option_name: String, choice: String) {
         //maybe we need to add some check.
         //And we also need to delete old children if clever kotlin didn't do it
         mapOfAn[choice]?.let {
@@ -88,13 +88,14 @@ data class Character(
     var id: Int,
     var name: String = "",
     var characterInfo: CharacterInfo = CharacterInfo(),
-    var customAbilities: CharacterAbilityNode = CharacterAbilityNode(AbilityNode("customRoot")),
+    var customAbilities: CharacterInfo = CharacterInfo(),
     var classAbilities: CharacterAbilityNode = CharacterAbilityNode(baseAN),
-    var abilities: List<CharacterAbilityNode> = listOf(customAbilities, classAbilities),
+    var abilities: List<CharacterAbilityNode> = listOf(classAbilities),
 )
 
 fun mergeAllAbilities(character: Character): Character {
     var characterInfo = CharacterInfo()
+    characterInfo = mergeCharacterInfo(characterInfo, character.customAbilities)
     for (ability in character.abilities) {
         characterInfo = ability.merge(characterInfo)
     }
