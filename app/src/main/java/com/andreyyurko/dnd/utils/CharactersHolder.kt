@@ -48,7 +48,8 @@ class CharactersHolder @Inject constructor(
                 characters.add(character)
             }
             _initActionState.emit(InitializationState.Initialized)
-            //db.clearMemory()
+            db.clearMemory()
+            saveCharacters()
         }
     }
 

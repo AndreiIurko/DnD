@@ -48,7 +48,7 @@
             android:layout_width="84dp"
             android:layout_height="84dp"
             android:layout_marginTop="6dp"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/dragonborn"
             app:layout_constraintStart_toEndOf="@id/arrowBackImageButton"
             app:layout_constraintTop_toBottomOf="@id/nameTextView" />
 
@@ -101,78 +101,54 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:columnCount="4"
-            android:rowCount="2"
+            android:rowCount="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iconImageView">
 
-            <TextView
-                android:id="@+id/proficiencyTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:gravity="center"
-                android:text="+0"
-                android:textSize="24sp" />
+            <LinearLayout style="@style/MainLayoutStyle">
+                <TextView
+                    android:id="@+id/proficiencyTextView"
+                    style="@style/Text.MainNumber"
+                    android:text="+0" />
 
-            <TextView
-                android:id="@+id/speedTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:gravity="center"
-                android:text="30ft"
-                android:textSize="24sp" />
+                <TextView
+                    style="@style/Text.MainName"
+                    android:text="Маст" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/initiativeTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:gravity="center"
-                android:text="+2"
-                android:textSize="24sp" />
+            <LinearLayout style="@style/MainLayoutStyle">
+                <TextView
+                    android:id="@+id/speedTextView"
+                    style="@style/Text.MainNumber"
+                    android:text="30ft" />
 
-            <TextView
-                android:id="@+id/acTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:gravity="center"
-                android:text="19"
-                android:textSize="24sp" />
+                <TextView
+                    style="@style/Text.MainName"
+                    android:text="Скор" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:gravity="center"
-                android:text="Маст"
-                android:textSize="16sp" />
+            <LinearLayout style="@style/MainLayoutStyle">
+                <TextView
+                    android:id="@+id/initiativeTextView"
+                    style="@style/Text.MainNumber"
+                    android:text="+4" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:gravity="center"
-                android:text="Скорость"
-                android:textSize="16sp" />
+                <TextView
+                    style="@style/Text.MainName"
+                    android:text="Ини" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:gravity="center"
-                android:text="Ини"
-                android:textSize="16sp" />
+            <LinearLayout style="@style/MainLayoutStyle">
+                <TextView
+                    android:id="@+id/acTextView"
+                    style="@style/Text.MainNumber"
+                    android:text="19" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:gravity="center"
-                android:text="КД"
-                android:textSize="16sp" />
+                <TextView
+                    style="@style/Text.MainName"
+                    android:text="КД" />
+            </LinearLayout>
         </GridLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -188,13 +164,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sharedInfoContainer"
         app:navGraph="@navigation/character_nav_graph"
-        tools:layout="@layout/fragment_character_skills" />
+        tools:layout="@layout/fragment_character_abilities" />
 
     <View
         android:id="@+id/popUpBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0"
-        android:background="@color/black" />
+        android:background="?attr/backgroundColor"
+        tools:layout_editor_absoluteX="-45dp"
+        tools:layout_editor_absoluteY="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

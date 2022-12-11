@@ -60,6 +60,7 @@ class CharacterMainFragment : Fragment(R.layout.fragment_character_main) {
             TODO("navigate to changing character stats, abilities, etc.")
         }
 
+        onPressAnimation(viewBinding.arrowBackImageButton)
         viewBinding.arrowBackImageButton.setOnClickListener {
             findNavController().popBackStack()
         }
