@@ -2,6 +2,7 @@ package com.andreyyurko.dnd.utils
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.andreyyurko.dnd.data.abilities.mapOfAn
 import com.andreyyurko.dnd.data.characters.*
 import com.andreyyurko.dnd.db.DB
 import com.andreyyurko.dnd.db.DBProvider
@@ -32,24 +33,46 @@ class CharactersHolder @Inject constructor(
         viewModelScope.launch {
             val charactersCount = db.getString(DB_CHARACTER_COUNT)?.toInt() ?: 0
             for (i in 0 until charactersCount) {
+                // get name
                 val name = db.getString(DB_CHARACTER_NAME + i.toString())
+
+                // get custom info
                 val characterCharacterInfoJson = db.getString(i.toString() + DB_CHARACTER_CUSTOM)
                 val characterCharacterInfo = Gson().fromJson(characterCharacterInfoJson, CharacterInfo::class.java)
+
+                // get current state
+                val currentStateJson = db.getString(i.toString() + DB_CHARACTER_STATE)
+                val currentState = Gson().fromJson(currentStateJson, CurrentState::class.java)
+
+                // get base_an with all sub-nods
                 val classCharacterAbilityNode = loadCharacterNode("base_an", i)
+
+                // init character
                 var character = Character(
                     id = i,
                     name = name!!,
                     characterInfo = CharacterInfo(),
                     customAbilities = characterCharacterInfo,
-                    classAbilities = classCharacterAbilityNode
+                    baseCAN = classCharacterAbilityNode
                 )
+
+                // add all custom data
                 character.characterInfo = mergeCharacterInfo(character.characterInfo, character.customAbilities)
+
+                // load current state
+                character.characterInfo.currentState = currentState
+
+                // merge all CAN
                 character = mergeAllAbilities(character)
+
+                // add to character list
                 characters.add(character)
             }
             _initActionState.emit(InitializationState.Initialized)
-            db.clearMemory()
-            saveCharacters()
+
+            // TODO: how to clear memory that we are not using any more? Maybe Android are doing it already? Need to dig into it
+            //db.clearMemory()
+            //saveCharacters()
         }
     }
 
@@ -109,15 +132,25 @@ class CharactersHolder @Inject constructor(
             val listOfStrings = mutableListOf<Pair<String, String>>()
             listOfStrings.add(Pair(DB_CHARACTER_COUNT, characters.size.toString()))
             for (i in characters.indices) {
-                //val characterJson = Gson().toJson(characters[i], Character::class.java)
-                //listOfStrings.add(Pair(DB_CHARACTER_ITEM + i.toString(), characterJson))
+                // add to save list name
                 listOfStrings.add(Pair(DB_CHARACTER_NAME + i.toString(), characters[i].name))
+
+                // add to save list custom info
                 val characterCharacterInfoJson = Gson().toJson(characters[i].customAbilities, CharacterInfo::class.java)
                 listOfStrings.add(Pair(
                     i.toString() + DB_CHARACTER_CUSTOM,
                     characterCharacterInfoJson
                 ))
-                saveCharacterNode(characters[i].classAbilities, i)
+
+                // add to save list current state
+                val characterCurrentStateJson = Gson().toJson(characters[i].characterInfo.currentState)
+                listOfStrings.add(Pair(
+                    i.toString() + DB_CHARACTER_STATE,
+                    characterCurrentStateJson
+                ))
+
+                // save all graph of choices
+                saveCharacterNode(characters[i].baseCAN, i)
             }
             db.putStringsAsync(
                 listOfStrings
@@ -126,15 +159,20 @@ class CharactersHolder @Inject constructor(
     }
 
     private fun saveCharacterNode(characterAbilityNode: CharacterAbilityNode, characterId: Int) {
+        // save all sub-nodes
         for (characterNode in characterAbilityNode.chosen_alternatives.values) {
             saveCharacterNode(characterNode, characterId)
         }
+
+        // get chosen AN names and save it using current AN option_name as key
         val chosenAlternativesNames : MutableMap<String, String> = mutableMapOf()
         for (key in characterAbilityNode.chosen_alternatives.keys) {
             characterAbilityNode.chosen_alternatives[key]?.apply {
                 chosenAlternativesNames[key] = this.data.name
             }
         }
+
+        // save map option_name -> chosen_option_name
         val chosenAlternativesJson = Gson().toJson(chosenAlternativesNames)
         db.putStringsAsync(listOf(
             Pair(
@@ -145,14 +183,22 @@ class CharactersHolder @Inject constructor(
     }
 
     private fun loadCharacterNode(name: String, id: Int) : CharacterAbilityNode{
+        // init type to load from db
         val mapType: Type = object : TypeToken<Map<String, String>>() {}.type
+
+        // get map option_name -> chosen_option_name
         val chosenAlternativesNamesJson = db.getString(id.toString() + DB_CHARACTER_ABILITY_NODE + name)
         val chosenAlternatives = Gson().fromJson<Map<String, String>>(chosenAlternativesNamesJson, mapType)
+
+        // create CAN with reference to AN and empty chosen_alternatives
         val characterAbilityNode = CharacterAbilityNode(mapOfAn[name]!!)
+
+        // add to chosen_alternatives all references to sub-nodes
         for (key in chosenAlternatives.keys) {
             val chosenNode = loadCharacterNode(chosenAlternatives[key]!!, id)
             characterAbilityNode.chosen_alternatives[chosenAlternatives[key]!!] = chosenNode
         }
+
         return characterAbilityNode
     }
 
@@ -162,7 +208,7 @@ class CharactersHolder @Inject constructor(
             info.add(CharacterBriefInfo(
                 id = character.id,
                 name = character.name,
-                characterClass = character.characterInfo.characterClass,
+                characterClass = character.characterInfo.characterClass.className,
                 level = character.characterInfo.level.toString()
             ))
         }
@@ -174,6 +220,7 @@ class CharactersHolder @Inject constructor(
 
         private const val DB_CHARACTER_COUNT = "CharacterCount"
         private const val DB_CHARACTER_NAME = "CharacterName="
+        private const val DB_CHARACTER_STATE = "CharacterState"
         private const val DB_CHARACTER_ABILITY_NODE = "_CharacterAbilityNode_"
         private const val DB_CHARACTER_CUSTOM = "_CharacterCustom"
 

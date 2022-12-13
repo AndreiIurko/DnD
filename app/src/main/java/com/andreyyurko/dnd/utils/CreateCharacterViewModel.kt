@@ -1,6 +1,5 @@
 package com.andreyyurko.dnd.utils
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.andreyyurko.dnd.data.characters.*
 import javax.inject.Inject

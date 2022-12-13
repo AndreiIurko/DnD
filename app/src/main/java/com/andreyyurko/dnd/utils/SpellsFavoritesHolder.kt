@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.andreyyurko.dnd.data.SpellSpecificLanguage
 import com.andreyyurko.dnd.db.DB
 import com.andreyyurko.dnd.db.DBProvider
+import com.google.gson.Gson
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -30,17 +31,16 @@ class SpellsFavoritesHolder @Inject constructor(
     private var _initActionState = MutableStateFlow<InitializationState>(InitializationState.NotInitialized)
     val initActionState: Flow<InitializationState> get() = _initActionState.asStateFlow()
 
-    private val moshi: Moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
-        .build()
-
-    private val type: Type = Types.newParameterizedType(MutableSet::class.java, SpellSpecificLanguage::class.java)
-    private val adapter: JsonAdapter<MutableSet<SpellSpecificLanguage>> = moshi.adapter(type)
-
     fun initialize() {
         viewModelScope.launch {
-            val spellsJson = db.getString(DB_FAVORITE_SPELLS_TAG)
-            favoriteSpells = spellsJson?.let { adapter.fromJson(it) } ?: mutableSetOf()
+            val size = db.getString(DB_FAVORITE_SPELLS_COUNT_TAG)?.toInt() ?: 0
+            for (i in 0 until size) {
+                val spellJson = db.getString(DB_FAVORITE_SPELLS_TAG + i.toString())
+                val spell = Gson().fromJson(spellJson, SpellSpecificLanguage::class.java)
+                if (spell != null) {
+                    favoriteSpells.add(spell)
+                }
+            }
             _initActionState.emit(InitializationState.Initialized)
         }
     }
@@ -61,20 +61,24 @@ class SpellsFavoritesHolder @Inject constructor(
 
     fun saveFavoritesSpells() {
         viewModelScope.launch {
-            val spellsJson = adapter.toJson(favoriteSpells) ?: ""
             db.putStringsAsync(
                 listOf(
-                    Pair(DB_FAVORITE_SPELLS_TAG, spellsJson)
+                    Pair(DB_FAVORITE_SPELLS_COUNT_TAG, favoriteSpells.size.toString())
                 )
             )
+            val spellsList = favoriteSpells.toList()
+            for (i in spellsList.indices) {
+                val spellJson = Pair(DB_FAVORITE_SPELLS_TAG + i.toString(), Gson().toJson(spellsList[i]))
+                db.putStringsAsync(listOf(spellJson))
+            }
+
         }
     }
 
     companion object {
         private const val DB_TAG = "favoriteSpells"
-
         private const val DB_FAVORITE_SPELLS_TAG = "favorite_spells"
-
+        private const val DB_FAVORITE_SPELLS_COUNT_TAG = "favorite_spells_count"
         private const val LOG_TAG = "SpellsFavorites"
     }
 

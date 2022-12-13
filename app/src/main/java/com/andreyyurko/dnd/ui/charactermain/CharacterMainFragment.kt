@@ -9,26 +9,27 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentCharacterMainBinding
+import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.onPressAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.applyInsetter
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class CharacterMainFragment : Fragment(R.layout.fragment_character_main) {
-    private val viewBinding by viewBinding(FragmentCharacterMainBinding::bind)
-    private lateinit var viewModel: CharacterMainViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[CharacterMainViewModel::class.java]
-    }
+    @Inject
+    lateinit var characterViewModel: CharacterViewModel
+
+    private val viewBinding by viewBinding(FragmentCharacterMainBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,6 +50,12 @@ class CharacterMainFragment : Fragment(R.layout.fragment_character_main) {
             type(statusBars = true) { margin() }
         }
 
+        val changeObserver = Observer<String> { state ->
+            if (state == CharacterViewModel.DataState.Complete.stateName) setupAll()
+        }
+        characterViewModel.dataState.observe(viewLifecycleOwner, changeObserver)
+
+
         setupAll()
 
         viewBinding.menuButton.setOnClickListener {
@@ -66,17 +73,17 @@ class CharacterMainFragment : Fragment(R.layout.fragment_character_main) {
         }
     }
 
-    private fun setupAll() {
-        viewBinding.nameTextView.text = viewModel.shownCharacter.name
-        viewBinding.classTextView.text = viewModel.shownCharacter.characterInfo.characterClass
-        viewBinding.levelTextView.text = viewModel.shownCharacter.characterInfo.level.toString()
-        viewBinding.hpEditText.setText(viewModel.shownCharacter.characterInfo.hp.toString())
+    fun setupAll() {
+        viewBinding.nameTextView.text = characterViewModel.shownCharacter.name
+        viewBinding.classTextView.text = characterViewModel.shownCharacter.characterInfo.characterClass.className
+        viewBinding.levelTextView.text = characterViewModel.shownCharacter.characterInfo.level.toString()
+        viewBinding.hpEditText.setText(characterViewModel.shownCharacter.characterInfo.hp.toString())
         viewBinding.proficiencyTextView.text =
-            "+ ${viewModel.shownCharacter.characterInfo.proficiencyBonus}"
-        viewBinding.speedTextView.text = "${viewModel.shownCharacter.characterInfo.speed}ft"
+            "+ ${characterViewModel.shownCharacter.characterInfo.proficiencyBonus}"
+        viewBinding.speedTextView.text = "${characterViewModel.shownCharacter.characterInfo.speed}ft"
         viewBinding.initiativeTextView.text =
-            "+ ${viewModel.shownCharacter.characterInfo.initiativeBonus}"
-        viewBinding.acTextView.text = viewModel.shownCharacter.characterInfo.ac.toString()
+            "+ ${characterViewModel.shownCharacter.characterInfo.initiativeBonus}"
+        viewBinding.acTextView.text = characterViewModel.shownCharacter.characterInfo.ac.toString()
     }
 
     private fun setupPopupMenu(context: Context) {

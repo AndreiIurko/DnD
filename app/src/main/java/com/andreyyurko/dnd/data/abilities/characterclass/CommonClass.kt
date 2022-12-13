@@ -1,10 +1,11 @@
 package com.andreyyurko.dnd.data.abilities.characterclass
 
+import com.andreyyurko.dnd.data.abilities.mapOfAn
 import com.andreyyurko.dnd.data.characters.AbilityNode
 import com.andreyyurko.dnd.data.characters.CharacterAbilityNode
 import com.andreyyurko.dnd.data.characters.CharacterInfo
-import com.andreyyurko.dnd.data.characters.mapOfAn
 
+// For all levels alternatives: it is important that
 class AbilityNodeLevel (
     name: String,
     changesInCharacterInfo: (abilities: CharacterInfo) -> CharacterInfo,
@@ -25,6 +26,21 @@ class CharacterAbilityNodeLevel(
         chosen_alternatives = mutableMapOf(),
         next_level = null
     )
+
+    fun makeChoice() {
+       for (entries in data.alternatives.entries) {
+           // check if ability is next level
+           if (entries.value[0] == data.next_level) continue
+
+           // choose all abilities
+           mapOfAn[entries.value[0]]?.let {
+               chosen_alternatives[entries.key] = CharacterAbilityNode(
+                   it
+               )
+           }
+       }
+    }
+
     fun levelUp() {
         next_level = CharacterAbilityNodeLevel(mapOfAn[data.next_level] as AbilityNodeLevel)
     }

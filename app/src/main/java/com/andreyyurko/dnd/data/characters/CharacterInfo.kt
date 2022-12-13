@@ -3,7 +3,7 @@ package com.andreyyurko.dnd.data.characters
 data class CharacterInfo(
     var level: Int = 0,
     var race: String = "",
-    var characterClass: String = "",
+    var characterClass: Classes = Classes.NotImplemented,
     var passiveInsightBonus: Int = 0,
     var passivePerceptionBonus: Int = 0,
     var strengthBonus: Int = 0,
@@ -17,9 +17,8 @@ data class CharacterInfo(
     var expertize: Set<Skill> = emptySet(),
     var savingThrowProf: Set<Ability> = emptySet(),
     var armorProficiency: Set<ArmorProf> = emptySet(),
-    var weaponProficiency: Set<WeaponProf> = emptySet(),
+    var weaponProficiency: Set<Weapon> = emptySet(),
     var armorAdditionalProficiency: Set<Int> = emptySet(), //every item has an id
-    var weaponAdditionalProficiency: Set<Int> = emptySet(), //every item has an id
     var toolProficiency: Set<Int> = emptySet(), //every tool has an id
     var languageProficiency: Set<Languages> = emptySet(), //every language has an id
     var ac: Int = 0,
@@ -30,12 +29,13 @@ data class CharacterInfo(
     var damageImmunities: Set<Int> = emptySet(),
     var actionsList: List<Action> = emptyList(),
     var inventory: List<EquipmentItem> = emptyList(),
+    var currentState: CurrentState = CurrentState()
 )
 
 fun mergeCharacterInfo(characterInfoFirst: CharacterInfo, characterInfoSecond: CharacterInfo): CharacterInfo {
     val resultCharacterInfo = CharacterInfo()
-
-    resultCharacterInfo.characterClass = characterInfoFirst.characterClass + characterInfoSecond.characterClass
+    resultCharacterInfo.currentState = characterInfoFirst.currentState
+    resultCharacterInfo.characterClass.className = characterInfoFirst.characterClass.className +characterInfoSecond.characterClass.className
     resultCharacterInfo.level = characterInfoFirst.level + characterInfoSecond.level
     resultCharacterInfo.race = characterInfoFirst.race + characterInfoSecond.race
     resultCharacterInfo.strengthBonus = characterInfoFirst.strengthBonus + characterInfoSecond.strengthBonus
@@ -51,3 +51,9 @@ fun mergeCharacterInfo(characterInfoFirst: CharacterInfo, characterInfoSecond: C
     resultCharacterInfo.hp = characterInfoFirst.hp + characterInfoSecond.hp
     return resultCharacterInfo
 }
+
+data class CurrentState(
+    var armor: Armor = Armor.NoArmor,
+    var weapons: List<Weapon> = listOf(),
+    var hasShield: Boolean = false
+)

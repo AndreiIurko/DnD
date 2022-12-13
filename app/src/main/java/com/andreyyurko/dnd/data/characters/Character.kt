@@ -1,15 +1,17 @@
 package com.andreyyurko.dnd.data.characters
 
 import android.util.Log
-import com.andreyyurko.dnd.data.abilities.characterclass.*
+import com.andreyyurko.dnd.data.abilities.baseAN
+import com.andreyyurko.dnd.data.abilities.mapOfAn
 
 open class AbilityNode(
     val name: String,
     val changesInCharacterInfo: (abilities: CharacterInfo) -> CharacterInfo,
     val alternatives: MutableMap<String, List<String>>,
     val requirements: (abilities: CharacterInfo) -> Boolean,
-    open val add_requirements: List<List<Triple<String, String, Int>>>,
-    var description: String
+    open val add_requirements: List<List<Triple<String, String, Int>>> = listOf(listOf()),
+    var description: String,
+    val priority: Priority = Priority.Basic
 ) {
     constructor(name: String) : this(
         name = name,
@@ -37,25 +39,6 @@ open class AbilityNode(
     }
 }
 
-var baseAN: AbilityNode = AbilityNode(
-    "base_an",
-    {abilities: CharacterInfo -> abilities},
-    mutableMapOf(
-        Pair("class", listOf("monk1", "barbarian1")),
-    ),
-    {true},
-    listOf(listOf()),
-    description = "Base Ability Node, root of all AN"
-)
-
-var mapOfAn: MutableMap<String, AbilityNode> = mutableMapOf(
-    Pair(baseAN.name, baseAN),
-    Pair(barbarian1.name, barbarian1),
-    Pair(barbarian2.name, barbarian2),
-    Pair(monk1.name, monk1),
-    Pair(monk2.name, monk2)
-)
-
 open class CharacterAbilityNode(
     open val data: AbilityNode,
     var chosen_alternatives: MutableMap<String, CharacterAbilityNode>
@@ -64,18 +47,18 @@ open class CharacterAbilityNode(
         data = _data,
         chosen_alternatives = mutableMapOf()
     )
-    fun merge(abilities: CharacterInfo): CharacterInfo {
+    fun merge(abilities: CharacterInfo, priority: Priority): CharacterInfo {
         var result: CharacterInfo = abilities
-        result = data.merge(result)
+        if (data.priority == priority) result = data.merge(result)
         for ((_, value) in chosen_alternatives.entries){
-            result = value.merge(result)
+            result = value.merge(result, priority)
         }
         return result
     }
     fun showOptions(abilities: CharacterInfo, option_name: String): List<String> {
         return data.showOptions(abilities, option_name)
     }
-    fun makeChoice(option_name: String, choice: String) {
+    open fun makeChoice(option_name: String, choice: String) {
         //maybe we need to add some check.
         //And we also need to delete old children if clever kotlin didn't do it
         mapOfAn[choice]?.let {
@@ -89,16 +72,22 @@ data class Character(
     var name: String = "",
     var characterInfo: CharacterInfo = CharacterInfo(),
     var customAbilities: CharacterInfo = CharacterInfo(),
-    var classAbilities: CharacterAbilityNode = CharacterAbilityNode(baseAN),
-    var abilities: List<CharacterAbilityNode> = listOf(classAbilities),
+    var baseCAN: CharacterAbilityNode = CharacterAbilityNode(baseAN),
+    var abilities: List<CharacterAbilityNode> = listOf(baseCAN),
+    //var sortedByPriority: SortedSet<CharacterAbilityNode> = sortedSetOf()
 )
 
 fun mergeAllAbilities(character: Character): Character {
     var characterInfo = CharacterInfo()
+    characterInfo.currentState = character.characterInfo.currentState
+    Log.d("Priority", characterInfo.currentState.toString())
     characterInfo = mergeCharacterInfo(characterInfo, character.customAbilities)
-    for (ability in character.abilities) {
-        characterInfo = ability.merge(characterInfo)
+    for (priority in Priority.values()) {
+        for (ability in character.abilities) {
+            characterInfo = ability.merge(characterInfo, priority)
+        }
     }
+
     character.characterInfo = characterInfo
     return character
 }

@@ -9,18 +9,17 @@ import com.andreyyurko.dnd.R
 import dagger.hilt.android.AndroidEntryPoint
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.databinding.FragmentCharacterAbilitiesBinding
+import com.andreyyurko.dnd.utils.CharacterViewModel
 import dev.chrisbanes.insetter.applyInsetter
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CharacterAbilitiesFragment : Fragment(R.layout.fragment_character_abilities) {
 
-    private val viewBinding by viewBinding(FragmentCharacterAbilitiesBinding::bind)
-    private lateinit var viewModel: CharacterAbilitiesViewModel
+    @Inject
+    lateinit var characterViewModel: CharacterViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[CharacterAbilitiesViewModel::class.java]
-    }
+    private val viewBinding by viewBinding(FragmentCharacterAbilitiesBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,11 +27,11 @@ class CharacterAbilitiesFragment : Fragment(R.layout.fragment_character_abilitie
     }
 
     private fun setupAll() {
-        viewBinding.strTextView.text = viewModel.shownCharacter.characterInfo.strengthBonus.toString()
-        viewBinding.dexTextView.text = viewModel.shownCharacter.characterInfo.dexterityBonus.toString()
-        viewBinding.conTextView.text = viewModel.shownCharacter.characterInfo.constitutionBonus.toString()
-        viewBinding.intTextView.text = viewModel.shownCharacter.characterInfo.intelligenceBonus.toString()
-        viewBinding.wisTextView.text = viewModel.shownCharacter.characterInfo.wisdomBonus.toString()
-        viewBinding.chaTextView.text = viewModel.shownCharacter.characterInfo.charismaBonus.toString()
+        viewBinding.strTextView.text = characterViewModel.shownCharacter.characterInfo.strengthBonus.toString()
+        viewBinding.dexTextView.text = characterViewModel.shownCharacter.characterInfo.dexterityBonus.toString()
+        viewBinding.conTextView.text = characterViewModel.shownCharacter.characterInfo.constitutionBonus.toString()
+        viewBinding.intTextView.text = characterViewModel.shownCharacter.characterInfo.intelligenceBonus.toString()
+        viewBinding.wisTextView.text = characterViewModel.shownCharacter.characterInfo.wisdomBonus.toString()
+        viewBinding.chaTextView.text = characterViewModel.shownCharacter.characterInfo.charismaBonus.toString()
     }
 }

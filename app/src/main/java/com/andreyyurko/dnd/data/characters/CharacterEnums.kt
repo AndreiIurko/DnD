@@ -37,9 +37,79 @@ enum class ArmorProf(var profName: String) {
     Shield("Щит")
 }
 
-enum class WeaponProf(var profName: String) {
-    Simple("Простое оружие"),
-    Martial("Воинское оружие")
+enum class Armor(
+    var armorName: String,
+    var cost: String,
+    var ac: Int,
+    var StrengthRequirement: Int,
+    var StealthDisadvantage: Boolean,
+    var weight: String,
+    var dexRestriction: Int) {
+    StuddedLeather("Проклёпанный кожаный", "45 зм", 12, 0, false, "13 фнт.", 10),
+    NoArmor("Без доспеха", "", 10, 0, false, "", 10)
+}
+
+enum class Weapon(
+    var weaponName: String,
+    var cost: String,
+    var damage: String,
+    var weight: String,
+    var properties: List<String>,
+    var setOfSkills : Set<Ability>,
+)
+{
+    Unarmed("Безоружный удар", "", "1", "", listOf(), setOf(Ability.Strength)),
+    Club("Дубинка", "1 см", "1к4 " + DamageType.Bludgeoning.typeName, "2 фнт.",
+        listOf("Лёгкий"), setOf(Ability.Strength)),
+    Dagger("Кинжал", "2 зм", "1к4 " + DamageType.Piercing.typeName, "1 фнт.",
+        listOf("Лёгкое", "метательное (дис. 20/60)", "фехтовальное"), setOf(Ability.Strength, Ability.Dexterity)),
+    GreatClub("Палица", "2 зм", "1к8 " + DamageType.Bludgeoning.typeName, "10 фнт.",
+        listOf("Двуручное"), setOf(Ability.Strength)),
+    HandAxe("Ручной топор", "5 зм", "1к6 " + DamageType.Slashing.typeName, "2 фнт.",
+        listOf("Лёгкое", "метательное (дис. 20/60)"), setOf(Ability.Strength)),
+    Javelin("Метательное копье", "5 см", "1к6 " + DamageType.Piercing.typeName, "2 фнт.",
+        listOf("Метательное (дис. 30/120)"), setOf(Ability.Strength)),
+    LightHammer("Лёгкий молот", "2 зм", "1к4 " + DamageType.Bludgeoning.typeName, "2 фнт.",
+        listOf("Метательное (дис. 20/60)",), setOf(Ability.Strength)),
+    Mace("Булава", "5 зм", "1к6 " + DamageType.Bludgeoning.typeName, "4 фнт.",
+        listOf(), setOf(Ability.Strength)),
+    Quarterstaff("Боевой посох", "2 см", "1к6 " + DamageType.Bludgeoning.typeName, "4 фнт.",
+        listOf("Универсальное (1к8)"), setOf(Ability.Strength)),
+    Sickle("Серп", "1 зм", "1к4 " + DamageType.Slashing.typeName, "2 фнт.",
+        listOf("Лёгкое"), setOf(Ability.Strength)),
+    Spear("Копье", "1 зм", "1к6 " + DamageType.Piercing.typeName, "3 фнт.",
+        listOf("Метательное (дис. 20/60)", "универсальное (1к8)"), setOf(Ability.Strength)),
+    CrossbowLight("Арбалет, легкий", "25 зм", "1к8 " + DamageType.Piercing.typeName, "5 фнт.",
+        listOf("Боеприпас (дис. 80/320)", "двуручное", "перезарядка"), setOf(Ability.Dexterity)),
+    Dart("Дротик", "5 мм", "1к4 " + DamageType.Piercing.typeName, "1/4 фнт.",
+        listOf("Метательное (дис. 20/60)", "фехтовальное"), setOf(Ability.Strength, Ability.Dexterity)),
+    ShortBow("Короткий лук", "25 зм", "1к6 " + DamageType.Piercing.typeName, "2 фнт.",
+        listOf("Боеприпас (дис. 80/320)", "двуручное"), setOf(Ability.Dexterity)),
+    Sling("Праща", "1 см", "1к4 " + DamageType.Bludgeoning.typeName, "-",
+        listOf("Боеприпас (дис. 30/120)"), setOf(Ability.Dexterity)),
+    ShortSword("Короткий меч", "10 зм", "1к6 " + DamageType.Slashing.typeName, "2 фнт",
+        listOf("Лёгкое", "фехтовальное"), setOf(Ability.Strength, Ability.Dexterity))
+}
+
+fun addAllSimpleWeapons(abilities: CharacterInfo): CharacterInfo {
+    val simpleWeapons = setOf(
+        Weapon.Club,
+        Weapon.CrossbowLight,
+        Weapon.Dagger,
+        Weapon.Dart,
+        Weapon.GreatClub,
+        Weapon.HandAxe,
+        Weapon.Javelin,
+        Weapon.LightHammer,
+        Weapon.Mace,
+        Weapon.Quarterstaff,
+        Weapon.Sickle,
+        Weapon.Spear,
+        Weapon.ShortBow,
+        Weapon.Sling
+    )
+    abilities.weaponProficiency = abilities.weaponProficiency.union(simpleWeapons)
+    return abilities
 }
 
 enum class ActionType(var actionName: String) {
@@ -70,7 +140,9 @@ enum class ItemType(var typeName: String) {
 }
 
 enum class DamageType(var typeName: String) {
-    //TODO: реализовать эту фигню, мне лениво их искать
+    Bludgeoning("дробящий"),
+    Piercing("колющий"),
+    Slashing("режущий")
 }
 
 enum class Languages(var languageName: String) {
@@ -91,3 +163,29 @@ enum class Languages(var languageName: String) {
     Sylvan("Сильван"),
     Undercommon("Подземный")
 }
+
+enum class Classes(var className: String = "") {
+    Artificer("Изобретатель"),
+    Barbarian("Варвар"),
+    Bard("Бард"),
+    Cleric("Жрец"),
+    Druid("Друид"),
+    Fighter("Воин"),
+    Monk("Монах"),
+    Paladin("Паладин"),
+    Ranger("Следопыт"),
+    Rogue("Плут"),
+    Sorcerer("Чародей"),
+    Warlock("Колдун"),
+    Wizard("Волшебник"),
+    NotImplemented()
+}
+
+enum class Priority {
+    DoFirst,
+    DoAsSoonAsPossible,
+    Basic,
+    DoAfterBasic,
+    DoLast
+}
+

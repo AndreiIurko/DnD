@@ -2,12 +2,12 @@ package com.andreyyurko.dnd.data.abilities.characterclass
 
 import com.andreyyurko.dnd.data.characters.AbilityNode
 import com.andreyyurko.dnd.data.characters.CharacterInfo
-import com.andreyyurko.dnd.data.characters.mapOfAn
+import com.andreyyurko.dnd.data.characters.Classes
 
 var barbarian1: AbilityNode = AbilityNodeLevel(
-    "barbarian1",
+    "Варвар_1",
     {abilities: CharacterInfo ->
-        abilities.characterClass = abilities.characterClass + "Варвар"
+        abilities.characterClass = Classes.Barbarian
         abilities.level = abilities.level + 1
         abilities.proficiencyBonus = abilities.proficiencyBonus + 1
         abilities
@@ -18,14 +18,14 @@ var barbarian1: AbilityNode = AbilityNodeLevel(
         proficiencyBonus = 2
     ),*/
     mutableMapOf(),
-    {abilities: CharacterInfo -> false},
+    {abilities: CharacterInfo -> true},
     listOf(listOf()),
     "1-й уровень, способности варвара",
     "barbarian2"
 )
 
 var barbarian2: AbilityNode = AbilityNodeLevel(
-    "barbarian2",
+    "Варвар_2",
     {abilities: CharacterInfo -> abilities},
     mutableMapOf(),
     {abilities: CharacterInfo -> true},
