@@ -31,10 +31,8 @@ class AbilitiesFragment : Fragment(R.layout.fragment_abilities) {
         }
 
         viewBinding.submitButton.setOnClickListener {
-            viewModel.characterInfo.ac = viewBinding.acEditText.text.toString().toInt()
             viewModel.characterInfo.hp = viewBinding.hitPointsEditText.text.toString().toInt()
             viewModel.characterInfo.speed = viewBinding.speedEditText.text.toString().toInt()
-            viewModel.characterInfo.initiativeBonus = viewBinding.initiativeEditText.text.toString().toInt()
             viewModel.characterInfo.strengthBonus = viewBinding.strEditText.text.toString().toInt()
             viewModel.characterInfo.dexterityBonus = viewBinding.dexEditText.text.toString().toInt()
             viewModel.characterInfo.constitutionBonus = viewBinding.conEditText.text.toString().toInt()

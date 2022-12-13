@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId "com.andreyyurko.dnd"
         minSdk 24
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -34,6 +34,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'com.andreyyurko.dnd'
 }
 
 dependencies {

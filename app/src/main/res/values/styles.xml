@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.DnD.ImageButton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:background">?backgroundColor</item>
+        <item name="android:tint">?colorPrimaryDark</item>
+    </style>
+
+    <style name="Widget.DnD.ImageButton.Back">
+        <item name="android:src">@drawable/ic_baseline_arrow_back_36</item>
+    </style>
+
+    <style name="Widget.DnD.ImageButton.Settings">
+        <item name="android:src">@drawable/ic_baseline_settings_36</item>
+    </style>
+
+    <style name="Widget.DnD.ImageButton.Menu">
+        <item name="android:src">@drawable/ic_baseline_menu_36</item>
+    </style>
+
+    <style name="Widget.DnD.ImageButton.Add">
+        <item name="android:src">@drawable/ic_baseline_add_36</item>
+    </style>
+
+    <style name="Widget.DnD.ImageButton.Delete">
+        <item name="android:src">@drawable/ic_baseline_delete_36</item>
+    </style>
+
+    <style name="Widget.DnD.MenuButton" parent="Widget.AppCompat.Button">
+
+    </style>
+
+
+    <style name="Text">
+    </style>
+
+    <style name="Text.Appearance">
+        <item name="android:textColor">?colorOnBackground</item>
+    </style>
+
+    <style name="AbilitiesLayoutStyle">
+        <item name="android:background">@drawable/back_border_abilities</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    
+    <style name="Text.AbilitiesNumber">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">"+0"</item>
+        <item name="android:textSize">36sp</item>
+    </style>
+
+    <style name="Text.AbilitiesName">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="MainLayoutStyle">
+        <item name="android:background">@drawable/back_border_main</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="Text.MainNumber">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Text.MainName">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+</resources>

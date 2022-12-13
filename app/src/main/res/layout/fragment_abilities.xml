@@ -17,6 +17,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Имя"
+                android:textColorHint="@color/primary"
         />
         <EditText
                 android:id="@+id/raceEditText"
@@ -24,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Раса"
+                android:textColorHint="@color/primary"
         />
         <EditText
                 android:id="@+id/hitPointsEditText"
@@ -31,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Максимум хитов"
+                android:textColorHint="@color/primary"
                 android:inputType="numberDecimal"
         />
         <EditText
@@ -39,22 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Скорость"
-                android:inputType="numberDecimal"
-        />
-        <EditText
-                android:id="@+id/initiativeEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Инициатива"
-                android:inputType="numberDecimal"
-        />
-        <EditText
-                android:id="@+id/acEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Класс доспеха"
+                android:textColorHint="@color/primary"
                 android:inputType="numberDecimal"
         />
         <EditText
@@ -63,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Сила"
+                android:textColorHint="@color/primary"
                 android:inputType="numberDecimal"
         />
         <EditText
@@ -71,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Ловкость"
+                android:textColorHint="@color/primary"
                 android:inputType="numberDecimal"
         />
         <EditText
@@ -79,6 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Телосложение"
+                android:textColorHint="@color/primary"
                 android:inputType="numberDecimal"
         />
         <EditText
@@ -87,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Интеллект"
+                android:textColorHint="@color/primary"
                 android:inputType="numberDecimal"
         />
         <EditText
@@ -95,6 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Мудрость"
+                android:textColorHint="@color/primary"
                 android:inputType="numberDecimal"
         />
         <EditText
@@ -103,6 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:hint="Харизма"
+                android:textColorHint="@color/primary"
                 android:inputType="numberDecimal"
         />
         <GridLayout

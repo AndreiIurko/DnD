@@ -10,9 +10,11 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentClassBinding
+import com.andreyyurko.dnd.ui.spellslist.SpellsListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,6 +30,9 @@ class ClassFragment : Fragment(R.layout.fragment_class) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setupRecyclerView()
+
         viewBinding.chooseClassButton.setOnClickListener {
             setupPopupMenu(requireContext())
         }
@@ -49,17 +54,31 @@ class ClassFragment : Fragment(R.layout.fragment_class) {
         val wid = LinearLayout.LayoutParams.WRAP_CONTENT
         val high = LinearLayout.LayoutParams.WRAP_CONTENT
         val classChoiceList = PopupWindow(parent, wid, high, focus)
-        for (classChoice in viewModel.baseCAN.data.alternatives["class"]!!) {
+        for (classChoice in viewModel.baseCAN.showOptions(viewModel.character.characterInfo, "class")) {
             val classNameTextView = TextView(context)
             classNameTextView.isClickable = true
             classNameTextView.textSize = resources.displayMetrics.density * 10
-            classNameTextView.text = classChoice
+            classNameTextView.text = classChoice.split("_").first()
             parent.addView(classNameTextView)
             classNameTextView.setOnClickListener {
                 viewModel.makeChoice(classChoice)
+                viewBinding.chooseClassTextView.text = classChoice.split("_").first()
+
                 classChoiceList.dismiss()
+                viewBinding.arrowUpImageView.visibility = View.GONE
+                viewBinding.arrowDropImageView.visibility = View.VISIBLE
             }
         }
         classChoiceList.showAtLocation(view, Gravity.NO_GRAVITY, viewBinding.chooseClassButton.x.toInt(), viewBinding.chooseClassButton.y.toInt() + 200)
+        viewBinding.arrowDropImageView.visibility = View.GONE
+        viewBinding.arrowUpImageView.visibility = View.VISIBLE
+    }
+
+    private fun setupRecyclerView() {
+        val recyclerView = viewBinding.abilitiesRecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        val adapter = ClassAdapter()
+        viewModel.adapter = adapter
+        recyclerView.adapter = adapter
     }
 }
