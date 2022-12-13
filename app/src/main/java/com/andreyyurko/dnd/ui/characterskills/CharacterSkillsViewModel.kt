@@ -25,14 +25,14 @@ class CharacterSkillsViewModel @Inject constructor(
             2 -> {}
             3 -> profBonus *= 2
         }
-        return when (skill.ability) {
+        return (when (skill.ability) {
             Ability.Strength -> shownCharacter.characterInfo.strengthBonus
             Ability.Dexterity -> shownCharacter.characterInfo.dexterityBonus
             Ability.Constitution -> shownCharacter.characterInfo.constitutionBonus
             Ability.Intelligence -> shownCharacter.characterInfo.intelligenceBonus
             Ability.Wisdom -> shownCharacter.characterInfo.wisdomBonus
             Ability.Charisma -> shownCharacter.characterInfo.charismaBonus
-        } + profBonus
+        } - 10) / 2 + profBonus
     }
 
     fun getProf(skill: Skill): Int? {
