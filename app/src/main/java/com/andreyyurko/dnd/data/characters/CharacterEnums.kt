@@ -1,33 +1,33 @@
 package com.andreyyurko.dnd.data.characters
 
-enum class Skill(var skillName: String) {
-    Acrobatics("Акробатика"),
-    AnimalHandling("Уход за животными"),
-    Arcana("Магия"),
-    Athletics("Атлетика"),
-    Deception("Обман"),
-    History("История"),
-    Insight("Проницательность"),
-    Intimidation("Запугивание"),
-    Investigation("Анализ"),
-    Medicine("Медицина"),
-    Nature("Природа"),
-    Perception("Восприятие"),
-    Performance("Выступление"),
-    Persuasion("Убеждение"),
-    Religion("Религия"),
-    SleightOfHand("Ловкость рук"),
-    Stealth("Скрытность"),
-    Survival("Выживание")
+enum class Skill(var skillName: String, var ability: Ability) {
+    Acrobatics("Акробатика", Ability.Dexterity),
+    AnimalHandling("Уход за животными", Ability.Wisdom),
+    Arcana("Магия", Ability.Intelligence),
+    Athletics("Атлетика", Ability.Strength),
+    Deception("Обман", Ability.Charisma),
+    History("История", Ability.Intelligence),
+    Insight("Проницательность", Ability.Wisdom),
+    Intimidation("Запугивание", Ability.Charisma),
+    Investigation("Анализ", Ability.Intelligence),
+    Medicine("Медицина", Ability.Wisdom),
+    Nature("Природа", Ability.Intelligence),
+    Perception("Восприятие", Ability.Wisdom),
+    Performance("Выступление", Ability.Charisma),
+    Persuasion("Убеждение", Ability.Charisma),
+    Religion("Религия", Ability.Intelligence),
+    SleightOfHand("Ловкость рук", Ability.Dexterity),
+    Stealth("Скрытность", Ability.Dexterity),
+    Survival("Выживание", Ability.Wisdom)
 }
 
-enum class Ability(var abilityName: String) {
-    Strength("Сила"),
-    Dexterity("Ловкость"),
-    Constitution("Телосложение"),
-    Intelligence("Интеллект"),
-    Wisdom("Мудрость"),
-    Charisma("Харизма")
+enum class Ability(var abilityName: String, var abilityShortName: String) {
+    Strength("Сила", "Сил"),
+    Dexterity("Ловкость", "Лвк"),
+    Constitution("Телосложение", "Тел"),
+    Intelligence("Интеллект", "Инт"),
+    Wisdom("Мудрость", "Мдр"),
+    Charisma("Харизма", "Хар")
 }
 
 enum class ArmorProf(var profName: String) {
