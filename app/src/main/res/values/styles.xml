@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.DnD.ImageButton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:background">@color/white</item>
+
+    </style>
+
+    <style name="Widget.DnD.ImageButton.Back">
+        <item name="android:src">@drawable/ic_baseline_arrow_back_36</item>
+    </style>
+
+    <style name="Widget.DnD.ImageButton.Settings">
+        <item name="android:src">@drawable/ic_baseline_settings_36</item>
+    </style>
+
+    <style name="Widget.DnD.ImageButton.Menu">
+        <item name="android:src">@drawable/ic_baseline_menu_36</item>
+    </style>
+
+    <style name="Widget.DnD.ImageButton.Add">
+        <item name="android:src">@drawable/ic_baseline_add_36</item>
+    </style>
+
+    <style name="Widget.DnD.MenuButton" parent="Widget.AppCompat.Button">
+
+    </style>
+
+</resources>
