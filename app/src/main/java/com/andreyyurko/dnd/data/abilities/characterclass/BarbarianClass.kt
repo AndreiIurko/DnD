@@ -1,5 +1,6 @@
 package com.andreyyurko.dnd.data.abilities.characterclass
 
+import com.andreyyurko.dnd.data.abilities.baseAN
 import com.andreyyurko.dnd.data.characters.AbilityNode
 import com.andreyyurko.dnd.data.characters.CharacterInfo
 import com.andreyyurko.dnd.data.characters.Classes
@@ -32,4 +33,9 @@ var barbarian2: AbilityNode = AbilityNodeLevel(
     listOf(listOf()),
     "2-й уровень, способности варвара",
     null
+)
+
+var mapOfBarbarianAbilities: MutableMap<String, AbilityNode> = mutableMapOf(
+    Pair(barbarian1.name, barbarian1),
+    Pair(barbarian2.name, barbarian2),
 )

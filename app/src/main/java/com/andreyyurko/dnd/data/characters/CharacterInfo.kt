@@ -27,8 +27,9 @@ data class CharacterInfo(
     var hp: Int = 0,
     var damageResistances: Set<Int> = emptySet(),
     var damageImmunities: Set<Int> = emptySet(),
-    var actionsList: List<Action> = emptyList(),
+    var actionsList: MutableList<Action> = mutableListOf(),
     var inventory: List<EquipmentItem> = emptyList(),
+    var additionalAbilities: MutableList<String> = mutableListOf(), // like blind vision
     var currentState: CurrentState = CurrentState()
 )
 
@@ -55,5 +56,6 @@ fun mergeCharacterInfo(characterInfoFirst: CharacterInfo, characterInfoSecond: C
 data class CurrentState(
     var armor: Armor = Armor.NoArmor,
     var weapons: List<Weapon> = listOf(),
-    var hasShield: Boolean = false
+    var hasShield: Boolean = false,
+    var charges: MutableMap<String, ChargesCounter> = mutableMapOf()
 )

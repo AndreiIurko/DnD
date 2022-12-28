@@ -56,11 +56,13 @@ enum class Weapon(
     var weight: String,
     var properties: List<String>,
     var setOfSkills : Set<Ability>,
+    var isMelee : Boolean = true,
+    var toHitBonus: Int = 0
 )
 {
     Unarmed("Безоружный удар", "", "1", "", listOf(), setOf(Ability.Strength)),
     Club("Дубинка", "1 см", "1к4 " + DamageType.Bludgeoning.typeName, "2 фнт.",
-        listOf("Лёгкий"), setOf(Ability.Strength)),
+        listOf("Лёгкое"), setOf(Ability.Strength)),
     Dagger("Кинжал", "2 зм", "1к4 " + DamageType.Piercing.typeName, "1 фнт.",
         listOf("Лёгкое", "метательное (дис. 20/60)", "фехтовальное"), setOf(Ability.Strength, Ability.Dexterity)),
     GreatClub("Палица", "2 зм", "1к8 " + DamageType.Bludgeoning.typeName, "10 фнт.",
@@ -80,13 +82,13 @@ enum class Weapon(
     Spear("Копье", "1 зм", "1к6 " + DamageType.Piercing.typeName, "3 фнт.",
         listOf("Метательное (дис. 20/60)", "универсальное (1к8)"), setOf(Ability.Strength)),
     CrossbowLight("Арбалет, легкий", "25 зм", "1к8 " + DamageType.Piercing.typeName, "5 фнт.",
-        listOf("Боеприпас (дис. 80/320)", "двуручное", "перезарядка"), setOf(Ability.Dexterity)),
+        listOf("Боеприпас (дис. 80/320)", "двуручное", "перезарядка"), setOf(Ability.Dexterity), false),
     Dart("Дротик", "5 мм", "1к4 " + DamageType.Piercing.typeName, "1/4 фнт.",
-        listOf("Метательное (дис. 20/60)", "фехтовальное"), setOf(Ability.Strength, Ability.Dexterity)),
+        listOf("Метательное (дис. 20/60)", "фехтовальное"), setOf(Ability.Strength, Ability.Dexterity), false),
     ShortBow("Короткий лук", "25 зм", "1к6 " + DamageType.Piercing.typeName, "2 фнт.",
-        listOf("Боеприпас (дис. 80/320)", "двуручное"), setOf(Ability.Dexterity)),
+        listOf("Боеприпас (дис. 80/320)", "двуручное"), setOf(Ability.Dexterity), false),
     Sling("Праща", "1 см", "1к4 " + DamageType.Bludgeoning.typeName, "-",
-        listOf("Боеприпас (дис. 30/120)"), setOf(Ability.Dexterity)),
+        listOf("Боеприпас (дис. 30/120)"), setOf(Ability.Dexterity), false),
     ShortSword("Короткий меч", "10 зм", "1к6 " + DamageType.Slashing.typeName, "2 фнт",
         listOf("Лёгкое", "фехтовальное"), setOf(Ability.Strength, Ability.Dexterity))
 }

@@ -45,60 +45,29 @@
                 android:textColorHint="@color/primary"
                 android:inputType="numberDecimal"
         />
-        <EditText
-                android:id="@+id/strEditText"
+
+        <TextView
+                android:id="@+id/pointsCapacity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Сила"
-                android:textColorHint="@color/primary"
-                android:inputType="numberDecimal"
-        />
-        <EditText
-                android:id="@+id/dexEditText"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:text="Всего очков: 27"/>
+
+        <LinearLayout
+                android:id="@+id/abilitiesLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_marginBottom="12dp"
-                android:hint="Ловкость"
-                android:textColorHint="@color/primary"
-                android:inputType="numberDecimal"
         />
-        <EditText
-                android:id="@+id/conEditText"
-                android:layout_width="match_parent"
+
+        <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Телосложение"
-                android:textColorHint="@color/primary"
-                android:inputType="numberDecimal"
-        />
-        <EditText
-                android:id="@+id/intEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Интеллект"
-                android:textColorHint="@color/primary"
-                android:inputType="numberDecimal"
-        />
-        <EditText
-                android:id="@+id/wisEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Мудрость"
-                android:textColorHint="@color/primary"
-                android:inputType="numberDecimal"
-        />
-        <EditText
-                android:id="@+id/chaEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Харизма"
-                android:textColorHint="@color/primary"
-                android:inputType="numberDecimal"
-        />
+                android:text="Система Point Buy. \n\nВы получаете 27 пунктов, которые распределяете между значениями характеристик. Цена повышения характеристики - 1 пункт. Исключения - с 13 на 14 и с 14 на 15, они стоят 2 пункта. 15 — наибольшее значение характеристики, которое вы можете получить в итоге, используя этот метод (перед применением расовых улучшений). Значение характеристики не может быть ниже 8."/>
+
+
         <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -20,6 +20,7 @@ import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.onPressAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.applyInsetter
+import java.lang.Math.abs
 import javax.inject.Inject
 
 
@@ -73,7 +74,7 @@ class CharacterMainFragment : Fragment(R.layout.fragment_character_main) {
         }
     }
 
-    fun setupAll() {
+    private fun setupAll() {
         viewBinding.nameTextView.text = characterViewModel.shownCharacter.name
         viewBinding.classTextView.text = characterViewModel.shownCharacter.characterInfo.characterClass.className
         viewBinding.levelTextView.text = characterViewModel.shownCharacter.characterInfo.level.toString()
@@ -82,7 +83,10 @@ class CharacterMainFragment : Fragment(R.layout.fragment_character_main) {
             "+ ${characterViewModel.shownCharacter.characterInfo.proficiencyBonus}"
         viewBinding.speedTextView.text = "${characterViewModel.shownCharacter.characterInfo.speed}ft"
         viewBinding.initiativeTextView.text =
-            "+ ${characterViewModel.shownCharacter.characterInfo.initiativeBonus}"
+            if (characterViewModel.shownCharacter.characterInfo.initiativeBonus >= 0)
+                "+ ${characterViewModel.shownCharacter.characterInfo.initiativeBonus}"
+            else
+                "- ${kotlin.math.abs(characterViewModel.shownCharacter.characterInfo.initiativeBonus)}"
         viewBinding.acTextView.text = characterViewModel.shownCharacter.characterInfo.ac.toString()
     }
 

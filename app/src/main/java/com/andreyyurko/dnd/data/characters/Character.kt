@@ -33,6 +33,7 @@ open class AbilityNode(
     fun showOptions(abilities: CharacterInfo, option_name: String): List<String> {
         val result: MutableList<String> = mutableListOf()
         for (option in alternatives[option_name]!!){
+            Log.d("test", option)
             if (mapOfAn[option]!!.isAddable(abilities)) result.add(option)
         }
         return result

@@ -1,6 +1,7 @@
 package com.andreyyurko.dnd.data.abilities.characterclass
 
 import android.util.Log
+import com.andreyyurko.dnd.data.abilities.baseAN
 import com.andreyyurko.dnd.data.characters.*
 
 var monk_unarmed_defence: AbilityNode = AbilityNode(
@@ -55,9 +56,9 @@ var monk1: AbilityNode = AbilityNodeLevel(
         abilities.characterClass = Classes.Monk
         abilities.level += 1
         abilities.proficiencyBonus += 2
-        val newAbilities = addAllSimpleWeapons(abilities)
-        newAbilities.weaponProficiency.plus(Weapon.ShortSword)
-        newAbilities
+        addAllSimpleWeapons(abilities)
+        abilities.weaponProficiency.plus(Weapon.ShortSword)
+        abilities
     },
     /*CharacterInfo(
         characterClass = "Монах",
@@ -69,9 +70,9 @@ var monk1: AbilityNode = AbilityNodeLevel(
         Pair("second", listOf(monk_martial_arts.name))
     ),
     {abilities: CharacterInfo -> true},
-    listOf(listOf()),
+    listOf(),
     "1-й уровень, способности монаха",
-    "monk2"
+    "Монах_2"
 )
 
 var monk_unarmed_movement = AbilityNode(
@@ -102,6 +103,14 @@ var monk2: AbilityNode = AbilityNodeLevel(
     listOf(listOf()),
     "2-й уровень, способности монаха",
     null
+)
+
+var mapOfMonkAbilities: MutableMap<String, AbilityNode> = mutableMapOf(
+    Pair(monk_unarmed_defence.name, monk_unarmed_defence),
+    Pair(monk_martial_arts.name, monk_martial_arts),
+    Pair(monk1.name, monk1),
+    Pair(monk_unarmed_movement.name, monk_unarmed_movement),
+    Pair(monk2.name, monk2),
 )
 
 
