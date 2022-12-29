@@ -12,7 +12,6 @@ var baseAN: AbilityNode = AbilityNode(
         abilities.weaponProficiency.plus(Weapon.Unarmed)
         abilities.ac = abilities.currentState.armor.ac + Integer.min(abilities.currentState.armor.dexRestriction, (abilities.dexterityBonus - 10) / 2)
         abilities.initiativeBonus = abilities.initiativeBonus + (abilities.dexterityBonus - 10) / 2
-        //Log.d("Priority", "base:" + abilities.ac.toString())
         addAttackActions(abilities)
         abilities
     },
@@ -25,6 +24,7 @@ var baseAN: AbilityNode = AbilityNode(
     priority = Priority.DoFirst
 )
 
+// helps to split code
 var mapOfAn: MutableMap<String, AbilityNode> = (
         mutableMapOf(Pair(baseAN.name, baseAN))
                 + mapOfMonkAbilities
@@ -35,6 +35,7 @@ var mapOfAn: MutableMap<String, AbilityNode> = (
 
 fun addAttackActions(abilities: CharacterInfo) {
     // main action
+    // TODO: consider to add damage as well
     abilities.actionsList.add(
         Action(
             name = "Атака",

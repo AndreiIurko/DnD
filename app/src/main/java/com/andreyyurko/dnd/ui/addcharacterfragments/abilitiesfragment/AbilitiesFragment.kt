@@ -73,7 +73,6 @@ class AbilitiesFragment : Fragment(R.layout.fragment_abilities) {
         score.text = viewModel.abilities[abilityName].toString()
 
         increaseButton.setOnClickListener {
-            Log.d("Ability test", "here")
             val newValue = score.text.toString().toInt() + 1
             score.text = newValue.toString()
             viewModel.abilities[abilityName] = newValue

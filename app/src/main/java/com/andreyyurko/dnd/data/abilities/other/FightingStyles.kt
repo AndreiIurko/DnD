@@ -5,6 +5,8 @@ import com.andreyyurko.dnd.data.characters.*
 
 var archery: AbilityNode = AbilityNode(
     name = "Стрельба",
+    // we can add to-hit bonus when this action appears on the screen
+    // change current state is dangerous because after every load bonus will accumulate
     changesInCharacterInfo = {abilities: CharacterInfo ->
         for (weaponProf in abilities.weaponProficiency) {
             if (!weaponProf.isMelee) {
@@ -37,6 +39,8 @@ var defense: AbilityNode = AbilityNode(
 
 var dueling: AbilityNode = AbilityNode(
     name = "Дуэлянт",
+    // don't know how to process this ability
+    // change current state is dangerous
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.additionalAbilities.add("Боевой стиль: Дуэлянт")
         abilities
@@ -50,6 +54,7 @@ var dueling: AbilityNode = AbilityNode(
 
 var greatWeaponFighting: AbilityNode = AbilityNode(
     name = "Сражение большим оружием",
+    // don't know how to process this ability
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.additionalAbilities.add("Боевой стиль: Сражение большим оружием")
         abilities

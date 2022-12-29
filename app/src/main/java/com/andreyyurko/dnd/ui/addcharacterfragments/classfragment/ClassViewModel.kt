@@ -33,6 +33,10 @@ class ClassViewModel @Inject constructor(
         showAllClassAbilities(choice)
 
         createCharacterViewModel.character = mergeAllAbilities(createCharacterViewModel.character)
+        updateCharacter()
+    }
+
+    fun updateCharacter() {
         createCharacterViewModel.updateCharacter()
     }
 
@@ -50,18 +54,19 @@ class ClassViewModel @Inject constructor(
             for (entry in classLevelAN.alternatives.entries) {
                 // check if level up ability
                 if (entry.key == classLevelAN.next_level) continue
-                Log.d(LOG_TAG, entry.value[0])
                 val ability = mapOfAn[entry.value[0]]!!
                 newListOfAbilities.add(ClassAbility(
                     name = ability.name,
                     classDescription = classLevelAN.description,
-                    description = ability.description
+                    description = ability.description,
+                    parentName = entry.key
                 ))
             }
         }
         listOfClassAbilities = newListOfAbilities
         adapter.apply {
             abilitiesList = listOfClassAbilities
+            classCAN = character.baseCAN.chosen_alternatives["class"] as CharacterAbilityNodeLevel
             notifyDataSetChanged()
         }
     }

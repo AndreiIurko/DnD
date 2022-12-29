@@ -36,7 +36,6 @@ class AbilitiesViewModel @Inject constructor(
     }
 
     fun increaseAbility(newValue: Int) {
-        Log.d("Ability text", totalPoints.value.toString())
         if (newValue == 14 || newValue == 15) {
             totalPoints.value?.let {
                 totalPoints.value = it - 2

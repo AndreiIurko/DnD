@@ -1,20 +1,26 @@
 package com.andreyyurko.dnd.ui.addcharacterfragments.classfragment
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
+import com.andreyyurko.dnd.data.abilities.characterclass.CharacterAbilityNodeLevel
+import com.andreyyurko.dnd.utils.createPopUpMenu
 
 class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
 
     var abilitiesList = listOf<ClassAbility>()
+    lateinit var classCAN: CharacterAbilityNodeLevel
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val nameTextView : TextView = itemView.findViewById(R.id.abilityNameTextView)
         val classDescription : TextView = itemView.findViewById(R.id.classDescription)
         val description : TextView = itemView.findViewById(R.id.description)
+        val parent = itemView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,11 +36,37 @@ class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
         holder.nameTextView.text = abilitiesList[position].name
         holder.classDescription.text = abilitiesList[position].classDescription
         holder.description.text = abilitiesList[position].description
+
+        val abilityCAN = classCAN.chosen_alternatives[abilitiesList[position].parentName]
+        abilityCAN?.apply {
+            // TODO: think about this code. I think it is too complicated
+            // how it works:
+            // search all available abilities and for each create button
+            // extract list of choices and setup popup menu
+            if (this.data.alternatives.isNotEmpty()) {
+                for ((optionName, optionsList) in this.data.alternatives.entries) {
+                    val choiceButton = LayoutInflater.from(holder.parent.context).inflate(R.layout.choose_option_button, null)
+                    // TODO: replace this shitty code with custom view or at least
+                    val layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                    layoutParams.setMargins(200, 40, 200, 40)
+                    (holder.parent as LinearLayout).addView(choiceButton, layoutParams)
+
+                    val textView = choiceButton.findViewById<TextView>(R.id.choiceText)
+
+                    choiceButton.setOnClickListener {
+                        createPopUpMenu(choiceButton, textView, optionsList, optionName, this)
+                    }
+                }
+            }
+        }
     }
 }
 
 data class ClassAbility(
     var name: String = "",
     var classDescription: String = "",
-    var description: String = ""
+    var description: String = "",
+    var parentName: String = ""
 )

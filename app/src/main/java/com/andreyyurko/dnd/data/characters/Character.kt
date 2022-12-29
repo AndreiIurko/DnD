@@ -33,8 +33,15 @@ open class AbilityNode(
     fun showOptions(abilities: CharacterInfo, option_name: String): List<String> {
         val result: MutableList<String> = mutableListOf()
         for (option in alternatives[option_name]!!){
-            Log.d("test", option)
             if (mapOfAn[option]!!.isAddable(abilities)) result.add(option)
+        }
+        return result
+    }
+
+    fun showOptions(option_name: String) : List<String> {
+        val result: MutableList<String> = mutableListOf()
+        for (option in alternatives[option_name]!!) {
+            result.add(option)
         }
         return result
     }
@@ -51,7 +58,7 @@ open class CharacterAbilityNode(
     fun merge(abilities: CharacterInfo, priority: Priority): CharacterInfo {
         var result: CharacterInfo = abilities
         if (data.priority == priority) result = data.merge(result)
-        for ((_, value) in chosen_alternatives.entries){
+        for ((_, value) in chosen_alternatives.entries) {
             result = value.merge(result, priority)
         }
         return result
@@ -81,7 +88,6 @@ data class Character(
 fun mergeAllAbilities(character: Character): Character {
     var characterInfo = CharacterInfo()
     characterInfo.currentState = character.characterInfo.currentState
-    Log.d("Priority", characterInfo.currentState.toString())
     characterInfo = mergeCharacterInfo(characterInfo, character.customAbilities)
     for (priority in Priority.values()) {
         for (ability in character.abilities) {

@@ -67,7 +67,6 @@ class SpellsListViewModel @Inject constructor(
                     } ?: _loadSpellsActionState.emit(LoadSpellsActionState.Error("Context is null"))
 
                 } catch (error: Throwable) {
-                    Log.d(LOG_TAG, error.message.toString())
                     _loadSpellsActionState.emit(LoadSpellsActionState.Error(error.message.toString()))
                 }
             }

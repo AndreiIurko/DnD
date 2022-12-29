@@ -7,7 +7,6 @@ import com.andreyyurko.dnd.data.characters.*
 var monk_unarmed_defence: AbilityNode = AbilityNode(
     name = "Защита без доспехов",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        Log.d("Priority", "node: " + abilities.currentState.armor.armorName)
         if (abilities.currentState.armor == Armor.NoArmor)
             abilities.ac = abilities.ac + (abilities.wisdomBonus - 10) / 2
         abilities

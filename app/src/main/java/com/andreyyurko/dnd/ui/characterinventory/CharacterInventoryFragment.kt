@@ -31,6 +31,5 @@ class CharacterInventoryFragment : Fragment(R.layout.fragment_character_inventor
             characterViewModel.shownCharacter.characterInfo.currentState.armor = Armor.NoArmor
             characterViewModel.updateCharacterInfo()
         }
-        Log.d("Priority", characterViewModel.shownCharacter.characterInfo.currentState.armor.armorName)
     }
 }
