@@ -16,7 +16,7 @@ class AbilityNodeLevel (
     add_requirements: List<List<Triple<String, String, Int>>>,
     description: String,
     var next_level: String?,
-) : AbilityNode(name, changesInCharacterInfo, alternatives, requirements, add_requirements, description, Priority.DoFirst)
+) : AbilityNode(name, changesInCharacterInfo, alternatives, requirements, add_requirements, description, Priority.DoAsSoonAsPossible)
 
 class CharacterAbilityNodeLevel(
     override val data: AbilityNodeLevel,

@@ -1,8 +1,6 @@
 package com.andreyyurko.dnd.ui.addcharacterfragments.classfragment
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.andreyyurko.dnd.data.abilities.baseAN
 import com.andreyyurko.dnd.data.abilities.characterclass.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.characterclass.CharacterAbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.mapOfAn
@@ -20,6 +18,8 @@ class ClassViewModel @Inject constructor(
 
     lateinit var adapter: ClassAdapter
     var listOfClassAbilities = emptyList<ClassAbility>()
+
+    var chosenLevel = 1
 
     fun makeChoice(choice: String) {
         // TODO: think about how to do it better
@@ -48,7 +48,7 @@ class ClassViewModel @Inject constructor(
         val newListOfAbilities = mutableListOf<ClassAbility>()
 
         val firstLevelCAN = character.baseCAN.chosen_alternatives["class"] as CharacterAbilityNodeLevel
-        showNextLevel(firstLevelCAN, newListOfAbilities)
+        showNextLevel(firstLevelCAN, newListOfAbilities, 1)
 
         listOfClassAbilities = newListOfAbilities
         adapter.apply {
@@ -57,7 +57,7 @@ class ClassViewModel @Inject constructor(
         }
     }
 
-    private fun showNextLevel(can: CharacterAbilityNodeLevel?, listOfAbilities: MutableList<ClassAbility>) {
+    private fun showNextLevel(can: CharacterAbilityNodeLevel?, listOfAbilities: MutableList<ClassAbility>, level: Int) {
         can?.let {
             it.levelUp()
             it.makeChoice()
@@ -72,8 +72,11 @@ class ClassViewModel @Inject constructor(
                     classCAN = it
                 ))
             }
-            val nextLevelCAN = it.next_level
-            showNextLevel(nextLevelCAN, listOfAbilities)
+            var nextLevelCAN : CharacterAbilityNodeLevel? = null
+            if (level + 1 < chosenLevel) {
+                nextLevelCAN = it.next_level
+            }
+            showNextLevel(nextLevelCAN, listOfAbilities, level + 1)
         }
     }
 

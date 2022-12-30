@@ -4,6 +4,7 @@ import android.util.Log
 import com.andreyyurko.dnd.data.characters.Ability
 import com.andreyyurko.dnd.data.characters.AbilityNode
 import com.andreyyurko.dnd.data.characters.CharacterInfo
+import com.andreyyurko.dnd.data.characters.Priority
 
 var strengthAbilityImprovement: AbilityNode = AbilityNode(
     name = Ability.Strength.abilityName,
@@ -14,7 +15,8 @@ var strengthAbilityImprovement: AbilityNode = AbilityNode(
     alternatives = mutableMapOf(),
     requirements = {true},
     add_requirements = emptyList(),
-    description = ""
+    description = "",
+    priority = Priority.DoFirst
 )
 
 var dexterityAbilityImprovement: AbilityNode = AbilityNode(
@@ -26,7 +28,8 @@ var dexterityAbilityImprovement: AbilityNode = AbilityNode(
     alternatives = mutableMapOf(),
     requirements = {true},
     add_requirements = emptyList(),
-    description = ""
+    description = "",
+    priority = Priority.DoFirst
 )
 
 var constitutionAbilityImprovement: AbilityNode = AbilityNode(
@@ -38,7 +41,8 @@ var constitutionAbilityImprovement: AbilityNode = AbilityNode(
     alternatives = mutableMapOf(),
     requirements = {true},
     add_requirements = emptyList(),
-    description = ""
+    description = "",
+    priority = Priority.DoFirst
 )
 
 var intelligenceAbilityImprovement: AbilityNode = AbilityNode(
@@ -50,7 +54,8 @@ var intelligenceAbilityImprovement: AbilityNode = AbilityNode(
     alternatives = mutableMapOf(),
     requirements = {true},
     add_requirements = emptyList(),
-    description = ""
+    description = "",
+    priority = Priority.DoFirst
 )
 
 var wisdomAbilityImprovement: AbilityNode = AbilityNode(
@@ -62,7 +67,8 @@ var wisdomAbilityImprovement: AbilityNode = AbilityNode(
     alternatives = mutableMapOf(),
     requirements = {true},
     add_requirements = emptyList(),
-    description = ""
+    description = "",
+    priority = Priority.DoFirst
 )
 
 var charismaAbilityImprovement: AbilityNode = AbilityNode(
@@ -74,13 +80,13 @@ var charismaAbilityImprovement: AbilityNode = AbilityNode(
     alternatives = mutableMapOf(),
     requirements = {true},
     add_requirements = emptyList(),
-    description = ""
+    description = "",
+    priority = Priority.DoFirst
 )
 
 var abilityScoreImprovement: AbilityNode = AbilityNode(
     name = "Увеличение характеристик",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        Log.d("test", "increase ability")
         abilities
     },
     alternatives = mutableMapOf(
@@ -103,7 +109,7 @@ var abilityScoreImprovement: AbilityNode = AbilityNode(
     ),
     requirements = {true},
     add_requirements = emptyList(),
-    description = ""
+    description = "",
 )
 
 var mapOfAbilityScoreImprovement = mutableMapOf(

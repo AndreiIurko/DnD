@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentClassBinding
-import com.andreyyurko.dnd.ui.spellslist.SpellsListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,8 +34,13 @@ class ClassFragment : Fragment(R.layout.fragment_class) {
         setupRecyclerView()
 
         viewBinding.chooseClassButton.setOnClickListener {
-            setupPopupMenu(requireContext())
+            setupClassPopupMenu(requireContext())
         }
+
+        viewBinding.chooseLevelButton.setOnClickListener {
+            setupLevelPopupMenu(requireContext())
+        }
+
         viewBinding.submitButton.setOnClickListener {
             viewModel.updateCharacter()
             findNavController().popBackStack(R.id.charactersListFragment, false)
@@ -47,7 +51,7 @@ class ClassFragment : Fragment(R.layout.fragment_class) {
         }
     }
 
-    private fun setupPopupMenu(context: Context) {
+    private fun setupClassPopupMenu(context: Context) {
         val parent = LinearLayout(context)
 
         parent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
@@ -76,6 +80,34 @@ class ClassFragment : Fragment(R.layout.fragment_class) {
             viewBinding.arrowUpImageView.visibility = View.GONE
             viewBinding.arrowDropImageView.visibility = View.VISIBLE
         }
+    }
+
+    //TODO: deal with code duplicate
+    private fun setupLevelPopupMenu(context: Context) {
+        val parent = LinearLayout(context)
+        parent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        parent.orientation = LinearLayout.VERTICAL
+        val focus = true
+        val wid = LinearLayout.LayoutParams.WRAP_CONTENT
+        val high = LinearLayout.LayoutParams.WRAP_CONTENT
+        val levelChoiceList = PopupWindow(parent, wid, high, focus)
+
+        for (level in 1..20) {
+            val levelTextView = TextView(context)
+            levelTextView.isClickable = true
+            levelTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, viewBinding.levelText.textSize)
+            levelTextView.text = level.toString()
+            parent.addView(levelTextView)
+            // TODO: make choice after level change as well
+            levelTextView.setOnClickListener {
+                viewModel.chosenLevel= level
+                viewBinding.levelText.text = level.toString()
+                levelChoiceList.dismiss()
+            }
+        }
+
+        levelChoiceList.showAtLocation(view, Gravity.NO_GRAVITY, viewBinding.chooseLevelButton.x.toInt(), viewBinding.chooseLevelButton.y.toInt() + viewBinding.chooseLevelButton.height)
+
     }
 
     private fun setupRecyclerView() {

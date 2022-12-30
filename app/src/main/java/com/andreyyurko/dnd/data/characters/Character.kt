@@ -101,3 +101,7 @@ fun mergeAllAbilities(character: Character): Character {
     character.characterInfo = characterInfo
     return character
 }
+
+fun abilityToModifier(ability: Int): Int {
+    return (ability - 10) / 2
+}

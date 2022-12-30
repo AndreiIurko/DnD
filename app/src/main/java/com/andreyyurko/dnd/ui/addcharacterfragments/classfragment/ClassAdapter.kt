@@ -37,6 +37,8 @@ class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
         holder.classDescription.text = abilitiesList[position].classDescription
         holder.description.text = abilitiesList[position].description
 
+        Log.d("test", (holder.parent as LinearLayout).childCount.toString())
+
         val abilityCAN = abilitiesList[position].classCAN.chosen_alternatives[abilitiesList[position].parentName]
         abilityCAN?.let {
             // TODO: think about this code. I think it is too complicated
@@ -44,6 +46,9 @@ class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
             // search all available abilities and for each create button
             // extract list of choices and setup popup menu
             if (it.data.alternatives.isNotEmpty()) {
+                // this line makes this ability view not reusable
+                holder.parent.setHasTransientState(true)
+
                 for ((optionName, optionsList) in it.data.alternatives.entries) {
                     val choiceButton = LayoutInflater.from(holder.parent.context).inflate(R.layout.choose_option_button, null)
                     // TODO: replace this shitty code with custom view or at least
