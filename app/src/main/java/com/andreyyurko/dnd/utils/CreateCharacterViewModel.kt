@@ -19,6 +19,7 @@ class CreateCharacterViewModel @Inject constructor(
     }
 
     fun updateCharacter() {
+        character = mergeAllAbilities(character)
         charactersHolder.updateCharacter(character)
     }
 

@@ -117,7 +117,8 @@ fun addAllSimpleWeapons(abilities: CharacterInfo): CharacterInfo {
 enum class ActionType(var actionName: String) {
     Action("Основное действие"),
     Bonus("Бонусное действие"),
-    Reaction("Реакция")
+    Reaction("Реакция"),
+    Additional("Дополнительные")
 }
 
 enum class ItemRarity(var rarityName: String) {

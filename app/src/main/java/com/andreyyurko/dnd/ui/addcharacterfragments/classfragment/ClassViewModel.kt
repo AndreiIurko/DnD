@@ -30,7 +30,7 @@ class ClassViewModel @Inject constructor(
 
         val firstLevelCAN = baseCAN.chosen_alternatives["class"] as CharacterAbilityNodeLevel
         firstLevelCAN.makeChoice()
-        showAllClassAbilities(choice)
+        showAllClassAbilities()
 
         createCharacterViewModel.character = mergeAllAbilities(createCharacterViewModel.character)
         updateCharacter()
@@ -44,30 +44,36 @@ class ClassViewModel @Inject constructor(
         createCharacterViewModel.deleteCharacter()
     }
 
-    private fun showAllClassAbilities(classChoice: String) {
+    private fun showAllClassAbilities() {
         val newListOfAbilities = mutableListOf<ClassAbility>()
-        for (key in mapOfAn.keys) {
-            // check if this is not class AN
-            if (key.split("_").first() != classChoice.split("_").first()) continue
 
-            val classLevelAN = mapOfAn[key]!! as AbilityNodeLevel
-            for (entry in classLevelAN.alternatives.entries) {
-                // check if level up ability
-                if (entry.key == classLevelAN.next_level) continue
-                val ability = mapOfAn[entry.value[0]]!!
-                newListOfAbilities.add(ClassAbility(
-                    name = ability.name,
-                    classDescription = classLevelAN.description,
-                    description = ability.description,
-                    parentName = entry.key
-                ))
-            }
-        }
+        val firstLevelCAN = character.baseCAN.chosen_alternatives["class"] as CharacterAbilityNodeLevel
+        showNextLevel(firstLevelCAN, newListOfAbilities)
+
         listOfClassAbilities = newListOfAbilities
         adapter.apply {
             abilitiesList = listOfClassAbilities
-            classCAN = character.baseCAN.chosen_alternatives["class"] as CharacterAbilityNodeLevel
             notifyDataSetChanged()
+        }
+    }
+
+    private fun showNextLevel(can: CharacterAbilityNodeLevel?, listOfAbilities: MutableList<ClassAbility>) {
+        can?.let {
+            it.levelUp()
+            it.makeChoice()
+            for (entry in it.data.alternatives.entries) {
+                // check if level up ability
+                val ability = mapOfAn[entry.value[0]]!!
+                listOfAbilities.add(ClassAbility(
+                    name = ability.name,
+                    classDescription = it.data.description,
+                    description = ability.description,
+                    parentName = entry.key,
+                    classCAN = it
+                ))
+            }
+            val nextLevelCAN = it.next_level
+            showNextLevel(nextLevelCAN, listOfAbilities)
         }
     }
 

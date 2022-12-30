@@ -69,6 +69,9 @@ open class CharacterAbilityNode(
     open fun makeChoice(option_name: String, choice: String) {
         //maybe we need to add some check.
         //And we also need to delete old children if clever kotlin didn't do it
+
+        Log.d("test", "option = $option_name")
+        Log.d("test", "choice = $choice")
         mapOfAn[choice]?.let {
             chosen_alternatives[option_name] = CharacterAbilityNode(it)
         }

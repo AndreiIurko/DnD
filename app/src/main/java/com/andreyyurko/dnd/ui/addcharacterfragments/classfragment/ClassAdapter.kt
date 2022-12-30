@@ -8,13 +8,13 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
+import com.andreyyurko.dnd.data.abilities.characterclass.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.characterclass.CharacterAbilityNodeLevel
 import com.andreyyurko.dnd.utils.createPopUpMenu
 
 class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
 
     var abilitiesList = listOf<ClassAbility>()
-    lateinit var classCAN: CharacterAbilityNodeLevel
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val nameTextView : TextView = itemView.findViewById(R.id.abilityNameTextView)
@@ -37,14 +37,14 @@ class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
         holder.classDescription.text = abilitiesList[position].classDescription
         holder.description.text = abilitiesList[position].description
 
-        val abilityCAN = classCAN.chosen_alternatives[abilitiesList[position].parentName]
-        abilityCAN?.apply {
+        val abilityCAN = abilitiesList[position].classCAN.chosen_alternatives[abilitiesList[position].parentName]
+        abilityCAN?.let {
             // TODO: think about this code. I think it is too complicated
             // how it works:
             // search all available abilities and for each create button
             // extract list of choices and setup popup menu
-            if (this.data.alternatives.isNotEmpty()) {
-                for ((optionName, optionsList) in this.data.alternatives.entries) {
+            if (it.data.alternatives.isNotEmpty()) {
+                for ((optionName, optionsList) in it.data.alternatives.entries) {
                     val choiceButton = LayoutInflater.from(holder.parent.context).inflate(R.layout.choose_option_button, null)
                     // TODO: replace this shitty code with custom view or at least
                     val layoutParams = LinearLayout.LayoutParams(
@@ -55,8 +55,9 @@ class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
 
                     val textView = choiceButton.findViewById<TextView>(R.id.choiceText)
 
+                    val can = it
                     choiceButton.setOnClickListener {
-                        createPopUpMenu(choiceButton, textView, optionsList, optionName, this)
+                        createPopUpMenu(choiceButton, textView, optionsList, optionName, can)
                     }
                 }
             }
@@ -68,5 +69,6 @@ data class ClassAbility(
     var name: String = "",
     var classDescription: String = "",
     var description: String = "",
-    var parentName: String = ""
+    var parentName: String = "",
+    var classCAN: CharacterAbilityNodeLevel
 )

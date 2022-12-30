@@ -2,6 +2,7 @@ package com.andreyyurko.dnd.data.abilities
 
 import android.util.Log
 import com.andreyyurko.dnd.data.abilities.characterclass.*
+import com.andreyyurko.dnd.data.abilities.other.mapOfAbilityScoreImprovement
 import com.andreyyurko.dnd.data.abilities.other.mapOfFightingStyles
 import com.andreyyurko.dnd.data.characters.*
 import java.lang.Integer.max
@@ -31,6 +32,7 @@ var mapOfAn: MutableMap<String, AbilityNode> = (
                 + mapOfBarbarianAbilities
                 + mapOfFightingStyles
                 + mapOfFighterAbilities
+                + mapOfAbilityScoreImprovement
         ).toMutableMap()
 
 fun addAttackActions(abilities: CharacterInfo) {
