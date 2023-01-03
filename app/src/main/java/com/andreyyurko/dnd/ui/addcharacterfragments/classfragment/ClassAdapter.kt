@@ -39,12 +39,16 @@ class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
 
         Log.d("test", (holder.parent as LinearLayout).childCount.toString())
 
+        // выбор одной способности
+        // сама CAN нашей ability
         val abilityCAN = abilitiesList[position].classCAN.chosen_alternatives[abilitiesList[position].parentName]
         abilityCAN?.let {
             // TODO: think about this code. I think it is too complicated
             // how it works:
             // search all available abilities and for each create button
             // extract list of choices and setup popup menu
+            // TODO: showOptions
+            // TODO: если у нас размер мапа хотя бы 2, то надо не показывать popup меню, а создавать карточку с выбором
             if (it.data.alternatives.isNotEmpty()) {
                 // this line makes this ability view not reusable
                 holder.parent.setHasTransientState(true)
@@ -56,7 +60,7 @@ class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
                         LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
                     )
                     layoutParams.setMargins(200, 40, 200, 40)
-                    (holder.parent as LinearLayout).addView(choiceButton, layoutParams)
+                    holder.parent.addView(choiceButton, layoutParams)
 
                     val textView = choiceButton.findViewById<TextView>(R.id.choiceText)
 
@@ -70,6 +74,7 @@ class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
     }
 }
 
+// parentName - имя способности в map
 data class ClassAbility(
     var name: String = "",
     var classDescription: String = "",

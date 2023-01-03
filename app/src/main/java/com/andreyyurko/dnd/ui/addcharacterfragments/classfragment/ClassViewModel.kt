@@ -1,5 +1,6 @@
 package com.andreyyurko.dnd.ui.addcharacterfragments.classfragment
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.andreyyurko.dnd.data.abilities.characterclass.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.characterclass.CharacterAbilityNodeLevel
@@ -58,22 +59,28 @@ class ClassViewModel @Inject constructor(
     }
 
     private fun showNextLevel(can: CharacterAbilityNodeLevel?, listOfAbilities: MutableList<ClassAbility>, level: Int) {
+        Log.d("test", level.toString())
+        Log.d("test", can?.data?.name.toString())
         can?.let {
-            it.levelUp()
+            //it.levelUp()
+            // TODO: пройти через showOptions
+            // it - CAN текущего уровня - для уровня размер альтернативы = 1
             it.makeChoice()
+            // TODO: showOptions
             for (entry in it.data.alternatives.entries) {
                 // check if level up ability
                 val ability = mapOfAn[entry.value[0]]!!
                 listOfAbilities.add(ClassAbility(
                     name = ability.name,
-                    classDescription = it.data.description,
+                    classDescription = it.data.description, // 1-й уровень монаха
                     description = ability.description,
-                    parentName = entry.key,
-                    classCAN = it
+                    parentName = entry.key, // имя в мапе
+                    classCAN = it // чтобы иметь доступ для makeChoice
                 ))
             }
             var nextLevelCAN : CharacterAbilityNodeLevel? = null
-            if (level + 1 < chosenLevel) {
+            if (level < chosenLevel) {
+                it.levelUp()
                 nextLevelCAN = it.next_level
             }
             showNextLevel(nextLevelCAN, listOfAbilities, level + 1)

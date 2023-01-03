@@ -57,5 +57,6 @@ data class CurrentState(
     var armor: Armor = Armor.NoArmor,
     var weapons: List<Weapon> = listOf(),
     var hasShield: Boolean = false,
+    // String - AN name
     var charges: MutableMap<String, ChargesCounter> = mutableMapOf()
 )

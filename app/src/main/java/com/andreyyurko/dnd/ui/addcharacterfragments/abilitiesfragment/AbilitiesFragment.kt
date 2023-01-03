@@ -91,13 +91,16 @@ class AbilitiesFragment : Fragment(R.layout.fragment_abilities) {
                 decreaseButton.isEnabled = false
                 decreaseButton.alpha = 0.6f
             }
-            else if (currentValue == 15 || currentValue >= 13 && state < 2 || state == 0) {
+            else {
+                decreaseButton.isEnabled = true
+                decreaseButton.alpha = 1f
+            }
+
+            if (currentValue == 15 || currentValue >= 13 && state < 2 || state == 0) {
                 increaseButton.isEnabled = false
                 increaseButton.alpha = 0.6f
             }
             else {
-                decreaseButton.isEnabled = true
-                decreaseButton.alpha = 1f
                 increaseButton.isEnabled = true
                 increaseButton.alpha = 1f
             }
