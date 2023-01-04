@@ -145,7 +145,35 @@ enum class ItemType(var typeName: String) {
 enum class DamageType(var typeName: String) {
     Bludgeoning("дробящий"),
     Piercing("колющий"),
-    Slashing("режущий")
+    Slashing("режущий"),
+    Poison("яд"),
+    Acid("кислота"),
+    Fire("огонь"),
+    Cold("яд"),
+    Necrotic("некротический"),
+    Radiant("излучение"),
+    Thunder("звук"),
+    Lightening("молния"),
+    Psychic("психический"),
+    Force("сила"),
+}
+
+enum class Conditions(var typeName: String) {
+    Blinded("ослеплённый"),
+    Charmed("очарованный"),
+    Deafened("оглушённый"),
+    Frightened("испуганный"),
+    Grappled("схваченный"),
+    Incapacitated("недееспособный"),
+    Invisible("невидимый"),
+    Paralyzed("парализованный"),
+    Petrified("окаменевший"),
+    Poisoned("отравлен"),
+    Prone("опрокинутый"),
+    Restrained("обездвиженный"),
+    Stunned("ошеломлённый"),
+    Unconscious("бессознательный")
+    //May be we need to add exhaustion
 }
 
 enum class Languages(var languageName: String) {
