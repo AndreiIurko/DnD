@@ -1,11 +1,10 @@
 package com.andreyyurko.dnd.data.abilities.characterclass
 
-import android.util.Log
 import com.andreyyurko.dnd.data.abilities.mapOfAn
-import com.andreyyurko.dnd.data.characters.AbilityNode
-import com.andreyyurko.dnd.data.characters.CharacterAbilityNode
 import com.andreyyurko.dnd.data.characters.CharacterInfo
 import com.andreyyurko.dnd.data.characters.Priority
+import com.andreyyurko.dnd.data.characters.character.AbilityNode
+import com.andreyyurko.dnd.data.characters.character.CharacterAbilityNode
 
 // For all levels alternatives: it is important that
 class AbilityNodeLevel (
@@ -16,7 +15,7 @@ class AbilityNodeLevel (
     add_requirements: List<List<Triple<String, String, Int>>>,
     description: String,
     var next_level: String?,
-) : AbilityNode(name, changesInCharacterInfo, alternatives, requirements, add_requirements, description, Priority.DoAsSoonAsPossible)
+) : AbilityNode(name, changesInCharacterInfo, alternatives, requirements, add_requirements, description, false, Priority.DoAsSoonAsPossible)
 
 class CharacterAbilityNodeLevel(
     override val data: AbilityNodeLevel,

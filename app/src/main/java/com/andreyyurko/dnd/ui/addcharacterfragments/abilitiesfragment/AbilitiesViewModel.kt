@@ -1,11 +1,9 @@
 package com.andreyyurko.dnd.ui.addcharacterfragments.abilitiesfragment
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.andreyyurko.dnd.data.characters.Ability
-import com.andreyyurko.dnd.data.characters.mergeCharacterInfo
-import com.andreyyurko.dnd.data.characters.mergeAllAbilities
+import com.andreyyurko.dnd.data.characters.character.mergeAllAbilities
 import com.andreyyurko.dnd.utils.CreateCharacterViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

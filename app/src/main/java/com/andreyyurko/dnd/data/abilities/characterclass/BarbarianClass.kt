@@ -1,9 +1,8 @@
 package com.andreyyurko.dnd.data.abilities.characterclass
 
-import com.andreyyurko.dnd.data.abilities.baseAN
-import com.andreyyurko.dnd.data.characters.AbilityNode
 import com.andreyyurko.dnd.data.characters.CharacterInfo
 import com.andreyyurko.dnd.data.characters.Classes
+import com.andreyyurko.dnd.data.characters.character.AbilityNode
 
 var barbarian1: AbilityNode = AbilityNodeLevel(
     "Варвар_1",

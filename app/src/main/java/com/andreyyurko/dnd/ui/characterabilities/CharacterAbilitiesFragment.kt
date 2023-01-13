@@ -3,14 +3,11 @@ package com.andreyyurko.dnd.ui.characterabilities
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.andreyyurko.dnd.R
-import dagger.hilt.android.AndroidEntryPoint
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentCharacterAbilitiesBinding
 import com.andreyyurko.dnd.utils.CharacterViewModel
-import dev.chrisbanes.insetter.applyInsetter
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint

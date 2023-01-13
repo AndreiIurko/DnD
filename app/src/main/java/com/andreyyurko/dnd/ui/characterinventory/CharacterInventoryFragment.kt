@@ -1,11 +1,10 @@
 package com.andreyyurko.dnd.ui.characterinventory
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.andreyyurko.dnd.R
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.characters.Armor
 import com.andreyyurko.dnd.databinding.FragmentCharacterInventoryBinding
 import com.andreyyurko.dnd.utils.CharacterViewModel

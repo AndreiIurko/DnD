@@ -1,8 +1,7 @@
 package com.andreyyurko.dnd.data.abilities.characterclass
 
-import android.util.Log
-import com.andreyyurko.dnd.data.abilities.baseAN
 import com.andreyyurko.dnd.data.characters.*
+import com.andreyyurko.dnd.data.characters.character.AbilityNode
 
 var monk_unarmed_defence: AbilityNode = AbilityNode(
     name = "Защита без доспехов",

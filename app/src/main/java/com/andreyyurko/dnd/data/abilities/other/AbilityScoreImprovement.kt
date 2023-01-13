@@ -2,20 +2,22 @@ package com.andreyyurko.dnd.data.abilities.other
 
 import android.util.Log
 import com.andreyyurko.dnd.data.characters.Ability
-import com.andreyyurko.dnd.data.characters.AbilityNode
 import com.andreyyurko.dnd.data.characters.CharacterInfo
 import com.andreyyurko.dnd.data.characters.Priority
+import com.andreyyurko.dnd.data.characters.character.AbilityNode
 
 var strengthAbilityImprovement: AbilityNode = AbilityNode(
     name = Ability.Strength.abilityName,
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.strengthBonus += 1
+        Log.d("skill", "skill+")
         abilities
     },
     alternatives = mutableMapOf(),
     requirements = {true},
     add_requirements = emptyList(),
     description = "",
+    isNeedsToBeShown = false,
     priority = Priority.DoFirst
 )
 
@@ -29,6 +31,7 @@ var dexterityAbilityImprovement: AbilityNode = AbilityNode(
     requirements = {true},
     add_requirements = emptyList(),
     description = "",
+    isNeedsToBeShown = false,
     priority = Priority.DoFirst
 )
 
@@ -42,6 +45,7 @@ var constitutionAbilityImprovement: AbilityNode = AbilityNode(
     requirements = {true},
     add_requirements = emptyList(),
     description = "",
+    isNeedsToBeShown = false,
     priority = Priority.DoFirst
 )
 
@@ -55,6 +59,7 @@ var intelligenceAbilityImprovement: AbilityNode = AbilityNode(
     requirements = {true},
     add_requirements = emptyList(),
     description = "",
+    isNeedsToBeShown = false,
     priority = Priority.DoFirst
 )
 
@@ -66,6 +71,7 @@ var wisdomAbilityImprovement: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = {true},
+    isNeedsToBeShown = false,
     add_requirements = emptyList(),
     description = "",
     priority = Priority.DoFirst
@@ -81,6 +87,7 @@ var charismaAbilityImprovement: AbilityNode = AbilityNode(
     requirements = {true},
     add_requirements = emptyList(),
     description = "",
+    isNeedsToBeShown = false,
     priority = Priority.DoFirst
 )
 

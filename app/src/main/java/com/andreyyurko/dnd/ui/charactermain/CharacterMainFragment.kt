@@ -3,7 +3,6 @@ package com.andreyyurko.dnd.ui.charactermain
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,6 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -21,7 +19,6 @@ import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.onPressAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.applyInsetter
-import java.lang.Math.abs
 import javax.inject.Inject
 
 

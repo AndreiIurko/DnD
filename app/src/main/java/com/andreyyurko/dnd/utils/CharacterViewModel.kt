@@ -2,8 +2,8 @@ package com.andreyyurko.dnd.utils
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.andreyyurko.dnd.data.characters.Character
-import com.andreyyurko.dnd.data.characters.mergeAllAbilities
+import com.andreyyurko.dnd.data.characters.character.Character
+import com.andreyyurko.dnd.data.characters.character.mergeAllAbilities
 import javax.inject.Inject
 import javax.inject.Singleton
 

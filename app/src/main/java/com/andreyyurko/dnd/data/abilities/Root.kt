@@ -1,11 +1,13 @@
 package com.andreyyurko.dnd.data.abilities
 
-import android.util.Log
 import com.andreyyurko.dnd.data.abilities.characterclass.*
+import com.andreyyurko.dnd.data.abilities.characterclass.fighter.fighter1
+import com.andreyyurko.dnd.data.abilities.characterclass.fighter.mapOfFighterAbilities
 import com.andreyyurko.dnd.data.abilities.other.mapOfAbilityScoreImprovement
 import com.andreyyurko.dnd.data.abilities.other.mapOfFightingStyles
+import com.andreyyurko.dnd.data.abilities.other.mapOfSkills
 import com.andreyyurko.dnd.data.characters.*
-import java.lang.Integer.max
+import com.andreyyurko.dnd.data.characters.character.AbilityNode
 
 var baseAN: AbilityNode = AbilityNode(
     "base_an",
@@ -22,7 +24,7 @@ var baseAN: AbilityNode = AbilityNode(
     {true},
     listOf(listOf()),
     description = "Base Ability Node, root of all AN",
-    priority = Priority.DoFirst
+    priority = Priority.DoAsSoonAsPossible
 )
 
 // helps to split code
@@ -33,6 +35,7 @@ var mapOfAn: MutableMap<String, AbilityNode> = (
                 + mapOfFightingStyles
                 + mapOfFighterAbilities
                 + mapOfAbilityScoreImprovement
+                + mapOfSkills
         ).toMutableMap()
 
 fun addAttackActions(abilities: CharacterInfo) {

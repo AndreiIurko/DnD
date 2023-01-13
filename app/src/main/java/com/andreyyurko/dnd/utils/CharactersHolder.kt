@@ -4,6 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andreyyurko.dnd.data.abilities.mapOfAn
 import com.andreyyurko.dnd.data.characters.*
+import com.andreyyurko.dnd.data.characters.character.Character
+import com.andreyyurko.dnd.data.characters.character.CharacterAbilityNode
+import com.andreyyurko.dnd.data.characters.character.mergeAllAbilities
 import com.andreyyurko.dnd.db.DB
 import com.andreyyurko.dnd.db.DBProvider
 import com.google.gson.Gson
@@ -182,7 +185,7 @@ class CharactersHolder @Inject constructor(
         ))
     }
 
-    private fun loadCharacterNode(name: String, id: Int) : CharacterAbilityNode{
+    private fun loadCharacterNode(name: String, id: Int) : CharacterAbilityNode {
         // init type to load from db
         val mapType: Type = object : TypeToken<Map<String, String>>() {}.type
 

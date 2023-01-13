@@ -1,7 +1,10 @@
 package com.andreyyurko.dnd.data.abilities.other
 
-import android.util.Log
-import com.andreyyurko.dnd.data.characters.*
+import com.andreyyurko.dnd.data.characters.Action
+import com.andreyyurko.dnd.data.characters.ActionType
+import com.andreyyurko.dnd.data.characters.Armor
+import com.andreyyurko.dnd.data.characters.CharacterInfo
+import com.andreyyurko.dnd.data.characters.character.AbilityNode
 
 var archery: AbilityNode = AbilityNode(
     name = "Стрельба",

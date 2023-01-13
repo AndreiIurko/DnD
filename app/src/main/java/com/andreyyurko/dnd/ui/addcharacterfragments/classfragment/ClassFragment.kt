@@ -67,6 +67,7 @@ class ClassFragment : Fragment(R.layout.fragment_class) {
             classNameTextView.text = classChoice.split("_").first()
             parent.addView(classNameTextView)
             classNameTextView.setOnClickListener {
+                viewModel.chosenClass = classChoice
                 viewModel.makeChoice(classChoice)
                 viewBinding.chooseClassTextView.text = classChoice.split("_").first()
                 classChoiceList.dismiss()
@@ -100,7 +101,10 @@ class ClassFragment : Fragment(R.layout.fragment_class) {
             parent.addView(levelTextView)
             // TODO: make choice after level change as well
             levelTextView.setOnClickListener {
-                viewModel.chosenLevel= level
+                viewModel.chosenLevel = level
+                viewModel.chosenClass?.let {
+                    viewModel.makeChoice(it)
+                }
                 viewBinding.levelText.text = level.toString()
                 levelChoiceList.dismiss()
             }

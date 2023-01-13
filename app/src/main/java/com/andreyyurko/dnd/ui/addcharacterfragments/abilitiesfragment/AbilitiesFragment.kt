@@ -1,7 +1,6 @@
 package com.andreyyurko.dnd.ui.addcharacterfragments.abilitiesfragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageButton
@@ -10,10 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.andreyyurko.dnd.R
-import com.andreyyurko.dnd.databinding.FragmentAbilitiesBinding
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.characters.Ability
+import com.andreyyurko.dnd.databinding.FragmentAbilitiesBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

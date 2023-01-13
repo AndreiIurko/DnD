@@ -1,14 +1,11 @@
 package com.andreyyurko.dnd.ui.spellslist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.PopupMenu
 import android.widget.PopupWindow
 import android.widget.TextView
-import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope

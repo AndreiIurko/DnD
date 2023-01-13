@@ -1,8 +1,41 @@
-package com.andreyyurko.dnd.data.abilities.characterclass
+package com.andreyyurko.dnd.data.abilities.characterclass.fighter
 
-import com.andreyyurko.dnd.data.abilities.other.abilityScoreImprovement
-import com.andreyyurko.dnd.data.abilities.other.mapOfFightingStyles
+import com.andreyyurko.dnd.data.abilities.characterclass.AbilityNodeLevel
+import com.andreyyurko.dnd.data.abilities.other.*
 import com.andreyyurko.dnd.data.characters.*
+import com.andreyyurko.dnd.data.characters.character.AbilityNode
+import com.andreyyurko.dnd.data.characters.character.abilityToModifier
+
+
+var classFeaturesFighter: AbilityNode = AbilityNode(
+    name = "Воин: классовые умения",
+    changesInCharacterInfo = {abilities: CharacterInfo ->
+        abilities.savingThrowProf.plus(Ability.Strength)
+        abilities.savingThrowProf.plus(Ability.Constitution)
+        abilities
+    },
+    alternatives = mutableMapOf(
+        Pair("skill1", listOf(acrobatics.name, athletics.name, perception.name, survival.name, intimidation.name, history.name, insight.name, animalHandling.name)),
+        Pair("skill2", listOf(acrobatics.name, athletics.name, perception.name, survival.name, intimidation.name, history.name, insight.name, animalHandling.name))
+    ),
+    requirements = {abilities: CharacterInfo ->
+        abilities.characterClass == Classes.Fighter
+    },
+    description = "ХИТЫ\n" +
+            "\n" +
+            "Кость Хитов: 1к10 за каждый уровень воина\n" +
+            "Хиты на 1 уровне: 10 + модификатор Телосложения\n" +
+            "Хиты на следующих уровнях: 1к10 (или 6) + модификатор Телосложения (суммарно минимум 1) за каждый уровень воина после первого\n" +
+            "\n" +
+            "ВЛАДЕНИЕ\n" +
+            "\n" +
+            "Доспехи: Все доспехи, щиты\n" +
+            "Оружие: Простое оружие, воинское оружие\n" +
+            "Инструменты: Нет\n" +
+            "Спасброски: Сила, Телосложение\n" +
+            "Навыки: Выберите два навыка из следующих: Акробатика, Атлетика, Восприятие, Выживание, Запугивание, История, Проницательность, Уход за животными",
+    priority = Priority.DoFirst
+)
 
 var fightingStyle: AbilityNode = AbilityNode(
     name = "Боевой стиль",
@@ -52,8 +85,9 @@ var fighter1 : AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     alternatives = mutableMapOf(
-        Pair("first", listOf(fightingStyle.name)),
-        Pair("Second", listOf(secondWind.name))
+        Pair("first", listOf(classFeaturesFighter.name)),
+        Pair("second", listOf(fightingStyle.name)),
+        Pair("third", listOf(secondWind.name))
     ),
     requirements = {true},
     add_requirements = listOf(),
@@ -112,11 +146,13 @@ var martialArchetype: AbilityNode = AbilityNode(
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(),
+    alternatives = mutableMapOf(
+        Pair("archetype", listOf(battleMaster.name, champion.name))
+    ),
     requirements = {abilities: CharacterInfo ->
         abilities.characterClass == Classes.Fighter
     },
-    description = "Вы выбираете архетип, отражающий стиль и технику, к которым вы стремитесь. Подробности всех архетипов приведены ниже. Выбранный вами архетип предоставляет вам умения на 3-м, 7-м, 10-м, 15-м и 18-м уровнях."
+    description = "Вы выбираете архетип, отражающий стиль и технику, к которым вы стремитесь. Подробности архетипа будут приведены ниже после выбора. Выбранный вами архетип предоставляет вам умения на 3-м, 7-м, 10-м, 15-м и 18-м уровнях."
 )
 
 var fighter3 : AbilityNodeLevel = AbilityNodeLevel(
@@ -454,7 +490,8 @@ var fighter20 : AbilityNodeLevel = AbilityNodeLevel(
     next_level = null,
 )
 
-var mapOfFighterAbilities: MutableMap<String, AbilityNode> = mutableMapOf(
+var mapOfFighterAbilities: MutableMap<String, AbilityNode> = (mutableMapOf(
+    Pair(classFeaturesFighter.name, classFeaturesFighter),
     Pair(fightingStyle.name, fightingStyle),
     Pair(secondWind.name, secondWind),
     Pair(fighter1.name, fighter1),
@@ -482,3 +519,5 @@ var mapOfFighterAbilities: MutableMap<String, AbilityNode> = mutableMapOf(
     Pair(fighter19.name, fighter19),
     Pair(fighter20.name, fighter20)
 )
+        + mapOfBattleMasterAbilities
+        + mapOfChampionAbilities).toMutableMap()
