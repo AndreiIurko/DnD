@@ -1,5 +1,6 @@
 package com.andreyyurko.dnd.utils
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andreyyurko.dnd.data.abilities.mapOfAn
@@ -164,6 +165,7 @@ class CharactersHolder @Inject constructor(
     private fun saveCharacterNode(characterAbilityNode: CharacterAbilityNode, characterId: Int) {
         // save all sub-nodes
         for (characterNode in characterAbilityNode.chosen_alternatives.values) {
+            Log.d("saving", characterNode.data.name)
             saveCharacterNode(characterNode, characterId)
         }
 
@@ -199,7 +201,7 @@ class CharactersHolder @Inject constructor(
         // add to chosen_alternatives all references to sub-nodes
         for (key in chosenAlternatives.keys) {
             val chosenNode = loadCharacterNode(chosenAlternatives[key]!!, id)
-            characterAbilityNode.chosen_alternatives[chosenAlternatives[key]!!] = chosenNode
+            characterAbilityNode.chosen_alternatives[key] = chosenNode
         }
 
         return characterAbilityNode

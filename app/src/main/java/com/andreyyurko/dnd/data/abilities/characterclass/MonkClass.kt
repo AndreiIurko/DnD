@@ -7,7 +7,7 @@ var monk_unarmed_defence: AbilityNode = AbilityNode(
     name = "Защита без доспехов",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         if (abilities.currentState.armor == Armor.NoArmor)
-            abilities.ac = abilities.ac + (abilities.wisdomBonus - 10) / 2
+            abilities.ac = abilities.ac + (abilities.wisdom - 10) / 2
         abilities
     },
     alternatives = mutableMapOf(),

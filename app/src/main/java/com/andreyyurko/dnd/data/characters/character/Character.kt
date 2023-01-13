@@ -1,5 +1,6 @@
 package com.andreyyurko.dnd.data.characters.character
 
+import android.util.Log
 import com.andreyyurko.dnd.data.abilities.baseAN
 import com.andreyyurko.dnd.data.characters.CharacterInfo
 import com.andreyyurko.dnd.data.characters.Priority
@@ -26,6 +27,7 @@ fun mergeAllAbilities(character: Character): Character {
     }
 
     character.characterInfo = characterInfo
+    Log.d("skill", characterInfo.toString())
     return character
 }
 

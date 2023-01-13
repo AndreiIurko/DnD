@@ -9,8 +9,7 @@ import com.andreyyurko.dnd.data.characters.character.AbilityNode
 var strengthAbilityImprovement: AbilityNode = AbilityNode(
     name = Ability.Strength.abilityName,
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.strengthBonus += 1
-        Log.d("skill", "skill+")
+        abilities.strength += 1
         abilities
     },
     alternatives = mutableMapOf(),
@@ -24,7 +23,7 @@ var strengthAbilityImprovement: AbilityNode = AbilityNode(
 var dexterityAbilityImprovement: AbilityNode = AbilityNode(
     name = Ability.Dexterity.abilityName,
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.dexterityBonus += 1
+        abilities.dexterity += 1
         abilities
     },
     alternatives = mutableMapOf(),
@@ -38,7 +37,7 @@ var dexterityAbilityImprovement: AbilityNode = AbilityNode(
 var constitutionAbilityImprovement: AbilityNode = AbilityNode(
     name = Ability.Constitution.abilityName,
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.constitutionBonus += 1
+        abilities.constitution += 1
         abilities
     },
     alternatives = mutableMapOf(),
@@ -52,7 +51,7 @@ var constitutionAbilityImprovement: AbilityNode = AbilityNode(
 var intelligenceAbilityImprovement: AbilityNode = AbilityNode(
     name = Ability.Intelligence.abilityName,
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.intelligenceBonus += 1
+        abilities.intelligence += 1
         abilities
     },
     alternatives = mutableMapOf(),
@@ -66,7 +65,7 @@ var intelligenceAbilityImprovement: AbilityNode = AbilityNode(
 var wisdomAbilityImprovement: AbilityNode = AbilityNode(
     name = Ability.Wisdom.abilityName,
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.wisdomBonus += 1
+        abilities.wisdom += 1
         abilities
     },
     alternatives = mutableMapOf(),
@@ -80,7 +79,7 @@ var wisdomAbilityImprovement: AbilityNode = AbilityNode(
 var charismaAbilityImprovement: AbilityNode = AbilityNode(
     name = Ability.Charisma.abilityName,
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.charismaBonus += 1
+        abilities.charisma += 1
         abilities
     },
     alternatives = mutableMapOf(),

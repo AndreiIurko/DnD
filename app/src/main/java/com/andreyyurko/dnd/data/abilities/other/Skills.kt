@@ -1,5 +1,6 @@
 package com.andreyyurko.dnd.data.abilities.other
 
+import android.util.Log
 import com.andreyyurko.dnd.data.characters.CharacterInfo
 import com.andreyyurko.dnd.data.characters.Priority
 import com.andreyyurko.dnd.data.characters.Skill
@@ -8,7 +9,8 @@ import com.andreyyurko.dnd.data.characters.character.AbilityNode
 var acrobatics: AbilityNode = AbilityNode(
     name = "Акробатика",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.skillProficiency.plus(Skill.Acrobatics)
+        abilities.skillProficiency.add(Skill.Acrobatics)
+        Log.d("skill", abilities.toString())
         abilities
     },
     alternatives = mutableMapOf(),
@@ -23,7 +25,7 @@ var acrobatics: AbilityNode = AbilityNode(
 var animalHandling: AbilityNode = AbilityNode(
     name = "Уход за животными",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.skillProficiency.plus(Skill.AnimalHandling)
+        abilities.skillProficiency.add(Skill.AnimalHandling)
         abilities
     },
     alternatives = mutableMapOf(),
@@ -38,7 +40,7 @@ var animalHandling: AbilityNode = AbilityNode(
 var arcana: AbilityNode = AbilityNode(
     name = "Магия",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.skillProficiency.plus(Skill.Arcana)
+        abilities.skillProficiency.add(Skill.Arcana)
         abilities
     },
     alternatives = mutableMapOf(),
@@ -53,7 +55,7 @@ var arcana: AbilityNode = AbilityNode(
 var athletics: AbilityNode = AbilityNode(
     name = "Атлетика",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.skillProficiency.plus(Skill.Athletics)
+        abilities.skillProficiency.add(Skill.Athletics)
         abilities
     },
     alternatives = mutableMapOf(),
@@ -68,7 +70,7 @@ var athletics: AbilityNode = AbilityNode(
 var deception: AbilityNode = AbilityNode(
     name = "Обман",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.skillProficiency.plus(Skill.Deception)
+        abilities.skillProficiency.add(Skill.Deception)
         abilities
     },
     alternatives = mutableMapOf(),
@@ -83,7 +85,7 @@ var deception: AbilityNode = AbilityNode(
 var history: AbilityNode = AbilityNode(
     name = "История",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.skillProficiency.plus(Skill.History)
+        abilities.skillProficiency.add(Skill.History)
         abilities
     },
     alternatives = mutableMapOf(),
@@ -98,7 +100,7 @@ var history: AbilityNode = AbilityNode(
 var insight: AbilityNode = AbilityNode(
     name = "Проницательность",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.skillProficiency.plus(Skill.Insight)
+        abilities.skillProficiency.add(Skill.Insight)
         abilities
     },
     alternatives = mutableMapOf(),
@@ -113,7 +115,7 @@ var insight: AbilityNode = AbilityNode(
 var intimidation: AbilityNode = AbilityNode(
     name = "Запугивание",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.skillProficiency.plus(Skill.Intimidation)
+        abilities.skillProficiency.add(Skill.Intimidation)
         abilities
     },
     alternatives = mutableMapOf(),
@@ -128,7 +130,7 @@ var intimidation: AbilityNode = AbilityNode(
 var investigation: AbilityNode = AbilityNode(
     name = "Анализ",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.skillProficiency.plus(Skill.Investigation)
+        abilities.skillProficiency.add(Skill.Investigation)
         abilities
     },
     alternatives = mutableMapOf(),
@@ -143,7 +145,7 @@ var investigation: AbilityNode = AbilityNode(
 var medicine: AbilityNode = AbilityNode(
     name = "Медицина",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.skillProficiency.plus(Skill.Medicine)
+        abilities.skillProficiency.add(Skill.Medicine)
         abilities
     },
     alternatives = mutableMapOf(),
@@ -158,7 +160,7 @@ var medicine: AbilityNode = AbilityNode(
 var nature: AbilityNode = AbilityNode(
     name = "Природа",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.skillProficiency.plus(Skill.Nature)
+        abilities.skillProficiency.add(Skill.Nature)
         abilities
     },
     alternatives = mutableMapOf(),
@@ -173,7 +175,7 @@ var nature: AbilityNode = AbilityNode(
 var perception: AbilityNode = AbilityNode(
     name = "Внимательность",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.skillProficiency.plus(Skill.Perception)
+        abilities.skillProficiency.add(Skill.Perception)
         abilities
     },
     alternatives = mutableMapOf(),
@@ -188,7 +190,7 @@ var perception: AbilityNode = AbilityNode(
 var performance: AbilityNode = AbilityNode(
     name = "Выступление",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.skillProficiency.plus(Skill.Performance)
+        abilities.skillProficiency.add(Skill.Performance)
         abilities
     },
     alternatives = mutableMapOf(),
@@ -203,7 +205,7 @@ var performance: AbilityNode = AbilityNode(
 var persuasion: AbilityNode = AbilityNode(
     name = "Убеждение",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.skillProficiency.plus(Skill.Persuasion)
+        abilities.skillProficiency.add(Skill.Persuasion)
         abilities
     },
     alternatives = mutableMapOf(),
@@ -218,7 +220,7 @@ var persuasion: AbilityNode = AbilityNode(
 var religion: AbilityNode = AbilityNode(
     name = "Религия",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.skillProficiency.plus(Skill.Religion)
+        abilities.skillProficiency.add(Skill.Religion)
         abilities
     },
     alternatives = mutableMapOf(),
@@ -233,7 +235,7 @@ var religion: AbilityNode = AbilityNode(
 var sleightOfHand: AbilityNode = AbilityNode(
     name = "Ловкость рук",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.skillProficiency.plus(Skill.SleightOfHand)
+        abilities.skillProficiency.add(Skill.SleightOfHand)
         abilities
     },
     alternatives = mutableMapOf(),
@@ -248,7 +250,7 @@ var sleightOfHand: AbilityNode = AbilityNode(
 var stealth: AbilityNode = AbilityNode(
     name = "Скрытность",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.skillProficiency.plus(Skill.Stealth)
+        abilities.skillProficiency.add(Skill.Stealth)
         abilities
     },
     alternatives = mutableMapOf(),
@@ -263,7 +265,7 @@ var stealth: AbilityNode = AbilityNode(
 var survival: AbilityNode = AbilityNode(
     name = "Выживание",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.skillProficiency.plus(Skill.Survival)
+        abilities.skillProficiency.add(Skill.Survival)
         abilities
     },
     alternatives = mutableMapOf(),

@@ -81,7 +81,7 @@ var fighter1 : AbilityNodeLevel = AbilityNodeLevel(
         abilities.characterClass = Classes.Fighter
         abilities.level += 1
         abilities.proficiencyBonus += 2
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 10
+        abilities.hp += abilityToModifier(abilities.constitution) + 10
         abilities
     },
     alternatives = mutableMapOf(
@@ -129,7 +129,7 @@ var fighter2 : AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_2",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.level += 1
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 6
+        abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(
@@ -159,7 +159,7 @@ var fighter3 : AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_3",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.level += 1
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 6
+        abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(
@@ -175,7 +175,7 @@ var fighter4 : AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_4",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.level += 1
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 6
+        abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(
@@ -211,7 +211,7 @@ var fighter5 : AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_5",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.level += 1
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 6
+        abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities.proficiencyBonus += 1
         abilities
     },
@@ -228,7 +228,7 @@ var fighter6 : AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_6",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.level += 1
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 6
+        abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(
@@ -244,7 +244,7 @@ var fighter7 : AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_7",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.level += 1
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 6
+        abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(),
@@ -258,7 +258,7 @@ var fighter8 : AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_8",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.level += 1
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 6
+        abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(
@@ -315,7 +315,7 @@ var fighter9 : AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_9",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.level += 1
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 6
+        abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities.proficiencyBonus += 1
         abilities
     },
@@ -332,7 +332,7 @@ var fighter10 : AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_10",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.level += 1
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 6
+        abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf( ),
@@ -346,7 +346,7 @@ var fighter11 : AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_11",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.level += 1
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 6
+        abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(),
@@ -360,7 +360,7 @@ var fighter12 : AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_12",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.level += 1
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 6
+        abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(
@@ -376,7 +376,7 @@ var fighter13 : AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_13",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.level += 1
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 6
+        abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(),
@@ -390,7 +390,7 @@ var fighter14 : AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_14",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.level += 1
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 6
+        abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(
@@ -406,7 +406,7 @@ var fighter15 : AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_15",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.level += 1
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 6
+        abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(),
@@ -420,7 +420,7 @@ var fighter16 : AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_16",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.level += 1
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 6
+        abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(
@@ -436,7 +436,7 @@ var fighter17 : AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_17",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.level += 1
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 6
+        abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(),
@@ -450,7 +450,7 @@ var fighter18 : AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_18",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.level += 1
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 6
+        abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(),
@@ -464,7 +464,7 @@ var fighter19 : AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_19",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.level += 1
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 6
+        abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(
@@ -480,7 +480,7 @@ var fighter20 : AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_20",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.level += 1
-        abilities.hp += abilityToModifier(abilities.constitutionBonus) + 6
+        abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(),

@@ -1,6 +1,7 @@
 package com.andreyyurko.dnd.ui.characterskills
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +17,15 @@ class CharacterSkillsAdapter @Inject constructor(
     private val viewModel: CharacterSkillsViewModel
 ) : RecyclerView.Adapter<CharacterSkillsAdapter.ViewHolder>() {
 
-    var skillsList = Skill.values().toList()
+    var skillsList = Skill.values().apply {
+        val comparator = Comparator { skillFirst: Skill, skillSecond :Skill ->
+            if (skillFirst.ability != skillSecond.ability) {
+                return@Comparator skillFirst.ability.compareTo(skillSecond.ability)
+            }
+            skillFirst.skillName.compareTo(skillSecond.skillName)
+        }
+        this.sortWith(comparator)
+    }
     var bonusMap = skillsList.associateWith { viewModel.getBonus(it) }
     var modifierMap = skillsList.associateWith { it.ability.abilityShortName }
     var profMap = skillsList.associateWith { viewModel.getProf(it) }

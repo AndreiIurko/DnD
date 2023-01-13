@@ -110,7 +110,7 @@ fun addAllSimpleWeapons(abilities: CharacterInfo): CharacterInfo {
         Weapon.ShortBow,
         Weapon.Sling
     )
-    abilities.weaponProficiency = abilities.weaponProficiency.union(simpleWeapons)
+    abilities.weaponProficiency = abilities.weaponProficiency.union(simpleWeapons) as MutableSet<Weapon>
     return abilities
 }
 

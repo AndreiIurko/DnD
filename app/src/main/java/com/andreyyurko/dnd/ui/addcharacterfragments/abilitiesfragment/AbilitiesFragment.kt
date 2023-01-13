@@ -48,12 +48,12 @@ class AbilitiesFragment : Fragment(R.layout.fragment_abilities) {
             viewModel.characterInfo.speed = viewBinding.speedEditText.text.toString().toInt()
             viewModel.characterInfo.race = viewBinding.raceEditText.text.toString()
 
-            viewModel.characterInfo.strengthBonus = viewModel.abilities[Ability.Strength.abilityName]!!
-            viewModel.characterInfo.dexterityBonus = viewModel.abilities[Ability.Dexterity.abilityName]!!
-            viewModel.characterInfo.constitutionBonus = viewModel.abilities[Ability.Constitution.abilityName]!!
-            viewModel.characterInfo.intelligenceBonus = viewModel.abilities[Ability.Intelligence.abilityName]!!
-            viewModel.characterInfo.wisdomBonus = viewModel.abilities[Ability.Wisdom.abilityName]!!
-            viewModel.characterInfo.charismaBonus = viewModel.abilities[Ability.Charisma.abilityName]!!
+            viewModel.characterInfo.strength = viewModel.abilities[Ability.Strength.abilityName]!!
+            viewModel.characterInfo.dexterity = viewModel.abilities[Ability.Dexterity.abilityName]!!
+            viewModel.characterInfo.constitution = viewModel.abilities[Ability.Constitution.abilityName]!!
+            viewModel.characterInfo.intelligence = viewModel.abilities[Ability.Intelligence.abilityName]!!
+            viewModel.characterInfo.wisdom = viewModel.abilities[Ability.Wisdom.abilityName]!!
+            viewModel.characterInfo.charisma = viewModel.abilities[Ability.Charisma.abilityName]!!
 
             viewModel.setAbility(viewBinding.nameEditText.text.toString())
             findNavController().navigate(R.id.classFragment)

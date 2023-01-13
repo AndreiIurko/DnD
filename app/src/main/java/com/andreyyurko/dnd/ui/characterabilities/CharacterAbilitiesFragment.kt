@@ -24,11 +24,11 @@ class CharacterAbilitiesFragment : Fragment(R.layout.fragment_character_abilitie
     }
 
     private fun setupAll() {
-        viewBinding.strTextView.text = characterViewModel.shownCharacter.characterInfo.strengthBonus.toString()
-        viewBinding.dexTextView.text = characterViewModel.shownCharacter.characterInfo.dexterityBonus.toString()
-        viewBinding.conTextView.text = characterViewModel.shownCharacter.characterInfo.constitutionBonus.toString()
-        viewBinding.intTextView.text = characterViewModel.shownCharacter.characterInfo.intelligenceBonus.toString()
-        viewBinding.wisTextView.text = characterViewModel.shownCharacter.characterInfo.wisdomBonus.toString()
-        viewBinding.chaTextView.text = characterViewModel.shownCharacter.characterInfo.charismaBonus.toString()
+        viewBinding.strTextView.text = characterViewModel.shownCharacter.characterInfo.strength.toString()
+        viewBinding.dexTextView.text = characterViewModel.shownCharacter.characterInfo.dexterity.toString()
+        viewBinding.conTextView.text = characterViewModel.shownCharacter.characterInfo.constitution.toString()
+        viewBinding.intTextView.text = characterViewModel.shownCharacter.characterInfo.intelligence.toString()
+        viewBinding.wisTextView.text = characterViewModel.shownCharacter.characterInfo.wisdom.toString()
+        viewBinding.chaTextView.text = characterViewModel.shownCharacter.characterInfo.charisma.toString()
     }
 }

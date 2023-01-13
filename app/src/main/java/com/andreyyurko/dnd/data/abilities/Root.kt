@@ -13,8 +13,8 @@ var baseAN: AbilityNode = AbilityNode(
     "base_an",
     {abilities: CharacterInfo ->
         abilities.weaponProficiency.plus(Weapon.Unarmed)
-        abilities.ac = abilities.currentState.armor.ac + Integer.min(abilities.currentState.armor.dexRestriction, (abilities.dexterityBonus - 10) / 2)
-        abilities.initiativeBonus = abilities.initiativeBonus + (abilities.dexterityBonus - 10) / 2
+        abilities.ac = abilities.currentState.armor.ac + Integer.min(abilities.currentState.armor.dexRestriction, (abilities.dexterity - 10) / 2)
+        abilities.initiativeBonus = abilities.initiativeBonus + (abilities.dexterity - 10) / 2
         addAttackActions(abilities)
         abilities
     },
