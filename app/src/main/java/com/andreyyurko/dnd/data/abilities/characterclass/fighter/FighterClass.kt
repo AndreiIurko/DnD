@@ -2,9 +2,9 @@ package com.andreyyurko.dnd.data.abilities.characterclass.fighter
 
 import com.andreyyurko.dnd.data.abilities.characterclass.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.other.*
-import com.andreyyurko.dnd.data.characters.*
-import com.andreyyurko.dnd.data.characters.character.AbilityNode
-import com.andreyyurko.dnd.data.characters.character.abilityToModifier
+import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.character.AbilityNode
+import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 
 
 var classFeaturesFighter: AbilityNode = AbilityNode(

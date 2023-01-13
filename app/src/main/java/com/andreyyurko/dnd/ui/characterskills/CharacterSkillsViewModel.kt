@@ -1,10 +1,9 @@
 package com.andreyyurko.dnd.ui.characterskills
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.andreyyurko.dnd.data.characters.Ability
-import com.andreyyurko.dnd.data.characters.Skill
-import com.andreyyurko.dnd.data.characters.character.abilityToModifier
+import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.Skill
+import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

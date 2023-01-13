@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
-import com.andreyyurko.dnd.data.characters.Ability
+import com.andreyyurko.dnd.data.characterData.Ability
 import com.andreyyurko.dnd.databinding.FragmentAbilitiesBinding
 import dagger.hilt.android.AndroidEntryPoint
 

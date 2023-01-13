@@ -4,10 +4,10 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andreyyurko.dnd.data.abilities.mapOfAn
-import com.andreyyurko.dnd.data.characters.*
-import com.andreyyurko.dnd.data.characters.character.Character
-import com.andreyyurko.dnd.data.characters.character.CharacterAbilityNode
-import com.andreyyurko.dnd.data.characters.character.mergeAllAbilities
+import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.character.Character
+import com.andreyyurko.dnd.data.characterData.character.CharacterAbilityNode
+import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
 import com.andreyyurko.dnd.db.DB
 import com.andreyyurko.dnd.db.DBProvider
 import com.google.gson.Gson
@@ -40,6 +40,13 @@ class CharactersHolder @Inject constructor(
                 // get name
                 val name = db.getString(DB_CHARACTER_NAME + i.toString())
 
+                // init character
+                var character = Character(
+                    id = i,
+                    name = name!!,
+                    characterInfo = CharacterInfo(),
+                )
+
                 // get custom info
                 val characterCharacterInfoJson = db.getString(i.toString() + DB_CHARACTER_CUSTOM)
                 val characterCharacterInfo = Gson().fromJson(characterCharacterInfoJson, CharacterInfo::class.java)
@@ -49,16 +56,11 @@ class CharactersHolder @Inject constructor(
                 val currentState = Gson().fromJson(currentStateJson, CurrentState::class.java)
 
                 // get base_an with all sub-nods
-                val classCharacterAbilityNode = loadCharacterNode("base_an", i, ".")
+                val baseCharacterAbilityNode = loadCharacterNode("base_an", i, ".", character)
 
-                // init character
-                var character = Character(
-                    id = i,
-                    name = name!!,
-                    characterInfo = CharacterInfo(),
-                    customAbilities = characterCharacterInfo,
-                    baseCAN = classCharacterAbilityNode
-                )
+                // init essential props
+                character.customAbilities = characterCharacterInfo
+                character.baseCAN = baseCharacterAbilityNode
 
                 // add all custom data
                 character.characterInfo = mergeCharacterInfo(character.characterInfo, character.customAbilities)
@@ -67,7 +69,7 @@ class CharactersHolder @Inject constructor(
                 character.characterInfo.currentState = currentState
 
                 // merge all CAN
-                character = mergeAllAbilities(character)
+                mergeAllAbilities(character)
 
                 // add to character list
                 characters.add(character)
@@ -187,7 +189,7 @@ class CharactersHolder @Inject constructor(
         ))
     }
 
-    private fun loadCharacterNode(name: String, id: Int, path: String) : CharacterAbilityNode {
+    private fun loadCharacterNode(name: String, id: Int, path: String, character: Character) : CharacterAbilityNode {
         // init type to load from db
         val mapType: Type = object : TypeToken<Map<String, String>>() {}.type
 
@@ -197,11 +199,11 @@ class CharactersHolder @Inject constructor(
         Log.d("db", chosenAlternatives.toString())
 
         // create CAN with reference to AN and empty chosen_alternatives
-        val characterAbilityNode = CharacterAbilityNode(mapOfAn[name]!!)
+        val characterAbilityNode = CharacterAbilityNode(mapOfAn[name]!!, character)
 
         // add to chosen_alternatives all references to sub-nodes
         for (key in chosenAlternatives.keys) {
-            val chosenNode = loadCharacterNode(chosenAlternatives[key]!!, id, path + characterAbilityNode.data.name + '.')
+            val chosenNode = loadCharacterNode(chosenAlternatives[key]!!, id, path + characterAbilityNode.data.name + '.', character)
             characterAbilityNode.chosen_alternatives[key] = chosenNode
         }
 

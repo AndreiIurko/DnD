@@ -1,34 +1,34 @@
-package com.andreyyurko.dnd.data.characters.character
+package com.andreyyurko.dnd.data.characterData.character
 
 import android.util.Log
 import com.andreyyurko.dnd.data.abilities.baseAN
-import com.andreyyurko.dnd.data.characters.CharacterInfo
-import com.andreyyurko.dnd.data.characters.Priority
-import com.andreyyurko.dnd.data.characters.mergeCharacterInfo
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.characterData.mergeCharacterInfo
 
-data class Character(
+class Character(
     var id: Int,
     var name: String = "",
     var characterInfo: CharacterInfo = CharacterInfo(),
     var customAbilities: CharacterInfo = CharacterInfo(),
-    var baseCAN: CharacterAbilityNode = CharacterAbilityNode(baseAN),
-    var abilities: List<CharacterAbilityNode> = listOf(baseCAN),
-    //var sortedByPriority: SortedSet<CharacterAbilityNode> = sortedSetOf()
-)
+    var baseCAN: CharacterAbilityNode = CharacterAbilityNode(baseAN, null),
+) {
+    init {
+        this.baseCAN.character = this
+    }
+}
 
-fun mergeAllAbilities(character: Character): Character {
+fun mergeAllAbilities(character: Character) {
+    val abilities: List<CharacterAbilityNode> = listOf(character.baseCAN)
     var characterInfo = CharacterInfo()
     characterInfo.currentState = character.characterInfo.currentState
     characterInfo = mergeCharacterInfo(characterInfo, character.customAbilities)
     for (priority in Priority.values()) {
-        for (ability in character.abilities) {
+        for (ability in abilities) {
             characterInfo = ability.merge(characterInfo, priority)
         }
     }
-
     character.characterInfo = characterInfo
-    Log.d("skill", characterInfo.toString())
-    return character
 }
 
 fun abilityToModifier(ability: Int): Int {

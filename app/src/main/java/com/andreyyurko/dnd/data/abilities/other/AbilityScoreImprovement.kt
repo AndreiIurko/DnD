@@ -1,10 +1,9 @@
 package com.andreyyurko.dnd.data.abilities.other
 
-import android.util.Log
-import com.andreyyurko.dnd.data.characters.Ability
-import com.andreyyurko.dnd.data.characters.CharacterInfo
-import com.andreyyurko.dnd.data.characters.Priority
-import com.andreyyurko.dnd.data.characters.character.AbilityNode
+import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var strengthAbilityImprovement: AbilityNode = AbilityNode(
     name = Ability.Strength.abilityName,

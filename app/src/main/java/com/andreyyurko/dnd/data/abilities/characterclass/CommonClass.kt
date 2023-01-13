@@ -1,10 +1,11 @@
 package com.andreyyurko.dnd.data.abilities.characterclass
 
 import com.andreyyurko.dnd.data.abilities.mapOfAn
-import com.andreyyurko.dnd.data.characters.CharacterInfo
-import com.andreyyurko.dnd.data.characters.Priority
-import com.andreyyurko.dnd.data.characters.character.AbilityNode
-import com.andreyyurko.dnd.data.characters.character.CharacterAbilityNode
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.characterData.character.AbilityNode
+import com.andreyyurko.dnd.data.characterData.character.Character
+import com.andreyyurko.dnd.data.characterData.character.CharacterAbilityNode
 
 // For all levels alternatives: it is important that
 class AbilityNodeLevel (
@@ -17,14 +18,16 @@ class AbilityNodeLevel (
     var next_level: String?,
 ) : AbilityNode(name, changesInCharacterInfo, alternatives, requirements, add_requirements, description, false, Priority.DoAsSoonAsPossible)
 
-class CharacterAbilityNodeLevel(
+class CharacterAbilityNodeLevel (
     override val data: AbilityNodeLevel,
     chosen_alternatives: MutableMap<String, CharacterAbilityNode>,
+    character: Character? = null,
     var next_level: CharacterAbilityNodeLevel?
-) : CharacterAbilityNode(data, chosen_alternatives) {
-    constructor(_data: AbilityNodeLevel) : this(
+) : CharacterAbilityNode(data, chosen_alternatives, character) {
+    constructor(_data: AbilityNodeLevel, character: Character?) : this(
         data = _data,
         chosen_alternatives = mutableMapOf(),
+        character = character,
         next_level = null
     )
 
@@ -34,18 +37,14 @@ class CharacterAbilityNodeLevel(
             if (entries.value[0] == data.next_level) continue
 
             // choose all abilities
-            mapOfAn[entries.value[0]]?.let {
-                chosen_alternatives[entries.key] = CharacterAbilityNode(
-                    it
-                )
-            }
+            (this as CharacterAbilityNode).makeChoice(entries.key, entries.value[0])
         }
     }
 
     fun levelUp() {
         val nextAN = mapOfAn[data.next_level]
         nextAN?.let {
-            next_level = CharacterAbilityNodeLevel(nextAN as AbilityNodeLevel)
+            next_level = CharacterAbilityNodeLevel(nextAN as AbilityNodeLevel, character)
             chosen_alternatives["nextLevel"] = next_level as CharacterAbilityNode
         }
 

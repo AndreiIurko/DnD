@@ -1,7 +1,7 @@
 package com.andreyyurko.dnd.data.abilities.characterclass.fighter
 
-import com.andreyyurko.dnd.data.characters.CharacterInfo
-import com.andreyyurko.dnd.data.characters.character.AbilityNode
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 
 var champion = AbilityNode(

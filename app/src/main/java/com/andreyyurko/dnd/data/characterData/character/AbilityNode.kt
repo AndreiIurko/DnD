@@ -1,8 +1,8 @@
-package com.andreyyurko.dnd.data.characters.character
+package com.andreyyurko.dnd.data.characterData.character
 
 import com.andreyyurko.dnd.data.abilities.mapOfAn
-import com.andreyyurko.dnd.data.characters.CharacterInfo
-import com.andreyyurko.dnd.data.characters.Priority
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.Priority
 
 open class AbilityNode(
     val name: String,
@@ -33,7 +33,7 @@ open class AbilityNode(
     }
     fun showOptions(abilities: CharacterInfo, option_name: String): List<String> {
         val result: MutableList<String> = mutableListOf()
-        for (option in alternatives[option_name]!!){
+        for (option in alternatives[option_name]!!) {
             if (mapOfAn[option]!!.isAddable(abilities)) result.add(option)
         }
         return result

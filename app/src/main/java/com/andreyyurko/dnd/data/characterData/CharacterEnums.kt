@@ -1,4 +1,4 @@
-package com.andreyyurko.dnd.data.characters
+package com.andreyyurko.dnd.data.characterData
 
 enum class Skill(var skillName: String, var ability: Ability) {
     Acrobatics("Акробатика", Ability.Dexterity),

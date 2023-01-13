@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.andreyyurko.dnd.data.abilities.characterclass.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.characterclass.CharacterAbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.mapOfAn
-import com.andreyyurko.dnd.data.characters.character.mergeAllAbilities
+import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
 import com.andreyyurko.dnd.utils.CreateCharacterViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -24,7 +24,7 @@ class ClassViewModel @Inject constructor(
     fun makeChoice(choice: String) {
         // TODO: think about how to do it better
         mapOfAn[choice]?.let {
-            baseCAN.chosen_alternatives["class"] = CharacterAbilityNodeLevel((it as AbilityNodeLevel))
+            baseCAN.chosen_alternatives["class"] = CharacterAbilityNodeLevel((it as AbilityNodeLevel), character)
         }
         //baseCAN.makeChoice("class", choice)
 
@@ -32,13 +32,12 @@ class ClassViewModel @Inject constructor(
         firstLevelCAN.makeChoice()
         showAllClassAbilities()
 
-        createCharacterViewModel.character = mergeAllAbilities(createCharacterViewModel.character)
+        mergeAllAbilities(createCharacterViewModel.character)
         updateCharacter()
     }
 
     fun updateCharacter() {
         createCharacterViewModel.updateCharacter()
-        adapter.characterInfo = character.characterInfo
     }
 
     fun deleteCharacter() {

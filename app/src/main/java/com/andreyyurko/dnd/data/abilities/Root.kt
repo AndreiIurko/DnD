@@ -6,8 +6,8 @@ import com.andreyyurko.dnd.data.abilities.characterclass.fighter.mapOfFighterAbi
 import com.andreyyurko.dnd.data.abilities.other.mapOfAbilityScoreImprovement
 import com.andreyyurko.dnd.data.abilities.other.mapOfFightingStyles
 import com.andreyyurko.dnd.data.abilities.other.mapOfSkills
-import com.andreyyurko.dnd.data.characters.*
-import com.andreyyurko.dnd.data.characters.character.AbilityNode
+import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var baseAN: AbilityNode = AbilityNode(
     "base_an",

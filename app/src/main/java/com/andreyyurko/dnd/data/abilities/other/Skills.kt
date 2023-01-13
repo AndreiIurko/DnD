@@ -1,10 +1,10 @@
 package com.andreyyurko.dnd.data.abilities.other
 
 import android.util.Log
-import com.andreyyurko.dnd.data.characters.CharacterInfo
-import com.andreyyurko.dnd.data.characters.Priority
-import com.andreyyurko.dnd.data.characters.Skill
-import com.andreyyurko.dnd.data.characters.character.AbilityNode
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.characterData.Skill
+import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var acrobatics: AbilityNode = AbilityNode(
     name = "Акробатика",
@@ -15,6 +15,7 @@ var acrobatics: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = {abilities: CharacterInfo ->
+        Log.d("add auto merge abil", abilities.skillProficiency.toString())
         !abilities.skillProficiency.contains(Skill.Acrobatics)
     },
     description = "",

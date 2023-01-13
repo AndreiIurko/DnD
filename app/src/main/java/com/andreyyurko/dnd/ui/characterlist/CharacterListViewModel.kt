@@ -1,7 +1,7 @@
 package com.andreyyurko.dnd.ui.characterlist
 
 import androidx.lifecycle.ViewModel
-import com.andreyyurko.dnd.data.characters.CharacterBriefInfo
+import com.andreyyurko.dnd.data.characterData.CharacterBriefInfo
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.CreateCharacterViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

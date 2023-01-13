@@ -11,7 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
-import com.andreyyurko.dnd.data.characters.CharacterBriefInfo
+import com.andreyyurko.dnd.data.characterData.CharacterBriefInfo
 
 class CharacterListAdapter(
     private val viewModel: CharacterListViewModel

@@ -1,5 +1,6 @@
 package com.andreyyurko.dnd.ui.addcharacterfragments.classfragment
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,13 +9,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.abilities.characterclass.CharacterAbilityNodeLevel
-import com.andreyyurko.dnd.data.characters.CharacterInfo
-import com.andreyyurko.dnd.data.characters.character.CharacterAbilityNode
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.character.CharacterAbilityNode
 import com.andreyyurko.dnd.utils.createPopUpMenu
 
 class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
 
-    var characterInfo = CharacterInfo()
     var firstLevelClassCAN: CharacterAbilityNodeLevel? = null
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -30,7 +30,7 @@ class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        makeAllSimpleChoice(firstLevelClassCAN)
+        //makeAllSimpleChoice(firstLevelClassCAN)
         return getAbilitiesCount(firstLevelClassCAN)
     }
 
@@ -56,7 +56,11 @@ class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
 
             for (optionName in abilityCAN.data.alternatives.keys) {
                 // extract all available options
-                val optionsList = abilityCAN.showOptions(characterInfo, optionName)
+                val optionsList = abilityCAN.showOptions(optionName)
+                if (abilityCAN.data.name == "Воин: классовые умения") {
+                    Log.d("add auto merge", abilityCAN.character!!.characterInfo.skillProficiency.toString())
+                    Log.d("add auto merge", optionsList.toString())
+                }
 
                 // if we have only one or zero options we don't need popup menu
                 if (optionsList.size <= 1) {
@@ -146,7 +150,7 @@ class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
         for (ability in can.chosen_alternatives.values) {
             makeAllSimpleChoice(ability)
             for (optionName in ability.data.alternatives.keys) {
-                val optionList = ability.showOptions(characterInfo, optionName)
+                val optionList = ability.showOptions(optionName)
                 if (optionList.size == 1 && ability.chosen_alternatives[optionName] == null) {
                     ability.makeChoice(optionName, optionList[0])
                     makeAllSimpleChoice(ability.chosen_alternatives[optionName])

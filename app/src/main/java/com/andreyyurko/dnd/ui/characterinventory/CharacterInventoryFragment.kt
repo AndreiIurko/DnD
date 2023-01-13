@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
-import com.andreyyurko.dnd.data.characters.Armor
+import com.andreyyurko.dnd.data.characterData.Armor
 import com.andreyyurko.dnd.databinding.FragmentCharacterInventoryBinding
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import dagger.hilt.android.AndroidEntryPoint

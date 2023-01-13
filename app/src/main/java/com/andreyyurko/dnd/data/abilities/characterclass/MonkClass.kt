@@ -1,12 +1,10 @@
 package com.andreyyurko.dnd.data.abilities.characterclass
 
-import android.util.Log
-import com.andreyyurko.dnd.data.abilities.baseAN
 import com.andreyyurko.dnd.data.abilities.characterclass.fighter.extraAttack
 import com.andreyyurko.dnd.data.abilities.other.abilityScoreImprovement
-import com.andreyyurko.dnd.data.characters.*
-import com.andreyyurko.dnd.data.characters.character.AbilityNode
-import com.andreyyurko.dnd.data.characters.character.abilityToModifier
+import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.character.AbilityNode
+import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 
 var monkUnarmedDefence: AbilityNode = AbilityNode(
     name = "Монашеская защита без доспехов",

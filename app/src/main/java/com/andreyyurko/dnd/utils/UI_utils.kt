@@ -10,7 +10,7 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.core.animation.doOnEnd
-import com.andreyyurko.dnd.data.characters.character.CharacterAbilityNode
+import com.andreyyurko.dnd.data.characterData.character.CharacterAbilityNode
 import com.andreyyurko.dnd.ui.addcharacterfragments.classfragment.ClassAdapter
 
 @SuppressLint("ClickableViewAccessibility")

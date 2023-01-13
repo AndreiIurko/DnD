@@ -2,8 +2,8 @@ package com.andreyyurko.dnd.ui.addcharacterfragments.abilitiesfragment
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.andreyyurko.dnd.data.characters.Ability
-import com.andreyyurko.dnd.data.characters.character.mergeAllAbilities
+import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
 import com.andreyyurko.dnd.utils.CreateCharacterViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -21,7 +21,7 @@ class AbilitiesViewModel @Inject constructor(
     fun setAbility(name: String) {
         createCharacterViewModel.character.customAbilities = characterInfo
         createCharacterViewModel.character.name = name
-        createCharacterViewModel.character = mergeAllAbilities(createCharacterViewModel.character)
+        mergeAllAbilities(createCharacterViewModel.character)
         createCharacterViewModel.updateCharacter()
     }
 
