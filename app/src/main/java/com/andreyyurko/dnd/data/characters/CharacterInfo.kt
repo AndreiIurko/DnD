@@ -26,8 +26,9 @@ data class CharacterInfo(
     var initiativeBonus: Int = 0,
     var speed: Int = 0,
     var hp: Int = 0,
-    var damageResistances: MutableSet<Int> = mutableSetOf(),
-    var damageImmunities: MutableSet<Int> = mutableSetOf(),
+    var damageResistances: MutableSet<DamageType> = mutableSetOf(),
+    var damageImmunities: MutableSet<DamageType> = mutableSetOf(),
+    var conditionImmunities: MutableSet<Conditions> = mutableSetOf(),
     var actionsList: MutableList<Action> = mutableListOf(),
     var inventory: List<EquipmentItem> = emptyList(),
     var additionalAbilities: MutableList<String> = mutableListOf(), // like blind vision

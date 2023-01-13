@@ -49,7 +49,7 @@ class CharactersHolder @Inject constructor(
                 val currentState = Gson().fromJson(currentStateJson, CurrentState::class.java)
 
                 // get base_an with all sub-nods
-                val classCharacterAbilityNode = loadCharacterNode("base_an", i)
+                val classCharacterAbilityNode = loadCharacterNode("base_an", i, ".")
 
                 // init character
                 var character = Character(
@@ -154,7 +154,7 @@ class CharactersHolder @Inject constructor(
                 ))
 
                 // save all graph of choices
-                saveCharacterNode(characters[i].baseCAN, i)
+                saveCharacterNode(characters[i].baseCAN, i, ".")
             }
             db.putStringsAsync(
                 listOfStrings
@@ -162,11 +162,10 @@ class CharactersHolder @Inject constructor(
         }
     }
 
-    private fun saveCharacterNode(characterAbilityNode: CharacterAbilityNode, characterId: Int) {
+    private fun saveCharacterNode(characterAbilityNode: CharacterAbilityNode, characterId: Int, path: String) {
         // save all sub-nodes
         for (characterNode in characterAbilityNode.chosen_alternatives.values) {
-            Log.d("saving", characterNode.data.name)
-            saveCharacterNode(characterNode, characterId)
+            saveCharacterNode(characterNode, characterId, path + characterAbilityNode.data.name + '.')
         }
 
         // get chosen AN names and save it using current AN option_name as key
@@ -178,29 +177,31 @@ class CharactersHolder @Inject constructor(
         }
 
         // save map option_name -> chosen_option_name
+        Log.d("db", chosenAlternativesNames.toString())
         val chosenAlternativesJson = Gson().toJson(chosenAlternativesNames)
         db.putStringsAsync(listOf(
             Pair(
-                characterId.toString() + DB_CHARACTER_ABILITY_NODE + characterAbilityNode.data.name,
+                characterId.toString() + DB_CHARACTER_ABILITY_NODE + path + characterAbilityNode.data.name,
                 chosenAlternativesJson
             )
         ))
     }
 
-    private fun loadCharacterNode(name: String, id: Int) : CharacterAbilityNode {
+    private fun loadCharacterNode(name: String, id: Int, path: String) : CharacterAbilityNode {
         // init type to load from db
         val mapType: Type = object : TypeToken<Map<String, String>>() {}.type
 
         // get map option_name -> chosen_option_name
-        val chosenAlternativesNamesJson = db.getString(id.toString() + DB_CHARACTER_ABILITY_NODE + name)
+        val chosenAlternativesNamesJson = db.getString(id.toString() + DB_CHARACTER_ABILITY_NODE + path + name)
         val chosenAlternatives = Gson().fromJson<Map<String, String>>(chosenAlternativesNamesJson, mapType)
+        Log.d("db", chosenAlternatives.toString())
 
         // create CAN with reference to AN and empty chosen_alternatives
         val characterAbilityNode = CharacterAbilityNode(mapOfAn[name]!!)
 
         // add to chosen_alternatives all references to sub-nodes
         for (key in chosenAlternatives.keys) {
-            val chosenNode = loadCharacterNode(chosenAlternatives[key]!!, id)
+            val chosenNode = loadCharacterNode(chosenAlternatives[key]!!, id, path + characterAbilityNode.data.name + '.')
             characterAbilityNode.chosen_alternatives[key] = chosenNode
         }
 
