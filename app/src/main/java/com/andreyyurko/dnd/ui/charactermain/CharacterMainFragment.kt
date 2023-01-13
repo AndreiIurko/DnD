@@ -10,7 +10,6 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -73,7 +72,7 @@ class CharacterMainFragment : Fragment(R.layout.fragment_character_main) {
         }
     }
 
-    fun setupAll() {
+    private fun setupAll() {
         viewBinding.nameTextView.text = characterViewModel.shownCharacter.name
         viewBinding.classTextView.text = characterViewModel.shownCharacter.characterInfo.characterClass.className
         viewBinding.levelTextView.text = characterViewModel.shownCharacter.characterInfo.level.toString()
@@ -82,7 +81,10 @@ class CharacterMainFragment : Fragment(R.layout.fragment_character_main) {
             "+ ${characterViewModel.shownCharacter.characterInfo.proficiencyBonus}"
         viewBinding.speedTextView.text = "${characterViewModel.shownCharacter.characterInfo.speed}ft"
         viewBinding.initiativeTextView.text =
-            "+ ${characterViewModel.shownCharacter.characterInfo.initiativeBonus}"
+            if (characterViewModel.shownCharacter.characterInfo.initiativeBonus >= 0)
+                "+ ${characterViewModel.shownCharacter.characterInfo.initiativeBonus}"
+            else
+                "- ${kotlin.math.abs(characterViewModel.shownCharacter.characterInfo.initiativeBonus)}"
         viewBinding.acTextView.text = characterViewModel.shownCharacter.characterInfo.ac.toString()
     }
 

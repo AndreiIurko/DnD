@@ -1,7 +1,8 @@
 package com.andreyyurko.dnd.utils
 
 import androidx.lifecycle.ViewModel
-import com.andreyyurko.dnd.data.characters.*
+import com.andreyyurko.dnd.data.characters.character.Character
+import com.andreyyurko.dnd.data.characters.character.mergeAllAbilities
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,6 +20,7 @@ class CreateCharacterViewModel @Inject constructor(
     }
 
     fun updateCharacter() {
+        character = mergeAllAbilities(character)
         charactersHolder.updateCharacter(character)
     }
 

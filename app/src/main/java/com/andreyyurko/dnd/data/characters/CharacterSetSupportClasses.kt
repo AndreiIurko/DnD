@@ -1,8 +1,9 @@
 package com.andreyyurko.dnd.data.characters
 
 data class Action(
+    var name: String,
     var description: String,
-    var abilityId: Int
+    var type: ActionType
 )
 
 data class EquipmentItem(
@@ -12,4 +13,9 @@ data class EquipmentItem(
     var name: String,
     var rarity: ItemRarity,
     var type: ItemType
+)
+
+data class ChargesCounter(
+    var current: Int,
+    var maximum: Int
 )

@@ -56,11 +56,13 @@ enum class Weapon(
     var weight: String,
     var properties: List<String>,
     var setOfSkills : Set<Ability>,
+    var isMelee : Boolean = true,
+    var toHitBonus: Int = 0
 )
 {
     Unarmed("Безоружный удар", "", "1", "", listOf(), setOf(Ability.Strength)),
     Club("Дубинка", "1 см", "1к4 " + DamageType.Bludgeoning.typeName, "2 фнт.",
-        listOf("Лёгкий"), setOf(Ability.Strength)),
+        listOf("Лёгкое"), setOf(Ability.Strength)),
     Dagger("Кинжал", "2 зм", "1к4 " + DamageType.Piercing.typeName, "1 фнт.",
         listOf("Лёгкое", "метательное (дис. 20/60)", "фехтовальное"), setOf(Ability.Strength, Ability.Dexterity)),
     GreatClub("Палица", "2 зм", "1к8 " + DamageType.Bludgeoning.typeName, "10 фнт.",
@@ -80,13 +82,13 @@ enum class Weapon(
     Spear("Копье", "1 зм", "1к6 " + DamageType.Piercing.typeName, "3 фнт.",
         listOf("Метательное (дис. 20/60)", "универсальное (1к8)"), setOf(Ability.Strength)),
     CrossbowLight("Арбалет, легкий", "25 зм", "1к8 " + DamageType.Piercing.typeName, "5 фнт.",
-        listOf("Боеприпас (дис. 80/320)", "двуручное", "перезарядка"), setOf(Ability.Dexterity)),
+        listOf("Боеприпас (дис. 80/320)", "двуручное", "перезарядка"), setOf(Ability.Dexterity), false),
     Dart("Дротик", "5 мм", "1к4 " + DamageType.Piercing.typeName, "1/4 фнт.",
-        listOf("Метательное (дис. 20/60)", "фехтовальное"), setOf(Ability.Strength, Ability.Dexterity)),
+        listOf("Метательное (дис. 20/60)", "фехтовальное"), setOf(Ability.Strength, Ability.Dexterity), false),
     ShortBow("Короткий лук", "25 зм", "1к6 " + DamageType.Piercing.typeName, "2 фнт.",
-        listOf("Боеприпас (дис. 80/320)", "двуручное"), setOf(Ability.Dexterity)),
+        listOf("Боеприпас (дис. 80/320)", "двуручное"), setOf(Ability.Dexterity), false),
     Sling("Праща", "1 см", "1к4 " + DamageType.Bludgeoning.typeName, "-",
-        listOf("Боеприпас (дис. 30/120)"), setOf(Ability.Dexterity)),
+        listOf("Боеприпас (дис. 30/120)"), setOf(Ability.Dexterity), false),
     ShortSword("Короткий меч", "10 зм", "1к6 " + DamageType.Slashing.typeName, "2 фнт",
         listOf("Лёгкое", "фехтовальное"), setOf(Ability.Strength, Ability.Dexterity))
 }
@@ -108,14 +110,15 @@ fun addAllSimpleWeapons(abilities: CharacterInfo): CharacterInfo {
         Weapon.ShortBow,
         Weapon.Sling
     )
-    abilities.weaponProficiency = abilities.weaponProficiency.union(simpleWeapons)
+    abilities.weaponProficiency = abilities.weaponProficiency.union(simpleWeapons) as MutableSet<Weapon>
     return abilities
 }
 
 enum class ActionType(var actionName: String) {
     Action("Основное действие"),
     Bonus("Бонусное действие"),
-    Reaction("Реакция")
+    Reaction("Реакция"),
+    Additional("Дополнительные")
 }
 
 enum class ItemRarity(var rarityName: String) {
@@ -142,7 +145,35 @@ enum class ItemType(var typeName: String) {
 enum class DamageType(var typeName: String) {
     Bludgeoning("дробящий"),
     Piercing("колющий"),
-    Slashing("режущий")
+    Slashing("режущий"),
+    Poison("яд"),
+    Acid("кислота"),
+    Fire("огонь"),
+    Cold("яд"),
+    Necrotic("некротический"),
+    Radiant("излучение"),
+    Thunder("звук"),
+    Lightening("молния"),
+    Psychic("психический"),
+    Force("сила"),
+}
+
+enum class Conditions(var typeName: String) {
+    Blinded("ослеплённый"),
+    Charmed("очарованный"),
+    Deafened("оглушённый"),
+    Frightened("испуганный"),
+    Grappled("схваченный"),
+    Incapacitated("недееспособный"),
+    Invisible("невидимый"),
+    Paralyzed("парализованный"),
+    Petrified("окаменевший"),
+    Poisoned("отравлен"),
+    Prone("опрокинутый"),
+    Restrained("обездвиженный"),
+    Stunned("ошеломлённый"),
+    Unconscious("бессознательный")
+    //May be we need to add exhaustion
 }
 
 enum class Languages(var languageName: String) {
