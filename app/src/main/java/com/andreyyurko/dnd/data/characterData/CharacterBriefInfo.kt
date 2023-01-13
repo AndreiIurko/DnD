@@ -1,4 +1,4 @@
-package com.andreyyurko.dnd.data.characters
+package com.andreyyurko.dnd.data.characterData
 
 
 data class CharacterBriefInfo(

@@ -1,8 +1,5 @@
 package com.andreyyurko.dnd.data
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-
 interface Properties {
     val properties: List<String>
 }

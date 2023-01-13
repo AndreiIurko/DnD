@@ -2,8 +2,8 @@ package com.andreyyurko.dnd.utils
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.andreyyurko.dnd.data.characters.Character
-import com.andreyyurko.dnd.data.characters.mergeAllAbilities
+import com.andreyyurko.dnd.data.characterData.character.Character
+import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -27,7 +27,7 @@ class CharacterViewModel @Inject constructor(
     }
     fun updateCharacterInfo() {
         dataState.value = DataState.Loading.stateName
-        shownCharacter = mergeAllAbilities(shownCharacter)
+        mergeAllAbilities(shownCharacter)
         charactersHolder.updateCharacter(shownCharacter)
         dataState.value = DataState.Complete.stateName
     }

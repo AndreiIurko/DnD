@@ -11,7 +11,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="24sp"
-            android:layout_marginHorizontal="66dp"
+            android:layout_marginHorizontal="86dp"
             android:clickable="true"
             android:focusable="true"
             android:background="@drawable/border">
@@ -25,7 +25,7 @@
                 app:layout_constraintEnd_toEndOf="@id/chooseClassButton"
                 android:layout_marginEnd="24dp"
                 android:text="Выбрать класс"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textAlignment="center"
         />
 
@@ -43,7 +43,7 @@
                 android:id="@+id/arrowUpImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                android:src="@drawable/ic_baseline_arrow_drop_up_24"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -51,6 +51,30 @@
         />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+            android:id="@+id/chooseLevelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/chooseClassButton"
+            app:layout_constraintStart_toEndOf="@id/chooseClassButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="vertical"
+            android:clickable="true"
+    >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Уровень"/>
+
+        <TextView
+                android:id="@+id/levelText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="24sp"
+                android:text="1"/>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/abilitiesRecyclerView"
@@ -62,7 +86,7 @@
             app:layout_constraintBottom_toTopOf="@id/buttonsLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chooseClassButton" />
+            app:layout_constraintTop_toBottomOf="@id/chooseLevelButton" />
 
     <GridLayout
             android:id="@+id/buttonsLayout"

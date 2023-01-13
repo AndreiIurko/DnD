@@ -1,12 +1,12 @@
 package com.andreyyurko.dnd.ui.characterskills
 
 import androidx.lifecycle.ViewModel
-import com.andreyyurko.dnd.data.characters.Ability
-import com.andreyyurko.dnd.data.characters.Skill
+import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.Skill
+import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlin.random.Random
 
 @HiltViewModel
 class CharacterSkillsViewModel @Inject constructor(
@@ -14,8 +14,8 @@ class CharacterSkillsViewModel @Inject constructor(
 ) : ViewModel() {
     private val shownCharacter = characterViewModel.shownCharacter
 
-    var skillsList = Skill.values().toList()
-    var skillsProf = skillsList.associateWith { Random.nextInt(0, 4) }
+    var skillsList = Skill.values()
+    private var skillsProf = skillsList.associateWith { getProfBonusFromCharacter(it) }
 
     fun getBonus(skill: Skill): Int {
         var profBonus = shownCharacter.characterInfo.proficiencyBonus
@@ -26,12 +26,12 @@ class CharacterSkillsViewModel @Inject constructor(
             3 -> profBonus *= 2
         }
         return when (skill.ability) {
-            Ability.Strength -> shownCharacter.characterInfo.strengthBonus
-            Ability.Dexterity -> shownCharacter.characterInfo.dexterityBonus
-            Ability.Constitution -> shownCharacter.characterInfo.constitutionBonus
-            Ability.Intelligence -> shownCharacter.characterInfo.intelligenceBonus
-            Ability.Wisdom -> shownCharacter.characterInfo.wisdomBonus
-            Ability.Charisma -> shownCharacter.characterInfo.charismaBonus
+            Ability.Strength -> abilityToModifier(shownCharacter.characterInfo.strength)
+            Ability.Dexterity -> abilityToModifier(shownCharacter.characterInfo.dexterity)
+            Ability.Constitution -> abilityToModifier(shownCharacter.characterInfo.constitution)
+            Ability.Intelligence -> abilityToModifier(shownCharacter.characterInfo.intelligence)
+            Ability.Wisdom -> abilityToModifier(shownCharacter.characterInfo.wisdom)
+            Ability.Charisma -> abilityToModifier(shownCharacter.characterInfo.charisma)
         } + profBonus
     }
 
@@ -41,5 +41,17 @@ class CharacterSkillsViewModel @Inject constructor(
         if (skill in shownCharacter.characterInfo.skillProficiency) return 2
         return 0*/
         return skillsProf[skill]
+    }
+
+    private fun getProfBonusFromCharacter(skill: Skill): Int {
+        return if (shownCharacter.characterInfo.expertize.contains(skill)) {
+            3
+        } else if (shownCharacter.characterInfo.skillProficiency.contains(skill)) {
+            2
+        } else if (shownCharacter.characterInfo.isHasHalfProf) {
+            1
+        } else {
+            0
+        }
     }
 }
