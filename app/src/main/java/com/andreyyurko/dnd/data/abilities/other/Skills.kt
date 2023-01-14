@@ -10,12 +10,10 @@ var acrobatics: AbilityNode = AbilityNode(
     name = "Акробатика",
     changesInCharacterInfo = {abilities: CharacterInfo ->
         abilities.skillProficiency.add(Skill.Acrobatics)
-        Log.d("skill", abilities.toString())
         abilities
     },
     alternatives = mutableMapOf(),
     requirements = {abilities: CharacterInfo ->
-        Log.d("add auto merge abil", abilities.skillProficiency.toString())
         !abilities.skillProficiency.contains(Skill.Acrobatics)
     },
     description = "",

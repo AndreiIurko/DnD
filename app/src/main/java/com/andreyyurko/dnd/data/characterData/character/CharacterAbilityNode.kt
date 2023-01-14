@@ -34,9 +34,7 @@ open class CharacterAbilityNode (
             makeAllSimpleChoice(chosen_alternatives[option_name])
         }
         if (isFirst && character != null) {
-            Log.d("add auto merge", data.name)
             mergeAllAbilities(character!!)
-            Log.d("add auto merge", character!!.characterInfo.skillProficiency.toString())
         }
     }
 

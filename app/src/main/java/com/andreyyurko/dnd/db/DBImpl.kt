@@ -3,6 +3,7 @@ package com.andreyyurko.dnd.db
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Parcelable
+import android.util.Log
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
@@ -82,7 +83,12 @@ internal class DBImpl(
         WorkManager.getInstance(appContext).enqueue(request)
     }
 
-    override fun clearMemory() {
-        sp.edit().clear().apply()
+    override fun deleteDataAsync(data: List<String>) {
+        val editor = sp.edit()
+        data.withIndex().forEach {
+            editor.remove(it.value + spTag)
+        }
+        editor.commit()
+        Log.d("delete", sp.all.keys.toString())
     }
 }

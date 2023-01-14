@@ -33,7 +33,6 @@ class ClassViewModel @Inject constructor(
         showAllClassAbilities()
 
         mergeAllAbilities(createCharacterViewModel.character)
-        updateCharacter()
     }
 
     fun updateCharacter() {

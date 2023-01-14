@@ -57,10 +57,6 @@ class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
             for (optionName in abilityCAN.data.alternatives.keys) {
                 // extract all available options
                 val optionsList = abilityCAN.showOptions(optionName)
-                if (abilityCAN.data.name == "Воин: классовые умения") {
-                    Log.d("add auto merge", abilityCAN.character!!.characterInfo.skillProficiency.toString())
-                    Log.d("add auto merge", optionsList.toString())
-                }
 
                 // if we have only one or zero options we don't need popup menu
                 if (optionsList.size <= 1) {

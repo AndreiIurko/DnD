@@ -26,5 +26,5 @@ interface DB {
     
     fun putStringsAsync(data: List<Pair<String, String>>)
 
-    fun clearMemory()
+    fun deleteDataAsync(data: List<String>)
 }
