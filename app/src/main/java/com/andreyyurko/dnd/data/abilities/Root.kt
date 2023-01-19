@@ -1,11 +1,14 @@
 package com.andreyyurko.dnd.data.abilities
 
-import com.andreyyurko.dnd.data.abilities.characterclass.*
-import com.andreyyurko.dnd.data.abilities.characterclass.fighter.fighter1
-import com.andreyyurko.dnd.data.abilities.characterclass.fighter.mapOfFighterAbilities
+import com.andreyyurko.dnd.data.abilities.classes.*
+import com.andreyyurko.dnd.data.abilities.classes.fighter.fighter1
+import com.andreyyurko.dnd.data.abilities.classes.fighter.mapOfFighterAbilities
 import com.andreyyurko.dnd.data.abilities.other.mapOfAbilityScoreImprovement
 import com.andreyyurko.dnd.data.abilities.other.mapOfFightingStyles
+import com.andreyyurko.dnd.data.abilities.other.mapOfLanguages
 import com.andreyyurko.dnd.data.abilities.other.mapOfSkills
+import com.andreyyurko.dnd.data.abilities.races.human
+import com.andreyyurko.dnd.data.abilities.races.mapOfRaces
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
@@ -20,6 +23,7 @@ var baseAN: AbilityNode = AbilityNode(
     },
     mutableMapOf(
         Pair("class", listOf(monk1.name, barbarian1.name, fighter1.name)),
+        Pair("race", listOf(human.name))
     ),
     {true},
     listOf(listOf()),
@@ -30,12 +34,12 @@ var baseAN: AbilityNode = AbilityNode(
 // helps to split code
 var mapOfAn: MutableMap<String, AbilityNode> = (
         mutableMapOf(Pair(baseAN.name, baseAN))
-                + mapOfMonkAbilities
-                + mapOfBarbarianAbilities
+                + mapOfRaces
+                + mapOfClasses
                 + mapOfFightingStyles
-                + mapOfFighterAbilities
                 + mapOfAbilityScoreImprovement
                 + mapOfSkills
+                + mapOfLanguages
         ).toMutableMap()
 
 fun addAttackActions(abilities: CharacterInfo) {

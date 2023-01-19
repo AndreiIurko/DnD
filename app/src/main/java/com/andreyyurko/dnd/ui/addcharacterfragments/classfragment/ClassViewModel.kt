@@ -1,10 +1,11 @@
 package com.andreyyurko.dnd.ui.addcharacterfragments.classfragment
 
 import androidx.lifecycle.ViewModel
-import com.andreyyurko.dnd.data.abilities.characterclass.AbilityNodeLevel
-import com.andreyyurko.dnd.data.abilities.characterclass.CharacterAbilityNodeLevel
+import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
+import com.andreyyurko.dnd.data.abilities.classes.CharacterAbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.mapOfAn
 import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
+import com.andreyyurko.dnd.ui.addcharacterfragments.AbilityAdapter
 import com.andreyyurko.dnd.utils.CreateCharacterViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -16,7 +17,7 @@ class ClassViewModel @Inject constructor(
     val character = createCharacterViewModel.character
     val baseCAN = character.baseCAN
 
-    lateinit var adapter: ClassAdapter
+    lateinit var adapter: AbilityAdapter
 
     var chosenLevel = 1
     var chosenClass: String? = null
@@ -49,7 +50,7 @@ class ClassViewModel @Inject constructor(
         levelUp(firstLevelCAN, 1)
 
         adapter.apply {
-            firstLevelClassCAN = firstLevelCAN
+            rootCan = firstLevelCAN
             notifyDataSetChanged()
         }
     }

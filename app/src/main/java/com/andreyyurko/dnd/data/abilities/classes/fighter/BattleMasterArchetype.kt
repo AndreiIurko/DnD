@@ -1,4 +1,4 @@
-package com.andreyyurko.dnd.data.abilities.characterclass.fighter
+package com.andreyyurko.dnd.data.abilities.classes.fighter
 
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Classes

@@ -1,6 +1,8 @@
-package com.andreyyurko.dnd.data.abilities.characterclass
+package com.andreyyurko.dnd.data.abilities.classes
 
+import com.andreyyurko.dnd.data.abilities.classes.fighter.mapOfFighterAbilities
 import com.andreyyurko.dnd.data.abilities.mapOfAn
+import com.andreyyurko.dnd.data.abilities.other.mapOfFightingStyles
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Priority
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
@@ -16,7 +18,15 @@ class AbilityNodeLevel (
     add_requirements: List<List<Triple<String, String, Int>>>,
     description: String,
     var next_level: String?,
-) : AbilityNode(name, changesInCharacterInfo, alternatives, requirements, add_requirements, description, false, Priority.DoAsSoonAsPossible)
+) : AbilityNode(
+    name,
+    changesInCharacterInfo,
+    alternatives,
+    requirements,
+    add_requirements,
+    description,
+    isNeedsToBeShown = false,
+    priority = Priority.DoAsSoonAsPossible)
 
 class CharacterAbilityNodeLevel (
     override val data: AbilityNodeLevel,
@@ -50,3 +60,9 @@ class CharacterAbilityNodeLevel (
 
     }
 }
+
+val mapOfClasses = (
+        mapOfMonkAbilities
+        + mapOfBarbarianAbilities
+        + mapOfFighterAbilities
+).toMutableMap()

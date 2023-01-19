@@ -19,23 +19,6 @@
                 android:hint="Имя"
                 android:textColorHint="@color/primary"
         />
-        <EditText
-                android:id="@+id/raceEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Раса"
-                android:textColorHint="@color/primary"
-        />
-        <EditText
-                android:id="@+id/speedEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Скорость"
-                android:textColorHint="@color/primary"
-                android:inputType="numberDecimal"
-        />
 
         <TextView
                 android:id="@+id/pointsCapacity"

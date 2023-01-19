@@ -173,7 +173,7 @@ enum class Conditions(var typeName: String) {
     Restrained("обездвиженный"),
     Stunned("ошеломлённый"),
     Unconscious("бессознательный")
-    //May be we need to add exhaustion
+    //Maybe we need to add exhaustion
 }
 
 enum class Languages(var languageName: String) {

@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentClassBinding
+import com.andreyyurko.dnd.ui.addcharacterfragments.AbilityAdapter
+import com.andreyyurko.dnd.utils.setupBasicPopUpMenu
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -52,14 +54,7 @@ class ClassFragment : Fragment(R.layout.fragment_class) {
     }
 
     private fun setupClassPopupMenu(context: Context) {
-        val parent = LinearLayout(context)
-
-        parent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-        parent.orientation = LinearLayout.VERTICAL
-        val focus = true
-        val wid = LinearLayout.LayoutParams.WRAP_CONTENT
-        val high = LinearLayout.LayoutParams.WRAP_CONTENT
-        val classChoiceList = PopupWindow(parent, wid, high, focus)
+        val (classChoiceList, parent) = setupBasicPopUpMenu(context)
         for (classChoice in viewModel.baseCAN.showOptions("class")) {
             val classNameTextView = TextView(context)
             classNameTextView.isClickable = true
@@ -85,13 +80,7 @@ class ClassFragment : Fragment(R.layout.fragment_class) {
 
     //TODO: deal with code duplicate
     private fun setupLevelPopupMenu(context: Context) {
-        val parent = LinearLayout(context)
-        parent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-        parent.orientation = LinearLayout.VERTICAL
-        val focus = true
-        val wid = LinearLayout.LayoutParams.WRAP_CONTENT
-        val high = LinearLayout.LayoutParams.WRAP_CONTENT
-        val levelChoiceList = PopupWindow(parent, wid, high, focus)
+        val (levelChoiceList, parent) = setupBasicPopUpMenu(context)
 
         for (level in 1..20) {
             val levelTextView = TextView(context)
@@ -117,7 +106,7 @@ class ClassFragment : Fragment(R.layout.fragment_class) {
     private fun setupRecyclerView() {
         val recyclerView = viewBinding.abilitiesRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        val adapter = ClassAdapter()
+        val adapter = AbilityAdapter()
         viewModel.adapter = adapter
         recyclerView.adapter = adapter
     }

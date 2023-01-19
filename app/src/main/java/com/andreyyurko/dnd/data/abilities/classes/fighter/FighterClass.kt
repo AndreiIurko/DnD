@@ -1,6 +1,6 @@
-package com.andreyyurko.dnd.data.abilities.characterclass.fighter
+package com.andreyyurko.dnd.data.abilities.classes.fighter
 
-import com.andreyyurko.dnd.data.abilities.characterclass.AbilityNodeLevel
+import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.other.*
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode

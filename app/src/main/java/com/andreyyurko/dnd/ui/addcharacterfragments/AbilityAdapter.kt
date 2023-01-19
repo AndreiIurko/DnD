@@ -1,6 +1,5 @@
-package com.andreyyurko.dnd.ui.addcharacterfragments.classfragment
+package com.andreyyurko.dnd.ui.addcharacterfragments
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,14 +7,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
-import com.andreyyurko.dnd.data.abilities.characterclass.CharacterAbilityNodeLevel
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.character.CharacterAbilityNode
 import com.andreyyurko.dnd.utils.createPopUpMenu
 
-class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
+class AbilityAdapter : RecyclerView.Adapter<AbilityAdapter.ViewHolder>() {
 
-    var firstLevelClassCAN: CharacterAbilityNodeLevel? = null
+    var rootCan: CharacterAbilityNode? = null
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val nameTextView : TextView = itemView.findViewById(R.id.abilityNameTextView)
@@ -31,13 +28,13 @@ class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int {
         //makeAllSimpleChoice(firstLevelClassCAN)
-        return getAbilitiesCount(firstLevelClassCAN)
+        return getAbilitiesCount(rootCan)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // classCAN not null because size != 0
         // algorithm is correct, null value for first param needed in getAbilityAtPosition
-        val classAbility = getAbilityAtPosition(firstLevelClassCAN!!, position).first!!
+        val classAbility = getAbilityAtPosition(rootCan!!, position).first!!
 
         // configure ability card
         holder.nameTextView.text = classAbility.name
@@ -83,7 +80,6 @@ class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
                     createPopUpMenu(choiceButton, textView, optionsList, optionName, abilityCAN, this)
                 }
             }
-
         }
     }
 
@@ -105,7 +101,7 @@ class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
 
     // run through tree of can
     // returns can in DFS on pos == position
-    private fun getAbilityAtPosition(can: CharacterAbilityNode, initPosition: Int): Pair<ClassAbility?, Int> {
+    private fun getAbilityAtPosition(can: CharacterAbilityNode, initPosition: Int): Pair<AbilityCard?, Int> {
         var position = initPosition
         for ((_, chosenAbility) in can.chosen_alternatives) {
             // skip if ability is not supposed to be shown
@@ -113,9 +109,9 @@ class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
                 // if position is zero we find our can
                 // if not position decreases by one
                 if (position == 0) {
-                    // we return the description (ClassAbility) of abilityCard with position = -1
+                    // we return the description (AbilityCard) of abilityCard with position = -1
                     return Pair(
-                        ClassAbility(
+                        AbilityCard(
                             name = chosenAbility.data.name,
                             description = chosenAbility.data.description,
                             parentDescription = if (isLevelClassCan(can)) can.data.description else can.data.name,
@@ -137,27 +133,12 @@ class ClassAdapter : RecyclerView.Adapter<ClassAdapter.ViewHolder>() {
 
     private fun isLevelClassCan(can: CharacterAbilityNode): Boolean {
         // all level can has name like ClassName_x, there x is level
-        return can.data.name.split('_')[0] == firstLevelClassCAN!!.data.name.split('_')[0]
-    }
-
-    // recursive make choice for all available abilities with only option
-    private fun makeAllSimpleChoice(can: CharacterAbilityNode?) {
-        if (can == null) return
-        for (ability in can.chosen_alternatives.values) {
-            makeAllSimpleChoice(ability)
-            for (optionName in ability.data.alternatives.keys) {
-                val optionList = ability.showOptions(optionName)
-                if (optionList.size == 1 && ability.chosen_alternatives[optionName] == null) {
-                    ability.makeChoice(optionName, optionList[0])
-                    makeAllSimpleChoice(ability.chosen_alternatives[optionName])
-                }
-            }
-        }
+        return can.data.name.split('_')[0] == rootCan!!.data.name.split('_')[0]
     }
 }
 
 // parentName - имя способности в map
-data class ClassAbility (
+data class AbilityCard (
     var name: String = "",
     var parentDescription: String = "",
     var description: String = "",

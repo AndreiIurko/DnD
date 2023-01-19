@@ -1,6 +1,6 @@
-package com.andreyyurko.dnd.data.abilities.characterclass
+package com.andreyyurko.dnd.data.abilities.classes
 
-import com.andreyyurko.dnd.data.abilities.characterclass.fighter.extraAttack
+import com.andreyyurko.dnd.data.abilities.classes.fighter.extraAttack
 import com.andreyyurko.dnd.data.abilities.other.abilityScoreImprovement
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode

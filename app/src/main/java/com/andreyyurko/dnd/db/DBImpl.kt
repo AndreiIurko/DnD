@@ -88,7 +88,6 @@ internal class DBImpl(
         data.withIndex().forEach {
             editor.remove(it.value + spTag)
         }
-        editor.commit()
-        Log.d("delete", sp.all.keys.toString())
+        editor.apply()
     }
 }

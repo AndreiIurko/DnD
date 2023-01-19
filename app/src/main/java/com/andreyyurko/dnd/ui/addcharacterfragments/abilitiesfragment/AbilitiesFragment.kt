@@ -45,9 +45,6 @@ class AbilitiesFragment : Fragment(R.layout.fragment_abilities) {
         }
 
         viewBinding.submitButton.setOnClickListener {
-            viewModel.characterInfo.speed = viewBinding.speedEditText.text.toString().toInt()
-            viewModel.characterInfo.race = viewBinding.raceEditText.text.toString()
-
             viewModel.characterInfo.strength = viewModel.abilities[Ability.Strength.abilityName]!!
             viewModel.characterInfo.dexterity = viewModel.abilities[Ability.Dexterity.abilityName]!!
             viewModel.characterInfo.constitution = viewModel.abilities[Ability.Constitution.abilityName]!!
@@ -56,7 +53,7 @@ class AbilitiesFragment : Fragment(R.layout.fragment_abilities) {
             viewModel.characterInfo.charisma = viewModel.abilities[Ability.Charisma.abilityName]!!
 
             viewModel.setAbility(viewBinding.nameEditText.text.toString())
-            findNavController().navigate(R.id.classFragment)
+            findNavController().navigate(R.id.raceFragment)
         }
     }
 
