@@ -34,7 +34,7 @@
 
     <fragment
         android:id="@+id/characterMainFragment"
-        android:name="com.andreyyurko.dnd.ui.charactermain.CharacterMainFragment"
+        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.main.CharacterMainFragment"
         android:label="CharacterMainFragment">
     </fragment>
 

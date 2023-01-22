@@ -1,4 +1,4 @@
-package com.andreyyurko.dnd.ui.characteractions
+package com.andreyyurko.dnd.ui.showcharacterfragments.actions
 
 import androidx.fragment.app.Fragment
 import com.andreyyurko.dnd.R

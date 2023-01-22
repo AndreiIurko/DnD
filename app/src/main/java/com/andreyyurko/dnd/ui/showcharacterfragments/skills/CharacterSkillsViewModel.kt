@@ -1,4 +1,4 @@
-package com.andreyyurko.dnd.ui.characterskills
+package com.andreyyurko.dnd.ui.showcharacterfragments.skills
 
 import androidx.lifecycle.ViewModel
 import com.andreyyurko.dnd.data.characterData.Ability

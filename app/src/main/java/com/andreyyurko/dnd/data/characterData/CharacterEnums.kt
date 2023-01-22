@@ -212,6 +212,14 @@ enum class Classes(var className: String = "") {
     NotImplemented()
 }
 
+enum class Source(val sourceName: String, val shortName: String) {
+    PlayerHandbook("«Player's handbook»", "PHB"),
+    DungeonMastersGuide("«Dungeon master's guide»", "DMG"),
+    XanatharsGuideToEverything("«Xanathar's Guide to Everything»", "XGE"),
+    MordenkainenTomeOfFoes("«Mordenkainen's Tome of Foes»", "MTE"),
+    VoloGuideToMonsters("«Volo's guide to monsters»", "VGM")
+}
+
 enum class Priority {
     DoFirst,
     DoAsSoonAsPossible,

@@ -1,4 +1,4 @@
-package com.andreyyurko.dnd.ui.charactermain
+package com.andreyyurko.dnd.ui.showcharacterfragments.main
 
 import android.animation.ObjectAnimator
 import android.content.Context

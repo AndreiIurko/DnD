@@ -8,10 +8,13 @@ import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.Character
 import com.andreyyurko.dnd.data.characterData.character.CharacterAbilityNode
 import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
+import com.andreyyurko.dnd.data.inventory.InventoryItem
+import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
 import com.andreyyurko.dnd.db.DB
 import com.andreyyurko.dnd.db.DBProvider
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.squareup.moshi.Types
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -57,6 +60,11 @@ class CharactersHolder @Inject constructor(
                 val currentStateJson = db.getString(id.toString() + DB_CHARACTER_STATE)
                 val currentState = Gson().fromJson(currentStateJson, CurrentState::class.java)
 
+                //get inventory
+                val inventoryMapType: Type = object : TypeToken<MutableMap<String, InventoryItemInfo>>() {}.type
+                val inventoryJson = db.getString(id.toString() + DB_INVENTORY)
+                val inventory: MutableMap<String, InventoryItemInfo> = Gson().fromJson(inventoryJson, inventoryMapType)
+
                 // get base_an with all sub-nods
                 val baseCharacterAbilityNode = loadCharacterNode("base_an", id, ".", character)
 
@@ -67,8 +75,12 @@ class CharactersHolder @Inject constructor(
                 // add all custom data
                 character.characterInfo = mergeCharacterInfo(character.characterInfo, character.customAbilities)
 
-                // load current state
+                // add current state
                 character.characterInfo.currentState = currentState
+
+                // add inventory
+                Log.d("inventory", inventory.toString())
+                character.characterInfo.inventory = inventory
 
                 // merge all CAN
                 mergeAllAbilities(character)
@@ -130,32 +142,38 @@ class CharactersHolder @Inject constructor(
         throw IllegalArgumentException("No such id: ${id}!")
     }
 
+    // TODO: on start sync save with load (in case fast kill and restore)
     private fun saveCharacter(id: Int) {
-        val listOfStrings = mutableListOf<Pair<String, String>>()
-        listOfStrings.add(Pair(DB_CHARACTER_IDS, Gson().toJson(characters.keys)))
-        // add to save list name
-        listOfStrings.add(Pair(DB_CHARACTER_NAME + id.toString(), characters[id]!!.name))
+        // in case changes in ids
+        db.putStringsAsync(
+            listOf(Pair(DB_CHARACTER_IDS, Gson().toJson(characters.keys)))
+        )
+        // save character name
+        db.putStringsAsync(
+            listOf(Pair(DB_CHARACTER_NAME + id.toString(), characters[id]!!.name))
+        )
 
-        // add to save list custom info
-        val characterCharacterInfoJson = Gson().toJson(characters[id]!!.customAbilities, CharacterInfo::class.java)
-        listOfStrings.add(Pair(
-            id.toString() + DB_CHARACTER_CUSTOM,
-            characterCharacterInfoJson
-        ))
+        // save character custom info
+        val customInfoJson = Gson().toJson(characters[id]!!.customAbilities)
+        db.putStringsAsync(
+            listOf(Pair(id.toString() + DB_CHARACTER_CUSTOM, customInfoJson))
+        )
 
-        // add to save list current state
-        val characterCurrentStateJson = Gson().toJson(characters[id]!!.characterInfo.currentState)
-        listOfStrings.add(Pair(
-            id.toString() + DB_CHARACTER_STATE,
-            characterCurrentStateJson
-        ))
+        // save character current state
+        val currentStateJson = Gson().toJson(characters[id]!!.characterInfo.currentState)
+        db.putStringsAsync(
+            listOf(Pair(id.toString() + DB_CHARACTER_STATE, currentStateJson))
+        )
+
+        // save character inventory
+        val inventoryJson = Gson().toJson(characters[id]!!.characterInfo.inventory)
+        Log.d("inventory", inventoryJson)
+        db.putStringsAsync(
+            listOf(Pair(id.toString() + DB_INVENTORY, inventoryJson))
+        )
 
         // save all graph of choices
         saveCharacterNode(characters[id]!!.baseCAN, id, ".")
-
-        db.putStringsAsync(
-            listOfStrings
-        )
     }
     fun saveCharacters() {
         viewModelScope.launch {
@@ -173,7 +191,8 @@ class CharactersHolder @Inject constructor(
         db.deleteDataAsync(listOf(
             DB_CHARACTER_NAME + character.id.toString(),
             character.id.toString() + DB_CHARACTER_CUSTOM,
-            character.id.toString() + DB_CHARACTER_STATE
+            character.id.toString() + DB_CHARACTER_STATE,
+            character.id.toString() + DB_INVENTORY
         ))
 
         deleteCharacterNode(character.baseCAN, character.id, ".")
@@ -254,6 +273,7 @@ class CharactersHolder @Inject constructor(
         private const val DB_CHARACTER_STATE = "CharacterState"
         private const val DB_CHARACTER_ABILITY_NODE = "_CharacterAbilityNode_"
         private const val DB_CHARACTER_CUSTOM = "_CharacterCustom"
+        private const val DB_INVENTORY = "_Inventory"
 
         private const val LOG_TAG = "CharacterHolder"
     }

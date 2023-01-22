@@ -21,7 +21,10 @@ class Character(
 fun mergeAllAbilities(character: Character) {
     val abilities: List<CharacterAbilityNode> = listOf(character.baseCAN)
     var characterInfo = CharacterInfo()
+
     characterInfo.currentState = character.characterInfo.currentState
+    characterInfo.inventory = character.characterInfo.inventory
+
     characterInfo = mergeCharacterInfo(characterInfo, character.customAbilities)
     for (priority in Priority.values()) {
         for (ability in abilities) {

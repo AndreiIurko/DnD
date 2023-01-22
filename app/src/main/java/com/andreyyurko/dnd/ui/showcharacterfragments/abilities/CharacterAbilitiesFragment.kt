@@ -1,4 +1,4 @@
-package com.andreyyurko.dnd.ui.characterabilities
+package com.andreyyurko.dnd.ui.showcharacterfragments.abilities
 
 import android.os.Bundle
 import android.view.View

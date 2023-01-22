@@ -1,4 +1,4 @@
-package com.andreyyurko.dnd.ui.characterspells
+package com.andreyyurko.dnd.ui.showcharacterfragments.spells
 
 import androidx.fragment.app.Fragment
 import com.andreyyurko.dnd.R

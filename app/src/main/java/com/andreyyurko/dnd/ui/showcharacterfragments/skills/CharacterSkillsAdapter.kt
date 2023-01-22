@@ -1,4 +1,4 @@
-package com.andreyyurko.dnd.ui.characterskills
+package com.andreyyurko.dnd.ui.showcharacterfragments.skills
 
 import android.content.Context
 import android.view.LayoutInflater

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/characterAbilitiesFragment"
-        android:name="com.andreyyurko.dnd.ui.characterabilities.CharacterAbilitiesFragment"
+        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.abilities.CharacterAbilitiesFragment"
         android:label="CharacterAbilitiesFragment"/>
 
     <action
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/characterActionsFragment"
-        android:name="com.andreyyurko.dnd.ui.characteractions.CharacterActionsFragment"
+        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.actions.CharacterActionsFragment"
         android:label="CharacterActionsFragment"/>
 
     <action
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/characterAdditionalInfoFragment"
-        android:name="com.andreyyurko.dnd.ui.characteradditionalinfo.CharacterAdditionalInfoFragment"
+        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.additionalinfo.CharacterAdditionalInfoFragment"
         android:label="CharacterAdditionalInfoFragment"/>
 
     <action
@@ -40,7 +40,7 @@
 
     <fragment
         android:id="@+id/characterInventoryFragment"
-        android:name="com.andreyyurko.dnd.ui.characterinventory.CharacterInventoryFragment"
+        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.inventory.CharacterInventoryFragment"
         android:label="CharacterInventoryFragment"/>
 
     <action
@@ -51,7 +51,7 @@
 
     <fragment
         android:id="@+id/characterSkillsFragment"
-        android:name="com.andreyyurko.dnd.ui.characterskills.CharacterSkillsFragment"
+        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.skills.CharacterSkillsFragment"
         android:label="CharacterSkillsFragment"/>
 
     <action
@@ -62,7 +62,7 @@
 
     <fragment
         android:id="@+id/characterSpellsFragment"
-        android:name="com.andreyyurko.dnd.ui.characterspells.CharacterSpellsFragment"
+        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.spells.CharacterSpellsFragment"
         android:label="CharacterSpellsFragment"/>
 
     <action
