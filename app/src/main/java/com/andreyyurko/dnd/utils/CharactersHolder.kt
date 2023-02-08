@@ -89,10 +89,6 @@ class CharactersHolder @Inject constructor(
                 characters[id] = character
             }
             _initActionState.emit(InitializationState.Initialized)
-
-            // TODO: how to clear memory that we are not using any more? Maybe Android are doing it already? Need to dig into it
-            //db.clearMemory()
-            //saveCharacters()
         }
     }
 

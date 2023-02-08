@@ -44,18 +44,25 @@ class InventoryAdapter @Inject constructor(
         holder.nameTextView.text = itemsList[position].itemName
         holder.countTextView.text = itemsList[position].count.toString()
 
-        if (itemsList[position].count == 0) holder.decreaseButton.alpha = 0.5F
+        if (itemsList[position].count == 0) {
+            holder.decreaseButton.isEnabled = false
+            holder.decreaseButton.alpha = 0.5F
+        }
 
         holder.increaseButton.setOnClickListener {
             itemsList[position].count += 1
             holder.decreaseButton.alpha = 1.0F
+            holder.decreaseButton.isEnabled = true
             inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, itemsList[position])
             holder.countTextView.text = itemsList[position].count.toString()
         }
 
         holder.decreaseButton.setOnClickListener {
             itemsList[position].count -= 1
-            if (itemsList[position].count == 0) holder.decreaseButton.alpha = 0.5F
+            if (itemsList[position].count == 0) {
+                holder.decreaseButton.alpha = 0.5F
+                holder.decreaseButton.isEnabled = false
+            }
             inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, itemsList[position])
             holder.countTextView.text = itemsList[position].count.toString()
         }
@@ -97,17 +104,26 @@ class InventoryAdapter @Inject constructor(
 
         val increaseButton: ImageButton = parent.findViewById(R.id.increaseButton)
         val decreaseButton: ImageButton = parent.findViewById(R.id.decreaseButton)
+        if (itemDescription.count == 0) {
+            decreaseButton.isEnabled = false
+            decreaseButton.alpha = 0.5F
+        }
+
 
         increaseButton.setOnClickListener {
             itemDescription.count += 1
             decreaseButton.alpha = 1.0F
+            decreaseButton.isEnabled = true
             //inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, itemDescription)
             countTextView.text = itemDescription.count.toString()
         }
 
         decreaseButton.setOnClickListener {
             itemDescription.count -= 1
-            if (itemDescription.count == 0) decreaseButton.alpha = 0.5F
+            if (itemDescription.count == 0) {
+                decreaseButton.alpha = 0.5F
+                decreaseButton.isEnabled = false
+            }
             //inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, itemDescription)
             countTextView.text = itemDescription.count.toString()
         }

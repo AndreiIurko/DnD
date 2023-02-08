@@ -94,8 +94,11 @@ fun setupBasicPopUpMenu(context: Context): Pair<PopupWindow, LinearLayout> {
 
     parent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
     parent.orientation = LinearLayout.VERTICAL
+
     val focus = true
     val wid = LinearLayout.LayoutParams.WRAP_CONTENT
     val high = LinearLayout.LayoutParams.WRAP_CONTENT
-    return Pair(PopupWindow(parent, wid, high, focus), parent)
+    val popupWindow = PopupWindow(parent, wid, high, focus)
+    popupWindow.elevation = 3 * context.resources.displayMetrics.density
+    return Pair(popupWindow, parent)
 }

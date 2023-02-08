@@ -51,11 +51,7 @@ class InventoryHandler @Inject constructor(
         Log.d("inventory", allItems.keys.toString())
         Log.d("inventory", allItems.values.size.toString())
         for (item in allItems.values) {
-            if (
-                checkFilter(item.itemTypeAndRarity, filters.rarity.map { it.rarityName }) &&
-                checkFilter(item.itemTypeAndRarity, filters.type.map { it.typeName }) &&
-                checkFilter(item.source, filters.source.map { it.sourceName })
-            ) {
+            if (checkFilterForItem(item, filters)) {
                 resultList.add(getItemDescription(character, item.name))
             }
         }
@@ -70,15 +66,18 @@ class InventoryHandler @Inject constructor(
         val resultList = mutableListOf<InventoryItemInfo>()
         for (itemDescription in inventory.values) {
             val item = allItems[itemDescription.itemName]!!
-            if (
-                checkFilter(item.itemTypeAndRarity, filters.rarity.map { it.rarityName }) &&
-                checkFilter(item.itemTypeAndRarity, filters.type.map { it.typeName }) &&
-                checkFilter(item.source, filters.source.map { it.sourceName })
-            ) {
+            if (checkFilterForItem(item, filters)) {
                 resultList.add(itemDescription)
             }
         }
         return resultList
+    }
+
+    private fun checkFilterForItem(item: InventoryItem, filters: Filters): Boolean {
+        return checkRarityFilter(item.itemTypeAndRarity, filters.rarity.map { it.rarityName }) &&
+                checkFilter(item.itemTypeAndRarity, filters.type.map { it.typeName }) &&
+                checkFilter(item.source, filters.source.map { it.sourceName }) &&
+                item.name.lowercase().contains(filters.substring.lowercase())
     }
 
     fun getItemDescription(character: Character, itemName: String): InventoryItemInfo {
@@ -98,14 +97,24 @@ class InventoryHandler @Inject constructor(
     data class Filters(
         val rarity: MutableSet<ItemRarity> = mutableSetOf(),
         val type: MutableSet<ItemType> = mutableSetOf(),
-        val source: MutableSet<Source> = mutableSetOf()
+        val source: MutableSet<Source> = mutableSetOf(),
+        var substring: String = "",
     )
 
     private fun checkFilter(target: String, filter: List<String>): Boolean {
         if (filter.isEmpty()) return true
         var isCorrect = false
         for (filterItem in filter) {
-            if (target.contains(filterItem)) isCorrect = true
+            if (target.lowercase().contains(filterItem.lowercase())) isCorrect = true
+        }
+        return isCorrect
+    }
+
+    private fun checkRarityFilter(target: String, filter: List<String>): Boolean {
+        if (filter.isEmpty()) return true
+        var isCorrect = false
+        for (filterItem in filter) {
+            if (target.lowercase().contains(", " + filterItem.lowercase().substring(0..2))) isCorrect = true
         }
         return isCorrect
     }

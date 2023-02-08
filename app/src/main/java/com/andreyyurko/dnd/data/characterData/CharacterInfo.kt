@@ -34,6 +34,7 @@ data class CharacterInfo(
     var actionsList: MutableList<Action> = mutableListOf(),
     var additionalAbilities: MutableList<String> = mutableListOf(), // like blind vision
 
+    // String - name of inventory item
     var inventory: MutableMap<String, InventoryItemInfo> = mutableMapOf(),
 
     var currentState: CurrentState = CurrentState()
