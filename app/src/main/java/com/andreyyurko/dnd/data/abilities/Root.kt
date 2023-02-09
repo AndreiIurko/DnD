@@ -3,6 +3,7 @@ package com.andreyyurko.dnd.data.abilities
 import com.andreyyurko.dnd.data.abilities.classes.*
 import com.andreyyurko.dnd.data.abilities.classes.fighter.fighter1
 import com.andreyyurko.dnd.data.abilities.classes.fighter.mapOfFighterAbilities
+import com.andreyyurko.dnd.data.abilities.classes.sorcerer.sorcerer1
 import com.andreyyurko.dnd.data.abilities.other.mapOfAbilityScoreImprovement
 import com.andreyyurko.dnd.data.abilities.other.mapOfFightingStyles
 import com.andreyyurko.dnd.data.abilities.other.mapOfLanguages
@@ -22,7 +23,7 @@ var baseAN: AbilityNode = AbilityNode(
         abilities
     },
     mutableMapOf(
-        Pair("class", listOf(monk1.name, barbarian1.name, fighter1.name)),
+        Pair("class", listOf(monk1.name, barbarian1.name, fighter1.name, sorcerer1.name)),
         Pair("race", listOf(human.name))
     ),
     {true},

@@ -1,6 +1,7 @@
 package com.andreyyurko.dnd.data.abilities.classes
 
 import com.andreyyurko.dnd.data.abilities.classes.fighter.mapOfFighterAbilities
+import com.andreyyurko.dnd.data.abilities.classes.sorcerer.mapOfSorcererAbilities
 import com.andreyyurko.dnd.data.abilities.mapOfAn
 import com.andreyyurko.dnd.data.abilities.other.mapOfFightingStyles
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
@@ -65,4 +66,5 @@ val mapOfClasses = (
         mapOfMonkAbilities
         + mapOfBarbarianAbilities
         + mapOfFighterAbilities
+        + mapOfSorcererAbilities
 ).toMutableMap()

@@ -1,6 +1,7 @@
 package com.andreyyurko.dnd.data.characterData
 
 import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
+import com.andreyyurko.dnd.data.spells.CharacterSpells
 
 data class CharacterInfo(
     var level: Int = 0,
@@ -37,6 +38,8 @@ data class CharacterInfo(
     // String - name of inventory item
     var inventory: MutableMap<String, InventoryItemInfo> = mutableMapOf(),
 
+    var spellsInfo: CharacterSpells = CharacterSpells(),
+
     var currentState: CurrentState = CurrentState()
 )
 
@@ -44,6 +47,8 @@ fun mergeCharacterInfo(characterInfoFirst: CharacterInfo, characterInfoSecond: C
     val resultCharacterInfo = CharacterInfo()
     resultCharacterInfo.inventory = characterInfoFirst.inventory
     resultCharacterInfo.currentState = characterInfoFirst.currentState
+    resultCharacterInfo.spellsInfo.spellLists = characterInfoFirst.spellsInfo.spellLists
+
     resultCharacterInfo.characterClass.className = characterInfoFirst.characterClass.className + characterInfoSecond.characterClass.className
     resultCharacterInfo.level = characterInfoFirst.level + characterInfoSecond.level
     resultCharacterInfo.race = characterInfoFirst.race + characterInfoSecond.race

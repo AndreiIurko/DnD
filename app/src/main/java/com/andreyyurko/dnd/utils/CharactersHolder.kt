@@ -10,6 +10,7 @@ import com.andreyyurko.dnd.data.characterData.character.CharacterAbilityNode
 import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
 import com.andreyyurko.dnd.data.inventory.InventoryItem
 import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
+import com.andreyyurko.dnd.data.spells.SpellLists
 import com.andreyyurko.dnd.db.DB
 import com.andreyyurko.dnd.db.DBProvider
 import com.google.gson.Gson
@@ -65,6 +66,10 @@ class CharactersHolder @Inject constructor(
                 val inventoryJson = db.getString(id.toString() + DB_INVENTORY)
                 val inventory: MutableMap<String, InventoryItemInfo> = Gson().fromJson(inventoryJson, inventoryMapType)
 
+                val spellsJson = db.getString(id.toString() + DB_SPELLS)
+                Log.d("spells", spellsJson.toString())
+                val spellLists = Gson().fromJson(spellsJson, SpellLists::class.java)
+
                 // get base_an with all sub-nods
                 val baseCharacterAbilityNode = loadCharacterNode("base_an", id, ".", character)
 
@@ -79,8 +84,10 @@ class CharactersHolder @Inject constructor(
                 character.characterInfo.currentState = currentState
 
                 // add inventory
-                Log.d("inventory", inventory.toString())
                 character.characterInfo.inventory = inventory
+
+                // add chosen spells
+                character.characterInfo.spellsInfo.spellLists = spellLists
 
                 // merge all CAN
                 mergeAllAbilities(character)
@@ -163,9 +170,14 @@ class CharactersHolder @Inject constructor(
 
         // save character inventory
         val inventoryJson = Gson().toJson(characters[id]!!.characterInfo.inventory)
-        Log.d("inventory", inventoryJson)
         db.putStringsAsync(
             listOf(Pair(id.toString() + DB_INVENTORY, inventoryJson))
+        )
+
+        // save chosen spells
+        val spellsJson = Gson().toJson(characters[id]!!.characterInfo.spellsInfo.spellLists)
+        db.putStringsAsync(
+            listOf(Pair(id.toString() + DB_SPELLS, spellsJson))
         )
 
         // save all graph of choices
@@ -188,7 +200,8 @@ class CharactersHolder @Inject constructor(
             DB_CHARACTER_NAME + character.id.toString(),
             character.id.toString() + DB_CHARACTER_CUSTOM,
             character.id.toString() + DB_CHARACTER_STATE,
-            character.id.toString() + DB_INVENTORY
+            character.id.toString() + DB_INVENTORY,
+            character.id.toString() + DB_SPELLS
         ))
 
         deleteCharacterNode(character.baseCAN, character.id, ".")
@@ -270,6 +283,7 @@ class CharactersHolder @Inject constructor(
         private const val DB_CHARACTER_ABILITY_NODE = "_CharacterAbilityNode_"
         private const val DB_CHARACTER_CUSTOM = "_CharacterCustom"
         private const val DB_INVENTORY = "_Inventory"
+        private const val DB_SPELLS = "_Spells"
 
         private const val LOG_TAG = "CharacterHolder"
     }

@@ -35,7 +35,7 @@ class InventoryHandler @Inject constructor(
                 .bufferedReader()
                 .use { it.readText() }
         } catch (ioException: IOException) {
-            Log.d(SpellsParser.LOG_TAG, ioException.toString())
+            Log.d("Inventory_parse", ioException.toString())
         }
 
         val type: Type = Types.newParameterizedType(MutableList::class.java, InventoryItem::class.java)

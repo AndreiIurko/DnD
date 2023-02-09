@@ -14,9 +14,10 @@ data class SpellSpecificLanguage(
     val range: String = "",
     val materials: String = "",
     val components: String = "",
-    val concentration: String = "",
     val duration: String = "",
-    val source: String = ""
+    val concentration: String = "",
+    val classes: String = "",
+    val sources: String = "",
 ) : Properties {
-    override val properties get() = listOf(name, engName, "$level уровень", text, school, castingTime, range, materials, components, concentration, duration, source)
+    override val properties get() = listOf(name, engName, "$level уровень", text, school, castingTime, range, materials, components, concentration, duration, sources, classes)
 }

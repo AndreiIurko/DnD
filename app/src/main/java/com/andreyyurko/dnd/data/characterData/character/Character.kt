@@ -1,6 +1,5 @@
 package com.andreyyurko.dnd.data.characterData.character
 
-import android.util.Log
 import com.andreyyurko.dnd.data.abilities.baseAN
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Priority
@@ -24,6 +23,7 @@ fun mergeAllAbilities(character: Character) {
 
     characterInfo.currentState = character.characterInfo.currentState
     characterInfo.inventory = character.characterInfo.inventory
+    characterInfo.spellsInfo.spellLists = character.characterInfo.spellsInfo.spellLists
 
     characterInfo = mergeCharacterInfo(characterInfo, character.customAbilities)
     for (priority in Priority.values()) {
@@ -35,5 +35,5 @@ fun mergeAllAbilities(character: Character) {
 }
 
 fun abilityToModifier(ability: Int): Int {
-    return (ability - 10) / 2
+    return Math.floorDiv(ability - 10, 2)
 }
