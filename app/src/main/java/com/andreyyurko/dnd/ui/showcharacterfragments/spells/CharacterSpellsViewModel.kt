@@ -15,11 +15,11 @@ class CharacterSpellsViewModel @Inject constructor(
 
     val filters = SpellsHandler.Filters()
 
-    fun showPreparedSpells(): MutableSet<SpellSpecificLanguage> {
-        return spellsHandler.getPreparedSpells(characterViewModel.shownCharacter)
+    fun showPreparedSpells(): List<SpellSpecificLanguage> {
+        return spellsHandler.getPreparedSpells(characterViewModel.shownCharacter, filters)
     }
 
-    fun showKnownSpells(): MutableSet<SpellSpecificLanguage> {
+    fun showKnownSpells(): List<SpellSpecificLanguage> {
         return spellsHandler.getKnownSpells(characterViewModel.shownCharacter, filters)
     }
 

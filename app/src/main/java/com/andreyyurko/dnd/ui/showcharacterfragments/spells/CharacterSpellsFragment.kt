@@ -18,6 +18,8 @@ class CharacterSpellsFragment : Fragment(R.layout.fragment_character_spells) {
     private val viewBinding by viewBinding(FragmentCharacterSpellsBinding::bind)
     private lateinit var viewModel: CharacterSpellsViewModel
 
+    private var isPreparedListShown = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[CharacterSpellsViewModel::class.java]
@@ -29,21 +31,25 @@ class CharacterSpellsFragment : Fragment(R.layout.fragment_character_spells) {
         setupRecyclerView()
 
         viewBinding.knownButton.setOnClickListener {
+            viewModel.filters.substring = viewBinding.searchEditText.text.toString()
             viewBinding.preparedButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_primary))
             viewBinding.knownButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
             (viewBinding.spellsRecyclerView.adapter as SpellsAdapter).apply {
-                spellsList = viewModel.showKnownSpells().toMutableList()
+                spellsList = viewModel.showKnownSpells()
                 notifyDataSetChanged()
             }
+            isPreparedListShown = false
         }
 
         viewBinding.preparedButton.setOnClickListener {
+            viewModel.filters.substring = viewBinding.searchEditText.text.toString()
             viewBinding.knownButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_primary))
             viewBinding.preparedButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
             (viewBinding.spellsRecyclerView.adapter as SpellsAdapter).apply {
-                spellsList = viewModel.showPreparedSpells().toMutableList()
+                spellsList = viewModel.showPreparedSpells()
                 notifyDataSetChanged()
             }
+            isPreparedListShown = true
         }
 
         viewBinding.preparedSpellsCount.text = viewModel.getPreparedSpellsCount().toString()
@@ -51,6 +57,16 @@ class CharacterSpellsFragment : Fragment(R.layout.fragment_character_spells) {
 
         viewBinding.preparedCantripsCount.text = viewModel.getPreparedCantripsCount().toString()
         viewBinding.maxCantripsCount.text = viewModel.getMaxPreparedCantripsCount().toString()
+
+        viewBinding.searchButton.setOnClickListener {
+            viewModel.filters.substring = viewBinding.searchEditText.text.toString()
+            (viewBinding.spellsRecyclerView.adapter as SpellsAdapter).apply {
+                spellsList =
+                    if (isPreparedListShown) viewModel.showPreparedSpells()
+                    else viewModel.showKnownSpells().toMutableList()
+                notifyDataSetChanged()
+            }
+        }
     }
 
     private fun setupRecyclerView() {

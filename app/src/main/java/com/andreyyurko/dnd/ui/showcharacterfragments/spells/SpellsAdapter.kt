@@ -19,7 +19,7 @@ class SpellsAdapter @Inject constructor(
     private val preparedCantripsCountTextView: TextView
 ) : RecyclerView.Adapter<SpellsAdapter.ViewHolder>() {
 
-    var spellsList : MutableList<SpellSpecificLanguage> = mutableListOf()
+    var spellsList : List<SpellSpecificLanguage> = listOf()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.spellName)

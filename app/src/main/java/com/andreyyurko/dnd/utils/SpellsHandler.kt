@@ -1,5 +1,6 @@
 package com.andreyyurko.dnd.utils
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.andreyyurko.dnd.data.SpellSpecificLanguage
 import com.andreyyurko.dnd.data.characterData.character.Character
@@ -29,37 +30,37 @@ class SpellsHandler @Inject constructor(
         return result
     }
 
-    fun getKnownSpells(character: Character, filters: Filters): MutableSet<SpellSpecificLanguage> {
-        return if (character.characterInfo.spellsInfo.maxKnownSpellsCount == -1) {
-            val result : MutableSet<SpellSpecificLanguage> = mutableSetOf()
+    fun getKnownSpells(character: Character, filters: Filters = Filters()): MutableList<SpellSpecificLanguage> {
+        val result : MutableList<SpellSpecificLanguage> = mutableListOf()
+        if (character.characterInfo.spellsInfo.maxKnownSpellsCount == -1) {
             for (spell in getClassSpells(character)) {
-                if (!spell.level.contains("заговор")) {
-                    if (spell.level.toInt() <= character.characterInfo.level / 2) {
-                        result.add(spell)
-                    }
-                }
-                else {
+                if (
+                    spell.level.toInt() <= (character.characterInfo.level + 1) / 2 &&
+                           checkSubstring(spell, filters.substring)
+                ) {
                     result.add(spell)
                 }
             }
-            return result
         } else {
-            val result : MutableSet<SpellSpecificLanguage> = mutableSetOf()
             for (spellName in character.characterInfo.spellsInfo.spellLists.knownSpells) {
                 result.add(allSpells[spellName]!!)
             }
-            result
         }
+        return result
     }
 
-    fun getPreparedSpells(character: Character): MutableSet<SpellSpecificLanguage> {
-        val result : MutableSet<SpellSpecificLanguage> = mutableSetOf()
-        for (spellName in character.characterInfo.spellsInfo.spellLists.preparedSpells) {
-            result.add(allSpells[spellName]!!)
+    fun getPreparedSpells(character: Character, filters: Filters = Filters()): MutableList<SpellSpecificLanguage> {
+        val result : MutableList<SpellSpecificLanguage> = mutableListOf()
+        for (spellName in character.characterInfo.spellsInfo.spellLists.preparedSpells + character.characterInfo.spellsInfo.spellLists.preparedCantrips) {
+            allSpells[spellName]?.apply {
+                if (
+                    checkSubstring(this, filters.substring)
+                )
+                    result.add(this)
+            }
+
         }
-        for (spellName in character.characterInfo.spellsInfo.spellLists.preparedCantrips) {
-            result.add(allSpells[spellName]!!)
-        }
+        sortByLevel(result)
         return result
     }
 
@@ -118,6 +119,18 @@ class SpellsHandler @Inject constructor(
     }
 
     data class Filters(
-        var levels: MutableSet<String> = mutableSetOf()
+        var levels: MutableSet<String> = mutableSetOf(),
+        var substring: String = ""
     )
+
+    private fun sortByLevel(spells: MutableList<SpellSpecificLanguage>) {
+        spells.sortWith { first: SpellSpecificLanguage, second: SpellSpecificLanguage ->
+            second.level.toInt().compareTo(first.level.toInt())
+        }
+    }
+
+    private fun checkSubstring(spell: SpellSpecificLanguage, substring: String): Boolean {
+        return spell.name.lowercase().contains(substring.lowercase()) ||
+                spell.engName.lowercase().contains(substring.lowercase())
+    }
 }
