@@ -1,5 +1,7 @@
 package com.andreyyurko.dnd.data.characterData
 
+import com.andreyyurko.dnd.data.characterData.character.Filter
+
 enum class Skill(var skillName: String, var ability: Ability) {
     Acrobatics("Акробатика", Ability.Dexterity),
     AnimalHandling("Уход за животными", Ability.Wisdom),
@@ -114,14 +116,14 @@ fun addAllSimpleWeapons(abilities: CharacterInfo): CharacterInfo {
     return abilities
 }
 
-enum class ActionType(var actionName: String) {
+enum class ActionType(override var shownName: String) : Filter{
     Action("Основное действие"),
     Bonus("Бонусное действие"),
     Reaction("Реакция"),
     Additional("Дополнительные")
 }
 
-enum class ItemRarity(var rarityName: String) {
+enum class ItemRarity(override var shownName: String) : Filter {
     Common("Обычный"),
     Uncommon("Необычный"),
     Rare("Редкий"),
@@ -130,7 +132,7 @@ enum class ItemRarity(var rarityName: String) {
     Artifact("Артефакт")
 }
 
-enum class ItemType(var typeName: String) {
+enum class ItemType(override var shownName: String) : Filter {
     Wand("Волшебная палочка"),
     Armor("Доспех"),
     Rode("Жезл"),
@@ -212,12 +214,24 @@ enum class Classes(var className: String = "") {
     NotImplemented()
 }
 
-enum class Source(val sourceName: String, val shortName: String) {
+enum class Source(val sourceName: String, override var shownName: String) : Filter {
     PlayerHandbook("«Player's handbook»", "PHB"),
     DungeonMastersGuide("«Dungeon master's guide»", "DMG"),
     XanatharsGuideToEverything("«Xanathar's Guide to Everything»", "XGE"),
     MordenkainenTomeOfFoes("«Mordenkainen's Tome of Foes»", "MTE"),
     VoloGuideToMonsters("«Volo's guide to monsters»", "VGM")
+}
+
+enum class School(override var shownName: String) : Filter {
+    Abjuration("Ограждение"),
+    Conjuration("Вызов"),
+    Divination("Прорицание"),
+    Enchantment("Очарование"),
+    Evocation("Воплощение"),
+    Illusion("Иллюзия"),
+    Necromancy("Некромантия"),
+    Transmutation("Преобразование")
+
 }
 
 enum class Priority {

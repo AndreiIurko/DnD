@@ -9,11 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentCharacterListBinding
+import com.andreyyurko.dnd.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.applyInsetter
 
 @AndroidEntryPoint
-class CharacterListFragment : Fragment(R.layout.fragment_character_list) {
+class CharacterListFragment : BaseFragment(R.layout.fragment_character_list) {
 
     private val viewBinding by viewBinding(FragmentCharacterListBinding::bind)
     private lateinit var viewModel : CharacterListViewModel

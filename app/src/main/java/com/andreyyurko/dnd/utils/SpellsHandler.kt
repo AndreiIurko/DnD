@@ -1,8 +1,9 @@
 package com.andreyyurko.dnd.utils
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.andreyyurko.dnd.data.SpellSpecificLanguage
+import com.andreyyurko.dnd.data.characterData.School
+import com.andreyyurko.dnd.data.characterData.Source
 import com.andreyyurko.dnd.data.characterData.character.Character
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -36,10 +37,8 @@ class SpellsHandler @Inject constructor(
             for (spell in getClassSpells(character)) {
                 if (
                     spell.level.toInt() <= (character.characterInfo.level + 1) / 2 &&
-                           checkSubstring(spell, filters.substring)
-                ) {
-                    result.add(spell)
-                }
+                           checkFilters(spell, filters)
+                ) result.add(spell)
             }
         } else {
             for (spellName in character.characterInfo.spellsInfo.spellLists.knownSpells) {
@@ -120,6 +119,8 @@ class SpellsHandler @Inject constructor(
 
     data class Filters(
         var levels: MutableSet<String> = mutableSetOf(),
+        var source: MutableSet<Source> = mutableSetOf(),
+        var school: MutableSet<School> = mutableSetOf(),
         var substring: String = ""
     )
 
@@ -129,8 +130,26 @@ class SpellsHandler @Inject constructor(
         }
     }
 
+    private fun checkFilters(spell: SpellSpecificLanguage, filters: Filters): Boolean {
+        return checkSubstring(spell, filters.substring) &&
+                checkFilter(spell.level, filters.levels.toList()) &&
+                checkFilter(spell.sources, filters.source.map { it.sourceName }) &&
+                checkFilter(spell.school, filters.school.map { it.shownName })
+
+    }
+
     private fun checkSubstring(spell: SpellSpecificLanguage, substring: String): Boolean {
-        return spell.name.lowercase().contains(substring.lowercase()) ||
-                spell.engName.lowercase().contains(substring.lowercase())
+        for (property in spell.properties) {
+            if (property.lowercase().contains(substring.lowercase())) return true
+        }
+        return false
+    }
+
+    private fun checkFilter(substring: String, filters: List<String>): Boolean {
+        if (filters.isEmpty()) return true
+        for (filter in filters) {
+            if (filter.lowercase().contains(substring.lowercase())) return true
+        }
+        return false
     }
 }

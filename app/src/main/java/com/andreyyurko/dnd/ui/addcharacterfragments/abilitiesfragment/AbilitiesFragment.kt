@@ -13,10 +13,11 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.characterData.Ability
 import com.andreyyurko.dnd.databinding.FragmentAbilitiesBinding
+import com.andreyyurko.dnd.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AbilitiesFragment : Fragment(R.layout.fragment_abilities) {
+class AbilitiesFragment : BaseFragment(R.layout.fragment_abilities) {
 
     private val viewBinding by viewBinding(FragmentAbilitiesBinding::bind)
 

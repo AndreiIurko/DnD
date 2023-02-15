@@ -7,13 +7,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.andreyyurko.dnd.R
-import dagger.hilt.android.AndroidEntryPoint
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentCharacterSpellsBinding
+import com.andreyyurko.dnd.ui.base.BaseFragment
+import com.andreyyurko.dnd.ui.showcharacterfragments.fragmentwithfilters.FragmentWithFilters
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CharacterSpellsFragment : Fragment(R.layout.fragment_character_spells) {
+class CharacterSpellsFragment : FragmentWithFilters(R.layout.fragment_character_spells) {
 
     private val viewBinding by viewBinding(FragmentCharacterSpellsBinding::bind)
     private lateinit var viewModel: CharacterSpellsViewModel
@@ -59,13 +61,29 @@ class CharacterSpellsFragment : Fragment(R.layout.fragment_character_spells) {
         viewBinding.maxCantripsCount.text = viewModel.getMaxPreparedCantripsCount().toString()
 
         viewBinding.searchButton.setOnClickListener {
-            viewModel.filters.substring = viewBinding.searchEditText.text.toString()
-            (viewBinding.spellsRecyclerView.adapter as SpellsAdapter).apply {
-                spellsList =
-                    if (isPreparedListShown) viewModel.showPreparedSpells()
-                    else viewModel.showKnownSpells().toMutableList()
-                notifyDataSetChanged()
+            showItems()
+        }
+
+        viewBinding.filtersButton.setOnClickListener {
+            if (viewBinding.filtersView.visibility == View.GONE) {
+                showFilters(viewBinding.filtersView, viewBinding.filtersButton, viewBinding.searchEditText)
             }
+            else {
+                closeFilters(viewBinding.filtersView, viewBinding.filtersButton, viewBinding.searchEditText)
+                showItems()
+            }
+        }
+
+        viewBinding.levelButton.setOnClickListener {
+            setupStringFilter(viewBinding.levelButton, viewModel.filters.levels, (0..9).map {i -> i.toString()})
+        }
+
+        viewBinding.sourceButton.setOnClickListener {
+            setupFilter(viewBinding.sourceButton, viewModel.filters.source)
+        }
+
+        viewBinding.schoolButton.setOnClickListener {
+            setupFilter(viewBinding.schoolButton, viewModel.filters.school)
         }
     }
 
@@ -82,6 +100,16 @@ class CharacterSpellsFragment : Fragment(R.layout.fragment_character_spells) {
 
         adapter.apply {
             spellsList = viewModel.showPreparedSpells().toMutableList()
+            notifyDataSetChanged()
+        }
+    }
+
+    private fun showItems() {
+        viewModel.filters.substring = viewBinding.searchEditText.text.toString()
+        (viewBinding.spellsRecyclerView.adapter as SpellsAdapter).apply {
+            spellsList =
+                if (isPreparedListShown) viewModel.showPreparedSpells()
+                else viewModel.showKnownSpells().toMutableList()
             notifyDataSetChanged()
         }
     }

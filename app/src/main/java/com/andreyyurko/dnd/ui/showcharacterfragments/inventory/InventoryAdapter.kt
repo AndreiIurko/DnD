@@ -12,8 +12,6 @@ import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.InventoryHandler
-import com.andreyyurko.dnd.utils.onPressAnimation
-import com.andreyyurko.dnd.utils.setupBasicPopUpMenu
 import javax.inject.Inject
 
 class InventoryAdapter @Inject constructor(

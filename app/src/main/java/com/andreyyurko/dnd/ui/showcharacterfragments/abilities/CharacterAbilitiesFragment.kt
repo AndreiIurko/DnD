@@ -6,12 +6,13 @@ import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentCharacterAbilitiesBinding
+import com.andreyyurko.dnd.ui.base.BaseFragment
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CharacterAbilitiesFragment : Fragment(R.layout.fragment_character_abilities) {
+class CharacterAbilitiesFragment : BaseFragment(R.layout.fragment_character_abilities) {
 
     @Inject
     lateinit var characterViewModel: CharacterViewModel

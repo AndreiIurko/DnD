@@ -1,7 +1,6 @@
 package com.andreyyurko.dnd.ui.showcharacterfragments.inventory
 
 import androidx.lifecycle.ViewModel
-import com.andreyyurko.dnd.data.inventory.InventoryItem
 import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.InventoryHandler

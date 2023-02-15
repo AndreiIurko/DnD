@@ -3,7 +3,6 @@ package com.andreyyurko.dnd.db
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Parcelable
-import android.util.Log
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager

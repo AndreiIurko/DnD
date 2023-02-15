@@ -1,6 +1,5 @@
 package com.andreyyurko.dnd.data.abilities.other
 
-import android.util.Log
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Priority
 import com.andreyyurko.dnd.data.characterData.Skill

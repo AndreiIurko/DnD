@@ -1,6 +1,5 @@
 package com.andreyyurko.dnd.data.characterData.character
 
-import android.util.Log
 import com.andreyyurko.dnd.data.abilities.mapOfAn
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Priority

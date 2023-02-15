@@ -3,7 +3,6 @@ package com.andreyyurko.dnd.data.abilities.classes
 import com.andreyyurko.dnd.data.abilities.classes.fighter.mapOfFighterAbilities
 import com.andreyyurko.dnd.data.abilities.classes.sorcerer.mapOfSorcererAbilities
 import com.andreyyurko.dnd.data.abilities.mapOfAn
-import com.andreyyurko.dnd.data.abilities.other.mapOfFightingStyles
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Priority
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode

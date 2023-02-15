@@ -9,7 +9,6 @@ import com.andreyyurko.dnd.data.characterData.Source
 import com.andreyyurko.dnd.data.characterData.character.Character
 import com.andreyyurko.dnd.data.inventory.InventoryItem
 import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
-import com.andreyyurko.dnd.db.DBProvider
 import com.google.gson.Gson
 import com.squareup.moshi.Types
 import java.io.IOException
@@ -74,8 +73,8 @@ class InventoryHandler @Inject constructor(
     }
 
     private fun checkFilterForItem(item: InventoryItem, filters: Filters): Boolean {
-        return checkRarityFilter(item.itemTypeAndRarity, filters.rarity.map { it.rarityName }) &&
-                checkFilter(item.itemTypeAndRarity, filters.type.map { it.typeName }) &&
+        return checkRarityFilter(item.itemTypeAndRarity, filters.rarity.map { it.shownName }) &&
+                checkFilter(item.itemTypeAndRarity, filters.type.map { it.shownName }) &&
                 checkFilter(item.source, filters.source.map { it.sourceName }) &&
                 item.name.lowercase().contains(filters.substring.lowercase())
     }

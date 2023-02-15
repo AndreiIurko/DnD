@@ -10,11 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentCharacterSkillsBinding
+import com.andreyyurko.dnd.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class CharacterSkillsFragment : Fragment(R.layout.fragment_character_skills) {
+class CharacterSkillsFragment : BaseFragment(R.layout.fragment_character_skills) {
 
     private val viewBinding by viewBinding(FragmentCharacterSkillsBinding::bind)
     private lateinit var viewModel: CharacterSkillsViewModel

@@ -238,14 +238,15 @@
             android:textSize="12sp"
     />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
             android:id="@+id/filtersView"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             app:layout_constraintTop_toTopOf="parent"
             android:elevation="5dp"
-            android:visibility="gone"
             android:padding="6dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
     >
 
         <TextView
@@ -256,12 +257,32 @@
                 android:textSize="20sp"
                 android:background="@drawable/border"
                 android:paddingHorizontal="10dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="12dp"
         />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+                android:id="@+id/sourceButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Источник"
+                android:textSize="20sp"
+                android:background="@drawable/border"
+                android:paddingHorizontal="10dp"
+                android:layout_marginStart="12dp"
+        />
+
+        <TextView
+                android:id="@+id/schoolButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Школа"
+                android:textSize="20sp"
+                android:background="@drawable/border"
+                android:paddingHorizontal="10dp"
+                android:layout_marginStart="12dp"
+        />
+
+    </LinearLayout>
 
 
     <View

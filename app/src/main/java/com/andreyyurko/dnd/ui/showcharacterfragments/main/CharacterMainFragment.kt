@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentCharacterMainBinding
+import com.andreyyurko.dnd.ui.base.BaseFragment
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.onPressAnimation
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +24,7 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class CharacterMainFragment : Fragment(R.layout.fragment_character_main) {
+class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
 
     @Inject
     lateinit var characterViewModel: CharacterViewModel

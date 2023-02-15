@@ -10,15 +10,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.andreyyurko.dnd.R
-import dagger.hilt.android.AndroidEntryPoint
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentRaceBinding
 import com.andreyyurko.dnd.ui.addcharacterfragments.AbilityAdapter
+import com.andreyyurko.dnd.ui.base.BaseFragment
 import com.andreyyurko.dnd.utils.setupBasicPopUpMenu
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RaceFragment : Fragment(R.layout.fragment_race) {
+class RaceFragment : BaseFragment(R.layout.fragment_race) {
 
     private val viewBinding by viewBinding(FragmentRaceBinding::bind)
     private lateinit var viewModel: RaceViewModel

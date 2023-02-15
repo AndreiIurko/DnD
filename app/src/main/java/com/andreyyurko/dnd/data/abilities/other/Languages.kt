@@ -2,8 +2,6 @@ package com.andreyyurko.dnd.data.abilities.other
 
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Languages
-import com.andreyyurko.dnd.data.characterData.Priority
-import com.andreyyurko.dnd.data.characterData.Skill
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var commonLanguage: AbilityNode = AbilityNode(
