@@ -3,7 +3,6 @@ package com.andreyyurko.dnd.db
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Parcelable
-import android.util.Log
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
@@ -74,7 +73,7 @@ internal class DBImpl(
         val inputData = Data.Builder()
             .putString(ParcelableWriter.WORKER_COUNT, data.size.toString())
             .putString(ParcelableWriter.WORKER_DB_TAG, trueSpTag)
-        data.withIndex().forEach { 
+        data.withIndex().forEach {
             inputData.putString(ParcelableWriter.WORKER_TAG + it.index, it.value.first + spTag)
             inputData.putString(ParcelableWriter.WORKER_DATA + it.index, it.value.second)
         }

@@ -7,6 +7,7 @@ import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
 import com.andreyyurko.dnd.utils.CreateCharacterViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+
 @HiltViewModel
 class AbilitiesViewModel @Inject constructor(
     private val createCharacterViewModel: CreateCharacterViewModel
@@ -38,8 +39,7 @@ class AbilitiesViewModel @Inject constructor(
             totalPoints.value?.let {
                 totalPoints.value = it - 2
             }
-        }
-        else {
+        } else {
             totalPoints.value?.let {
                 totalPoints.value = it - 1
             }
@@ -51,8 +51,7 @@ class AbilitiesViewModel @Inject constructor(
             totalPoints.value?.let {
                 totalPoints.value = it + 2
             }
-        }
-        else {
+        } else {
             totalPoints.value?.let {
                 totalPoints.value = it + 1
             }

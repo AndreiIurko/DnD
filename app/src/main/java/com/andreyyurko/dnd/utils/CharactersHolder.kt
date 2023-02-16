@@ -4,10 +4,15 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andreyyurko.dnd.data.abilities.mapOfAn
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.CharacterBriefInfo
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.CurrentState
 import com.andreyyurko.dnd.data.characterData.character.Character
 import com.andreyyurko.dnd.data.characterData.character.CharacterAbilityNode
 import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
+import com.andreyyurko.dnd.data.characterData.mergeCharacterInfo
+import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
+import com.andreyyurko.dnd.data.spells.SpellLists
 import com.andreyyurko.dnd.db.DB
 import com.andreyyurko.dnd.db.DBProvider
 import com.google.gson.Gson
@@ -29,7 +34,7 @@ class CharactersHolder @Inject constructor(
         dbProvider.getDB(DB_TAG)
     }
 
-    private var characters : MutableMap<Int, Character> = mutableMapOf()
+    private var characters: MutableMap<Int, Character> = mutableMapOf()
 
     private var _initActionState = MutableStateFlow<InitializationState>(InitializationState.NotInitialized)
     val initActionState: Flow<InitializationState> get() = _initActionState.asStateFlow()
@@ -57,6 +62,15 @@ class CharactersHolder @Inject constructor(
                 val currentStateJson = db.getString(id.toString() + DB_CHARACTER_STATE)
                 val currentState = Gson().fromJson(currentStateJson, CurrentState::class.java)
 
+                //get inventory
+                val inventoryMapType: Type = object : TypeToken<MutableMap<String, InventoryItemInfo>>() {}.type
+                val inventoryJson = db.getString(id.toString() + DB_INVENTORY)
+                val inventory: MutableMap<String, InventoryItemInfo> = Gson().fromJson(inventoryJson, inventoryMapType)
+
+                val spellsJson = db.getString(id.toString() + DB_SPELLS)
+                Log.d("spells", spellsJson.toString())
+                val spellLists = Gson().fromJson(spellsJson, SpellLists::class.java)
+
                 // get base_an with all sub-nods
                 val baseCharacterAbilityNode = loadCharacterNode("base_an", id, ".", character)
 
@@ -67,8 +81,14 @@ class CharactersHolder @Inject constructor(
                 // add all custom data
                 character.characterInfo = mergeCharacterInfo(character.characterInfo, character.customAbilities)
 
-                // load current state
+                // add current state
                 character.characterInfo.currentState = currentState
+
+                // add inventory
+                character.characterInfo.inventory = inventory
+
+                // add chosen spells
+                character.characterInfo.spellsInfo.spellLists = spellLists
 
                 // merge all CAN
                 mergeAllAbilities(character)
@@ -77,10 +97,6 @@ class CharactersHolder @Inject constructor(
                 characters[id] = character
             }
             _initActionState.emit(InitializationState.Initialized)
-
-            // TODO: how to clear memory that we are not using any more? Maybe Android are doing it already? Need to dig into it
-            //db.clearMemory()
-            //saveCharacters()
         }
     }
 
@@ -91,6 +107,7 @@ class CharactersHolder @Inject constructor(
     fun isCharacterExists(id: Int): Boolean {
         return characters.contains(id)
     }
+
     fun getCharacterById(id: Int): Character {
         characters[id]?.let {
             return it
@@ -101,7 +118,7 @@ class CharactersHolder @Inject constructor(
     fun addCharacter(character: Character): Character {
         if (characters.isEmpty()) character.id = 0
         else {
-            for (i in 0 ..characters.size) {
+            for (i in 0..characters.size) {
                 if (characters.contains(i)) continue
                 character.id = i
             }
@@ -130,33 +147,45 @@ class CharactersHolder @Inject constructor(
         throw IllegalArgumentException("No such id: ${id}!")
     }
 
+    // TODO: on start sync save with load (in case fast kill and restore)
     private fun saveCharacter(id: Int) {
-        val listOfStrings = mutableListOf<Pair<String, String>>()
-        listOfStrings.add(Pair(DB_CHARACTER_IDS, Gson().toJson(characters.keys)))
-        // add to save list name
-        listOfStrings.add(Pair(DB_CHARACTER_NAME + id.toString(), characters[id]!!.name))
+        // in case changes in ids
+        db.putStringsAsync(
+            listOf(Pair(DB_CHARACTER_IDS, Gson().toJson(characters.keys)))
+        )
+        // save character name
+        db.putStringsAsync(
+            listOf(Pair(DB_CHARACTER_NAME + id.toString(), characters[id]!!.name))
+        )
 
-        // add to save list custom info
-        val characterCharacterInfoJson = Gson().toJson(characters[id]!!.customAbilities, CharacterInfo::class.java)
-        listOfStrings.add(Pair(
-            id.toString() + DB_CHARACTER_CUSTOM,
-            characterCharacterInfoJson
-        ))
+        // save character custom info
+        val customInfoJson = Gson().toJson(characters[id]!!.customAbilities)
+        db.putStringsAsync(
+            listOf(Pair(id.toString() + DB_CHARACTER_CUSTOM, customInfoJson))
+        )
 
-        // add to save list current state
-        val characterCurrentStateJson = Gson().toJson(characters[id]!!.characterInfo.currentState)
-        listOfStrings.add(Pair(
-            id.toString() + DB_CHARACTER_STATE,
-            characterCurrentStateJson
-        ))
+        // save character current state
+        val currentStateJson = Gson().toJson(characters[id]!!.characterInfo.currentState)
+        db.putStringsAsync(
+            listOf(Pair(id.toString() + DB_CHARACTER_STATE, currentStateJson))
+        )
+
+        // save character inventory
+        val inventoryJson = Gson().toJson(characters[id]!!.characterInfo.inventory)
+        db.putStringsAsync(
+            listOf(Pair(id.toString() + DB_INVENTORY, inventoryJson))
+        )
+
+        // save chosen spells
+        val spellsJson = Gson().toJson(characters[id]!!.characterInfo.spellsInfo.spellLists)
+        db.putStringsAsync(
+            listOf(Pair(id.toString() + DB_SPELLS, spellsJson))
+        )
 
         // save all graph of choices
         saveCharacterNode(characters[id]!!.baseCAN, id, ".")
-
-        db.putStringsAsync(
-            listOfStrings
-        )
     }
+
     fun saveCharacters() {
         viewModelScope.launch {
             for (id in characters.keys) {
@@ -166,15 +195,21 @@ class CharactersHolder @Inject constructor(
     }
 
     private fun deleteCharacter(character: Character) {
-        db.putStringsAsync(listOf(
-            Pair(DB_CHARACTER_IDS, Gson().toJson(characters.keys))
-        ))
+        db.putStringsAsync(
+            listOf(
+                Pair(DB_CHARACTER_IDS, Gson().toJson(characters.keys))
+            )
+        )
 
-        db.deleteDataAsync(listOf(
-            DB_CHARACTER_NAME + character.id.toString(),
-            character.id.toString() + DB_CHARACTER_CUSTOM,
-            character.id.toString() + DB_CHARACTER_STATE
-        ))
+        db.deleteDataAsync(
+            listOf(
+                DB_CHARACTER_NAME + character.id.toString(),
+                character.id.toString() + DB_CHARACTER_CUSTOM,
+                character.id.toString() + DB_CHARACTER_STATE,
+                character.id.toString() + DB_INVENTORY,
+                character.id.toString() + DB_SPELLS
+            )
+        )
 
         deleteCharacterNode(character.baseCAN, character.id, ".")
     }
@@ -186,7 +221,7 @@ class CharactersHolder @Inject constructor(
         }
 
         // get chosen AN names and save it using current AN option_name as key
-        val chosenAlternativesNames : MutableMap<String, String> = mutableMapOf()
+        val chosenAlternativesNames: MutableMap<String, String> = mutableMapOf()
         for (key in characterAbilityNode.chosen_alternatives.keys) {
             characterAbilityNode.chosen_alternatives[key]?.apply {
                 chosenAlternativesNames[key] = this.data.name
@@ -195,15 +230,17 @@ class CharactersHolder @Inject constructor(
 
         // save map option_name -> chosen_option_name
         val chosenAlternativesJson = Gson().toJson(chosenAlternativesNames)
-        db.putStringsAsync(listOf(
-            Pair(
-                characterId.toString() + DB_CHARACTER_ABILITY_NODE + path + characterAbilityNode.data.name,
-                chosenAlternativesJson
+        db.putStringsAsync(
+            listOf(
+                Pair(
+                    characterId.toString() + DB_CHARACTER_ABILITY_NODE + path + characterAbilityNode.data.name,
+                    chosenAlternativesJson
+                )
             )
-        ))
+        )
     }
 
-    private fun loadCharacterNode(name: String, id: Int, path: String, character: Character) : CharacterAbilityNode {
+    private fun loadCharacterNode(name: String, id: Int, path: String, character: Character): CharacterAbilityNode {
         // init type to load from db
         val mapType: Type = object : TypeToken<Map<String, String>>() {}.type
 
@@ -216,7 +253,8 @@ class CharactersHolder @Inject constructor(
 
         // add to chosen_alternatives all references to sub-nodes
         for (key in chosenAlternatives.keys) {
-            val chosenNode = loadCharacterNode(chosenAlternatives[key]!!, id, path + characterAbilityNode.data.name + '.', character)
+            val chosenNode =
+                loadCharacterNode(chosenAlternatives[key]!!, id, path + characterAbilityNode.data.name + '.', character)
             characterAbilityNode.chosen_alternatives[key] = chosenNode
         }
 
@@ -228,20 +266,24 @@ class CharactersHolder @Inject constructor(
             deleteCharacterNode(characterNode, characterId, path + characterAbilityNode.data.name + '.')
         }
 
-        db.deleteDataAsync(listOf(
-            characterId.toString() + DB_CHARACTER_ABILITY_NODE + path + characterAbilityNode.data.name
-        ))
+        db.deleteDataAsync(
+            listOf(
+                characterId.toString() + DB_CHARACTER_ABILITY_NODE + path + characterAbilityNode.data.name
+            )
+        )
     }
 
     fun getBriefInfo(): MutableList<CharacterBriefInfo> {
-        val info : MutableList<CharacterBriefInfo> = mutableListOf()
+        val info: MutableList<CharacterBriefInfo> = mutableListOf()
         for (character in characters.values) {
-            info.add(CharacterBriefInfo(
-                id = character.id,
-                name = character.name,
-                characterClass = character.characterInfo.characterClass.className,
-                level = character.characterInfo.level.toString()
-            ))
+            info.add(
+                CharacterBriefInfo(
+                    id = character.id,
+                    name = character.name,
+                    characterClass = character.characterInfo.characterClass.className,
+                    level = character.characterInfo.level.toString()
+                )
+            )
         }
         return info
     }
@@ -254,12 +296,14 @@ class CharactersHolder @Inject constructor(
         private const val DB_CHARACTER_STATE = "CharacterState"
         private const val DB_CHARACTER_ABILITY_NODE = "_CharacterAbilityNode_"
         private const val DB_CHARACTER_CUSTOM = "_CharacterCustom"
+        private const val DB_INVENTORY = "_Inventory"
+        private const val DB_SPELLS = "_Spells"
 
         private const val LOG_TAG = "CharacterHolder"
     }
 
     sealed class InitializationState {
-        object NotInitialized: InitializationState()
-        object Initialized: InitializationState()
+        object NotInitialized : InitializationState()
+        object Initialized : InitializationState()
     }
 }

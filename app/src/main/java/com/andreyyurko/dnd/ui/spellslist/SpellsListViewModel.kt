@@ -70,6 +70,7 @@ class SpellsListViewModel @Inject constructor(
             }
         }
     }
+
     fun getFavoriteSpells() {
         favoriteSpells = spellsFavoritesHolder.getFavoriteSpells().toList()
     }

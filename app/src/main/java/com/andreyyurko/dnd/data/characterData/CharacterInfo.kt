@@ -1,5 +1,8 @@
 package com.andreyyurko.dnd.data.characterData
 
+import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
+import com.andreyyurko.dnd.data.spells.CharacterSpells
+
 data class CharacterInfo(
     var level: Int = 0,
     var race: String = "",
@@ -30,15 +33,24 @@ data class CharacterInfo(
     var damageImmunities: MutableSet<DamageType> = mutableSetOf(),
     var conditionImmunities: MutableSet<Conditions> = mutableSetOf(),
     var actionsList: MutableList<Action> = mutableListOf(),
-    var inventory: List<EquipmentItem> = emptyList(),
     var additionalAbilities: MutableList<String> = mutableListOf(), // like blind vision
+
+    // String - name of inventory item
+    var inventory: MutableMap<String, InventoryItemInfo> = mutableMapOf(),
+
+    var spellsInfo: CharacterSpells = CharacterSpells(),
+
     var currentState: CurrentState = CurrentState()
 )
 
 fun mergeCharacterInfo(characterInfoFirst: CharacterInfo, characterInfoSecond: CharacterInfo): CharacterInfo {
     val resultCharacterInfo = CharacterInfo()
+    resultCharacterInfo.inventory = characterInfoFirst.inventory
     resultCharacterInfo.currentState = characterInfoFirst.currentState
-    resultCharacterInfo.characterClass.className = characterInfoFirst.characterClass.className + characterInfoSecond.characterClass.className
+    resultCharacterInfo.spellsInfo.spellLists = characterInfoFirst.spellsInfo.spellLists
+
+    resultCharacterInfo.characterClass.className =
+        characterInfoFirst.characterClass.className + characterInfoSecond.characterClass.className
     resultCharacterInfo.level = characterInfoFirst.level + characterInfoSecond.level
     resultCharacterInfo.race = characterInfoFirst.race + characterInfoSecond.race
     resultCharacterInfo.strength = characterInfoFirst.strength + characterInfoSecond.strength
@@ -52,9 +64,12 @@ fun mergeCharacterInfo(characterInfoFirst: CharacterInfo, characterInfoSecond: C
     resultCharacterInfo.initiativeBonus = characterInfoFirst.initiativeBonus + characterInfoSecond.initiativeBonus
     resultCharacterInfo.ac = characterInfoFirst.ac + characterInfoSecond.ac
     resultCharacterInfo.hp = characterInfoFirst.hp + characterInfoSecond.hp
-    resultCharacterInfo.passiveInsightBonus = characterInfoFirst.passiveInsightBonus + characterInfoSecond.passiveInsightBonus
-    resultCharacterInfo.passivePerceptionBonus = characterInfoFirst.passivePerceptionBonus + characterInfoSecond.passivePerceptionBonus
-    resultCharacterInfo.skillProficiency = (characterInfoFirst.skillProficiency + characterInfoSecond.skillProficiency) as MutableSet<Skill>
+    resultCharacterInfo.passiveInsightBonus =
+        characterInfoFirst.passiveInsightBonus + characterInfoSecond.passiveInsightBonus
+    resultCharacterInfo.passivePerceptionBonus =
+        characterInfoFirst.passivePerceptionBonus + characterInfoSecond.passivePerceptionBonus
+    resultCharacterInfo.skillProficiency =
+        (characterInfoFirst.skillProficiency + characterInfoSecond.skillProficiency) as MutableSet<Skill>
 
     return resultCharacterInfo
 }
@@ -63,6 +78,8 @@ data class CurrentState(
     var armor: Armor = Armor.NoArmor,
     var weapons: List<Weapon> = listOf(),
     var hasShield: Boolean = false,
+
+    var equippedItems: MutableSet<String> = mutableSetOf(),
     // String - AN name
     var charges: MutableMap<String, ChargesCounter> = mutableMapOf()
 )

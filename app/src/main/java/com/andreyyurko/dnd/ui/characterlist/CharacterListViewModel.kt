@@ -17,6 +17,7 @@ class CharacterListViewModel @Inject constructor(
     fun setShownCharacter(id: Int) {
         characterViewModel.setShownCharacter(id)
     }
+
     fun createNewCharacter() {
         createCharacterViewModel.createEmptyCharacter()
     }

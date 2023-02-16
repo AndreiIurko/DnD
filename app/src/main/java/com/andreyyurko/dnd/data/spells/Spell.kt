@@ -2,7 +2,7 @@ package com.andreyyurko.dnd.data.spells
 
 import com.andreyyurko.dnd.data.SpellSpecificLanguage
 
-data class Spell (
+data class Spell(
     val en: SpellSpecificLanguage,
     val ru: SpellSpecificLanguage
 )

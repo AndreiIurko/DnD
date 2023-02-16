@@ -1,11 +1,10 @@
 package com.andreyyurko.dnd.data.characterData.character
 
-import android.util.Log
 import com.andreyyurko.dnd.data.abilities.mapOfAn
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Priority
 
-open class CharacterAbilityNode (
+open class CharacterAbilityNode(
     open val data: AbilityNode,
     var chosen_alternatives: MutableMap<String, CharacterAbilityNode>,
     var character: Character? = null
@@ -15,6 +14,7 @@ open class CharacterAbilityNode (
         chosen_alternatives = mutableMapOf(),
         character = character
     )
+
     fun merge(abilities: CharacterInfo, priority: Priority): CharacterInfo {
         var result: CharacterInfo = abilities
         if (data.priority == priority) {
@@ -25,9 +25,11 @@ open class CharacterAbilityNode (
         }
         return result
     }
+
     fun showOptions(option_name: String): List<String> {
         return data.showOptions(character!!.characterInfo, option_name)
     }
+
     open fun makeChoice(option_name: String, choice: String, isFirst: Boolean = true) {
         mapOfAn[choice]?.let {
             chosen_alternatives[option_name] = CharacterAbilityNode(it, character)

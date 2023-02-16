@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.PopupWindow
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,11 +13,12 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentClassBinding
 import com.andreyyurko.dnd.ui.addcharacterfragments.AbilityAdapter
+import com.andreyyurko.dnd.ui.base.BaseFragment
 import com.andreyyurko.dnd.utils.setupBasicPopUpMenu
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ClassFragment : Fragment(R.layout.fragment_class) {
+class ClassFragment : BaseFragment(R.layout.fragment_class) {
 
     private val viewBinding by viewBinding(FragmentClassBinding::bind)
     private lateinit var viewModel: ClassViewModel
@@ -68,7 +66,12 @@ class ClassFragment : Fragment(R.layout.fragment_class) {
                 classChoiceList.dismiss()
             }
         }
-        classChoiceList.showAtLocation(view, Gravity.NO_GRAVITY, viewBinding.chooseClassButton.x.toInt(), viewBinding.chooseClassButton.y.toInt() + viewBinding.chooseClassButton.height)
+        classChoiceList.showAtLocation(
+            view,
+            Gravity.NO_GRAVITY,
+            viewBinding.chooseClassButton.x.toInt(),
+            viewBinding.chooseClassButton.y.toInt() + viewBinding.chooseClassButton.height
+        )
         viewBinding.arrowDropImageView.visibility = View.GONE
         viewBinding.arrowUpImageView.visibility = View.VISIBLE
 
@@ -99,7 +102,12 @@ class ClassFragment : Fragment(R.layout.fragment_class) {
             }
         }
 
-        levelChoiceList.showAtLocation(view, Gravity.NO_GRAVITY, viewBinding.chooseLevelButton.x.toInt(), viewBinding.chooseLevelButton.y.toInt() + viewBinding.chooseLevelButton.height)
+        levelChoiceList.showAtLocation(
+            view,
+            Gravity.NO_GRAVITY,
+            viewBinding.chooseLevelButton.x.toInt(),
+            viewBinding.chooseLevelButton.y.toInt() + viewBinding.chooseLevelButton.height
+        )
 
     }
 

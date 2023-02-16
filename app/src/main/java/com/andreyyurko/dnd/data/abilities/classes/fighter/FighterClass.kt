@@ -9,16 +9,40 @@ import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 
 var classFeaturesFighter: AbilityNode = AbilityNode(
     name = "Воин: классовые умения",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.savingThrowProf.plus(Ability.Strength)
         abilities.savingThrowProf.plus(Ability.Constitution)
         abilities
     },
     alternatives = mutableMapOf(
-        Pair("skill1", listOf(acrobatics.name, athletics.name, perception.name, survival.name, intimidation.name, history.name, insight.name, animalHandling.name)),
-        Pair("skill2", listOf(acrobatics.name, athletics.name, perception.name, survival.name, intimidation.name, history.name, insight.name, animalHandling.name))
+        Pair(
+            "skill1",
+            listOf(
+                acrobatics.name,
+                athletics.name,
+                perception.name,
+                survival.name,
+                intimidation.name,
+                history.name,
+                insight.name,
+                animalHandling.name
+            )
+        ),
+        Pair(
+            "skill2",
+            listOf(
+                acrobatics.name,
+                athletics.name,
+                perception.name,
+                survival.name,
+                intimidation.name,
+                history.name,
+                insight.name,
+                animalHandling.name
+            )
+        )
     ),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Fighter
     },
     description = "ХИТЫ\n" +
@@ -39,13 +63,13 @@ var classFeaturesFighter: AbilityNode = AbilityNode(
 
 var fightingStyle: AbilityNode = AbilityNode(
     name = "Боевой стиль",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
     alternatives = mutableMapOf(
         Pair("style", mapOfFightingStyles.keys.toList())
     ),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Fighter
     },
     description = "Вы выбираете боевой стиль, соответствующий вашей специализации. Выберите один из следующих вариантов. Вы не можете выбирать один и тот же вариант боевого стиля, даже если позже у вас будет возможность выбрать еще один стиль."
@@ -53,21 +77,23 @@ var fightingStyle: AbilityNode = AbilityNode(
 
 var secondWind: AbilityNode = AbilityNode(
     name = "Второе дыхание",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
-        if ( ! abilities.currentState.charges.contains("Второе дыхание")) {
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        if (!abilities.currentState.charges.contains("Второе дыхание")) {
             abilities.currentState.charges["Второе дыхание"] = ChargesCounter(current = 1, maximum = 1)
         }
-        abilities.actionsList.add(Action(
-            name = "Второе дыхание",
-            description = "Вы обладаете ограниченным источником выносливости, которым можете воспользоваться, чтобы уберечь себя. В свой ход вы можете бонусным действием восстановить хиты в размере 1к10 + ваш уровень воина.\n" +
-                    "\n" +
-                    "Использовав это умение, вы должны завершить короткий либо продолжительный отдых, чтобы получить возможность использовать его снова.",
-            type = ActionType.Bonus
-        ))
+        abilities.actionsList.add(
+            Action(
+                name = "Второе дыхание",
+                description = "Вы обладаете ограниченным источником выносливости, которым можете воспользоваться, чтобы уберечь себя. В свой ход вы можете бонусным действием восстановить хиты в размере 1к10 + ваш уровень воина.\n" +
+                        "\n" +
+                        "Использовав это умение, вы должны завершить короткий либо продолжительный отдых, чтобы получить возможность использовать его снова.",
+                type = ActionType.Bonus
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Fighter
     },
     description = "Вы обладаете ограниченным источником выносливости, которым можете воспользоваться, чтобы уберечь себя. В свой ход вы можете бонусным действием восстановить хиты в размере 1к10 + ваш уровень воина.\n" +
@@ -75,9 +101,9 @@ var secondWind: AbilityNode = AbilityNode(
             "Использовав это умение, вы должны завершить короткий либо продолжительный отдых, чтобы получить возможность использовать его снова."
 )
 
-var fighter1 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter1: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_1",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.characterClass = Classes.Fighter
         abilities.level += 1
         abilities.proficiencyBonus += 2
@@ -89,7 +115,7 @@ var fighter1 : AbilityNodeLevel = AbilityNodeLevel(
         Pair("second", listOf(fightingStyle.name)),
         Pair("third", listOf(secondWind.name))
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "1-й уровень, способности воина",
     next_level = "Воин_2",
@@ -97,13 +123,15 @@ var fighter1 : AbilityNodeLevel = AbilityNodeLevel(
 
 var actionSurge: AbilityNode = AbilityNode(
     name = "Всплеск действий",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.actionsList.add(Action(
-            name = "Всплеск действий",
-            description = "Вы получаете возможность на мгновение преодолеть обычные возможности. В свой ход вы можете совершить одно дополнительное действие помимо обычного и бонусного действий. Использовав это умение, вы должны завершить короткий или продолжительный отдых, чтобы получить возможность использовать его снова. Начиная с 17-го уровня, вы можете использовать это умение дважды, прежде чем вам понадобится отдых, но в течение одного хода его всё равно можно использовать лишь один раз.",
-            type = ActionType.Additional
-        ))
-        if (! abilities.currentState.charges.contains("Всплеск действий")) {
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsList.add(
+            Action(
+                name = "Всплеск действий",
+                description = "Вы получаете возможность на мгновение преодолеть обычные возможности. В свой ход вы можете совершить одно дополнительное действие помимо обычного и бонусного действий. Использовав это умение, вы должны завершить короткий или продолжительный отдых, чтобы получить возможность использовать его снова. Начиная с 17-го уровня, вы можете использовать это умение дважды, прежде чем вам понадобится отдых, но в течение одного хода его всё равно можно использовать лишь один раз.",
+                type = ActionType.Additional
+            )
+        )
+        if (!abilities.currentState.charges.contains("Всплеск действий")) {
             abilities.currentState.charges["Всплеск действий"] = ChargesCounter(
                 current = 1,
                 maximum = 1
@@ -119,15 +147,15 @@ var actionSurge: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Fighter
     },
     description = "Вы получаете возможность на мгновение преодолеть обычные возможности. В свой ход вы можете совершить одно дополнительное действие помимо обычного и бонусного действий. Использовав это умение, вы должны завершить короткий или продолжительный отдых, чтобы получить возможность использовать его снова. Начиная с 17-го уровня, вы можете использовать это умение дважды, прежде чем вам понадобится отдых, но в течение одного хода его всё равно можно использовать лишь один раз."
 )
 
-var fighter2 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter2: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_2",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
@@ -135,7 +163,7 @@ var fighter2 : AbilityNodeLevel = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(actionSurge.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "2-й уровень, способности воина",
     next_level = "Воин_3",
@@ -143,21 +171,21 @@ var fighter2 : AbilityNodeLevel = AbilityNodeLevel(
 
 var martialArchetype: AbilityNode = AbilityNode(
     name = "Воинский архетип",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
     alternatives = mutableMapOf(
         Pair("archetype", listOf(battleMaster.name, champion.name))
     ),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Fighter
     },
     description = "Вы выбираете архетип, отражающий стиль и технику, к которым вы стремитесь. Подробности архетипа будут приведены ниже после выбора. Выбранный вами архетип предоставляет вам умения на 3-м, 7-м, 10-м, 15-м и 18-м уровнях."
 )
 
-var fighter3 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter3: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_3",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
@@ -165,15 +193,15 @@ var fighter3 : AbilityNodeLevel = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(martialArchetype.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "3-й уровень, способности воина",
     next_level = "Воин_4",
 )
 
-var fighter4 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter4: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_4",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
@@ -181,35 +209,36 @@ var fighter4 : AbilityNodeLevel = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "4-й уровень, способности воина",
     next_level = "Воин_5",
 )
 
-var extraAttack : AbilityNode = AbilityNode(
+var extraAttack: AbilityNode = AbilityNode(
     name = "Дополнительная атака",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         for (action in abilities.actionsList) {
             if (action.name == "Атака") {
-                action.description = "Если вы в свой ход совершаете действие Атака, вы можете совершить две атаки вместо одной.\n" +
-                        "\n" +
-                        "Количество атак увеличивается до трёх на 11-м уровне этого класса, и до четырёх на 20-м уровне."
+                action.description =
+                    "Если вы в свой ход совершаете действие Атака, вы можете совершить две атаки вместо одной.\n" +
+                            "\n" +
+                            "Количество атак увеличивается до трёх на 11-м уровне этого класса, и до четырёх на 20-м уровне."
             }
         }
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "Если вы в свой ход совершаете действие Атака, вы можете совершить две атаки вместо одной.\n" +
             "\n" +
             "Количество атак увеличивается до трёх на 11-м уровне этого класса, и до четырёх на 20-м уровне."
 )
 
-var fighter5 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter5: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_5",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities.proficiencyBonus += 1
@@ -218,15 +247,15 @@ var fighter5 : AbilityNodeLevel = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(extraAttack.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "5-й уровень, способности воина",
     next_level = "Воин_6",
 )
 
-var fighter6 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter6: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_6",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
@@ -234,29 +263,29 @@ var fighter6 : AbilityNodeLevel = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "6-й уровень, способности воина",
     next_level = "Воин_7",
 )
 
-var fighter7 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter7: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_7",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "7-й уровень, способности воина",
     next_level = "Воин_8",
 )
 
-var fighter8 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter8: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_8",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
@@ -264,7 +293,7 @@ var fighter8 : AbilityNodeLevel = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "8-й уровень, способности воина",
     next_level = "Воин_9",
@@ -272,17 +301,17 @@ var fighter8 : AbilityNodeLevel = AbilityNodeLevel(
 
 var indomitable: AbilityNode = AbilityNode(
     name = "Упорный",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.actionsList.add(
             Action(
                 name = "Упорный",
                 description = "Вы можете перебросить проваленный спасбросок и должны использовать новый результат. После этого вы можете повторно использовать это умение только после завершения продолжительного отдыха.\n" +
-                    "\n" +
-                    "Вы можете использовать это умение дважды между периодами продолжительного отдыха после достижения 13-го уровня, и трижды после достижения 17-го уровня.",
+                        "\n" +
+                        "Вы можете использовать это умение дважды между периодами продолжительного отдыха после достижения 13-го уровня, и трижды после достижения 17-го уровня.",
                 type = ActionType.Additional
             )
         )
-        if (! abilities.currentState.charges.contains("Упорный")) {
+        if (!abilities.currentState.charges.contains("Упорный")) {
             abilities.currentState.charges["Упорный"] = ChargesCounter(
                 current = 1,
                 maximum = 1
@@ -303,7 +332,7 @@ var indomitable: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "Вы можете перебросить проваленный спасбросок и должны использовать новый результат. После этого вы можете повторно использовать это умение только после завершения продолжительного отдыха.\n" +
             "\n" +
@@ -311,9 +340,9 @@ var indomitable: AbilityNode = AbilityNode(
 
 )
 
-var fighter9 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter9: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_9",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities.proficiencyBonus += 1
@@ -322,43 +351,43 @@ var fighter9 : AbilityNodeLevel = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(indomitable.name))
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "9-й уровень, способности воина",
     next_level = "Воин_10",
 )
 
-var fighter10 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter10: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_10",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf( ),
-    requirements = {true},
+    alternatives = mutableMapOf(),
+    requirements = { true },
     add_requirements = listOf(),
     description = "10-й уровень, способности воина",
     next_level = "Воин_11",
 )
 
-var fighter11 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter11: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_11",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "11-й уровень, способности воина",
     next_level = "Воин_12",
 )
 
-var fighter12 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter12: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_12",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
@@ -366,29 +395,29 @@ var fighter12 : AbilityNodeLevel = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "12-й уровень, способности воина",
     next_level = "Воин_13",
 )
 
-var fighter13 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter13: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_13",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "13-й уровень, способности воина",
     next_level = "Воин_14",
 )
 
-var fighter14 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter14: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_14",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
@@ -396,29 +425,29 @@ var fighter14 : AbilityNodeLevel = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "14-й уровень, способности воина",
     next_level = "Воин_15",
 )
 
-var fighter15 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter15: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_15",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "15-й уровень, способности воина",
     next_level = "Воин_16",
 )
 
-var fighter16 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter16: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_16",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
@@ -426,43 +455,43 @@ var fighter16 : AbilityNodeLevel = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "16-й уровень, способности воина",
     next_level = "Воин_17",
 )
 
-var fighter17 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter17: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_17",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "17-й уровень, способности воина",
     next_level = "Воин_18",
 )
 
-var fighter18 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter18: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_18",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "18-й уровень, способности воина",
     next_level = "Воин_19",
 )
 
-var fighter19 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter19: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_19",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
@@ -470,21 +499,21 @@ var fighter19 : AbilityNodeLevel = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "19-й уровень, способности воина",
     next_level = "Воин_20",
 )
 
-var fighter20 : AbilityNodeLevel = AbilityNodeLevel(
+var fighter20: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_20",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "20-й уровень, способности воина",
     next_level = null,

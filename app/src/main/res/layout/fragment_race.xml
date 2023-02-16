@@ -62,7 +62,7 @@
             app:layout_constraintBottom_toTopOf="@id/buttonsLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chooseRaceButton" />
+            app:layout_constraintTop_toBottomOf="@id/chooseRaceButton"/>
 
     <GridLayout
             android:id="@+id/buttonsLayout"

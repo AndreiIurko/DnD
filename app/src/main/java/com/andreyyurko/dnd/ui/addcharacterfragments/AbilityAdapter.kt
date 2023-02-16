@@ -14,15 +14,15 @@ class AbilityAdapter : RecyclerView.Adapter<AbilityAdapter.ViewHolder>() {
 
     var rootCan: CharacterAbilityNode? = null
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val nameTextView : TextView = itemView.findViewById(R.id.abilityNameTextView)
-        val classDescription : TextView = itemView.findViewById(R.id.classDescription)
-        val description : TextView = itemView.findViewById(R.id.description)
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val nameTextView: TextView = itemView.findViewById(R.id.abilityNameTextView)
+        val classDescription: TextView = itemView.findViewById(R.id.classDescription)
+        val description: TextView = itemView.findViewById(R.id.description)
         val parent = itemView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.class_ability_item, parent,false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.class_ability_item, parent, false)
         return ViewHolder(itemView)
     }
 
@@ -62,7 +62,8 @@ class AbilityAdapter : RecyclerView.Adapter<AbilityAdapter.ViewHolder>() {
 
                 // TODO: replace this shitty code with custom view
                 // creates a button
-                val choiceButton = LayoutInflater.from(holder.parent.context).inflate(R.layout.choose_option_button, null)
+                val choiceButton =
+                    LayoutInflater.from(holder.parent.context).inflate(R.layout.choose_option_button, null)
                 val layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
                 )
@@ -85,7 +86,7 @@ class AbilityAdapter : RecyclerView.Adapter<AbilityAdapter.ViewHolder>() {
 
     // run through tree of can and skip if ability is not supposed to be shown
     // this is DFS
-    private fun getAbilitiesCount(can: CharacterAbilityNode?, initCount: Int = 0) : Int {
+    private fun getAbilitiesCount(can: CharacterAbilityNode?, initCount: Int = 0): Int {
         if (can == null) {
             return 0
         }
@@ -116,7 +117,8 @@ class AbilityAdapter : RecyclerView.Adapter<AbilityAdapter.ViewHolder>() {
                             description = chosenAbility.data.description,
                             parentDescription = if (isLevelClassCan(can)) can.data.description else can.data.name,
                             can = chosenAbility
-                        ), -1)
+                        ), -1
+                    )
                 }
                 position -= 1
             }
@@ -138,7 +140,7 @@ class AbilityAdapter : RecyclerView.Adapter<AbilityAdapter.ViewHolder>() {
 }
 
 // parentName - имя способности в map
-data class AbilityCard (
+data class AbilityCard(
     var name: String = "",
     var parentDescription: String = "",
     var description: String = "",

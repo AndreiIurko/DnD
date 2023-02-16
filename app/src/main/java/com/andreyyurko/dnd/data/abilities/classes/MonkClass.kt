@@ -8,19 +8,19 @@ import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 
 var monkUnarmedDefence: AbilityNode = AbilityNode(
     name = "Монашеская защита без доспехов",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         if (abilities.currentState.armor == Armor.NoArmor)
             abilities.ac = abilities.ac + (abilities.wisdom - 10) / 2
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     description = "Если вы не носите ни доспех, ни щит, ваш Класс Доспеха равен 10 + модификатор Ловкости + модификатор Мудрости.",
 )
 
 var martialArts: AbilityNode = AbilityNode(
     name = "Боевые искусства",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         if (abilities.currentState.armor == Armor.NoArmor && !abilities.currentState.hasShield) {
             checkProfs@ for (prof in abilities.weaponProficiency) {
                 for (prop in prof.properties) {
@@ -34,7 +34,7 @@ var martialArts: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     description = "Ваше знание боевых искусств позволяет вам эффективно использовать в бою безоружные удары и монашеское оружие — короткие мечи, а также любое простое рукопашное оружие, не имеющее свойств двуручное и тяжёлое.\n" +
             "\n" +
             "Если вы безоружны или используете только монашеское оружие, и не носите ни доспехов, ни щита, вы получаете следующие преимущества:\n" +
@@ -49,7 +49,7 @@ var martialArts: AbilityNode = AbilityNode(
 
 var monk1: AbilityNode = AbilityNodeLevel(
     name = "Монах_1",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.characterClass = Classes.Monk
         abilities.savingThrowProf.add(Ability.Dexterity)
         abilities.savingThrowProf.add(Ability.Strength)
@@ -64,7 +64,7 @@ var monk1: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(monkUnarmedDefence.name)),
         Pair("second", listOf(martialArts.name))
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "1-й уровень, способности монаха",
     next_level = "Монах_2"
@@ -72,14 +72,14 @@ var monk1: AbilityNode = AbilityNodeLevel(
 
 var monkUnarmedMovement = AbilityNode(
     name = "Монашеское движение без доспехов",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         if (abilities.currentState.armor == Armor.NoArmor) {
             abilities.speed = abilities.speed + 5 * ((abilities.level + 6) / 4)
         }
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     description = "Ваша скорость увеличивается на 10 футов, если вы не носите доспехов и щит. Этот бонус увеличивается с ростом вашего уровня, как показано в таблице.\n" +
             "\n" +
             "На 9-м уровне вы получаете возможность в свой ход перемещаться по вертикальным поверхностям и по поверхности жидкости, не падая во время движения.",
@@ -88,15 +88,15 @@ var monkUnarmedMovement = AbilityNode(
 
 var kiUsing = AbilityNode(
     name = "Ци",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
-        if (! abilities.currentState.charges.contains("Ци")) {
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        if (!abilities.currentState.charges.contains("Ци")) {
             abilities.currentState.charges["Ци"] = ChargesCounter(
                 current = 1,
                 maximum = 1
             )
         }
         abilities.currentState.charges["Ци"]?.let {
-            if (it.maximum < abilities.level){
+            if (it.maximum < abilities.level) {
                 abilities.currentState.charges["Ци"] = ChargesCounter(
                     current = abilities.level,
                     maximum = abilities.level
@@ -106,7 +106,7 @@ var kiUsing = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     description = "Ваши тренировки позволяют вам управлять мистической энергией ци. Ваш доступ к этой энергии выражается количеством очков ци. Ваш уровень монаха определяет это количество, согласно колонке «Очки ци». Вы можете использовать эти очки чтобы активировать различные умения ци. Вначале вам известны следующие три умения: «Поступь ветра», «Терпеливая оборона» и «Шквал ударов». С повышением уровня в этом классе вы выучите новые умения ци.\n" +
             "\n" +
             "Все потраченные очки ци восполняются по окончании короткого или продолжительного отдыха. Вы должны потратить как минимум 30 минут на медитацию для их восстановления. Некоторые из ваших умений ци требуют от цели спасброска, позволяющего избежать эффекта. Сл такого спасброска определяется следующим образом:\n" +
@@ -123,7 +123,7 @@ var kiUsing = AbilityNode(
 
 var monk2: AbilityNode = AbilityNodeLevel(
     name = "Монах_2",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -132,7 +132,7 @@ var monk2: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(monkUnarmedMovement.name)),
         Pair("second", listOf(kiUsing.name))
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "2-й уровень, способности монаха",
     next_level = "Монах_3"
@@ -140,21 +140,21 @@ var monk2: AbilityNode = AbilityNodeLevel(
 
 var monasticTradition: AbilityNode = AbilityNode(
     name = "Монашеская традиция",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     description = "Вы выбираете монастырскую традицию, которой следуете. Все они описаны в конце описания класса. Выбранная традиция обеспечивает вам дополнительные умения на 3-м, 6-м, 11-м и 17-м уровнях."
 )
 
 var deflectMissiles: AbilityNode = AbilityNode(
     name = "Отражение снарядов",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     description = "Вы можете реакцией отразить или поймать снаряд, если по вам попали дальнобойной атакой оружием. Если вы делаете это, урон снижается на 1к10 + ваш модификатор Ловкости + ваш уровень монаха.\n" +
             "\n" +
             "Если вы снизили урон до 0, вы можете поймать снаряд в случае, если он достаточно мал, чтоб держать его одной рукой, и одна из ваших рук свободна. Если вы поймали снаряд с помощью этого умения, вы можете потратить одно очко ци, чтобы частью реакции совершить дальнобойную атаку пойманным оружием или боеприпасом с дистанцией 20/60 футов. Вы совершаете эту атаку с владением, вне зависимости от владения данным оружием, и этот снаряд считается для данной атаки монашеским оружием."
@@ -162,7 +162,7 @@ var deflectMissiles: AbilityNode = AbilityNode(
 
 var monk3: AbilityNode = AbilityNodeLevel(
     name = "Монах_3",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -171,7 +171,7 @@ var monk3: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(monasticTradition.name)),
         Pair("second", listOf(deflectMissiles.name))
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "3-й уровень, способности монаха",
     next_level = "Монах_4"
@@ -179,18 +179,18 @@ var monk3: AbilityNode = AbilityNodeLevel(
 
 var slowFall: AbilityNode = AbilityNode(
     name = "Замедленное падение",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "Если вы упали, вы можете реакцией уменьшить урон от падения на значение, равное вашему уровню монаха, умноженному на пять."
 )
 
 var monk4: AbilityNode = AbilityNodeLevel(
     name = "Монах_4",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -199,7 +199,7 @@ var monk4: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
         Pair("second", listOf(slowFall.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "4-й уровень, способности монаха",
     next_level = "Монах_5"
@@ -207,11 +207,11 @@ var monk4: AbilityNode = AbilityNodeLevel(
 
 var stunningStrike: AbilityNode = AbilityNode(
     name = "Ошеломляющий удар",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "Вы можете взаимодействовать с энергией ци, текущей в теле вашего противника. Если вы попали по другому существу рукопашной атакой оружием, вы можете потратить 1 очко ци, чтобы нанести ошеломляющий удар. Цель должна преуспеть в спасброске Телосложения, иначе она станет ошеломлённой до конца вашего следующего хода."
 )
@@ -219,7 +219,7 @@ var stunningStrike: AbilityNode = AbilityNode(
 
 var monk5: AbilityNode = AbilityNodeLevel(
     name = "Монах_5",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
@@ -229,7 +229,7 @@ var monk5: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(extraAttack.name)),
         Pair("second", listOf(stunningStrike.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "5-й уровень, способности монаха",
     next_level = "Монах_6"
@@ -237,18 +237,18 @@ var monk5: AbilityNode = AbilityNodeLevel(
 
 var kiImprovedStrike: AbilityNode = AbilityNode(
     name = "Энергетические удары",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "Ваши безоружные удары считаются магическими при определении преодоления сопротивления и иммунитета к немагическим атакам и урону."
 )
 
 var monk6: AbilityNode = AbilityNodeLevel(
     name = "Монах_6",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -256,7 +256,7 @@ var monk6: AbilityNode = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(kiImprovedStrike.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "6-й уровень, способности монаха",
     next_level = "Монах_7"
@@ -264,29 +264,29 @@ var monk6: AbilityNode = AbilityNodeLevel(
 
 var monkEvasion: AbilityNode = AbilityNode(
     name = "Монашеская увёртливость",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "Ваше инстинктивное проворство позволяет вам уклоняться от эффектов, направленных на определённую область, вроде дыхания синего дракона или заклинания огненный шар. Если вы попадаете под действие эффекта, позволяющего совершить спасбросок Ловкости, чтобы получить только половину урона, вы вместо этого не получаете урона при успешном спасброске и получаете только половину урона при проваленном."
 )
 
 var stillnessOfMind: AbilityNode = AbilityNode(
     name = "Спокойствие разума",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "Ваше инстинктивное проворство позволяет вам уклоняться от эффектов, направленных на определённую область, вроде дыхания синего дракона или заклинания огненный шар. Если вы попадаете под действие эффекта, позволяющего совершить спасбросок Ловкости, чтобы получить только половину урона, вы вместо этого не получаете урона при успешном спасброске и получаете только половину урона при проваленном."
 )
 
 var monk7: AbilityNode = AbilityNodeLevel(
     name = "Монах_7",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -295,7 +295,7 @@ var monk7: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(monkEvasion.name)),
         Pair("second", listOf(stillnessOfMind.name))
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "7-й уровень, способности монаха",
     next_level = "Монах_8"
@@ -303,7 +303,7 @@ var monk7: AbilityNode = AbilityNodeLevel(
 
 var monk8: AbilityNode = AbilityNodeLevel(
     name = "Монах_8",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -311,7 +311,7 @@ var monk8: AbilityNode = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "8-й уровень, способности монаха",
     next_level = "Монах_9"
@@ -319,7 +319,7 @@ var monk8: AbilityNode = AbilityNodeLevel(
 
 var monk9: AbilityNode = AbilityNodeLevel(
     name = "Монах_9",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
@@ -327,7 +327,7 @@ var monk9: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "9-й уровень, способности монаха",
     next_level = "Монах_10"
@@ -335,24 +335,24 @@ var monk9: AbilityNode = AbilityNodeLevel(
 
 var purityOfBody: AbilityNode = AbilityNode(
     name = "Чистота тела",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
-        if (! abilities.damageImmunities.contains(DamageType.Poison)) {
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        if (!abilities.damageImmunities.contains(DamageType.Poison)) {
             abilities.damageImmunities.add(DamageType.Poison)
         }
-        if (! abilities.conditionImmunities.contains(Conditions.Poisoned)) {
+        if (!abilities.conditionImmunities.contains(Conditions.Poisoned)) {
             abilities.conditionImmunities.add(Conditions.Poisoned)
         }
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "Ваше мастерство ци даёт вам иммунитет к болезням и яду."
 )
 
 var monk10: AbilityNode = AbilityNodeLevel(
     name = "Монах_10",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -360,7 +360,7 @@ var monk10: AbilityNode = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(purityOfBody.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "10-й уровень, способности монаха",
     next_level = "Монах_11"
@@ -368,14 +368,14 @@ var monk10: AbilityNode = AbilityNodeLevel(
 
 var monk11: AbilityNode = AbilityNodeLevel(
     name = "Монах_11",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
     alternatives = mutableMapOf(
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "11-й уровень, способности монаха",
     next_level = "Монах_12"
@@ -383,7 +383,7 @@ var monk11: AbilityNode = AbilityNodeLevel(
 
 var monk12: AbilityNode = AbilityNodeLevel(
     name = "Монах_12",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -391,7 +391,7 @@ var monk12: AbilityNode = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "12-й уровень, способности монаха",
     next_level = "Монах_13"
@@ -399,18 +399,18 @@ var monk12: AbilityNode = AbilityNodeLevel(
 
 var tongueOfTheSunAndMoon: AbilityNode = AbilityNode(
     name = "Язык солнца и луны",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "Вы понимаете, как взаимодействовать с энергией ци в чужом разуме, и теперь вы понимаете речь на любом языке. Кроме того, все существа, способные понимать хотя бы один язык, понимают то, что вы сказали."
 )
 
 var monk13: AbilityNode = AbilityNodeLevel(
     name = "Монах_13",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
@@ -419,7 +419,7 @@ var monk13: AbilityNode = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(tongueOfTheSunAndMoon.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "13-й уровень, способности монаха",
     next_level = "Монах_14"
@@ -427,7 +427,7 @@ var monk13: AbilityNode = AbilityNodeLevel(
 
 var diamondSoul: AbilityNode = AbilityNode(
     name = "Алмазная душа",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.savingThrowProf.add(Ability.Dexterity)
         abilities.savingThrowProf.add(Ability.Strength)
         abilities.savingThrowProf.add(Ability.Intelligence)
@@ -437,14 +437,14 @@ var diamondSoul: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "Ваше мастерство ци предоставляет вам владение всеми спасбросками. Кроме того, если вы провалили спасбросок, вы можете повторить его, потратив 1 очко ци, и должны использовать второй результат."
 )
 
 var monk14: AbilityNode = AbilityNodeLevel(
     name = "Монах_14",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -452,7 +452,7 @@ var monk14: AbilityNode = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(diamondSoul.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "14-й уровень, способности монаха",
     next_level = "Монах_15"
@@ -460,18 +460,18 @@ var monk14: AbilityNode = AbilityNodeLevel(
 
 var timelessBody: AbilityNode = AbilityNode(
     name = "Безвременное тело",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "Ваша ци поддерживает вас, и ваше тело больше не подвержено признакам старения. Вы не можете быть состарены магически. Впрочем, вы всё еще можете умереть от старости. Кроме того, вам больше не требуется еда и вода."
 )
 
 var monk15: AbilityNode = AbilityNodeLevel(
     name = "Монах_15",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -479,7 +479,7 @@ var monk15: AbilityNode = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(timelessBody.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "15-й уровень, способности монаха",
     next_level = "Монах_16"
@@ -487,7 +487,7 @@ var monk15: AbilityNode = AbilityNodeLevel(
 
 var monk16: AbilityNode = AbilityNodeLevel(
     name = "Монах_16",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -495,7 +495,7 @@ var monk16: AbilityNode = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "16-й уровень, способности монаха",
     next_level = "Монах_17"
@@ -503,7 +503,7 @@ var monk16: AbilityNode = AbilityNodeLevel(
 
 var monk17: AbilityNode = AbilityNodeLevel(
     name = "Монах_17",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
@@ -511,7 +511,7 @@ var monk17: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "17-й уровень, способности монаха",
     next_level = "Монах_18"
@@ -519,11 +519,11 @@ var monk17: AbilityNode = AbilityNodeLevel(
 
 var emptyBody: AbilityNode = AbilityNode(
     name = "Пустое тело",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "Вы можете действием потратить 4 очка ци, чтобы стать невидимым на 1 минуту. В течение этого времени вы получаете сопротивление всем видам урона, кроме урона силовым полем.\n" +
             "\n" +
@@ -532,7 +532,7 @@ var emptyBody: AbilityNode = AbilityNode(
 
 var monk18: AbilityNode = AbilityNodeLevel(
     name = "Монах_18",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -540,7 +540,7 @@ var monk18: AbilityNode = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(emptyBody.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "18-й уровень, способности монаха",
     next_level = "Монах_19"
@@ -548,7 +548,7 @@ var monk18: AbilityNode = AbilityNodeLevel(
 
 var monk19: AbilityNode = AbilityNodeLevel(
     name = "Монах_19",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -556,7 +556,7 @@ var monk19: AbilityNode = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "19-й уровень, способности монаха",
     next_level = "Монах_20"
@@ -564,18 +564,18 @@ var monk19: AbilityNode = AbilityNodeLevel(
 
 var perfectSelf: AbilityNode = AbilityNode(
     name = "Совершенство",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "Если при броске инициативы у вас нет очков ци, вы получаете 4 очка ци."
 )
 
 var monk20: AbilityNode = AbilityNodeLevel(
     name = "Монах_20",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -583,7 +583,7 @@ var monk20: AbilityNode = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(perfectSelf.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(listOf()),
     description = "20-й уровень, способности монаха",
     next_level = null

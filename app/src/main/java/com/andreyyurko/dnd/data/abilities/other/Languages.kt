@@ -2,18 +2,16 @@ package com.andreyyurko.dnd.data.abilities.other
 
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Languages
-import com.andreyyurko.dnd.data.characterData.Priority
-import com.andreyyurko.dnd.data.characterData.Skill
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var commonLanguage: AbilityNode = AbilityNode(
     name = "Общий язык",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.languageProficiency.add(Languages.Common)
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Common)
     },
     description = "",
@@ -22,12 +20,12 @@ var commonLanguage: AbilityNode = AbilityNode(
 
 var elvishLanguage: AbilityNode = AbilityNode(
     name = "Эльфийский язык",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.languageProficiency.add(Languages.Elvish)
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Elvish)
     },
     description = "",
@@ -36,12 +34,12 @@ var elvishLanguage: AbilityNode = AbilityNode(
 
 var dwarvishLanguage: AbilityNode = AbilityNode(
     name = "Дварфийский язык",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.languageProficiency.add(Languages.Dwarvish)
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Dwarvish)
     },
     description = "",
@@ -50,12 +48,12 @@ var dwarvishLanguage: AbilityNode = AbilityNode(
 
 var giantLanguage: AbilityNode = AbilityNode(
     name = "Великаний язык",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.languageProficiency.add(Languages.Giant)
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Giant)
     },
     description = "",
@@ -64,12 +62,12 @@ var giantLanguage: AbilityNode = AbilityNode(
 
 var gnomishLanguage: AbilityNode = AbilityNode(
     name = "Гномий язык",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.languageProficiency.add(Languages.Gnomish)
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Gnomish)
     },
     description = "",
@@ -78,12 +76,12 @@ var gnomishLanguage: AbilityNode = AbilityNode(
 
 var goblinLanguage: AbilityNode = AbilityNode(
     name = "Гоблинский язык",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.languageProficiency.add(Languages.Goblin)
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Goblin)
     },
     description = "",
@@ -92,12 +90,12 @@ var goblinLanguage: AbilityNode = AbilityNode(
 
 var halflingLanguage: AbilityNode = AbilityNode(
     name = "Язык полуросликов",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.languageProficiency.add(Languages.Halfling)
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Halfling)
     },
     description = "",
@@ -106,12 +104,12 @@ var halflingLanguage: AbilityNode = AbilityNode(
 
 var orcLanguage: AbilityNode = AbilityNode(
     name = "Орочий язык",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.languageProficiency.add(Languages.Orc)
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Orc)
     },
     description = "",
@@ -120,12 +118,12 @@ var orcLanguage: AbilityNode = AbilityNode(
 
 var abyssalLanguage: AbilityNode = AbilityNode(
     name = "Язык бездны",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.languageProficiency.add(Languages.Abyssal)
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Abyssal)
     },
     description = "",
@@ -134,12 +132,12 @@ var abyssalLanguage: AbilityNode = AbilityNode(
 
 var celestialLanguage: AbilityNode = AbilityNode(
     name = "Неьесный язык",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.languageProficiency.add(Languages.Celestial)
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Celestial)
     },
     description = "",
@@ -148,12 +146,12 @@ var celestialLanguage: AbilityNode = AbilityNode(
 
 var draconicLanguage: AbilityNode = AbilityNode(
     name = "Драконий язык",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Draconic)
     },
     description = "",
@@ -162,12 +160,12 @@ var draconicLanguage: AbilityNode = AbilityNode(
 
 var deepSpeechLanguage: AbilityNode = AbilityNode(
     name = "Глубинная речь",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.languageProficiency.add(Languages.DeepSpeech)
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.DeepSpeech)
     },
     description = "",
@@ -176,12 +174,12 @@ var deepSpeechLanguage: AbilityNode = AbilityNode(
 
 var infernalLanguage: AbilityNode = AbilityNode(
     name = "Инфернальный язык",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.languageProficiency.add(Languages.Infernal)
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Infernal)
     },
     description = "",
@@ -190,12 +188,12 @@ var infernalLanguage: AbilityNode = AbilityNode(
 
 var primordialLanguage: AbilityNode = AbilityNode(
     name = "Первичный язык",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.languageProficiency.add(Languages.Primordial)
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Primordial)
     },
     description = "",
@@ -204,12 +202,12 @@ var primordialLanguage: AbilityNode = AbilityNode(
 
 var sylvanLanguage: AbilityNode = AbilityNode(
     name = "Сильван",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.languageProficiency.add(Languages.Sylvan)
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Sylvan)
     },
     description = "",
@@ -218,12 +216,12 @@ var sylvanLanguage: AbilityNode = AbilityNode(
 
 var undercommonLanguage: AbilityNode = AbilityNode(
     name = "Подземный язык",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.languageProficiency.add(Languages.Undercommon)
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Undercommon)
     },
     description = "",

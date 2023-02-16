@@ -1,8 +1,8 @@
 package com.andreyyurko.dnd.data.abilities.classes
 
 import com.andreyyurko.dnd.data.abilities.classes.fighter.mapOfFighterAbilities
+import com.andreyyurko.dnd.data.abilities.classes.sorcerer.mapOfSorcererAbilities
 import com.andreyyurko.dnd.data.abilities.mapOfAn
-import com.andreyyurko.dnd.data.abilities.other.mapOfFightingStyles
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Priority
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
@@ -10,7 +10,7 @@ import com.andreyyurko.dnd.data.characterData.character.Character
 import com.andreyyurko.dnd.data.characterData.character.CharacterAbilityNode
 
 // For all levels alternatives: it is important that
-class AbilityNodeLevel (
+class AbilityNodeLevel(
     name: String,
     changesInCharacterInfo: (abilities: CharacterInfo) -> CharacterInfo,
     alternatives: MutableMap<String, List<String>>,
@@ -26,9 +26,10 @@ class AbilityNodeLevel (
     add_requirements,
     description,
     isNeedsToBeShown = false,
-    priority = Priority.DoAsSoonAsPossible)
+    priority = Priority.DoAsSoonAsPossible
+)
 
-class CharacterAbilityNodeLevel (
+class CharacterAbilityNodeLevel(
     override val data: AbilityNodeLevel,
     chosen_alternatives: MutableMap<String, CharacterAbilityNode>,
     character: Character? = null,
@@ -63,6 +64,7 @@ class CharacterAbilityNodeLevel (
 
 val mapOfClasses = (
         mapOfMonkAbilities
-        + mapOfBarbarianAbilities
-        + mapOfFighterAbilities
-).toMutableMap()
+                + mapOfBarbarianAbilities
+                + mapOfFighterAbilities
+                + mapOfSorcererAbilities
+        ).toMutableMap()

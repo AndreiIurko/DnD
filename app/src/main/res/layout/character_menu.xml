@@ -1,172 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   android:layout_width="wrap_content"
+                                                   android:layout_height="wrap_content"
+                                                   app:layout_constraintBottom_toBottomOf="parent"
+                                                   app:layout_constraintEnd_toEndOf="parent"
+                                                   app:layout_constraintStart_toStartOf="parent"
+                                                   app:layout_constraintTop_toTopOf="parent">
 
     <LinearLayout
-        android:id="@+id/abilitiesLinearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="18dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/abilitiesTextView"
+            android:id="@+id/abilitiesLinearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Основная"
-            android:textSize="18dp" />
+            android:layout_margin="18dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+                android:id="@+id/abilitiesTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Основная"
+                android:textSize="18dp"/>
 
         <ImageView
-            android:id="@+id/abilitiesImageView"
-            android:layout_width="108dp"
-            android:layout_height="108dp"
-            android:src="@drawable/menu_item_image" />
+                android:id="@+id/abilitiesImageView"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
+                android:src="@drawable/menu_item_image"/>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/skillsLinearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="18dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/abilitiesLinearLayout"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/skillsTextView"
+            android:id="@+id/skillsLinearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Навыки"
-            android:textSize="18dp" />
+            android:layout_margin="18dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/abilitiesLinearLayout"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+                android:id="@+id/skillsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Навыки"
+                android:textSize="18dp"/>
 
         <ImageView
-            android:id="@+id/skillsImageView"
-            android:layout_width="108dp"
-            android:layout_height="108dp"
-            android:src="@drawable/menu_item_image" />
+                android:id="@+id/skillsImageView"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
+                android:src="@drawable/menu_item_image"/>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/actionsLinearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="18dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/abilitiesLinearLayout">
-
-        <TextView
-            android:id="@+id/actionsTextView"
+            android:id="@+id/actionsLinearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Действия"
-            android:textSize="18dp" />
+            android:layout_margin="18dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/abilitiesLinearLayout">
+
+        <TextView
+                android:id="@+id/actionsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Действия"
+                android:textSize="18dp"/>
 
         <ImageView
-            android:id="@+id/actionsImageView"
-            android:layout_width="108dp"
-            android:layout_height="108dp"
-            android:src="@drawable/menu_item_image" />
+                android:id="@+id/actionsImageView"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
+                android:src="@drawable/menu_item_image"/>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/inventoryLinearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="18dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/abilitiesLinearLayout"
-        app:layout_constraintTop_toBottomOf="@id/skillsLinearLayout">
-
-        <TextView
-            android:id="@+id/inventoryTextView"
+            android:id="@+id/inventoryLinearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Инвентарь"
-            android:textSize="18dp" />
+            android:layout_margin="18dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/abilitiesLinearLayout"
+            app:layout_constraintTop_toBottomOf="@id/skillsLinearLayout">
+
+        <TextView
+                android:id="@+id/inventoryTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Инвентарь"
+                android:textSize="18dp"/>
 
         <ImageView
-            android:id="@+id/inventoryImageView"
-            android:layout_width="108dp"
-            android:layout_height="108dp"
-            android:src="@drawable/menu_item_image" />
+                android:id="@+id/inventoryImageView"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
+                android:src="@drawable/menu_item_image"/>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/spellsLinearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="18dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/actionsLinearLayout">
-
-        <TextView
-            android:id="@+id/spellsTextView"
+            android:id="@+id/spellsLinearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Заклинания"
-            android:textSize="18dp" />
+            android:layout_margin="18dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/actionsLinearLayout">
+
+        <TextView
+                android:id="@+id/spellsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Заклинания"
+                android:textSize="18dp"/>
 
         <ImageView
-            android:id="@+id/spellsImageView"
-            android:layout_width="108dp"
-            android:layout_height="108dp"
-            android:src="@drawable/menu_item_image" />
+                android:id="@+id/spellsImageView"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
+                android:src="@drawable/menu_item_image"/>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/additionalInfoLinearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="18dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/abilitiesLinearLayout"
-        app:layout_constraintTop_toBottomOf="@id/inventoryLinearLayout">
-
-        <TextView
-            android:id="@+id/additionalInfoTextView"
+            android:id="@+id/additionalInfoLinearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Доп. инфо"
-            android:textSize="18dp" />
+            android:layout_margin="18dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/abilitiesLinearLayout"
+            app:layout_constraintTop_toBottomOf="@id/inventoryLinearLayout">
+
+        <TextView
+                android:id="@+id/additionalInfoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Доп. инфо"
+                android:textSize="18dp"/>
 
         <ImageView
-            android:id="@+id/additionalInfoImageView"
-            android:layout_width="108dp"
-            android:layout_height="108dp"
-            android:src="@drawable/menu_item_image" />
+                android:id="@+id/additionalInfoImageView"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
+                android:src="@drawable/menu_item_image"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

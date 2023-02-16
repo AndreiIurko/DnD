@@ -21,7 +21,7 @@ class SpellsFavoritesHolder @Inject constructor(
         dbProvider.getDB(DB_TAG)
     }
 
-    private var favoriteSpells : MutableSet<SpellSpecificLanguage> = mutableSetOf()
+    private var favoriteSpells: MutableSet<SpellSpecificLanguage> = mutableSetOf()
     private var _initActionState = MutableStateFlow<InitializationState>(InitializationState.NotInitialized)
     val initActionState: Flow<InitializationState> get() = _initActionState.asStateFlow()
 
@@ -77,7 +77,7 @@ class SpellsFavoritesHolder @Inject constructor(
     }
 
     sealed class InitializationState {
-        object NotInitialized: InitializationState()
-        object Initialized: InitializationState()
+        object NotInitialized : InitializationState()
+        object Initialized : InitializationState()
     }
 }

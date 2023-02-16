@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -13,10 +12,11 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.characterData.Ability
 import com.andreyyurko.dnd.databinding.FragmentAbilitiesBinding
+import com.andreyyurko.dnd.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AbilitiesFragment : Fragment(R.layout.fragment_abilities) {
+class AbilitiesFragment : BaseFragment(R.layout.fragment_abilities) {
 
     private val viewBinding by viewBinding(FragmentAbilitiesBinding::bind)
 
@@ -34,7 +34,7 @@ class AbilitiesFragment : Fragment(R.layout.fragment_abilities) {
             setupAbilityView(ability.abilityName)
         }
 
-        val onChangePoints = Observer<Int> {state ->
+        val onChangePoints = Observer<Int> { state ->
             viewBinding.pointsCapacity.text = "Всего очков: $state"
         }
         viewModel.totalPoints.observe(viewLifecycleOwner, onChangePoints)
@@ -81,13 +81,12 @@ class AbilitiesFragment : Fragment(R.layout.fragment_abilities) {
             viewModel.decreaseAbility(newValue)
         }
 
-        val changeValueObserver = Observer<Int> {state ->
+        val changeValueObserver = Observer<Int> { state ->
             val currentValue = score.text.toString().toInt()
             if (currentValue == 8) {
                 decreaseButton.isEnabled = false
                 decreaseButton.alpha = 0.6f
-            }
-            else {
+            } else {
                 decreaseButton.isEnabled = true
                 decreaseButton.alpha = 1f
             }
@@ -95,8 +94,7 @@ class AbilitiesFragment : Fragment(R.layout.fragment_abilities) {
             if (currentValue == 15 || currentValue >= 13 && state < 2 || state == 0) {
                 increaseButton.isEnabled = false
                 increaseButton.alpha = 0.6f
-            }
-            else {
+            } else {
                 increaseButton.isEnabled = true
                 increaseButton.alpha = 1f
             }

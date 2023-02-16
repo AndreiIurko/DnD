@@ -59,7 +59,7 @@ class SpellsListFragment : BaseFragment(R.layout.fragment_spells_list) {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.loadSpellsActionState.collect {viewState ->
+                viewModel.loadSpellsActionState.collect { viewState ->
                     renderViewState(viewState)
                 }
             }
@@ -95,10 +95,11 @@ class SpellsListFragment : BaseFragment(R.layout.fragment_spells_list) {
     }
 
     private fun renderViewState(viewState: SpellsListViewModel.LoadSpellsActionState) {
-        when(viewState) {
+        when (viewState) {
             is SpellsListViewModel.LoadSpellsActionState.Loading -> {
                 // TODO: реализовать отображение загрузки
             }
+
             is SpellsListViewModel.LoadSpellsActionState.Ok -> {
                 (viewBinding.spellsRecyclerView.adapter as SpellsListAdapter).apply {
                     //spellsList = viewModel.allSpells
@@ -106,6 +107,7 @@ class SpellsListFragment : BaseFragment(R.layout.fragment_spells_list) {
                     viewModel.setShownSpellList("", this)
                 }
             }
+
             is SpellsListViewModel.LoadSpellsActionState.Error -> {
                 // TODO: реализовать показание ошибки
             }
@@ -123,16 +125,23 @@ class SpellsListFragment : BaseFragment(R.layout.fragment_spells_list) {
             SpellsListViewModel.SpellListState.All -> {
                 showFavoritesButton.text = "Показать избранные"
             }
+
             SpellsListViewModel.SpellListState.Favorites -> {
                 showFavoritesButton.text = "Показать все"
             }
         }
-        filtersMenu.showAtLocation(view, Gravity.NO_GRAVITY, viewBinding.menuButton.x.toInt() - 350, viewBinding.menuButton.y.toInt() + 100)
+        filtersMenu.showAtLocation(
+            view,
+            Gravity.NO_GRAVITY,
+            viewBinding.menuButton.x.toInt() - 350,
+            viewBinding.menuButton.y.toInt() + 100
+        )
         showFavoritesButton.setOnClickListener {
             when (viewModel.shownList) {
                 SpellsListViewModel.SpellListState.All -> {
                     viewModel.shownList = SpellsListViewModel.SpellListState.Favorites
                 }
+
                 SpellsListViewModel.SpellListState.Favorites -> {
                     viewModel.shownList = SpellsListViewModel.SpellListState.All
                 }

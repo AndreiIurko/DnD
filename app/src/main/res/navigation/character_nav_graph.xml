@@ -6,69 +6,69 @@
 >
 
     <fragment
-        android:id="@+id/characterAbilitiesFragment"
-        android:name="com.andreyyurko.dnd.ui.characterabilities.CharacterAbilitiesFragment"
-        android:label="CharacterAbilitiesFragment"/>
+            android:id="@+id/characterAbilitiesFragment"
+            android:name="com.andreyyurko.dnd.ui.showcharacterfragments.abilities.CharacterAbilitiesFragment"
+            android:label="CharacterAbilitiesFragment"/>
 
     <action
             android:id="@+id/action_abilitiesFragment"
             app:destination="@+id/characterAbilitiesFragment"
             app:popUpTo="@+id/characterAbilitiesFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"/>
 
     <fragment
-        android:id="@+id/characterActionsFragment"
-        android:name="com.andreyyurko.dnd.ui.characteractions.CharacterActionsFragment"
-        android:label="CharacterActionsFragment"/>
+            android:id="@+id/characterActionsFragment"
+            android:name="com.andreyyurko.dnd.ui.showcharacterfragments.actions.CharacterActionsFragment"
+            android:label="CharacterActionsFragment"/>
 
     <action
             android:id="@+id/action_actionsFragment"
             app:destination="@+id/characterActionsFragment"
             app:popUpTo="@+id/characterAbilitiesFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"/>
 
     <fragment
-        android:id="@+id/characterAdditionalInfoFragment"
-        android:name="com.andreyyurko.dnd.ui.characteradditionalinfo.CharacterAdditionalInfoFragment"
-        android:label="CharacterAdditionalInfoFragment"/>
+            android:id="@+id/characterAdditionalInfoFragment"
+            android:name="com.andreyyurko.dnd.ui.showcharacterfragments.additionalinfo.CharacterAdditionalInfoFragment"
+            android:label="CharacterAdditionalInfoFragment"/>
 
     <action
             android:id="@+id/action_additionalInfoFragment"
             app:destination="@+id/characterAdditionalInfoFragment"
             app:popUpTo="@+id/characterAbilitiesFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"/>
 
     <fragment
-        android:id="@+id/characterInventoryFragment"
-        android:name="com.andreyyurko.dnd.ui.characterinventory.CharacterInventoryFragment"
-        android:label="CharacterInventoryFragment"/>
+            android:id="@+id/characterInventoryFragment"
+            android:name="com.andreyyurko.dnd.ui.showcharacterfragments.inventory.CharacterInventoryFragment"
+            android:label="CharacterInventoryFragment"/>
 
     <action
             android:id="@+id/action_inventoryFragment"
             app:destination="@+id/characterInventoryFragment"
             app:popUpTo="@+id/characterAbilitiesFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"/>
 
     <fragment
-        android:id="@+id/characterSkillsFragment"
-        android:name="com.andreyyurko.dnd.ui.characterskills.CharacterSkillsFragment"
-        android:label="CharacterSkillsFragment"/>
+            android:id="@+id/characterSkillsFragment"
+            android:name="com.andreyyurko.dnd.ui.showcharacterfragments.skills.CharacterSkillsFragment"
+            android:label="CharacterSkillsFragment"/>
 
     <action
             android:id="@+id/action_skillsFragment"
             app:destination="@+id/characterSkillsFragment"
             app:popUpTo="@+id/characterAbilitiesFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"/>
 
     <fragment
-        android:id="@+id/characterSpellsFragment"
-        android:name="com.andreyyurko.dnd.ui.characterspells.CharacterSpellsFragment"
-        android:label="CharacterSpellsFragment"/>
+            android:id="@+id/characterSpellsFragment"
+            android:name="com.andreyyurko.dnd.ui.showcharacterfragments.spells.CharacterSpellsFragment"
+            android:label="CharacterSpellsFragment"/>
 
     <action
             android:id="@+id/action_spellsFragment"
             app:destination="@+id/characterSpellsFragment"
             app:popUpTo="@+id/characterAbilitiesFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"/>
 
 </navigation>

@@ -12,11 +12,26 @@
     <color name="my_orange">#e96709</color>
     <color name="my_bloody">#7a0400</color>
 
+    <color name="base_dark">#21130d</color>
+    <color name="base_dark_variant">#362723</color>
+    <color name="base_grey">#998680</color>
+    <color name="base_background">#fff3ed</color>
+
+
+    <color name="primary">@color/base_dark</color>
+    <color name="primary_variant">@color/base_dark</color>
+    <color name="on_primary">@color/base_grey</color>
+    <color name="primary_dark">@color/base_dark_variant</color>
+    <color name="background">@color/base_background</color>
+
+
+    <!-->
     <color name="primary">@color/my_bloody</color>
     <color name="primary_variant">@color/my_orange</color>
     <color name="on_primary">@color/my_yellow</color>
     <color name="primary_dark">@color/my_blue</color>
     <color name="background">@color/my_dark_blue</color>
+    <-->
 
     <color name="primary_night">@color/my_dark_blue</color>
     <color name="primary_night_variant">@color/my_bloody</color>
