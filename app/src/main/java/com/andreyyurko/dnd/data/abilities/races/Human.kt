@@ -8,17 +8,17 @@ import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 val humanChooseLanguage = AbilityNode(
     name = "Выбор языка: человек",
-    changesInCharacterInfo = {abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     alternatives = mutableMapOf(
         Pair("language", mapOfLanguages.keys.toList())
     ),
-    requirements = {true},
+    requirements = { true },
     description = "Выберите любой язык:"
 )
 
 val humanAbilities = AbilityNode(
     name = "Способности человека",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.strength += 1
         abilities.dexterity += 1
         abilities.constitution += 1
@@ -32,7 +32,7 @@ val humanAbilities = AbilityNode(
     alternatives = mutableMapOf(
         Pair("languageFirst", listOf(humanChooseLanguage.name))
     ),
-    requirements = {true},
+    requirements = { true },
     description = "Увеличение характеристик. Значение всех ваших характеристик увеличивается на 1.\n" +
             "\n" +
             "Возраст. Люди становятся взрослыми в районе 20 лет, и живут менее столетия.\n" +
@@ -49,14 +49,14 @@ val humanAbilities = AbilityNode(
 
 val human = AbilityNode(
     name = "Человек",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.race = "Человек"
         abilities
     },
     alternatives = mutableMapOf(
         Pair("abilities", listOf(humanAbilities.name))
     ),
-    requirements = {true},
+    requirements = { true },
     description = "Человек",
 )
 

@@ -19,12 +19,18 @@ class CharacterViewModel @Inject constructor(
         MutableLiveData<String>()
     }
 
+    val backgroundIsShown: MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>(false)
+    }
+
     fun updateBriefInfo() {
         charactersBriefInfo = charactersHolder.getBriefInfo()
     }
+
     fun setShownCharacter(id: Int) {
         shownCharacter = charactersHolder.getCharacterById(id)
     }
+
     fun updateCharacterInfo() {
         dataState.value = DataState.Loading.stateName
         mergeAllAbilities(shownCharacter)
@@ -34,6 +40,14 @@ class CharacterViewModel @Inject constructor(
 
     fun deleteCharacter(id: Int) {
         charactersHolder.removeCharacterById(id)
+    }
+
+    fun showPopUpBackground() {
+        backgroundIsShown.value = true
+    }
+
+    fun closePopUpBackground() {
+        backgroundIsShown.value = false
     }
 
     enum class DataState(val stateName: String) {

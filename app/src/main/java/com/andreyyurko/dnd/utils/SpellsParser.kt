@@ -17,7 +17,7 @@ class SpellsParser @Inject constructor() : ViewModel() {
         const val LOG_TAG = "Spells parser"
     }
 
-    var spells :  List<SpellSpecificLanguage>? = null
+    var spells: List<SpellSpecificLanguage>? = null
 
     fun parseRuSpells(context: Context): List<SpellSpecificLanguage> {
 

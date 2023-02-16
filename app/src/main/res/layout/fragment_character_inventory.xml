@@ -31,12 +31,13 @@
                 android:id="@+id/searchButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_search_24"
+                android:src="@drawable/ic_baseline_search_32"
                 android:background="@color/base_background"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="74dp"/>
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="84dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -55,8 +56,8 @@
 
     <TextView
             android:id="@+id/filtersButton"
-            android:layout_width="80dp"
-            android:layout_height="20dp"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:background="@drawable/tab_background"
@@ -64,7 +65,7 @@
             android:text="фильтр"
             android:textColor="@color/base_background"
             android:paddingStart="20dp"
-            android:textSize="12sp"
+            android:textSize="15sp"
     />
 
     <LinearLayout
@@ -79,14 +80,14 @@
     >
 
         <TextView
-            android:id="@+id/rarityButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Редкость"
-            android:textSize="20sp"
-            android:background="@drawable/border"
-            android:paddingHorizontal="10dp"
-            android:layout_marginStart="12dp"
+                android:id="@+id/rarityButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Редкость"
+                android:textSize="20sp"
+                android:background="@drawable/border"
+                android:paddingHorizontal="10dp"
+                android:layout_marginStart="12dp"
         />
 
         <TextView
@@ -112,15 +113,5 @@
         />
 
     </LinearLayout>
-
-
-    <View
-            android:id="@+id/popUpBackground"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:alpha="0"
-            android:background="?attr/backgroundColor"
-            tools:layout_editor_absoluteX="-45dp"
-            tools:layout_editor_absoluteY="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -49,7 +49,8 @@ fun mergeCharacterInfo(characterInfoFirst: CharacterInfo, characterInfoSecond: C
     resultCharacterInfo.currentState = characterInfoFirst.currentState
     resultCharacterInfo.spellsInfo.spellLists = characterInfoFirst.spellsInfo.spellLists
 
-    resultCharacterInfo.characterClass.className = characterInfoFirst.characterClass.className + characterInfoSecond.characterClass.className
+    resultCharacterInfo.characterClass.className =
+        characterInfoFirst.characterClass.className + characterInfoSecond.characterClass.className
     resultCharacterInfo.level = characterInfoFirst.level + characterInfoSecond.level
     resultCharacterInfo.race = characterInfoFirst.race + characterInfoSecond.race
     resultCharacterInfo.strength = characterInfoFirst.strength + characterInfoSecond.strength
@@ -63,9 +64,12 @@ fun mergeCharacterInfo(characterInfoFirst: CharacterInfo, characterInfoSecond: C
     resultCharacterInfo.initiativeBonus = characterInfoFirst.initiativeBonus + characterInfoSecond.initiativeBonus
     resultCharacterInfo.ac = characterInfoFirst.ac + characterInfoSecond.ac
     resultCharacterInfo.hp = characterInfoFirst.hp + characterInfoSecond.hp
-    resultCharacterInfo.passiveInsightBonus = characterInfoFirst.passiveInsightBonus + characterInfoSecond.passiveInsightBonus
-    resultCharacterInfo.passivePerceptionBonus = characterInfoFirst.passivePerceptionBonus + characterInfoSecond.passivePerceptionBonus
-    resultCharacterInfo.skillProficiency = (characterInfoFirst.skillProficiency + characterInfoSecond.skillProficiency) as MutableSet<Skill>
+    resultCharacterInfo.passiveInsightBonus =
+        characterInfoFirst.passiveInsightBonus + characterInfoSecond.passiveInsightBonus
+    resultCharacterInfo.passivePerceptionBonus =
+        characterInfoFirst.passivePerceptionBonus + characterInfoSecond.passivePerceptionBonus
+    resultCharacterInfo.skillProficiency =
+        (characterInfoFirst.skillProficiency + characterInfoSecond.skillProficiency) as MutableSet<Skill>
 
     return resultCharacterInfo
 }

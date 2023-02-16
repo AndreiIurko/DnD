@@ -47,14 +47,19 @@ open class FragmentWithFilters : BaseFragment {
         searchEditText.isEnabled = true
     }
 
-    protected inline fun <reified T> setupFilter(button: TextView, set: MutableSet<T>) where T : Enum<T>, T: Filter {
+    protected inline fun <reified T> setupFilter(button: TextView, set: MutableSet<T>) where T : Enum<T>, T : Filter {
         val (choiceList, parent) = setupBasicPopUpMenu(button.context)
         for (enumValue in enumValues<T>()) {
             val textView = TextView(context)
             textView.isClickable = true
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, button.textSize)
             textView.text = enumValue.shownName
-            if (set.contains(enumValue)) textView.setBackgroundColor(ContextCompat.getColor(button.context, R.color.on_primary))
+            if (set.contains(enumValue)) textView.setBackgroundColor(
+                ContextCompat.getColor(
+                    button.context,
+                    R.color.on_primary
+                )
+            )
             else textView.setBackgroundColor(ContextCompat.getColor(button.context, R.color.background))
 
             parent.addView(textView)
@@ -62,8 +67,7 @@ open class FragmentWithFilters : BaseFragment {
                 if (set.contains(enumValue)) {
                     set.remove(enumValue)
                     textView.setBackgroundColor(ContextCompat.getColor(button.context, R.color.background))
-                }
-                else {
+                } else {
                     set.add(enumValue)
                     textView.setBackgroundColor(ContextCompat.getColor(button.context, R.color.on_primary))
                 }
@@ -83,14 +87,18 @@ open class FragmentWithFilters : BaseFragment {
             textView.text = value
             parent.addView(textView)
 
-            if (set.contains(value)) textView.setBackgroundColor(ContextCompat.getColor(button.context, R.color.on_primary))
+            if (set.contains(value)) textView.setBackgroundColor(
+                ContextCompat.getColor(
+                    button.context,
+                    R.color.on_primary
+                )
+            )
             else textView.setBackgroundColor(ContextCompat.getColor(button.context, R.color.background))
             textView.setOnClickListener {
                 if (set.contains(value)) {
                     set.remove(value)
                     textView.setBackgroundColor(ContextCompat.getColor(button.context, R.color.background))
-                }
-                else {
+                } else {
                     set.add(value)
                     textView.setBackgroundColor(ContextCompat.getColor(button.context, R.color.on_primary))
                 }

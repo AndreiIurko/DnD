@@ -17,7 +17,7 @@ class CharacterSkillsAdapter @Inject constructor(
 ) : RecyclerView.Adapter<CharacterSkillsAdapter.ViewHolder>() {
 
     var skillsList = Skill.values().apply {
-        val comparator = Comparator { skillFirst: Skill, skillSecond :Skill ->
+        val comparator = Comparator { skillFirst: Skill, skillSecond: Skill ->
             if (skillFirst.ability != skillSecond.ability) {
                 return@Comparator skillFirst.ability.compareTo(skillSecond.ability)
             }
@@ -48,10 +48,33 @@ class CharacterSkillsAdapter @Inject constructor(
         holder.skillBonusTextView.text = bonusMap[skillsList[position]].toString()
         holder.skillModifierTextView.text = modifierMap[skillsList[position]]
         when (profMap[skillsList[position]]) {
-            0 -> holder.skillProficiencyImageView.setImageDrawable(ContextCompat.getDrawable(holder.context, R.drawable.prof_none_24))
-            1 -> holder.skillProficiencyImageView.setImageDrawable(ContextCompat.getDrawable(holder.context, R.drawable.prof_half_24))
-            2 -> holder.skillProficiencyImageView.setImageDrawable(ContextCompat.getDrawable(holder.context, R.drawable.prof_full_24))
-            3 -> holder.skillProficiencyImageView.setImageDrawable(ContextCompat.getDrawable(holder.context, R.drawable.prof_exp_24))
+            0 -> holder.skillProficiencyImageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    holder.context,
+                    R.drawable.prof_none_24
+                )
+            )
+
+            1 -> holder.skillProficiencyImageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    holder.context,
+                    R.drawable.prof_half_24
+                )
+            )
+
+            2 -> holder.skillProficiencyImageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    holder.context,
+                    R.drawable.prof_full_24
+                )
+            )
+
+            3 -> holder.skillProficiencyImageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    holder.context,
+                    R.drawable.prof_exp_24
+                )
+            )
         }
     }
 

@@ -10,12 +10,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="spellName"
+            android:clickable="true"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/spellLevel"
             android:textSize="15sp"
             android:layout_marginStart="16dp"
-            android:layout_marginVertical="8dp"/>
+            android:layout_marginVertical="8dp"
+            android:focusable="true"/>
 
     <TextView
             android:id="@+id/spellLevel"

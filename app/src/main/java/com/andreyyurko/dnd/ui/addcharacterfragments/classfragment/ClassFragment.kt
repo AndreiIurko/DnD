@@ -6,7 +6,6 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -67,7 +66,12 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
                 classChoiceList.dismiss()
             }
         }
-        classChoiceList.showAtLocation(view, Gravity.NO_GRAVITY, viewBinding.chooseClassButton.x.toInt(), viewBinding.chooseClassButton.y.toInt() + viewBinding.chooseClassButton.height)
+        classChoiceList.showAtLocation(
+            view,
+            Gravity.NO_GRAVITY,
+            viewBinding.chooseClassButton.x.toInt(),
+            viewBinding.chooseClassButton.y.toInt() + viewBinding.chooseClassButton.height
+        )
         viewBinding.arrowDropImageView.visibility = View.GONE
         viewBinding.arrowUpImageView.visibility = View.VISIBLE
 
@@ -98,7 +102,12 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
             }
         }
 
-        levelChoiceList.showAtLocation(view, Gravity.NO_GRAVITY, viewBinding.chooseLevelButton.x.toInt(), viewBinding.chooseLevelButton.y.toInt() + viewBinding.chooseLevelButton.height)
+        levelChoiceList.showAtLocation(
+            view,
+            Gravity.NO_GRAVITY,
+            viewBinding.chooseLevelButton.x.toInt(),
+            viewBinding.chooseLevelButton.y.toInt() + viewBinding.chooseLevelButton.height
+        )
 
     }
 

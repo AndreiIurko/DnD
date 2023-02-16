@@ -6,9 +6,9 @@ import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var champion = AbilityNode(
     name = "Чемпион",
-    changesInCharacterInfo = {abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     description = "",
     isNeedsToBeShown = false
 )

@@ -8,8 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.PopupWindow
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -55,6 +55,18 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
         }
         characterViewModel.dataState.observe(viewLifecycleOwner, changeObserver)
 
+        val backgroundObserver = Observer<Boolean> { isShown ->
+            if (isShown) {
+                val fadeOut = ObjectAnimator.ofFloat(viewBinding.popUpBackground, "alpha", 0f, .5f)
+                fadeOut.duration = 300
+                fadeOut.start()
+            } else {
+                val fadeIn = ObjectAnimator.ofFloat(viewBinding.popUpBackground, "alpha", 0.5f, 0f)
+                fadeIn.duration = 300
+                fadeIn.start()
+            }
+        }
+        characterViewModel.backgroundIsShown.observe(viewLifecycleOwner, backgroundObserver)
 
         setupAll()
 
@@ -99,60 +111,66 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
 
         val navController =
             (childFragmentManager.findFragmentById(R.id.mainFragmentNavigationHost) as NavHostFragment).navController
-        parent.findViewById<LinearLayout>(R.id.actionsLinearLayout).apply {
-            onPressAnimation(this)
-            this.setOnClickListener {
-                navController.navigate(R.id.action_actionsFragment)
-                characterMenu.dismiss()
-            }
-        }
-        parent.findViewById<LinearLayout>(R.id.abilitiesLinearLayout).apply {
-            onPressAnimation(this)
-            this.setOnClickListener {
-                navController.navigate(R.id.action_abilitiesFragment)
-                characterMenu.dismiss()
-            }
-        }
-        parent.findViewById<LinearLayout>(R.id.skillsLinearLayout).apply {
-            onPressAnimation(this)
-            this.setOnClickListener {
-                navController.navigate(R.id.action_skillsFragment)
-                characterMenu.dismiss()
-            }
-        }
-        parent.findViewById<LinearLayout>(R.id.inventoryLinearLayout).apply {
-            onPressAnimation(this)
-            this.setOnClickListener {
-                navController.navigate(R.id.action_inventoryFragment)
-                characterMenu.dismiss()
-            }
-        }
-        parent.findViewById<LinearLayout>(R.id.spellsLinearLayout).apply {
-            onPressAnimation(this)
-            this.setOnClickListener {
-                navController.navigate(R.id.action_spellsFragment)
-                characterMenu.dismiss()
-            }
-        }
-        parent.findViewById<LinearLayout>(R.id.additionalInfoLinearLayout).apply {
-            onPressAnimation(this)
-            this.setOnClickListener {
-                navController.navigate(R.id.action_additionalInfoFragment)
-                characterMenu.dismiss()
-            }
-        }
+
+        setupMenuButton(
+            parent.findViewById(R.id.actionsLinearLayout),
+            R.id.action_actionsFragment,
+            navController,
+            characterMenu
+        )
+        setupMenuButton(
+            parent.findViewById(R.id.abilitiesLinearLayout),
+            R.id.action_abilitiesFragment,
+            navController,
+            characterMenu
+        )
+        setupMenuButton(
+            parent.findViewById(R.id.skillsLinearLayout),
+            R.id.action_skillsFragment,
+            navController,
+            characterMenu
+        )
+        setupMenuButton(
+            parent.findViewById(R.id.inventoryLinearLayout),
+            R.id.action_inventoryFragment,
+            navController,
+            characterMenu
+        )
+        setupMenuButton(
+            parent.findViewById(R.id.spellsLinearLayout),
+            R.id.action_spellsFragment,
+            navController,
+            characterMenu
+        )
+        setupMenuButton(
+            parent.findViewById(R.id.additionalInfoLinearLayout),
+            R.id.action_additionalInfoFragment,
+            navController,
+            characterMenu
+        )
 
         characterMenu.animationStyle = androidx.appcompat.R.style.Animation_AppCompat_Dialog
         characterMenu.showAtLocation(view, Gravity.CENTER, 0, 0)
 
-        val fadeOut = ObjectAnimator.ofFloat(viewBinding.popUpBackground, "alpha", 0f, .5f)
-        fadeOut.duration = 300
-        fadeOut.start()
+        characterViewModel.showPopUpBackground()
 
         characterMenu.setOnDismissListener {
-            val fadeIn = ObjectAnimator.ofFloat(viewBinding.popUpBackground, "alpha", 0.5f, 0f)
-            fadeIn.duration = 300
-            fadeIn.start()
+            characterViewModel.closePopUpBackground()
+        }
+    }
+
+    private fun setupMenuButton(
+        button: LinearLayout,
+        destId: Int,
+        navController: NavController,
+        characterMenu: PopupWindow
+    ) {
+        button.apply {
+            onPressAnimation(this)
+            this.setOnClickListener {
+                navController.navigate(destId)
+                characterMenu.dismiss()
+            }
         }
     }
 }

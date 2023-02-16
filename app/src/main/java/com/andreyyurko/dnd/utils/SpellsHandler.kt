@@ -32,12 +32,12 @@ class SpellsHandler @Inject constructor(
     }
 
     fun getKnownSpells(character: Character, filters: Filters = Filters()): MutableList<SpellSpecificLanguage> {
-        val result : MutableList<SpellSpecificLanguage> = mutableListOf()
+        val result: MutableList<SpellSpecificLanguage> = mutableListOf()
         if (character.characterInfo.spellsInfo.maxKnownSpellsCount == -1) {
             for (spell in getClassSpells(character)) {
                 if (
                     spell.level.toInt() <= (character.characterInfo.level + 1) / 2 &&
-                           checkFilters(spell, filters)
+                    checkFilters(spell, filters)
                 ) result.add(spell)
             }
         } else {
@@ -49,7 +49,7 @@ class SpellsHandler @Inject constructor(
     }
 
     fun getPreparedSpells(character: Character, filters: Filters = Filters()): MutableList<SpellSpecificLanguage> {
-        val result : MutableList<SpellSpecificLanguage> = mutableListOf()
+        val result: MutableList<SpellSpecificLanguage> = mutableListOf()
         for (spellName in character.characterInfo.spellsInfo.spellLists.preparedSpells + character.characterInfo.spellsInfo.spellLists.preparedCantrips) {
             allSpells[spellName]?.apply {
                 if (
@@ -68,7 +68,7 @@ class SpellsHandler @Inject constructor(
     }
 
     fun getMaxPreparedSpellsCount(character: Character): Int {
-        return  character.characterInfo.spellsInfo.maxPreparedSpellsCount
+        return character.characterInfo.spellsInfo.maxPreparedSpellsCount
     }
 
     fun getPreparedCantripsCount(character: Character): Int {
@@ -102,8 +102,7 @@ class SpellsHandler @Inject constructor(
     fun addSpell(character: Character, spell: SpellSpecificLanguage) {
         if (spell.level.toInt() == 0) {
             addPreparedCantrip(character, spell.name)
-        }
-        else {
+        } else {
             addPreparedSpell(character, spell.name)
         }
     }
@@ -111,8 +110,7 @@ class SpellsHandler @Inject constructor(
     fun removeSpell(character: Character, spell: SpellSpecificLanguage) {
         if (spell.level.toInt() == 0) {
             removePreparedCantrip(character, spell.name)
-        }
-        else {
+        } else {
             removePreparedSpell(character, spell.name)
         }
     }

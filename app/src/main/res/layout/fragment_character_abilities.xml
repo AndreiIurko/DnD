@@ -1,104 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <GridLayout
-            android:id="@+id/skillsGridLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="24dp"
-            android:columnCount="3"
-            android:rowCount="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+        <GridLayout
+                android:id="@+id/skillsGridLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="24dp"
+                android:columnCount="3"
+                android:rowCount="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
             <LinearLayout
-                android:id="@+id/strLayout"
-                style="@style/AbilitiesLayoutStyle">
+                    android:id="@+id/strLayout"
+                    style="@style/AbilitiesLayoutStyle">
 
                 <TextView
-                    android:id="@+id/strTextView"
-                    style="@style/Text.AbilitiesNumber" />
+                        android:id="@+id/strTextView"
+                        style="@style/Text.AbilitiesNumber"/>
 
                 <TextView
-                    style="@style/Text.AbilitiesName"
-                    android:text="Сил" />
+                        style="@style/Text.AbilitiesName"
+                        android:text="Сил"/>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/dexLayout"
-                style="@style/AbilitiesLayoutStyle">
+                    android:id="@+id/dexLayout"
+                    style="@style/AbilitiesLayoutStyle">
 
                 <TextView
-                    android:id="@+id/dexTextView"
-                    style="@style/Text.AbilitiesNumber" />
+                        android:id="@+id/dexTextView"
+                        style="@style/Text.AbilitiesNumber"/>
 
                 <TextView
-                    style="@style/Text.AbilitiesName"
-                    android:text="Лвк" />
+                        style="@style/Text.AbilitiesName"
+                        android:text="Лвк"/>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/conLayout"
-                style="@style/AbilitiesLayoutStyle">
+                    android:id="@+id/conLayout"
+                    style="@style/AbilitiesLayoutStyle">
 
                 <TextView
-                    android:id="@+id/conTextView"
-                    style="@style/Text.AbilitiesNumber" />
+                        android:id="@+id/conTextView"
+                        style="@style/Text.AbilitiesNumber"/>
 
                 <TextView
-                    style="@style/Text.AbilitiesName"
-                    android:text="Тел" />
+                        style="@style/Text.AbilitiesName"
+                        android:text="Тел"/>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/intLayout"
-                style="@style/AbilitiesLayoutStyle">
+                    android:id="@+id/intLayout"
+                    style="@style/AbilitiesLayoutStyle">
 
                 <TextView
-                    android:id="@+id/intTextView"
-                    style="@style/Text.AbilitiesNumber" />
+                        android:id="@+id/intTextView"
+                        style="@style/Text.AbilitiesNumber"/>
 
                 <TextView
-                    style="@style/Text.AbilitiesName"
-                    android:text="Инт" />
+                        style="@style/Text.AbilitiesName"
+                        android:text="Инт"/>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/wisLayout"
-                style="@style/AbilitiesLayoutStyle">
+                    android:id="@+id/wisLayout"
+                    style="@style/AbilitiesLayoutStyle">
 
                 <TextView
-                    android:id="@+id/wisTextView"
-                    style="@style/Text.AbilitiesNumber" />
+                        android:id="@+id/wisTextView"
+                        style="@style/Text.AbilitiesNumber"/>
 
                 <TextView
-                    style="@style/Text.AbilitiesName"
-                    android:text="Мдр" />
+                        style="@style/Text.AbilitiesName"
+                        android:text="Мдр"/>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/chaLayout"
-                style="@style/AbilitiesLayoutStyle">
+                    android:id="@+id/chaLayout"
+                    style="@style/AbilitiesLayoutStyle">
 
                 <TextView
-                    android:id="@+id/chaTextView"
-                    style="@style/Text.AbilitiesNumber" />
+                        android:id="@+id/chaTextView"
+                        style="@style/Text.AbilitiesNumber"/>
 
                 <TextView
-                    style="@style/Text.AbilitiesName"
-                    android:text="Хар" />
+                        style="@style/Text.AbilitiesName"
+                        android:text="Хар"/>
             </LinearLayout>
         </GridLayout>
 

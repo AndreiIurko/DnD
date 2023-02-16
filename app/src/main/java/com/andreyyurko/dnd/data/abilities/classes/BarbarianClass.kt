@@ -6,7 +6,7 @@ import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var barbarian1: AbilityNode = AbilityNodeLevel(
     "Варвар_1",
-    {abilities: CharacterInfo ->
+    { abilities: CharacterInfo ->
         abilities.characterClass = Classes.Barbarian
         abilities.level = abilities.level + 1
         abilities.proficiencyBonus = abilities.proficiencyBonus + 1
@@ -18,7 +18,7 @@ var barbarian1: AbilityNode = AbilityNodeLevel(
         proficiencyBonus = 2
     ),*/
     mutableMapOf(),
-    {abilities: CharacterInfo -> true},
+    { abilities: CharacterInfo -> true },
     listOf(listOf()),
     "1-й уровень, способности варвара",
     "barbarian2"
@@ -26,9 +26,9 @@ var barbarian1: AbilityNode = AbilityNodeLevel(
 
 var barbarian2: AbilityNode = AbilityNodeLevel(
     "Варвар_2",
-    {abilities: CharacterInfo -> abilities},
+    { abilities: CharacterInfo -> abilities },
     mutableMapOf(),
-    {abilities: CharacterInfo -> true},
+    { abilities: CharacterInfo -> true },
     listOf(listOf()),
     "2-й уровень, способности варвара",
     null

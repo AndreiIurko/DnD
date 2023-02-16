@@ -6,11 +6,11 @@ import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var combatSuperiority = AbilityNode(
     name = "Боевое превосходство",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Fighter
     },
     description = "Если вы выбираете этот архетип, вы изучаете приёмы, использующие специальные кости, называемые костями превосходства.\n" +
@@ -28,9 +28,9 @@ var combatSuperiority = AbilityNode(
 
 var studentOfWar = AbilityNode(
     name = "Ученик войны",
-    changesInCharacterInfo = {abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Fighter
     },
     description = "Вы осваиваете владением одним из ремесленных инструментов на ваш выбор."
@@ -38,9 +38,9 @@ var studentOfWar = AbilityNode(
 
 var knowYourEnemy = AbilityNode(
     name = "Познай своего врага",
-    changesInCharacterInfo = {abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 7 && abilities.characterClass == Classes.Fighter
     },
     description = "Если вы потратите как минимум 1 минуту, рассматривая, или по другому взаимодействуя с существом вне боя, вы можете узнать некоторую информацию о его способностях в сравнении с вашими. Мастер сообщит вам, равняется ли существо, превосходит или уступает вам в двух характеристиках на ваш выбор из перечисленных:\n" +
@@ -56,9 +56,9 @@ var knowYourEnemy = AbilityNode(
 
 var improvedCombatSuperiority = AbilityNode(
     name = "Улучшенное боевое превосходство",
-    changesInCharacterInfo = {abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 10 && abilities.characterClass == Classes.Fighter
     },
     description = "Ваша кость превосходства увеличивается до к10. На 18-м уровне — до к12."
@@ -66,9 +66,9 @@ var improvedCombatSuperiority = AbilityNode(
 
 var relentless = AbilityNode(
     name = "Неослабевающий",
-    changesInCharacterInfo = {abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 15 && abilities.characterClass == Classes.Fighter
     },
     description = "Если вы совершаете бросок инициативы, не имея костей превосходства, вы получаете одну."
@@ -76,7 +76,7 @@ var relentless = AbilityNode(
 
 var battleMaster = AbilityNode(
     name = "Мастер боевых искусств",
-    changesInCharacterInfo = {abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     alternatives = mutableMapOf(
         Pair("first", listOf(combatSuperiority.name)),
         Pair("second", listOf(studentOfWar.name)),
@@ -84,7 +84,7 @@ var battleMaster = AbilityNode(
         Pair("fourth", listOf(improvedCombatSuperiority.name)),
         Pair("fifth", listOf(relentless.name))
     ),
-    requirements = {true},
+    requirements = { true },
     description = "",
     isNeedsToBeShown = false
 )

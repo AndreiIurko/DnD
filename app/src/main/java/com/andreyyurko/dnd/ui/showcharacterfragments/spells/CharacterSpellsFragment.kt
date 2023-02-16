@@ -3,14 +3,12 @@ package com.andreyyurko.dnd.ui.showcharacterfragments.spells
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentCharacterSpellsBinding
-import com.andreyyurko.dnd.ui.base.BaseFragment
 import com.andreyyurko.dnd.ui.showcharacterfragments.fragmentwithfilters.FragmentWithFilters
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -67,15 +65,14 @@ class CharacterSpellsFragment : FragmentWithFilters(R.layout.fragment_character_
         viewBinding.filtersButton.setOnClickListener {
             if (viewBinding.filtersView.visibility == View.GONE) {
                 showFilters(viewBinding.filtersView, viewBinding.filtersButton, viewBinding.searchEditText)
-            }
-            else {
+            } else {
                 closeFilters(viewBinding.filtersView, viewBinding.filtersButton, viewBinding.searchEditText)
                 showItems()
             }
         }
 
         viewBinding.levelButton.setOnClickListener {
-            setupStringFilter(viewBinding.levelButton, viewModel.filters.levels, (0..9).map {i -> i.toString()})
+            setupStringFilter(viewBinding.levelButton, viewModel.filters.levels, (0..9).map { i -> i.toString() })
         }
 
         viewBinding.sourceButton.setOnClickListener {
@@ -91,7 +88,11 @@ class CharacterSpellsFragment : FragmentWithFilters(R.layout.fragment_character_
         val recyclerView = viewBinding.spellsRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-        val adapter = SpellsAdapter(viewModel.spellsHandler, viewModel.characterViewModel, viewBinding.preparedSpellsCount, viewBinding.preparedCantripsCount)
+        val adapter = SpellsAdapter(
+            viewModel.spellsHandler, viewModel.characterViewModel,
+            viewBinding.preparedSpellsCount, viewBinding.preparedCantripsCount, viewBinding.root
+        )
+
         recyclerView.adapter = adapter
 
         val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)

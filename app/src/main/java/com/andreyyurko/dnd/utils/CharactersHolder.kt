@@ -34,7 +34,7 @@ class CharactersHolder @Inject constructor(
         dbProvider.getDB(DB_TAG)
     }
 
-    private var characters : MutableMap<Int, Character> = mutableMapOf()
+    private var characters: MutableMap<Int, Character> = mutableMapOf()
 
     private var _initActionState = MutableStateFlow<InitializationState>(InitializationState.NotInitialized)
     val initActionState: Flow<InitializationState> get() = _initActionState.asStateFlow()
@@ -107,6 +107,7 @@ class CharactersHolder @Inject constructor(
     fun isCharacterExists(id: Int): Boolean {
         return characters.contains(id)
     }
+
     fun getCharacterById(id: Int): Character {
         characters[id]?.let {
             return it
@@ -117,7 +118,7 @@ class CharactersHolder @Inject constructor(
     fun addCharacter(character: Character): Character {
         if (characters.isEmpty()) character.id = 0
         else {
-            for (i in 0 ..characters.size) {
+            for (i in 0..characters.size) {
                 if (characters.contains(i)) continue
                 character.id = i
             }
@@ -184,6 +185,7 @@ class CharactersHolder @Inject constructor(
         // save all graph of choices
         saveCharacterNode(characters[id]!!.baseCAN, id, ".")
     }
+
     fun saveCharacters() {
         viewModelScope.launch {
             for (id in characters.keys) {
@@ -193,17 +195,21 @@ class CharactersHolder @Inject constructor(
     }
 
     private fun deleteCharacter(character: Character) {
-        db.putStringsAsync(listOf(
-            Pair(DB_CHARACTER_IDS, Gson().toJson(characters.keys))
-        ))
+        db.putStringsAsync(
+            listOf(
+                Pair(DB_CHARACTER_IDS, Gson().toJson(characters.keys))
+            )
+        )
 
-        db.deleteDataAsync(listOf(
-            DB_CHARACTER_NAME + character.id.toString(),
-            character.id.toString() + DB_CHARACTER_CUSTOM,
-            character.id.toString() + DB_CHARACTER_STATE,
-            character.id.toString() + DB_INVENTORY,
-            character.id.toString() + DB_SPELLS
-        ))
+        db.deleteDataAsync(
+            listOf(
+                DB_CHARACTER_NAME + character.id.toString(),
+                character.id.toString() + DB_CHARACTER_CUSTOM,
+                character.id.toString() + DB_CHARACTER_STATE,
+                character.id.toString() + DB_INVENTORY,
+                character.id.toString() + DB_SPELLS
+            )
+        )
 
         deleteCharacterNode(character.baseCAN, character.id, ".")
     }
@@ -215,7 +221,7 @@ class CharactersHolder @Inject constructor(
         }
 
         // get chosen AN names and save it using current AN option_name as key
-        val chosenAlternativesNames : MutableMap<String, String> = mutableMapOf()
+        val chosenAlternativesNames: MutableMap<String, String> = mutableMapOf()
         for (key in characterAbilityNode.chosen_alternatives.keys) {
             characterAbilityNode.chosen_alternatives[key]?.apply {
                 chosenAlternativesNames[key] = this.data.name
@@ -224,15 +230,17 @@ class CharactersHolder @Inject constructor(
 
         // save map option_name -> chosen_option_name
         val chosenAlternativesJson = Gson().toJson(chosenAlternativesNames)
-        db.putStringsAsync(listOf(
-            Pair(
-                characterId.toString() + DB_CHARACTER_ABILITY_NODE + path + characterAbilityNode.data.name,
-                chosenAlternativesJson
+        db.putStringsAsync(
+            listOf(
+                Pair(
+                    characterId.toString() + DB_CHARACTER_ABILITY_NODE + path + characterAbilityNode.data.name,
+                    chosenAlternativesJson
+                )
             )
-        ))
+        )
     }
 
-    private fun loadCharacterNode(name: String, id: Int, path: String, character: Character) : CharacterAbilityNode {
+    private fun loadCharacterNode(name: String, id: Int, path: String, character: Character): CharacterAbilityNode {
         // init type to load from db
         val mapType: Type = object : TypeToken<Map<String, String>>() {}.type
 
@@ -245,7 +253,8 @@ class CharactersHolder @Inject constructor(
 
         // add to chosen_alternatives all references to sub-nodes
         for (key in chosenAlternatives.keys) {
-            val chosenNode = loadCharacterNode(chosenAlternatives[key]!!, id, path + characterAbilityNode.data.name + '.', character)
+            val chosenNode =
+                loadCharacterNode(chosenAlternatives[key]!!, id, path + characterAbilityNode.data.name + '.', character)
             characterAbilityNode.chosen_alternatives[key] = chosenNode
         }
 
@@ -257,20 +266,24 @@ class CharactersHolder @Inject constructor(
             deleteCharacterNode(characterNode, characterId, path + characterAbilityNode.data.name + '.')
         }
 
-        db.deleteDataAsync(listOf(
-            characterId.toString() + DB_CHARACTER_ABILITY_NODE + path + characterAbilityNode.data.name
-        ))
+        db.deleteDataAsync(
+            listOf(
+                characterId.toString() + DB_CHARACTER_ABILITY_NODE + path + characterAbilityNode.data.name
+            )
+        )
     }
 
     fun getBriefInfo(): MutableList<CharacterBriefInfo> {
-        val info : MutableList<CharacterBriefInfo> = mutableListOf()
+        val info: MutableList<CharacterBriefInfo> = mutableListOf()
         for (character in characters.values) {
-            info.add(CharacterBriefInfo(
-                id = character.id,
-                name = character.name,
-                characterClass = character.characterInfo.characterClass.className,
-                level = character.characterInfo.level.toString()
-            ))
+            info.add(
+                CharacterBriefInfo(
+                    id = character.id,
+                    name = character.name,
+                    characterClass = character.characterInfo.characterClass.className,
+                    level = character.characterInfo.level.toString()
+                )
+            )
         }
         return info
     }
@@ -290,7 +303,7 @@ class CharactersHolder @Inject constructor(
     }
 
     sealed class InitializationState {
-        object NotInitialized: InitializationState()
-        object Initialized: InitializationState()
+        object NotInitialized : InitializationState()
+        object Initialized : InitializationState()
     }
 }

@@ -58,7 +58,7 @@ class ClassViewModel @Inject constructor(
     private fun levelUp(can: CharacterAbilityNodeLevel?, level: Int) {
         can?.let {
             it.makeChoice()
-            var nextLevelCAN : CharacterAbilityNodeLevel? = null
+            var nextLevelCAN: CharacterAbilityNodeLevel? = null
             if (level < chosenLevel) {
                 it.levelUp()
                 nextLevelCAN = it.next_level

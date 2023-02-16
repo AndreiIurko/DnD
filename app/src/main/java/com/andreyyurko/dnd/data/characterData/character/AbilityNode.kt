@@ -16,21 +16,25 @@ open class AbilityNode(
 ) {
     constructor(name: String) : this(
         name = name,
-        changesInCharacterInfo = {abilities: CharacterInfo -> abilities},
+        changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
         alternatives = mutableMapOf<String, List<String>>(),
         requirements = { true },
         add_requirements = listOf<List<Triple<String, String, Int>>>(),
         description = ""
     )
-    fun merge (abilities: CharacterInfo): CharacterInfo {
+
+    fun merge(abilities: CharacterInfo): CharacterInfo {
         return changesInCharacterInfo(abilities)
     }
+
     fun isCorrect(abilities: CharacterInfo): Boolean {
         return requirements(abilities)
     }
+
     fun isAddable(abilities: CharacterInfo): Boolean {
         return isCorrect(abilities) and true
     }
+
     fun showOptions(abilities: CharacterInfo, option_name: String): List<String> {
         val result: MutableList<String> = mutableListOf()
         for (option in alternatives[option_name]!!) {
@@ -39,7 +43,7 @@ open class AbilityNode(
         return result
     }
 
-    fun showOptions(option_name: String) : List<String> {
+    fun showOptions(option_name: String): List<String> {
         val result: MutableList<String> = mutableListOf()
         for (option in alternatives[option_name]!!) {
             result.add(option)

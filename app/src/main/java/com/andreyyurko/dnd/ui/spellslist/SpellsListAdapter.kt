@@ -16,7 +16,7 @@ class SpellsListAdapter @Inject constructor(
     private val spellsFavoritesHolder: SpellsFavoritesHolder
 ) : RecyclerView.Adapter<SpellsListAdapter.ViewHolder>() {
 
-    var spellsList : List<SpellSpecificLanguage> = emptyList()
+    var spellsList: List<SpellSpecificLanguage> = emptyList()
     lateinit var viewModel: SpellsListViewModel
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -36,18 +36,18 @@ class SpellsListAdapter @Inject constructor(
             R.string.spell_name,
             HtmlCompat.fromHtml(spellsList[position].name, HtmlCompat.FROM_HTML_MODE_LEGACY)
         )
-        holder.spellLevelAndSchoolTextView.text =  holder.context.getString(
+        holder.spellLevelAndSchoolTextView.text = holder.context.getString(
             R.string.spell_level_and_school,
             HtmlCompat.fromHtml(spellsList[position].level, HtmlCompat.FROM_HTML_MODE_LEGACY),
             HtmlCompat.fromHtml(spellsList[position].school, HtmlCompat.FROM_HTML_MODE_LEGACY)
         )
-        holder.spellDescriptionTextView.text = HtmlCompat.fromHtml(spellsList[position].text, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        holder.spellDescriptionTextView.text =
+            HtmlCompat.fromHtml(spellsList[position].text, HtmlCompat.FROM_HTML_MODE_LEGACY)
         holder.spellDescriptionTextView.setOnClickListener {
             if (spellsFavoritesHolder.getFavoriteSpells().contains(spellsList[position])) {
                 spellsFavoritesHolder.removeFavoriteSpell(spellsList[position])
                 viewModel.getFavoriteSpells()
-            }
-            else {
+            } else {
                 spellsFavoritesHolder.putFavoriteSpell(spellsList[position])
                 viewModel.getFavoriteSpells()
             }

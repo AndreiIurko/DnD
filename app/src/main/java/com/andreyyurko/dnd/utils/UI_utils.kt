@@ -23,6 +23,7 @@ fun onPressAnimation(view: View) {
             MotionEvent.ACTION_DOWN -> {
                 fadeOut.start()
             }
+
             MotionEvent.ACTION_UP -> {
                 if (!(event.x > 0 && event.y > 0 && event.x < v.width && event.y < v.height)) {
                     val fadeIn = ObjectAnimator.ofFloat(v, "alpha", v.alpha, 1f)
@@ -34,8 +35,7 @@ fun onPressAnimation(view: View) {
                     fadeOut.doOnEnd {
                         startFadeIn(view)
                     }
-                }
-                else {
+                } else {
                     startFadeIn(view)
                 }
             }
@@ -44,7 +44,7 @@ fun onPressAnimation(view: View) {
     }
 }
 
-private fun startFadeIn(view:View) {
+private fun startFadeIn(view: View) {
     val fadeIn = ObjectAnimator.ofFloat(view, "alpha", view.alpha, 0.7f)
     fadeIn.duration = 100
     fadeIn.start()
@@ -59,7 +59,14 @@ private fun startFadeIn(view:View) {
 // optionName - name of list of options in can
 // can - parent CharacterAbilityNode
 // adapter - we need to update info in RecyclerView after make choice, so we add adapter
-fun createPopUpMenu(triggerView: View, textView: TextView, listOfOptions: List<String>, optionName: String, can: CharacterAbilityNode, adapter: AbilityAdapter): PopupWindow {
+fun createPopUpMenu(
+    triggerView: View,
+    textView: TextView,
+    listOfOptions: List<String>,
+    optionName: String,
+    can: CharacterAbilityNode,
+    adapter: AbilityAdapter
+): PopupWindow {
     // parent - linear layout inside popup menu
     val (popupChoiceList, parent) = setupBasicPopUpMenu(triggerView.context)
     // for every ability we need to add it inside linear layout
@@ -92,7 +99,8 @@ fun createPopUpMenu(triggerView: View, textView: TextView, listOfOptions: List<S
 fun setupBasicPopUpMenu(context: Context): Pair<PopupWindow, LinearLayout> {
     val parent = LinearLayout(context)
 
-    parent.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+    parent.layoutParams =
+        LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
     parent.orientation = LinearLayout.VERTICAL
 
     val focus = true

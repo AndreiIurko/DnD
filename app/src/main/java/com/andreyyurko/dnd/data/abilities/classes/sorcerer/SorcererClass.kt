@@ -12,16 +12,22 @@ import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 
 var classFeaturesSorcerer: AbilityNode = AbilityNode(
     name = "Чародей: классовые умения",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.savingThrowProf.add(Ability.Constitution)
         abilities.savingThrowProf.add(Ability.Charisma)
         abilities
     },
     alternatives = mutableMapOf(
-        Pair("skill1", listOf(intimidation.name, arcana.name, deception.name, insight.name, religion.name, persuasion.name)),
-        Pair("skill2", listOf(intimidation.name, arcana.name, deception.name, insight.name, religion.name, persuasion.name)),
+        Pair(
+            "skill1",
+            listOf(intimidation.name, arcana.name, deception.name, insight.name, religion.name, persuasion.name)
+        ),
+        Pair(
+            "skill2",
+            listOf(intimidation.name, arcana.name, deception.name, insight.name, religion.name, persuasion.name)
+        ),
     ),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Sorcerer
     },
     description = "ХИТЫ\n" +
@@ -48,7 +54,7 @@ var classFeaturesSorcerer: AbilityNode = AbilityNode(
 
 var spellCastingSorcerer: AbilityNode = AbilityNode(
     name = "Чародей: использование заклинаний",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.spellsInfo.apply {
             this.className = Classes.Sorcerer.className
             this.maxPreparedSpellsCount += 2
@@ -57,7 +63,7 @@ var spellCastingSorcerer: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Sorcerer
     },
     description = "Определённое событие в вашем прошлом или в жизни ваших родителей или предков оставило на вас неизгладимый отпечаток, связав вас с магией. Ваши заклинания питает некий источник магии, какого бы происхождения он не был. Вы найдёте список заклинаний, доступных чародею в этом разделе: заклинания чародея.\n" +
@@ -88,9 +94,9 @@ var spellCastingSorcerer: AbilityNode = AbilityNode(
             "Вы можете использовать магическую фокусировку в качестве фокусировки для заклинаний чародея"
 )
 
-var sorcerer1 : AbilityNodeLevel = AbilityNodeLevel(
+var sorcerer1: AbilityNodeLevel = AbilityNodeLevel(
     name = "Чародей_1",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.characterClass = Classes.Sorcerer
         abilities.level += 1
         abilities.proficiencyBonus += 2
@@ -101,45 +107,45 @@ var sorcerer1 : AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(classFeaturesSorcerer.name)),
         Pair("second", listOf(spellCastingSorcerer.name)),
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "1-й уровень, способности чародея",
     next_level = "Чародей_2",
 )
 
-var sorcerer2 : AbilityNodeLevel = AbilityNodeLevel(
+var sorcerer2: AbilityNodeLevel = AbilityNodeLevel(
     name = "Чародей_2",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.spellsInfo.maxPreparedSpellsCount += 1
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "2-й уровень, способности чародея",
     next_level = "Чародей_3",
 )
 
-var sorcerer3 : AbilityNodeLevel = AbilityNodeLevel(
+var sorcerer3: AbilityNodeLevel = AbilityNodeLevel(
     name = "Чародей_3",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.spellsInfo.maxPreparedSpellsCount += 1
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "3-й уровень, способности чародея",
     next_level = "Чародей_4",
 )
 
-var sorcerer4 : AbilityNodeLevel = AbilityNodeLevel(
+var sorcerer4: AbilityNodeLevel = AbilityNodeLevel(
     name = "Чародей_4",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.spellsInfo.maxPreparedSpellsCount += 1
@@ -148,15 +154,15 @@ var sorcerer4 : AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "4-й уровень, способности чародея",
     next_level = "Чародей_5",
 )
 
-var sorcerer5 : AbilityNodeLevel = AbilityNodeLevel(
+var sorcerer5: AbilityNodeLevel = AbilityNodeLevel(
     name = "Чародей_5",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.proficiencyBonus += 1
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
@@ -164,7 +170,7 @@ var sorcerer5 : AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = listOf(),
     description = "5-й уровень, способности чародея",
     next_level = null,

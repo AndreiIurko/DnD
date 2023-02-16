@@ -16,9 +16,12 @@ import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var baseAN: AbilityNode = AbilityNode(
     "base_an",
-    {abilities: CharacterInfo ->
+    { abilities: CharacterInfo ->
         abilities.weaponProficiency.plus(Weapon.Unarmed)
-        abilities.ac = abilities.currentState.armor.ac + Integer.min(abilities.currentState.armor.dexRestriction, (abilities.dexterity - 10) / 2)
+        abilities.ac = abilities.currentState.armor.ac + Integer.min(
+            abilities.currentState.armor.dexRestriction,
+            (abilities.dexterity - 10) / 2
+        )
         abilities.initiativeBonus = abilities.initiativeBonus + (abilities.dexterity - 10) / 2
         addAttackActions(abilities)
         abilities
@@ -27,7 +30,7 @@ var baseAN: AbilityNode = AbilityNode(
         Pair("class", listOf(monk1.name, barbarian1.name, fighter1.name, sorcerer1.name)),
         Pair("race", listOf(human.name))
     ),
-    {true},
+    { true },
     listOf(listOf()),
     description = "Base Ability Node, root of all AN",
     priority = Priority.DoAsSoonAsPossible
@@ -57,7 +60,10 @@ fun addAttackActions(abilities: CharacterInfo) {
 
     // attack as bonus action
     if (abilities.currentState.weapons.size == 2) {
-        if (abilities.currentState.weapons[0].properties.contains("Лёгкое") and abilities.currentState.weapons[1].properties.contains("Лёгкое")) {
+        if (abilities.currentState.weapons[0].properties.contains("Лёгкое") and abilities.currentState.weapons[1].properties.contains(
+                "Лёгкое"
+            )
+        ) {
             abilities.actionsList.add(
                 Action(
                     name = "Атака второй рукой",

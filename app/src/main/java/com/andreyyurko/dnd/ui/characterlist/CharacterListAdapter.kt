@@ -17,7 +17,7 @@ class CharacterListAdapter(
     private val viewModel: CharacterListViewModel
 ) : RecyclerView.Adapter<CharacterListAdapter.ViewHolder>() {
 
-    var charactersList : List<CharacterBriefInfo> = emptyList()
+    var charactersList: List<CharacterBriefInfo> = emptyList()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val iconImageView: ImageView = itemView.findViewById(R.id.iconImageView)

@@ -16,10 +16,10 @@ class ParcelableWriter(
         for (i in 0 until count) {
             val tag = inputData.getString(WORKER_TAG + i)
             val data = inputData.getString(WORKER_DATA + i)
-            
+
             sp.edit().putString(tag, data).apply()
         }
-        
+
         return Result.success()
     }
 

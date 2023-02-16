@@ -7,12 +7,12 @@ import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var strengthAbilityImprovement: AbilityNode = AbilityNode(
     name = Ability.Strength.abilityName,
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.strength += 1
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = emptyList(),
     description = "",
     isNeedsToBeShown = false,
@@ -21,12 +21,12 @@ var strengthAbilityImprovement: AbilityNode = AbilityNode(
 
 var dexterityAbilityImprovement: AbilityNode = AbilityNode(
     name = Ability.Dexterity.abilityName,
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.dexterity += 1
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = emptyList(),
     description = "",
     isNeedsToBeShown = false,
@@ -35,12 +35,12 @@ var dexterityAbilityImprovement: AbilityNode = AbilityNode(
 
 var constitutionAbilityImprovement: AbilityNode = AbilityNode(
     name = Ability.Constitution.abilityName,
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.constitution += 1
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = emptyList(),
     description = "",
     isNeedsToBeShown = false,
@@ -49,12 +49,12 @@ var constitutionAbilityImprovement: AbilityNode = AbilityNode(
 
 var intelligenceAbilityImprovement: AbilityNode = AbilityNode(
     name = Ability.Intelligence.abilityName,
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.intelligence += 1
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = emptyList(),
     description = "",
     isNeedsToBeShown = false,
@@ -63,12 +63,12 @@ var intelligenceAbilityImprovement: AbilityNode = AbilityNode(
 
 var wisdomAbilityImprovement: AbilityNode = AbilityNode(
     name = Ability.Wisdom.abilityName,
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.wisdom += 1
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     isNeedsToBeShown = false,
     add_requirements = emptyList(),
     description = "",
@@ -77,12 +77,12 @@ var wisdomAbilityImprovement: AbilityNode = AbilityNode(
 
 var charismaAbilityImprovement: AbilityNode = AbilityNode(
     name = Ability.Charisma.abilityName,
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.charisma += 1
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     add_requirements = emptyList(),
     description = "",
     isNeedsToBeShown = false,
@@ -91,28 +91,32 @@ var charismaAbilityImprovement: AbilityNode = AbilityNode(
 
 var abilityScoreImprovement: AbilityNode = AbilityNode(
     name = "Увеличение характеристик",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
     alternatives = mutableMapOf(
-        Pair("firstAbility", listOf(
-            strengthAbilityImprovement.name,
-            dexterityAbilityImprovement.name,
-            constitutionAbilityImprovement.name,
-            intelligenceAbilityImprovement.name,
-            wisdomAbilityImprovement.name,
-            charismaAbilityImprovement.name
-        )),
-        Pair("secondAbility", listOf(
-            strengthAbilityImprovement.name,
-            dexterityAbilityImprovement.name,
-            constitutionAbilityImprovement.name,
-            intelligenceAbilityImprovement.name,
-            wisdomAbilityImprovement.name,
-            charismaAbilityImprovement.name
-        ))
+        Pair(
+            "firstAbility", listOf(
+                strengthAbilityImprovement.name,
+                dexterityAbilityImprovement.name,
+                constitutionAbilityImprovement.name,
+                intelligenceAbilityImprovement.name,
+                wisdomAbilityImprovement.name,
+                charismaAbilityImprovement.name
+            )
+        ),
+        Pair(
+            "secondAbility", listOf(
+                strengthAbilityImprovement.name,
+                dexterityAbilityImprovement.name,
+                constitutionAbilityImprovement.name,
+                intelligenceAbilityImprovement.name,
+                wisdomAbilityImprovement.name,
+                charismaAbilityImprovement.name
+            )
+        )
     ),
-    requirements = {true},
+    requirements = { true },
     add_requirements = emptyList(),
     description = "",
 )

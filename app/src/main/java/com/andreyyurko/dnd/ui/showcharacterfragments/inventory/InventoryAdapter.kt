@@ -17,16 +17,16 @@ import javax.inject.Inject
 class InventoryAdapter @Inject constructor(
     private val inventoryHandler: InventoryHandler,
     private val characterViewModel: CharacterViewModel,
-    private val popupBackground: View
+    private val parent: ViewGroup
 ) : RecyclerView.Adapter<InventoryAdapter.ViewHolder>() {
 
     var itemsList: MutableList<InventoryItemInfo> = mutableListOf()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val nameTextView : TextView = itemView.findViewById(R.id.itemName)
-        val increaseButton : ImageButton = itemView.findViewById(R.id.increaseButton)
-        val countTextView : TextView = itemView.findViewById(R.id.count)
-        val decreaseButton : ImageButton = itemView.findViewById(R.id.decreaseButton)
+        val nameTextView: TextView = itemView.findViewById(R.id.itemName)
+        val increaseButton: ImageButton = itemView.findViewById(R.id.increaseButton)
+        val countTextView: TextView = itemView.findViewById(R.id.count)
+        val decreaseButton: ImageButton = itemView.findViewById(R.id.decreaseButton)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -66,28 +66,28 @@ class InventoryAdapter @Inject constructor(
         }
 
         holder.nameTextView.isClickable = true
-        holder.nameTextView.setOnClickListener { 
-            showFullDescription(itemsList[position], it.context, position )
+        holder.nameTextView.setOnClickListener {
+            showFullDescription(itemsList[position], it.context, position)
         }
     }
-    
+
     private fun showFullDescription(itemDescription: InventoryItemInfo, context: Context, position: Int) {
         val item = inventoryHandler.allItems[itemDescription.itemName]!!
-        
+
         val parent = LayoutInflater.from(context).inflate(R.layout.view_full_inventory_item, null)
         parent.layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             400 * context.resources.displayMetrics.density.toInt()
         )
 
-        
+
         parent.findViewById<TextView>(R.id.name).text = item.name
         parent.findViewById<TextView>(R.id.typeAndRarity).text = item.itemTypeAndRarity
         parent.findViewById<TextView>(R.id.source).text = "Источник: ${item.source}"
         parent.findViewById<TextView>(R.id.cost).text = item.cost
         parent.findViewById<TextView>(R.id.description).text = item.description
-        
-        parent.findViewById<EditText>(R.id.notesEditText).apply { 
+
+        parent.findViewById<EditText>(R.id.notesEditText).apply {
             this.setText(itemDescription.notes)
             // TODO: add buffer with auto save
             this.doOnTextChanged { text, _, _, _ ->
@@ -137,11 +137,11 @@ class InventoryAdapter @Inject constructor(
         }
 
         fullDescriptionPopUp.animationStyle = androidx.appcompat.R.style.Animation_AppCompat_Dialog
-        fullDescriptionPopUp.showAtLocation(popupBackground, Gravity.CENTER, 0, 0)
-        popupBackground.alpha = 0.5F
+        fullDescriptionPopUp.showAtLocation(parent, Gravity.CENTER, 0, 0)
+        characterViewModel.showPopUpBackground()
 
         fullDescriptionPopUp.setOnDismissListener {
-            popupBackground.alpha = 0.0F
+            characterViewModel.closePopUpBackground()
             notifyItemChanged(position)
         }
     }
