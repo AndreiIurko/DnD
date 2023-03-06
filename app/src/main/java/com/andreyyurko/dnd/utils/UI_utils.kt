@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.core.animation.doOnEnd
+import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.characterData.character.CharacterAbilityNode
 import com.andreyyurko.dnd.ui.addcharacterfragments.AbilityAdapter
 
@@ -98,6 +99,7 @@ fun createPopUpMenu(
 // parent - Linear layout, root View of popUp window
 fun setupBasicPopUpMenu(context: Context): Pair<PopupWindow, LinearLayout> {
     val parent = LinearLayout(context)
+    parent.setBackgroundColor(context.getColor(R.color.background))
 
     parent.layoutParams =
         LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)

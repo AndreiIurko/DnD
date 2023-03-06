@@ -103,6 +103,7 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
 
     private fun setupPopupMenu(context: Context) {
         val parent = LayoutInflater.from(context).inflate(R.layout.character_menu, null)
+        parent.setBackgroundColor(context.getColor(R.color.background))
 
         val focus = true
         val wid = LinearLayout.LayoutParams.WRAP_CONTENT
