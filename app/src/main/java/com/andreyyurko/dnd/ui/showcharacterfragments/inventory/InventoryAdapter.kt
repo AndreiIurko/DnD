@@ -79,7 +79,7 @@ class InventoryAdapter @Inject constructor(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             400 * context.resources.displayMetrics.density.toInt()
         )
-
+        parent.setBackgroundColor(context.getColor(R.color.background))
 
         parent.findViewById<TextView>(R.id.name).text = item.name
         parent.findViewById<TextView>(R.id.typeAndRarity).text = item.itemTypeAndRarity

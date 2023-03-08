@@ -185,30 +185,54 @@
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
-                android:id="@+id/spellInfoText"
-                android:layout_width="wrap_content"
+        <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/cantripsCountContainer"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="6dp"
-                android:text="Имя, уровень, время накладывания"
-                android:textColor="@color/on_primary"
-        />
+        >
+            <TextView
+                    android:id="@+id/spellNameText"
+                    android:layout_marginStart="16dp"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:text="Имя"
+                    android:textColor="@color/on_primary"
+                    android:textSize="12sp"
+            />
 
-        <TextView
-                android:id="@+id/isPrepared"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:text="Подг"
-                android:layout_marginEnd="10dp"
-                android:textColor="@color/on_primary"
-                android:textSize="12sp"
-        />
+            <TextView
+                    android:id="@+id/spellLevelText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="уровень"
+                    android:textColor="@color/on_primary"
+                    android:textSize="12sp"
+            />
+
+            <TextView
+                    android:layout_marginStart="14dp"
+                    android:id="@+id/spellTimeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="время"
+                    android:textColor="@color/on_primary"
+                    android:textSize="12sp"
+            />
+
+            <TextView
+                    android:id="@+id/isPrepared"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="подг"
+                    android:textColor="@color/on_primary"
+                    android:textSize="12sp"
+                    android:gravity="end"
+                    android:layout_marginEnd="10dp"
+            />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -247,6 +271,7 @@
             android:padding="6dp"
             android:orientation="horizontal"
             android:visibility="gone"
+            android:background="@color/background"
     >
 
         <TextView

@@ -2,6 +2,8 @@ package com.andreyyurko.dnd.ui.showcharacterfragments.fragmentwithfilters
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.graphics.Rect
+import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -20,10 +22,11 @@ open class FragmentWithFilters : BaseFragment {
     constructor(@LayoutRes contentLayoutId: Int) : super(contentLayoutId)
 
     protected fun showFilters(filtersView: View, filtersButton: TextView, searchEditText: EditText) {
-        filtersView.y = -100 * resources.displayMetrics.density
+        Log.d("test", filtersButton.z.toString())
+        filtersView.y = -100 * resources.displayMetrics.density + filtersButton.y
         filtersView.visibility = View.VISIBLE
         filtersView.animate()
-            .translationY(0f)
+            .translationY(filtersButton.y)
             .setListener(null)
 
         filtersButton.animate()
@@ -34,7 +37,7 @@ open class FragmentWithFilters : BaseFragment {
 
     protected fun closeFilters(filtersView: View, filtersButton: TextView, searchEditText: EditText) {
         filtersView.animate()
-            .translationY(-filtersView.height.toFloat())
+            .translationY(-2 * filtersView.height.toFloat() + filtersButton.y)
             .setListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     super.onAnimationEnd(animation)

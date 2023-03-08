@@ -57,8 +57,8 @@ var spellCastingSorcerer: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.spellsInfo.apply {
             this.className = Classes.Sorcerer.className
-            this.maxPreparedSpellsCount += 2
-            this.maxPreparedCantripsCount += 4
+            this.maxKnownSpellsCount = 2
+            this.maxKnownCantripsCount = 4
         }
         abilities
     },
@@ -91,7 +91,8 @@ var spellCastingSorcerer: AbilityNode = AbilityNode(
             "Модификатор броска атаки = ваш бонус мастерства + ваш модификатор Харизмы\n" +
             "Фокусировка заклинания\n" +
             "\n" +
-            "Вы можете использовать магическую фокусировку в качестве фокусировки для заклинаний чародея"
+            "Вы можете использовать магическую фокусировку в качестве фокусировки для заклинаний чародея",
+    priority = Priority.DoAsSoonAsPossible
 )
 
 var sorcerer1: AbilityNodeLevel = AbilityNodeLevel(
@@ -118,7 +119,7 @@ var sorcerer2: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        abilities.spellsInfo.maxPreparedSpellsCount += 1
+        abilities.spellsInfo.maxKnownSpellsCount += 1
         abilities
     },
     alternatives = mutableMapOf(),
@@ -133,7 +134,7 @@ var sorcerer3: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        abilities.spellsInfo.maxPreparedSpellsCount += 1
+        abilities.spellsInfo.maxKnownSpellsCount += 1
         abilities
     },
     alternatives = mutableMapOf(),
@@ -148,9 +149,8 @@ var sorcerer4: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        abilities.spellsInfo.maxPreparedSpellsCount += 1
-        Log.d("spells", abilities.spellsInfo.maxPreparedSpellsCount.toString())
-        abilities.spellsInfo.maxPreparedCantripsCount += 1
+        abilities.spellsInfo.maxKnownSpellsCount+= 1
+        abilities.spellsInfo.maxKnownCantripsCount += 1
         abilities
     },
     alternatives = mutableMapOf(),
@@ -166,7 +166,7 @@ var sorcerer5: AbilityNodeLevel = AbilityNodeLevel(
         abilities.proficiencyBonus += 1
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        abilities.spellsInfo.maxPreparedSpellsCount += 1
+        abilities.spellsInfo.maxKnownSpellsCount += 1
         abilities
     },
     alternatives = mutableMapOf(),

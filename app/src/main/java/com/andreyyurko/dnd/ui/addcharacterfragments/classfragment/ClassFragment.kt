@@ -43,7 +43,10 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
 
         viewBinding.submitButton.setOnClickListener {
             viewModel.updateCharacter()
-            findNavController().popBackStack(R.id.charactersListFragment, false)
+            if (viewModel.isNeededToChooseKnownSpells())
+                findNavController().navigate(R.id.spellsFragment)
+            else
+                findNavController().popBackStack(R.id.charactersListFragment, false)
         }
         viewBinding.cancelButton.setOnClickListener {
             viewModel.deleteCharacter()

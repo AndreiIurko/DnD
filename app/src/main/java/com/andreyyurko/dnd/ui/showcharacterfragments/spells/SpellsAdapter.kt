@@ -11,25 +11,30 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.SpellSpecificLanguage
+import com.andreyyurko.dnd.data.characterData.character.Character
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.SpellsHandler
 import javax.inject.Inject
 
 class SpellsAdapter @Inject constructor(
-    private val spellsHandler: SpellsHandler,
-    private val characterViewModel: CharacterViewModel,
-    private val preparedSpellsCountTextView: TextView,
-    private val preparedCantripsCountTextView: TextView,
-    private val root: ViewGroup
+    private val spellsCountTextView: TextView,
+    private val cantripsCountTextView: TextView,
+    private val chosenSpellsSet: MutableSet<String>,
+    private val chosenCantripsSet: MutableSet<String>,
+    private val root: ViewGroup,
+    private val showPopUpBackground: () -> Unit,
+    private val closePopUpBackground: () -> Unit,
+    private val updateCharacter: () -> Unit
+
 ) : RecyclerView.Adapter<SpellsAdapter.ViewHolder>() {
 
-    var spellsList: List<SpellSpecificLanguage> = listOf()
+    var shownSpellsList: List<SpellSpecificLanguage> = listOf()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.spellName)
         val levelTextView: TextView = itemView.findViewById(R.id.spellLevel)
         val castTimeTextView: TextView = itemView.findViewById(R.id.spellCastTime)
-        val isPreparedCheckbox: CheckBox = itemView.findViewById(R.id.isPrepared)
+        val isAddedCheckbox: CheckBox = itemView.findViewById(R.id.isAdded)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,38 +43,35 @@ class SpellsAdapter @Inject constructor(
     }
 
     override fun getItemCount(): Int {
-        return spellsList.size
+        return shownSpellsList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        spellsList[position].name.apply {
+        shownSpellsList[position].name.apply {
             if (this.length > 20) holder.nameTextView.text = this.substring(0..16) + "..."
             else holder.nameTextView.text = this
         }
-        holder.levelTextView.text = spellsList[position].level
-        spellsList[position].castingTime.apply {
+        holder.levelTextView.text = shownSpellsList[position].level
+        shownSpellsList[position].castingTime.apply {
             if (this.split(" ")[1][0] == 'м') holder.castTimeTextView.text =
-                spellsList[position].castingTime.split(",")[0]
+                shownSpellsList[position].castingTime.split(",")[0]
             else holder.castTimeTextView.text = this.split(" ")[1]
         }
-        holder.isPreparedCheckbox.setOnCheckedChangeListener(null)
-        holder.isPreparedCheckbox.isChecked =
-            spellsHandler.getPreparedSpells(characterViewModel.shownCharacter).contains(spellsList[position])
+        holder.isAddedCheckbox.setOnCheckedChangeListener(null)
+        holder.isAddedCheckbox.isChecked = chosenSpellsSet.contains(shownSpellsList[position].name) || chosenCantripsSet.contains(shownSpellsList[position].name)
 
-        holder.isPreparedCheckbox.setOnCheckedChangeListener { _, isChecked ->
+        holder.isAddedCheckbox.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                spellsHandler.addSpell(characterViewModel.shownCharacter, spellsList[position])
+                addSpell(shownSpellsList[position])
             } else {
-                spellsHandler.removeSpell(characterViewModel.shownCharacter, spellsList[position])
+                removeSpell(shownSpellsList[position])
             }
-            preparedSpellsCountTextView.text =
-                spellsHandler.getPreparedSpellsCount(characterViewModel.shownCharacter).toString()
-            preparedCantripsCountTextView.text =
-                spellsHandler.getPreparedCantripsCount(characterViewModel.shownCharacter).toString()
+            spellsCountTextView.text = chosenSpellsSet.size.toString()
+            cantripsCountTextView.text = chosenCantripsSet.size.toString()
         }
 
         holder.nameTextView.setOnClickListener {
-            showFullDescription(spellsList[position])
+            showFullDescription(shownSpellsList[position])
         }
     }
 
@@ -79,6 +81,7 @@ class SpellsAdapter @Inject constructor(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             400 * root.context.resources.displayMetrics.density.toInt()
         )
+        parent.setBackgroundColor(root.context.getColor(R.color.background))
 
         parent.findViewById<TextView>(R.id.nameTextView).text = spell.name
         parent.findViewById<TextView>(R.id.levelAndSchoolTextView).text =
@@ -100,11 +103,28 @@ class SpellsAdapter @Inject constructor(
 
         fullDescriptionPopUp.animationStyle = androidx.appcompat.R.style.Animation_AppCompat_Dialog
         fullDescriptionPopUp.showAtLocation(parent, Gravity.CENTER, 0, 0)
-        characterViewModel.showPopUpBackground()
+        showPopUpBackground()
 
         fullDescriptionPopUp.setOnDismissListener {
-            characterViewModel.closePopUpBackground()
+            closePopUpBackground()
         }
+    }
 
+    private fun addSpell(spell: SpellSpecificLanguage) {
+        if (spell.level.toInt() == 0) {
+            chosenCantripsSet.add(spell.name)
+        } else {
+            chosenSpellsSet.add(spell.name)
+        }
+        updateCharacter()
+    }
+
+    private fun removeSpell(spell: SpellSpecificLanguage) {
+        if (spell.level.toInt() == 0) {
+            chosenCantripsSet.remove(spell.name)
+        } else {
+            chosenSpellsSet.remove(spell.name)
+        }
+        updateCharacter()
     }
 }

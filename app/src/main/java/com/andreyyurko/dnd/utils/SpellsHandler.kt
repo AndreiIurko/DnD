@@ -1,5 +1,6 @@
 package com.andreyyurko.dnd.utils
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.andreyyurko.dnd.data.SpellSpecificLanguage
 import com.andreyyurko.dnd.data.characterData.School
@@ -22,45 +23,69 @@ class SpellsHandler @Inject constructor(
         }
     }
 
-    private fun getClassSpells(character: Character): MutableSet<SpellSpecificLanguage> {
+    fun getClassSpellsWithDescription(character: Character, filters: Filters = Filters()): MutableList<SpellSpecificLanguage> {
         val className = character.characterInfo.spellsInfo.className
-        val result: MutableSet<SpellSpecificLanguage> = mutableSetOf()
+        val result: MutableList<SpellSpecificLanguage> = mutableListOf()
         for (spell in allSpells.values) {
-            if (spell.classes.contains(className.lowercase())) result.add(spell)
+            if (spell.classes.contains(className.lowercase()) &&
+                checkFilters(spell, filters) &&
+                spell.level.toInt() <= (character.characterInfo.level + 1) / 2)
+                result.add(spell)
         }
         return result
     }
 
-    fun getKnownSpells(character: Character, filters: Filters = Filters()): MutableList<SpellSpecificLanguage> {
-        val result: MutableList<SpellSpecificLanguage> = mutableListOf()
+    fun getKnownSpellsWithDescription(character: Character, filters: Filters = Filters()): MutableList<SpellSpecificLanguage> {
+        var result: MutableList<SpellSpecificLanguage> = mutableListOf()
         if (character.characterInfo.spellsInfo.maxKnownSpellsCount == -1) {
-            for (spell in getClassSpells(character)) {
-                if (
-                    spell.level.toInt() <= (character.characterInfo.level + 1) / 2 &&
-                    checkFilters(spell, filters)
-                ) result.add(spell)
-            }
+            result = getClassSpellsWithDescription(character, filters)
         } else {
-            for (spellName in character.characterInfo.spellsInfo.spellLists.knownSpells) {
-                result.add(allSpells[spellName]!!)
+            for (spellName in character.characterInfo.spellsInfo.spellLists.knownSpells + character.characterInfo.spellsInfo.spellLists.knownCantrips) {
+                allSpells[spellName]?.apply {
+                    if (checkFilters(this, filters)) result.add(this)
+                }
             }
         }
         return result
     }
 
-    fun getPreparedSpells(character: Character, filters: Filters = Filters()): MutableList<SpellSpecificLanguage> {
-        val result: MutableList<SpellSpecificLanguage> = mutableListOf()
-        for (spellName in character.characterInfo.spellsInfo.spellLists.preparedSpells + character.characterInfo.spellsInfo.spellLists.preparedCantrips) {
-            allSpells[spellName]?.apply {
-                if (
-                    checkSubstring(this, filters.substring)
-                )
-                    result.add(this)
-            }
+    fun getPreparedSpellsWithDescription(character: Character, filters: Filters = Filters()): MutableList<SpellSpecificLanguage> {
+        var result: MutableList<SpellSpecificLanguage> = mutableListOf()
+        if (character.characterInfo.spellsInfo.maxPreparedSpellsCount == -1) {
+            result = getKnownSpellsWithDescription(character, filters)
+        }
+        else {
+            for (spellName in character.characterInfo.spellsInfo.spellLists.preparedCantrips + character.characterInfo.spellsInfo.spellLists.preparedSpells) {
+                allSpells[spellName]?.apply {
+                    if (checkFilters(this, filters)) result.add(this)
+                }
 
+            }
         }
         sortByLevel(result)
         return result
+    }
+
+    fun isAllKnownIsPrepared(character: Character): Boolean {
+        return character.characterInfo.spellsInfo.maxPreparedSpellsCount == -1
+    }
+
+    fun isAllKnown(character: Character): Boolean {
+        return character.characterInfo.spellsInfo.maxKnownSpellsCount == -1
+    }
+
+    // this is essential to return reference
+    fun getPreparedSpells(character: Character): MutableSet<String> {
+        return character.characterInfo.spellsInfo.spellLists.preparedSpells
+    }
+    fun getPreparedCantrips(character: Character): MutableSet<String> {
+        return character.characterInfo.spellsInfo.spellLists.preparedCantrips
+    }
+    fun getKnownSpells(character: Character): MutableSet<String> {
+        return character.characterInfo.spellsInfo.spellLists.knownSpells
+    }
+    fun getKnownCantrips(character: Character): MutableSet<String> {
+        return character.characterInfo.spellsInfo.spellLists.knownCantrips
     }
 
     fun getPreparedSpellsCount(character: Character): Int {
@@ -77,6 +102,22 @@ class SpellsHandler @Inject constructor(
 
     fun getMaxPreparedCantripsCount(character: Character): Int {
         return character.characterInfo.spellsInfo.maxPreparedCantripsCount
+    }
+
+    fun getKnownSpellsCount(character: Character): Int {
+        return character.characterInfo.spellsInfo.spellLists.knownSpells.size
+    }
+
+    fun getMaxKnownSpellsCount(character: Character): Int {
+        return character.characterInfo.spellsInfo.maxKnownSpellsCount
+    }
+
+    fun getKnownCantripsCount(character: Character): Int {
+        return character.characterInfo.spellsInfo.spellLists.knownCantrips.size
+    }
+
+    fun getMaxKnownCantripsCount(character: Character): Int {
+        return character.characterInfo.spellsInfo.maxKnownCantripsCount
     }
 
     private fun addPreparedSpell(character: Character, spellName: String) {

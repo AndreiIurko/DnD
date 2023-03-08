@@ -7,12 +7,14 @@ import com.andreyyurko.dnd.data.abilities.mapOfAn
 import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
 import com.andreyyurko.dnd.ui.addcharacterfragments.AbilityAdapter
 import com.andreyyurko.dnd.utils.CreateCharacterViewModel
+import com.andreyyurko.dnd.utils.SpellsHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class ClassViewModel @Inject constructor(
-    private val createCharacterViewModel: CreateCharacterViewModel
+    private val createCharacterViewModel: CreateCharacterViewModel,
+    private val spellsHandler: SpellsHandler
 ) : ViewModel() {
     val character = createCharacterViewModel.character
     val baseCAN = character.baseCAN
@@ -42,6 +44,10 @@ class ClassViewModel @Inject constructor(
 
     fun deleteCharacter() {
         createCharacterViewModel.deleteCharacter()
+    }
+
+    fun isNeededToChooseKnownSpells(): Boolean {
+        return !spellsHandler.isAllKnown(createCharacterViewModel.character)
     }
 
     private fun showAllClassAbilities() {

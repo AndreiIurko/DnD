@@ -68,7 +68,7 @@ var spellCastingCleric: AbilityNode = AbilityNode(
         abilities.spellsInfo.apply {
             this.className = Classes.Cleric.className
             this.maxPreparedSpellsCount = max((abilityToModifier(abilities.wisdom) + abilities.level), 1)
-            this.maxPreparedCantripsCount += 3
+            this.maxPreparedCantripsCount = 3
         }
         abilities
     },
