@@ -38,7 +38,7 @@ data class CharacterInfo(
     // String - name of inventory item
     var inventory: MutableMap<String, InventoryItemInfo> = mutableMapOf(),
 
-    var spellsInfo: CharacterSpells = CharacterSpells(),
+    var spellsInfo: MutableMap<String, CharacterSpells> = mutableMapOf(),//CharacterSpells(),
 
     var currentState: CurrentState = CurrentState()
 )
@@ -47,7 +47,7 @@ fun mergeCharacterInfo(characterInfoFirst: CharacterInfo, characterInfoSecond: C
     val resultCharacterInfo = CharacterInfo()
     resultCharacterInfo.inventory = characterInfoFirst.inventory
     resultCharacterInfo.currentState = characterInfoFirst.currentState
-    resultCharacterInfo.spellsInfo.spellLists = characterInfoFirst.spellsInfo.spellLists
+    resultCharacterInfo.spellsInfo = characterInfoFirst.spellsInfo
 
     resultCharacterInfo.characterClass.className =
         characterInfoFirst.characterClass.className + characterInfoSecond.characterClass.className

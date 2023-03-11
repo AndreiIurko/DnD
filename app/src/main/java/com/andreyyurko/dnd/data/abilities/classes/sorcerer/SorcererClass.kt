@@ -9,6 +9,7 @@ import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.Priority
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
+import com.andreyyurko.dnd.data.spells.CharacterSpells
 
 var classFeaturesSorcerer: AbilityNode = AbilityNode(
     name = "Чародей: классовые умения",
@@ -56,9 +57,12 @@ var spellCastingSorcerer: AbilityNode = AbilityNode(
     name = "Чародей: использование заклинаний",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.spellsInfo.apply {
-            this.className = Classes.Sorcerer.className
-            this.maxKnownSpellsCount = 2
-            this.maxKnownCantripsCount = 4
+            if (!this.contains("Заклинания класса")) {
+                this["Заклинания класса"] = CharacterSpells()
+            }
+            this["Заклинания класса"]?.className = Classes.Sorcerer.className
+            this["Заклинания класса"]?.maxKnownSpellsCount = 2
+            this["Заклинания класса"]?.maxKnownCantripsCount = 4
         }
         abilities
     },
@@ -119,7 +123,9 @@ var sorcerer2: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        abilities.spellsInfo.maxKnownSpellsCount += 1
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownSpellsCount += 1
+        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -134,7 +140,9 @@ var sorcerer3: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        abilities.spellsInfo.maxKnownSpellsCount += 1
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownSpellsCount += 1
+        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -149,8 +157,12 @@ var sorcerer4: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        abilities.spellsInfo.maxKnownSpellsCount+= 1
-        abilities.spellsInfo.maxKnownCantripsCount += 1
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownSpellsCount += 1
+        }
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownCantripsCount += 1
+        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -166,7 +178,9 @@ var sorcerer5: AbilityNodeLevel = AbilityNodeLevel(
         abilities.proficiencyBonus += 1
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        abilities.spellsInfo.maxKnownSpellsCount += 1
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownSpellsCount += 1
+        }
         abilities
     },
     alternatives = mutableMapOf(),

@@ -24,7 +24,12 @@ class SpellsHandler @Inject constructor(
     }
 
     fun getClassSpellsWithDescription(character: Character, filters: Filters = Filters()): MutableList<SpellSpecificLanguage> {
-        val className = character.characterInfo.spellsInfo.className
+        var className = ""
+        if (character.characterInfo.spellsInfo.contains("Заклинания класса")) {
+            character.characterInfo.spellsInfo["Заклинания класса"]?.let{
+                className = it.className
+            }
+        }
         val result: MutableList<SpellSpecificLanguage> = mutableListOf()
         for (spell in allSpells.values) {
             if (spell.classes.contains(className.lowercase()) &&
@@ -37,12 +42,14 @@ class SpellsHandler @Inject constructor(
 
     fun getKnownSpellsWithDescription(character: Character, filters: Filters = Filters()): MutableList<SpellSpecificLanguage> {
         var result: MutableList<SpellSpecificLanguage> = mutableListOf()
-        if (character.characterInfo.spellsInfo.maxKnownSpellsCount == -1) {
-            result = getClassSpellsWithDescription(character, filters)
-        } else {
-            for (spellName in character.characterInfo.spellsInfo.spellLists.knownSpells + character.characterInfo.spellsInfo.spellLists.knownCantrips) {
-                allSpells[spellName]?.apply {
-                    if (checkFilters(this, filters)) result.add(this)
+        for((_, value) in character.characterInfo.spellsInfo.entries) {
+            if (value.maxKnownSpellsCount == -1) {
+                result = getClassSpellsWithDescription(character, filters)
+            } else {
+                for (spellName in value.spellLists.knownSpells + value.spellLists.knownCantrips) {
+                    allSpells[spellName]?.apply {
+                        if (checkFilters(this, filters)) result.add(this)
+                    }
                 }
             }
         }
@@ -51,15 +58,15 @@ class SpellsHandler @Inject constructor(
 
     fun getPreparedSpellsWithDescription(character: Character, filters: Filters = Filters()): MutableList<SpellSpecificLanguage> {
         var result: MutableList<SpellSpecificLanguage> = mutableListOf()
-        if (character.characterInfo.spellsInfo.maxPreparedSpellsCount == -1) {
-            result = getKnownSpellsWithDescription(character, filters)
-        }
-        else {
-            for (spellName in character.characterInfo.spellsInfo.spellLists.preparedCantrips + character.characterInfo.spellsInfo.spellLists.preparedSpells) {
-                allSpells[spellName]?.apply {
-                    if (checkFilters(this, filters)) result.add(this)
+        for((_, value) in character.characterInfo.spellsInfo.entries) {
+            if (value.maxPreparedSpellsCount == -1) {
+                result += getKnownSpellsWithDescription(character, filters)
+            } else {
+                for (spellName in value.spellLists.preparedCantrips + value.spellLists.preparedSpells) {
+                    allSpells[spellName]?.apply {
+                        if (checkFilters(this, filters)) result.add(this)
+                    }
                 }
-
             }
         }
         sortByLevel(result)
@@ -67,60 +74,148 @@ class SpellsHandler @Inject constructor(
     }
 
     fun isAllKnownIsPrepared(character: Character): Boolean {
-        return character.characterInfo.spellsInfo.maxPreparedSpellsCount == -1
+        if (character.characterInfo.spellsInfo.contains("Заклинания класса")) {
+            character.characterInfo.spellsInfo["Заклинания класса"]?.let{
+                return it.maxPreparedSpellsCount == -1
+            }
+        }
+        return true
     }
 
     fun isAllKnown(character: Character): Boolean {
-        return character.characterInfo.spellsInfo.maxKnownSpellsCount == -1
+        if (character.characterInfo.spellsInfo.contains("Заклинания класса")) {
+            character.characterInfo.spellsInfo["Заклинания класса"]?.let{
+                return it.maxKnownSpellsCount == -1
+            }
+        }
+        return true
     }
 
     // this is essential to return reference
     fun getPreparedSpells(character: Character): MutableSet<String> {
-        return character.characterInfo.spellsInfo.spellLists.preparedSpells
+        var result: MutableSet<String> = mutableSetOf()
+        for((_, value) in character.characterInfo.spellsInfo.entries) {
+            if (value.maxPreparedSpellsCount == -1) {
+                result += value.spellLists.knownSpells
+            } else {
+                result += value.spellLists.preparedSpells
+            }
+        }
+        return result
+        //return character.characterInfo.spellsInfo.spellLists.preparedSpells
     }
     fun getPreparedCantrips(character: Character): MutableSet<String> {
-        return character.characterInfo.spellsInfo.spellLists.preparedCantrips
+        var result: MutableSet<String> = mutableSetOf()
+        for((_, value) in character.characterInfo.spellsInfo.entries) {
+            if (value.maxPreparedCantripsCount == -1) {
+                result += value.spellLists.knownCantrips
+            } else {
+                result += value.spellLists.preparedCantrips
+            }
+        }
+        return result
+        //return character.characterInfo.spellsInfo.spellLists.preparedCantrips
     }
     fun getKnownSpells(character: Character): MutableSet<String> {
-        return character.characterInfo.spellsInfo.spellLists.knownSpells
+        var result: MutableSet<String> = mutableSetOf()
+        if (character.characterInfo.spellsInfo.contains("Заклинания класса")) {
+            character.characterInfo.spellsInfo["Заклинания класса"]?.let{
+                result = it.spellLists.knownSpells
+            }
+        }
+        return result
     }
     fun getKnownCantrips(character: Character): MutableSet<String> {
-        return character.characterInfo.spellsInfo.spellLists.knownCantrips
+        var result: MutableSet<String> = mutableSetOf()
+        if (character.characterInfo.spellsInfo.contains("Заклинания класса")) {
+            character.characterInfo.spellsInfo["Заклинания класса"]?.let{
+                result = it.spellLists.knownCantrips
+            }
+        }
+        return result
     }
 
     fun getPreparedSpellsCount(character: Character): Int {
-        return character.characterInfo.spellsInfo.spellLists.preparedSpells.size
+        var result = 0
+        if (character.characterInfo.spellsInfo.contains("Заклинания класса")) {
+            character.characterInfo.spellsInfo["Заклинания класса"]?.let{
+                result = it.spellLists.preparedSpells.size
+            }
+        }
+        return result
     }
 
     fun getMaxPreparedSpellsCount(character: Character): Int {
-        return character.characterInfo.spellsInfo.maxPreparedSpellsCount
+        var result = 0
+        if (character.characterInfo.spellsInfo.contains("Заклинания класса")) {
+            character.characterInfo.spellsInfo["Заклинания класса"]?.let{
+                result = it.maxPreparedSpellsCount
+            }
+        }
+        return result
     }
 
     fun getPreparedCantripsCount(character: Character): Int {
-        return character.characterInfo.spellsInfo.spellLists.preparedCantrips.size
+        var result = 0
+        if (character.characterInfo.spellsInfo.contains("Заклинания класса")) {
+            character.characterInfo.spellsInfo["Заклинания класса"]?.let{
+                result = it.spellLists.preparedCantrips.size
+            }
+        }
+        return result
     }
 
     fun getMaxPreparedCantripsCount(character: Character): Int {
-        return character.characterInfo.spellsInfo.maxPreparedCantripsCount
+        var result = 0
+        if (character.characterInfo.spellsInfo.contains("Заклинания класса")) {
+            character.characterInfo.spellsInfo["Заклинания класса"]?.let{
+                result = it.maxPreparedCantripsCount
+            }
+        }
+        return result
     }
 
     fun getKnownSpellsCount(character: Character): Int {
-        return character.characterInfo.spellsInfo.spellLists.knownSpells.size
+        var result = 0
+        if (character.characterInfo.spellsInfo.contains("Заклинания класса")) {
+            character.characterInfo.spellsInfo["Заклинания класса"]?.let{
+                result = it.spellLists.knownSpells.size
+            }
+        }
+        return result
     }
 
     fun getMaxKnownSpellsCount(character: Character): Int {
-        return character.characterInfo.spellsInfo.maxKnownSpellsCount
+        var result = 0
+        if (character.characterInfo.spellsInfo.contains("Заклинания класса")) {
+            character.characterInfo.spellsInfo["Заклинания класса"]?.let{
+                result = it.maxKnownSpellsCount
+            }
+        }
+        return result
     }
 
     fun getKnownCantripsCount(character: Character): Int {
-        return character.characterInfo.spellsInfo.spellLists.knownCantrips.size
+        var result = 0
+        if (character.characterInfo.spellsInfo.contains("Заклинания класса")) {
+            character.characterInfo.spellsInfo["Заклинания класса"]?.let{
+                result = it.spellLists.knownCantrips.size
+            }
+        }
+        return result
     }
 
     fun getMaxKnownCantripsCount(character: Character): Int {
-        return character.characterInfo.spellsInfo.maxKnownCantripsCount
+        var result = 0
+        if (character.characterInfo.spellsInfo.contains("Заклинания класса")) {
+            character.characterInfo.spellsInfo["Заклинания класса"]?.let{
+                result = it.maxKnownCantripsCount
+            }
+        }
+        return result
     }
 
-    private fun addPreparedSpell(character: Character, spellName: String) {
+    /*private fun addPreparedSpell(character: Character, spellName: String) {
         character.characterInfo.spellsInfo.spellLists.preparedSpells.add(spellName)
         charactersHolder.updateCharacter(character)
     }
@@ -138,9 +233,9 @@ class SpellsHandler @Inject constructor(
     private fun removePreparedCantrip(character: Character, spellName: String) {
         character.characterInfo.spellsInfo.spellLists.preparedCantrips.remove(spellName)
         charactersHolder.updateCharacter(character)
-    }
+    }*/
 
-    fun addSpell(character: Character, spell: SpellSpecificLanguage) {
+    /*fun addSpell(character: Character, spell: SpellSpecificLanguage) {
         if (spell.level.toInt() == 0) {
             addPreparedCantrip(character, spell.name)
         } else {
@@ -154,7 +249,7 @@ class SpellsHandler @Inject constructor(
         } else {
             removePreparedSpell(character, spell.name)
         }
-    }
+    }*/
 
     data class Filters(
         var levels: MutableSet<String> = mutableSetOf(),

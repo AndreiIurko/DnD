@@ -12,6 +12,7 @@ import com.andreyyurko.dnd.data.characterData.character.CharacterAbilityNode
 import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
 import com.andreyyurko.dnd.data.characterData.mergeCharacterInfo
 import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
+import com.andreyyurko.dnd.data.spells.CharacterSpells
 import com.andreyyurko.dnd.data.spells.SpellLists
 import com.andreyyurko.dnd.db.DB
 import com.andreyyurko.dnd.db.DBProvider
@@ -67,9 +68,10 @@ class CharactersHolder @Inject constructor(
                 val inventoryJson = db.getString(id.toString() + DB_INVENTORY)
                 val inventory: MutableMap<String, InventoryItemInfo> = Gson().fromJson(inventoryJson, inventoryMapType)
 
+                val spellsMapType: Type = object : TypeToken<MutableMap<String, CharacterSpells>>() {}.type
                 val spellsJson = db.getString(id.toString() + DB_SPELLS)
                 Log.d("spells", spellsJson.toString())
-                val spellLists = Gson().fromJson(spellsJson, SpellLists::class.java)
+                val spells: MutableMap<String, CharacterSpells> = Gson().fromJson(spellsJson, spellsMapType)
 
                 // get base_an with all sub-nods
                 val baseCharacterAbilityNode = loadCharacterNode("base_an", id, ".", character)
@@ -88,7 +90,7 @@ class CharactersHolder @Inject constructor(
                 character.characterInfo.inventory = inventory
 
                 // add chosen spells
-                character.characterInfo.spellsInfo.spellLists = spellLists
+                character.characterInfo.spellsInfo = spells
 
                 // merge all CAN
                 mergeAllAbilities(character)
@@ -177,7 +179,7 @@ class CharactersHolder @Inject constructor(
         )
 
         // save chosen spells
-        val spellsJson = Gson().toJson(characters[id]!!.characterInfo.spellsInfo.spellLists)
+        val spellsJson = Gson().toJson(characters[id]!!.characterInfo.spellsInfo)
         db.putStringsAsync(
             listOf(Pair(id.toString() + DB_SPELLS, spellsJson))
         )

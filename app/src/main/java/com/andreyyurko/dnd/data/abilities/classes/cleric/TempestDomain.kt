@@ -4,6 +4,24 @@ import com.andreyyurko.dnd.data.abilities.classes.fighter.*
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
+var TempestDomainSpells = AbilityNode(
+    name = "Заклинания домена бури",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { abilities: CharacterInfo ->
+        abilities.level >= 1 && abilities.characterClass == Classes.Cleric
+    },
+    description =
+            "Уровень жреца | Заклинания\n" +
+            "       1      | громовая волна, туманное облако\n" +
+            "       3      | дребезги, порыв ветра\n" +
+            "       5      | метель, призыв молнии\n" +
+            "       7      | власть над водами, град\n" +
+            "       9      | нашествие насекомых, разрушительная волна\n"
+)
+
 var bonusProficiencyTempestDomain = AbilityNode(
     name = "Дополнительные владения домена бури",
     changesInCharacterInfo = { abilities: CharacterInfo ->
@@ -103,12 +121,13 @@ var tempestDomain = AbilityNode(
     name = "Домен бури",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     alternatives = mutableMapOf(
-        Pair("first", listOf(bonusProficiencyTempestDomain.name)),
-        Pair("second", listOf(wrathOfTheStorm.name)),
-        Pair("third", listOf(channelDivinityDestructiveWrath.name)),
-        Pair("fourth", listOf(thunderboltStrike.name)),
-        Pair("fifth", listOf(divineStrikeTempestDomain.name)),
-        Pair("sixth", listOf(stormBorn.name))
+        Pair("first", listOf(TempestDomainSpells.name)),
+        Pair("second", listOf(bonusProficiencyTempestDomain.name)),
+        Pair("third", listOf(wrathOfTheStorm.name)),
+        Pair("fourth", listOf(channelDivinityDestructiveWrath.name)),
+        Pair("fifth", listOf(thunderboltStrike.name)),
+        Pair("sixth", listOf(divineStrikeTempestDomain.name)),
+        Pair("seventh", listOf(stormBorn.name))
     ),
     requirements = { true },
     description = "",
@@ -116,6 +135,7 @@ var tempestDomain = AbilityNode(
 )
 
 var mapOfTempestDomainAbilities: MutableMap<String, AbilityNode> = mutableMapOf(
+    Pair(TempestDomainSpells.name, TempestDomainSpells),
     Pair(bonusProficiencyTempestDomain.name, bonusProficiencyTempestDomain),
     Pair(wrathOfTheStorm.name, wrathOfTheStorm),
     Pair(channelDivinityDestructiveWrath.name, channelDivinityDestructiveWrath),

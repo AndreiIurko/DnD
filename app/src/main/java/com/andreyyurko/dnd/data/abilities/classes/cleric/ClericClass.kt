@@ -14,6 +14,7 @@ import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.spells.CharacterSpells
 import kotlin.math.*
 
 var classFeaturesCleric: AbilityNode = AbilityNode(
@@ -66,9 +67,12 @@ var spellCastingCleric: AbilityNode = AbilityNode(
     name = "Жрец: использование заклинаний",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.spellsInfo.apply {
-            this.className = Classes.Cleric.className
-            this.maxPreparedSpellsCount = max((abilityToModifier(abilities.wisdom) + abilities.level), 1)
-            this.maxPreparedCantripsCount = 3
+            if (!this.contains("Заклинания класса")) {
+                this["Заклинания класса"] = CharacterSpells()
+            }
+            this["Заклинания класса"]?.className = Classes.Cleric.className
+            this["Заклинания класса"]?.maxPreparedSpellsCount = max((abilityToModifier(abilities.wisdom) + abilities.level), 1)
+            this["Заклинания класса"]?.maxKnownCantripsCount = 3
         }
         abilities
     },
@@ -227,7 +231,9 @@ var cleric4: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        abilities.spellsInfo.maxPreparedCantripsCount += 1
+        abilities.spellsInfo["Заклинания класса"]?.let{
+            it.maxPreparedCantripsCount += 1
+        }
         abilities
     },
     alternatives = mutableMapOf(
