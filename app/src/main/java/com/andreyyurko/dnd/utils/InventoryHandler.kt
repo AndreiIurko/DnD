@@ -47,8 +47,6 @@ class InventoryHandler @Inject constructor(
         filters: Filters = Filters()
     ): MutableList<InventoryItemInfo> {
         val resultList = mutableListOf<InventoryItemInfo>()
-        Log.d("inventory", allItems.keys.toString())
-        Log.d("inventory", allItems.values.size.toString())
         for (item in allItems.values) {
             if (checkFilterForItem(item, filters)) {
                 resultList.add(getItemDescription(character, item.name))
@@ -89,7 +87,6 @@ class InventoryHandler @Inject constructor(
         if (itemDescription.count == 0) {
             inventory.remove(itemDescription.itemName)
         }
-        Log.d("inventory", itemDescription.toString())
         charactersHolder.updateCharacter(character)
     }
 

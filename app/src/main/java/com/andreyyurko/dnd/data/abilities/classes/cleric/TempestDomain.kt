@@ -3,10 +3,41 @@ package com.andreyyurko.dnd.data.abilities.classes.cleric
 import com.andreyyurko.dnd.data.abilities.classes.fighter.*
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
+import com.andreyyurko.dnd.data.spells.CharacterSpells
+import com.andreyyurko.dnd.data.spells.SpellLists
 
 var TempestDomainSpells = AbilityNode(
     name = "Заклинания домена бури",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        val additionalSpellList = mutableSetOf<String>()
+        if (abilities.level >= 1) {
+            additionalSpellList.add("Волна грома")
+            additionalSpellList.add("Туманное облако")
+        }
+        if (abilities.level >= 3) {
+            additionalSpellList.add("Дребезги")
+            additionalSpellList.add("Порыв ветра")
+        }
+        if (abilities.level >= 5) {
+            additionalSpellList.add("Метель")
+            additionalSpellList.add("Призыв молнии")
+        }
+        if (abilities.level >= 7) {
+            additionalSpellList.add("Власть над водами")
+            additionalSpellList.add("Град")
+        }
+        if (abilities.level >= 9) {
+            additionalSpellList.add("Нашествие насекомых")
+            additionalSpellList.add("Разрушительная волна")
+        }
+        abilities.spellsInfo["Заклинания домена бури"] = CharacterSpells(
+            className = abilities.characterClass.className,
+            maxKnownSpellsCount = 0,
+            maxKnownCantripsCount = 0,
+            spellLists = SpellLists(
+                knownSpells = additionalSpellList
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),

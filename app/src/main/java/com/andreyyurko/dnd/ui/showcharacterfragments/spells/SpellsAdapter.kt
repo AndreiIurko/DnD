@@ -1,5 +1,6 @@
 package com.andreyyurko.dnd.ui.showcharacterfragments.spells
 
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -58,8 +59,16 @@ class SpellsAdapter @Inject constructor(
             else holder.castTimeTextView.text = this.split(" ")[1]
         }
         holder.isAddedCheckbox.setOnCheckedChangeListener(null)
-        holder.isAddedCheckbox.isChecked = getChosenSpells().contains(shownSpellsList[position])
-        holder.isAddedCheckbox.isEnabled = !shownSpellsList[position].isAlwaysIncluded
+        var isChecked = false
+        var isAlwaysIncluded = false
+        getChosenSpells().map { spell: Spell ->
+            if (spell.data.name == shownSpellsList[position].data.name) {
+                isChecked = true
+                isAlwaysIncluded = spell.isAlwaysIncluded
+            }
+        }
+        holder.isAddedCheckbox.isChecked = isChecked
+        holder.isAddedCheckbox.isEnabled = !isAlwaysIncluded
 
         holder.isAddedCheckbox.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {

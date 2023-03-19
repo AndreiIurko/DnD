@@ -22,7 +22,6 @@ open class FragmentWithFilters : BaseFragment {
     constructor(@LayoutRes contentLayoutId: Int) : super(contentLayoutId)
 
     protected fun showFilters(filtersView: View, filtersButton: TextView, searchEditText: EditText) {
-        Log.d("test", filtersButton.z.toString())
         filtersView.y = -100 * resources.displayMetrics.density + filtersButton.y
         filtersView.visibility = View.VISIBLE
         filtersView.animate()

@@ -1,9 +1,7 @@
 package com.andreyyurko.dnd.ui.addcharacterfragments.spellsfragment
 
 import androidx.lifecycle.ViewModel
-import com.andreyyurko.dnd.data.SpellSpecificLanguage
 import com.andreyyurko.dnd.data.spells.Spell
-import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.CreateCharacterViewModel
 import com.andreyyurko.dnd.utils.SpellsHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -43,7 +41,7 @@ class SpellsViewModel @Inject constructor(
     }
 
     fun showAllSpells(): List<Spell> {
-        return spellsHandler.getAllSpellsWhatNeedsToBePrepared(createCharacterViewModel.character, allFilters).toList()
+        return spellsHandler.getAllSpellsWhatNeedsToBeChosen(createCharacterViewModel.character, allFilters).toList()
     }
 
     fun showKnownSpells(): List<Spell> {

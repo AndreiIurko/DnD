@@ -70,7 +70,6 @@ class CharactersHolder @Inject constructor(
 
                 val spellsMapType: Type = object : TypeToken<MutableMap<String, CharacterSpells>>() {}.type
                 val spellsJson = db.getString(id.toString() + DB_SPELLS)
-                Log.d("spells", spellsJson.toString())
                 val spells: MutableMap<String, CharacterSpells> = Gson().fromJson(spellsJson, spellsMapType)
 
                 // get base_an with all sub-nods

@@ -111,7 +111,6 @@ class CharacterSpellsFragment : FragmentWithFilters(R.layout.fragment_character_
 
     private fun showItems() {
         viewModel.getFilters().substring = viewBinding.searchEditText.text.toString()
-        Log.d("test", viewModel.getFilters().toString())
         (viewBinding.spellsRecyclerView.adapter as SpellsAdapter).apply {
             shownSpellsList =
                 if (viewModel.isPreparedListShown) viewModel.showPreparedSpells()

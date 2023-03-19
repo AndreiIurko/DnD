@@ -44,16 +44,14 @@ class SpellsHandler @Inject constructor(
         return result
     }
 
-    fun getAllSpellsWhatNeedsToBePrepared(character: Character, filters: Filters = Filters()): MutableList<Spell> {
+    fun getAllSpellsWhatNeedsToBeChosen(character: Character, filters: Filters = Filters()): MutableList<Spell> {
         val result: MutableList<Spell> = mutableListOf()
-        Log.d("spell", character.characterInfo.characterClass.className)
         for ((listName, value) in character.characterInfo.spellsInfo.entries) {
             if ((value.maxKnownSpellsCount != -1 || value.maxKnownCantripsCount != -1 ) && character.characterInfo.characterClass.className == value.className) {
-                Log.d("spell", value.className)
                 for (spell in getClassSpellsWithDescription(character, filters, listName)) {
-                    if (value.maxKnownSpellsCount != -1 && spell.data.level != "0")
+                    if (value.maxKnownSpellsCount != -1 && value.maxKnownSpellsCount != 0 && spell.data.level != "0")
                         result.add(spell)
-                    if (value.maxKnownCantripsCount != -1 && spell.data.level == "0")
+                    if (value.maxKnownCantripsCount != -1 && value.maxKnownCantripsCount != 0 && spell.data.level == "0")
                         result.add(spell)
                 }
             }
@@ -69,20 +67,24 @@ class SpellsHandler @Inject constructor(
         if (value.maxKnownCantripsCount == -1) {
             for (spell in getClassSpellsWithDescription(character, filters, listName)) {
                 if (spell.data.level == "0") {
-                    spell.isAlwaysIncluded = true
                     result.add(spell)
                 }
+            }
+        }
+        else for (spellName in value.spellLists.knownCantrips) {
+            allSpells[spellName]?.let {
+                val spell = Spell(it, listName, false)
+                if (checkFilters(spell, filters)) result.add(spell)
             }
         }
         if (value.maxKnownSpellsCount == -1) {
             for (spell in getClassSpellsWithDescription(character, filters, listName)) {
                 if (spell.data.level != "0") {
-                    spell.isAlwaysIncluded = true
                     result.add(spell)
                 }
             }
         }
-        for (spellName in value.spellLists.knownCantrips + value.spellLists.knownSpells) {
+        else for (spellName in value.spellLists.knownSpells) {
             allSpells[spellName]?.let {
                 val spell = Spell(it, listName, false)
                 if (checkFilters(spell, filters)) result.add(spell)
@@ -204,7 +206,6 @@ class SpellsHandler @Inject constructor(
 
     fun getMaxPreparedCantripsCount(character: Character): Int {
         var result = 0
-        Log.d("spell", character.characterInfo.spellsInfo.toString())
         for ((_, value) in character.characterInfo.spellsInfo) {
             if (value.maxPreparedCantripsCount != -1)
                 result += value.maxPreparedCantripsCount
@@ -215,7 +216,7 @@ class SpellsHandler @Inject constructor(
     fun getKnownSpellsCount(character: Character): Int {
         var result = 0
         for ((_, value) in character.characterInfo.spellsInfo) {
-            if (value.maxKnownSpellsCount != -1)
+            if (value.maxKnownSpellsCount != -1 && value.maxKnownSpellsCount != 0)
                 result += value.spellLists.knownSpells.size
 
         }
@@ -235,7 +236,7 @@ class SpellsHandler @Inject constructor(
     fun getKnownCantripsCount(character: Character): Int {
         var result = 0
         for ((_, value) in character.characterInfo.spellsInfo) {
-            if (value.maxKnownCantripsCount != -1)
+            if (value.maxKnownCantripsCount != -1 && value.maxKnownCantripsCount != 0)
                 result += value.spellLists.knownCantrips.size
 
         }
