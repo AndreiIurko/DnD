@@ -88,7 +88,7 @@ var wrathOfTheStorm = AbilityNode(
 )
 
 var channelDivinityDestructiveWrath: AbilityNode = AbilityNode(
-    name = "Разрушительный гнев",
+    name = "Божественный канал: разрушительный гнев",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.actionsList.add(
             Action(
