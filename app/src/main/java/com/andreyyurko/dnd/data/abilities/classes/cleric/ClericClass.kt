@@ -232,7 +232,7 @@ var cleric4: AbilityNodeLevel = AbilityNodeLevel(
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.spellsInfo["Заклинания класса"]?.let{
-            it.maxPreparedCantripsCount += 1
+            it.maxKnownCantripsCount += 1
         }
         abilities
     },

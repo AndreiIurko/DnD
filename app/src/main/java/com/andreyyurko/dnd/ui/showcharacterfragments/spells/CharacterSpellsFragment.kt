@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
+import com.andreyyurko.dnd.data.spells.Spell
 import com.andreyyurko.dnd.databinding.FragmentCharacterSpellsBinding
 import com.andreyyurko.dnd.ui.showcharacterfragments.fragmentwithfilters.FragmentWithFilters
 import dagger.hilt.android.AndroidEntryPoint
@@ -88,12 +89,12 @@ class CharacterSpellsFragment : FragmentWithFilters(R.layout.fragment_character_
 
         val adapter = SpellsAdapter(
             viewBinding.preparedSpellsCount, viewBinding.preparedCantripsCount,
-            viewModel.getPreparedSpells(),
-            viewModel.getPreparedCantrips(),
             viewBinding.root,
             { viewModel.characterViewModel.showPopUpBackground() },
             { viewModel.characterViewModel.closePopUpBackground() },
-            { viewModel.characterViewModel.updateCharacterInfo() }
+            { spell: Spell -> viewModel.addPreparedSpell(spell) },
+            { spell: Spell -> viewModel.removePreparedSpell(spell) },
+            { viewModel.showPreparedSpells() }
         )
 
         recyclerView.adapter = adapter

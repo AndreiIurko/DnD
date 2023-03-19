@@ -3,6 +3,7 @@ package com.andreyyurko.dnd.ui.showcharacterfragments.spells
 import androidx.lifecycle.ViewModel
 import com.andreyyurko.dnd.data.SpellSpecificLanguage
 import com.andreyyurko.dnd.data.characterData.character.Character
+import com.andreyyurko.dnd.data.spells.Spell
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.SpellsHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,19 +28,22 @@ class CharacterSpellsViewModel @Inject constructor(
         else knownFilters
     }
 
-    fun showPreparedSpells(): List<SpellSpecificLanguage> {
+    fun showPreparedSpells(): List<Spell> {
         return spellsHandler.getPreparedSpellsWithDescription(characterViewModel.shownCharacter, preparedFilters)
     }
 
-    fun showKnownSpells(): List<SpellSpecificLanguage> {
+    fun showKnownSpells(): List<Spell> {
         return spellsHandler.getKnownSpellsWithDescription(characterViewModel.shownCharacter, knownFilters)
     }
 
-    fun getPreparedSpells(): MutableSet<String> {
-        return spellsHandler.getPreparedSpells(characterViewModel.shownCharacter)
+    fun addPreparedSpell(spell: Spell) {
+        spellsHandler.addPreparedSpell(spell.data.name, spell.listName, characterViewModel.shownCharacter)
+        characterViewModel.updateCharacterInfo()
     }
-    fun getPreparedCantrips(): MutableSet<String> {
-        return spellsHandler.getPreparedCantrips(characterViewModel.shownCharacter)
+
+    fun removePreparedSpell(spell: Spell) {
+        spellsHandler.removePreparedSpell(spell.data.name, spell.listName, characterViewModel.shownCharacter)
+        characterViewModel.updateCharacterInfo()
     }
 
     fun getPreparedSpellsCount(): Int {

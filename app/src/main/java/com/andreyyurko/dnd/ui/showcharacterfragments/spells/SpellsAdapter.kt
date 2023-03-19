@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.SpellSpecificLanguage
 import com.andreyyurko.dnd.data.characterData.character.Character
+import com.andreyyurko.dnd.data.spells.Spell
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.SpellsHandler
 import javax.inject.Inject
@@ -19,16 +20,15 @@ import javax.inject.Inject
 class SpellsAdapter @Inject constructor(
     private val spellsCountTextView: TextView,
     private val cantripsCountTextView: TextView,
-    private val chosenSpellsSet: MutableSet<String>,
-    private val chosenCantripsSet: MutableSet<String>,
     private val root: ViewGroup,
     private val showPopUpBackground: () -> Unit,
     private val closePopUpBackground: () -> Unit,
-    private val updateCharacter: () -> Unit
-
+    private val addSpell: (spell: Spell) -> Unit,
+    private val removeSpell: (spell: Spell) -> Unit,
+    private val getChosenSpells: () -> List<Spell>,
 ) : RecyclerView.Adapter<SpellsAdapter.ViewHolder>() {
 
-    var shownSpellsList: List<SpellSpecificLanguage> = listOf()
+    var shownSpellsList: List<Spell> = listOf()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.spellName)
@@ -47,31 +47,38 @@ class SpellsAdapter @Inject constructor(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        shownSpellsList[position].name.apply {
+        shownSpellsList[position].data.name.apply {
             if (this.length > 20) holder.nameTextView.text = this.substring(0..16) + "..."
             else holder.nameTextView.text = this
         }
-        holder.levelTextView.text = shownSpellsList[position].level
-        shownSpellsList[position].castingTime.apply {
+        holder.levelTextView.text = shownSpellsList[position].data.level
+        shownSpellsList[position].data.castingTime.apply {
             if (this.split(" ")[1][0] == 'м') holder.castTimeTextView.text =
-                shownSpellsList[position].castingTime.split(",")[0]
+                shownSpellsList[position].data.castingTime.split(",")[0]
             else holder.castTimeTextView.text = this.split(" ")[1]
         }
         holder.isAddedCheckbox.setOnCheckedChangeListener(null)
-        holder.isAddedCheckbox.isChecked = chosenSpellsSet.contains(shownSpellsList[position].name) || chosenCantripsSet.contains(shownSpellsList[position].name)
+        holder.isAddedCheckbox.isChecked = getChosenSpells().contains(shownSpellsList[position])
+        holder.isAddedCheckbox.isEnabled = !shownSpellsList[position].isAlwaysIncluded
 
         holder.isAddedCheckbox.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 addSpell(shownSpellsList[position])
+                if (shownSpellsList[position].data.level.toInt() == 0)
+                    cantripsCountTextView.text = (cantripsCountTextView.text.toString().toInt() + 1).toString()
+                else
+                    spellsCountTextView.text = (spellsCountTextView.text.toString().toInt() + 1).toString()
             } else {
                 removeSpell(shownSpellsList[position])
+                if (shownSpellsList[position].data.level.toInt() == 0)
+                    cantripsCountTextView.text = (cantripsCountTextView.text.toString().toInt() - 1).toString()
+                else
+                    spellsCountTextView.text = (spellsCountTextView.text.toString().toInt() - 1).toString()
             }
-            spellsCountTextView.text = chosenSpellsSet.size.toString()
-            cantripsCountTextView.text = chosenCantripsSet.size.toString()
         }
 
         holder.nameTextView.setOnClickListener {
-            showFullDescription(shownSpellsList[position])
+            showFullDescription(shownSpellsList[position].data)
         }
     }
 
@@ -108,23 +115,5 @@ class SpellsAdapter @Inject constructor(
         fullDescriptionPopUp.setOnDismissListener {
             closePopUpBackground()
         }
-    }
-
-    private fun addSpell(spell: SpellSpecificLanguage) {
-        if (spell.level.toInt() == 0) {
-            chosenCantripsSet.add(spell.name)
-        } else {
-            chosenSpellsSet.add(spell.name)
-        }
-        updateCharacter()
-    }
-
-    private fun removeSpell(spell: SpellSpecificLanguage) {
-        if (spell.level.toInt() == 0) {
-            chosenCantripsSet.remove(spell.name)
-        } else {
-            chosenSpellsSet.remove(spell.name)
-        }
-        updateCharacter()
     }
 }

@@ -2,6 +2,7 @@ package com.andreyyurko.dnd.ui.addcharacterfragments.spellsfragment
 
 import androidx.lifecycle.ViewModel
 import com.andreyyurko.dnd.data.SpellSpecificLanguage
+import com.andreyyurko.dnd.data.spells.Spell
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.CreateCharacterViewModel
 import com.andreyyurko.dnd.utils.SpellsHandler
@@ -41,20 +42,22 @@ class SpellsViewModel @Inject constructor(
         return spellsHandler.getMaxKnownCantripsCount(createCharacterViewModel.character)
     }
 
-    fun showAllSpells(): List<SpellSpecificLanguage> {
-        return spellsHandler.getClassSpellsWithDescription(createCharacterViewModel.character, allFilters).toList()
+    fun showAllSpells(): List<Spell> {
+        return spellsHandler.getAllSpellsWhatNeedsToBePrepared(createCharacterViewModel.character, allFilters).toList()
     }
 
-    fun showKnownSpells(): List<SpellSpecificLanguage> {
+    fun showKnownSpells(): List<Spell> {
         return spellsHandler.getKnownSpellsWithDescription(createCharacterViewModel.character, knownFilters).toList()
     }
 
-    fun getKnownSpells(): MutableSet<String> {
-        return spellsHandler.getKnownSpells(createCharacterViewModel.character)
+    fun addKnownSpell(spell: Spell) {
+        spellsHandler.addKnownSpell(spell.data.name, spell.listName, createCharacterViewModel.character)
+        updateCharacter()
     }
 
-    fun getKnownCantrips(): MutableSet<String> {
-        return spellsHandler.getKnownCantrips(createCharacterViewModel.character)
+    fun removeKnownSpell(spell: Spell) {
+        spellsHandler.removeKnownSpell(spell.data.name, spell.listName, createCharacterViewModel.character)
+        updateCharacter()
     }
 
     fun updateCharacter() {

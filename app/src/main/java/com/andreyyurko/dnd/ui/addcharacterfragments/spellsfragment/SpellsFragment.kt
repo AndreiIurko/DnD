@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.ui.showcharacterfragments.fragmentwithfilters.FragmentWithFilters
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.andreyyurko.dnd.data.spells.Spell
 import com.andreyyurko.dnd.databinding.FragmentSpellsBinding
 import com.andreyyurko.dnd.ui.showcharacterfragments.spells.SpellsAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -92,11 +93,12 @@ class SpellsFragment: FragmentWithFilters(R.layout.fragment_spells) {
 
         val adapter = SpellsAdapter(
             viewBinding.knownSpellsCount, viewBinding.knownCantripsCount,
-            viewModel.getKnownSpells(), viewModel.getKnownCantrips(),
             viewBinding.root,
             { showPopupBackground() },
             { showPopupBackground() },
-            { viewModel.updateCharacter() }
+            { spell: Spell -> viewModel.addKnownSpell(spell) },
+            { spell: Spell -> viewModel.removeKnownSpell(spell) },
+            { viewModel.showKnownSpells() }
         )
 
         recyclerView.adapter = adapter

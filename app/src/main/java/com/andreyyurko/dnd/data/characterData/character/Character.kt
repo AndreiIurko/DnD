@@ -23,7 +23,7 @@ fun mergeAllAbilities(character: Character) {
 
     characterInfo.currentState = character.characterInfo.currentState
     characterInfo.inventory = character.characterInfo.inventory
-    //characterInfo.spellsInfo.spellLists = character.characterInfo.spellsInfo.spellListss
+    //characterInfo.spellsInfo.spellLists = character.characterInfo.spellsInfo.spellLists
     characterInfo.spellsInfo = character.characterInfo.spellsInfo
 
     characterInfo = mergeCharacterInfo(characterInfo, character.customAbilities)
