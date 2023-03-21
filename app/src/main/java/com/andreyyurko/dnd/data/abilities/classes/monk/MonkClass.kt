@@ -1,10 +1,57 @@
-package com.andreyyurko.dnd.data.abilities.classes
+package com.andreyyurko.dnd.data.abilities.classes.monk
 
+import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
+import com.andreyyurko.dnd.data.abilities.classes.cleric.classFeaturesCleric
 import com.andreyyurko.dnd.data.abilities.classes.fighter.extraAttack
-import com.andreyyurko.dnd.data.abilities.other.abilityScoreImprovement
+import com.andreyyurko.dnd.data.abilities.other.*
+import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
+
+var classFeaturesMonk: AbilityNode = AbilityNode(
+    name = "Монах: классовые умения",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.savingThrowProf.add(Ability.Dexterity)
+        abilities.savingThrowProf.add(Ability.Strength)
+        addAllSimpleWeapons(abilities)
+        abilities.weaponProficiency.plus(Weapon.ShortSword)
+        abilities
+    },
+    alternatives = mutableMapOf(
+        Pair(
+            "skill1",
+            listOf(acrobatics.name, athletics.name, history.name, insight.name, religion.name, stealth.name)
+        ),
+        Pair(
+            "skill2",
+            listOf(acrobatics.name, athletics.name, history.name, insight.name, religion.name, stealth.name)
+        ),
+    ),
+    requirements = { abilities: CharacterInfo ->
+        abilities.characterClass == Classes.Monk
+    },
+    description = "ХИТЫ\n" +
+            "\n" +
+            "Кость Хитов: 1к8 за каждый уровень монаха\n" +
+            "\n" +
+            "Хиты на 1 уровне: 8 + модификатор Телосложения\n" +
+            "\n" +
+            "Хиты на следующих уровнях: 1к8 (или 5) + модификатор Телосложения (суммарно минимум 1) за каждый уровень монаха после первого\n" +
+            "\n" +
+            "ВЛАДЕНИЕ\n" +
+            "\n" +
+            "Доспехи: нет\n" +
+            "\n" +
+            "Оружие: Простое оружие, короткие мечи\n" +
+            "\n" +
+            "Инструменты: Выберите один вид инструмента ремесленников, либо музыкального инструмента.\n" +
+            "\n" +
+            "Спасброски: Сила, Ловкость\n" +
+            "\n" +
+            "Навыки: Выберите два навыка из следующих: Акробатика, Атлетика, История, Проницательность, Религия, Скрытность.\n",
+    priority = Priority.DoFirst
+)
 
 var monkUnarmedDefence: AbilityNode = AbilityNode(
     name = "Монашеская защита без доспехов",
@@ -15,7 +62,7 @@ var monkUnarmedDefence: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    description = "Если вы не носите ни доспех, ни щит, ваш Класс Доспеха равен 10 + модификатор Ловкости + модификатор Мудрости.",
+    description = "Если вы не носите ни доспех, ни щит, ваш Класс Доспеха равен 10 + модификатор Ловкости + модификатор Мудрости.\n",
 )
 
 var martialArts: AbilityNode = AbilityNode(
@@ -30,6 +77,7 @@ var martialArts: AbilityNode = AbilityNode(
                 }
                 prof.setOfSkills.plus(Ability.Dexterity)
             }
+            /// We need to change dice
         }
         abilities
     },
@@ -43,7 +91,7 @@ var martialArts: AbilityNode = AbilityNode(
             "\tВы можете использовать к4 вместо обычной кости урона ваших безоружных ударов или атак монашеским оружием. Эта кость увеличивается с вашим уровнем, как показано в колонке «боевые искусства».\n" +
             "\tЕсли в свой ход вы используете действие Атака для безоружного удара или атаки монашеским оружием, вы можете бонусным действием совершить ещё один безоружный удар. Например, если вы совершили действие Атака и атаковали боевым посохом, вы можете совершить бонусным действием безоружный удар, при условии, что в этом ходу вы еще не совершали бонусное действие.\n" +
             "\n" +
-            "Некоторые монастыри используют особые виды монашеского оружия. Например, вы можете использовать дубинку в виде двух деревянных брусков, соединённых короткой цепью (такое оружие называется нунчаками), или серп с более коротким и прямым лезвием (называется камой). Как бы ни называлось ваше монашеское оружие, вы используете характеристики, соответствующие этому оружию.",
+            "Некоторые монастыри используют особые виды монашеского оружия. Например, вы можете использовать дубинку в виде двух деревянных брусков, соединённых короткой цепью (такое оружие называется нунчаками), или серп с более коротким и прямым лезвием (называется камой). Как бы ни называлось ваше монашеское оружие, вы используете характеристики, соответствующие этому оружию.\n",
     priority = Priority.DoLast
 )
 
@@ -51,18 +99,15 @@ var monk1: AbilityNode = AbilityNodeLevel(
     name = "Монах_1",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.characterClass = Classes.Monk
-        abilities.savingThrowProf.add(Ability.Dexterity)
-        abilities.savingThrowProf.add(Ability.Strength)
         abilities.level += 1
         abilities.proficiencyBonus += 2
-        addAllSimpleWeapons(abilities)
-        abilities.weaponProficiency.plus(Weapon.ShortSword)
         abilities.hp += abilityToModifier(abilities.constitution) + 8
         abilities
     },
     alternatives = mutableMapOf(
-        Pair("first", listOf(monkUnarmedDefence.name)),
-        Pair("second", listOf(martialArts.name))
+        Pair("first", listOf(classFeaturesMonk.name)),
+        Pair("second", listOf(monkUnarmedDefence.name)),
+        Pair("third", listOf(martialArts.name))
     ),
     requirements = { true },
     add_requirements = listOf(),
@@ -82,7 +127,7 @@ var monkUnarmedMovement = AbilityNode(
     requirements = { true },
     description = "Ваша скорость увеличивается на 10 футов, если вы не носите доспехов и щит. Этот бонус увеличивается с ростом вашего уровня, как показано в таблице.\n" +
             "\n" +
-            "На 9-м уровне вы получаете возможность в свой ход перемещаться по вертикальным поверхностям и по поверхности жидкости, не падая во время движения.",
+            "На 9-м уровне вы получаете возможность в свой ход перемещаться по вертикальным поверхностям и по поверхности жидкости, не падая во время движения.\n",
     priority = Priority.DoLast
 )
 
@@ -103,6 +148,30 @@ var kiUsing = AbilityNode(
                 )
             }
         }
+        abilities.actionsList.add(
+            Action(
+                name = "Поступь ветра",
+                description = "Вы можете потратить 1 очко ци в свой ход, чтобы совершить бонусным действием Отход или Рывок. В этот ход дальность ваших прыжков удваивается.\n",
+                type = ActionType.Bonus,
+                relatedCharges = "Ци"
+            )
+        )
+        abilities.actionsList.add(
+            Action(
+                name = "Терпеливая оборона",
+                description = "Вы тратите 1 очко ци в свой ход, чтобы совершить бонусным действием Уклонение.\n",
+                type = ActionType.Bonus,
+                relatedCharges = "Ци"
+            )
+        )
+        abilities.actionsList.add(
+            Action(
+                name = "Шквал ударов",
+                description = "Сразу же после того, как вы в свой ход совершили действие Атака, вы можете потратить 1 очко ци, чтобы бонусным действием совершить два безоружных удара.y\n",
+                type = ActionType.Bonus,
+                relatedCharges = "Ци"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
@@ -117,7 +186,7 @@ var kiUsing = AbilityNode(
             "\nТЕРПЕЛИВАЯ ОБОРОНА\n" +
             "Вы тратите 1 очко ци в свой ход, чтобы совершить бонусным действием Уклонение.\n" +
             "\nШКВАЛ УДАРОВ\n" +
-            "Сразу же после того, как вы в свой ход совершили действие Атака, вы можете потратить 1 очко ци, чтобы бонусным действием совершить два безоружных удара.",
+            "Сразу же после того, как вы в свой ход совершили действие Атака, вы можете потратить 1 очко ци, чтобы бонусным действием совершить два безоружных удара.\n",
     priority = Priority.DoLast
 )
 
@@ -143,21 +212,33 @@ var monasticTradition: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(),
+    alternatives = mutableMapOf(
+        Pair("first", listOf(wayOfOpenHand.name, wayOfFourElements.name))
+    ),
     requirements = { true },
-    description = "Вы выбираете монастырскую традицию, которой следуете. Все они описаны в конце описания класса. Выбранная традиция обеспечивает вам дополнительные умения на 3-м, 6-м, 11-м и 17-м уровнях."
+    description = "Вы выбираете монастырскую традицию, которой следуете. Все они описаны в конце описания класса. Выбранная традиция обеспечивает вам дополнительные умения на 3-м, 6-м, 11-м и 17-м уровнях.\n"
 )
 
 var deflectMissiles: AbilityNode = AbilityNode(
     name = "Отражение снарядов",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsList.add(
+            Action(
+                name = "Отражение снарядов",
+                description = "Вы можете реакцией отразить или поймать снаряд, если по вам попали дальнобойной атакой оружием. Если вы делаете это, урон снижается на 1к10 + ваш модификатор Ловкости + ваш уровень монаха.\n" +
+                        "\n" +
+                        "Если вы снизили урон до 0, вы можете поймать снаряд в случае, если он достаточно мал, чтоб держать его одной рукой, и одна из ваших рук свободна. Если вы поймали снаряд с помощью этого умения, вы можете потратить одно очко ци, чтобы частью реакции совершить дальнобойную атаку пойманным оружием или боеприпасом с дистанцией 20/60 футов. Вы совершаете эту атаку с владением, вне зависимости от владения данным оружием, и этот снаряд считается для данной атаки монашеским оружием.\n",
+                type = ActionType.Reaction,
+                relatedCharges = "Ци"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
     requirements = { true },
     description = "Вы можете реакцией отразить или поймать снаряд, если по вам попали дальнобойной атакой оружием. Если вы делаете это, урон снижается на 1к10 + ваш модификатор Ловкости + ваш уровень монаха.\n" +
             "\n" +
-            "Если вы снизили урон до 0, вы можете поймать снаряд в случае, если он достаточно мал, чтоб держать его одной рукой, и одна из ваших рук свободна. Если вы поймали снаряд с помощью этого умения, вы можете потратить одно очко ци, чтобы частью реакции совершить дальнобойную атаку пойманным оружием или боеприпасом с дистанцией 20/60 футов. Вы совершаете эту атаку с владением, вне зависимости от владения данным оружием, и этот снаряд считается для данной атаки монашеским оружием."
+            "Если вы снизили урон до 0, вы можете поймать снаряд в случае, если он достаточно мал, чтоб держать его одной рукой, и одна из ваших рук свободна. Если вы поймали снаряд с помощью этого умения, вы можете потратить одно очко ци, чтобы частью реакции совершить дальнобойную атаку пойманным оружием или боеприпасом с дистанцией 20/60 футов. Вы совершаете эту атаку с владением, вне зависимости от владения данным оружием, и этот снаряд считается для данной атаки монашеским оружием.\n"
 )
 
 var monk3: AbilityNode = AbilityNodeLevel(
@@ -180,12 +261,19 @@ var monk3: AbilityNode = AbilityNodeLevel(
 var slowFall: AbilityNode = AbilityNode(
     name = "Замедленное падение",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsList.add(
+            Action(
+                name = "Замедленное падение",
+                description = "Если вы упали, вы можете реакцией уменьшить урон от падения на значение, равное вашему уровню монаха, умноженному на пять.\n",
+                type = ActionType.Reaction
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
     requirements = { true },
     add_requirements = listOf(listOf()),
-    description = "Если вы упали, вы можете реакцией уменьшить урон от падения на значение, равное вашему уровню монаха, умноженному на пять."
+    description = "Если вы упали, вы можете реакцией уменьшить урон от падения на значение, равное вашему уровню монаха, умноженному на пять.\n"
 )
 
 var monk4: AbilityNode = AbilityNodeLevel(
@@ -208,12 +296,20 @@ var monk4: AbilityNode = AbilityNodeLevel(
 var stunningStrike: AbilityNode = AbilityNode(
     name = "Ошеломляющий удар",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsList.add(
+            Action(
+                name = "Ошеломляющий удар",
+                description = "Вы можете взаимодействовать с энергией ци, текущей в теле вашего противника. Если вы попали по другому существу рукопашной атакой оружием, вы можете потратить 1 очко ци, чтобы нанести ошеломляющий удар. Цель должна преуспеть в спасброске Телосложения, иначе она станет ошеломлённой до конца вашего следующего хода.\n",
+                type = ActionType.Additional,
+                relatedCharges = "Ци"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
     requirements = { true },
     add_requirements = listOf(listOf()),
-    description = "Вы можете взаимодействовать с энергией ци, текущей в теле вашего противника. Если вы попали по другому существу рукопашной атакой оружием, вы можете потратить 1 очко ци, чтобы нанести ошеломляющий удар. Цель должна преуспеть в спасброске Телосложения, иначе она станет ошеломлённой до конца вашего следующего хода."
+    description = "Вы можете взаимодействовать с энергией ци, текущей в теле вашего противника. Если вы попали по другому существу рукопашной атакой оружием, вы можете потратить 1 очко ци, чтобы нанести ошеломляющий удар. Цель должна преуспеть в спасброске Телосложения, иначе она станет ошеломлённой до конца вашего следующего хода.\n"
 )
 
 
@@ -238,12 +334,19 @@ var monk5: AbilityNode = AbilityNodeLevel(
 var kiImprovedStrike: AbilityNode = AbilityNode(
     name = "Энергетические удары",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsList.add(
+            Action(
+                name = "Энергетические удары",
+                description = "Ваши безоружные удары считаются магическими при определении преодоления сопротивления и иммунитета к немагическим атакам и урону.\n",
+                type = ActionType.Additional
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
     requirements = { true },
     add_requirements = listOf(listOf()),
-    description = "Ваши безоружные удары считаются магическими при определении преодоления сопротивления и иммунитета к немагическим атакам и урону."
+    description = "Ваши безоружные удары считаются магическими при определении преодоления сопротивления и иммунитета к немагическим атакам и урону.\n"
 )
 
 var monk6: AbilityNode = AbilityNodeLevel(
@@ -265,12 +368,19 @@ var monk6: AbilityNode = AbilityNodeLevel(
 var monkEvasion: AbilityNode = AbilityNode(
     name = "Монашеская увёртливость",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsList.add(
+            Action(
+                name = "Монашеская увёртливость",
+                description = "Ваше инстинктивное проворство позволяет вам уклоняться от эффектов, направленных на определённую область, вроде дыхания синего дракона или заклинания огненный шар. Если вы попадаете под действие эффекта, позволяющего совершить спасбросок Ловкости, чтобы получить только половину урона, вы вместо этого не получаете урона при успешном спасброске и получаете только половину урона при проваленном.\n",
+                type = ActionType.Additional
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
     requirements = { true },
     add_requirements = listOf(listOf()),
-    description = "Ваше инстинктивное проворство позволяет вам уклоняться от эффектов, направленных на определённую область, вроде дыхания синего дракона или заклинания огненный шар. Если вы попадаете под действие эффекта, позволяющего совершить спасбросок Ловкости, чтобы получить только половину урона, вы вместо этого не получаете урона при успешном спасброске и получаете только половину урона при проваленном."
+    description = "Ваше инстинктивное проворство позволяет вам уклоняться от эффектов, направленных на определённую область, вроде дыхания синего дракона или заклинания огненный шар. Если вы попадаете под действие эффекта, позволяющего совершить спасбросок Ловкости, чтобы получить только половину урона, вы вместо этого не получаете урона при успешном спасброске и получаете только половину урона при проваленном.\n"
 )
 
 var stillnessOfMind: AbilityNode = AbilityNode(
@@ -281,7 +391,7 @@ var stillnessOfMind: AbilityNode = AbilityNode(
     alternatives = mutableMapOf(),
     requirements = { true },
     add_requirements = listOf(listOf()),
-    description = "Ваше инстинктивное проворство позволяет вам уклоняться от эффектов, направленных на определённую область, вроде дыхания синего дракона или заклинания огненный шар. Если вы попадаете под действие эффекта, позволяющего совершить спасбросок Ловкости, чтобы получить только половину урона, вы вместо этого не получаете урона при успешном спасброске и получаете только половину урона при проваленном."
+    description = "Ваше инстинктивное проворство позволяет вам уклоняться от эффектов, направленных на определённую область, вроде дыхания синего дракона или заклинания огненный шар. Если вы попадаете под действие эффекта, позволяющего совершить спасбросок Ловкости, чтобы получить только половину урона, вы вместо этого не получаете урона при успешном спасброске и получаете только половину урона при проваленном.\n"
 )
 
 var monk7: AbilityNode = AbilityNodeLevel(
@@ -347,7 +457,7 @@ var purityOfBody: AbilityNode = AbilityNode(
     alternatives = mutableMapOf(),
     requirements = { true },
     add_requirements = listOf(listOf()),
-    description = "Ваше мастерство ци даёт вам иммунитет к болезням и яду."
+    description = "Ваше мастерство ци даёт вам иммунитет к болезням и яду.\n"
 )
 
 var monk10: AbilityNode = AbilityNodeLevel(
@@ -400,12 +510,19 @@ var monk12: AbilityNode = AbilityNodeLevel(
 var tongueOfTheSunAndMoon: AbilityNode = AbilityNode(
     name = "Язык солнца и луны",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsList.add(
+            Action(
+                name = "Язык солнца и луны",
+                description = "Вы понимаете, как взаимодействовать с энергией ци в чужом разуме, и теперь вы понимаете речь на любом языке. Кроме того, все существа, способные понимать хотя бы один язык, понимают то, что вы сказали.\n",
+                type = ActionType.Additional,
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
     requirements = { true },
     add_requirements = listOf(listOf()),
-    description = "Вы понимаете, как взаимодействовать с энергией ци в чужом разуме, и теперь вы понимаете речь на любом языке. Кроме того, все существа, способные понимать хотя бы один язык, понимают то, что вы сказали."
+    description = "Вы понимаете, как взаимодействовать с энергией ци в чужом разуме, и теперь вы понимаете речь на любом языке. Кроме того, все существа, способные понимать хотя бы один язык, понимают то, что вы сказали.\n"
 )
 
 var monk13: AbilityNode = AbilityNodeLevel(
@@ -439,7 +556,7 @@ var diamondSoul: AbilityNode = AbilityNode(
     alternatives = mutableMapOf(),
     requirements = { true },
     add_requirements = listOf(listOf()),
-    description = "Ваше мастерство ци предоставляет вам владение всеми спасбросками. Кроме того, если вы провалили спасбросок, вы можете повторить его, потратив 1 очко ци, и должны использовать второй результат."
+    description = "Ваше мастерство ци предоставляет вам владение всеми спасбросками. Кроме того, если вы провалили спасбросок, вы можете повторить его, потратив 1 очко ци, и должны использовать второй результат.\n"
 )
 
 var monk14: AbilityNode = AbilityNodeLevel(
@@ -461,12 +578,19 @@ var monk14: AbilityNode = AbilityNodeLevel(
 var timelessBody: AbilityNode = AbilityNode(
     name = "Безвременное тело",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsList.add(
+            Action(
+                name = "Безвременное тело",
+                description = "Ваша ци поддерживает вас, и ваше тело больше не подвержено признакам старения. Вы не можете быть состарены магически. Впрочем, вы всё еще можете умереть от старости. Кроме того, вам больше не требуется еда и вода.\n",
+                type = ActionType.Additional,
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
     requirements = { true },
     add_requirements = listOf(listOf()),
-    description = "Ваша ци поддерживает вас, и ваше тело больше не подвержено признакам старения. Вы не можете быть состарены магически. Впрочем, вы всё еще можете умереть от старости. Кроме того, вам больше не требуется еда и вода."
+    description = "Ваша ци поддерживает вас, и ваше тело больше не подвержено признакам старения. Вы не можете быть состарены магически. Впрочем, вы всё еще можете умереть от старости. Кроме того, вам больше не требуется еда и вода.\n"
 )
 
 var monk15: AbilityNode = AbilityNodeLevel(
@@ -520,6 +644,22 @@ var monk17: AbilityNode = AbilityNodeLevel(
 var emptyBody: AbilityNode = AbilityNode(
     name = "Пустое тело",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsList.add(
+            Action(
+                name = "Пустое тело",
+                description = "Вы можете действием потратить 4 очка ци, чтобы стать невидимым на 1 минуту. В течение этого времени вы получаете сопротивление всем видам урона, кроме урона силовым полем.\n",
+                type = ActionType.Action,
+                relatedCharges = "Ци"
+            )
+        )
+        abilities.actionsList.add(
+            Action(
+                name = "Пустое тело. Проекция в астрал",
+                description = "Вы можете потратить 8 очков ци, чтобы наложить заклинание проекция в астрал [astral projection] без применения материальных компонентов. Вы не можете перемещать кого-либо вместе с собой.\n",
+                type = ActionType.Additional,
+                relatedCharges = "Ци"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
@@ -527,7 +667,7 @@ var emptyBody: AbilityNode = AbilityNode(
     add_requirements = listOf(listOf()),
     description = "Вы можете действием потратить 4 очка ци, чтобы стать невидимым на 1 минуту. В течение этого времени вы получаете сопротивление всем видам урона, кроме урона силовым полем.\n" +
             "\n" +
-            "Кроме того, вы можете потратить 8 очков ци, чтобы наложить заклинание проекция в астрал [astral projection] без применения материальных компонентов. Вы не можете перемещать кого-либо вместе с собой."
+            "Кроме того, вы можете потратить 8 очков ци, чтобы наложить заклинание проекция в астрал [astral projection] без применения материальных компонентов. Вы не можете перемещать кого-либо вместе с собой.\n"
 )
 
 var monk18: AbilityNode = AbilityNodeLevel(
@@ -565,12 +705,20 @@ var monk19: AbilityNode = AbilityNodeLevel(
 var perfectSelf: AbilityNode = AbilityNode(
     name = "Совершенство",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsList.add(
+            Action(
+                name = "Совершенство",
+                description = "Если при броске инициативы у вас нет очков ци, вы получаете 4 очка ци.\n",
+                type = ActionType.Additional,
+                relatedCharges = "Ци"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
     requirements = { true },
     add_requirements = listOf(listOf()),
-    description = "Если при броске инициативы у вас нет очков ци, вы получаете 4 очка ци."
+    description = "Если при броске инициативы у вас нет очков ци, вы получаете 4 очка ци.\n"
 )
 
 var monk20: AbilityNode = AbilityNodeLevel(
@@ -589,7 +737,8 @@ var monk20: AbilityNode = AbilityNodeLevel(
     next_level = null
 )
 
-var mapOfMonkAbilities: MutableMap<String, AbilityNode> = mutableMapOf(
+var mapOfMonkAbilities: MutableMap<String, AbilityNode> = (mutableMapOf(
+    Pair(classFeaturesMonk.name, classFeaturesMonk),
     Pair(monkUnarmedDefence.name, monkUnarmedDefence),
     Pair(martialArts.name, martialArts),
     Pair(monk1.name, monk1),
@@ -628,6 +777,8 @@ var mapOfMonkAbilities: MutableMap<String, AbilityNode> = mutableMapOf(
     Pair(perfectSelf.name, perfectSelf),
     Pair(monk20.name, monk20),
 )
+        + mapOfWayOfFourElementsAbilities
+        + mapOfWayOfOpenHandAbilities).toMutableMap()
 
 
 

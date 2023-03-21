@@ -3,7 +3,7 @@ package com.andreyyurko.dnd.data.abilities
 import com.andreyyurko.dnd.data.abilities.classes.barbarian1
 import com.andreyyurko.dnd.data.abilities.classes.fighter.fighter1
 import com.andreyyurko.dnd.data.abilities.classes.mapOfClasses
-import com.andreyyurko.dnd.data.abilities.classes.monk1
+import com.andreyyurko.dnd.data.abilities.classes.monk.monk1
 import com.andreyyurko.dnd.data.abilities.classes.sorcerer.sorcerer1
 import com.andreyyurko.dnd.data.abilities.classes.cleric.cleric1
 import com.andreyyurko.dnd.data.abilities.other.mapOfAbilityScoreImprovement
