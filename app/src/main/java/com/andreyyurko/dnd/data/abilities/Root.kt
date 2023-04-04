@@ -6,6 +6,7 @@ import com.andreyyurko.dnd.data.abilities.classes.mapOfClasses
 import com.andreyyurko.dnd.data.abilities.classes.monk.monk1
 import com.andreyyurko.dnd.data.abilities.classes.sorcerer.sorcerer1
 import com.andreyyurko.dnd.data.abilities.classes.cleric.cleric1
+import com.andreyyurko.dnd.data.abilities.classes.wizard.wizard1
 import com.andreyyurko.dnd.data.abilities.other.mapOfAbilityScoreImprovement
 import com.andreyyurko.dnd.data.abilities.other.mapOfFightingStyles
 import com.andreyyurko.dnd.data.abilities.other.mapOfLanguages
@@ -28,7 +29,7 @@ var baseAN: AbilityNode = AbilityNode(
         abilities
     },
     mutableMapOf(
-        Pair("class", listOf(monk1.name, barbarian1.name, fighter1.name, sorcerer1.name, cleric1.name)),
+        Pair("class", listOf(monk1.name, barbarian1.name, fighter1.name, sorcerer1.name, cleric1.name, wizard1.name)),
         Pair("race", listOf(human.name))
     ),
     { true },

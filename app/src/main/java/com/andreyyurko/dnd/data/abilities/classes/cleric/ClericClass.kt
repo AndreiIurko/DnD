@@ -525,7 +525,7 @@ var cleric20: AbilityNodeLevel = AbilityNodeLevel(
 var mapOfClericAbilities: MutableMap<String, AbilityNode> = (mutableMapOf(
     Pair(classFeaturesCleric.name, classFeaturesCleric),
     Pair(spellCastingCleric.name, spellCastingCleric),
-    Pair(divineDomain.name, divineDomain), /// Later
+    Pair(divineDomain.name, divineDomain),
     Pair(cleric1.name, cleric1),
     Pair(channelDivinity.name, channelDivinity),
     Pair(cleric2.name, cleric2),
