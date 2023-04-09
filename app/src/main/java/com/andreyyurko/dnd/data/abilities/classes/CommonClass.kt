@@ -5,6 +5,7 @@ import com.andreyyurko.dnd.data.abilities.classes.sorcerer.mapOfSorcererAbilitie
 import com.andreyyurko.dnd.data.abilities.classes.cleric.mapOfClericAbilities
 import com.andreyyurko.dnd.data.abilities.classes.monk.mapOfMonkAbilities
 import com.andreyyurko.dnd.data.abilities.classes.wizard.mapOfWizardAbilities
+import com.andreyyurko.dnd.data.abilities.classes.bard.mapOfBardAbilities
 import com.andreyyurko.dnd.data.abilities.mapOfAn
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Priority
@@ -72,4 +73,5 @@ val mapOfClasses = (
                 + mapOfSorcererAbilities
                 + mapOfClericAbilities
                 + mapOfWizardAbilities
+                + mapOfBardAbilities
         ).toMutableMap()

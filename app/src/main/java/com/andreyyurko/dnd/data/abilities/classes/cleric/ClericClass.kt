@@ -73,6 +73,11 @@ var spellCastingCleric: AbilityNode = AbilityNode(
             this["Заклинания класса"]?.className = Classes.Cleric.className
             this["Заклинания класса"]?.maxPreparedSpellsCount = max((abilityToModifier(abilities.wisdom) + abilities.level), 1)
             this["Заклинания класса"]?.maxKnownCantripsCount = 3
+            this["Заклинания класса"]?.maxKnownCantripsCount = 3
+            if ((abilities.level > 3) and (abilities.level < 10))
+                this["Заклинания класса"]?.maxKnownCantripsCount = 4
+            if (abilities.level > 9)
+                this["Заклинания класса"]?.maxKnownCantripsCount = 5
         }
         abilities
     },

@@ -74,7 +74,7 @@ var spellCastingWizard: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
-        abilities.characterClass == Classes.Cleric
+        abilities.characterClass == Classes.Wizard
     },
     description = "Являясь учеником тайной магии, вы обладаете книгой, содержащей заклинания, показывающие первые проблески вашей истинной силы. Вы найдёте список заклинаний, доступных волшебнику в этом разделе: заклинания волшебника.\n" +
             "Заговоры (заклинания 0-го уровня)\n" +
@@ -204,6 +204,7 @@ var wizard5: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_5",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
@@ -262,6 +263,7 @@ var wizard9: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_9",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
@@ -320,6 +322,7 @@ var wizard13: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_13",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
@@ -378,6 +381,7 @@ var wizard17: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_17",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },

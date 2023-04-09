@@ -136,8 +136,8 @@ var kiUsing = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         if (!abilities.currentState.charges.contains("Ци")) {
             abilities.currentState.charges["Ци"] = ChargesCounter(
-                current = 1,
-                maximum = 1
+                current = abilities.level,
+                maximum = abilities.level
             )
         }
         abilities.currentState.charges["Ци"]?.let {
