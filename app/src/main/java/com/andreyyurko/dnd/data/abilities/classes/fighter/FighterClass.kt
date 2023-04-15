@@ -220,10 +220,7 @@ var extraAttack: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         for (action in abilities.actionsList) {
             if (action.name == "Атака") {
-                action.description =
-                    "Если вы в свой ход совершаете действие Атака, вы можете совершить две атаки вместо одной.\n" +
-                            "\n" +
-                            "Количество атак увеличивается до трёх на 11-м уровне этого класса, и до четырёх на 20-м уровне."
+                action.description = "Совершить две атаки рукопашным оружием"
             }
         }
         abilities
@@ -376,6 +373,11 @@ var fighter11: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
+        for (action in abilities.actionsList) {
+            if (action.name == "Атака") {
+                action.description = "Совершить три атаки рукопашным оружием"
+            }
+        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -405,6 +407,7 @@ var fighter13: AbilityNodeLevel = AbilityNodeLevel(
     name = "Воин_13",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
@@ -466,6 +469,7 @@ var fighter17: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
+        abilities.proficiencyBonus += 1
         abilities
     },
     alternatives = mutableMapOf(),
@@ -510,6 +514,11 @@ var fighter20: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
+        for (action in abilities.actionsList) {
+            if (action.name == "Атака") {
+                action.description = "Совершить четыре атаки рукопашным оружием"
+            }
+        }
         abilities
     },
     alternatives = mutableMapOf(),

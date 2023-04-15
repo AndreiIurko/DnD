@@ -3,10 +3,7 @@ package com.andreyyurko.dnd.data.abilities.classes.sorcerer
 import android.util.Log
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.other.*
-import com.andreyyurko.dnd.data.characterData.Ability
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
-import com.andreyyurko.dnd.data.characterData.Classes
-import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import com.andreyyurko.dnd.data.spells.CharacterSpells
@@ -99,6 +96,18 @@ var spellCastingSorcerer: AbilityNode = AbilityNode(
     priority = Priority.DoAsSoonAsPossible
 )
 
+var sorcerousOrigin: AbilityNode = AbilityNode(
+    name = "Происхождение чародея",
+    changesInCharacterInfo = {abilities: CharacterInfo -> abilities },
+    alternatives = mutableMapOf(
+        Pair("first", listOf(draconicBloodline.name, wildMagic.name))
+    ),
+    requirements = {true},
+    description = "Выберите источник, из которого ваш персонаж черпает свою силу.\n" +
+            "\n" +
+            "Ваш выбор предоставляет вам умения на 1-м, 6-м, 14-м и 18-м уровнях."
+)
+
 var sorcerer1: AbilityNodeLevel = AbilityNodeLevel(
     name = "Чародей_1",
     changesInCharacterInfo = { abilities: CharacterInfo ->
@@ -111,11 +120,77 @@ var sorcerer1: AbilityNodeLevel = AbilityNodeLevel(
     alternatives = mutableMapOf(
         Pair("first", listOf(classFeaturesSorcerer.name)),
         Pair("second", listOf(spellCastingSorcerer.name)),
+        Pair("third", listOf(sorcerousOrigin.name))
     ),
     requirements = { true },
     add_requirements = listOf(),
     description = "1-й уровень, способности чародея",
     next_level = "Чародей_2",
+)
+
+var fontOfMagic :AbilityNode = AbilityNode(
+    name = "Источник магии",
+    changesInCharacterInfo = {abilities: CharacterInfo ->
+        if (!abilities.currentState.charges.contains("Единицы чародейства")) {
+            abilities.currentState.charges["Единицы чародейства"] = ChargesCounter(
+                current = 2,
+                maximum = 2
+            )
+        }
+        if (abilities.level > abilities.currentState.charges["Единицы чародейства"]!!.maximum) {
+            abilities.currentState.charges["Единицы чародейства"]!!.maximum = abilities.level
+            abilities.currentState.charges["Единицы чародейства"]!!.current = abilities.level
+        }
+
+        abilities.actionsList.add(
+            Action(
+                name = "Преобразование ячейки заклинания в единицы чародейства",
+                description = "Вы можете в свой ход бонусным действием преобразовать одну ячейку заклинаний в единицы чародейства, количество которых равно уровню ячейки.",
+                type = ActionType.Bonus,
+                relatedCharges = "Единицы чародейства"
+            )
+        )
+
+        abilities.actionsList.add(
+            Action(
+                name = "Создание ячеек заклинаний",
+                description = " В свой ход вы можете бонусным действием превратить оставшиеся единицы чародейства в дополнительные ячейки заклинаний. Приведённая таблица отображает стоимость создания ячеек разных уровней. Вы не можете создавать ячейки с уровнем выше 5. Созданные ячейки заклинаний исчезают в конце длительного отдыха.\n" +
+                        "СОЗДАНИЕ ЯЧЕЕК ЗАКЛИНАНИЙ\n" +
+                        "Единицы -> Уровень\n" +
+                        "   2    ->     1\n" +
+                        "   3    ->     2\n" +
+                        "   5    ->     3\n" +
+                        "   6    ->     4\n" +
+                        "   7    ->     5\n",
+                type = ActionType.Bonus,
+                relatedCharges = "Единицы чародейства"
+            )
+        )
+
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = {abilities: CharacterInfo ->
+        abilities.characterClass == Classes.Sorcerer
+    },
+    description = "Вы получаете доступ к внутреннему источнику магии. Этот источник выражен в единицах чародейства, позволяющих вам создавать разнообразные магические эффекты.\n" +
+            "Единицы чародейства\n" +
+            "\n" +
+            "Вы получаете 2 единицы чародейства, и их становится больше на более высоких уровнях. У вас не может быть этих единиц больше, чем указанно в таблице для вашего уровня. Вы восстанавливаете все использованные единицы чародейства по окончании продолжительного отдыха.\n" +
+            "Свободное заклинательство\n" +
+            "\n" +
+            "Вы можете использовать единицы чародейства, чтобы получить дополнительные ячейки заклинаний, и наоборот, пожертвовать ячейками, чтобы получить единицы. Другие способы использования единиц чародейства вы освоите на более высоких уровнях.\n" +
+            "\n" +
+            "Преобразование ячейки заклинания в единицы чародейства. Вы можете в свой ход бонусным действием преобразовать одну ячейку заклинаний в единицы чародейства, количество которых равно уровню ячейки.\n" +
+            "\n" +
+            "Создание ячеек заклинаний. В свой ход вы можете бонусным действием превратить оставшиеся единицы чародейства в дополнительные ячейки заклинаний. Приведённая таблица отображает стоимость создания ячеек разных уровней. Вы не можете создавать ячейки с уровнем выше 5. Созданные ячейки заклинаний исчезают в конце длительного отдыха.\n" +
+            "СОЗДАНИЕ ЯЧЕЕК ЗАКЛИНАНИЙ\n" +
+            "Единицы -> Уровень\n" +
+            "   2    ->     1\n" +
+            "   3    ->     2\n" +
+            "   5    ->     3\n" +
+            "   6    ->     4\n" +
+            "   7    ->     5\n",
 )
 
 var sorcerer2: AbilityNodeLevel = AbilityNodeLevel(
@@ -128,11 +203,30 @@ var sorcerer2: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    alternatives = mutableMapOf(
+        Pair("first", listOf(fontOfMagic.name))
+    ),
     requirements = { true },
     add_requirements = listOf(),
     description = "2-й уровень, способности чародея",
     next_level = "Чародей_3",
+)
+
+var metamagic: AbilityNode = AbilityNode(
+    name = "Метамагия",
+    changesInCharacterInfo = {abilities: CharacterInfo ->
+        abilities
+    },
+    alternatives = mutableMapOf(
+        Pair("first", listOf(carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
+            heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name)),
+        Pair("second", listOf(carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
+            heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name)),
+    ),
+    requirements = {true},
+    description = "Вы получаете способность подстраивать заклинания под свои нужды. Вы выбираете два варианта метамагии из перечисленных ниже. На 10-м и 17-м уровне вы получаете ещё по одному варианту.\n" +
+            "\n" +
+            "При накладывании заклинания может быть использован только один метамагический вариант, если в его описании не указано обратное."
 )
 
 var sorcerer3: AbilityNodeLevel = AbilityNodeLevel(
@@ -145,7 +239,9 @@ var sorcerer3: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    alternatives = mutableMapOf(
+        Pair("first", listOf(metamagic.name))
+    ),
     requirements = { true },
     add_requirements = listOf(),
     description = "3-й уровень, способности чародея",
@@ -187,15 +283,323 @@ var sorcerer5: AbilityNodeLevel = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "5-й уровень, способности чародея",
+    next_level = "Чародей_6",
+)
+
+var sorcerer6: AbilityNodeLevel = AbilityNodeLevel(
+    name = "Чародей_6",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.level += 1
+        abilities.hp += abilityToModifier(abilities.constitution) + 4
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownSpellsCount += 1
+        }
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { true },
+    add_requirements = listOf(),
+    description = "6-й уровень, способности чародея",
+    next_level = "Чародей_7",
+)
+
+var sorcerer7: AbilityNodeLevel = AbilityNodeLevel(
+    name = "Чародей_7",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.level += 1
+        abilities.hp += abilityToModifier(abilities.constitution) + 4
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownSpellsCount += 1
+        }
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { true },
+    add_requirements = listOf(),
+    description = "7-й уровень, способности чародея",
+    next_level = "Чародей_8",
+)
+
+var sorcerer8: AbilityNodeLevel = AbilityNodeLevel(
+    name = "Чародей_8",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.level += 1
+        abilities.hp += abilityToModifier(abilities.constitution) + 4
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownSpellsCount += 1
+        }
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { true },
+    add_requirements = listOf(),
+    description = "8-й уровень, способности чародея",
+    next_level = "Чародей_9",
+)
+
+var sorcerer9: AbilityNodeLevel = AbilityNodeLevel(
+    name = "Чародей_9",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.level += 1
+        abilities.hp += abilityToModifier(abilities.constitution) + 4
+        abilities.proficiencyBonus += 1
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownSpellsCount += 1
+        }
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { true },
+    add_requirements = listOf(),
+    description = "9-й уровень, способности чародея",
+    next_level = "Чародей_10",
+)
+
+var metamagic2: AbilityNode = AbilityNode(
+    name = "Метамагия: выбор опции",
+    changesInCharacterInfo = {abilities: CharacterInfo ->
+        abilities
+    },
+    alternatives = mutableMapOf(
+        Pair("first", listOf(carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
+            heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name)),
+    ),
+    requirements = {true},
+    description = "Выберите еще одну опцию метамагии:"
+)
+
+var sorcerer10: AbilityNodeLevel = AbilityNodeLevel(
+    name = "Чародей_10",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.level += 1
+        abilities.hp += abilityToModifier(abilities.constitution) + 4
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownSpellsCount += 1
+        }
+        abilities
+    },
+    alternatives = mutableMapOf(
+        Pair("first", listOf(metamagic2.name))
+    ),
+    requirements = { true },
+    add_requirements = listOf(),
+    description = "10-й уровень, способности чародея",
+    next_level = "Чародей_11",
+)
+
+var sorcerer11: AbilityNodeLevel = AbilityNodeLevel(
+    name = "Чародей_11",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.level += 1
+        abilities.hp += abilityToModifier(abilities.constitution) + 4
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownSpellsCount += 1
+        }
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { true },
+    add_requirements = listOf(),
+    description = "11-й уровень, способности чародея",
+    next_level = "Чародей_12",
+)
+
+var sorcerer12: AbilityNodeLevel = AbilityNodeLevel(
+    name = "Чародей_12",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.level += 1
+        abilities.hp += abilityToModifier(abilities.constitution) + 4
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownSpellsCount += 1
+        }
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { true },
+    add_requirements = listOf(),
+    description = "12-й уровень, способности чародея",
+    next_level = "Чародей_13",
+)
+
+var sorcerer13: AbilityNodeLevel = AbilityNodeLevel(
+    name = "Чародей_13",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.level += 1
+        abilities.hp += abilityToModifier(abilities.constitution) + 4
+        abilities.proficiencyBonus += 1
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownSpellsCount += 1
+        }
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { true },
+    add_requirements = listOf(),
+    description = "13-й уровень, способности чародея",
+    next_level = "Чародей_14",
+)
+
+var sorcerer14: AbilityNodeLevel = AbilityNodeLevel(
+    name = "Чародей_14",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.level += 1
+        abilities.hp += abilityToModifier(abilities.constitution) + 4
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownSpellsCount += 1
+        }
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { true },
+    add_requirements = listOf(),
+    description = "14-й уровень, способности чародея",
+    next_level = "Чародей_15",
+)
+
+var sorcerer15: AbilityNodeLevel = AbilityNodeLevel(
+    name = "Чародей_15",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.level += 1
+        abilities.hp += abilityToModifier(abilities.constitution) + 4
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownSpellsCount += 1
+        }
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { true },
+    add_requirements = listOf(),
+    description = "15-й уровень, способности чародея",
+    next_level = "Чародей_16",
+)
+
+var sorcerer16: AbilityNodeLevel = AbilityNodeLevel(
+    name = "Чародей_16",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.level += 1
+        abilities.hp += abilityToModifier(abilities.constitution) + 4
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownSpellsCount += 1
+        }
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { true },
+    add_requirements = listOf(),
+    description = "16-й уровень, способности чародея",
+    next_level = "Чародей_17",
+)
+
+var metamagic3: AbilityNode = AbilityNode(
+    name = "Метамагия: выбор опции",
+    changesInCharacterInfo = {abilities: CharacterInfo ->
+        abilities
+    },
+    alternatives = mutableMapOf(
+        Pair("first", listOf(carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
+            heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name)),
+    ),
+    requirements = {true},
+    description = "Выберите еще одну опцию метамагии:"
+)
+
+var sorcerer17: AbilityNodeLevel = AbilityNodeLevel(
+    name = "Чародей_17",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.level += 1
+        abilities.hp += abilityToModifier(abilities.constitution) + 4
+        abilities.proficiencyBonus += 1
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownSpellsCount += 1
+        }
+        abilities
+    },
+    alternatives = mutableMapOf(
+        Pair("first", listOf(metamagic3.name))
+    ),
+    requirements = { true },
+    add_requirements = listOf(),
+    description = "17-й уровень, способности чародея",
+    next_level = "Чародей_18",
+)
+
+var sorcerer18: AbilityNodeLevel = AbilityNodeLevel(
+    name = "Чародей_18",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.level += 1
+        abilities.hp += abilityToModifier(abilities.constitution) + 4
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownSpellsCount += 1
+        }
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { true },
+    add_requirements = listOf(),
+    description = "18-й уровень, способности чародея",
+    next_level = "Чародей_19",
+)
+
+var sorcerer19: AbilityNodeLevel = AbilityNodeLevel(
+    name = "Чародей_19",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.level += 1
+        abilities.hp += abilityToModifier(abilities.constitution) + 4
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownSpellsCount += 1
+        }
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { true },
+    add_requirements = listOf(),
+    description = "19-й уровень, способности чародея",
+    next_level = "Чародей_20",
+)
+
+var sorcerer20: AbilityNodeLevel = AbilityNodeLevel(
+    name = "Чародей_20",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.level += 1
+        abilities.hp += abilityToModifier(abilities.constitution) + 4
+        abilities.spellsInfo["Заклинания класса"]?.let {
+            it.maxKnownSpellsCount += 1
+        }
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { true },
+    add_requirements = listOf(),
+    description = "20-й уровень, способности чародея",
     next_level = null,
 )
 
 var mapOfSorcererAbilities = mutableMapOf(
     Pair(classFeaturesSorcerer.name, classFeaturesSorcerer),
     Pair(spellCastingSorcerer.name, spellCastingSorcerer),
+    Pair(sorcerousOrigin.name, sorcerousOrigin),
     Pair(sorcerer1.name, sorcerer1),
+    Pair(fontOfMagic.name, fontOfMagic),
     Pair(sorcerer2.name, sorcerer2),
+    Pair(metamagic.name, metamagic),
     Pair(sorcerer3.name, sorcerer3),
     Pair(sorcerer4.name, sorcerer4),
-    Pair(sorcerer5.name, sorcerer5)
-)
+    Pair(sorcerer5.name, sorcerer5),
+    Pair(sorcerer6.name, sorcerer6),
+    Pair(sorcerer7.name, sorcerer7),
+    Pair(sorcerer8.name, sorcerer8),
+    Pair(sorcerer9.name, sorcerer9),
+    Pair(metamagic2.name, metamagic2),
+    Pair(sorcerer10.name, sorcerer10),
+    Pair(sorcerer11.name, sorcerer11),
+    Pair(sorcerer12.name, sorcerer12),
+    Pair(sorcerer13.name, sorcerer13),
+    Pair(sorcerer14.name, sorcerer14),
+    Pair(sorcerer15.name, sorcerer15),
+    Pair(sorcerer16.name, sorcerer16),
+    Pair(metamagic3.name, metamagic3),
+    Pair(sorcerer17.name, sorcerer17),
+    Pair(sorcerer18.name, sorcerer18),
+    Pair(sorcerer19.name, sorcerer19),
+    Pair(sorcerer20.name, sorcerer20)
+) + mapOfMetamagicOptions + draconicBloodlineMap + wildMagicMap

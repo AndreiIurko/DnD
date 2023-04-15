@@ -48,7 +48,7 @@ class CharacterSkillsViewModel @Inject constructor(
             3
         } else if (shownCharacter.characterInfo.skillProficiency.contains(skill)) {
             2
-        } else if (shownCharacter.characterInfo.isHasHalfProf) {
+        } else if (shownCharacter.characterInfo.halfProfSet.contains(skill.ability)) {
             1
         } else {
             0

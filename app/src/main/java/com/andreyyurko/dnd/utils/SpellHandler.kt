@@ -13,8 +13,7 @@ import javax.inject.Singleton
 
 @Singleton
 class SpellsHandler @Inject constructor(
-    private val charactersHolder: CharactersHolder,
-    private val spellsParser: SpellsParser
+    spellsParser: SpellsParser
 ) : ViewModel() {
 
     var allSpells: MutableMap<String, SpellSpecificLanguage> = mutableMapOf()

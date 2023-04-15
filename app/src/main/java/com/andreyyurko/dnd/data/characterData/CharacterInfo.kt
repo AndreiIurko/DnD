@@ -18,7 +18,7 @@ data class CharacterInfo(
     var proficiencyBonus: Int = 0,
     var skillProficiency: MutableSet<Skill> = mutableSetOf(),
     var expertize: MutableSet<Skill> = mutableSetOf(),
-    var isHasHalfProf: Boolean = false,
+    var halfProfSet: MutableSet<Ability> = mutableSetOf(),
     var savingThrowProf: MutableSet<Ability> = mutableSetOf(),
     var armorProficiency: MutableSet<ArmorProf> = mutableSetOf(),
     var weaponProficiency: MutableSet<Weapon> = mutableSetOf(),
@@ -60,6 +60,7 @@ fun mergeCharacterInfo(characterInfoFirst: CharacterInfo, characterInfoSecond: C
     resultCharacterInfo.wisdom = characterInfoFirst.wisdom + characterInfoSecond.wisdom
     resultCharacterInfo.charisma = characterInfoFirst.charisma + characterInfoSecond.charisma
     resultCharacterInfo.proficiencyBonus = characterInfoFirst.proficiencyBonus + characterInfoSecond.proficiencyBonus
+    resultCharacterInfo.halfProfSet = (characterInfoFirst.halfProfSet + characterInfoSecond.halfProfSet) as MutableSet<Ability>
     resultCharacterInfo.speed = characterInfoFirst.speed + characterInfoSecond.speed
     resultCharacterInfo.initiativeBonus = characterInfoFirst.initiativeBonus + characterInfoSecond.initiativeBonus
     resultCharacterInfo.ac = characterInfoFirst.ac + characterInfoSecond.ac

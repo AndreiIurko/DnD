@@ -242,7 +242,9 @@ var bard1: AbilityNode = AbilityNodeLevel(
 var jackOfAllTrades: AbilityNode = AbilityNode(
     name = "Мастер на все руки",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.isHasHalfProf = true
+        for (ability in Ability.values()) {
+            abilities.halfProfSet.add(ability)
+        }
         abilities
     },
     alternatives = mutableMapOf(),
