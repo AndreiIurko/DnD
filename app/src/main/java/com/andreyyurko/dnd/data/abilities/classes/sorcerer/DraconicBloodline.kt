@@ -22,11 +22,10 @@ var typeToDamageMap = mapOf(
 var ancestorBlack: AbilityNode = AbilityNode(
     name = "Цвет дракона: черный",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.additionalAbilities.add(
+        abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Черный Дракон.\n" +
                     "\n" +
                     "Вы можете говорить, читать и писать на Драконьем языке. Кроме того, когда вы взаимодействуете с драконами и совершаете проверку Харизмы, ваш бонус мастерства удваивается для этой проверки."
-        )
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
@@ -41,11 +40,10 @@ var ancestorBlack: AbilityNode = AbilityNode(
 var ancestorBlue: AbilityNode = AbilityNode(
     name = "Цвет дракона: синий",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.additionalAbilities.add(
+        abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Синий Дракон.\n" +
                     "\n" +
                     "Вы можете говорить, читать и писать на Драконьем языке. Кроме того, когда вы взаимодействуете с драконами и совершаете проверку Харизмы, ваш бонус мастерства удваивается для этой проверки."
-        )
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
@@ -60,11 +58,10 @@ var ancestorBlue: AbilityNode = AbilityNode(
 var ancestorBrass: AbilityNode = AbilityNode(
     name = "Цвет дракона: латунный",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.additionalAbilities.add(
+        abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Латунный Дракон.\n" +
                     "\n" +
                     "Вы можете говорить, читать и писать на Драконьем языке. Кроме того, когда вы взаимодействуете с драконами и совершаете проверку Харизмы, ваш бонус мастерства удваивается для этой проверки."
-        )
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
@@ -79,11 +76,10 @@ var ancestorBrass: AbilityNode = AbilityNode(
 var ancestorBronze: AbilityNode = AbilityNode(
     name = "Цвет дракона: бронзовый",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.additionalAbilities.add(
+        abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Бронзовый Дракон.\n" +
                     "\n" +
                     "Вы можете говорить, читать и писать на Драконьем языке. Кроме того, когда вы взаимодействуете с драконами и совершаете проверку Харизмы, ваш бонус мастерства удваивается для этой проверки."
-        )
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
@@ -98,11 +94,10 @@ var ancestorBronze: AbilityNode = AbilityNode(
 var ancestorCopper: AbilityNode = AbilityNode(
     name = "Цвет дракона: медный",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.additionalAbilities.add(
+        abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Медный Дракон.\n" +
                     "\n" +
                     "Вы можете говорить, читать и писать на Драконьем языке. Кроме того, когда вы взаимодействуете с драконами и совершаете проверку Харизмы, ваш бонус мастерства удваивается для этой проверки."
-        )
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
@@ -117,11 +112,10 @@ var ancestorCopper: AbilityNode = AbilityNode(
 var ancestorGold: AbilityNode = AbilityNode(
     name = "Цвет дракона: золотой",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.additionalAbilities.add(
+        abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Золотой Дракон.\n" +
                     "\n" +
                     "Вы можете говорить, читать и писать на Драконьем языке. Кроме того, когда вы взаимодействуете с драконами и совершаете проверку Харизмы, ваш бонус мастерства удваивается для этой проверки."
-        )
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
@@ -136,11 +130,10 @@ var ancestorGold: AbilityNode = AbilityNode(
 var ancestorGreen: AbilityNode = AbilityNode(
     name = "Цвет дракона: зеленый",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.additionalAbilities.add(
+        abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Зеленый Дракон.\n" +
                     "\n" +
                     "Вы можете говорить, читать и писать на Драконьем языке. Кроме того, когда вы взаимодействуете с драконами и совершаете проверку Харизмы, ваш бонус мастерства удваивается для этой проверки."
-        )
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
@@ -155,11 +148,10 @@ var ancestorGreen: AbilityNode = AbilityNode(
 var ancestorRed: AbilityNode = AbilityNode(
     name = "Цвет дракона: красный",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.additionalAbilities.add(
+        abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Красный Дракон.\n" +
                     "\n" +
                     "Вы можете говорить, читать и писать на Драконьем языке. Кроме того, когда вы взаимодействуете с драконами и совершаете проверку Харизмы, ваш бонус мастерства удваивается для этой проверки."
-        )
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
@@ -174,11 +166,10 @@ var ancestorRed: AbilityNode = AbilityNode(
 var ancestorSilver: AbilityNode = AbilityNode(
     name = "Цвет дракона: серебряный",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.additionalAbilities.add(
+        abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Серебряный Дракон.\n" +
                     "\n" +
                     "Вы можете говорить, читать и писать на Драконьем языке. Кроме того, когда вы взаимодействуете с драконами и совершаете проверку Харизмы, ваш бонус мастерства удваивается для этой проверки."
-        )
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
@@ -193,11 +184,10 @@ var ancestorSilver: AbilityNode = AbilityNode(
 var ancestorWhite: AbilityNode = AbilityNode(
     name = "Цвет дракона: белый",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.additionalAbilities.add(
+        abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Белый Дракон.\n" +
                     "\n" +
                     "Вы можете говорить, читать и писать на Драконьем языке. Кроме того, когда вы взаимодействуете с драконами и совершаете проверку Харизмы, ваш бонус мастерства удваивается для этой проверки."
-        )
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
@@ -260,18 +250,17 @@ var draconicResilience: AbilityNode = AbilityNode(
 var elementalAffinity: AbilityNode = AbilityNode(
     name = "Родство со стихией",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        for (addAbility in abilities.additionalAbilities) {
-            if (addAbility.contains("Ваш драконий предок - ")) {
-                val colorType = addAbility.split(' ')[4]
-                typeToDamageMap[colorType]?.let {
-                    abilities.actionsList.add(Action(
-                        name = "Родство со стихией",
-                        description = "Когда вы накладываете заклинание, причиняющее урон вида ${it.typeName}, вы добавляете модификатор Харизмы к одному броску урона этого заклинания. В это же самое время вы можете потратить 1 единицу чародейства, чтобы получить сопротивление этому виду урона на 1 час.",
-                        type = ActionType.PartOfAction
-                    ))
-                }
-                Log.d("test", typeToDamageMap[colorType]?.typeName.toString())
+        if (abilities.additionalAbilities.contains("Драконий предок")) {
+            var colorType = ""
+            abilities.additionalAbilities["Драконий предок"]?.let { colorType =  it.split(' ')[4] }
+            typeToDamageMap[colorType]?.let {
+                abilities.actionsList.add(Action(
+                    name = "Родство со стихией",
+                    description = "Когда вы накладываете заклинание, причиняющее урон вида ${it.typeName}, вы добавляете модификатор Харизмы к одному броску урона этого заклинания. В это же самое время вы можете потратить 1 единицу чародейства, чтобы получить сопротивление этому виду урона на 1 час.",
+                    type = ActionType.PartOfAction
+                ))
             }
+            Log.d("test", typeToDamageMap[colorType]?.typeName.toString())
         }
         abilities
     },

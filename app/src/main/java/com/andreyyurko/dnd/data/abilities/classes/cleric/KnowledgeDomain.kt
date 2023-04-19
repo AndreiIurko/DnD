@@ -1,6 +1,7 @@
 package com.andreyyurko.dnd.data.abilities.classes.cleric
 
 import com.andreyyurko.dnd.data.abilities.classes.fighter.*
+import com.andreyyurko.dnd.data.abilities.other.*
 import com.andreyyurko.dnd.data.characterData.Action
 import com.andreyyurko.dnd.data.characterData.ActionType
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
@@ -12,7 +13,28 @@ import com.andreyyurko.dnd.data.spells.SpellLists
 var blessingsOfKnowledge = AbilityNode(
     name = "Благословение знаний",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(),
+    alternatives = mutableMapOf(
+        Pair("language1", mapOfLanguages.keys.toList()),
+        Pair("language2", mapOfLanguages.keys.toList()),
+        Pair(
+            "expertise1",
+            listOf(
+                historySkillAndExpertise.name,
+                arcanaSkillAndExpertise.name,
+                natureSkillAndExpertise.name,
+                religionSkillAndExpertise.name,
+            )
+        ),
+        Pair(
+            "expertise2",
+            listOf(
+                historySkillAndExpertise.name,
+                arcanaSkillAndExpertise.name,
+                natureSkillAndExpertise.name,
+                religionSkillAndExpertise.name,
+            )
+        )
+    ),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Cleric
     },
@@ -73,7 +95,7 @@ var channelDivinityKnowledgeOfTheAges: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.actionsList.add(
             Action(
-                name = "Знания веков",
+                name = "Божественный канал: Знания веков",
                 description = "Вы можете использовать «Божественный канал», чтобы получить доступ к источнику знаний. Вы действием выбираете навык или инструмент. На 10 минут вы осваиваете владение выбранным навыком или инструментом.\n",
                 type = ActionType.Additional,
                 relatedCharges = "Божественный канал"
@@ -94,7 +116,7 @@ var channelDivinityReadThoughts: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.actionsList.add(
             Action(
-                name = "Чтение мыслей",
+                name = "Божественный канал: Чтение мыслей",
                 description = "Вы можете использовать свой «Божественный канал», чтобы читать мысли существ. Затем вы можете использовать доступ к разуму существа, чтобы командовать им.\n" +
                         "\n" +
                         "Выберите действием одно существо, которое вы можете видеть, находящееся в пределах 60 футов от вас. Это существо должно совершить спасбросок Мудрости. Если существо преуспело, вы не можете использовать это умение на нём, пока не завершите продолжительный отдых. Если существо проваливает спасбросок, вы можете прочитать его поверхностные мысли (то, что у него на уме, его текущие эмоции и то, о чём оно активно думает), когда оно находится в пределах 60 футов от вас. Этот эффект длится в течение 1 минуты.\n" +
@@ -121,6 +143,7 @@ var channelDivinityReadThoughts: AbilityNode = AbilityNode(
 var potentSpellcasting = AbilityNode(
     name = "Могущественное колдовство",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.additionalAbilities["Могущественное колдовство (жрец)"] = "Вы добавляете модификатор Мудрости к урону, который причиняете заговорами жреца.\n"
         abilities
     },
     alternatives = mutableMapOf(),
@@ -133,6 +156,19 @@ var potentSpellcasting = AbilityNode(
 var visionsOfThePast = AbilityNode(
     name = "Видения прошлого",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsList.add(
+            Action(
+                name = "Видения прошлого",
+                description = "Вы можете вызывать видения прошлого, связанные с предметом, который вы держите, или находящимся вокруг вас окружением. Вы проводите не менее 1 минуты медитируя и молясь, а затем получаете призрачные туманные видения последних событий. Вы можете медитировать таким образом количество минут, равное вашему значению Мудрости, и должны поддерживать концентрацию в течение этого времени, как если бы вы накладывали заклинание.\n" +
+                        "\n" +
+                        "После того как вы использовали это умение, вы не можете его использовать повторно, пока не окончите короткий или продолжительный отдых.\n" +
+                        "\n" +
+                        "Чтение предмета. Удерживая предмет во время медитации, вы получаете видение предыдущего владельца этого предмета. После медитации в течение 1 минуты вы узнаёте, как владелец приобрёл и потерял предмет, а также самое последнее значимое событие с участием предмета и его владельца. Если предмет принадлежал другому существу в недавнем прошлом (в пределах количества дней, равного значению вашей Мудрости), вы можете потратить 1 дополнительную минуту на каждого владельца, чтобы узнать ту же информацию о нём.\n" +
+                        "\n" +
+                        "Чтение окрестностей. Пока вы медитируете, вы наблюдаете видения последних событий, произошедших в непосредственной близости (комната, улица, туннель, поляна и тому подобное в пределах куба с длиной ребра 50 футов), на протяжении количества прошедших дней, равного значению вашей Мудрости. За каждую минуту медитации вы узнаёте об одном значимом событии, начиная с самого последнего. Значимые события обычно связаны с сильными эмоциями, например, битвами и предательствами, свадьбами и убийствами, родами и похоронами. Однако они могут также включать в себя более обыденные события, которые, тем не менее, важны в текущей ситуации.\n",
+                type = ActionType.Additional,
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),

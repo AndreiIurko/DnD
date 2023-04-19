@@ -563,6 +563,294 @@ var survivalExpertise: AbilityNode = AbilityNode(
     priority = Priority.DoFirst
 )
 
+var acrobaticsSkillAndExpertise: AbilityNode = AbilityNode(
+    name = "Акробатика, навык и экспертиза",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.skillProficiency.add(Skill.Acrobatics)
+        abilities.expertize.add(Skill.Acrobatics)
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { abilities: CharacterInfo ->
+        !abilities.expertize.contains(Skill.Acrobatics)
+    },
+    description = "",
+    isNeedsToBeShown = false,
+    priority = Priority.DoFirst
+)
+
+var animalHandlingSkillAndExpertise: AbilityNode = AbilityNode(
+    name = "Уход за животными, навык и экспертиза",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.skillProficiency.add(Skill.AnimalHandling)
+        abilities.expertize.add(Skill.AnimalHandling)
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { abilities: CharacterInfo ->
+        !abilities.expertize.contains(Skill.AnimalHandling)
+    },
+    description = "",
+    isNeedsToBeShown = false,
+    priority = Priority.DoFirst
+)
+
+var arcanaSkillAndExpertise: AbilityNode = AbilityNode(
+    name = "Магия, навык и экспертиза",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.skillProficiency.add(Skill.Arcana)
+        abilities.expertize.add(Skill.Arcana)
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { abilities: CharacterInfo ->
+        !abilities.expertize.contains(Skill.Arcana)
+    },
+    description = "",
+    isNeedsToBeShown = false,
+    priority = Priority.DoFirst
+)
+
+var athleticsSkillAndExpertise: AbilityNode = AbilityNode(
+    name = "Атлетика, навык и экспертиза",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.skillProficiency.add(Skill.Athletics)
+        abilities.expertize.add(Skill.Athletics)
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { abilities: CharacterInfo ->
+        !abilities.expertize.contains(Skill.Athletics)
+    },
+    description = "",
+    isNeedsToBeShown = false,
+    priority = Priority.DoFirst
+)
+
+var deceptionSkillAndExpertise: AbilityNode = AbilityNode(
+    name = "Обман, навык и экспертиза",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.skillProficiency.add(Skill.Deception)
+        abilities.expertize.add(Skill.Deception)
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { abilities: CharacterInfo ->
+        !abilities.expertize.contains(Skill.Deception)
+    },
+    description = "",
+    isNeedsToBeShown = false,
+    priority = Priority.DoFirst
+)
+
+var historySkillAndExpertise: AbilityNode = AbilityNode(
+    name = "История, навык и экспертиза",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.skillProficiency.add(Skill.History)
+        abilities.expertize.add(Skill.History)
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { abilities: CharacterInfo ->
+        !abilities.expertize.contains(Skill.History)
+    },
+    description = "",
+    isNeedsToBeShown = false,
+    priority = Priority.DoFirst
+)
+
+var insightSkillAndExpertise: AbilityNode = AbilityNode(
+    name = "Проницательность, навык и экспертиза",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.skillProficiency.add(Skill.Insight)
+        abilities.expertize.add(Skill.Insight)
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { abilities: CharacterInfo ->
+        !abilities.expertize.contains(Skill.Insight)
+    },
+    description = "",
+    isNeedsToBeShown = false,
+    priority = Priority.DoFirst
+)
+
+var intimidationSkillAndExpertise: AbilityNode = AbilityNode(
+    name = "Запугивание, навык и экспертиза",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.skillProficiency.add(Skill.Intimidation)
+        abilities.expertize.add(Skill.Intimidation)
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { abilities: CharacterInfo ->
+        !abilities.expertize.contains(Skill.Intimidation)
+    },
+    description = "",
+    isNeedsToBeShown = false,
+    priority = Priority.DoFirst
+)
+
+var investigationSkillAndExpertise: AbilityNode = AbilityNode(
+    name = "Анализ, навык и экспертиза",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.skillProficiency.add(Skill.Investigation)
+        abilities.expertize.add(Skill.Investigation)
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { abilities: CharacterInfo ->
+        !abilities.expertize.contains(Skill.Investigation)
+    },
+    description = "",
+    isNeedsToBeShown = false,
+    priority = Priority.DoFirst
+)
+
+var medicineSkillAndExpertise: AbilityNode = AbilityNode(
+    name = "Медицина, навык и экспертиза",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.skillProficiency.add(Skill.Medicine)
+        abilities.expertize.add(Skill.Medicine)
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { abilities: CharacterInfo ->
+        !abilities.expertize.contains(Skill.Medicine)
+    },
+    description = "",
+    isNeedsToBeShown = false,
+    priority = Priority.DoFirst
+)
+
+var natureSkillAndExpertise: AbilityNode = AbilityNode(
+    name = "Природа, навык и экспертиза",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.skillProficiency.add(Skill.Nature)
+        abilities.expertize.add(Skill.Nature)
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { abilities: CharacterInfo ->
+        !abilities.expertize.contains(Skill.Nature)
+    },
+    description = "",
+    isNeedsToBeShown = false,
+    priority = Priority.DoFirst
+)
+
+var perceptionSkillAndExpertise: AbilityNode = AbilityNode(
+    name = "Внимательность, навык и экспертиза",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.skillProficiency.add(Skill.Perception)
+        abilities.expertize.add(Skill.Perception)
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { abilities: CharacterInfo ->
+        !abilities.expertize.contains(Skill.Perception)
+    },
+    description = "",
+    isNeedsToBeShown = false,
+    priority = Priority.DoFirst
+)
+
+var performanceSkillAndExpertise: AbilityNode = AbilityNode(
+    name = "Выступление, навык и экспертиза",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.skillProficiency.add(Skill.Performance)
+        abilities.expertize.add(Skill.Performance)
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { abilities: CharacterInfo ->
+        !abilities.expertize.contains(Skill.Performance)
+    },
+    description = "",
+    isNeedsToBeShown = false,
+    priority = Priority.DoFirst
+)
+
+var persuasionSkillAndExpertise: AbilityNode = AbilityNode(
+    name = "Убеждение, навык и экспертиза",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.skillProficiency.add(Skill.Persuasion)
+        abilities.expertize.add(Skill.Persuasion)
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { abilities: CharacterInfo ->
+        !abilities.expertize.contains(Skill.Persuasion)
+    },
+    description = "",
+    isNeedsToBeShown = false,
+    priority = Priority.DoFirst
+)
+
+var religionSkillAndExpertise: AbilityNode = AbilityNode(
+    name = "Религия, навык и экспертиза",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.skillProficiency.add(Skill.Religion)
+        abilities.expertize.add(Skill.Religion)
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { abilities: CharacterInfo ->
+        !abilities.expertize.contains(Skill.Religion)
+    },
+    description = "",
+    isNeedsToBeShown = false,
+    priority = Priority.DoFirst
+)
+
+var sleightOfHandSkillAndExpertise: AbilityNode = AbilityNode(
+    name = "Ловкость рук, навык и экспертиза",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.skillProficiency.add(Skill.SleightOfHand)
+        abilities.expertize.add(Skill.SleightOfHand)
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { abilities: CharacterInfo ->
+        !abilities.expertize.contains(Skill.SleightOfHand)
+    },
+    description = "",
+    isNeedsToBeShown = false,
+    priority = Priority.DoFirst
+)
+
+var stealthSkillAndExpertise: AbilityNode = AbilityNode(
+    name = "Скрытность, навык и экспертиза",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.skillProficiency.add(Skill.Stealth)
+        abilities.expertize.add(Skill.Stealth)
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { abilities: CharacterInfo ->
+        !abilities.expertize.contains(Skill.Stealth)
+    },
+    description = "",
+    isNeedsToBeShown = false,
+    priority = Priority.DoFirst
+)
+
+var survivalSkillAndExpertise: AbilityNode = AbilityNode(
+    name = "Выживание, навык и экспертиза",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.skillProficiency.add(Skill.Survival)
+        abilities.expertize.add(Skill.Survival)
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { abilities: CharacterInfo ->
+        !abilities.expertize.contains(Skill.Survival)
+    },
+    description = "",
+    isNeedsToBeShown = false,
+    priority = Priority.DoFirst
+)
+
 var mapOfSkills = mutableMapOf(
     Pair(acrobatics.name, acrobatics),
     Pair(animalHandling.name, animalHandling),
@@ -599,5 +887,23 @@ var mapOfSkills = mutableMapOf(
     Pair(religionExpertise.name, religionExpertise),
     Pair(sleightOfHandExpertise.name, sleightOfHandExpertise),
     Pair(stealthExpertise.name, stealthExpertise),
-    Pair(survivalExpertise.name, survivalExpertise)
+    Pair(survivalExpertise.name, survivalExpertise),
+    Pair(acrobaticsSkillAndExpertise.name, acrobaticsSkillAndExpertise),
+    Pair(animalHandlingSkillAndExpertise.name, animalHandlingSkillAndExpertise),
+    Pair(arcanaSkillAndExpertise.name, arcanaSkillAndExpertise),
+    Pair(athleticsSkillAndExpertise.name, athleticsSkillAndExpertise),
+    Pair(deceptionSkillAndExpertise.name, deceptionSkillAndExpertise),
+    Pair(historySkillAndExpertise.name, historySkillAndExpertise),
+    Pair(insightSkillAndExpertise.name, insightSkillAndExpertise),
+    Pair(intimidationSkillAndExpertise.name, intimidationSkillAndExpertise),
+    Pair(investigationSkillAndExpertise.name, investigationSkillAndExpertise),
+    Pair(medicineSkillAndExpertise.name, medicineSkillAndExpertise),
+    Pair(natureSkillAndExpertise.name, natureSkillAndExpertise),
+    Pair(perceptionSkillAndExpertise.name, perceptionSkillAndExpertise),
+    Pair(performanceSkillAndExpertise.name, performanceSkillAndExpertise),
+    Pair(persuasionSkillAndExpertise.name, persuasionSkillAndExpertise),
+    Pair(religionSkillAndExpertise.name, religionSkillAndExpertise),
+    Pair(sleightOfHandSkillAndExpertise.name, sleightOfHandSkillAndExpertise),
+    Pair(stealthSkillAndExpertise.name, stealthSkillAndExpertise),
+    Pair(survivalSkillAndExpertise.name, survivalSkillAndExpertise)
 )

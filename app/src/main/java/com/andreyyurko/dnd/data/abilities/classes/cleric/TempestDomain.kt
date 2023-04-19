@@ -115,6 +115,13 @@ var channelDivinityDestructiveWrath: AbilityNode = AbilityNode(
 var thunderboltStrike = AbilityNode(
     name = "Удар грома",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsList.add(
+            Action(
+                name = "Удар грома",
+                description = "Когда вы наносите урон электричеством существу с размером Большое или меньше, вы также можете оттолкнуть его на 10 футов от себя.\n",
+                type = ActionType.Additional,
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
@@ -127,6 +134,13 @@ var thunderboltStrike = AbilityNode(
 var divineStrikeTempestDomain = AbilityNode(
     name = "Божественный удар домена бури",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsList.add(
+            Action(
+                name = "Божественный удар домена бури",
+                description = "Вы получаете способность наполнять удары своего оружия божественной энергией. Один раз в каждый свой ход, когда вы попадаете по существу атакой оружием, вы можете причинить цели дополнительный урон звуком 1к8. Когда вы достигаете 14-го уровня, дополнительный урон возрастает до 2к8.\n",
+                type = ActionType.Additional,
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
@@ -139,6 +153,7 @@ var divineStrikeTempestDomain = AbilityNode(
 var stormBorn = AbilityNode(
     name = "Бурерождённый",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.additionalAbilities["Бурерождённый"] = "У вас появляется скорость полёта, равная вашей текущей наземной скорости ходьбы, когда вы не под землёй и не в помещении.\n"
         abilities
     },
     alternatives = mutableMapOf(),

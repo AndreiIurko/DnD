@@ -8,7 +8,10 @@ import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var conjurationSavant = AbilityNode(
     name = "Мастер вызова",
-    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.additionalAbilities["Мастер вызова"] = "Золото и время, которое вы тратите на копирование заклинания школы Вызова в свою книгу заклинаний, уменьшаются вдвое.\n"
+        abilities
+    },
     alternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 2 && abilities.characterClass == Classes.Wizard
@@ -59,8 +62,11 @@ var benignTransposition = AbilityNode(
 )
 
 var focusedConjuration = AbilityNode(
-    name = "Фокусированный вызова",
-    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
+    name = "Фокусированный вызов",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.additionalAbilities["Фокусированный вызов"] = "Когда вы концентрируетесь на заклинании школы Вызова, ваша концентрация не может быть нарушена в результате получения урона.\n"
+        abilities
+    },
     alternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 10 && abilities.characterClass == Classes.Wizard
@@ -70,7 +76,10 @@ var focusedConjuration = AbilityNode(
 
 var durableSummons = AbilityNode(
     name = "Надёжный призыв",
-    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.additionalAbilities["Надёжный призыв"] = "Все призванные или созданные вами заклинанием школы Вызова существа имеют 30 временных хитов.\n"
+        abilities
+    },
     alternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 14 && abilities.characterClass == Classes.Wizard

@@ -5,7 +5,10 @@ import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var divineSavant = AbilityNode(
     name = "Мастер прорицания",
-    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.additionalAbilities["Мастер прорицания"] = "Золото и время, которое вы тратите на копирование заклинания школы Прорицания в свою книгу заклинаний, уменьшаются вдвое.\n"
+        abilities
+    },
     alternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 2 && abilities.characterClass == Classes.Wizard
@@ -15,7 +18,31 @@ var divineSavant = AbilityNode(
 
 var portent = AbilityNode(
     name = "Знамение",
-    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        if (abilities.level < 14) {
+            abilities.actionsList.add(
+                Action(
+                    name = "Знамение",
+                    description = "Когда вы выбираете эту школу, в вашем сознании возникают проблески будущего. Когда вы заканчиваете продолжительный отдых, сделайте два броска к20 и запишите их результаты. Вы можете заменить любой бросок атаки, спасбросок, или проверку характеристики, сделанную вами или существом, которое вы можете видеть, одним из этих бросков предсказания. Вы должны сделать выбор о том, что так поступаете, до броска, и вы можете заменить значение броска подобным путём только один раз за ход.\n" +
+                            "\n" +
+                            "Каждый бросок предсказания может быть использован только один раз. Когда вы заканчиваете продолжительный отдых, вы теряете все неиспользованные броски предсказания.\n",
+                    type = ActionType.Additional
+                )
+            )
+        }
+        else {
+            abilities.actionsList.add(
+                Action(
+                    name = "Знамение",
+                    description = "Когда вы выбираете эту школу, в вашем сознании возникают проблески будущего. Когда вы заканчиваете продолжительный отдых, сделайте три броска к20 и запишите их результаты. Вы можете заменить любой бросок атаки, спасбросок, или проверку характеристики, сделанную вами или существом, которое вы можете видеть, одним из этих бросков предсказания. Вы должны сделать выбор о том, что так поступаете, до броска, и вы можете заменить значение броска подобным путём только один раз за ход.\n" +
+                            "\n" +
+                            "Каждый бросок предсказания может быть использован только один раз. Когда вы заканчиваете продолжительный отдых, вы теряете все неиспользованные броски предсказания.\n",
+                    type = ActionType.Additional
+                )
+            )
+        }
+        abilities
+    },
     alternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 2 && abilities.characterClass == Classes.Wizard
@@ -27,7 +54,10 @@ var portent = AbilityNode(
 
 var expertDivination = AbilityNode(
     name = "Эксперт прорицания",
-    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.additionalAbilities["Эксперт прорицания"] = "Вы так легко накладываете заклинания школы Прорицания, что расходуете лишь малую часть своих сил. Когда вы накладываете заклинание школы Прорицания 2-го уровня или выше, используя ячейку заклинаний, вы восстанавливаете одну уже израсходованную ячейку заклинаний. Восстанавливаемая ячейка должна быть ниже уровнем, чем заклинание, которое вы накладываете, и не может быть выше 5-го уровня.\n"
+        abilities
+    },
     alternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 6 && abilities.characterClass == Classes.Wizard
@@ -37,7 +67,24 @@ var expertDivination = AbilityNode(
 
 var theThirdEye = AbilityNode(
     name = "Третий глаз",
-    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsList.add(
+            Action(
+                name = "Третий глаз",
+                description = "Вы можете действием увеличить силу восприятия. Когда вы так поступаете, выберите одно преимущество, которое будет длиться, пока вы не станете недееспособны или пока вы не совершите короткий или продолжительный отдых. Вы не можете использовать это умение повторно, пока не завершите отдых.\n" +
+                        "\n" +
+                        "Большое понимание. Вы можете читать на любых языках.\n" +
+                        "\n" +
+                        "Видеть невидимое. Вы можете видеть находящихся на линии обзора невидимых существ и предметы в пределах 10 футов.\n" +
+                        "\n" +
+                        "Тёмное зрение. Вы получаете тёмное зрение в пределах 60 футов.\n" +
+                        "\n" +
+                        "Эфирный взгляд. Ваше зрение простирается на Эфирный План в пределах 60 футов.\n",
+                type = ActionType.Action
+            )
+        )
+        abilities
+    },
     alternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 10 && abilities.characterClass == Classes.Wizard

@@ -45,7 +45,7 @@ var dueling: AbilityNode = AbilityNode(
     // don't know how to process this ability
     // change current state is dangerous
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities.add("Боевой стиль: Дуэлянт")
+        abilities.additionalAbilities["Боевой стиль: Дуэлянт"] = "Пока вы держите рукопашное оружие в одной руке и не используете другого оружия, вы получаете бонус +2 к броскам урона этим оружием."
         abilities
     },
     alternatives = mutableMapOf(),
@@ -59,7 +59,7 @@ var greatWeaponFighting: AbilityNode = AbilityNode(
     name = "Сражение большим оружием",
     // don't know how to process this ability
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities.add("Боевой стиль: Сражение большим оружием")
+        abilities.additionalAbilities["Боевой стиль: Сражение большим оружием"] = "Если у вас выпало «1» или «2» на кости урона оружия при атаке, которую вы совершали рукопашным оружием, удерживая его двумя руками, то вы можете перебросить эту кость, и должны использовать новый результат, даже если снова выпало «1» или «2». Чтобы воспользоваться этим преимуществом, ваше оружие должно иметь свойство « двуручное» или «универсальное»."
         abilities
     },
     alternatives = mutableMapOf(),

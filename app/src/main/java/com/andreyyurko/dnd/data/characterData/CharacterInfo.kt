@@ -33,7 +33,7 @@ data class CharacterInfo(
     var damageImmunities: MutableSet<DamageType> = mutableSetOf(),
     var conditionImmunities: MutableSet<Conditions> = mutableSetOf(),
     var actionsList: MutableList<Action> = mutableListOf(),
-    var additionalAbilities: MutableList<String> = mutableListOf(), // like blind vision
+    var additionalAbilities: MutableMap<String, String> = mutableMapOf(), // like blind vision
 
     // String - name of inventory item
     var inventory: MutableMap<String, InventoryItemInfo> = mutableMapOf(),

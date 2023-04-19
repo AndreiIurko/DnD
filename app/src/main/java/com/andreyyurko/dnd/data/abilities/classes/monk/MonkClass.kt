@@ -334,13 +334,7 @@ var monk5: AbilityNode = AbilityNodeLevel(
 var kiImprovedStrike: AbilityNode = AbilityNode(
     name = "Энергетические удары",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
-            Action(
-                name = "Энергетические удары",
-                description = "Ваши безоружные удары считаются магическими при определении преодоления сопротивления и иммунитета к немагическим атакам и урону.\n",
-                type = ActionType.Additional
-            )
-        )
+        abilities.additionalAbilities["Энергетические удары"] = "Ваши безоружные удары считаются магическими при определении преодоления сопротивления и иммунитета к немагическим атакам и урону."
         abilities
     },
     alternatives = mutableMapOf(),
@@ -368,13 +362,7 @@ var monk6: AbilityNode = AbilityNodeLevel(
 var monkEvasion: AbilityNode = AbilityNode(
     name = "Монашеская увёртливость",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
-            Action(
-                name = "Монашеская увёртливость",
-                description = "Ваше инстинктивное проворство позволяет вам уклоняться от эффектов, направленных на определённую область, вроде дыхания синего дракона или заклинания огненный шар. Если вы попадаете под действие эффекта, позволяющего совершить спасбросок Ловкости, чтобы получить только половину урона, вы вместо этого не получаете урона при успешном спасброске и получаете только половину урона при проваленном.\n",
-                type = ActionType.Additional
-            )
-        )
+        abilities.additionalAbilities["Монашеская увёртливость"] = "Ваше инстинктивное проворство позволяет вам уклоняться от эффектов, направленных на определённую область, вроде дыхания синего дракона или заклинания огненный шар. Если вы попадаете под действие эффекта, позволяющего совершить спасбросок Ловкости, чтобы получить только половину урона, вы вместо этого не получаете урона при успешном спасброске и получаете только половину урона при проваленном."
         abilities
     },
     alternatives = mutableMapOf(),
@@ -386,12 +374,19 @@ var monkEvasion: AbilityNode = AbilityNode(
 var stillnessOfMind: AbilityNode = AbilityNode(
     name = "Спокойствие разума",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsList.add(
+            Action(
+                name = "Спокойствие разума",
+                description = "Вы можете действием окончить один из действующих на вас эффектов, делающих вас очарованным или испуганным.\n",
+                type = ActionType.Action
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
     requirements = { true },
     add_requirements = listOf(listOf()),
-    description = "Ваше инстинктивное проворство позволяет вам уклоняться от эффектов, направленных на определённую область, вроде дыхания синего дракона или заклинания огненный шар. Если вы попадаете под действие эффекта, позволяющего совершить спасбросок Ловкости, чтобы получить только половину урона, вы вместо этого не получаете урона при успешном спасброске и получаете только половину урона при проваленном.\n"
+    description = "Вы можете действием окончить один из действующих на вас эффектов, делающих вас очарованным или испуганным.\n"
 )
 
 var monk7: AbilityNode = AbilityNodeLevel(
@@ -510,13 +505,7 @@ var monk12: AbilityNode = AbilityNodeLevel(
 var tongueOfTheSunAndMoon: AbilityNode = AbilityNode(
     name = "Язык солнца и луны",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
-            Action(
-                name = "Язык солнца и луны",
-                description = "Вы понимаете, как взаимодействовать с энергией ци в чужом разуме, и теперь вы понимаете речь на любом языке. Кроме того, все существа, способные понимать хотя бы один язык, понимают то, что вы сказали.\n",
-                type = ActionType.Additional,
-            )
-        )
+        abilities.additionalAbilities["Язык солнца и луны"] = "Вы понимаете, как взаимодействовать с энергией ци в чужом разуме, и теперь вы понимаете речь на любом языке. Кроме того, все существа, способные понимать хотя бы один язык, понимают то, что вы сказали."
         abilities
     },
     alternatives = mutableMapOf(),
@@ -551,6 +540,13 @@ var diamondSoul: AbilityNode = AbilityNode(
         abilities.savingThrowProf.add(Ability.Charisma)
         abilities.savingThrowProf.add(Ability.Constitution)
         abilities.savingThrowProf.add(Ability.Wisdom)
+        abilities.actionsList.add(
+            Action(
+                name = "Алмазная душа",
+                description = "Если вы провалили спасбросок, вы можете повторить его, потратив 1 очко ци, и должны использовать второй результат.\n",
+                type = ActionType.Additional
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
@@ -578,13 +574,7 @@ var monk14: AbilityNode = AbilityNodeLevel(
 var timelessBody: AbilityNode = AbilityNode(
     name = "Безвременное тело",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
-            Action(
-                name = "Безвременное тело",
-                description = "Ваша ци поддерживает вас, и ваше тело больше не подвержено признакам старения. Вы не можете быть состарены магически. Впрочем, вы всё еще можете умереть от старости. Кроме того, вам больше не требуется еда и вода.\n",
-                type = ActionType.Additional,
-            )
-        )
+        abilities.additionalAbilities["Безвременное тело"] = "Ваша ци поддерживает вас, и ваше тело больше не подвержено признакам старения. Вы не можете быть состарены магически. Впрочем, вы всё еще можете умереть от старости. Кроме того, вам больше не требуется еда и вода."
         abilities
     },
     alternatives = mutableMapOf(),
@@ -705,14 +695,7 @@ var monk19: AbilityNode = AbilityNodeLevel(
 var perfectSelf: AbilityNode = AbilityNode(
     name = "Совершенство",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
-            Action(
-                name = "Совершенство",
-                description = "Если при броске инициативы у вас нет очков ци, вы получаете 4 очка ци.\n",
-                type = ActionType.Additional,
-                relatedCharges = "Ци"
-            )
-        )
+        abilities.additionalAbilities["Совершенство"] = "Если при броске инициативы у вас нет очков ци, вы получаете 4 очка ци."
         abilities
     },
     alternatives = mutableMapOf(),

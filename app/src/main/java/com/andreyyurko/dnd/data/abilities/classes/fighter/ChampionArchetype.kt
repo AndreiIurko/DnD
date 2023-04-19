@@ -9,7 +9,7 @@ import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 var improvedCritical = AbilityNode(
     name = "Улучшенные критические попадания",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities.add("Ваши атаки оружием совершают критическое попадание при выпадении «19» или «20» на кости атаки.")
+        abilities.additionalAbilities["Улучшенные критические попадания"] = "Ваши атаки оружием совершают критическое попадание при выпадении «19» или «20» на кости атаки."
         abilities
     },
     alternatives = mutableMapOf(),
@@ -49,11 +49,7 @@ var additionalFightingStyle = AbilityNode(
 var superiorCritical = AbilityNode(
     name = "Превосходные критические попадания",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        for (i in 0 until abilities.additionalAbilities.size) {
-            if (abilities.additionalAbilities[i] == "Ваши атаки оружием совершают критическое попадание при выпадении «19» или «20» на кости атаки.") {
-                abilities.additionalAbilities[i] = "Ваши атаки оружием совершают критическое попадание при выпадении «18–20» на кости атаки."
-            }
-        }
+        abilities.additionalAbilities["Улучшенные критические попадания"] = "Ваши атаки оружием совершают критическое попадание при выпадении «18–20» на кости атаки."
         abilities
     },
     alternatives = mutableMapOf(),
@@ -64,7 +60,7 @@ var superiorCritical = AbilityNode(
 var survivor = AbilityNode(
     name = "Уцелевший",
     changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.additionalAbilities.add("Вы достигаете вершин стойкости в бою. В начале каждого своего хода вы восстанавливаете количество хитов, равное 5 + ваш модификатор Телосложения, если количество ваших хитов не превышает половины от максимума. Это умение не работает, если у вас 0 хитов.")
+        abilities.additionalAbilities["Уцелевший"] = "Вы достигаете вершин стойкости в бою. В начале каждого своего хода вы восстанавливаете количество хитов, равное 5 + ваш модификатор Телосложения, если количество ваших хитов не превышает половины от максимума. Это умение не работает, если у вас 0 хитов."
         abilities
     },
     alternatives = mutableMapOf(),

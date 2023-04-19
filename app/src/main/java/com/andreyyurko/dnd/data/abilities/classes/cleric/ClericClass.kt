@@ -253,6 +253,20 @@ var cleric4: AbilityNodeLevel = AbilityNodeLevel(
 var destroy_undead: AbilityNode = AbilityNode(
     name = "Уничтожение нежити",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        for (i in 0..abilities.actionsList.size-1) {
+            if (abilities.actionsList[i].name == "Изгнание нежити") {
+                abilities.actionsList[i].description = abilities.actionsList[i].description +
+                        "\n" +
+                        "Когда Нежить проваливает спасбросок от вашего умения «Изгнание Нежити», существо мгновенно уничтожается, если его показатель опасности не превышает значения, указанного в таблице:\n" +
+                        "\n" +
+                        "Уровень жреца | Уничтожается нежить с ПО\n" +
+                        "       5      | 1/2 и ниже\n" +
+                        "       8      | 1 и ниже\n" +
+                        "      11      | 2 и ниже\n" +
+                        "      14      | 3 и ниже\n" +
+                        "      17      | 4 и ниже\n"
+            }
+        }
         abilities
     },
     alternatives = mutableMapOf(),
