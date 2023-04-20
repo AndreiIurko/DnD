@@ -19,8 +19,12 @@ class RaceViewModel @Inject constructor(
 
     fun makeChoice(raceChoice: String) {
         baseCAN.makeChoice("race", raceChoice)
+        showAbilities()
+    }
+
+    fun showAbilities() {
         adapter.apply {
-            rootCan = baseCAN.chosen_alternatives["race"]!!
+            rootCan = baseCAN.chosen_alternatives["race"]
             notifyDataSetChanged()
         }
     }

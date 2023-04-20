@@ -9,7 +9,8 @@ import javax.inject.Singleton
 
 @Singleton
 class CharacterViewModel @Inject constructor(
-    private val charactersHolder: CharactersHolder
+    private val charactersHolder: CharactersHolder,
+    private val createCharacterViewModel: CreateCharacterViewModel
 ) : ViewModel() {
     var charactersBriefInfo = charactersHolder.getBriefInfo()
 
@@ -36,6 +37,10 @@ class CharacterViewModel @Inject constructor(
         mergeAllAbilities(shownCharacter)
         charactersHolder.updateCharacter(shownCharacter)
         dataState.value = DataState.Complete.stateName
+    }
+
+    fun changeShownCharacter() {
+        createCharacterViewModel.character = shownCharacter
     }
 
     fun deleteCharacter(id: Int) {

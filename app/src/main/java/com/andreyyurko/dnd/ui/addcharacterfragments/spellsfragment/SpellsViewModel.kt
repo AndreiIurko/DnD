@@ -14,10 +14,20 @@ class SpellsViewModel @Inject constructor(
 ) : ViewModel() {
 
     var character = createCharacterViewModel.character
+    var classesForSpells: MutableList<String> = mutableListOf()
+    var currentClassList = 0
 
     private val knownFilters = SpellsHandler.Filters()
     private val allFilters = SpellsHandler.Filters()
     var isKnownListShown = false
+
+    init {
+        for (spellList in character.characterInfo.spellsInfo.values) {
+            if (!classesForSpells.contains(spellList.className)) {
+                classesForSpells.add(spellList.className)
+            }
+        }
+    }
 
     fun getFilters(): SpellsHandler.Filters {
         return if (isKnownListShown) knownFilters
@@ -25,27 +35,27 @@ class SpellsViewModel @Inject constructor(
     }
 
     fun getKnownSpellsCount(): Int {
-        return spellsHandler.getKnownSpellsCount(createCharacterViewModel.character)
+        return spellsHandler.getKnownSpellsCount(createCharacterViewModel.character, classesForSpells[currentClassList])
     }
 
     fun getMaxKnownSpellsCount(): Int {
-        return spellsHandler.getMaxKnownSpellsCount(createCharacterViewModel.character)
+        return spellsHandler.getMaxKnownSpellsCount(createCharacterViewModel.character, classesForSpells[currentClassList])
     }
 
     fun getKnownCantripsCount(): Int {
-        return spellsHandler.getKnownCantripsCount(createCharacterViewModel.character)
+        return spellsHandler.getKnownCantripsCount(createCharacterViewModel.character, classesForSpells[currentClassList])
     }
 
     fun getMaxKnownCantripsCount(): Int {
-        return spellsHandler.getMaxKnownCantripsCount(createCharacterViewModel.character)
+        return spellsHandler.getMaxKnownCantripsCount(createCharacterViewModel.character, classesForSpells[currentClassList])
     }
 
     fun showAllSpells(): List<Spell> {
-        return spellsHandler.getAllSpellsWhatNeedsToBeChosen(createCharacterViewModel.character, allFilters).toList()
+        return spellsHandler.getAllSpellsWhatNeedsToBeChosen(createCharacterViewModel.character, classesForSpells[currentClassList], allFilters)
     }
 
     fun showKnownSpells(): List<Spell> {
-        return spellsHandler.getKnownSpellsWithDescription(createCharacterViewModel.character, knownFilters).toList()
+        return spellsHandler.getKnownSpellsWithDescription(createCharacterViewModel.character, knownFilters, classesForSpells[currentClassList])
     }
 
     fun addKnownSpell(spell: Spell) {
@@ -64,5 +74,15 @@ class SpellsViewModel @Inject constructor(
 
     fun deleteCharacter() {
         createCharacterViewModel.deleteCharacter()
+    }
+
+    fun nextListOrExit(): Boolean {
+        currentClassList++
+        return currentClassList != classesForSpells.size
+    }
+
+    fun previousOrBack(): Boolean {
+        currentClassList--
+        return currentClassList >= 0
     }
 }

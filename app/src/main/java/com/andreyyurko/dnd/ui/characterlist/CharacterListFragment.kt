@@ -41,7 +41,7 @@ class CharacterListFragment : BaseFragment(R.layout.fragment_character_list) {
         viewBinding.addImageButton.setOnClickListener {
             viewModel.createNewCharacter()
             val controller = findNavController()
-            controller.navigate(R.id.abilitiesFragment)
+            controller.navigate(R.id.action_charactersListFragment_to_character_creation_nav_grapg)
         }
 
         viewBinding.arrowBackImageButton.setOnClickListener {

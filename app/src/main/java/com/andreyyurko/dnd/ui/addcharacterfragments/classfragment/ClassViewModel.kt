@@ -26,6 +26,7 @@ class ClassViewModel @Inject constructor(
     var chosenClass: String? = null
 
     fun makeChoice(choice: String) {
+        character.characterInfo.spellsInfo.remove("Заклинания класса")
         // TODO: think about how to do it better
         mapOfAn[choice]?.let {
             baseCAN.chosen_alternatives["class"] = CharacterAbilityNodeLevel((it as AbilityNodeLevel), character)
@@ -34,6 +35,7 @@ class ClassViewModel @Inject constructor(
 
         val firstLevelCAN = baseCAN.chosen_alternatives["class"] as CharacterAbilityNodeLevel
         firstLevelCAN.makeChoice()
+        levelUp(firstLevelCAN, 1)
         showAllClassAbilities()
 
         mergeAllAbilities(createCharacterViewModel.character)
@@ -51,10 +53,8 @@ class ClassViewModel @Inject constructor(
         return !spellsHandler.isAllKnown(createCharacterViewModel.character)
     }
 
-    private fun showAllClassAbilities() {
-
-        val firstLevelCAN = character.baseCAN.chosen_alternatives["class"] as CharacterAbilityNodeLevel
-        levelUp(firstLevelCAN, 1)
+    fun showAllClassAbilities() {
+        val firstLevelCAN = character.baseCAN.chosen_alternatives["class"]
 
         adapter.apply {
             rootCan = firstLevelCAN

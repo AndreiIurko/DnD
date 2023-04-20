@@ -79,11 +79,30 @@ class SpellsFragment: FragmentWithFilters(R.layout.fragment_spells) {
 
         viewBinding.submitButton.setOnClickListener {
             viewModel.updateCharacter()
-            findNavController().popBackStack(R.id.charactersListFragment, false)
+            if (viewModel.nextListOrExit()) {
+                viewModel.isKnownListShown = false
+                viewBinding.knownSpellsCount.text = viewModel.getKnownSpellsCount().toString()
+                viewBinding.maxSpellsCount.text = viewModel.getMaxKnownSpellsCount().toString()
+
+                viewBinding.knownCantripsCount.text = viewModel.getKnownCantripsCount().toString()
+                viewBinding.maxCantripsCount.text = viewModel.getMaxKnownCantripsCount().toString()
+                showItems()
+            }
+            else
+                findNavController().popBackStack(R.id.charactersListFragment, false)
         }
         viewBinding.cancelButton.setOnClickListener {
-            viewModel.deleteCharacter()
-            findNavController().popBackStack(R.id.charactersListFragment, false)
+            if (viewModel.previousOrBack()) {
+                viewModel.isKnownListShown = false
+                viewBinding.knownSpellsCount.text = viewModel.getKnownSpellsCount().toString()
+                viewBinding.maxSpellsCount.text = viewModel.getMaxKnownSpellsCount().toString()
+
+                viewBinding.knownCantripsCount.text = viewModel.getKnownCantripsCount().toString()
+                viewBinding.maxCantripsCount.text = viewModel.getMaxKnownCantripsCount().toString()
+                showItems()
+            }
+            else
+                findNavController().popBackStack()
         }
     }
 

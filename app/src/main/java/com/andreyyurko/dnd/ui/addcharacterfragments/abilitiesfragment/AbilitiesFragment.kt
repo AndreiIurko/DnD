@@ -39,8 +39,11 @@ class AbilitiesFragment : BaseFragment(R.layout.fragment_abilities) {
         }
         viewModel.totalPoints.observe(viewLifecycleOwner, onChangePoints)
 
+        viewBinding.nameEditText.setText(viewModel.getName())
+
         viewBinding.cancelButton.setOnClickListener {
-            viewModel.deleteCharacter()
+            if (findNavController().previousBackStackEntry?.destination?.id == R.id.charactersListFragment)
+                viewModel.deleteCharacter()
             findNavController().popBackStack()
         }
 
