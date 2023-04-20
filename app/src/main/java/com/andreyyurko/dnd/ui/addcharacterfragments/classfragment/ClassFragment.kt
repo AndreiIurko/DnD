@@ -49,8 +49,7 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
                 findNavController().popBackStack(R.id.charactersListFragment, false)
         }
         viewBinding.cancelButton.setOnClickListener {
-            viewModel.deleteCharacter()
-            findNavController().popBackStack(R.id.charactersListFragment, false)
+            findNavController().popBackStack()
         }
     }
 
@@ -120,5 +119,6 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
         val adapter = AbilityAdapter()
         viewModel.adapter = adapter
         recyclerView.adapter = adapter
+        viewModel.showAllClassAbilities()
     }
 }

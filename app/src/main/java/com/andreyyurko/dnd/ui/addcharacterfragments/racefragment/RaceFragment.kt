@@ -42,8 +42,7 @@ class RaceFragment : BaseFragment(R.layout.fragment_race) {
             findNavController().navigate(R.id.classFragment)
         }
         viewBinding.cancelButton.setOnClickListener {
-            viewModel.deleteCharacter()
-            findNavController().popBackStack(R.id.charactersListFragment, false)
+            findNavController().popBackStack()
         }
     }
 
@@ -53,6 +52,7 @@ class RaceFragment : BaseFragment(R.layout.fragment_race) {
         val adapter = AbilityAdapter()
         viewModel.adapter = adapter
         recyclerView.adapter = adapter
+        viewModel.showAbilities()
     }
 
     private fun setupRacePopUpMenu(context: Context) {

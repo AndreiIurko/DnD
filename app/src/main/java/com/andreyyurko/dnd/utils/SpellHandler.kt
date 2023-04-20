@@ -16,22 +16,21 @@ class SpellsHandler @Inject constructor(
     spellsParser: SpellsParser
 ) : ViewModel() {
 
+    // description of all spells
     var allSpells: MutableMap<String, SpellSpecificLanguage> = mutableMapOf()
 
     init {
+        // get description from spell parser
         for (spell in spellsParser.spells!!) {
             allSpells[spell.name] = spell
         }
     }
 
+    // this is used then we need get all class spell from some list
     fun getClassSpellsWithDescription(character: Character, filters: Filters = Filters(), listName: String): MutableList<Spell> {
-        val className = character.characterInfo.characterClass.className
-        // in the future we must decide what to do with multiclass
-        /*if (character.characterInfo.spellsInfo.contains("Заклинания класса")) {
-            character.characterInfo.spellsInfo["Заклинания класса"]?.let{
-                className = it.className
-            }
-        }*/
+        // spellInfo[listName] not null, but just in case if smth will go wrong we will use className from character
+        val className = character.characterInfo.spellsInfo[listName]?.className ?: character.characterInfo.characterClass.className
+
         val result: MutableList<Spell> = mutableListOf()
         for (spellDescription in allSpells.values) {
             val spell = Spell(spellDescription, listName, false)
@@ -43,10 +42,11 @@ class SpellsHandler @Inject constructor(
         return result
     }
 
-    fun getAllSpellsWhatNeedsToBeChosen(character: Character, filters: Filters = Filters()): MutableList<Spell> {
+    // used then user chooses his known spells - this is all options for listClassName
+    fun getAllSpellsWhatNeedsToBeChosen(character: Character, listClassName: String, filters: Filters = Filters()): MutableList<Spell> {
         val result: MutableList<Spell> = mutableListOf()
         for ((listName, value) in character.characterInfo.spellsInfo.entries) {
-            if ((value.maxKnownSpellsCount != -1 || value.maxKnownCantripsCount != -1 ) && character.characterInfo.characterClass.className == value.className) {
+            if ((value.maxKnownSpellsCount != -1 || value.maxKnownCantripsCount != -1 ) && listClassName == value.className) {
                 for (spell in getClassSpellsWithDescription(character, filters, listName)) {
                     if (value.maxKnownSpellsCount != -1 && value.maxKnownSpellsCount != 0 && spell.data.level != "0")
                         result.add(spell)
@@ -92,10 +92,23 @@ class SpellsHandler @Inject constructor(
         return result
     }
 
-    fun getKnownSpellsWithDescription(character: Character, filters: Filters = Filters()): MutableList<Spell> {
+    fun getKnownSpellsWithDescription(character: Character, filters: Filters = Filters(), classListName: String = ""): MutableList<Spell> {
         val result: MutableList<Spell> = mutableListOf()
         for((listName, value) in character.characterInfo.spellsInfo.entries) {
-            result += getKnownSpellsWithDescriptionFromList(character, filters, listName, value)
+            if (classListName == "") {
+                result += getKnownSpellsWithDescriptionFromList(character, filters, listName, value)
+                continue
+            }
+
+            if (classListName == value.className) {
+                result += getKnownSpellsWithDescriptionFromList(character, filters, listName, value)
+            }
+            else {
+                val returnedValue = getKnownSpellsWithDescriptionFromList(character, filters, listName, value)
+                for (spell in returnedValue)
+                    spell.isAlwaysIncluded = true
+                result += returnedValue
+            }
         }
         return result
     }
@@ -212,40 +225,45 @@ class SpellsHandler @Inject constructor(
         return result
     }
 
-    fun getKnownSpellsCount(character: Character): Int {
+    fun getKnownSpellsCount(character: Character, classListName: String = ""): Int {
         var result = 0
         for ((_, value) in character.characterInfo.spellsInfo) {
-            if (value.maxKnownSpellsCount != -1 && value.maxKnownSpellsCount != 0)
+            if (value.maxKnownSpellsCount != -1 && value.maxKnownSpellsCount != 0 && classListName == "")
                 result += value.spellLists.knownSpells.size
 
+            if (value.maxKnownSpellsCount != -1 && value.maxKnownSpellsCount != 0 && classListName == value.className)
+                result += value.spellLists.knownSpells.size
         }
         return result
     }
 
-    fun getMaxKnownSpellsCount(character: Character): Int {
+    fun getMaxKnownSpellsCount(character: Character, listClassName: String): Int {
         var result = 0
         for ((_, value) in character.characterInfo.spellsInfo) {
-            if (value.maxKnownSpellsCount != -1)
+            if (value.maxKnownSpellsCount != -1 && value.className == listClassName)
                 result += value.maxKnownSpellsCount
 
         }
         return result
     }
 
-    fun getKnownCantripsCount(character: Character): Int {
+    fun getKnownCantripsCount(character: Character, listClassName: String = ""): Int {
         var result = 0
         for ((_, value) in character.characterInfo.spellsInfo) {
-            if (value.maxKnownCantripsCount != -1 && value.maxKnownCantripsCount != 0)
+            if (value.maxKnownCantripsCount != -1 && value.maxKnownCantripsCount != 0 && listClassName == "")
+                result += value.spellLists.knownCantrips.size
+
+            if (value.maxKnownCantripsCount != -1 && value.maxKnownCantripsCount != 0 && listClassName == value.className)
                 result += value.spellLists.knownCantrips.size
 
         }
         return result
     }
 
-    fun getMaxKnownCantripsCount(character: Character): Int {
+    fun getMaxKnownCantripsCount(character: Character, classListName: String): Int {
         var result = 0
         for ((_, value) in character.characterInfo.spellsInfo) {
-            if (value.maxKnownCantripsCount != -1)
+            if (value.maxKnownCantripsCount != -1 && value.className == classListName)
                 result += value.maxKnownCantripsCount
 
         }
@@ -257,7 +275,11 @@ class SpellsHandler @Inject constructor(
     }
 
     fun isAllKnown(character: Character): Boolean {
-        return getMaxKnownSpellsCount(character) + getMaxKnownCantripsCount(character) == 0
+        for ((_, value) in character.characterInfo.spellsInfo) {
+            if (getMaxKnownSpellsCount(character, value.className) + getMaxKnownCantripsCount(character, value.className) != 0)
+                return false
+        }
+        return true
     }
 
     data class Filters(

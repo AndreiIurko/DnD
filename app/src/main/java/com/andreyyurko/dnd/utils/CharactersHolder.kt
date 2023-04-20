@@ -122,6 +122,7 @@ class CharactersHolder @Inject constructor(
             for (i in 0..characters.size) {
                 if (characters.contains(i)) continue
                 character.id = i
+                break
             }
         }
         characters[character.id] = character

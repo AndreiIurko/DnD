@@ -39,6 +39,13 @@ var highElf = AbilityNode(
         abilities.intelligence += 1
         // weapon
         // cantrip
+        if (!abilities.spellsInfo.contains("Заклинания Высшего эльфа")) {
+            abilities.spellsInfo["Заклинания Высшего эльфа"] = CharacterSpells(
+                className = Classes.Wizard.className,
+                maxKnownCantripsCount = 1,
+                maxKnownSpellsCount = 0
+            )
+        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -82,7 +89,7 @@ var drow = AbilityNode(
             maxKnownSpellsCount = 0,
             maxKnownCantripsCount = 0,
             spellLists = SpellLists(
-                knownCantrips = mutableSetOf<String>("Пляшушие огоньки")
+                knownCantrips = mutableSetOf<String>("Пляшущие огоньки")
             )
         )
         if (abilities.level >= 3) {

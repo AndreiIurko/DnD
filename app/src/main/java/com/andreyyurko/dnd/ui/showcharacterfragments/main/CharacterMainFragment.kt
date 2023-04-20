@@ -75,8 +75,9 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
         }
 
         viewBinding.settingsButton.setOnClickListener {
-            //findNavController().navigate(R.id.abilitiesFragment)
-            TODO("navigate to changing character stats, abilities, etc.")
+            characterViewModel.changeShownCharacter()
+            findNavController().navigate(R.id.action_characterMainFragment_to_character_creation_nav_graph)
+            //TODO("navigate to changing character stats, abilities, etc.")
         }
 
         onPressAnimation(viewBinding.arrowBackImageButton)
