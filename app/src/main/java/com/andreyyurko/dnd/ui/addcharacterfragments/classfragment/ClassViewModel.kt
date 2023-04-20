@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.classes.CharacterAbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.mapOfAn
+import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
 import com.andreyyurko.dnd.ui.addcharacterfragments.AbilityAdapter
 import com.andreyyurko.dnd.utils.CreateCharacterViewModel
@@ -25,6 +26,13 @@ class ClassViewModel @Inject constructor(
     var chosenLevel = 1
     var chosenClass: String? = null
 
+    init {
+        if (character.characterInfo.level > 0)
+            chosenLevel = character.characterInfo.level
+        if (character.characterInfo.characterClass != Classes.NotImplemented)
+            chosenClass = character.characterInfo.characterClass.className
+    }
+
     fun makeChoice(choice: String) {
         character.characterInfo.spellsInfo.remove("Заклинания класса")
         // TODO: think about how to do it better
@@ -43,6 +51,10 @@ class ClassViewModel @Inject constructor(
 
     fun updateCharacter() {
         createCharacterViewModel.updateCharacter()
+    }
+
+    fun saveChangesInCharacter() {
+        createCharacterViewModel.saveChangesInCharacter()
     }
 
     fun deleteCharacter() {

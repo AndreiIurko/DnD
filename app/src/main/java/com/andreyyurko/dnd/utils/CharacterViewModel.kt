@@ -40,7 +40,8 @@ class CharacterViewModel @Inject constructor(
     }
 
     fun changeShownCharacter() {
-        createCharacterViewModel.character = shownCharacter
+        createCharacterViewModel.character = charactersHolder.getCharacterCopy(shownCharacter.id)
+        createCharacterViewModel.currentlyChangingCharacterId = shownCharacter.id
     }
 
     fun deleteCharacter(id: Int) {

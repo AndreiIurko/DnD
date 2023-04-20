@@ -45,54 +45,7 @@ class CharactersHolder @Inject constructor(
             val charactersListJson = db.getString(DB_CHARACTER_IDS)
             val charactersList: List<Int> = Gson().fromJson(charactersListJson, listIdsType) ?: emptyList()
             for (id in charactersList) {
-                // get name
-                val name = db.getString(DB_CHARACTER_NAME + id.toString())
-
-                // init character
-                var character = Character(
-                    id = id,
-                    name = name!!,
-                    characterInfo = CharacterInfo(),
-                )
-
-                // get custom info
-                val characterCharacterInfoJson = db.getString(id.toString() + DB_CHARACTER_CUSTOM)
-                val characterCharacterInfo = Gson().fromJson(characterCharacterInfoJson, CharacterInfo::class.java)
-
-                // get current state
-                val currentStateJson = db.getString(id.toString() + DB_CHARACTER_STATE)
-                val currentState = Gson().fromJson(currentStateJson, CurrentState::class.java)
-
-                //get inventory
-                val inventoryMapType: Type = object : TypeToken<MutableMap<String, InventoryItemInfo>>() {}.type
-                val inventoryJson = db.getString(id.toString() + DB_INVENTORY)
-                val inventory: MutableMap<String, InventoryItemInfo> = Gson().fromJson(inventoryJson, inventoryMapType)
-
-                val spellsMapType: Type = object : TypeToken<MutableMap<String, CharacterSpells>>() {}.type
-                val spellsJson = db.getString(id.toString() + DB_SPELLS)
-                val spells: MutableMap<String, CharacterSpells> = Gson().fromJson(spellsJson, spellsMapType)
-
-                // get base_an with all sub-nods
-                val baseCharacterAbilityNode = loadCharacterNode("base_an", id, ".", character)
-
-                // init essential props
-                character.customAbilities = characterCharacterInfo
-                character.baseCAN = baseCharacterAbilityNode
-
-                // add all custom data
-                character.characterInfo = mergeCharacterInfo(character.characterInfo, character.customAbilities)
-
-                // add current state
-                character.characterInfo.currentState = currentState
-
-                // add inventory
-                character.characterInfo.inventory = inventory
-
-                // add chosen spells
-                character.characterInfo.spellsInfo = spells
-
-                // merge all CAN
-                mergeAllAbilities(character)
+                val character = loadCharacter(id)
 
                 // add to character list
                 characters[id] = character
@@ -101,8 +54,71 @@ class CharactersHolder @Inject constructor(
         }
     }
 
+    private fun loadCharacter(id: Int): Character {
+        // get name
+        val name = db.getString(DB_CHARACTER_NAME + id.toString())
+
+        // init character
+        var character = Character(
+            id = id,
+            name = name!!,
+            characterInfo = CharacterInfo(),
+        )
+
+        // get custom info
+        val characterCharacterInfoJson = db.getString(id.toString() + DB_CHARACTER_CUSTOM)
+        val characterCharacterInfo = Gson().fromJson(characterCharacterInfoJson, CharacterInfo::class.java)
+
+        // get current state
+        val currentStateJson = db.getString(id.toString() + DB_CHARACTER_STATE)
+        val currentState = Gson().fromJson(currentStateJson, CurrentState::class.java)
+
+        //get inventory
+        val inventoryMapType: Type = object : TypeToken<MutableMap<String, InventoryItemInfo>>() {}.type
+        val inventoryJson = db.getString(id.toString() + DB_INVENTORY)
+        val inventory: MutableMap<String, InventoryItemInfo> = Gson().fromJson(inventoryJson, inventoryMapType)
+
+        val spellsMapType: Type = object : TypeToken<MutableMap<String, CharacterSpells>>() {}.type
+        val spellsJson = db.getString(id.toString() + DB_SPELLS)
+        val spells: MutableMap<String, CharacterSpells> = Gson().fromJson(spellsJson, spellsMapType)
+
+        // get base_an with all sub-nods
+        val baseCharacterAbilityNode = loadCharacterNode("base_an", id, ".", character)
+
+        // init essential props
+        character.customAbilities = characterCharacterInfo
+        character.baseCAN = baseCharacterAbilityNode
+
+        // add all custom data
+        character.characterInfo = mergeCharacterInfo(character.characterInfo, character.customAbilities)
+
+        // add current state
+        character.characterInfo.currentState = currentState
+
+        // add inventory
+        character.characterInfo.inventory = inventory
+
+        // add chosen spells
+        character.characterInfo.spellsInfo = spells
+
+        // merge all CAN
+        mergeAllAbilities(character)
+
+        return character
+    }
+
     fun getCharacters(): List<Character> {
         return characters.values.toList()
+    }
+
+    fun getCharacterCopy(id: Int): Character {
+        val character = loadCharacter(id)
+        for (i in 0..characters.size) {
+            if (characters.contains(i)) continue
+            character.id = i
+            break
+        }
+        return character
     }
 
     fun isCharacterExists(id: Int): Boolean {

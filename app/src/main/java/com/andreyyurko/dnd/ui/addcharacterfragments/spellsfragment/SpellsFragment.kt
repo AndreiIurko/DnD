@@ -88,8 +88,10 @@ class SpellsFragment: FragmentWithFilters(R.layout.fragment_spells) {
                 viewBinding.maxCantripsCount.text = viewModel.getMaxKnownCantripsCount().toString()
                 showItems()
             }
-            else
+            else {
+                viewModel.saveChangesInCharacter()
                 findNavController().popBackStack(R.id.charactersListFragment, false)
+            }
         }
         viewBinding.cancelButton.setOnClickListener {
             if (viewModel.previousOrBack()) {

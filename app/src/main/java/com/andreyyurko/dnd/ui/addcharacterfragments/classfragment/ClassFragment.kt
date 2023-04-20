@@ -33,6 +33,12 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
 
         setupRecyclerView()
 
+        viewModel.chosenClass?.let {
+            viewBinding.chooseClassTextView.text = it
+            viewBinding.levelText.text = viewModel.chosenLevel.toString()
+        }
+
+
         viewBinding.chooseClassButton.setOnClickListener {
             setupClassPopupMenu(requireContext())
         }
@@ -45,8 +51,10 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
             viewModel.updateCharacter()
             if (viewModel.isNeededToChooseKnownSpells())
                 findNavController().navigate(R.id.spellsFragment)
-            else
+            else {
+                viewModel.saveChangesInCharacter()
                 findNavController().popBackStack(R.id.charactersListFragment, false)
+            }
         }
         viewBinding.cancelButton.setOnClickListener {
             findNavController().popBackStack()

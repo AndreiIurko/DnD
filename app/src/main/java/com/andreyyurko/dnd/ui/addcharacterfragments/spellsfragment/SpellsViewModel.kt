@@ -76,6 +76,10 @@ class SpellsViewModel @Inject constructor(
         createCharacterViewModel.deleteCharacter()
     }
 
+    fun saveChangesInCharacter() {
+        createCharacterViewModel.saveChangesInCharacter()
+    }
+
     fun nextListOrExit(): Boolean {
         currentClassList++
         return currentClassList != classesForSpells.size

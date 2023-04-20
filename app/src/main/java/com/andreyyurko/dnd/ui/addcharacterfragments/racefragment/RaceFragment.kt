@@ -31,6 +31,9 @@ class RaceFragment : BaseFragment(R.layout.fragment_race) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (viewModel.getRace() != "")
+            viewBinding.chooseRaceTextView.text = viewModel.getRace()
+
         setupRecyclerView()
 
         viewBinding.chooseRaceButton.setOnClickListener {

@@ -10,12 +10,16 @@ import javax.inject.Inject
 class RaceViewModel @Inject constructor(
     private val createCharacterViewModel: CreateCharacterViewModel
 ) : ViewModel() {
-    val character = createCharacterViewModel.character
+    private val character = createCharacterViewModel.character
     val baseCAN = character.baseCAN
 
     lateinit var adapter: AbilityAdapter
 
     var chosenRace: String? = null
+
+    fun getRace(): String {
+        return character.characterInfo.race
+    }
 
     fun makeChoice(raceChoice: String) {
         baseCAN.makeChoice("race", raceChoice)
