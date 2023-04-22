@@ -82,5 +82,14 @@ data class CurrentState(
 
     var equippedItems: MutableSet<String> = mutableSetOf(),
     // String - AN name
-    var charges: MutableMap<String, ChargesCounter> = mutableMapOf()
+    var charges: MutableMap<String, ChargesCounter> = mutableMapOf(),
+    var inventoryBonus: InventoryBonus = InventoryBonus()
+)
+
+data class InventoryBonus(
+    val weaponDamage: Int = 0,
+    val weaponToHit: Int = 0,
+    val spellToHit: Int = 0,
+    val spellSaveDC: Int = 0,
+    val ac: Int = 0
 )

@@ -150,6 +150,18 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
             navController,
             characterMenu
         )
+        setupMenuButton(
+            parent.findViewById(R.id.equippedInventoryLinearLayout),
+            R.id.action_equpmentFragment,
+            navController,
+            characterMenu
+        )
+        setupMenuButton(
+            parent.findViewById(R.id.notesLinearLayout),
+            R.id.action_notesFragment,
+            navController,
+            characterMenu
+        )
 
         characterMenu.animationStyle = androidx.appcompat.R.style.Animation_AppCompat_Dialog
         characterMenu.showAtLocation(view, Gravity.CENTER, 0, 0)

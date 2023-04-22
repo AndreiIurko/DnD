@@ -300,7 +300,7 @@ var stunningStrike: AbilityNode = AbilityNode(
             Action(
                 name = "Ошеломляющий удар",
                 description = "Вы можете взаимодействовать с энергией ци, текущей в теле вашего противника. Если вы попали по другому существу рукопашной атакой оружием, вы можете потратить 1 очко ци, чтобы нанести ошеломляющий удар. Цель должна преуспеть в спасброске Телосложения, иначе она станет ошеломлённой до конца вашего следующего хода.\n",
-                type = ActionType.Additional,
+                type = ActionType.PartOfAction,
                 relatedCharges = "Ци"
             )
         )
@@ -646,7 +646,7 @@ var emptyBody: AbilityNode = AbilityNode(
             Action(
                 name = "Пустое тело. Проекция в астрал",
                 description = "Вы можете потратить 8 очков ци, чтобы наложить заклинание проекция в астрал [astral projection] без применения материальных компонентов. Вы не можете перемещать кого-либо вместе с собой.\n",
-                type = ActionType.Additional,
+                type = ActionType.Action,
                 relatedCharges = "Ци"
             )
         )

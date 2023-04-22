@@ -16,8 +16,7 @@ import javax.inject.Inject
 
 class InventoryAdapter @Inject constructor(
     private val inventoryHandler: InventoryHandler,
-    private val characterViewModel: CharacterViewModel,
-    private val parent: ViewGroup
+    private val characterViewModel: CharacterViewModel
 ) : RecyclerView.Adapter<InventoryAdapter.ViewHolder>() {
 
     var itemsList: MutableList<InventoryItemInfo> = mutableListOf()

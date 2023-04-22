@@ -151,6 +151,7 @@ enum class ActionType(override var shownName: String) : Filter {
     Bonus("Бонусное действие"),
     Reaction("Реакция"),
     PartOfAction("Часть действия"),
+    Long("Длительные"),
     Additional("Дополнительные")
 }
 

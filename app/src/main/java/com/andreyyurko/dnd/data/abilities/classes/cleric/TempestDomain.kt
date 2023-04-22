@@ -96,7 +96,7 @@ var channelDivinityDestructiveWrath: AbilityNode = AbilityNode(
                 description = "Вы можете использовать «Божественный канал», чтобы овладеть могуществом бури с необузданной свирепостью.\n" +
                         "\n" +
                         "Когда вы совершаете бросок урона звуком или электричеством, вы можете использовать «Божественный канал», чтобы нанести максимальный урон вместо броска.\n",
-                type = ActionType.Additional,
+                type = ActionType.PartOfAction,
                 relatedCharges = "Божественный канал"
             )
         )
@@ -119,7 +119,7 @@ var thunderboltStrike = AbilityNode(
             Action(
                 name = "Удар грома",
                 description = "Когда вы наносите урон электричеством существу с размером Большое или меньше, вы также можете оттолкнуть его на 10 футов от себя.\n",
-                type = ActionType.Additional,
+                type = ActionType.PartOfAction,
             )
         )
         abilities
@@ -138,7 +138,7 @@ var divineStrikeTempestDomain = AbilityNode(
             Action(
                 name = "Божественный удар домена бури",
                 description = "Вы получаете способность наполнять удары своего оружия божественной энергией. Один раз в каждый свой ход, когда вы попадаете по существу атакой оружием, вы можете причинить цели дополнительный урон звуком 1к8. Когда вы достигаете 14-го уровня, дополнительный урон возрастает до 2к8.\n",
-                type = ActionType.Additional,
+                type = ActionType.PartOfAction,
             )
         )
         abilities

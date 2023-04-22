@@ -18,9 +18,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class CharacterInventoryFragment : FragmentWithFilters(R.layout.fragment_character_inventory) {
 
-    @Inject
-    lateinit var characterViewModel: CharacterViewModel
-
     lateinit var viewModel: CharacterInventoryViewModel
 
     private val viewBinding by viewBinding(FragmentCharacterInventoryBinding::bind)
@@ -65,7 +62,7 @@ class CharacterInventoryFragment : FragmentWithFilters(R.layout.fragment_charact
         val recyclerView = viewBinding.inventoryRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-        val adapter = InventoryAdapter(viewModel.inventoryHandler, viewModel.characterViewModel, viewBinding.root)
+        val adapter = InventoryAdapter(viewModel.inventoryHandler, viewModel.characterViewModel)
         recyclerView.adapter = adapter
 
         val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)

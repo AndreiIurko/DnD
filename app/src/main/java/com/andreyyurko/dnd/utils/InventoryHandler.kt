@@ -30,7 +30,7 @@ class InventoryHandler @Inject constructor(
     private fun parseInventory(context: Context) {
         lateinit var jsonString: String
         try {
-            jsonString = context.assets.open("magicItems_ru.json")
+            jsonString = context.assets.open("magicItems.json")
                 .bufferedReader()
                 .use { it.readText() }
         } catch (ioException: IOException) {
