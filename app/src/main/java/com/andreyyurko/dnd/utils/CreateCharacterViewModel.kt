@@ -20,6 +20,7 @@ class CreateCharacterViewModel @Inject constructor(
         )
         currentlyChangingCharacterId = null
         character.baseCAN.character = character
+        character.baseCAN.makeChoice("actions", "base_actions_an")
         character = charactersHolder.addCharacter(character)
     }
 

@@ -179,15 +179,15 @@ var bardicInspiration: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         if (!abilities.currentState.charges.contains("Бардовское вдохновение")) {
             abilities.currentState.charges["Бардовское вдохновение"] = ChargesCounter(
-                current = abilityToModifier(abilities.charisma),
-                maximum = abilityToModifier(abilities.charisma)
+                current = max(1, abilityToModifier(abilities.charisma)),
+                maximum = max(1, abilityToModifier(abilities.charisma))
             )
         }
         abilities.currentState.charges["Бардовское вдохновение"]?.let {
-            if (it.maximum < abilities.charisma) {
+            if (it.maximum < max(1, abilityToModifier(abilities.charisma))) {
                 abilities.currentState.charges["Бардовское вдохновение"] = ChargesCounter(
-                    current = abilityToModifier(abilities.charisma),
-                    maximum = abilityToModifier(abilities.charisma)
+                    current = max(1, abilityToModifier(abilities.charisma)),
+                    maximum = max(1, abilityToModifier(abilities.charisma))
                 )
             }
         }
@@ -220,7 +220,7 @@ var bardicInspiration: AbilityNode = AbilityNode(
 )
 
 var bard1: AbilityNode = AbilityNodeLevel(
-    name = "бард_1",
+    name = "Бард_1",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.characterClass = Classes.Bard
         abilities.level += 1
@@ -236,7 +236,7 @@ var bard1: AbilityNode = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "1-й уровень, способности барда",
-    next_level = "бард_2"
+    next_level = "Бард_2"
 )
 
 var jackOfAllTrades: AbilityNode = AbilityNode(
@@ -276,7 +276,7 @@ var songOfRest: AbilityNode = AbilityNode(
 )
 
 var bard2: AbilityNode = AbilityNodeLevel(
-    name = "бард_2",
+    name = "Бард_2",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
@@ -289,7 +289,7 @@ var bard2: AbilityNode = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "2-й уровень, способности барда",
-    next_level = "бард_3"
+    next_level = "Бард_3"
 )
 
 var bardCollege: AbilityNode = AbilityNode(
@@ -365,7 +365,7 @@ var expertise: AbilityNode = AbilityNode(
 )
 
 var bard3: AbilityNode = AbilityNodeLevel(
-    name = "бард_3",
+    name = "Бард_3",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
@@ -378,11 +378,11 @@ var bard3: AbilityNode = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "3-й уровень, способности барда",
-    next_level = "бард_4"
+    next_level = "Бард_4"
 )
 
 var bard4: AbilityNode = AbilityNodeLevel(
-    name = "бард_4",
+    name = "Бард_4",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
@@ -394,7 +394,7 @@ var bard4: AbilityNode = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "4-й уровень, способности барда",
-    next_level = "бард_5"
+    next_level = "Бард_5"
 )
 
 var fontOfInspiration: AbilityNode = AbilityNode(
@@ -410,7 +410,7 @@ var fontOfInspiration: AbilityNode = AbilityNode(
 )
 
 var bard5: AbilityNode = AbilityNodeLevel(
-    name = "бард_5",
+    name = "Бард_5",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.proficiencyBonus += 1
@@ -423,7 +423,7 @@ var bard5: AbilityNode = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "5-й уровень, способности барда",
-    next_level = "бард_6"
+    next_level = "Бард_6"
 )
 
 var contercharm: AbilityNode = AbilityNode(
@@ -445,7 +445,7 @@ var contercharm: AbilityNode = AbilityNode(
 )
 
 var bard6: AbilityNode = AbilityNodeLevel(
-    name = "бард_6",
+    name = "Бард_6",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
@@ -455,11 +455,11 @@ var bard6: AbilityNode = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "6-й уровень, способности барда",
-    next_level = "бард_7"
+    next_level = "Бард_7"
 )
 
 var bard7: AbilityNode = AbilityNodeLevel(
-    name = "бард_7",
+    name = "Бард_7",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
@@ -469,11 +469,11 @@ var bard7: AbilityNode = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "7-й уровень, способности барда",
-    next_level = "бард_8"
+    next_level = "Бард_8"
 )
 
 var bard8: AbilityNode = AbilityNodeLevel(
-    name = "бард_8",
+    name = "Бард_8",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
@@ -485,11 +485,11 @@ var bard8: AbilityNode = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "8-й уровень, способности барда",
-    next_level = "бард_9"
+    next_level = "Бард_9"
 )
 
 var bard9: AbilityNode = AbilityNodeLevel(
-    name = "бард_9",
+    name = "Бард_9",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.proficiencyBonus += 1
@@ -500,11 +500,11 @@ var bard9: AbilityNode = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "9-й уровень, способности барда",
-    next_level = "бард_10"
+    next_level = "Бард_10"
 )
 
 var bard10: AbilityNode = AbilityNodeLevel(
-    name = "бард_10",
+    name = "Бард_10",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
@@ -517,11 +517,11 @@ var bard10: AbilityNode = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "10-й уровень, способности барда",
-    next_level = "бард_11"
+    next_level = "Бард_11"
 )
 
 var bard11: AbilityNode = AbilityNodeLevel(
-    name = "бард_11",
+    name = "Бард_11",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
@@ -531,11 +531,11 @@ var bard11: AbilityNode = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "11-й уровень, способности барда",
-    next_level = "бард_12"
+    next_level = "Бард_12"
 )
 
 var bard12: AbilityNode = AbilityNodeLevel(
-    name = "бард_12",
+    name = "Бард_12",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
@@ -547,11 +547,11 @@ var bard12: AbilityNode = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "12-й уровень, способности барда",
-    next_level = "бард_13"
+    next_level = "Бард_13"
 )
 
 var bard13: AbilityNode = AbilityNodeLevel(
-    name = "бард_13",
+    name = "Бард_13",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.proficiencyBonus += 1
@@ -562,11 +562,11 @@ var bard13: AbilityNode = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "13-й уровень, способности барда",
-    next_level = "бард_14"
+    next_level = "Бард_14"
 )
 
 var bard14: AbilityNode = AbilityNodeLevel(
-    name = "бард_14",
+    name = "Бард_14",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
@@ -576,11 +576,11 @@ var bard14: AbilityNode = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "14-й уровень, способности барда",
-    next_level = "бард_15"
+    next_level = "Бард_15"
 )
 
 var bard15: AbilityNode = AbilityNodeLevel(
-    name = "бард_15",
+    name = "Бард_15",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
@@ -590,11 +590,11 @@ var bard15: AbilityNode = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "15-й уровень, способности барда",
-    next_level = "бард_16"
+    next_level = "Бард_16"
 )
 
 var bard16: AbilityNode = AbilityNodeLevel(
-    name = "бард_16",
+    name = "Бард_16",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
@@ -606,11 +606,11 @@ var bard16: AbilityNode = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "16-й уровень, способности барда",
-    next_level = "бард_17"
+    next_level = "Бард_17"
 )
 
 var bard17: AbilityNode = AbilityNodeLevel(
-    name = "бард_17",
+    name = "Бард_17",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.proficiencyBonus += 1
@@ -621,11 +621,11 @@ var bard17: AbilityNode = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "17-й уровень, способности барда",
-    next_level = "бард_18"
+    next_level = "Бард_18"
 )
 
 var bard18: AbilityNode = AbilityNodeLevel(
-    name = "бард_18",
+    name = "Бард_18",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
@@ -637,11 +637,11 @@ var bard18: AbilityNode = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "18-й уровень, способности барда",
-    next_level = "бард_19"
+    next_level = "Бард_19"
 )
 
 var bard19: AbilityNode = AbilityNodeLevel(
-    name = "бард_19",
+    name = "Бард_19",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
@@ -653,7 +653,7 @@ var bard19: AbilityNode = AbilityNodeLevel(
     requirements = { true },
     add_requirements = listOf(),
     description = "19-й уровень, способности барда",
-    next_level = "бард_20"
+    next_level = "Бард_20"
 )
 
 var superiorInspiration: AbilityNode = AbilityNode(
@@ -669,7 +669,7 @@ var superiorInspiration: AbilityNode = AbilityNode(
 )
 
 var bard20: AbilityNode = AbilityNodeLevel(
-    name = "бард_20",
+    name = "Бард_20",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
