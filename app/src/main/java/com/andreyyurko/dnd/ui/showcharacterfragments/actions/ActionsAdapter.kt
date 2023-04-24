@@ -56,6 +56,10 @@ class ActionsAdapter @Inject constructor(
             holder.decreaseButton.alpha = 0.5F
             holder.decreaseButton.isEnabled = false
         }
+        if (charges.current == charges.maximum) {
+            holder.increaseButton.alpha = 0.5F
+            holder.increaseButton.isEnabled = false
+        }
 
         holder.increaseButton.setOnClickListener {
             charges.current += 1

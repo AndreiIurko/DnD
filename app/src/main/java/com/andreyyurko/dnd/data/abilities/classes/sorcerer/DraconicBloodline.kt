@@ -260,7 +260,6 @@ var elementalAffinity: AbilityNode = AbilityNode(
                     type = ActionType.PartOfAction
                 ))
             }
-            Log.d("test", typeToDamageMap[colorType]?.typeName.toString())
         }
         abilities
     },

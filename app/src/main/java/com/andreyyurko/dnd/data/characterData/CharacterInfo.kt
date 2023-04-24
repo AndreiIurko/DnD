@@ -2,6 +2,7 @@ package com.andreyyurko.dnd.data.characterData
 
 import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
 import com.andreyyurko.dnd.data.spells.CharacterSpells
+import java.util.StringJoiner
 
 data class CharacterInfo(
     var level: Int = 0,
@@ -71,23 +72,38 @@ fun mergeCharacterInfo(characterInfoFirst: CharacterInfo, characterInfoSecond: C
         characterInfoFirst.passivePerceptionBonus + characterInfoSecond.passivePerceptionBonus
     resultCharacterInfo.skillProficiency =
         (characterInfoFirst.skillProficiency + characterInfoSecond.skillProficiency) as MutableSet<Skill>
+    resultCharacterInfo.expertize = (characterInfoFirst.expertize + characterInfoSecond.expertize) as MutableSet<Skill>
+    resultCharacterInfo.savingThrowProf = ((characterInfoFirst.savingThrowProf + resultCharacterInfo.savingThrowProf) as MutableSet<Ability>)
+    resultCharacterInfo.armorProficiency = (characterInfoFirst.armorProficiency + characterInfoSecond.armorProficiency) as MutableSet<ArmorProf>
+    resultCharacterInfo.weaponProficiency = (characterInfoFirst.weaponProficiency + characterInfoSecond.weaponProficiency) as MutableSet<Weapon>
+    resultCharacterInfo.languageProficiency = (characterInfoFirst.languageProficiency + characterInfoSecond.languageProficiency) as MutableSet<Languages>
+    resultCharacterInfo.damageResistances = (characterInfoFirst.damageResistances + characterInfoSecond.damageResistances) as MutableSet<DamageType>
+    resultCharacterInfo.damageImmunities = (characterInfoFirst.damageImmunities + characterInfoSecond.damageImmunities) as MutableSet<DamageType>
+    resultCharacterInfo.conditionImmunities = (characterInfoFirst.conditionImmunities + characterInfoSecond.conditionImmunities) as MutableSet<Conditions>
+    resultCharacterInfo.actionsList = (characterInfoFirst.actionsList + characterInfoSecond.actionsList) as MutableList<Action>
 
     return resultCharacterInfo
 }
 
 data class CurrentState(
     var armor: Armor = Armor.NoArmor,
-    var weapons: List<Weapon> = listOf(),
+    var armorName: String = "",
+    var firstWeapon: Weapon = Weapon.Unarmed,
+    var firstWeaponName: String = "",
+    var secondWeapon: Weapon? = null,
+    var secondWeaponName: String = "",
     var hasShield: Boolean = false,
-
-    var equippedItems: MutableSet<String> = mutableSetOf(),
+    var shieldItemName: String = "",
+    var equippedMagicWeapons: MutableSet<String> = mutableSetOf(),
+    var equippedArtifacts: MutableSet<String> = mutableSetOf(),
+    var inventoryBonuses: MutableMap<String, InventoryBonus> = mutableMapOf(),
     // String - AN name
     var charges: MutableMap<String, ChargesCounter> = mutableMapOf(),
-    var inventoryBonus: InventoryBonus = InventoryBonus()
 )
 
 data class InventoryBonus(
-    val weaponDamage: Int = 0,
+    // damage is string like к4+5к6+2
+    val weaponDamage: String = "0",
     val weaponToHit: Int = 0,
     val spellToHit: Int = 0,
     val spellSaveDC: Int = 0,

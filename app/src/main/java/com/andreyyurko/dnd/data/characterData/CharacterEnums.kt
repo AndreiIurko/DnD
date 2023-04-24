@@ -1,5 +1,6 @@
 package com.andreyyurko.dnd.data.characterData
 
+import android.util.Log
 import com.andreyyurko.dnd.data.characterData.character.Filter
 
 enum class Skill(var skillName: String, var ability: Ability) {
@@ -41,88 +42,90 @@ enum class ArmorProf(var profName: String) {
 
 enum class Armor(
     var armorName: String,
-    var cost: String,
     var ac: Int,
     var StrengthRequirement: Int,
     var StealthDisadvantage: Boolean,
-    var weight: String,
     var dexRestriction: Int
 ) {
-    StuddedLeather("Проклёпанный кожаный", "45 зм", 12, 0, false, "13 фнт.", 10),
-    NoArmor("Без доспеха", "", 10, 0, false, "", 10)
+    StuddedLeather("Проклёпанный кожаный", 12, 0, false, 10),
+    NoArmor("Без доспеха", 10, 0, false, 10)
 }
 
 enum class Weapon(
     var weaponName: String,
     var cost: String,
     var damage: String,
-    var weight: String,
+    var damageType: DamageType,
     var properties: List<String>,
     var setOfSkills: Set<Ability>,
     var isMelee: Boolean = true,
     var toHitBonus: Int = 0
 ) {
-    Unarmed("Безоружный удар", "", "1", "", listOf(), setOf(Ability.Strength)),
+    Unarmed("Безоружный удар", "", "1", DamageType.Bludgeoning, listOf(), setOf(Ability.Strength)),
     Club(
-        "Дубинка", "1 см", "1к4 " + DamageType.Bludgeoning.typeName, "2 фнт.",
+        "Дубинка", "1 см", "1к4",DamageType.Bludgeoning,
         listOf("Лёгкое"), setOf(Ability.Strength)
     ),
     Dagger(
-        "Кинжал", "2 зм", "1к4 " + DamageType.Piercing.typeName, "1 фнт.",
+        "Кинжал", "2 зм", "1к4", DamageType.Piercing,
         listOf("Лёгкое", "метательное (дис. 20/60)", "фехтовальное"), setOf(Ability.Strength, Ability.Dexterity)
     ),
     GreatClub(
-        "Палица", "2 зм", "1к8 " + DamageType.Bludgeoning.typeName, "10 фнт.",
+        "Палица", "2 зм", "1к8", DamageType.Bludgeoning,
         listOf("Двуручное"), setOf(Ability.Strength)
     ),
     HandAxe(
-        "Ручной топор", "5 зм", "1к6 " + DamageType.Slashing.typeName, "2 фнт.",
+        "Ручной топор", "5 зм", "1к6", DamageType.Slashing,
         listOf("Лёгкое", "метательное (дис. 20/60)"), setOf(Ability.Strength)
     ),
     Javelin(
-        "Метательное копье", "5 см", "1к6 " + DamageType.Piercing.typeName, "2 фнт.",
+        "Метательное копье", "5 см", "1к6", DamageType.Piercing,
         listOf("Метательное (дис. 30/120)"), setOf(Ability.Strength)
     ),
     LightHammer(
-        "Лёгкий молот", "2 зм", "1к4 " + DamageType.Bludgeoning.typeName, "2 фнт.",
+        "Лёгкий молот", "2 зм", "1к4", DamageType.Bludgeoning,
         listOf("Метательное (дис. 20/60)"), setOf(Ability.Strength)
     ),
     Mace(
-        "Булава", "5 зм", "1к6 " + DamageType.Bludgeoning.typeName, "4 фнт.",
+        "Булава", "5 зм", "1к6", DamageType.Bludgeoning,
         listOf(), setOf(Ability.Strength)
     ),
     Quarterstaff(
-        "Боевой посох", "2 см", "1к6 " + DamageType.Bludgeoning.typeName, "4 фнт.",
+        "Боевой посох", "2 см", "1к6", DamageType.Bludgeoning,
         listOf("Универсальное (1к8)"), setOf(Ability.Strength)
     ),
     Sickle(
-        "Серп", "1 зм", "1к4 " + DamageType.Slashing.typeName, "2 фнт.",
+        "Серп", "1 зм", "1к4", DamageType.Slashing,
         listOf("Лёгкое"), setOf(Ability.Strength)
     ),
     Spear(
-        "Копье", "1 зм", "1к6 " + DamageType.Piercing.typeName, "3 фнт.",
+        "Копье", "1 зм", "1к6", DamageType.Piercing,
         listOf("Метательное (дис. 20/60)", "универсальное (1к8)"), setOf(Ability.Strength)
     ),
     CrossbowLight(
-        "Арбалет, легкий", "25 зм", "1к8 " + DamageType.Piercing.typeName, "5 фнт.",
+        "Арбалет, легкий", "25 зм", "1к8", DamageType.Piercing,
         listOf("Боеприпас (дис. 80/320)", "двуручное", "перезарядка"), setOf(Ability.Dexterity), false
     ),
     Dart(
-        "Дротик", "5 мм", "1к4 " + DamageType.Piercing.typeName, "1/4 фнт.",
+        "Дротик", "5 мм", "1к4", DamageType.Piercing,
         listOf("Метательное (дис. 20/60)", "фехтовальное"), setOf(Ability.Strength, Ability.Dexterity), false
     ),
     ShortBow(
-        "Короткий лук", "25 зм", "1к6 " + DamageType.Piercing.typeName, "2 фнт.",
+        "Короткий лук", "25 зм", "1к6" , DamageType.Piercing,
         listOf("Боеприпас (дис. 80/320)", "двуручное"), setOf(Ability.Dexterity), false
     ),
     Sling(
-        "Праща", "1 см", "1к4 " + DamageType.Bludgeoning.typeName, "-",
+        "Праща", "1 см", "1к4", DamageType.Bludgeoning,
         listOf("Боеприпас (дис. 30/120)"), setOf(Ability.Dexterity), false
     ),
     ShortSword(
-        "Короткий меч", "10 зм", "1к6 " + DamageType.Slashing.typeName, "2 фнт",
+        "Короткий меч", "10 зм", "1к6", DamageType.Slashing,
         listOf("Лёгкое", "фехтовальное"), setOf(Ability.Strength, Ability.Dexterity)
-    )
+    );
+
+    var shownDamage: String = ""
+    var shownToHit: Int = 0
+    var itemName: String = ""
 }
 
 fun addAllSimpleWeapons(abilities: CharacterInfo): CharacterInfo {

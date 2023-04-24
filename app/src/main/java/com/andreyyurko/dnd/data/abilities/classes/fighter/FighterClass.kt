@@ -10,8 +10,10 @@ import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 var classFeaturesFighter: AbilityNode = AbilityNode(
     name = "Воин: классовые умения",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.savingThrowProf.plus(Ability.Strength)
-        abilities.savingThrowProf.plus(Ability.Constitution)
+        abilities.savingThrowProf.add(Ability.Strength)
+        abilities.savingThrowProf.add(Ability.Constitution)
+        abilities.weaponProficiency.add(Weapon.ShortSword)
+        addAllSimpleWeapons(abilities)
         abilities
     },
     alternatives = mutableMapOf(
@@ -222,7 +224,11 @@ var extraAttack: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         for (action in abilities.actionsList) {
             if (action.name == "Атака") {
-                action.description = "Совершить две атаки рукопашным оружием"
+                val actionSplit: MutableList<String> = action.description.split("\n") as MutableList<String>
+                actionSplit[0] = if (abilities.level >= 20) "Совершить четыре атаки рукопашным оружием"
+                else if (abilities.level >= 11) "Совершить три атаки рукопашным оружием"
+                else "Совершить 2 атаки рукопашным оружием"
+                action.description = actionSplit.joinToString("\n")
             }
         }
         abilities
@@ -232,7 +238,8 @@ var extraAttack: AbilityNode = AbilityNode(
     add_requirements = listOf(),
     description = "Если вы в свой ход совершаете действие Атака, вы можете совершить две атаки вместо одной.\n" +
             "\n" +
-            "Количество атак увеличивается до трёх на 11-м уровне этого класса, и до четырёх на 20-м уровне."
+            "Количество атак увеличивается до трёх на 11-м уровне этого класса, и до четырёх на 20-м уровне.",
+    priority = Priority.DoLast
 )
 
 var fighter5: AbilityNodeLevel = AbilityNodeLevel(
@@ -376,11 +383,6 @@ var fighter11: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
-        for (action in abilities.actionsList) {
-            if (action.name == "Атака") {
-                action.description = "Совершить три атаки рукопашным оружием"
-            }
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -517,11 +519,6 @@ var fighter20: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
-        for (action in abilities.actionsList) {
-            if (action.name == "Атака") {
-                action.description = "Совершить четыре атаки рукопашным оружием"
-            }
-        }
         abilities
     },
     alternatives = mutableMapOf(),

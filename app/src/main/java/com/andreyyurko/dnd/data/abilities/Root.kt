@@ -1,5 +1,6 @@
 package com.andreyyurko.dnd.data.abilities
 
+import android.util.Log
 import com.andreyyurko.dnd.data.abilities.classes.barbarian1
 import com.andreyyurko.dnd.data.abilities.classes.fighter.fighter1
 import com.andreyyurko.dnd.data.abilities.classes.mapOfClasses
@@ -17,11 +18,56 @@ import com.andreyyurko.dnd.data.abilities.races.elf
 import com.andreyyurko.dnd.data.abilities.races.mapOfRaces
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
+import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
+import java.lang.Integer.max
+import java.lang.Integer.min
 
 var baseActionsAN = AbilityNode(
     "base_actions_an",
     { abilities: CharacterInfo ->
-        addAttackActions(abilities)
+        abilities.currentState.firstWeapon.itemName = abilities.currentState.firstWeaponName
+        var (damage, toHitBonus) = calculateWeaponProp(abilities.currentState.firstWeapon, abilities)
+
+        var damageBonus = -5
+        if (abilities.currentState.firstWeapon.setOfSkills.contains(Ability.Strength)) {
+            damageBonus = max(damageBonus, abilityToModifier(abilities.strength))
+        }
+        if (abilities.currentState.firstWeapon.setOfSkills.contains(Ability.Dexterity)) {
+            damageBonus = max(damageBonus, abilityToModifier(abilities.dexterity))
+        }
+        damage = sumTwoDamages(damage, damageBonus.toString())
+
+        abilities.currentState.firstWeapon.shownDamage = damage
+        abilities.currentState.firstWeapon.shownToHit = toHitBonus
+        abilities.actionsList.add(
+            Action(
+                name = "Атака",
+                description = "Совершить одну атаку рукопашным оружием\n" +
+                        "Бонус к попаданию: ${if (toHitBonus<0) "" else "+"}${toHitBonus}\n" +
+                        "Урон: $damage",
+                type = ActionType.Action
+            )
+        )
+
+        abilities.currentState.secondWeapon?.let {
+            val (secondDamage, secondToHitBonus) = calculateWeaponProp(it, abilities)
+            it.shownDamage = secondDamage
+            it.shownToHit = secondToHitBonus
+            abilities.actionsList.add(
+                Action(
+                    name = "Атака второй рукой",
+                    description = "Если вы совершаете действие «Атака» и атакуете рукопашным оружием со свойством «лёгкое», удерживаемым в одной руке, вы можете бонусным действием атаковать другим рукопашным оружием со свойством «лёгкое», удерживаемым в другой руке.\n" +
+                            "\n" +
+                            "Вы не добавляете модификатор характеристики к урону от бонусной атаки, если только он не отрицательный.\n" +
+                            "\n" +
+                            "Если у любого из оружий есть свойство «метательное», вы можете не совершать им рукопашную атаку, а метнуть его.\n" +
+                            "Бонус к попаданию: ${if (secondToHitBonus<0) "" else "+"}${secondToHitBonus}\n" +
+                            "Урон: $secondDamage",
+                    type = ActionType.Bonus
+                )
+            )
+        }
+
         abilities.actionsList.add(
             Action(
                 name = "Засада",
@@ -158,11 +204,14 @@ var baseActionsAN = AbilityNode(
 var baseAN: AbilityNode = AbilityNode(
     "base_an",
     { abilities: CharacterInfo ->
-        abilities.weaponProficiency.plus(Weapon.Unarmed)
-        abilities.ac = abilities.currentState.armor.ac + Integer.min(
+        abilities.weaponProficiency.add(Weapon.Unarmed)
+        abilities.ac = abilities.currentState.armor.ac + min(
             abilities.currentState.armor.dexRestriction,
-            (abilities.dexterity - 10) / 2
+            abilityToModifier(abilities.dexterity)
         )
+        if (abilities.currentState.hasShield) {
+            abilities.ac += 2
+        }
         abilities.initiativeBonus = abilities.initiativeBonus + (abilities.dexterity - 10) / 2
         abilities
     },
@@ -191,34 +240,61 @@ var mapOfAn: MutableMap<String, AbilityNode> = (
                 + mapOfLanguages
         ).toMutableMap()
 
-fun addAttackActions(abilities: CharacterInfo) {
-    // main action
-    // TODO: consider to add damage as well
-    abilities.actionsList.add(
-        Action(
-            name = "Атака",
-            description = "Совершить одну атаку рукопашным оружием",
-            type = ActionType.Action
-        )
+
+fun calculateWeaponProp(weapon: Weapon, abilities: CharacterInfo): Pair<String, Int> {
+    var toHitBonus = -5
+    if (weapon.setOfSkills.contains(Ability.Strength)) {
+        toHitBonus = max(toHitBonus, abilityToModifier(abilities.strength))
+    }
+    if (weapon.setOfSkills.contains(Ability.Dexterity)) {
+        toHitBonus = max(toHitBonus, abilityToModifier(abilities.dexterity))
+    }
+
+    if (abilities.weaponProficiency.contains(weapon)) {
+        toHitBonus += abilities.proficiencyBonus
+    }
+
+    var damage = weapon.damage
+
+    abilities.currentState.inventoryBonuses[abilities.currentState.firstWeaponName]?.let {
+        toHitBonus += it.weaponToHit
+        damage = sumTwoDamages(damage, it.weaponDamage)
+    }
+
+    return Pair(damage, toHitBonus)
+}
+fun sumTwoDamages(damage1: String, damage2: String): String {
+    val mapOfDices: MutableMap<String, Int> = mutableMapOf(
+        Pair("к4", 0),
+        Pair("к6", 0),
+        Pair("к8", 0),
+        Pair("к10", 0),
+        Pair("к12", 0),
+        Pair("", 0)
     )
 
-    // attack as bonus action
-    if (abilities.currentState.weapons.size == 2) {
-        if (abilities.currentState.weapons[0].properties.contains("Лёгкое") and abilities.currentState.weapons[1].properties.contains(
-                "Лёгкое"
-            )
-        ) {
-            abilities.actionsList.add(
-                Action(
-                    name = "Атака второй рукой",
-                    description = "Если вы совершаете действие «Атака» и атакуете рукопашным оружием со свойством «лёгкое», удерживаемым в одной руке, вы можете бонусным действием атаковать другим рукопашным оружием со свойством «лёгкое», удерживаемым в другой руке.\n" +
-                            "\n" +
-                            "Вы не добавляете модификатор характеристики к урону от бонусной атаки, если только он не отрицательный.\n" +
-                            "\n" +
-                            "Если у любого из оружий есть свойство «метательное», вы можете не совершать им рукопашную атаку, а метнуть его.",
-                    type = ActionType.Bonus
-                )
-            )
-        }
+    for (dice in damage1.split('+')) {
+        val count = if (dice.split('к')[0] == "") 1 else dice.split('к')[0].toInt()
+        val diceType = if (dice.contains("к")) dice.substring(dice.indexOf('к')) else ""
+        mapOfDices[diceType] = mapOfDices[diceType]!! + count
     }
+
+    for (dice in damage2.split('+')) {
+        val count = if (dice.split('к')[0] == "") 1 else dice.split('к')[0].toInt()
+        val diceType = if (dice.contains("к")) dice.substring(dice.indexOf('к')) else ""
+        mapOfDices[diceType] = mapOfDices[diceType]!! + count
+    }
+
+    var result = ""
+    for ((key, value) in mapOfDices.entries) {
+        if (value == 0) continue
+        if (value < 0 && result != "")
+            result = result.substring(0 until result.length-1)
+        result += value.toString() + key
+        if (key.contains('к'))
+            result += "+"
+    }
+
+    if (result == "") result = "0"
+    return result
 }
