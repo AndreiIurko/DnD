@@ -1,15 +1,12 @@
 package com.andreyyurko.dnd.data.abilities.classes.bard
 
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
-import com.andreyyurko.dnd.data.abilities.classes.cleric.KnowledgeDomain
-import com.andreyyurko.dnd.data.abilities.classes.cleric.tempestDomain
 import com.andreyyurko.dnd.data.abilities.other.*
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import com.andreyyurko.dnd.data.spells.CharacterSpells
 import kotlin.math.max
-import kotlin.math.min
 
 var classFeaturesBard: AbilityNode = AbilityNode(
     name = "бард: классовые умения",
@@ -260,8 +257,8 @@ var songOfRest: AbilityNode = AbilityNode(
             Action(
                 name = "Песнь отдыха",
                 description = "Вы с помощью успокаивающей музыки или речей можете помочь своим раненым союзникам восстановить их силы во время короткого отдыха. Если вы или любые союзные существа, способные слышать ваше исполнение, восстанавливаете хиты в конце короткого отдыха, используя Кости Хитов, каждое потратившее Кость Хитов существо восстанавливает дополнительно 1к6 хитов.\n" +
-                    "\n" +
-                    "Количество дополнительно восстанавливаемых хитов растёт с вашим уровнем в этом классе: 1к8 на 9-м уровне, 1к10 на 13 уровне и 1к12 на 17 уровне.",
+                        "\n" +
+                        "Количество дополнительно восстанавливаемых хитов растёт с вашим уровнем в этом классе: 1к8 на 9-м уровне, 1к10 на 13 уровне и 1к12 на 17 уровне.",
                 type = ActionType.Long
             )
         )
@@ -400,7 +397,8 @@ var bard4: AbilityNode = AbilityNodeLevel(
 var fontOfInspiration: AbilityNode = AbilityNode(
     name = "Источник вдохновения",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Источник вдохновения"] = "Вы восстанавливаете истраченные вдохновения барда и после короткого и после продолжительного отдыха.\n"
+        abilities.additionalAbilities["Источник вдохновения"] =
+            "Вы восстанавливаете истраченные вдохновения барда и после короткого и после продолжительного отдыха.\n"
         abilities
     },
     alternatives = mutableMapOf(),
@@ -659,7 +657,8 @@ var bard19: AbilityNode = AbilityNodeLevel(
 var superiorInspiration: AbilityNode = AbilityNode(
     name = "Превосходное вдохновение",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Превосходное вдохновение"] = "Если на момент броска инициативы у вас не осталось неиспользованных вдохновений, вы получаете одно.\n"
+        abilities.additionalAbilities["Превосходное вдохновение"] =
+            "Если на момент броска инициативы у вас не осталось неиспользованных вдохновений, вы получаете одно.\n"
         abilities
     },
     alternatives = mutableMapOf(),

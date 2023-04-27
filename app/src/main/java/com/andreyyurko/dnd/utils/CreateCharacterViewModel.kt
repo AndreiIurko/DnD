@@ -1,6 +1,5 @@
 package com.andreyyurko.dnd.utils
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.andreyyurko.dnd.data.characterData.character.Character
 import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities

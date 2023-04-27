@@ -72,15 +72,25 @@
             app:popUpToInclusive="true"/>
 
     <fragment
-        android:id="@+id/characterEquipmentFragment"
-        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.equipment.CharacterEquipmentFragment"
-        android:label="CharacterEquipmentFragment"/>
+            android:id="@+id/characterEquipmentFragment"
+            android:name="com.andreyyurko.dnd.ui.showcharacterfragments.equipment.CharacterEquipmentFragment"
+            android:label="CharacterEquipmentFragment">
+        <action android:id="@+id/action_characterEquipmentFragment_to_characterChooseEquipmentFragment"
+                app:destination="@id/characterChooseEquipmentFragment"/>
+    </fragment>
 
     <action
             android:id="@+id/action_equpmentFragment"
             app:destination="@+id/characterEquipmentFragment"
             app:popUpTo="@+id/characterAbilitiesFragment"
             app:popUpToInclusive="true"/>
+
+    <fragment
+        android:id="@+id/characterChooseEquipmentFragment"
+        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.chooseequipment.CharacterChooseEquipmentFragment"
+        android:label="CharacterChooseEquipmentFragment"/>
+
+
 
     <fragment
         android:id="@+id/characterNotesFragment"

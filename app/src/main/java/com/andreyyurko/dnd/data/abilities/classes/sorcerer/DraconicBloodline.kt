@@ -1,6 +1,5 @@
 package com.andreyyurko.dnd.data.abilities.classes.sorcerer
 
-import android.util.Log
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
@@ -21,7 +20,7 @@ var typeToDamageMap = mapOf(
 
 var ancestorBlack: AbilityNode = AbilityNode(
     name = "Цвет дракона: черный",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Черный Дракон.\n" +
                     "\n" +
@@ -30,7 +29,7 @@ var ancestorBlack: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
     description = "",
@@ -39,7 +38,7 @@ var ancestorBlack: AbilityNode = AbilityNode(
 
 var ancestorBlue: AbilityNode = AbilityNode(
     name = "Цвет дракона: синий",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Синий Дракон.\n" +
                     "\n" +
@@ -48,7 +47,7 @@ var ancestorBlue: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
     description = "",
@@ -57,7 +56,7 @@ var ancestorBlue: AbilityNode = AbilityNode(
 
 var ancestorBrass: AbilityNode = AbilityNode(
     name = "Цвет дракона: латунный",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Латунный Дракон.\n" +
                     "\n" +
@@ -66,7 +65,7 @@ var ancestorBrass: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
     description = "",
@@ -75,7 +74,7 @@ var ancestorBrass: AbilityNode = AbilityNode(
 
 var ancestorBronze: AbilityNode = AbilityNode(
     name = "Цвет дракона: бронзовый",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Бронзовый Дракон.\n" +
                     "\n" +
@@ -84,7 +83,7 @@ var ancestorBronze: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
     description = "",
@@ -93,7 +92,7 @@ var ancestorBronze: AbilityNode = AbilityNode(
 
 var ancestorCopper: AbilityNode = AbilityNode(
     name = "Цвет дракона: медный",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Медный Дракон.\n" +
                     "\n" +
@@ -102,7 +101,7 @@ var ancestorCopper: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
     description = "",
@@ -111,7 +110,7 @@ var ancestorCopper: AbilityNode = AbilityNode(
 
 var ancestorGold: AbilityNode = AbilityNode(
     name = "Цвет дракона: золотой",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Золотой Дракон.\n" +
                     "\n" +
@@ -120,7 +119,7 @@ var ancestorGold: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
     description = "",
@@ -129,7 +128,7 @@ var ancestorGold: AbilityNode = AbilityNode(
 
 var ancestorGreen: AbilityNode = AbilityNode(
     name = "Цвет дракона: зеленый",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Зеленый Дракон.\n" +
                     "\n" +
@@ -138,7 +137,7 @@ var ancestorGreen: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
     description = "",
@@ -147,7 +146,7 @@ var ancestorGreen: AbilityNode = AbilityNode(
 
 var ancestorRed: AbilityNode = AbilityNode(
     name = "Цвет дракона: красный",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Красный Дракон.\n" +
                     "\n" +
@@ -156,7 +155,7 @@ var ancestorRed: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
     description = "",
@@ -165,7 +164,7 @@ var ancestorRed: AbilityNode = AbilityNode(
 
 var ancestorSilver: AbilityNode = AbilityNode(
     name = "Цвет дракона: серебряный",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Серебряный Дракон.\n" +
                     "\n" +
@@ -174,7 +173,7 @@ var ancestorSilver: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
     description = "",
@@ -183,7 +182,7 @@ var ancestorSilver: AbilityNode = AbilityNode(
 
 var ancestorWhite: AbilityNode = AbilityNode(
     name = "Цвет дракона: белый",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.additionalAbilities["Драконий предок"] =
             "Ваш драконий предок - Белый Дракон.\n" +
                     "\n" +
@@ -192,7 +191,7 @@ var ancestorWhite: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
     description = "",
@@ -201,12 +200,16 @@ var ancestorWhite: AbilityNode = AbilityNode(
 
 var dragonAncestor: AbilityNode = AbilityNode(
     name = "Драконий предок",
-    changesInCharacterInfo = {abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     alternatives = mutableMapOf(
-        Pair("first", listOf(ancestorBlack.name, ancestorSilver.name, ancestorBlue.name, ancestorBrass.name, ancestorBronze.name,
-        ancestorCopper.name, ancestorGold.name, ancestorGreen.name, ancestorRed.name, ancestorWhite.name))
+        Pair(
+            "first", listOf(
+                ancestorBlack.name, ancestorSilver.name, ancestorBlue.name, ancestorBrass.name, ancestorBronze.name,
+                ancestorCopper.name, ancestorGold.name, ancestorGreen.name, ancestorRed.name, ancestorWhite.name
+            )
+        )
     ),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
     description = "Вы выбираете вид вашего дракона предка. Связанный с ним вид урона используется в ваших умениях.\n" +
@@ -229,7 +232,7 @@ var dragonAncestor: AbilityNode = AbilityNode(
 
 var draconicResilience: AbilityNode = AbilityNode(
     name = "Драконья устойчивость",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         if (abilities.currentState.armor == Armor.NoArmor) {
             abilities.ac = max(abilities.ac, 13 + abilityToModifier(abilities.dexterity))
         }
@@ -239,7 +242,7 @@ var draconicResilience: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
     description = "Магия, струящаяся через ваше тело, проявляет физические черты ваших предков драконов. Максимум ваших хитов увеличивается на 1 на 1-м уровне и на 1 на каждом уровне, полученном в данном классе.\n" +
@@ -249,22 +252,24 @@ var draconicResilience: AbilityNode = AbilityNode(
 
 var elementalAffinity: AbilityNode = AbilityNode(
     name = "Родство со стихией",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         if (abilities.additionalAbilities.contains("Драконий предок")) {
             var colorType = ""
-            abilities.additionalAbilities["Драконий предок"]?.let { colorType =  it.split(' ')[4] }
+            abilities.additionalAbilities["Драконий предок"]?.let { colorType = it.split(' ')[4] }
             typeToDamageMap[colorType]?.let {
-                abilities.actionsList.add(Action(
-                    name = "Родство со стихией",
-                    description = "Когда вы накладываете заклинание, причиняющее урон вида ${it.typeName}, вы добавляете модификатор Харизмы к одному броску урона этого заклинания. В это же самое время вы можете потратить 1 единицу чародейства, чтобы получить сопротивление этому виду урона на 1 час.",
-                    type = ActionType.PartOfAction
-                ))
+                abilities.actionsList.add(
+                    Action(
+                        name = "Родство со стихией",
+                        description = "Когда вы накладываете заклинание, причиняющее урон вида ${it.typeName}, вы добавляете модификатор Харизмы к одному броску урона этого заклинания. В это же самое время вы можете потратить 1 единицу чародейства, чтобы получить сопротивление этому виду урона на 1 час.",
+                        type = ActionType.PartOfAction
+                    )
+                )
             }
         }
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 6 && abilities.characterClass == Classes.Sorcerer
     },
     description = "Когда вы накладываете заклинание, причиняющее урон вида, связанного с вашим драконьим предком, вы добавляете модификатор Харизмы к одному броску урона этого заклинания. В это же самое время вы можете потратить 1 единицу чародейства, чтобы получить сопротивление этому виду урона на 1 час."
@@ -272,7 +277,7 @@ var elementalAffinity: AbilityNode = AbilityNode(
 
 var dragonWings: AbilityNode = AbilityNode(
     name = "Крылья дракона",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.actionsList.add(
             Action(
                 name = "Крылья дракона",
@@ -285,7 +290,7 @@ var dragonWings: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 14 && abilities.characterClass == Classes.Sorcerer
     },
     description = "Вы получаете способность расправить драконьи крылья у себя за спиной, получая при этом скорость полёта, равную вашей текущей скорости. Вы можете создать их бонусным действием в свой ход. Крылья существуют, пока вы не развеете их бонусным действием в свой ход.\n" +
@@ -295,7 +300,7 @@ var dragonWings: AbilityNode = AbilityNode(
 
 var dragonPresence: AbilityNode = AbilityNode(
     name = "Образ дракона",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.actionsList.add(
             Action(
                 name = "Образ дракона",
@@ -306,7 +311,7 @@ var dragonPresence: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.level >= 18 && abilities.characterClass == Classes.Sorcerer
     },
     description = "Вы можете вызвать ужасный образ своего предка дракона, повергая им в ужас врагов. Вы можете действием потратить 5 единиц чародейства, чтобы окружить себя аурой страха или трепета (на ваш выбор), радиусом 60 футов. В течение 1 минуты, или пока вы не утратите концентрацию (как если бы вы концентрировались на заклинании), все враждебные существа, начинающие ход в этой ауре, должны преуспеть в спасброске Мудрости, иначе они станут очарованными (если вы выбрали трепет) или испуганными (если вы выбрали страх) до окончания действия ауры. Существо, преуспевшее в спасброске, получает иммунитет к вашей ауре на 24 часа."
@@ -314,7 +319,7 @@ var dragonPresence: AbilityNode = AbilityNode(
 
 var draconicBloodline: AbilityNode = AbilityNode(
     name = "Наследие драконьей крови",
-    changesInCharacterInfo = {abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     alternatives = mutableMapOf(
         Pair("first", listOf(dragonAncestor.name)),
         Pair("second", listOf(draconicResilience.name)),
@@ -322,7 +327,7 @@ var draconicBloodline: AbilityNode = AbilityNode(
         Pair("forth", listOf(dragonWings.name)),
         Pair("fifth", listOf(dragonPresence.name))
     ),
-    requirements = {true},
+    requirements = { true },
     description = "",
     isNeedsToBeShown = false
 )

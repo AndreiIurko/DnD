@@ -2,8 +2,6 @@ package com.andreyyurko.dnd.ui.showcharacterfragments.fragmentwithfilters
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.graphics.Rect
-import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View

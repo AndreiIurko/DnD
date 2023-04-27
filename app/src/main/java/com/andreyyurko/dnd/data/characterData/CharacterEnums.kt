@@ -1,6 +1,5 @@
 package com.andreyyurko.dnd.data.characterData
 
-import android.util.Log
 import com.andreyyurko.dnd.data.characterData.character.Filter
 
 enum class Skill(var skillName: String, var ability: Ability) {
@@ -63,7 +62,7 @@ enum class Weapon(
 ) {
     Unarmed("Безоружный удар", "", "1", DamageType.Bludgeoning, listOf(), setOf(Ability.Strength)),
     Club(
-        "Дубинка", "1 см", "1к4",DamageType.Bludgeoning,
+        "Дубинка", "1 см", "1к4", DamageType.Bludgeoning,
         listOf("Лёгкое"), setOf(Ability.Strength)
     ),
     Dagger(
@@ -111,7 +110,7 @@ enum class Weapon(
         listOf("Метательное (дис. 20/60)", "фехтовальное"), setOf(Ability.Strength, Ability.Dexterity), false
     ),
     ShortBow(
-        "Короткий лук", "25 зм", "1к6" , DamageType.Piercing,
+        "Короткий лук", "25 зм", "1к6", DamageType.Piercing,
         listOf("Боеприпас (дис. 80/320)", "двуручное"), setOf(Ability.Dexterity), false
     ),
     Sling(
@@ -124,8 +123,8 @@ enum class Weapon(
     );
 
     var shownDamage: String = ""
+    var shownSecondWeaponDamage: String = ""
     var shownToHit: Int = 0
-    var itemName: String = ""
 }
 
 fun addAllSimpleWeapons(abilities: CharacterInfo): CharacterInfo {

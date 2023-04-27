@@ -8,16 +8,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.andreyyurko.dnd.R
-import com.andreyyurko.dnd.ui.showcharacterfragments.fragmentwithfilters.FragmentWithFilters
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.spells.Spell
 import com.andreyyurko.dnd.databinding.FragmentSpellsBinding
+import com.andreyyurko.dnd.ui.showcharacterfragments.fragmentwithfilters.FragmentWithFilters
 import com.andreyyurko.dnd.ui.showcharacterfragments.spells.SpellsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SpellsFragment: FragmentWithFilters(R.layout.fragment_spells) {
+class SpellsFragment : FragmentWithFilters(R.layout.fragment_spells) {
     private val viewBinding by viewBinding(FragmentSpellsBinding::bind)
     private lateinit var viewModel: SpellsViewModel
     private var isPopupBackgroundShown = false
@@ -87,8 +87,7 @@ class SpellsFragment: FragmentWithFilters(R.layout.fragment_spells) {
                 viewBinding.knownCantripsCount.text = viewModel.getKnownCantripsCount().toString()
                 viewBinding.maxCantripsCount.text = viewModel.getMaxKnownCantripsCount().toString()
                 showItems()
-            }
-            else {
+            } else {
                 viewModel.saveChangesInCharacter()
                 findNavController().popBackStack(R.id.charactersListFragment, false)
             }
@@ -102,8 +101,7 @@ class SpellsFragment: FragmentWithFilters(R.layout.fragment_spells) {
                 viewBinding.knownCantripsCount.text = viewModel.getKnownCantripsCount().toString()
                 viewBinding.maxCantripsCount.text = viewModel.getMaxKnownCantripsCount().toString()
                 showItems()
-            }
-            else
+            } else
                 findNavController().popBackStack()
         }
     }

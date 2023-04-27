@@ -8,7 +8,7 @@ import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var carefulSpell: AbilityNode = AbilityNode(
     name = "Аккуратное заклинание",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.actionsList.add(
             Action(
                 name = "Аккуратное заклинание",
@@ -20,7 +20,7 @@ var carefulSpell: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isChosen = false
         for (action in abilities.actionsList) {
             if (action.name == "Аккуратное заклинание") isChosen = true
@@ -32,7 +32,7 @@ var carefulSpell: AbilityNode = AbilityNode(
 
 var distantSpell: AbilityNode = AbilityNode(
     name = "Далёкое заклинание",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.actionsList.add(
             Action(
                 name = "Далёкое заклинание",
@@ -46,7 +46,7 @@ var distantSpell: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isChosen = false
         for (action in abilities.actionsList) {
             if (action.name == "Далёкое заклинание") isChosen = true
@@ -60,7 +60,7 @@ var distantSpell: AbilityNode = AbilityNode(
 
 var empoweredSpell: AbilityNode = AbilityNode(
     name = "Усиленное заклинание",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.actionsList.add(
             Action(
                 name = "Усиленное заклинание",
@@ -74,7 +74,7 @@ var empoweredSpell: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isChosen = false
         for (action in abilities.actionsList) {
             if (action.name == "Усиленное заклинание") isChosen = true
@@ -88,7 +88,7 @@ var empoweredSpell: AbilityNode = AbilityNode(
 
 var extendedSpell: AbilityNode = AbilityNode(
     name = "Продлённое заклинание",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.actionsList.add(
             Action(
                 name = "Продлённое заклинание",
@@ -100,7 +100,7 @@ var extendedSpell: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isChosen = false
         for (action in abilities.actionsList) {
             if (action.name == "Продлённое заклинание") isChosen = true
@@ -112,7 +112,7 @@ var extendedSpell: AbilityNode = AbilityNode(
 
 var heightenedSpell: AbilityNode = AbilityNode(
     name = "Непреодолимое заклинание",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.actionsList.add(
             Action(
                 name = "Непреодолимое заклинание",
@@ -124,7 +124,7 @@ var heightenedSpell: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isChosen = false
         for (action in abilities.actionsList) {
             if (action.name == "") isChosen = true
@@ -134,9 +134,9 @@ var heightenedSpell: AbilityNode = AbilityNode(
     description = "Когда вы накладываете заклинание, которое вынуждает существо совершить спасбросок для защиты от его эффектов, вы можете потратить 3 единицы чародейства, чтобы одна из целей заклинания совершила первый спасбросок от этого заклинания с помехой."
 )
 
-var quickenedSpell : AbilityNode = AbilityNode(
+var quickenedSpell: AbilityNode = AbilityNode(
     name = "Ускоренное заклинание",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.actionsList.add(
             Action(
                 name = "Ускоренное заклинание",
@@ -148,7 +148,7 @@ var quickenedSpell : AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isChosen = false
         for (action in abilities.actionsList) {
             if (action.name == "Ускоренное заклинание") isChosen = true
@@ -160,7 +160,7 @@ var quickenedSpell : AbilityNode = AbilityNode(
 
 var subtleSpell: AbilityNode = AbilityNode(
     name = "Неуловимое заклинание",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.actionsList.add(
             Action(
                 name = "Неуловимое заклинание",
@@ -172,7 +172,7 @@ var subtleSpell: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isChosen = false
         for (action in abilities.actionsList) {
             if (action.name == "Неуловимое заклинание") isChosen = true
@@ -184,7 +184,7 @@ var subtleSpell: AbilityNode = AbilityNode(
 
 var twinnedSpell: AbilityNode = AbilityNode(
     name = "Удвоенное заклинание",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.actionsList.add(
             Action(
                 name = "Удвоенное заклинание",
@@ -198,7 +198,7 @@ var twinnedSpell: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isChosen = false
         for (action in abilities.actionsList) {
             if (action.name == "Удвоенное заклинание") isChosen = true

@@ -30,11 +30,12 @@ class AbilitiesViewModel @Inject constructor(
     }
 
     private fun increaseAbility(abilityName: String, end: Int) {
-        for (i in abilities[abilityName]!!+1..end) {
+        for (i in abilities[abilityName]!! + 1..end) {
             increaseAbility(i)
         }
         if (abilities[abilityName]!! < end) abilities[abilityName] = end
     }
+
     fun setAbility(name: String) {
         createCharacterViewModel.character.customAbilities = characterInfo
         createCharacterViewModel.character.name = name

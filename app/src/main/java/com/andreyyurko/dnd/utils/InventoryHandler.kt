@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.Character
-import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
 import com.andreyyurko.dnd.data.inventory.InventoryItem
 import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
 import com.google.gson.Gson
@@ -20,7 +19,7 @@ class InventoryHandler @Inject constructor(
     private val charactersHolder: CharactersHolder
 ) : ViewModel() {
 
-    lateinit var allItems: MutableMap<String, InventoryItem>
+    private lateinit var allItems: MutableMap<String, InventoryItem>
 
     fun initialize(context: Context) {
         parseInventory(context)
@@ -77,7 +76,23 @@ class InventoryHandler @Inject constructor(
     }
 
     fun getItemDescription(character: Character, itemName: String): InventoryItemInfo {
-        return character.characterInfo.inventory[itemName] ?: InventoryItemInfo(itemName = itemName)
+        character.characterInfo.inventory[itemName]?.let {
+            return it
+        }
+        allItems[itemName]?.inventoryRelevantData?.maximumCharges?.let {
+            if (it > 0) return InventoryItemInfo(
+                itemName = itemName,
+                maximumCharges = it,
+                currentCharges = it
+            )
+        }
+        return InventoryItemInfo(
+            itemName = itemName
+        )
+    }
+
+    fun getItemInfo(itemName: String): InventoryItem? {
+        return allItems[itemName]
     }
 
     fun changeItemDescription(character: Character, itemDescription: InventoryItemInfo) {
@@ -145,8 +160,7 @@ class InventoryHandler @Inject constructor(
         if (item.itemTypeAndRarity.lowercase().contains(ItemType.Weapon.shownName.lowercase())) {
             if (currentState.firstWeapon == Weapon.Unarmed) {
                 return true
-            }
-            else if (currentState.secondWeapon == null && currentState.firstWeapon.properties.contains("Лёгкое") && !currentState.hasShield) {
+            } else if (currentState.secondWeapon == null && currentState.firstWeapon.properties.contains("Лёгкое") && !currentState.hasShield) {
                 var weapon: Weapon = Weapon.Unarmed
                 for (weaponType in Weapon.values()) {
                     if (item.itemTypeAndRarity.lowercase().contains(weaponType.weaponName.lowercase())) {
@@ -163,10 +177,10 @@ class InventoryHandler @Inject constructor(
         //armor
         if (item.itemTypeAndRarity.lowercase().contains(ItemType.Armor.shownName.lowercase())) {
             if (item.itemTypeAndRarity.contains("щит") && !currentState.hasShield && currentState.secondWeapon == null &&
-                !currentState.firstWeapon.properties.contains("двуручное")) {
+                !currentState.firstWeapon.properties.contains("двуручное")
+            ) {
                 return true
-            }
-            else if (currentState.armor == Armor.NoArmor) {
+            } else if (currentState.armor == Armor.NoArmor) {
                 return true
             }
         }
@@ -174,7 +188,8 @@ class InventoryHandler @Inject constructor(
         // wand/staff/rode
         if (item.itemTypeAndRarity.lowercase().contains(ItemType.Wand.shownName.lowercase()) ||
             item.itemTypeAndRarity.lowercase().contains(ItemType.Staff.shownName.lowercase()) ||
-            item.itemTypeAndRarity.lowercase().contains(ItemType.Rode.shownName.lowercase())) {
+            item.itemTypeAndRarity.lowercase().contains(ItemType.Rode.shownName.lowercase())
+        ) {
             if (!currentState.equippedMagicWeapons.contains(itemName)) {
                 return true
             }
@@ -182,7 +197,8 @@ class InventoryHandler @Inject constructor(
 
         // wondrous item/ring
         if (item.itemTypeAndRarity.lowercase().contains(ItemType.WondrousItem.shownName.lowercase()) ||
-            item.itemTypeAndRarity.lowercase().contains(ItemType.Ring.shownName.lowercase())) {
+            item.itemTypeAndRarity.lowercase().contains(ItemType.Ring.shownName.lowercase())
+        ) {
             if (!currentState.equippedArtifacts.contains(itemName)) {
                 return true
             }
@@ -206,10 +222,9 @@ class InventoryHandler @Inject constructor(
                 }
                 currentState.firstWeapon = weapon
                 currentState.firstWeaponName = itemName
-                currentState.inventoryBonuses[itemName] = item.inventoryBonus
+                currentState.inventoryRelevantData[itemName] = item.inventoryRelevantData
                 return true
-            }
-            else if (currentState.secondWeapon == null && currentState.firstWeapon.properties.contains("Лёгкое") && !currentState.hasShield) {
+            } else if (currentState.secondWeapon == null && currentState.firstWeapon.properties.contains("Лёгкое") && !currentState.hasShield) {
                 var weapon: Weapon = Weapon.Unarmed
                 for (weaponType in Weapon.values()) {
                     if (item.itemTypeAndRarity.lowercase().contains(weaponType.weaponName.lowercase())) {
@@ -220,7 +235,7 @@ class InventoryHandler @Inject constructor(
                 if (weapon.properties.contains("Лёгкое")) {
                     currentState.secondWeapon = weapon
                     currentState.secondWeaponName = itemName
-                    currentState.inventoryBonuses[itemName] = item.inventoryBonus
+                    currentState.inventoryRelevantData[itemName] = item.inventoryRelevantData
                     return true
                 }
             }
@@ -229,11 +244,11 @@ class InventoryHandler @Inject constructor(
         //adding armor
         if (item.itemTypeAndRarity.lowercase().contains(ItemType.Armor.shownName.lowercase())) {
             if (item.itemTypeAndRarity.contains("щит") && !currentState.hasShield && currentState.secondWeapon == null &&
-                    !currentState.firstWeapon.properties.contains("двуручное")) {
+                !currentState.firstWeapon.properties.contains("двуручное")
+            ) {
                 currentState.hasShield = true
                 currentState.shieldItemName = itemName
-            }
-            else if (currentState.armor == Armor.NoArmor) {
+            } else if (currentState.armor == Armor.NoArmor) {
                 var armor: Armor = Armor.NoArmor
                 for (armorType in Armor.values()) {
                     if (item.itemTypeAndRarity.lowercase().contains(armorType.armorName.lowercase())) {
@@ -243,28 +258,30 @@ class InventoryHandler @Inject constructor(
                 }
                 currentState.armor = armor
                 currentState.armorName = itemName
-                currentState.inventoryBonuses[itemName] = item.inventoryBonus
+                currentState.inventoryRelevantData[itemName] = item.inventoryRelevantData
                 return true
             }
         }
 
         // adding wand/staff/rode
         if (item.itemTypeAndRarity.lowercase().contains(ItemType.Wand.shownName.lowercase()) ||
-                item.itemTypeAndRarity.lowercase().contains(ItemType.Staff.shownName.lowercase()) ||
-                item.itemTypeAndRarity.lowercase().contains(ItemType.Rode.shownName.lowercase())) {
+            item.itemTypeAndRarity.lowercase().contains(ItemType.Staff.shownName.lowercase()) ||
+            item.itemTypeAndRarity.lowercase().contains(ItemType.Rode.shownName.lowercase())
+        ) {
             if (!currentState.equippedMagicWeapons.contains(itemName)) {
                 currentState.equippedMagicWeapons.add(itemName)
-                currentState.inventoryBonuses[itemName] = item.inventoryBonus
+                currentState.inventoryRelevantData[itemName] = item.inventoryRelevantData
                 return true
             }
         }
 
         // adding wondrous item/ring
         if (item.itemTypeAndRarity.lowercase().contains(ItemType.WondrousItem.shownName.lowercase()) ||
-                item.itemTypeAndRarity.lowercase().contains(ItemType.Ring.shownName.lowercase())) {
+            item.itemTypeAndRarity.lowercase().contains(ItemType.Ring.shownName.lowercase())
+        ) {
             if (!currentState.equippedArtifacts.contains(itemName)) {
                 currentState.equippedArtifacts.add(itemName)
-                currentState.inventoryBonuses[itemName] = item.inventoryBonus
+                currentState.inventoryRelevantData[itemName] = item.inventoryRelevantData
                 return true
             }
         }
@@ -281,24 +298,24 @@ class InventoryHandler @Inject constructor(
             if (currentState.secondWeaponName == itemName) {
                 currentState.secondWeapon = null
                 currentState.secondWeaponName = ""
-                currentState.inventoryBonuses.remove(itemName)
+                currentState.inventoryRelevantData.remove(itemName)
                 // in case of similar weapons
-                currentState.inventoryBonuses[currentState.firstWeapon.weaponName] = allItems[currentState.firstWeaponName]!!.inventoryBonus
-            }
-            else if (currentState.firstWeaponName == itemName) {
+                currentState.inventoryRelevantData[currentState.firstWeapon.weaponName] =
+                    allItems[currentState.firstWeaponName]!!.inventoryRelevantData
+            } else if (currentState.firstWeaponName == itemName) {
                 if (currentState.secondWeapon != null) {
-                    currentState.inventoryBonuses.remove(itemName)
+                    currentState.inventoryRelevantData.remove(itemName)
                     currentState.firstWeapon = currentState.secondWeapon!!
                     currentState.firstWeaponName = currentState.secondWeaponName
                     currentState.secondWeapon = null
                     currentState.secondWeaponName = ""
                     // in case of similar weapons
-                    currentState.inventoryBonuses[currentState.firstWeapon.weaponName] = allItems[currentState.firstWeaponName]!!.inventoryBonus
-                }
-                else {
+                    currentState.inventoryRelevantData[currentState.firstWeapon.weaponName] =
+                        allItems[currentState.firstWeaponName]!!.inventoryRelevantData
+                } else {
                     currentState.firstWeapon = Weapon.Unarmed
                     currentState.firstWeaponName = Weapon.Unarmed.weaponName
-                    currentState.inventoryBonuses.remove(itemName)
+                    currentState.inventoryRelevantData.remove(itemName)
                 }
             }
         }
@@ -308,9 +325,8 @@ class InventoryHandler @Inject constructor(
             if (item.itemTypeAndRarity.contains("щит") && currentState.hasShield) {
                 currentState.hasShield = false
                 currentState.shieldItemName = ""
-            }
-            else if (currentState.armorName == itemName) {
-                currentState.inventoryBonuses.remove(itemName)
+            } else if (currentState.armorName == itemName) {
+                currentState.inventoryRelevantData.remove(itemName)
                 currentState.armor = Armor.NoArmor
                 currentState.armorName = ""
             }
@@ -319,17 +335,28 @@ class InventoryHandler @Inject constructor(
         // removing wand/staff/rode
         if (item.itemTypeAndRarity.lowercase().contains(ItemType.Wand.shownName.lowercase()) ||
             item.itemTypeAndRarity.lowercase().contains(ItemType.Staff.shownName.lowercase()) ||
-            item.itemTypeAndRarity.lowercase().contains(ItemType.Rode.shownName.lowercase())) {
-            currentState.inventoryBonuses.remove(itemName)
+            item.itemTypeAndRarity.lowercase().contains(ItemType.Rode.shownName.lowercase())
+        ) {
+            currentState.inventoryRelevantData.remove(itemName)
             currentState.equippedMagicWeapons.remove(itemName)
         }
 
         // removing wondrous item/ring
         if (item.itemTypeAndRarity.lowercase().contains(ItemType.WondrousItem.shownName.lowercase()) ||
-            item.itemTypeAndRarity.lowercase().contains(ItemType.Ring.shownName.lowercase())) {
-            currentState.inventoryBonuses.remove(itemName)
+            item.itemTypeAndRarity.lowercase().contains(ItemType.Ring.shownName.lowercase())
+        ) {
+            currentState.inventoryRelevantData.remove(itemName)
             currentState.equippedArtifacts.remove(itemName)
         }
+    }
+
+    fun getEquippedMagicalItems(character: Character): MutableList<InventoryItemInfo> {
+        val itemNames = character.characterInfo.currentState.equippedArtifacts + character.characterInfo.currentState.equippedMagicWeapons
+        val result: MutableList<InventoryItemInfo> = mutableListOf()
+        for (name in itemNames) {
+            result.add(getItemDescription(character, name))
+        }
+        return result
     }
 
 }

@@ -1,7 +1,6 @@
 package com.andreyyurko.dnd.data.inventory
 
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
-import com.andreyyurko.dnd.data.characterData.InventoryBonus
+import com.andreyyurko.dnd.data.characterData.InventoryRelevantData
 
 data class InventoryItem(
     val name: String,
@@ -10,5 +9,5 @@ data class InventoryItem(
     val cost: String,
     val source: String,
     val description: String,
-    val inventoryBonus: InventoryBonus = InventoryBonus()
+    val inventoryRelevantData: InventoryRelevantData = InventoryRelevantData()
 )

@@ -1,6 +1,5 @@
 package com.andreyyurko.dnd.ui.showcharacterfragments.spells
 
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.SpellSpecificLanguage
-import com.andreyyurko.dnd.data.characterData.character.Character
 import com.andreyyurko.dnd.data.spells.Spell
-import com.andreyyurko.dnd.utils.CharacterViewModel
-import com.andreyyurko.dnd.utils.SpellsHandler
 import javax.inject.Inject
 
 class SpellsAdapter @Inject constructor(

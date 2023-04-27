@@ -1,6 +1,5 @@
 package com.andreyyurko.dnd.data.abilities.classes.cleric
 
-import com.andreyyurko.dnd.data.abilities.classes.fighter.*
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.spells.CharacterSpells
@@ -45,7 +44,7 @@ var TempestDomainSpells = AbilityNode(
         abilities.level >= 1 && abilities.characterClass == Classes.Cleric
     },
     description =
-            "Уровень жреца | Заклинания\n" +
+    "Уровень жреца | Заклинания\n" +
             "       1      | громовая волна, туманное облако\n" +
             "       3      | дребезги, порыв ветра\n" +
             "       5      | метель, призыв молнии\n" +
@@ -153,7 +152,8 @@ var divineStrikeTempestDomain = AbilityNode(
 var stormBorn = AbilityNode(
     name = "Бурерождённый",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Бурерождённый"] = "У вас появляется скорость полёта, равная вашей текущей наземной скорости ходьбы, когда вы не под землёй и не в помещении.\n"
+        abilities.additionalAbilities["Бурерождённый"] =
+            "У вас появляется скорость полёта, равная вашей текущей наземной скорости ходьбы, когда вы не под землёй и не в помещении.\n"
         abilities
     },
     alternatives = mutableMapOf(),

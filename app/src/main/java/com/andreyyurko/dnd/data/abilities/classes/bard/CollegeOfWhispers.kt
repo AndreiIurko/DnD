@@ -1,12 +1,7 @@
 package com.andreyyurko.dnd.data.abilities.classes.bard
 
-import com.andreyyurko.dnd.data.characterData.Action
-import com.andreyyurko.dnd.data.characterData.ActionType
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
-import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
-import com.andreyyurko.dnd.data.spells.CharacterSpells
-import com.andreyyurko.dnd.data.spells.SpellLists
 
 
 var collegeOfWhispers = AbilityNode(

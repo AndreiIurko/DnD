@@ -1,9 +1,6 @@
 package com.andreyyurko.dnd.data.abilities.classes.wizard
 
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
-import com.andreyyurko.dnd.data.abilities.classes.cleric.*
-import com.andreyyurko.dnd.data.abilities.classes.monk.wayOfFourElements
-import com.andreyyurko.dnd.data.abilities.classes.monk.wayOfOpenHand
 import com.andreyyurko.dnd.data.abilities.other.*
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
@@ -67,8 +64,9 @@ var spellCastingWizard: AbilityNode = AbilityNode(
             }
             this["Заклинания класса"]?.className = Classes.Wizard.className
             this["Заклинания класса"]?.maxKnownSpellsCount = 4 + 2 * (abilities.level)
-            this["Заклинания класса"]?.maxPreparedSpellsCount = max((abilityToModifier(abilities.intelligence) + abilities.level), 1)
-            this["Заклинания класса"]?.maxKnownCantripsCount = kotlin.math.min((abilities.level+20)/6, 5)
+            this["Заклинания класса"]?.maxPreparedSpellsCount =
+                max((abilityToModifier(abilities.intelligence) + abilities.level), 1)
+            this["Заклинания класса"]?.maxKnownCantripsCount = kotlin.math.min((abilities.level + 20) / 6, 5)
         }
         abilities
     },
@@ -395,9 +393,10 @@ var wizard17: AbilityNode = AbilityNodeLevel(
 var spellMastery: AbilityNode = AbilityNode(
     name = "Мастерство заклинателя",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Мастерство заклинателя"] = "Вы достигаете такого мастерства в отношении некоторых заклинаний, что можете накладывать их неограниченное количество раз. Выберите одно заклинание волшебника 1-го уровня и одно заклинание волшебника 2-го уровня, которые есть в вашей книге заклинаний. Вы можете накладывать эти заклинания без увеличения их уровня, не тратя ячейки заклинаний, при условии, что вы их подготовили. Если вы хотите увеличить уровень этих заклинаний, вы должны потратить ячейку заклинаний как обычно.\n" +
-                "\n" +
-                "Потратив 8 часов на обучение, вы можете изменить одно или оба эти заклинания по своему усмотрению на заклинания тех же уровней.\n"
+        abilities.additionalAbilities["Мастерство заклинателя"] =
+            "Вы достигаете такого мастерства в отношении некоторых заклинаний, что можете накладывать их неограниченное количество раз. Выберите одно заклинание волшебника 1-го уровня и одно заклинание волшебника 2-го уровня, которые есть в вашей книге заклинаний. Вы можете накладывать эти заклинания без увеличения их уровня, не тратя ячейки заклинаний, при условии, что вы их подготовили. Если вы хотите увеличить уровень этих заклинаний, вы должны потратить ячейку заклинаний как обычно.\n" +
+                    "\n" +
+                    "Потратив 8 часов на обучение, вы можете изменить одно или оба эти заклинания по своему усмотрению на заклинания тех же уровней.\n"
         abilities
     },
     alternatives = mutableMapOf(),
@@ -499,6 +498,6 @@ var mapOfWizardAbilities: MutableMap<String, AbilityNode> = (mutableMapOf(
     Pair(signatureSpells.name, signatureSpells),
     Pair(wizard20.name, wizard20),
 )
-        +mapOfSchoolOfDivinationAbilities
-        +mapOfSchoolOfConjurationAbilities
+        + mapOfSchoolOfDivinationAbilities
+        + mapOfSchoolOfConjurationAbilities
         ).toMutableMap()

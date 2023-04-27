@@ -1,6 +1,5 @@
 package com.andreyyurko.dnd.data.abilities.classes.sorcerer
 
-import android.util.Log
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.other.*
 import com.andreyyurko.dnd.data.characterData.*
@@ -98,11 +97,11 @@ var spellCastingSorcerer: AbilityNode = AbilityNode(
 
 var sorcerousOrigin: AbilityNode = AbilityNode(
     name = "Происхождение чародея",
-    changesInCharacterInfo = {abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     alternatives = mutableMapOf(
         Pair("first", listOf(draconicBloodline.name, wildMagic.name))
     ),
-    requirements = {true},
+    requirements = { true },
     description = "Выберите источник, из которого ваш персонаж черпает свою силу.\n" +
             "\n" +
             "Ваш выбор предоставляет вам умения на 1-м, 6-м, 14-м и 18-м уровнях."
@@ -128,9 +127,9 @@ var sorcerer1: AbilityNodeLevel = AbilityNodeLevel(
     next_level = "Чародей_2",
 )
 
-var fontOfMagic :AbilityNode = AbilityNode(
+var fontOfMagic: AbilityNode = AbilityNode(
     name = "Источник магии",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         if (!abilities.currentState.charges.contains("Единицы чародейства")) {
             abilities.currentState.charges["Единицы чародейства"] = ChargesCounter(
                 current = 2,
@@ -170,7 +169,7 @@ var fontOfMagic :AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Sorcerer
     },
     description = "Вы получаете доступ к внутреннему источнику магии. Этот источник выражен в единицах чародейства, позволяющих вам создавать разнообразные магические эффекты.\n" +
@@ -214,16 +213,24 @@ var sorcerer2: AbilityNodeLevel = AbilityNodeLevel(
 
 var metamagic: AbilityNode = AbilityNode(
     name = "Метамагия",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
     alternatives = mutableMapOf(
-        Pair("first", listOf(carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
-            heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name)),
-        Pair("second", listOf(carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
-            heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name)),
+        Pair(
+            "first", listOf(
+                carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
+                heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name
+            )
+        ),
+        Pair(
+            "second", listOf(
+                carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
+                heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name
+            )
+        ),
     ),
-    requirements = {true},
+    requirements = { true },
     description = "Вы получаете способность подстраивать заклинания под свои нужды. Вы выбираете два варианта метамагии из перечисленных ниже. На 10-м и 17-м уровне вы получаете ещё по одному варианту.\n" +
             "\n" +
             "При накладывании заклинания может быть использован только один метамагический вариант, если в его описании не указано обратное."
@@ -357,14 +364,18 @@ var sorcerer9: AbilityNodeLevel = AbilityNodeLevel(
 
 var metamagic2: AbilityNode = AbilityNode(
     name = "Метамагия: выбор опции",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
     alternatives = mutableMapOf(
-        Pair("first", listOf(carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
-            heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name)),
+        Pair(
+            "first", listOf(
+                carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
+                heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name
+            )
+        ),
     ),
-    requirements = {true},
+    requirements = { true },
     description = "Выберите еще одну опцию метамагии:"
 )
 
@@ -492,14 +503,18 @@ var sorcerer16: AbilityNodeLevel = AbilityNodeLevel(
 
 var metamagic3: AbilityNode = AbilityNode(
     name = "Метамагия: выбор опции",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
     alternatives = mutableMapOf(
-        Pair("first", listOf(carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
-            heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name)),
+        Pair(
+            "first", listOf(
+                carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
+                heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name
+            )
+        ),
     ),
-    requirements = {true},
+    requirements = { true },
     description = "Выберите еще одну опцию метамагии:"
 )
 

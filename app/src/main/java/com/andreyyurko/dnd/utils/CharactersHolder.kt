@@ -1,6 +1,5 @@
 package com.andreyyurko.dnd.utils
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andreyyurko.dnd.data.abilities.mapOfAn
@@ -13,7 +12,6 @@ import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
 import com.andreyyurko.dnd.data.characterData.mergeCharacterInfo
 import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
 import com.andreyyurko.dnd.data.spells.CharacterSpells
-import com.andreyyurko.dnd.data.spells.SpellLists
 import com.andreyyurko.dnd.db.DB
 import com.andreyyurko.dnd.db.DBProvider
 import com.google.gson.Gson

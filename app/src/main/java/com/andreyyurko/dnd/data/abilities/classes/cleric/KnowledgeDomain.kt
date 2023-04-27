@@ -1,6 +1,5 @@
 package com.andreyyurko.dnd.data.abilities.classes.cleric
 
-import com.andreyyurko.dnd.data.abilities.classes.fighter.*
 import com.andreyyurko.dnd.data.abilities.other.*
 import com.andreyyurko.dnd.data.characterData.Action
 import com.andreyyurko.dnd.data.characterData.ActionType
@@ -143,7 +142,8 @@ var channelDivinityReadThoughts: AbilityNode = AbilityNode(
 var potentSpellcasting = AbilityNode(
     name = "Могущественное колдовство",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Могущественное колдовство (жрец)"] = "Вы добавляете модификатор Мудрости к урону, который причиняете заговорами жреца.\n"
+        abilities.additionalAbilities["Могущественное колдовство (жрец)"] =
+            "Вы добавляете модификатор Мудрости к урону, который причиняете заговорами жреца.\n"
         abilities
     },
     alternatives = mutableMapOf(),

@@ -1,8 +1,6 @@
 package com.andreyyurko.dnd.ui.showcharacterfragments.spells
 
 import androidx.lifecycle.ViewModel
-import com.andreyyurko.dnd.data.SpellSpecificLanguage
-import com.andreyyurko.dnd.data.characterData.character.Character
 import com.andreyyurko.dnd.data.spells.Spell
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.SpellsHandler

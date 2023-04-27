@@ -1,7 +1,6 @@
 package com.andreyyurko.dnd.ui.showcharacterfragments.equipment
 
 import androidx.lifecycle.ViewModel
-import com.andreyyurko.dnd.data.characterData.ItemType
 import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.InventoryHandler
@@ -14,33 +13,49 @@ class CharacterEquipmentViewModel @Inject constructor(
     val inventoryHandler: InventoryHandler
 ) : ViewModel() {
 
-    private fun getTypeItems(itemType: ItemType): MutableList<InventoryItemInfo> {
-        val filters = InventoryHandler.Filters()
-        filters.type.add(itemType)
-        return inventoryHandler.getCharacterItems(characterViewModel.shownCharacter, filters)
+    fun getEquippedMagicalItems(): MutableList<InventoryItemInfo> {
+        return inventoryHandler.getEquippedMagicalItems(characterViewModel.shownCharacter)
     }
 
-    fun getWeaponItems(): MutableList<InventoryItemInfo> {
-        return getTypeItems(ItemType.Weapon)
+    fun getFirstWeaponInfo(): WeaponInfo {
+        val currentState = characterViewModel.shownCharacter.characterInfo.currentState
+        return WeaponInfo(
+            weaponName = currentState.firstWeaponName,
+            properties = currentState.firstWeapon.properties,
+            damage = currentState.firstWeapon.shownDamage
+        )
     }
 
-    fun getArmorItems(): MutableList<InventoryItemInfo> {
-        return getTypeItems(ItemType.Armor)
+    fun getSecondWeaponInfo(): WeaponInfo? {
+        val currentState = characterViewModel.shownCharacter.characterInfo.currentState
+        currentState.secondWeapon?.let {
+            return WeaponInfo(
+                weaponName = currentState.secondWeaponName,
+                properties = it.properties,
+                damage = it.shownSecondWeaponDamage
+            )
+        }
+        return null
     }
 
-    fun getMagicWeapons(): List<InventoryItemInfo> {
-        return getTypeItems(ItemType.Staff) + getTypeItems(ItemType.Rode) + getTypeItems(ItemType.Wand)
+    fun getArmorInfo(): ArmorInfo {
+        val currentState = characterViewModel.shownCharacter.characterInfo.currentState
+        return ArmorInfo(
+            armorName = currentState.armorName,
+            type = "Тип",
+            ac = currentState.armor.ac + (currentState.inventoryRelevantData[currentState.armorName]?.ac ?: 0)
+        )
     }
 
-    fun getArtifacts(): List<InventoryItemInfo> {
-        return getTypeItems(ItemType.WondrousItem) + getTypeItems(ItemType.Ring)
-    }
+    data class WeaponInfo(
+        val weaponName: String,
+        val properties: List<String>,
+        var damage: String
+    )
 
-    fun getConsumables(): List<InventoryItemInfo> {
-        return getTypeItems(ItemType.Scroll) + getTypeItems(ItemType.Potion)
-    }
-
-    fun isEquipped(itemName: String): Boolean {
-        return true
-    }
+    data class ArmorInfo(
+        val armorName: String,
+        val type: String,
+        val ac: Int
+    )
 }

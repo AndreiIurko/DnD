@@ -1,6 +1,5 @@
 package com.andreyyurko.dnd.utils
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.andreyyurko.dnd.data.SpellSpecificLanguage
 import com.andreyyurko.dnd.data.characterData.School
@@ -27,26 +26,36 @@ class SpellsHandler @Inject constructor(
     }
 
     // this is used then we need get all class spell from some list
-    fun getClassSpellsWithDescription(character: Character, filters: Filters = Filters(), listName: String): MutableList<Spell> {
+    fun getClassSpellsWithDescription(
+        character: Character,
+        filters: Filters = Filters(),
+        listName: String
+    ): MutableList<Spell> {
         // spellInfo[listName] not null, but just in case if smth will go wrong we will use className from character
-        val className = character.characterInfo.spellsInfo[listName]?.className ?: character.characterInfo.characterClass.className
+        val className =
+            character.characterInfo.spellsInfo[listName]?.className ?: character.characterInfo.characterClass.className
 
         val result: MutableList<Spell> = mutableListOf()
         for (spellDescription in allSpells.values) {
             val spell = Spell(spellDescription, listName, false)
             if (spell.data.classes.contains(className.lowercase()) &&
                 checkFilters(spell, filters) &&
-                spell.data.level.toInt() <= (character.characterInfo.level + 1) / 2)
+                spell.data.level.toInt() <= (character.characterInfo.level + 1) / 2
+            )
                 result.add(spell)
         }
         return result
     }
 
     // used then user chooses his known spells - this is all options for listClassName
-    fun getAllSpellsWhatNeedsToBeChosen(character: Character, listClassName: String, filters: Filters = Filters()): MutableList<Spell> {
+    fun getAllSpellsWhatNeedsToBeChosen(
+        character: Character,
+        listClassName: String,
+        filters: Filters = Filters()
+    ): MutableList<Spell> {
         val result: MutableList<Spell> = mutableListOf()
         for ((listName, value) in character.characterInfo.spellsInfo.entries) {
-            if ((value.maxKnownSpellsCount != -1 || value.maxKnownCantripsCount != -1 ) && listClassName == value.className) {
+            if ((value.maxKnownSpellsCount != -1 || value.maxKnownCantripsCount != -1) && listClassName == value.className) {
                 for (spell in getClassSpellsWithDescription(character, filters, listName)) {
                     if (value.maxKnownSpellsCount != -1 && value.maxKnownSpellsCount != 0 && spell.data.level != "0")
                         result.add(spell)
@@ -69,8 +78,7 @@ class SpellsHandler @Inject constructor(
                     result.add(spell)
                 }
             }
-        }
-        else for (spellName in value.spellLists.knownCantrips) {
+        } else for (spellName in value.spellLists.knownCantrips) {
             allSpells[spellName]?.let {
                 val spell = Spell(it, listName, false)
                 if (checkFilters(spell, filters)) result.add(spell)
@@ -82,8 +90,7 @@ class SpellsHandler @Inject constructor(
                     result.add(spell)
                 }
             }
-        }
-        else for (spellName in value.spellLists.knownSpells) {
+        } else for (spellName in value.spellLists.knownSpells) {
             allSpells[spellName]?.let {
                 val spell = Spell(it, listName, false)
                 if (checkFilters(spell, filters)) result.add(spell)
@@ -92,9 +99,13 @@ class SpellsHandler @Inject constructor(
         return result
     }
 
-    fun getKnownSpellsWithDescription(character: Character, filters: Filters = Filters(), classListName: String = ""): MutableList<Spell> {
+    fun getKnownSpellsWithDescription(
+        character: Character,
+        filters: Filters = Filters(),
+        classListName: String = ""
+    ): MutableList<Spell> {
         val result: MutableList<Spell> = mutableListOf()
-        for((listName, value) in character.characterInfo.spellsInfo.entries) {
+        for ((listName, value) in character.characterInfo.spellsInfo.entries) {
             if (classListName == "") {
                 result += getKnownSpellsWithDescriptionFromList(character, filters, listName, value)
                 continue
@@ -102,8 +113,7 @@ class SpellsHandler @Inject constructor(
 
             if (classListName == value.className) {
                 result += getKnownSpellsWithDescriptionFromList(character, filters, listName, value)
-            }
-            else {
+            } else {
                 val returnedValue = getKnownSpellsWithDescriptionFromList(character, filters, listName, value)
                 for (spell in returnedValue)
                     spell.isAlwaysIncluded = true
@@ -115,7 +125,7 @@ class SpellsHandler @Inject constructor(
 
     fun getPreparedSpellsWithDescription(character: Character, filters: Filters = Filters()): MutableList<Spell> {
         var result: MutableList<Spell> = mutableListOf()
-        for((listName, value) in character.characterInfo.spellsInfo.entries) {
+        for ((listName, value) in character.characterInfo.spellsInfo.entries) {
             if (value.maxPreparedCantripsCount == -1) {
                 for (spell in getKnownSpellsWithDescriptionFromList(character, filters, listName, value)) {
                     if (spell.data.level == "0") {
@@ -276,7 +286,11 @@ class SpellsHandler @Inject constructor(
 
     fun isAllKnown(character: Character): Boolean {
         for ((_, value) in character.characterInfo.spellsInfo) {
-            if (getMaxKnownSpellsCount(character, value.className) + getMaxKnownCantripsCount(character, value.className) != 0)
+            if (getMaxKnownSpellsCount(character, value.className) + getMaxKnownCantripsCount(
+                    character,
+                    value.className
+                ) != 0
+            )
                 return false
         }
         return true
@@ -290,7 +304,7 @@ class SpellsHandler @Inject constructor(
     )
 
     private fun sortByLevel(spells: MutableList<Spell>) {
-        spells.sortWith { first: Spell, second: Spell->
+        spells.sortWith { first: Spell, second: Spell ->
             second.data.level.toInt().compareTo(first.data.level.toInt())
         }
     }

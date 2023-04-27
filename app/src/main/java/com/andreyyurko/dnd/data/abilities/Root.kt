@@ -1,20 +1,19 @@
 package com.andreyyurko.dnd.data.abilities
 
-import android.util.Log
 import com.andreyyurko.dnd.data.abilities.classes.barbarian1
+import com.andreyyurko.dnd.data.abilities.classes.bard.bard1
+import com.andreyyurko.dnd.data.abilities.classes.cleric.cleric1
 import com.andreyyurko.dnd.data.abilities.classes.fighter.fighter1
 import com.andreyyurko.dnd.data.abilities.classes.mapOfClasses
 import com.andreyyurko.dnd.data.abilities.classes.monk.monk1
 import com.andreyyurko.dnd.data.abilities.classes.sorcerer.sorcerer1
-import com.andreyyurko.dnd.data.abilities.classes.cleric.cleric1
 import com.andreyyurko.dnd.data.abilities.classes.wizard.wizard1
-import com.andreyyurko.dnd.data.abilities.classes.bard.bard1
 import com.andreyyurko.dnd.data.abilities.other.mapOfAbilityScoreImprovement
 import com.andreyyurko.dnd.data.abilities.other.mapOfFightingStyles
 import com.andreyyurko.dnd.data.abilities.other.mapOfLanguages
 import com.andreyyurko.dnd.data.abilities.other.mapOfSkills
-import com.andreyyurko.dnd.data.abilities.races.human
 import com.andreyyurko.dnd.data.abilities.races.elf
+import com.andreyyurko.dnd.data.abilities.races.human
 import com.andreyyurko.dnd.data.abilities.races.mapOfRaces
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
@@ -25,7 +24,6 @@ import java.lang.Integer.min
 var baseActionsAN = AbilityNode(
     "base_actions_an",
     { abilities: CharacterInfo ->
-        abilities.currentState.firstWeapon.itemName = abilities.currentState.firstWeaponName
         var (damage, toHitBonus) = calculateWeaponProp(abilities.currentState.firstWeapon, abilities)
 
         var damageBonus = -5
@@ -39,11 +37,12 @@ var baseActionsAN = AbilityNode(
 
         abilities.currentState.firstWeapon.shownDamage = damage
         abilities.currentState.firstWeapon.shownToHit = toHitBonus
+
         abilities.actionsList.add(
             Action(
                 name = "Атака",
                 description = "Совершить одну атаку рукопашным оружием\n" +
-                        "Бонус к попаданию: ${if (toHitBonus<0) "" else "+"}${toHitBonus}\n" +
+                        "Бонус к попаданию: ${if (toHitBonus < 0) "" else "+"}${toHitBonus}\n" +
                         "Урон: $damage",
                 type = ActionType.Action
             )
@@ -51,7 +50,8 @@ var baseActionsAN = AbilityNode(
 
         abilities.currentState.secondWeapon?.let {
             val (secondDamage, secondToHitBonus) = calculateWeaponProp(it, abilities)
-            it.shownDamage = secondDamage
+
+            it.shownSecondWeaponDamage = secondDamage
             it.shownToHit = secondToHitBonus
             abilities.actionsList.add(
                 Action(
@@ -61,7 +61,7 @@ var baseActionsAN = AbilityNode(
                             "Вы не добавляете модификатор характеристики к урону от бонусной атаки, если только он не отрицательный.\n" +
                             "\n" +
                             "Если у любого из оружий есть свойство «метательное», вы можете не совершать им рукопашную атаку, а метнуть его.\n" +
-                            "Бонус к попаданию: ${if (secondToHitBonus<0) "" else "+"}${secondToHitBonus}\n" +
+                            "Бонус к попаданию: ${if (secondToHitBonus < 0) "" else "+"}${secondToHitBonus}\n" +
                             "Урон: $secondDamage",
                     type = ActionType.Bonus
                 )
@@ -217,7 +217,10 @@ var baseAN: AbilityNode = AbilityNode(
     },
     mutableMapOf(
         Pair("actions", listOf(baseActionsAN.name)),
-        Pair("class", listOf(monk1.name, barbarian1.name, fighter1.name, sorcerer1.name, cleric1.name, wizard1.name, bard1.name)),
+        Pair(
+            "class",
+            listOf(monk1.name, barbarian1.name, fighter1.name, sorcerer1.name, cleric1.name, wizard1.name, bard1.name)
+        ),
         Pair("race", listOf(human.name, elf.name))
     ),
     { true },
@@ -256,13 +259,14 @@ fun calculateWeaponProp(weapon: Weapon, abilities: CharacterInfo): Pair<String, 
 
     var damage = weapon.damage
 
-    abilities.currentState.inventoryBonuses[abilities.currentState.firstWeaponName]?.let {
+    abilities.currentState.inventoryRelevantData[abilities.currentState.firstWeaponName]?.let {
         toHitBonus += it.weaponToHit
         damage = sumTwoDamages(damage, it.weaponDamage)
     }
 
     return Pair(damage, toHitBonus)
 }
+
 fun sumTwoDamages(damage1: String, damage2: String): String {
     val mapOfDices: MutableMap<String, Int> = mutableMapOf(
         Pair("к4", 0),
@@ -289,7 +293,7 @@ fun sumTwoDamages(damage1: String, damage2: String): String {
     for ((key, value) in mapOfDices.entries) {
         if (value == 0) continue
         if (value < 0 && result != "")
-            result = result.substring(0 until result.length-1)
+            result = result.substring(0 until result.length - 1)
         result += value.toString() + key
         if (key.contains('к'))
             result += "+"

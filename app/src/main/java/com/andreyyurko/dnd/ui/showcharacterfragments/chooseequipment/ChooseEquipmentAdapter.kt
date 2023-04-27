@@ -1,6 +1,7 @@
-package com.andreyyurko.dnd.ui.showcharacterfragments.inventory
+package com.andreyyurko.dnd.ui.showcharacterfragments.chooseequipment
 
 import android.content.Context
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -14,22 +15,27 @@ import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.InventoryHandler
 import javax.inject.Inject
 
-class InventoryAdapter @Inject constructor(
+class ChooseEquipmentAdapter @Inject constructor(
     private val inventoryHandler: InventoryHandler,
     private val characterViewModel: CharacterViewModel
-) : RecyclerView.Adapter<InventoryAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ChooseEquipmentAdapter.ViewHolder>() {
 
-    var itemsList: MutableList<InventoryItemInfo> = mutableListOf()
+    data class EquipmentItem(
+        val itemDescription: InventoryItemInfo,
+        var isEquipped: Boolean,
+        var isCanBeEquipped: Boolean
+    )
+
+    var itemsList: List<EquipmentItem> = listOf()
+    var itemsListWithoutCopies: List<InventoryItemInfo> = listOf()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val nameTextView: TextView = itemView.findViewById(R.id.itemName)
-        val increaseButton: ImageButton = itemView.findViewById(R.id.increaseButton)
-        val countTextView: TextView = itemView.findViewById(R.id.count)
-        val decreaseButton: ImageButton = itemView.findViewById(R.id.decreaseButton)
+        val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
+        val equipButton: TextView = itemView.findViewById(R.id.equipButton)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.view_inventory_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.view_equipment_list_item, parent, false)
         return ViewHolder(itemView)
     }
 
@@ -38,36 +44,95 @@ class InventoryAdapter @Inject constructor(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.nameTextView.text = itemsList[position].itemName
-        holder.countTextView.text = itemsList[position].count.toString()
-
-        if (itemsList[position].count == 0) {
-            holder.decreaseButton.isEnabled = false
-            holder.decreaseButton.alpha = 0.5F
-        }
-
-        holder.increaseButton.setOnClickListener {
-            itemsList[position].count += 1
-            holder.decreaseButton.alpha = 1.0F
-            holder.decreaseButton.isEnabled = true
-            inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, itemsList[position])
-            holder.countTextView.text = itemsList[position].count.toString()
-        }
-
-        holder.decreaseButton.setOnClickListener {
-            itemsList[position].count -= 1
-            if (itemsList[position].count == 0) {
-                holder.decreaseButton.alpha = 0.5F
-                holder.decreaseButton.isEnabled = false
-            }
-            inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, itemsList[position])
-            holder.countTextView.text = itemsList[position].count.toString()
-        }
-
-        holder.nameTextView.isClickable = true
+        Log.d("test", position.toString())
+        holder.nameTextView.text = itemsList[position].itemDescription.itemName
         holder.nameTextView.setOnClickListener {
-            showFullDescription(itemsList[position], it.context, position)
+            showFullDescription(itemsList[position].itemDescription, it.context, position)
         }
+
+        if (!itemsList[position].isEquipped && !itemsList[position].isCanBeEquipped) {
+            holder.equipButton.alpha = 0.5F
+            holder.equipButton.isEnabled = false
+        } else {
+            holder.equipButton.alpha = 1.0F
+            holder.equipButton.isEnabled = true
+        }
+
+        if (itemsList[position].isEquipped) {
+            holder.equipButton.text = "Снять"
+        } else {
+            holder.equipButton.text = "Надеть"
+        }
+
+        holder.equipButton.setOnClickListener {
+            if (itemsList[position].isEquipped) {
+                inventoryHandler.unequipItem(
+                    characterViewModel.shownCharacter,
+                    itemsList[position].itemDescription.itemName
+                )
+            } else {
+                inventoryHandler.equipItem(
+                    characterViewModel.shownCharacter,
+                    itemsList[position].itemDescription.itemName
+                )
+            }
+            characterViewModel.updateCharacterInfo()
+            itemsList = createListWithCopies()
+            notifyDataSetChanged()
+        }
+    }
+
+    fun createListWithCopies(): MutableList<EquipmentItem> {
+        val resultList: MutableList<EquipmentItem> = mutableListOf()
+        for (item in itemsListWithoutCopies) {
+            if (item.count <= 0) continue
+
+            val isEquipped = inventoryHandler.isItemEquipped(characterViewModel.shownCharacter, item.itemName)
+            val isCanBeEquipped = inventoryHandler.isItemEquitable(characterViewModel.shownCharacter, item.itemName)
+            Log.d("test", item.itemName)
+            Log.d("test", isEquipped.toString())
+            Log.d("test", isCanBeEquipped.toString())
+
+            resultList.add(
+                EquipmentItem(
+                    item,
+                    isEquipped,
+                    isCanBeEquipped
+                )
+            )
+
+            if (isEquipped && isCanBeEquipped && item.count >= 2) {
+                resultList.add(
+                    EquipmentItem(
+                        item,
+                        isEquipped = false,
+                        isCanBeEquipped = true
+                    )
+                )
+            }
+            if (isEquipped && !isCanBeEquipped && item.count >= 2) {
+                if (characterViewModel.shownCharacter.characterInfo.currentState.firstWeaponName ==
+                    characterViewModel.shownCharacter.characterInfo.currentState.secondWeaponName &&
+                    characterViewModel.shownCharacter.characterInfo.currentState.firstWeaponName == item.itemName
+                )
+                    resultList.add(
+                        EquipmentItem(
+                            item,
+                            isEquipped = true,
+                            isCanBeEquipped = false
+                        )
+                    )
+                else
+                    resultList.add(
+                        EquipmentItem(
+                            item,
+                            isEquipped = false,
+                            isCanBeEquipped = false
+                        )
+                    )
+            }
+        }
+        return resultList
     }
 
     private fun showFullDescription(itemDescription: InventoryItemInfo, context: Context, position: Int) {
@@ -141,7 +206,8 @@ class InventoryAdapter @Inject constructor(
 
         fullDescriptionPopUp.setOnDismissListener {
             characterViewModel.closePopUpBackground()
-            notifyItemChanged(position)
+            itemsList = createListWithCopies()
+            notifyDataSetChanged()
         }
     }
 }

@@ -5,18 +5,20 @@ import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var evasiveFootworkManeuver = AbilityNode(
     name = "Активное уклонение",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         val dice = if (abilities.level >= 18) "к12" else if (abilities.level >= 10) "к10" else "к8"
-        abilities.actionsList.add(Action(
-            name = "Прием: активное уклонение",
-            description = "При перемещении вы можете потратить одну кость превосходства равную $dice, совершить её бросок и добавить выпавшее значение к КД, пока не прекратите перемещение.",
-            type = ActionType.PartOfAction,
-            "Боевое превосходство"
-        ))
+        abilities.actionsList.add(
+            Action(
+                name = "Прием: активное уклонение",
+                description = "При перемещении вы можете потратить одну кость превосходства равную $dice, совершить её бросок и добавить выпавшее значение к КД, пока не прекратите перемещение.",
+                type = ActionType.PartOfAction,
+                "Боевое превосходство"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
             if (action.name == "Прием: активное уклонение") isValid = false
@@ -28,18 +30,20 @@ var evasiveFootworkManeuver = AbilityNode(
 
 var lungingAttackManeuver = AbilityNode(
     name = "Атака с выпадом",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         val dice = if (abilities.level >= 18) "к12" else if (abilities.level >= 10) "к10" else "к8"
-        abilities.actionsList.add(Action(
-            name = "Прием: атака с выпадом",
-            description = "Если вы в свой ход совершаете рукопашную атаку оружием, вы можете потратить одну кость превосходства равную $dice, чтобы увеличить досягаемость этой атаки на 5 футов. В случае попадания вы добавляете кость превосходства к броску урона этой атаки.",
-            type = ActionType.PartOfAction,
-            relatedCharges = "Боевое превосходство"
-        ))
+        abilities.actionsList.add(
+            Action(
+                name = "Прием: атака с выпадом",
+                description = "Если вы в свой ход совершаете рукопашную атаку оружием, вы можете потратить одну кость превосходства равную $dice, чтобы увеличить досягаемость этой атаки на 5 футов. В случае попадания вы добавляете кость превосходства к броску урона этой атаки.",
+                type = ActionType.PartOfAction,
+                relatedCharges = "Боевое превосходство"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
             if (action.name == "Прием: атака с выпадом") isValid = false
@@ -51,18 +55,20 @@ var lungingAttackManeuver = AbilityNode(
 
 var maneuveringAttackManeuver = AbilityNode(
     name = "Атака с манёвром",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         val dice = if (abilities.level >= 18) "к12" else if (abilities.level >= 10) "к10" else "к8"
-        abilities.actionsList.add(Action(
-            name = "Прием: атака с манёвром",
-            description = "Если вы попадаете по существу атакой оружием, вы можете потратить одну кость превосходства равную $dice, чтобы один из ваших товарищей смог переместиться в более выгодное положение. Вы добавляете кость превосходства к броску урона этой атаки и выбираете дружественное существо, которое может видеть или слышать вас. Это существо может реакцией переместиться на расстояние до половины своей скорости, не провоцируя при этом атаки от цели вашей атаки.",
-            type = ActionType.PartOfAction,
-            relatedCharges = "Боевое превосходство"
-        ))
+        abilities.actionsList.add(
+            Action(
+                name = "Прием: атака с манёвром",
+                description = "Если вы попадаете по существу атакой оружием, вы можете потратить одну кость превосходства равную $dice, чтобы один из ваших товарищей смог переместиться в более выгодное положение. Вы добавляете кость превосходства к броску урона этой атаки и выбираете дружественное существо, которое может видеть или слышать вас. Это существо может реакцией переместиться на расстояние до половины своей скорости, не провоцируя при этом атаки от цели вашей атаки.",
+                type = ActionType.PartOfAction,
+                relatedCharges = "Боевое превосходство"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
             if (action.name == "Прием: атака с манёвром") isValid = false
@@ -74,18 +80,20 @@ var maneuveringAttackManeuver = AbilityNode(
 
 var menacingAttackManeuver = AbilityNode(
     name = "Атака с угрозой",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         val dice = if (abilities.level >= 18) "к12" else if (abilities.level >= 10) "к10" else "к8"
-        abilities.actionsList.add(Action(
-            name = "Прием: атака с угрозой",
-            description = "Если вы попадаете по существу атакой оружием, вы можете потратить одну кость превосходства равную $dice, чтобы попытаться напугать цель. Вы добавляете кость превосходства к броску урона этой атаки, а цель должна совершить спасбросок Мудрости. При провале цель испугана вами до конца вашего следующего хода.",
-            type = ActionType.PartOfAction,
-            relatedCharges = "Боевое превосходство"
-        ))
+        abilities.actionsList.add(
+            Action(
+                name = "Прием: атака с угрозой",
+                description = "Если вы попадаете по существу атакой оружием, вы можете потратить одну кость превосходства равную $dice, чтобы попытаться напугать цель. Вы добавляете кость превосходства к броску урона этой атаки, а цель должна совершить спасбросок Мудрости. При провале цель испугана вами до конца вашего следующего хода.",
+                type = ActionType.PartOfAction,
+                relatedCharges = "Боевое превосходство"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
             if (action.name == "Прием: атака с угрозой") isValid = false
@@ -97,18 +105,20 @@ var menacingAttackManeuver = AbilityNode(
 
 var feintingAttackManeuver = AbilityNode(
     name = "Атака с финтом",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         val dice = if (abilities.level >= 18) "к12" else if (abilities.level >= 10) "к10" else "к8"
-        abilities.actionsList.add(Action(
-            name = "Прием: атака с финтом",
-            description = "Вы можете в свой ход потратить одну кость превосходства равную $dice и бонусным действием совершить финт, выбрав в качестве цели одно существо в пределах 5 футов. Следующий бросок атаки по этому существу в этом ходу вы совершаете с преимуществом. Если атака попадает, добавьте кость превосходства к броску урона этой атаки. Оба преимущества пропадают, если вы не используете их в том же ходу, в котором получили их.",
-            type = ActionType.Bonus,
-            relatedCharges = "Боевое превосходство"
-        ))
+        abilities.actionsList.add(
+            Action(
+                name = "Прием: атака с финтом",
+                description = "Вы можете в свой ход потратить одну кость превосходства равную $dice и бонусным действием совершить финт, выбрав в качестве цели одно существо в пределах 5 футов. Следующий бросок атаки по этому существу в этом ходу вы совершаете с преимуществом. Если атака попадает, добавьте кость превосходства к броску урона этой атаки. Оба преимущества пропадают, если вы не используете их в том же ходу, в котором получили их.",
+                type = ActionType.Bonus,
+                relatedCharges = "Боевое превосходство"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
             if (action.name == "Прием: атака с финтом") isValid = false
@@ -120,18 +130,20 @@ var feintingAttackManeuver = AbilityNode(
 
 var disarmingAttackManeuver = AbilityNode(
     name = "Обезоруживающая атака",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         val dice = if (abilities.level >= 18) "к12" else if (abilities.level >= 10) "к10" else "к8"
-        abilities.actionsList.add(Action(
-            name = "Прием: обезоруживающая атака",
-            description = "Если вы попадаете по существу атакой оружием, вы можете потратить одну кость превосходства равную $dice, чтобы попытаться обезоружить противника, заставляя его выронить один предмет по вашему выбору, который он держит. Вы добавляете кость превосходства к броску урона атаки, а цель должна совершить спасбросок Силы. В случае провала она роняет выбранный вами предмет. Предмет падает у её ног.",
-            type = ActionType.PartOfAction,
-            relatedCharges = "Боевое превосходство"
-        ))
+        abilities.actionsList.add(
+            Action(
+                name = "Прием: обезоруживающая атака",
+                description = "Если вы попадаете по существу атакой оружием, вы можете потратить одну кость превосходства равную $dice, чтобы попытаться обезоружить противника, заставляя его выронить один предмет по вашему выбору, который он держит. Вы добавляете кость превосходства к броску урона атаки, а цель должна совершить спасбросок Силы. В случае провала она роняет выбранный вами предмет. Предмет падает у её ног.",
+                type = ActionType.PartOfAction,
+                relatedCharges = "Боевое превосходство"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
             if (action.name == "Прием: обезоруживающая атака") isValid = false
@@ -143,18 +155,20 @@ var disarmingAttackManeuver = AbilityNode(
 
 var tripAttackManeuver = AbilityNode(
     name = "Опрокидывающая атака",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         val dice = if (abilities.level >= 18) "к12" else if (abilities.level >= 10) "к10" else "к8"
-        abilities.actionsList.add(Action(
-            name = "Прием: опрокидывающая атака",
-            description = "Если вы попадаете по существу атакой оружием, вы можете потратить одну кость превосходства равную $dice, чтобы попытаться сбить цель с ног. Вы добавляете кость превосходства к броску урона атаки, и, если размер цели Большой или меньше, она должна совершить спасбросок Силы. В случае провала вы сбиваете цель с ног.",
-            type = ActionType.PartOfAction,
-            relatedCharges = "Боевое превосходство"
-        ))
+        abilities.actionsList.add(
+            Action(
+                name = "Прием: опрокидывающая атака",
+                description = "Если вы попадаете по существу атакой оружием, вы можете потратить одну кость превосходства равную $dice, чтобы попытаться сбить цель с ног. Вы добавляете кость превосходства к броску урона атаки, и, если размер цели Большой или меньше, она должна совершить спасбросок Силы. В случае провала вы сбиваете цель с ног.",
+                type = ActionType.PartOfAction,
+                relatedCharges = "Боевое превосходство"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
             if (action.name == "Прием: опрокидывающая атака") isValid = false
@@ -166,18 +180,20 @@ var tripAttackManeuver = AbilityNode(
 
 var riposteManeuver = AbilityNode(
     name = "Ответный удар",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         val dice = if (abilities.level >= 18) "к12" else if (abilities.level >= 10) "к10" else "к8"
-        abilities.actionsList.add(Action(
-            name = "Прием: ответный удар",
-            description = "Если существо промахивается по вам рукопашной атакой, вы можете реакцией потратить одну кость превосходства равную $dice, чтобы совершить рукопашную атаку оружием по этому существу. Если вы попадаете, вы добавляете кость превосходства к броску урона этой атаки.",
-            type = ActionType.Reaction,
-            relatedCharges = "Боевое превосходство"
-        ))
+        abilities.actionsList.add(
+            Action(
+                name = "Прием: ответный удар",
+                description = "Если существо промахивается по вам рукопашной атакой, вы можете реакцией потратить одну кость превосходства равную $dice, чтобы совершить рукопашную атаку оружием по этому существу. Если вы попадаете, вы добавляете кость превосходства к броску урона этой атаки.",
+                type = ActionType.Reaction,
+                relatedCharges = "Боевое превосходство"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
             if (action.name == "Прием: ответный удар") isValid = false
@@ -189,18 +205,20 @@ var riposteManeuver = AbilityNode(
 
 var distractingStrikeManeuver = AbilityNode(
     name = "Отвлекающий удар",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         val dice = if (abilities.level >= 18) "к12" else if (abilities.level >= 10) "к10" else "к8"
-        abilities.actionsList.add(Action(
-            name = "Прием: отвлекающий удар",
-            description = "Если вы попадаете по существу атакой оружием, вы можете потратить одну кость превосходства равную $dice, чтобы отвлечь существо, открывая его для ваших союзников. Вы добавляете кость превосходства к броску урона этой атаки. Следующий бросок атаки по этой цели любого существа кроме вас совершается с преимуществом, если атака совершается до начала вашего следующего хода.",
-            type = ActionType.PartOfAction,
-            relatedCharges = "Боевое превосходство"
-        ))
+        abilities.actionsList.add(
+            Action(
+                name = "Прием: отвлекающий удар",
+                description = "Если вы попадаете по существу атакой оружием, вы можете потратить одну кость превосходства равную $dice, чтобы отвлечь существо, открывая его для ваших союзников. Вы добавляете кость превосходства к броску урона этой атаки. Следующий бросок атаки по этой цели любого существа кроме вас совершается с преимуществом, если атака совершается до начала вашего следующего хода.",
+                type = ActionType.PartOfAction,
+                relatedCharges = "Боевое превосходство"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
             if (action.name == "Прием: отвлекающий удар") isValid = false
@@ -212,18 +230,20 @@ var distractingStrikeManeuver = AbilityNode(
 
 var parryManeuver = AbilityNode(
     name = "Парирование",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         val dice = if (abilities.level >= 18) "к12" else if (abilities.level >= 10) "к10" else "к8"
-        abilities.actionsList.add(Action(
-            name = "Прием: парирование",
-            description = "Если другое существо причиняет вам урон рукопашной атакой, вы можете реакцией потратить одну кость превосходства равную $dice, чтобы уменьшить урон на величину, равную броску вашей кости превосходства + ваш модификатор Ловкости.",
-            type = ActionType.Reaction,
-            relatedCharges = "Боевое превосходство"
-        ))
+        abilities.actionsList.add(
+            Action(
+                name = "Прием: парирование",
+                description = "Если другое существо причиняет вам урон рукопашной атакой, вы можете реакцией потратить одну кость превосходства равную $dice, чтобы уменьшить урон на величину, равную броску вашей кости превосходства + ваш модификатор Ловкости.",
+                type = ActionType.Reaction,
+                relatedCharges = "Боевое превосходство"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
             if (action.name == "Прием: парирование") isValid = false
@@ -235,18 +255,20 @@ var parryManeuver = AbilityNode(
 
 var goadingAttackManeuver = AbilityNode(
     name = "Провоцирующая атака",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         val dice = if (abilities.level >= 18) "к12" else if (abilities.level >= 10) "к10" else "к8"
-        abilities.actionsList.add(Action(
-            name = "Прием: провоцирующая атака",
-            description = "Если вы попадаете по существу атакой оружием, вы можете потратить одну кость превосходства равную $dice, чтобы попытаться спровоцировать противника атаковать вас. Вы добавляете кость превосходства к броску урона этой атаки, а цель должна совершить спасбросок Мудрости. При провале цель до конца вашего следующего хода совершает с помехой броски атаки по всем целям, кроме вас.",
-            type = ActionType.PartOfAction,
-            relatedCharges = "Боевое превосходство"
-        ))
+        abilities.actionsList.add(
+            Action(
+                name = "Прием: провоцирующая атака",
+                description = "Если вы попадаете по существу атакой оружием, вы можете потратить одну кость превосходства равную $dice, чтобы попытаться спровоцировать противника атаковать вас. Вы добавляете кость превосходства к броску урона этой атаки, а цель должна совершить спасбросок Мудрости. При провале цель до конца вашего следующего хода совершает с помехой броски атаки по всем целям, кроме вас.",
+                type = ActionType.PartOfAction,
+                relatedCharges = "Боевое превосходство"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
             if (action.name == "Прием: провоцирующая атака") isValid = false
@@ -258,18 +280,20 @@ var goadingAttackManeuver = AbilityNode(
 
 var rallyManeuver = AbilityNode(
     name = "Сплочение",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         val dice = if (abilities.level >= 18) "к12" else if (abilities.level >= 10) "к10" else "к8"
-        abilities.actionsList.add(Action(
-            name = "Прием: сплочение",
-            description = "Вы можете в свой ход бонусным действием потратить одну кость превосходства равную $dice, чтобы поддержать решимость одного из ваших спутников. Если вы это сделаете, выберите дружественное существо, которое может видеть или слышать вас. Это существо получает временные хиты, равные броску кости превосходства + ваш модификатор Харизмы.",
-            type = ActionType.Bonus,
-            relatedCharges = "Боевое превосходство"
-        ))
+        abilities.actionsList.add(
+            Action(
+                name = "Прием: сплочение",
+                description = "Вы можете в свой ход бонусным действием потратить одну кость превосходства равную $dice, чтобы поддержать решимость одного из ваших спутников. Если вы это сделаете, выберите дружественное существо, которое может видеть или слышать вас. Это существо получает временные хиты, равные броску кости превосходства + ваш модификатор Харизмы.",
+                type = ActionType.Bonus,
+                relatedCharges = "Боевое превосходство"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
             if (action.name == "Прием: сплочение") isValid = false
@@ -281,18 +305,20 @@ var rallyManeuver = AbilityNode(
 
 var pushingAttackManeuver = AbilityNode(
     name = "Толкающая атака",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         val dice = if (abilities.level >= 18) "к12" else if (abilities.level >= 10) "к10" else "к8"
-        abilities.actionsList.add(Action(
-            name = "Прием: толкающая атака",
-            description = "Если вы попадаете по существу атакой оружием, вы можете потратить одну кость превосходства равную $dice, чтобы попытаться оттолкнуть цель. Вы добавляете кость превосходства к броску урона атаки, и, если размер цели Большой или меньше, она должна совершить спасбросок Силы. При провале вы толкаете цель на расстояние до 15 футов от себя.",
-            type = ActionType.PartOfAction,
-            relatedCharges = "Боевое превосходство"
-        ))
+        abilities.actionsList.add(
+            Action(
+                name = "Прием: толкающая атака",
+                description = "Если вы попадаете по существу атакой оружием, вы можете потратить одну кость превосходства равную $dice, чтобы попытаться оттолкнуть цель. Вы добавляете кость превосходства к броску урона атаки, и, если размер цели Большой или меньше, она должна совершить спасбросок Силы. При провале вы толкаете цель на расстояние до 15 футов от себя.",
+                type = ActionType.PartOfAction,
+                relatedCharges = "Боевое превосходство"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
             if (action.name == "Прием: толкающая атака") isValid = false
@@ -304,18 +330,20 @@ var pushingAttackManeuver = AbilityNode(
 
 var precisionAttackManeuver = AbilityNode(
     name = "Точная атака",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         val dice = if (abilities.level >= 18) "к12" else if (abilities.level >= 10) "к10" else "к8"
-        abilities.actionsList.add(Action(
-            name = "Прием: точная атака",
-            description = "Если вы совершаете бросок атаки оружием по существу, вы можете потратить одну кость превосходства равную $dice, чтобы добавить её к броску. Вы можете использовать этот приём до или после совершения броска атаки, но до применения эффектов атаки.",
-            type = ActionType.PartOfAction,
-            relatedCharges = "Боевое превосходство"
-        ))
+        abilities.actionsList.add(
+            Action(
+                name = "Прием: точная атака",
+                description = "Если вы совершаете бросок атаки оружием по существу, вы можете потратить одну кость превосходства равную $dice, чтобы добавить её к броску. Вы можете использовать этот приём до или после совершения броска атаки, но до применения эффектов атаки.",
+                type = ActionType.PartOfAction,
+                relatedCharges = "Боевое превосходство"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
             if (action.name == "Прием: точная атака") isValid = false
@@ -327,18 +355,20 @@ var precisionAttackManeuver = AbilityNode(
 
 var commanderStrikeManeuver = AbilityNode(
     name = "Удар командующего",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         val dice = if (abilities.level >= 18) "к12" else if (abilities.level >= 10) "к10" else "к8"
-        abilities.actionsList.add(Action(
-            name = "Прием: удар командующего",
-            description = "Если вы совершаете в свой ход действие Атака, вы можете отказаться от одной из ваших атак и бонусным действием направить удар одного из ваших соратников. Если вы это сделаете, выберите дружественное существо, которое может видеть или слышать вас и потратьте одну кость превосходства равную $dice. Это существо может немедленно совершить реакцией одну атаку оружием, добавив кость превосходства к броску урона этой атаки.",
-            type = ActionType.PartOfAction,
-            relatedCharges = "Боевое превосходство"
-        ))
+        abilities.actionsList.add(
+            Action(
+                name = "Прием: удар командующего",
+                description = "Если вы совершаете в свой ход действие Атака, вы можете отказаться от одной из ваших атак и бонусным действием направить удар одного из ваших соратников. Если вы это сделаете, выберите дружественное существо, которое может видеть или слышать вас и потратьте одну кость превосходства равную $dice. Это существо может немедленно совершить реакцией одну атаку оружием, добавив кость превосходства к броску урона этой атаки.",
+                type = ActionType.PartOfAction,
+                relatedCharges = "Боевое превосходство"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
             if (action.name == "Прием: удар командующего") isValid = false
@@ -350,18 +380,20 @@ var commanderStrikeManeuver = AbilityNode(
 
 var sweepingAttackManeuver = AbilityNode(
     name = "Широкая атака",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
+    changesInCharacterInfo = { abilities: CharacterInfo ->
         val dice = if (abilities.level >= 18) "к12" else if (abilities.level >= 10) "к10" else "к8"
-        abilities.actionsList.add(Action(
-            name = "Прием: широкая атака",
-            description = "Если вы попадаете по существу атакой рукопашным оружием, вы можете потратить одну кость превосходства равную $dice, чтобы попытаться причинить урон другому существу этой же атакой. Выберите другое существо в пределах 5 футов от первоначальной цели и в пределах вашей досягаемости. Если исходный бросок атаки попал бы по второму существу, оно получает урон, равный броску кости превосходства. Урон того же вида, что и для исходной атаки.",
-            type = ActionType.PartOfAction,
-            relatedCharges = "Боевое превосходство"
-        ))
+        abilities.actionsList.add(
+            Action(
+                name = "Прием: широкая атака",
+                description = "Если вы попадаете по существу атакой рукопашным оружием, вы можете потратить одну кость превосходства равную $dice, чтобы попытаться причинить урон другому существу этой же атакой. Выберите другое существо в пределах 5 футов от первоначальной цели и в пределах вашей досягаемости. Если исходный бросок атаки попал бы по второму существу, оно получает урон, равный броску кости превосходства. Урон того же вида, что и для исходной атаки.",
+                type = ActionType.PartOfAction,
+                relatedCharges = "Боевое превосходство"
+            )
+        )
         abilities
     },
     alternatives = mutableMapOf(),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
             if (action.name == "Прием: широкая атака") isValid = false
@@ -395,18 +427,66 @@ var combatSuperiority = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(
-        Pair("first", listOf(evasiveFootworkManeuver.name, commanderStrikeManeuver.name, distractingStrikeManeuver.name, disarmingAttackManeuver.name,
-            feintingAttackManeuver.name, goadingAttackManeuver.name, lungingAttackManeuver.name, maneuveringAttackManeuver.name, menacingAttackManeuver.name,
-            parryManeuver.name, pushingAttackManeuver.name, precisionAttackManeuver.name, rallyManeuver.name, riposteManeuver.name, sweepingAttackManeuver.name,
-            tripAttackManeuver.name)),
-        Pair("second", listOf(evasiveFootworkManeuver.name, commanderStrikeManeuver.name, distractingStrikeManeuver.name, disarmingAttackManeuver.name,
-            feintingAttackManeuver.name, goadingAttackManeuver.name, lungingAttackManeuver.name, maneuveringAttackManeuver.name, menacingAttackManeuver.name,
-            parryManeuver.name, pushingAttackManeuver.name, precisionAttackManeuver.name, rallyManeuver.name, riposteManeuver.name, sweepingAttackManeuver.name,
-            tripAttackManeuver.name)),
-        Pair("third", listOf(evasiveFootworkManeuver.name, commanderStrikeManeuver.name, distractingStrikeManeuver.name, disarmingAttackManeuver.name,
-            feintingAttackManeuver.name, goadingAttackManeuver.name, lungingAttackManeuver.name, maneuveringAttackManeuver.name, menacingAttackManeuver.name,
-            parryManeuver.name, pushingAttackManeuver.name, precisionAttackManeuver.name, rallyManeuver.name, riposteManeuver.name, sweepingAttackManeuver.name,
-            tripAttackManeuver.name)),
+        Pair(
+            "first", listOf(
+                evasiveFootworkManeuver.name,
+                commanderStrikeManeuver.name,
+                distractingStrikeManeuver.name,
+                disarmingAttackManeuver.name,
+                feintingAttackManeuver.name,
+                goadingAttackManeuver.name,
+                lungingAttackManeuver.name,
+                maneuveringAttackManeuver.name,
+                menacingAttackManeuver.name,
+                parryManeuver.name,
+                pushingAttackManeuver.name,
+                precisionAttackManeuver.name,
+                rallyManeuver.name,
+                riposteManeuver.name,
+                sweepingAttackManeuver.name,
+                tripAttackManeuver.name
+            )
+        ),
+        Pair(
+            "second", listOf(
+                evasiveFootworkManeuver.name,
+                commanderStrikeManeuver.name,
+                distractingStrikeManeuver.name,
+                disarmingAttackManeuver.name,
+                feintingAttackManeuver.name,
+                goadingAttackManeuver.name,
+                lungingAttackManeuver.name,
+                maneuveringAttackManeuver.name,
+                menacingAttackManeuver.name,
+                parryManeuver.name,
+                pushingAttackManeuver.name,
+                precisionAttackManeuver.name,
+                rallyManeuver.name,
+                riposteManeuver.name,
+                sweepingAttackManeuver.name,
+                tripAttackManeuver.name
+            )
+        ),
+        Pair(
+            "third", listOf(
+                evasiveFootworkManeuver.name,
+                commanderStrikeManeuver.name,
+                distractingStrikeManeuver.name,
+                disarmingAttackManeuver.name,
+                feintingAttackManeuver.name,
+                goadingAttackManeuver.name,
+                lungingAttackManeuver.name,
+                maneuveringAttackManeuver.name,
+                menacingAttackManeuver.name,
+                parryManeuver.name,
+                pushingAttackManeuver.name,
+                precisionAttackManeuver.name,
+                rallyManeuver.name,
+                riposteManeuver.name,
+                sweepingAttackManeuver.name,
+                tripAttackManeuver.name
+            )
+        ),
     ),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Fighter
@@ -437,15 +517,16 @@ var studentOfWar = AbilityNode(
 var knowYourEnemy = AbilityNode(
     name = "Познай своего врага",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Познай своего врага"] = "Если вы потратите как минимум 1 минуту, рассматривая, или по другому взаимодействуя с существом вне боя, вы можете узнать некоторую информацию о его способностях в сравнении с вашими. Мастер сообщит вам, равняется ли существо, превосходит или уступает вам в двух характеристиках на ваш выбор из перечисленных:\n" +
-                "\n" +
-                "    Значение Силы\n" +
-                "    Значение Ловкости\n" +
-                "    Значение Телосложения\n" +
-                "    Класс Доспеха\n" +
-                "    Текущие хиты\n" +
-                "    Общее количество уровней (если есть)\n" +
-                "    Количество уровней в классе Воин (если есть)\n"
+        abilities.additionalAbilities["Познай своего врага"] =
+            "Если вы потратите как минимум 1 минуту, рассматривая, или по другому взаимодействуя с существом вне боя, вы можете узнать некоторую информацию о его способностях в сравнении с вашими. Мастер сообщит вам, равняется ли существо, превосходит или уступает вам в двух характеристиках на ваш выбор из перечисленных:\n" +
+                    "\n" +
+                    "    Значение Силы\n" +
+                    "    Значение Ловкости\n" +
+                    "    Значение Телосложения\n" +
+                    "    Класс Доспеха\n" +
+                    "    Текущие хиты\n" +
+                    "    Общее количество уровней (если есть)\n" +
+                    "    Количество уровней в классе Воин (если есть)\n"
         abilities
     },
     alternatives = mutableMapOf(),
@@ -476,7 +557,8 @@ var improvedCombatSuperiority = AbilityNode(
 var relentless = AbilityNode(
     name = "Неослабевающий",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Неослабевающий"] = "Если вы совершаете бросок инициативы, не имея костей превосходства, вы получаете одну."
+        abilities.additionalAbilities["Неослабевающий"] =
+            "Если вы совершаете бросок инициативы, не имея костей превосходства, вы получаете одну."
         abilities
     },
     alternatives = mutableMapOf(),

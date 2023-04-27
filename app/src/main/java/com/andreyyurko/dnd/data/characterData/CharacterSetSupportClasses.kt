@@ -4,7 +4,7 @@ data class Action(
     var name: String,
     var description: String,
     var type: ActionType,
-    var relatedCharges : String,
+    var relatedCharges: String,
 ) {
     constructor(name: String, description: String, type: ActionType) : this(name, description, type, "")
 }

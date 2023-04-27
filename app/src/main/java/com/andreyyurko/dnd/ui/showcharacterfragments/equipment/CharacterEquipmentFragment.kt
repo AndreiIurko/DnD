@@ -2,23 +2,19 @@ package com.andreyyurko.dnd.ui.showcharacterfragments.equipment
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.ViewCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.ui.base.BaseFragment
-import dagger.hilt.android.AndroidEntryPoint
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.andreyyurko.dnd.data.characterData.ActionType
-import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
+import com.andreyyurko.dnd.data.abilities.sumTwoDamages
 import com.andreyyurko.dnd.databinding.FragmentCharacterEquipmentBinding
-import com.andreyyurko.dnd.ui.showcharacterfragments.actions.ActionsAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CharacterEquipmentFragment: BaseFragment(R.layout.fragment_character_equipment) {
+class CharacterEquipmentFragment : BaseFragment(R.layout.fragment_character_equipment) {
 
     private val viewBinding by viewBinding(FragmentCharacterEquipmentBinding::bind)
 
@@ -32,53 +28,47 @@ class CharacterEquipmentFragment: BaseFragment(R.layout.fragment_character_equip
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewBinding.weaponsButton.setOnClickListener {
-            setupButton(viewBinding.weaponsRecyclerView, viewBinding.weaponsArrowImage, viewModel.getWeaponItems())
+        val firstWeaponInfo = viewModel.getFirstWeaponInfo()
+
+        viewBinding.firstWeaponName.text = firstWeaponInfo.weaponName
+        viewBinding.firstWeaponDamage.text = firstWeaponInfo.damage
+        viewBinding.firstWeaponProperties.text = firstWeaponInfo.properties.joinToString()
+
+        val secondWeaponInfo = viewModel.getSecondWeaponInfo()
+
+        secondWeaponInfo?.let {
+            if (it.weaponName == firstWeaponInfo.weaponName) {
+
+            }
+            viewBinding.secondWeaponName.text = it.weaponName
+            viewBinding.secondWeaponDamage.text = it.damage
+            viewBinding.secondWeaponProperties.text = it.properties.joinToString()
         }
 
-        viewBinding.armorButton.setOnClickListener {
-            setupButton(viewBinding.armorRecyclerView, viewBinding.armorArrowImage, viewModel.getArmorItems())
+
+        val armorInfo = viewModel.getArmorInfo()
+        if (armorInfo.armorName != "") {
+            viewBinding.armorName.text = armorInfo.armorName
+            viewBinding.armorAC.text = armorInfo.ac.toString()
+            viewBinding.armorType.text = armorInfo.type
         }
 
-        viewBinding.magicWeaponsButton.setOnClickListener {
-            setupButton(viewBinding.magicWeaponsRecyclerView, viewBinding.magicWeaponsArrowImage, viewModel.getMagicWeapons())
-        }
+        setupRecyclerView()
 
-        viewBinding.magicArtifactsButton.setOnClickListener {
-            setupButton(viewBinding.magicArtifactsRecyclerView, viewBinding.magicArtifactsArrowImage, viewModel.getArtifacts())
+        viewBinding.allButton.setOnClickListener {
+            findNavController().navigate(R.id.characterChooseEquipmentFragment)
         }
-
-        viewBinding.consumablesButton.setOnClickListener {
-            setupButton(viewBinding.consumablesRecyclerView, viewBinding.consumablesArrowImage, viewModel.getConsumables())
-        }
-
     }
 
-    private fun setupRecyclerView(recyclerView: RecyclerView, list: List<InventoryItemInfo>) {
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+    fun setupRecyclerView() {
+        viewBinding.magicItemsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         val adapter = EquipmentAdapter(viewModel.inventoryHandler, viewModel.characterViewModel)
-        recyclerView.adapter = adapter
+        viewBinding.magicItemsRecyclerView.adapter = adapter
+        ViewCompat.setNestedScrollingEnabled(viewBinding.magicItemsRecyclerView, false)
 
         adapter.apply {
-            itemsListWithoutCopies = list
-            itemsList = createListWithCopies()
+            listOfItems = viewModel.getEquippedMagicalItems()
             notifyDataSetChanged()
-        }
-    }
-
-    private fun setupButton(recyclerView: RecyclerView, image: ImageView, list: List<InventoryItemInfo>) {
-        if (recyclerView.visibility == View.GONE) {
-            setupRecyclerView(recyclerView, list)
-            recyclerView.visibility = View.VISIBLE
-            image.setImageDrawable(
-                AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_up_24)
-            )
-        }
-        else {
-            recyclerView.visibility = View.GONE
-            image.setImageDrawable(
-                AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_down_24)
-            )
         }
     }
 

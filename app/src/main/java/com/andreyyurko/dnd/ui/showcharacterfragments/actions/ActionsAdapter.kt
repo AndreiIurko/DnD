@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class ActionsAdapter @Inject constructor(
     private val characterViewModel: CharacterViewModel
-) : RecyclerView.Adapter<ActionsAdapter.ViewHolder>(){
+) : RecyclerView.Adapter<ActionsAdapter.ViewHolder>() {
 
     var actionsList: List<Action> = listOf()
 
@@ -43,8 +43,9 @@ class ActionsAdapter @Inject constructor(
             showDescription(actionsList[position], holder.actionNameTextView.context)
         }
 
-        val charges = characterViewModel.shownCharacter.characterInfo.currentState.charges[actionsList[position].relatedCharges]
-            ?: return
+        val charges =
+            characterViewModel.shownCharacter.characterInfo.currentState.charges[actionsList[position].relatedCharges]
+                ?: return
 
         holder.countTextView.visibility = View.VISIBLE
         holder.increaseButton.visibility = View.VISIBLE

@@ -1,7 +1,6 @@
 package com.andreyyurko.dnd.ui.showcharacterfragments.equipment
 
 import android.content.Context
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +9,8 @@ import android.widget.*
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
-import com.andreyyurko.dnd.data.characterData.ItemType
 import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
-import com.andreyyurko.dnd.ui.showcharacterfragments.inventory.InventoryAdapter
+import com.andreyyurko.dnd.ui.showcharacterfragments.chooseequipment.ChooseEquipmentAdapter
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.InventoryHandler
 import javax.inject.Inject
@@ -22,117 +20,81 @@ class EquipmentAdapter @Inject constructor(
     private val characterViewModel: CharacterViewModel
 ) : RecyclerView.Adapter<EquipmentAdapter.ViewHolder>() {
 
-    data class EquipmentItem(
-        val itemDescription: InventoryItemInfo,
-        var isEquipped: Boolean,
-        var isCanBeEquipped: Boolean
-    )
-
-    var itemsList: List<EquipmentItem> = listOf()
-    var itemsListWithoutCopies: List<InventoryItemInfo> = listOf()
+    var listOfItems: List<InventoryItemInfo> = listOf()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
-        val equipButton: TextView = itemView.findViewById(R.id.equipButton)
+        val typeAndRarityTextView: TextView = itemView.findViewById(R.id.typeAndRarityTextView)
+        val chargesTextView: TextView = itemView.findViewById(R.id.chargesTextView)
+        val increaseButton: ImageButton = itemView.findViewById(R.id.increaseButton)
+        val decreaseButton: ImageButton = itemView.findViewById(R.id.decreaseButton)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.view_equipment_list_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.view_magic_item_equipment, parent, false)
         return ViewHolder(itemView)
     }
 
     override fun getItemCount(): Int {
-        return itemsList.size
+        return listOfItems.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.d("test", position.toString())
-        holder.nameTextView.text = itemsList[position].itemDescription.itemName
+        val itemProperties = inventoryHandler.getItemInfo(listOfItems[position].itemName)!!
+        holder.nameTextView.text = listOfItems[position].itemName
+        holder.typeAndRarityTextView.text = itemProperties.itemTypeAndRarity
+
         holder.nameTextView.setOnClickListener {
-            showFullDescription(itemsList[position].itemDescription, it.context, position)
+            showFullDescription(listOfItems[position], it.context, position)
         }
 
-        if (!itemsList[position].isEquipped && !itemsList[position].isCanBeEquipped) {
-            holder.equipButton.alpha = 0.5F
-            holder.equipButton.isEnabled = false
-        }
-        else {
-            holder.equipButton.alpha = 1.0F
-            holder.equipButton.isEnabled = true
+        holder.typeAndRarityTextView.setOnClickListener {
+            showFullDescription(listOfItems[position], it.context, position)
         }
 
-        if (itemsList[position].isEquipped) {
-            holder.equipButton.text = "Снять"
+        if (listOfItems[position].currentCharges == null) {
+            holder.chargesTextView.visibility = View.INVISIBLE
+            holder.increaseButton.visibility = View.INVISIBLE
+            holder.decreaseButton.visibility = View.INVISIBLE
         }
         else {
-            holder.equipButton.text = "Надеть"
-        }
+            listOfItems[position].currentCharges?.let {
+                holder.chargesTextView.text = it.toString()
+                if (it >= listOfItems[position].maximumCharges) {
+                    holder.increaseButton.alpha = 0.5F
+                    holder.increaseButton.isEnabled = false
+                }
+                else {
+                    holder.increaseButton.alpha = 1F
+                    holder.increaseButton.isEnabled = true
+                }
 
-        holder.equipButton.setOnClickListener {
-            if (itemsList[position].isEquipped ) {
-                inventoryHandler.unequipItem(characterViewModel.shownCharacter, itemsList[position].itemDescription.itemName)
-            }
-            else {
-                inventoryHandler.equipItem(characterViewModel.shownCharacter, itemsList[position].itemDescription.itemName)
-            }
-            characterViewModel.updateCharacterInfo()
-            itemsList = createListWithCopies()
-            notifyDataSetChanged()
-        }
-    }
+                if (it <= 0) {
+                    holder.decreaseButton.alpha = 0.5F
+                    holder.decreaseButton.isEnabled = false
+                }
+                else {
+                    holder.decreaseButton.alpha = 1F
+                    holder.decreaseButton.isEnabled = true
+                }
 
-    fun createListWithCopies(): MutableList<EquipmentItem> {
-        val resultList: MutableList<EquipmentItem> = mutableListOf()
-        for (item in itemsListWithoutCopies) {
-            if (item.count <= 0) continue
+                holder.increaseButton.setOnClickListener { _ ->
+                    listOfItems[position].currentCharges = it + 1
+                    inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, listOfItems[position])
+                    notifyItemChanged(position)
+                }
 
-            val isEquipped = inventoryHandler.isItemEquipped(characterViewModel.shownCharacter, item.itemName)
-            val isCanBeEquipped = inventoryHandler.isItemEquitable(characterViewModel.shownCharacter, item.itemName)
-            Log.d("test", item.itemName)
-            Log.d("test", isEquipped.toString())
-            Log.d("test", isCanBeEquipped.toString())
-
-            resultList.add(EquipmentItem(
-                item,
-                isEquipped,
-                isCanBeEquipped
-            ))
-
-            if (isEquipped && isCanBeEquipped && item.count >= 2) {
-                resultList.add(
-                    EquipmentItem(
-                        item,
-                        isEquipped = false,
-                        isCanBeEquipped = true
-                    )
-                )
-            }
-            if (isEquipped && !isCanBeEquipped && item.count >= 2) {
-                if (characterViewModel.shownCharacter.characterInfo.currentState.firstWeaponName ==
-                        characterViewModel.shownCharacter.characterInfo.currentState.secondWeaponName &&
-                        characterViewModel.shownCharacter.characterInfo.currentState.firstWeaponName == item.itemName)
-                    resultList.add(
-                        EquipmentItem(
-                            item,
-                            isEquipped = true,
-                            isCanBeEquipped = false
-                        )
-                    )
-                else
-                    resultList.add(
-                        EquipmentItem(
-                            item,
-                            isEquipped = false,
-                            isCanBeEquipped = false
-                        )
-                    )
+                holder.decreaseButton.setOnClickListener { _ ->
+                    listOfItems[position].currentCharges = it - 1
+                    inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, listOfItems[position])
+                    notifyItemChanged(position)
+                }
             }
         }
-        return resultList
     }
 
     private fun showFullDescription(itemDescription: InventoryItemInfo, context: Context, position: Int) {
-        val item = inventoryHandler.allItems[itemDescription.itemName]!!
+        val item = inventoryHandler.getItemInfo(itemDescription.itemName)!!
 
         val parent = LayoutInflater.from(context).inflate(R.layout.view_full_inventory_item, null)
         parent.layoutParams = LinearLayout.LayoutParams(
@@ -162,29 +124,10 @@ class EquipmentAdapter @Inject constructor(
 
         val increaseButton: ImageButton = parent.findViewById(R.id.increaseButton)
         val decreaseButton: ImageButton = parent.findViewById(R.id.decreaseButton)
-        if (itemDescription.count == 0) {
-            decreaseButton.isEnabled = false
-            decreaseButton.alpha = 0.5F
-        }
-
-
-        increaseButton.setOnClickListener {
-            itemDescription.count += 1
-            decreaseButton.alpha = 1.0F
-            decreaseButton.isEnabled = true
-            //inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, itemDescription)
-            countTextView.text = itemDescription.count.toString()
-        }
-
-        decreaseButton.setOnClickListener {
-            itemDescription.count -= 1
-            if (itemDescription.count == 0) {
-                decreaseButton.alpha = 0.5F
-                decreaseButton.isEnabled = false
-            }
-            //inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, itemDescription)
-            countTextView.text = itemDescription.count.toString()
-        }
+        increaseButton.isEnabled = false
+        decreaseButton.isEnabled = false
+        increaseButton.visibility = View.INVISIBLE
+        decreaseButton.visibility = View.INVISIBLE
 
         val focus = true
         val wid = LinearLayout.LayoutParams.WRAP_CONTENT
@@ -202,8 +145,7 @@ class EquipmentAdapter @Inject constructor(
 
         fullDescriptionPopUp.setOnDismissListener {
             characterViewModel.closePopUpBackground()
-            itemsList = createListWithCopies()
-            notifyDataSetChanged()
+            notifyItemChanged(position)
         }
     }
 }

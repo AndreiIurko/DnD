@@ -1,7 +1,6 @@
 package com.andreyyurko.dnd.ui.showcharacterfragments.spells
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -34,8 +33,7 @@ class CharacterSpellsFragment : FragmentWithFilters(R.layout.fragment_character_
             viewBinding.changeListsButton.visibility = View.GONE
             viewBinding.spellsCountContainer.visibility = View.GONE
             viewBinding.cantripsCountContainer.visibility = View.GONE
-        }
-        else {
+        } else {
             viewBinding.knownButton.setOnClickListener {
                 viewBinding.preparedButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_primary))
                 viewBinding.knownButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))

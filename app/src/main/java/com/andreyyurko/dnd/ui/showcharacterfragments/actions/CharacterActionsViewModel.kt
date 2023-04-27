@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import com.andreyyurko.dnd.data.characterData.Action
 import com.andreyyurko.dnd.data.characterData.ActionType
 import com.andreyyurko.dnd.utils.CharacterViewModel
-import com.andreyyurko.dnd.utils.InventoryHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

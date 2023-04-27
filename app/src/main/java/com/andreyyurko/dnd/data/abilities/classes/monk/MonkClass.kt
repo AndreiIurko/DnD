@@ -1,10 +1,8 @@
 package com.andreyyurko.dnd.data.abilities.classes.monk
 
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
-import com.andreyyurko.dnd.data.abilities.classes.cleric.classFeaturesCleric
 import com.andreyyurko.dnd.data.abilities.classes.fighter.extraAttack
 import com.andreyyurko.dnd.data.abilities.other.*
-import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
@@ -334,7 +332,8 @@ var monk5: AbilityNode = AbilityNodeLevel(
 var kiImprovedStrike: AbilityNode = AbilityNode(
     name = "Энергетические удары",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Энергетические удары"] = "Ваши безоружные удары считаются магическими при определении преодоления сопротивления и иммунитета к немагическим атакам и урону."
+        abilities.additionalAbilities["Энергетические удары"] =
+            "Ваши безоружные удары считаются магическими при определении преодоления сопротивления и иммунитета к немагическим атакам и урону."
         abilities
     },
     alternatives = mutableMapOf(),
@@ -362,7 +361,8 @@ var monk6: AbilityNode = AbilityNodeLevel(
 var monkEvasion: AbilityNode = AbilityNode(
     name = "Монашеская увёртливость",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Монашеская увёртливость"] = "Ваше инстинктивное проворство позволяет вам уклоняться от эффектов, направленных на определённую область, вроде дыхания синего дракона или заклинания огненный шар. Если вы попадаете под действие эффекта, позволяющего совершить спасбросок Ловкости, чтобы получить только половину урона, вы вместо этого не получаете урона при успешном спасброске и получаете только половину урона при проваленном."
+        abilities.additionalAbilities["Монашеская увёртливость"] =
+            "Ваше инстинктивное проворство позволяет вам уклоняться от эффектов, направленных на определённую область, вроде дыхания синего дракона или заклинания огненный шар. Если вы попадаете под действие эффекта, позволяющего совершить спасбросок Ловкости, чтобы получить только половину урона, вы вместо этого не получаете урона при успешном спасброске и получаете только половину урона при проваленном."
         abilities
     },
     alternatives = mutableMapOf(),
@@ -505,7 +505,8 @@ var monk12: AbilityNode = AbilityNodeLevel(
 var tongueOfTheSunAndMoon: AbilityNode = AbilityNode(
     name = "Язык солнца и луны",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Язык солнца и луны"] = "Вы понимаете, как взаимодействовать с энергией ци в чужом разуме, и теперь вы понимаете речь на любом языке. Кроме того, все существа, способные понимать хотя бы один язык, понимают то, что вы сказали."
+        abilities.additionalAbilities["Язык солнца и луны"] =
+            "Вы понимаете, как взаимодействовать с энергией ци в чужом разуме, и теперь вы понимаете речь на любом языке. Кроме того, все существа, способные понимать хотя бы один язык, понимают то, что вы сказали."
         abilities
     },
     alternatives = mutableMapOf(),
@@ -574,7 +575,8 @@ var monk14: AbilityNode = AbilityNodeLevel(
 var timelessBody: AbilityNode = AbilityNode(
     name = "Безвременное тело",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Безвременное тело"] = "Ваша ци поддерживает вас, и ваше тело больше не подвержено признакам старения. Вы не можете быть состарены магически. Впрочем, вы всё еще можете умереть от старости. Кроме того, вам больше не требуется еда и вода."
+        abilities.additionalAbilities["Безвременное тело"] =
+            "Ваша ци поддерживает вас, и ваше тело больше не подвержено признакам старения. Вы не можете быть состарены магически. Впрочем, вы всё еще можете умереть от старости. Кроме того, вам больше не требуется еда и вода."
         abilities
     },
     alternatives = mutableMapOf(),
@@ -695,7 +697,8 @@ var monk19: AbilityNode = AbilityNodeLevel(
 var perfectSelf: AbilityNode = AbilityNode(
     name = "Совершенство",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Совершенство"] = "Если при броске инициативы у вас нет очков ци, вы получаете 4 очка ци."
+        abilities.additionalAbilities["Совершенство"] =
+            "Если при броске инициативы у вас нет очков ци, вы получаете 4 очка ци."
         abilities
     },
     alternatives = mutableMapOf(),

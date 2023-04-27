@@ -1,21 +1,15 @@
 package com.andreyyurko.dnd.data.abilities.classes.cleric
 
 //import android.util.Log
-import android.util.Log
-import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
-import com.andreyyurko.dnd.data.abilities.classes.fighter.battleMaster
-import com.andreyyurko.dnd.data.abilities.classes.fighter.champion
-import com.andreyyurko.dnd.data.abilities.other.*
 //import com.andreyyurko.dnd.data.abilities.other.*
-import com.andreyyurko.dnd.data.characterData.Ability
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
-import com.andreyyurko.dnd.data.characterData.Classes
 //import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
+import com.andreyyurko.dnd.data.abilities.other.*
+import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
-import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.spells.CharacterSpells
-import kotlin.math.*
+import kotlin.math.max
 
 var classFeaturesCleric: AbilityNode = AbilityNode(
     name = "Жрец: классовые умения",
@@ -71,7 +65,8 @@ var spellCastingCleric: AbilityNode = AbilityNode(
                 this["Заклинания класса"] = CharacterSpells()
             }
             this["Заклинания класса"]?.className = Classes.Cleric.className
-            this["Заклинания класса"]?.maxPreparedSpellsCount = max((abilityToModifier(abilities.wisdom) + abilities.level), 1)
+            this["Заклинания класса"]?.maxPreparedSpellsCount =
+                max((abilityToModifier(abilities.wisdom) + abilities.level), 1)
             this["Заклинания класса"]?.maxKnownCantripsCount = 3
             this["Заклинания класса"]?.maxKnownCantripsCount = 3
             if ((abilities.level > 3) and (abilities.level < 10))
@@ -168,10 +163,10 @@ var channelDivinity: AbilityNode = AbilityNode(
             )
         }
         abilities.currentState.charges["Божественный канал"]?.let {
-            if (it.maximum < (abilities.level+18)/12) {
+            if (it.maximum < (abilities.level + 18) / 12) {
                 abilities.currentState.charges["Божественный канал"] = ChargesCounter(
-                    current = (abilities.level+18)/12,
-                    maximum = (abilities.level+18)/12
+                    current = (abilities.level + 18) / 12,
+                    maximum = (abilities.level + 18) / 12
                 )
             }
         }
@@ -236,7 +231,7 @@ var cleric4: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        abilities.spellsInfo["Заклинания класса"]?.let{
+        abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownCantripsCount += 1
         }
         abilities
@@ -253,7 +248,7 @@ var cleric4: AbilityNodeLevel = AbilityNodeLevel(
 var destroy_undead: AbilityNode = AbilityNode(
     name = "Уничтожение нежити",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        for (i in 0..abilities.actionsList.size-1) {
+        for (i in 0..abilities.actionsList.size - 1) {
             if (abilities.actionsList[i].name == "Изгнание нежити") {
                 abilities.actionsList[i].description = abilities.actionsList[i].description +
                         "\n" +
@@ -273,13 +268,13 @@ var destroy_undead: AbilityNode = AbilityNode(
     requirements = { true },
     add_requirements = listOf(),
     description = "Когда Нежить проваливает спасбросок от вашего умения «Изгнание Нежити», существо мгновенно уничтожается, если его показатель опасности не превышает значения, указанного в таблице:\n" +
-    "\n" +
-    "Уровень жреца | Уничтожается нежить с ПО\n" +
-    "       5      | 1/2 и ниже\n" +
-    "       8      | 1 и ниже\n" +
-    "      11      | 2 и ниже\n" +
-    "      14      | 3 и ниже\n" +
-    "      17      | 4 и ниже\n",
+            "\n" +
+            "Уровень жреца | Уничтожается нежить с ПО\n" +
+            "       5      | 1/2 и ниже\n" +
+            "       8      | 1 и ниже\n" +
+            "      11      | 2 и ниже\n" +
+            "      14      | 3 и ниже\n" +
+            "      17      | 4 и ниже\n",
 )
 
 
@@ -569,8 +564,8 @@ var mapOfClericAbilities: MutableMap<String, AbilityNode> = (mutableMapOf(
     Pair(cleric19.name, cleric19),
     Pair(cleric20.name, cleric20),
 )
-    + mapOfTempestDomainAbilities
-    + mapOfKnowledgeDomainAbilities).toMutableMap()
+        + mapOfTempestDomainAbilities
+        + mapOfKnowledgeDomainAbilities).toMutableMap()
 
 
 

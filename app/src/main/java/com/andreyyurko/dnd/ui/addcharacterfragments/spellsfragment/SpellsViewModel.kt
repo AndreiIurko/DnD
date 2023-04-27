@@ -39,23 +39,40 @@ class SpellsViewModel @Inject constructor(
     }
 
     fun getMaxKnownSpellsCount(): Int {
-        return spellsHandler.getMaxKnownSpellsCount(createCharacterViewModel.character, classesForSpells[currentClassList])
+        return spellsHandler.getMaxKnownSpellsCount(
+            createCharacterViewModel.character,
+            classesForSpells[currentClassList]
+        )
     }
 
     fun getKnownCantripsCount(): Int {
-        return spellsHandler.getKnownCantripsCount(createCharacterViewModel.character, classesForSpells[currentClassList])
+        return spellsHandler.getKnownCantripsCount(
+            createCharacterViewModel.character,
+            classesForSpells[currentClassList]
+        )
     }
 
     fun getMaxKnownCantripsCount(): Int {
-        return spellsHandler.getMaxKnownCantripsCount(createCharacterViewModel.character, classesForSpells[currentClassList])
+        return spellsHandler.getMaxKnownCantripsCount(
+            createCharacterViewModel.character,
+            classesForSpells[currentClassList]
+        )
     }
 
     fun showAllSpells(): List<Spell> {
-        return spellsHandler.getAllSpellsWhatNeedsToBeChosen(createCharacterViewModel.character, classesForSpells[currentClassList], allFilters)
+        return spellsHandler.getAllSpellsWhatNeedsToBeChosen(
+            createCharacterViewModel.character,
+            classesForSpells[currentClassList],
+            allFilters
+        )
     }
 
     fun showKnownSpells(): List<Spell> {
-        return spellsHandler.getKnownSpellsWithDescription(createCharacterViewModel.character, knownFilters, classesForSpells[currentClassList])
+        return spellsHandler.getKnownSpellsWithDescription(
+            createCharacterViewModel.character,
+            knownFilters,
+            classesForSpells[currentClassList]
+        )
     }
 
     fun addKnownSpell(spell: Spell) {

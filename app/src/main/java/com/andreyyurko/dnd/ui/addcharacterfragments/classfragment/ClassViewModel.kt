@@ -1,6 +1,5 @@
 package com.andreyyurko.dnd.ui.addcharacterfragments.classfragment
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.classes.CharacterAbilityNodeLevel

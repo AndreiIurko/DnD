@@ -1,12 +1,16 @@
 package com.andreyyurko.dnd.data.abilities.classes.wizard
 
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var divineSavant = AbilityNode(
     name = "Мастер прорицания",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Мастер прорицания"] = "Золото и время, которое вы тратите на копирование заклинания школы Прорицания в свою книгу заклинаний, уменьшаются вдвое.\n"
+        abilities.additionalAbilities["Мастер прорицания"] =
+            "Золото и время, которое вы тратите на копирование заклинания школы Прорицания в свою книгу заклинаний, уменьшаются вдвое.\n"
         abilities
     },
     alternatives = mutableMapOf(),
@@ -29,8 +33,7 @@ var portent = AbilityNode(
                     type = ActionType.Additional
                 )
             )
-        }
-        else {
+        } else {
             abilities.actionsList.add(
                 Action(
                     name = "Знамение",
@@ -55,7 +58,8 @@ var portent = AbilityNode(
 var expertDivination = AbilityNode(
     name = "Эксперт прорицания",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Эксперт прорицания"] = "Вы так легко накладываете заклинания школы Прорицания, что расходуете лишь малую часть своих сил. Когда вы накладываете заклинание школы Прорицания 2-го уровня или выше, используя ячейку заклинаний, вы восстанавливаете одну уже израсходованную ячейку заклинаний. Восстанавливаемая ячейка должна быть ниже уровнем, чем заклинание, которое вы накладываете, и не может быть выше 5-го уровня.\n"
+        abilities.additionalAbilities["Эксперт прорицания"] =
+            "Вы так легко накладываете заклинания школы Прорицания, что расходуете лишь малую часть своих сил. Когда вы накладываете заклинание школы Прорицания 2-го уровня или выше, используя ячейку заклинаний, вы восстанавливаете одну уже израсходованную ячейку заклинаний. Восстанавливаемая ячейка должна быть ниже уровнем, чем заклинание, которое вы накладываете, и не может быть выше 5-го уровня.\n"
         abilities
     },
     alternatives = mutableMapOf(),
