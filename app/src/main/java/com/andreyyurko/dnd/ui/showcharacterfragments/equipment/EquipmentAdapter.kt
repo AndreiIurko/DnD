@@ -10,7 +10,6 @@ import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
-import com.andreyyurko.dnd.ui.showcharacterfragments.chooseequipment.ChooseEquipmentAdapter
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.InventoryHandler
 import javax.inject.Inject
@@ -56,15 +55,13 @@ class EquipmentAdapter @Inject constructor(
             holder.chargesTextView.visibility = View.INVISIBLE
             holder.increaseButton.visibility = View.INVISIBLE
             holder.decreaseButton.visibility = View.INVISIBLE
-        }
-        else {
+        } else {
             listOfItems[position].currentCharges?.let {
                 holder.chargesTextView.text = it.toString()
                 if (it >= listOfItems[position].maximumCharges) {
                     holder.increaseButton.alpha = 0.5F
                     holder.increaseButton.isEnabled = false
-                }
-                else {
+                } else {
                     holder.increaseButton.alpha = 1F
                     holder.increaseButton.isEnabled = true
                 }
@@ -72,8 +69,7 @@ class EquipmentAdapter @Inject constructor(
                 if (it <= 0) {
                     holder.decreaseButton.alpha = 0.5F
                     holder.decreaseButton.isEnabled = false
-                }
-                else {
+                } else {
                     holder.decreaseButton.alpha = 1F
                     holder.decreaseButton.isEnabled = true
                 }

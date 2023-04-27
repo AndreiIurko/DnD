@@ -160,7 +160,7 @@ class InventoryHandler @Inject constructor(
         if (item.itemTypeAndRarity.lowercase().contains(ItemType.Weapon.shownName.lowercase())) {
             if (currentState.firstWeapon == Weapon.Unarmed) {
                 return true
-            } else if (currentState.secondWeapon == null && currentState.firstWeapon.properties.contains("Лёгкое") && !currentState.hasShield) {
+            } else if (currentState.secondWeapon == null && currentState.firstWeapon.properties.contains("лёгкое") && !currentState.hasShield) {
                 var weapon: Weapon = Weapon.Unarmed
                 for (weaponType in Weapon.values()) {
                     if (item.itemTypeAndRarity.lowercase().contains(weaponType.weaponName.lowercase())) {
@@ -168,7 +168,7 @@ class InventoryHandler @Inject constructor(
                         break
                     }
                 }
-                if (weapon.properties.contains("Лёгкое")) {
+                if (weapon.properties.contains("лёгкое")) {
                     return true
                 }
             }
@@ -224,7 +224,7 @@ class InventoryHandler @Inject constructor(
                 currentState.firstWeaponName = itemName
                 currentState.inventoryRelevantData[itemName] = item.inventoryRelevantData
                 return true
-            } else if (currentState.secondWeapon == null && currentState.firstWeapon.properties.contains("Лёгкое") && !currentState.hasShield) {
+            } else if (currentState.secondWeapon == null && currentState.firstWeapon.properties.contains("лёгкое") && !currentState.hasShield) {
                 var weapon: Weapon = Weapon.Unarmed
                 for (weaponType in Weapon.values()) {
                     if (item.itemTypeAndRarity.lowercase().contains(weaponType.weaponName.lowercase())) {
@@ -232,7 +232,7 @@ class InventoryHandler @Inject constructor(
                         break
                     }
                 }
-                if (weapon.properties.contains("Лёгкое")) {
+                if (weapon.properties.contains("лёгкое")) {
                     currentState.secondWeapon = weapon
                     currentState.secondWeaponName = itemName
                     currentState.inventoryRelevantData[itemName] = item.inventoryRelevantData
@@ -351,7 +351,8 @@ class InventoryHandler @Inject constructor(
     }
 
     fun getEquippedMagicalItems(character: Character): MutableList<InventoryItemInfo> {
-        val itemNames = character.characterInfo.currentState.equippedArtifacts + character.characterInfo.currentState.equippedMagicWeapons
+        val itemNames =
+            character.characterInfo.currentState.equippedArtifacts + character.characterInfo.currentState.equippedMagicWeapons
         val result: MutableList<InventoryItemInfo> = mutableListOf()
         for (name in itemNames) {
             result.add(getItemDescription(character, name))

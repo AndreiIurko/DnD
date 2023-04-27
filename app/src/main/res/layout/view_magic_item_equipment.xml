@@ -6,16 +6,16 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:id="@+id/nameTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Имя предмета"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/chargesTextView"
-        android:clickable="true"
-        android:focusable="true"
-        android:textSize="19sp"/>
+            android:id="@+id/nameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Имя предмета"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/chargesTextView"
+            android:clickable="true"
+            android:focusable="true"
+            android:textSize="19sp"/>
 
     <TextView
             android:id="@+id/typeAndRarityTextView"

@@ -41,6 +41,6 @@
                 app:destination="@id/character_creation_nav_graph"/>
     </fragment>
 
-   <include app:graph="@navigation/character_creation_nav_graph"/>
+    <include app:graph="@navigation/character_creation_nav_graph"/>
 
 </navigation>

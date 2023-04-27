@@ -6,11 +6,10 @@ import androidx.core.view.ViewCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.andreyyurko.dnd.R
-import com.andreyyurko.dnd.ui.base.BaseFragment
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.andreyyurko.dnd.data.abilities.sumTwoDamages
+import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentCharacterEquipmentBinding
+import com.andreyyurko.dnd.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -61,7 +60,8 @@ class CharacterEquipmentFragment : BaseFragment(R.layout.fragment_character_equi
     }
 
     fun setupRecyclerView() {
-        viewBinding.magicItemsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        viewBinding.magicItemsRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         val adapter = EquipmentAdapter(viewModel.inventoryHandler, viewModel.characterViewModel)
         viewBinding.magicItemsRecyclerView.adapter = adapter
         ViewCompat.setNestedScrollingEnabled(viewBinding.magicItemsRecyclerView, false)
