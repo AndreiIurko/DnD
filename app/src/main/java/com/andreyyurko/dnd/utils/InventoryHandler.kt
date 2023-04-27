@@ -146,7 +146,7 @@ class InventoryHandler @Inject constructor(
             if (currentState.firstWeapon == Weapon.Unarmed) {
                 return true
             }
-            else if (currentState.secondWeapon == null && currentState.firstWeapon.properties.contains("Лёгкое") && !currentState.hasShield) {
+            else if (currentState.secondWeapon == null && currentState.firstWeapon.properties.contains("лёгкое") && !currentState.hasShield) {
                 var weapon: Weapon = Weapon.Unarmed
                 for (weaponType in Weapon.values()) {
                     if (item.itemTypeAndRarity.lowercase().contains(weaponType.weaponName.lowercase())) {
@@ -154,7 +154,7 @@ class InventoryHandler @Inject constructor(
                         break
                     }
                 }
-                if (weapon.properties.contains("Лёгкое")) {
+                if (weapon.properties.contains("лёгкое")) {
                     return true
                 }
             }
@@ -209,7 +209,7 @@ class InventoryHandler @Inject constructor(
                 currentState.inventoryBonuses[itemName] = item.inventoryBonus
                 return true
             }
-            else if (currentState.secondWeapon == null && currentState.firstWeapon.properties.contains("Лёгкое") && !currentState.hasShield) {
+            else if (currentState.secondWeapon == null && currentState.firstWeapon.properties.contains("лёгкое") && !currentState.hasShield) {
                 var weapon: Weapon = Weapon.Unarmed
                 for (weaponType in Weapon.values()) {
                     if (item.itemTypeAndRarity.lowercase().contains(weaponType.weaponName.lowercase())) {
@@ -217,7 +217,7 @@ class InventoryHandler @Inject constructor(
                         break
                     }
                 }
-                if (weapon.properties.contains("Лёгкое")) {
+                if (weapon.properties.contains("лёгкое")) {
                     currentState.secondWeapon = weapon
                     currentState.secondWeaponName = itemName
                     currentState.inventoryBonuses[itemName] = item.inventoryBonus
