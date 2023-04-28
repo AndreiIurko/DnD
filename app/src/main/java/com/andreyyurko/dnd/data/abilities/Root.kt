@@ -50,7 +50,8 @@ var baseAN: AbilityNode = AbilityNode(
 // helps to split code
 var mapOfAn: MutableMap<String, AbilityNode> = (
         mutableMapOf(
-            Pair(baseAN.name, baseAN)
+            Pair(baseAN.name, baseAN),
+            Pair(customBackstory.name, customBackstory)
         )
                 + mapOfCommonAN
                 + mapOfRaces
