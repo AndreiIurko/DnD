@@ -13,3 +13,10 @@ data class ChargesCounter(
     var current: Int,
     var maximum: Int
 )
+
+data class Note(
+    var createDate: String,
+    var lastModifiedDate: String,
+    var title: String,
+    var text: String
+)

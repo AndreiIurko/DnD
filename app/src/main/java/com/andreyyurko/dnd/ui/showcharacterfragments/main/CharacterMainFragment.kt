@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -30,6 +31,7 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
     lateinit var characterViewModel: CharacterViewModel
 
     private val viewBinding by viewBinding(FragmentCharacterMainBinding::bind)
+    private val destinationList: MutableList<Int> = mutableListOf(R.id.action_abilitiesFragment)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -114,6 +116,20 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
         val navController =
             (childFragmentManager.findFragmentById(R.id.mainFragmentNavigationHost) as NavHostFragment).navController
 
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (destinationList.size >= 2) {
+                        destinationList.removeLast()
+                        navController.navigate(destinationList.last())
+                    } else {
+                        findNavController().popBackStack()
+                    }
+                }
+            }
+        )
+
         setupMenuButton(
             parent.findViewById(R.id.actionsLinearLayout),
             R.id.action_actionsFragment,
@@ -183,6 +199,7 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
             onPressAnimation(this)
             this.setOnClickListener {
                 navController.navigate(destId)
+                destinationList.add(destId)
                 characterMenu.dismiss()
             }
         }

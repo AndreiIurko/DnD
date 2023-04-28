@@ -2,6 +2,7 @@ package com.andreyyurko.dnd.data.characterData.character
 
 import com.andreyyurko.dnd.data.abilities.baseAN
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.Note
 import com.andreyyurko.dnd.data.characterData.Priority
 import com.andreyyurko.dnd.data.characterData.mergeCharacterInfo
 
@@ -11,6 +12,7 @@ class Character(
     var characterInfo: CharacterInfo = CharacterInfo(),
     var customAbilities: CharacterInfo = CharacterInfo(),
     var baseCAN: CharacterAbilityNode = CharacterAbilityNode(baseAN, null),
+    var notes: MutableList<Note> = mutableListOf()
 ) {
     init {
         this.baseCAN.character = this

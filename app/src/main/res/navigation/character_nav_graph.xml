@@ -94,12 +94,20 @@
     <fragment
             android:id="@+id/characterNotesFragment"
             android:name="com.andreyyurko.dnd.ui.showcharacterfragments.notes.CharacterNotesFragment"
-            android:label="CharacterNotesFragment"/>
+            android:label="CharacterNotesFragment">
+        <action android:id="@+id/action_characterNotesFragment_to_characterCreateNoteFragment"
+                app:destination="@id/characterCreateNoteFragment"/>
+    </fragment>
 
     <action
             android:id="@+id/action_notesFragment"
             app:destination="@+id/characterNotesFragment"
             app:popUpTo="@+id/characterAbilitiesFragment"
             app:popUpToInclusive="true"/>
+
+    <fragment
+            android:id="@+id/characterCreateNoteFragment"
+            android:name="com.andreyyurko.dnd.ui.showcharacterfragments.createnote.CreateNoteFragment"
+            android:label="CharacterCreateNoteFragment"/>
 
 </navigation>

@@ -1,15 +1,13 @@
 package com.andreyyurko.dnd.utils
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andreyyurko.dnd.data.abilities.mapOfAn
-import com.andreyyurko.dnd.data.characterData.CharacterBriefInfo
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
-import com.andreyyurko.dnd.data.characterData.CurrentState
+import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.Character
 import com.andreyyurko.dnd.data.characterData.character.CharacterAbilityNode
 import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
-import com.andreyyurko.dnd.data.characterData.mergeCharacterInfo
 import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
 import com.andreyyurko.dnd.data.spells.CharacterSpells
 import com.andreyyurko.dnd.db.DB
@@ -76,9 +74,16 @@ class CharactersHolder @Inject constructor(
         val inventoryJson = db.getString(id.toString() + DB_INVENTORY)
         val inventory: MutableMap<String, InventoryItemInfo> = Gson().fromJson(inventoryJson, inventoryMapType)
 
+        // get spells
         val spellsMapType: Type = object : TypeToken<MutableMap<String, CharacterSpells>>() {}.type
         val spellsJson = db.getString(id.toString() + DB_SPELLS)
         val spells: MutableMap<String, CharacterSpells> = Gson().fromJson(spellsJson, spellsMapType)
+
+        val notesListType: Type = object : TypeToken<MutableList<Note>>() {}.type
+        val notesJson = db.getString(id.toString() + DB_NOTES)
+        Log.d("notes", notesJson.toString())
+        val notes: MutableList<Note> =
+            if (notesJson != null) Gson().fromJson(notesJson, notesListType) else mutableListOf()
 
         // get base_an with all sub-nods
         val baseCharacterAbilityNode = loadCharacterNode("base_an", id, ".", character)
@@ -98,6 +103,9 @@ class CharactersHolder @Inject constructor(
 
         // add chosen spells
         character.characterInfo.spellsInfo = spells
+
+        // add notes
+        character.notes = notes
 
         // merge all CAN
         mergeAllAbilities(character)
@@ -196,6 +204,13 @@ class CharactersHolder @Inject constructor(
         val spellsJson = Gson().toJson(characters[id]!!.characterInfo.spellsInfo)
         db.putStringsAsync(
             listOf(Pair(id.toString() + DB_SPELLS, spellsJson))
+        )
+
+        // save notes
+        val notesJson = Gson().toJson(characters[id]!!.notes)
+        Log.d("notes", notesJson)
+        db.putStringsAsync(
+            listOf(Pair(id.toString() + DB_NOTES, notesJson))
         )
 
         // save all graph of choices
@@ -314,6 +329,7 @@ class CharactersHolder @Inject constructor(
         private const val DB_CHARACTER_CUSTOM = "_CharacterCustom"
         private const val DB_INVENTORY = "_Inventory"
         private const val DB_SPELLS = "_Spells"
+        private const val DB_NOTES = "_Notes"
 
         private const val LOG_TAG = "CharacterHolder"
     }

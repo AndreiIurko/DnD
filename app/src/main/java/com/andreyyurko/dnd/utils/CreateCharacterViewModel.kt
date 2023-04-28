@@ -1,6 +1,7 @@
 package com.andreyyurko.dnd.utils
 
 import androidx.lifecycle.ViewModel
+import com.andreyyurko.dnd.data.abilities.other.commonRoot
 import com.andreyyurko.dnd.data.characterData.character.Character
 import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
 import javax.inject.Inject
@@ -19,7 +20,7 @@ class CreateCharacterViewModel @Inject constructor(
         )
         currentlyChangingCharacterId = null
         character.baseCAN.character = character
-        character.baseCAN.makeChoice("actions", "base_actions_an")
+        character.baseCAN.makeChoice("commonAbilities", commonRoot.name)
         character = charactersHolder.addCharacter(character)
     }
 
