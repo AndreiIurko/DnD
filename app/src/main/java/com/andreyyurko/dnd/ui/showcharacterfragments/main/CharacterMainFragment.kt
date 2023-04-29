@@ -2,16 +2,20 @@ package com.andreyyurko.dnd.ui.showcharacterfragments.main
 
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnFocusChangeListener
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.activity.OnBackPressedCallback
+import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.lifecycle.Observer
+import androidx.lifecycle.coroutineScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -20,9 +24,14 @@ import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentCharacterMainBinding
 import com.andreyyurko.dnd.ui.base.BaseFragment
 import com.andreyyurko.dnd.utils.CharacterViewModel
+import com.andreyyurko.dnd.utils.PhotoPicker
 import com.andreyyurko.dnd.utils.onPressAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.applyInsetter
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 
@@ -34,6 +43,12 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
 
     private val viewBinding by viewBinding(FragmentCharacterMainBinding::bind)
     private val destinationList: MutableList<Int> = mutableListOf(R.id.action_abilitiesFragment)
+
+    private val singlePhotoPickerLauncher = registerForActivityResult(PhotoPicker()) { imageUri: Uri? ->
+        imageUri?.let(characterViewModel::setImageUri)
+    }
+
+    private fun pickPhoto() = singlePhotoPickerLauncher.launch(Unit)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,6 +67,25 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
 
         viewBinding.settingsButton.applyInsetter {
             type(statusBars = true) { margin() }
+        }
+
+        characterViewModel.shownCharacter.image?.let {
+            viewBinding.iconImageButton.setImageBitmap(it)
+        }
+
+        viewBinding.iconImageButton.setOnClickListener {
+            pickPhoto()
+            viewLifecycleOwner.lifecycle.coroutineScope.launch {
+                characterViewModel.imageState.collectLatest { imageState ->
+                    imageState.imageBitmap?.let {
+                        val out = ByteArrayOutputStream()
+                        it.asAndroidBitmap().compress(Bitmap.CompressFormat.JPEG, 20, out)
+                        val bitmap = BitmapFactory.decodeStream(ByteArrayInputStream(out.toByteArray()))
+                        characterViewModel.saveBitmap(bitmap)
+                        viewBinding.iconImageButton.setImageBitmap(bitmap)
+                    }
+                }
+            }
         }
 
         val changeObserver = Observer<String> { state ->

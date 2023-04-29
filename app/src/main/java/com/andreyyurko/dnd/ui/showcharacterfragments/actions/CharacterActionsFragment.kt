@@ -3,7 +3,10 @@ package com.andreyyurko.dnd.ui.showcharacterfragments.actions
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.ViewCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -11,6 +14,7 @@ import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.characterData.ActionType
 import com.andreyyurko.dnd.databinding.FragmentCharacterActionsBinding
 import com.andreyyurko.dnd.ui.base.BaseFragment
+import com.andreyyurko.dnd.utils.CharacterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -123,6 +127,18 @@ class CharacterActionsFragment : BaseFragment(R.layout.fragment_character_action
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         val adapter = ActionsAdapter(viewModel.characterViewModel)
         recyclerView.adapter = adapter
+
+        ViewCompat.setNestedScrollingEnabled(recyclerView, false)
+
+        val changeObserver = Observer<String> { state ->
+            if (state == CharacterViewModel.DataState.Complete.stateName) {
+                adapter.apply {
+                    actionsList = viewModel.getActionList(actionType)
+                    notifyDataSetChanged()
+                }
+            }
+        }
+        viewModel.characterViewModel.dataState.observe(viewLifecycleOwner, changeObserver)
 
         adapter.apply {
             actionsList = viewModel.getActionList(actionType)

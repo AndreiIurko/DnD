@@ -26,7 +26,6 @@ class CharacterAdditionalInfoViewModel @Inject constructor(
         for ((name, description) in characterViewModel.shownCharacter.characterInfo.additionalAbilities.entries) {
             result.add(Pair(name, description))
         }
-        Log.d("test", result.toString())
         return result
     }
 }

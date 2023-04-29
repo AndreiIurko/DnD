@@ -1,10 +1,13 @@
 package com.andreyyurko.dnd.ui.addcharacterfragments.classfragment
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.classes.CharacterAbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.mapOfAn
 import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.character.CharacterAbilityNode
+import com.andreyyurko.dnd.data.characterData.character.checkIfSomeRequirementsSatisfied
 import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
 import com.andreyyurko.dnd.ui.addcharacterfragments.AbilityAdapter
 import com.andreyyurko.dnd.utils.CreateCharacterViewModel
@@ -29,7 +32,7 @@ class ClassViewModel @Inject constructor(
         if (character.characterInfo.level > 0)
             chosenLevel = character.characterInfo.level
         if (character.characterInfo.characterClass != Classes.NotImplemented)
-            chosenClass = character.characterInfo.characterClass.className
+            chosenClass = baseCAN.chosen_alternatives["class"]?.data?.name
     }
 
     fun makeChoice(choice: String) {
@@ -46,6 +49,24 @@ class ClassViewModel @Inject constructor(
         showAllClassAbilities()
 
         mergeAllAbilities(createCharacterViewModel.character)
+    }
+
+    fun levelUp() {
+        var can = baseCAN.chosen_alternatives["class"]!!
+        var nextLevel = can.chosen_alternatives["nextLevel"]
+
+        while (nextLevel != null) {
+            can = nextLevel
+            nextLevel = can.chosen_alternatives["nextLevel"]
+        }
+
+        val nextLevelName = can.data.name.split('_')[0] + '_' + (can.data.name.split('_')[1].toInt()+1).toString()
+
+        can.makeChoice("nextLevel", nextLevelName)
+        chosenLevel++
+        checkIfSomeRequirementsSatisfied(baseCAN.chosen_alternatives["class"])
+        mergeAllAbilities(createCharacterViewModel.character)
+        showAllClassAbilities()
     }
 
     fun updateCharacter() {

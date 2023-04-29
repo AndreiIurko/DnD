@@ -44,7 +44,6 @@ class ChooseEquipmentAdapter @Inject constructor(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.d("test", position.toString())
         holder.nameTextView.text = itemsList[position].itemDescription.itemName
         holder.nameTextView.setOnClickListener {
             showFullDescription(itemsList[position].itemDescription, it.context, position)
@@ -89,9 +88,6 @@ class ChooseEquipmentAdapter @Inject constructor(
 
             val isEquipped = inventoryHandler.isItemEquipped(characterViewModel.shownCharacter, item.itemName)
             val isCanBeEquipped = inventoryHandler.isItemEquitable(characterViewModel.shownCharacter, item.itemName)
-            Log.d("test", item.itemName)
-            Log.d("test", isEquipped.toString())
-            Log.d("test", isCanBeEquipped.toString())
 
             resultList.add(
                 EquipmentItem(

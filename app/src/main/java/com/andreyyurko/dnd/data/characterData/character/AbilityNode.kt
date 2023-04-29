@@ -31,7 +31,8 @@ open class AbilityNode(
         return requirements(abilities)
     }
 
-    fun isAddable(abilities: CharacterInfo): Boolean {
+    fun isAddable(abilities: CharacterInfo?): Boolean {
+        if (abilities == null) return false
         return isCorrect(abilities) and true
     }
 

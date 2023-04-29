@@ -4,34 +4,36 @@
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent">
 
+
+
     <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Home screen"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-    <Button
-            android:id="@+id/spellsListButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="spells List"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title"/>
-
-    <Button
             android:id="@+id/charactersListButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="characters List"
+            android:text="Лист персонажей"
+            android:layout_marginTop="300dp"
+            android:clickable="true"
+            android:textSize="32sp"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="10dp"
+            android:background="@drawable/border_24_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spellsListButton"/>
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+            android:id="@+id/directoryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textSize="32sp"
+            android:background="@drawable/border_24_red"
+            android:paddingHorizontal="24dp"
+            android:alpha="0.5"
+            android:paddingVertical="10dp"
+            android:text="Справочная"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/charactersListButton"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

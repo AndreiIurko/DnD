@@ -6,6 +6,7 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,10 +35,11 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
         setupRecyclerView()
 
         viewModel.chosenClass?.let {
-            viewBinding.chooseClassTextView.text = it
+            viewBinding.chooseClassTextView.text = it.split('_')[0]
             viewBinding.levelText.text = viewModel.chosenLevel.toString()
+            viewBinding.levelUpButton.alpha = 1F
+            viewBinding.levelUpButton.isEnabled = true
         }
-
 
         viewBinding.chooseClassButton.setOnClickListener {
             setupClassPopupMenu(requireContext())
@@ -45,6 +47,14 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
 
         viewBinding.chooseLevelButton.setOnClickListener {
             setupLevelPopupMenu(requireContext())
+            viewBinding.levelArrowImageView.setImageDrawable(
+                AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_arrow_drop_up_24)
+            )
+        }
+
+        viewBinding.levelUpButton.setOnClickListener {
+            viewModel.levelUp()
+            viewBinding.levelText.text = viewModel.chosenLevel.toString()
         }
 
         viewBinding.submitButton.setOnClickListener {
@@ -72,6 +82,8 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
             classNameTextView.setOnClickListener {
                 viewModel.chosenClass = classChoice
                 viewModel.makeChoice(classChoice)
+                viewBinding.levelUpButton.alpha = 1F
+                viewBinding.levelUpButton.isEnabled = true
                 viewBinding.chooseClassTextView.text = classChoice.split("_").first()
                 classChoiceList.dismiss()
             }
@@ -100,15 +112,22 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
             levelTextView.isClickable = true
             levelTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, viewBinding.levelText.textSize)
             levelTextView.text = level.toString()
+            levelTextView.width = viewBinding.chooseLevelButton.width
+            levelTextView.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
             parent.addView(levelTextView)
             // TODO: make choice after level change as well
             levelTextView.setOnClickListener {
                 viewModel.chosenLevel = level
                 viewModel.chosenClass?.let {
                     viewModel.makeChoice(it)
+                    viewBinding.levelUpButton.alpha = 1F
+                    viewBinding.levelUpButton.isEnabled = true
                 }
                 viewBinding.levelText.text = level.toString()
                 levelChoiceList.dismiss()
+                viewBinding.levelArrowImageView.setImageDrawable(
+                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_arrow_drop_down_24)
+                )
             }
         }
 

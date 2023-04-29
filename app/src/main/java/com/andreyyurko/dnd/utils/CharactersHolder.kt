@@ -1,7 +1,10 @@
 package com.andreyyurko.dnd.utils
 
-import android.util.Log
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.andreyyurko.dnd.data.abilities.mapOfAn
 import com.andreyyurko.dnd.data.characterData.*
@@ -18,6 +21,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.io.FileInputStream
+import java.io.FileOutputStream
 import java.lang.reflect.Type
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -25,13 +30,15 @@ import javax.inject.Singleton
 
 @Singleton
 class CharactersHolder @Inject constructor(
-    private val dbProvider: DBProvider
-) : ViewModel() {
+    private val dbProvider: DBProvider,
+    application: Application
+) : AndroidViewModel(application) {
     private val db: DB by lazy(LazyThreadSafetyMode.NONE) {
         dbProvider.getDB(DB_TAG)
     }
 
     private var characters: MutableMap<Int, Character> = mutableMapOf()
+    private var characterImages: MutableMap<Int, Bitmap?> = mutableMapOf()
 
     private var _initActionState = MutableStateFlow<InitializationState>(InitializationState.NotInitialized)
     val initActionState: Flow<InitializationState> get() = _initActionState.asStateFlow()
@@ -53,10 +60,13 @@ class CharactersHolder @Inject constructor(
     private fun loadCharacter(id: Int): Character {
         // get name
         val name = db.getString(DB_CHARACTER_NAME + id.toString())
+        val bitmap = loadCharacterBitmap(id)
+        characterImages[id] = bitmap
 
         // init character
-        var character = Character(
+        val character = Character(
             id = id,
+            image = bitmap,
             name = name!!,
             characterInfo = CharacterInfo(),
         )
@@ -81,7 +91,6 @@ class CharactersHolder @Inject constructor(
 
         val notesListType: Type = object : TypeToken<MutableList<Note>>() {}.type
         val notesJson = db.getString(id.toString() + DB_NOTES)
-        Log.d("notes", notesJson.toString())
         val notes: MutableList<Note> =
             if (notesJson != null) Gson().fromJson(notesJson, notesListType) else mutableListOf()
 
@@ -162,6 +171,12 @@ class CharactersHolder @Inject constructor(
         throw IllegalArgumentException("Character with id ${character.id} not exist!")
     }
 
+    fun updateCharacterImage(character: Character, bitmap: Bitmap) {
+        character.image = bitmap
+        characterImages[character.id] = bitmap
+        saveCharacterBitmap(character.id, bitmap)
+    }
+
     fun removeCharacterById(id: Int) {
         if (characters.contains(id)) {
             val character = characters.remove(id)!!
@@ -173,6 +188,7 @@ class CharactersHolder @Inject constructor(
 
     // TODO: on start sync save with load (in case fast kill and restore)
     private fun saveCharacter(id: Int) {
+        saveCharacterBitmap(id, characters[id]!!.image)
         // in case changes in ids
         db.putStringsAsync(
             listOf(Pair(DB_CHARACTER_IDS, Gson().toJson(characters.keys)))
@@ -208,13 +224,40 @@ class CharactersHolder @Inject constructor(
 
         // save notes
         val notesJson = Gson().toJson(characters[id]!!.notes)
-        Log.d("notes", notesJson)
         db.putStringsAsync(
             listOf(Pair(id.toString() + DB_NOTES, notesJson))
         )
 
         // save all graph of choices
         saveCharacterNode(characters[id]!!.baseCAN, id, ".")
+    }
+
+    private fun saveCharacterBitmap(id: Int, bitmap: Bitmap?) {
+        if (bitmap == null) return
+        val name = id.toString() + DB_IMAGE
+        val fileOutputStream: FileOutputStream
+        try {
+            fileOutputStream = getApplication<Application>().applicationContext.openFileOutput(name, Context.MODE_PRIVATE)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fileOutputStream)
+            fileOutputStream.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun loadCharacterBitmap(id: Int) : Bitmap? {
+        val name = id.toString() + DB_IMAGE
+        val fileInputStream: FileInputStream
+        var bitmap: Bitmap? = null
+        try {
+            fileInputStream = getApplication<Application>().applicationContext.openFileInput(name)
+            bitmap = BitmapFactory.decodeStream(fileInputStream);
+            fileInputStream.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return bitmap
     }
 
     fun saveCharacters() {
@@ -312,7 +355,8 @@ class CharactersHolder @Inject constructor(
                     id = character.id,
                     name = character.name,
                     characterClass = character.characterInfo.characterClass.className,
-                    level = character.characterInfo.level.toString()
+                    level = character.characterInfo.level.toString(),
+                    bitmap = characterImages[character.id]
                 )
             )
         }
@@ -330,6 +374,7 @@ class CharactersHolder @Inject constructor(
         private const val DB_INVENTORY = "_Inventory"
         private const val DB_SPELLS = "_Spells"
         private const val DB_NOTES = "_Notes"
+        private const val DB_IMAGE = "_Image"
 
         private const val LOG_TAG = "CharacterHolder"
     }

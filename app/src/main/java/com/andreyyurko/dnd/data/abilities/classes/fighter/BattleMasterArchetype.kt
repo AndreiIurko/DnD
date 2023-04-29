@@ -514,6 +514,105 @@ var studentOfWar = AbilityNode(
     description = "Вы осваиваете владением одним из ремесленных инструментов на ваш выбор."
 )
 
+var combatSuperiorityImprovement1 = AbilityNode(
+    name = "Боевое превосходство - первый дополнительный прием",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities
+    },
+    alternatives = mutableMapOf(
+        Pair(
+            "first", listOf(
+                evasiveFootworkManeuver.name,
+                commanderStrikeManeuver.name,
+                distractingStrikeManeuver.name,
+                disarmingAttackManeuver.name,
+                feintingAttackManeuver.name,
+                goadingAttackManeuver.name,
+                lungingAttackManeuver.name,
+                maneuveringAttackManeuver.name,
+                menacingAttackManeuver.name,
+                parryManeuver.name,
+                pushingAttackManeuver.name,
+                precisionAttackManeuver.name,
+                rallyManeuver.name,
+                riposteManeuver.name,
+                sweepingAttackManeuver.name,
+                tripAttackManeuver.name
+            )
+        )
+    ),
+    requirements = { abilities: CharacterInfo ->
+        abilities.level >= 7 && abilities.characterClass == Classes.Fighter
+    },
+    description = "Выберите еще один прием."
+)
+
+var combatSuperiorityImprovement2 = AbilityNode(
+    name = "Боевое превосходство - второй дополнительный прием",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities
+    },
+    alternatives = mutableMapOf(
+        Pair(
+            "first", listOf(
+                evasiveFootworkManeuver.name,
+                commanderStrikeManeuver.name,
+                distractingStrikeManeuver.name,
+                disarmingAttackManeuver.name,
+                feintingAttackManeuver.name,
+                goadingAttackManeuver.name,
+                lungingAttackManeuver.name,
+                maneuveringAttackManeuver.name,
+                menacingAttackManeuver.name,
+                parryManeuver.name,
+                pushingAttackManeuver.name,
+                precisionAttackManeuver.name,
+                rallyManeuver.name,
+                riposteManeuver.name,
+                sweepingAttackManeuver.name,
+                tripAttackManeuver.name
+            )
+        )
+    ),
+    requirements = { abilities: CharacterInfo ->
+        abilities.level >= 10 && abilities.characterClass == Classes.Fighter
+    },
+    description = "Выберите еще один прием."
+)
+
+var combatSuperiorityImprovement3 = AbilityNode(
+    name = "Боевое превосходство - третий дополнительный прием",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities
+    },
+    alternatives = mutableMapOf(
+        Pair(
+            "first", listOf(
+                evasiveFootworkManeuver.name,
+                commanderStrikeManeuver.name,
+                distractingStrikeManeuver.name,
+                disarmingAttackManeuver.name,
+                feintingAttackManeuver.name,
+                goadingAttackManeuver.name,
+                lungingAttackManeuver.name,
+                maneuveringAttackManeuver.name,
+                menacingAttackManeuver.name,
+                parryManeuver.name,
+                pushingAttackManeuver.name,
+                precisionAttackManeuver.name,
+                rallyManeuver.name,
+                riposteManeuver.name,
+                sweepingAttackManeuver.name,
+                tripAttackManeuver.name
+            )
+        )
+    ),
+    requirements = { abilities: CharacterInfo ->
+        abilities.level >= 15 && abilities.characterClass == Classes.Fighter
+    },
+    description = "Выберите еще один прием."
+)
+
 var knowYourEnemy = AbilityNode(
     name = "Познай своего врага",
     changesInCharacterInfo = { abilities: CharacterInfo ->
@@ -576,7 +675,10 @@ var battleMaster = AbilityNode(
         Pair("second", listOf(studentOfWar.name)),
         Pair("third", listOf(knowYourEnemy.name)),
         Pair("fourth", listOf(improvedCombatSuperiority.name)),
-        Pair("fifth", listOf(relentless.name))
+        Pair("fifth", listOf(relentless.name)),
+        Pair("sixth", listOf(combatSuperiorityImprovement1.name)),
+        Pair("seventh", listOf(combatSuperiorityImprovement2.name)),
+        Pair("eighth", listOf(combatSuperiorityImprovement3.name))
     ),
     requirements = { true },
     description = "",
@@ -605,5 +707,8 @@ var mapOfBattleMasterAbilities: MutableMap<String, AbilityNode> = mutableMapOf(
     Pair(rallyManeuver.name, rallyManeuver),
     Pair(riposteManeuver.name, riposteManeuver),
     Pair(sweepingAttackManeuver.name, sweepingAttackManeuver),
-    Pair(tripAttackManeuver.name, tripAttackManeuver)
+    Pair(tripAttackManeuver.name, tripAttackManeuver),
+    Pair(combatSuperiorityImprovement1.name, combatSuperiorityImprovement1),
+    Pair(combatSuperiorityImprovement2.name, combatSuperiorityImprovement2),
+    Pair(combatSuperiorityImprovement3.name, combatSuperiorityImprovement3)
 )

@@ -45,13 +45,16 @@
                 app:layout_constraintEnd_toStartOf="@id/menuButton"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-        <ImageView
-                android:id="@+id/iconImageView"
+        <ImageButton
+                android:id="@+id/iconImageButton"
                 android:layout_width="84dp"
                 android:layout_height="84dp"
                 android:layout_marginTop="6dp"
-                android:src="@drawable/dragonborn"
+                android:src="@drawable/ic_baseline_person_84"
+                android:background="@color/background"
                 app:layout_constraintStart_toEndOf="@id/arrowBackImageButton"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
                 app:layout_constraintTop_toBottomOf="@id/nameTextView"/>
 
         <TextView
@@ -62,8 +65,8 @@
                 android:text="HP"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toTopOf="@id/classTextView"
-                app:layout_constraintStart_toEndOf="@id/iconImageView"
-                app:layout_constraintTop_toTopOf="@id/iconImageView"/>
+                app:layout_constraintStart_toEndOf="@id/iconImageButton"
+                app:layout_constraintTop_toTopOf="@id/iconImageButton"/>
 
         <EditText
                 android:id="@+id/hpEditText"
@@ -95,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:text="Класс"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@id/iconImageView"
+                app:layout_constraintBottom_toBottomOf="@id/iconImageButton"
                 app:layout_constraintStart_toStartOf="@id/hpTextView"
                 app:layout_constraintTop_toBottomOf="@id/hpTextView"/>
 
@@ -106,7 +109,7 @@
                 android:layout_marginStart="156dp"
                 android:text="Уровень"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@id/iconImageView"
+                app:layout_constraintBottom_toBottomOf="@id/iconImageButton"
                 app:layout_constraintStart_toStartOf="@id/hpTextView"
                 app:layout_constraintTop_toBottomOf="@id/hpTextView"/>
 
@@ -119,7 +122,7 @@
                 android:rowCount="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iconImageView">
+                app:layout_constraintTop_toBottomOf="@id/iconImageButton">
 
             <LinearLayout style="@style/MainLayoutStyle">
                 <TextView
