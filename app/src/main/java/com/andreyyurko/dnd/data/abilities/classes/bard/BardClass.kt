@@ -14,8 +14,11 @@ var classFeaturesBard: AbilityNode = AbilityNode(
         abilities.savingThrowProf.add(Ability.Dexterity)
         abilities.savingThrowProf.add(Ability.Charisma)
         addAllSimpleWeapons(abilities)
-        //abilities.weaponProficiency.add(Weapon.)
-        // we need to add warrior weapon and instruments
+        abilities.weaponProficiency.add(Weapon.Longsword)
+        abilities.weaponProficiency.add(Weapon.ShortSword)
+        abilities.weaponProficiency.add(Weapon.Rapier)
+        abilities.weaponProficiency.add(Weapon.CrossbowHand)
+        // we need to add musical instruments
         abilities.armorProficiency.add(ArmorProf.LightArmor)
         abilities
     },
