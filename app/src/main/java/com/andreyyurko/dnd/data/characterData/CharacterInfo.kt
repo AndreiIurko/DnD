@@ -105,6 +105,7 @@ data class CurrentState(
     var equippedMagicWeapons: MutableSet<String> = mutableSetOf(),
     var equippedArtifacts: MutableSet<String> = mutableSetOf(),
     var inventoryRelevantData: MutableMap<String, InventoryRelevantData> = mutableMapOf(),
+    var hp: Int? = null,
     // String - AN name
     var charges: MutableMap<String, ChargesCounter> = mutableMapOf(),
 )

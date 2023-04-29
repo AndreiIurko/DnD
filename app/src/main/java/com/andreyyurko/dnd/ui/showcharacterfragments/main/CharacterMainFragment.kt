@@ -4,8 +4,10 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
 import android.view.Gravity
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.activity.OnBackPressedCallback
@@ -92,7 +94,20 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
         viewBinding.nameTextView.text = characterViewModel.shownCharacter.name
         viewBinding.classTextView.text = characterViewModel.shownCharacter.characterInfo.characterClass.className
         viewBinding.levelTextView.text = characterViewModel.shownCharacter.characterInfo.level.toString()
-        viewBinding.hpEditText.setText(characterViewModel.shownCharacter.characterInfo.hp.toString())
+        if (characterViewModel.shownCharacter.characterInfo.currentState.hp == null) {
+            characterViewModel.shownCharacter.characterInfo.currentState.hp = characterViewModel.shownCharacter.characterInfo.hp
+        }
+        viewBinding.hpEditText.setText(characterViewModel.shownCharacter.characterInfo.currentState.hp.toString())
+        viewBinding.hpEditText.setOnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                viewBinding.hpEditText.clearFocus()
+                characterViewModel.shownCharacter.characterInfo.currentState.hp = viewBinding.hpEditText.text.toString().toInt()
+                characterViewModel.updateCharacterInfo()
+            }
+            false
+        }
+
+        viewBinding.maxHpTextView.text = "/" + characterViewModel.shownCharacter.characterInfo.hp.toString()
         viewBinding.proficiencyTextView.text =
             "+ ${characterViewModel.shownCharacter.characterInfo.proficiencyBonus}"
         viewBinding.speedTextView.text = "${characterViewModel.shownCharacter.characterInfo.speed}ft"
