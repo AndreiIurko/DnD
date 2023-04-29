@@ -9,8 +9,10 @@ import com.andreyyurko.dnd.data.abilities.classes.monk.monk1
 import com.andreyyurko.dnd.data.abilities.classes.sorcerer.sorcerer1
 import com.andreyyurko.dnd.data.abilities.classes.wizard.wizard1
 import com.andreyyurko.dnd.data.abilities.other.*
+import com.andreyyurko.dnd.data.abilities.races.dwarf
 import com.andreyyurko.dnd.data.abilities.races.elf
 import com.andreyyurko.dnd.data.abilities.races.human
+import com.andreyyurko.dnd.data.abilities.races.halfling
 import com.andreyyurko.dnd.data.abilities.races.mapOfRaces
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Priority
@@ -39,7 +41,7 @@ var baseAN: AbilityNode = AbilityNode(
             "class",
             listOf(monk1.name, barbarian1.name, fighter1.name, sorcerer1.name, cleric1.name, wizard1.name, bard1.name)
         ),
-        Pair("race", listOf(human.name, elf.name))
+        Pair("race", listOf(human.name, dwarf.name, elf.name, halfling.name))
     ),
     { true },
     listOf(listOf()),

@@ -68,6 +68,7 @@ var spellCastingWizard: AbilityNode = AbilityNode(
                 max((abilityToModifier(abilities.intelligence) + abilities.level), 1)
             this["Заклинания класса"]?.maxKnownCantripsCount = kotlin.math.min((abilities.level + 20) / 6, 5)
         }
+        abilities.additionalAbilities["Ритуальное колдовство"] = "Вы можете сотворить любое известное вам заклинание волшебника в качестве ритуала, если заклинание позволяет это.\n"
         abilities
     },
     alternatives = mutableMapOf(),

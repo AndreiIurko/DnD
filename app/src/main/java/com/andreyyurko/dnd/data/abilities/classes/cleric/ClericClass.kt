@@ -74,6 +74,7 @@ var spellCastingCleric: AbilityNode = AbilityNode(
             if (abilities.level > 9)
                 this["Заклинания класса"]?.maxKnownCantripsCount = 5
         }
+        abilities.additionalAbilities["Ритуальное колдовство"] = "Вы можете сотворить любое известное вам заклинание жреца в качестве ритуала, если заклинание позволяет это.\n"
         abilities
     },
     alternatives = mutableMapOf(),
@@ -355,6 +356,12 @@ var cleric9: AbilityNodeLevel = AbilityNodeLevel(
 var divineIntervention: AbilityNode = AbilityNode(
     name = "Божественное вмешательство",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        if (!abilities.currentState.charges.contains("Божественное вмешательство")) {
+            abilities.currentState.charges["Божественное вмешательство"] = ChargesCounter(
+                current = 1,
+                maximum = 1
+            )
+        }
         abilities.actionsList.add(
             Action(
                 name = "Божественное вмешательство",
@@ -362,6 +369,7 @@ var divineIntervention: AbilityNode = AbilityNode(
                         "\n" +
                         "Если божество вмешивается, вы не можете использовать это умение в течение 7 дней. В противном случае вы можете использовать это умение после продолжительного отдыха. На 20-м уровне ваше воззвание автоматически успешно и не требует проверки.\n",
                 type = ActionType.Action,
+                relatedCharges = "Божественное вмешательство"
             )
         )
         abilities
