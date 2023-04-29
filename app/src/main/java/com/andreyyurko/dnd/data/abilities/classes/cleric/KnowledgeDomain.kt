@@ -1,46 +1,10 @@
 package com.andreyyurko.dnd.data.abilities.classes.cleric
 
 import com.andreyyurko.dnd.data.abilities.other.*
-import com.andreyyurko.dnd.data.characterData.Action
-import com.andreyyurko.dnd.data.characterData.ActionType
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
-import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.spells.CharacterSpells
 import com.andreyyurko.dnd.data.spells.SpellLists
-
-var blessingsOfKnowledge = AbilityNode(
-    name = "Благословение знаний",
-    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("language1", mapOfLanguages.keys.toList()),
-        Pair("language2", mapOfLanguages.keys.toList()),
-        Pair(
-            "expertise1",
-            listOf(
-                historySkillAndExpertise.name,
-                arcanaSkillAndExpertise.name,
-                natureSkillAndExpertise.name,
-                religionSkillAndExpertise.name,
-            )
-        ),
-        Pair(
-            "expertise2",
-            listOf(
-                historySkillAndExpertise.name,
-                arcanaSkillAndExpertise.name,
-                natureSkillAndExpertise.name,
-                religionSkillAndExpertise.name,
-            )
-        )
-    ),
-    requirements = { abilities: CharacterInfo ->
-        abilities.level >= 1 && abilities.characterClass == Classes.Cleric
-    },
-    description = "Вы можете выучить два языка на свой выбор. Вы также получаете владение двумя навыками из следующего списка: История, Магия, Природа, Религия.\n" +
-            "\n" +
-            "Ваш бонус мастерства удваивается для всех проверок характеристик при использовании этих навыков.\n"
-)
 
 var KnowledgeDomainSpells = AbilityNode(
     name = "Заклинания домена знаний",
@@ -87,6 +51,39 @@ var KnowledgeDomainSpells = AbilityNode(
             "       5      | необнаружимость, разговор с мёртвыми\n" +
             "       7      | магический граз, смятение\n" +
             "       9      | знание легенд, наблюдение\n"
+)
+
+var blessingsOfKnowledge = AbilityNode(
+    name = "Благословение знаний",
+    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
+    alternatives = mutableMapOf(
+        Pair("language1", mapOfLanguages.keys.toList()),
+        Pair("language2", mapOfLanguages.keys.toList()),
+        Pair(
+            "expertise1",
+            listOf(
+                historySkillAndExpertise.name,
+                arcanaSkillAndExpertise.name,
+                natureSkillAndExpertise.name,
+                religionSkillAndExpertise.name,
+            )
+        ),
+        Pair(
+            "expertise2",
+            listOf(
+                historySkillAndExpertise.name,
+                arcanaSkillAndExpertise.name,
+                natureSkillAndExpertise.name,
+                religionSkillAndExpertise.name,
+            )
+        )
+    ),
+    requirements = { abilities: CharacterInfo ->
+        abilities.level >= 1 && abilities.characterClass == Classes.Cleric
+    },
+    description = "Вы можете выучить два языка на свой выбор. Вы также получаете владение двумя навыками из следующего списка: История, Магия, Природа, Религия.\n" +
+            "\n" +
+            "Ваш бонус мастерства удваивается для всех проверок характеристик при использовании этих навыков.\n"
 )
 
 var channelDivinityKnowledgeOfTheAges: AbilityNode = AbilityNode(
@@ -156,6 +153,12 @@ var potentSpellcasting = AbilityNode(
 var visionsOfThePast = AbilityNode(
     name = "Видения прошлого",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        if (!abilities.currentState.charges.contains("Видения прошлого")) {
+            abilities.currentState.charges["Видения прошлого"] = ChargesCounter(
+                current = 1,
+                maximum = 1
+            )
+        }
         abilities.actionsList.add(
             Action(
                 name = "Видения прошлого",
@@ -167,6 +170,7 @@ var visionsOfThePast = AbilityNode(
                         "\n" +
                         "Чтение окрестностей. Пока вы медитируете, вы наблюдаете видения последних событий, произошедших в непосредственной близости (комната, улица, туннель, поляна и тому подобное в пределах куба с длиной ребра 50 футов), на протяжении количества прошедших дней, равного значению вашей Мудрости. За каждую минуту медитации вы узнаёте об одном значимом событии, начиная с самого последнего. Значимые события обычно связаны с сильными эмоциями, например, битвами и предательствами, свадьбами и убийствами, родами и похоронами. Однако они могут также включать в себя более обыденные события, которые, тем не менее, важны в текущей ситуации.\n",
                 type = ActionType.Long,
+                relatedCharges = "Видения прошлого"
             )
         )
         abilities
@@ -188,12 +192,12 @@ var KnowledgeDomain = AbilityNode(
     name = "Домен знаний",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     alternatives = mutableMapOf(
-        Pair("first", listOf(blessingsOfKnowledge.name)),
-        Pair("second", listOf(KnowledgeDomainSpells.name)),
+        Pair("first", listOf(KnowledgeDomainSpells.name)),
+        Pair("second", listOf(blessingsOfKnowledge.name)),
         Pair("third", listOf(channelDivinityKnowledgeOfTheAges.name)),
         Pair("fourth", listOf(channelDivinityReadThoughts.name)),
         Pair("fifth", listOf(potentSpellcasting.name)),
-        Pair("sizth", listOf(visionsOfThePast.name))
+        Pair("sixth", listOf(visionsOfThePast.name))
     ),
     requirements = { true },
     description = "",

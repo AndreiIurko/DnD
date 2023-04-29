@@ -139,6 +139,7 @@ var spellCastingBard: AbilityNode = AbilityNode(
             if (abilities.level > 9)
                 this["Заклинания класса"]?.maxKnownCantripsCount = 4
         }
+        abilities.additionalAbilities["Ритуальное колдовство"] = "Вы можете сотворить любое известное вам заклинание барда в качестве ритуала, если заклинание позволяет это.\n"
         abilities
     },
     alternatives = mutableMapOf(),

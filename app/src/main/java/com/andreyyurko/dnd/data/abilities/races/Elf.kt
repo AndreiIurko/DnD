@@ -10,7 +10,10 @@ var woodElf = AbilityNode(
     name = "Лесной эльф",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.wisdom += 1
-        // weapon
+        abilities.weaponProficiency.add(Weapon.ShortSword)
+        abilities.weaponProficiency.add(Weapon.Longsword)
+        abilities.weaponProficiency.add(Weapon.ShortBow)
+        abilities.weaponProficiency.add(Weapon.LongBow)
         abilities.speed += 5
         abilities.additionalAbilities["Маскировка в дикой местности"] =
             "Вы можете предпринять попытку спрятаться, даже если вы слабо заслонены листвой, сильным дождём, снегопадом, туманом или другими природными явлениями.\n"
@@ -36,8 +39,10 @@ var highElf = AbilityNode(
     name = "Высший эльф",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.intelligence += 1
-        // weapon
-        // cantrip
+        abilities.weaponProficiency.add(Weapon.ShortSword)
+        abilities.weaponProficiency.add(Weapon.Longsword)
+        abilities.weaponProficiency.add(Weapon.ShortBow)
+        abilities.weaponProficiency.add(Weapon.LongBow)
         if (!abilities.spellsInfo.contains("Заклинания Высшего эльфа")) {
             abilities.spellsInfo["Заклинания Высшего эльфа"] = CharacterSpells(
                 className = Classes.Wizard.className,
@@ -69,6 +74,9 @@ var drow = AbilityNode(
     name = "Дроу",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.charisma += 1
+        abilities.weaponProficiency.add(Weapon.ShortSword)
+        abilities.weaponProficiency.add(Weapon.Rapier)
+        abilities.weaponProficiency.add(Weapon.CrossbowHand)
         var regex = Regex(" [^ ]* футов")
         if (abilities.additionalAbilities.contains("Тёмное зрение")) {
             abilities.additionalAbilities["Тёмное зрение"]?.let {
@@ -173,7 +181,7 @@ val elfAbilities = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(
-        Pair("languageFirst", listOf(woodElf.name, highElf.name, drow.name))
+        Pair("subrace", listOf(woodElf.name, highElf.name, drow.name))
     ),
     requirements = { true },
     description = "Увеличение характеристик. Значение вашей Ловкости увеличивается на 2.\n" +
