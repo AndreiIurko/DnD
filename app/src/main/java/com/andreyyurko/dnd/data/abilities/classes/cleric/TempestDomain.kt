@@ -56,7 +56,7 @@ var bonusProficiencyTempestDomain = AbilityNode(
     name = "Дополнительные владения домена бури",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.armorProficiency.add(ArmorProf.HeavyArmor)
-        //abilities.weaponProficiency.add()
+        addAllMartialWeapons(abilities)
         abilities
     },
     alternatives = mutableMapOf(),

@@ -157,7 +157,7 @@ var channelDivinity: AbilityNode = AbilityNode(
     name = "Божественный канал",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         if (!abilities.currentState.charges.contains("Божественный канал")) {
-            abilities.currentState.charges["Ци"] = ChargesCounter(
+            abilities.currentState.charges["Божественный канал"] = ChargesCounter(
                 current = 1,
                 maximum = 1
             )
