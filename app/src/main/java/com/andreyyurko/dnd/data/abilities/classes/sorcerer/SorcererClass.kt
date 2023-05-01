@@ -114,6 +114,12 @@ var sorcerer1: AbilityNodeLevel = AbilityNodeLevel(
         abilities.level += 1
         abilities.proficiencyBonus += 2
         abilities.hp += abilityToModifier(abilities.constitution) + 6
+        if (!abilities.currentState.charges.contains("Ячейки_1")) {
+            abilities.currentState.charges["Ячейки_1"] = ChargesCounter(
+                current = 2,
+                maximum = 2
+            )
+        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -200,6 +206,10 @@ var sorcerer2: AbilityNodeLevel = AbilityNodeLevel(
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
         }
+        abilities.currentState.charges["Ячейки_1"]?.let {
+            if (it.maximum < 3)
+                it.maximum = 3
+        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -244,6 +254,16 @@ var sorcerer3: AbilityNodeLevel = AbilityNodeLevel(
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
         }
+        if (!abilities.currentState.charges.contains("Ячейки_2")) {
+            abilities.currentState.charges["Ячейки_2"] = ChargesCounter(
+                current = 2,
+                maximum = 2
+            )
+        }
+        abilities.currentState.charges["Ячейки_1"]?.let {
+            if (it.maximum < 4)
+                it.maximum = 4
+        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -266,6 +286,10 @@ var sorcerer4: AbilityNodeLevel = AbilityNodeLevel(
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownCantripsCount += 1
         }
+        abilities.currentState.charges["Ячейки_2"]?.let {
+            if (it.maximum < 3)
+                it.maximum = 3
+        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -284,6 +308,12 @@ var sorcerer5: AbilityNodeLevel = AbilityNodeLevel(
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
         }
+        if (!abilities.currentState.charges.contains("Ячейки_3")) {
+            abilities.currentState.charges["Ячейки_3"] = ChargesCounter(
+                current = 2,
+                maximum = 2
+            )
+        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -300,6 +330,10 @@ var sorcerer6: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
+        }
+        abilities.currentState.charges["Ячейки_3"]?.let {
+            if (it.maximum < 3)
+                it.maximum = 3
         }
         abilities
     },
@@ -318,6 +352,12 @@ var sorcerer7: AbilityNodeLevel = AbilityNodeLevel(
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
         }
+        if (!abilities.currentState.charges.contains("Ячейки_4")) {
+            abilities.currentState.charges["Ячейки_4"] = ChargesCounter(
+                current = 1,
+                maximum = 1
+            )
+        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -334,6 +374,10 @@ var sorcerer8: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
+        }
+        abilities.currentState.charges["Ячейки_4"]?.let {
+            if (it.maximum < 2)
+                it.maximum = 2
         }
         abilities
     },
@@ -352,6 +396,16 @@ var sorcerer9: AbilityNodeLevel = AbilityNodeLevel(
         abilities.proficiencyBonus += 1
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
+        }
+        abilities.currentState.charges["Ячейки_4"]?.let {
+            if (it.maximum < 3)
+                it.maximum = 3
+        }
+        if (!abilities.currentState.charges.contains("Ячейки_5")) {
+            abilities.currentState.charges["Ячейки_5"] = ChargesCounter(
+                current = 1,
+                maximum = 1
+            )
         }
         abilities
     },
@@ -387,6 +441,10 @@ var sorcerer10: AbilityNodeLevel = AbilityNodeLevel(
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
         }
+        abilities.currentState.charges["Ячейки_5"]?.let {
+            if (it.maximum < 2)
+                it.maximum = 2
+        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -405,6 +463,12 @@ var sorcerer11: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
+        }
+        if (!abilities.currentState.charges.contains("Ячейки_6")) {
+            abilities.currentState.charges["Ячейки_6"] = ChargesCounter(
+                current = 1,
+                maximum = 1
+            )
         }
         abilities
     },
@@ -441,6 +505,12 @@ var sorcerer13: AbilityNodeLevel = AbilityNodeLevel(
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
         }
+        if (!abilities.currentState.charges.contains("Ячейки_7")) {
+            abilities.currentState.charges["Ячейки_7"] = ChargesCounter(
+                current = 1,
+                maximum = 1
+            )
+        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -474,6 +544,12 @@ var sorcerer15: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
+        }
+        if (!abilities.currentState.charges.contains("Ячейки_8")) {
+            abilities.currentState.charges["Ячейки_8"] = ChargesCounter(
+                current = 1,
+                maximum = 1
+            )
         }
         abilities
     },
@@ -527,6 +603,12 @@ var sorcerer17: AbilityNodeLevel = AbilityNodeLevel(
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
         }
+        if (!abilities.currentState.charges.contains("Ячейки_9")) {
+            abilities.currentState.charges["Ячейки_9"] = ChargesCounter(
+                current = 1,
+                maximum = 1
+            )
+        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -546,6 +628,10 @@ var sorcerer18: AbilityNodeLevel = AbilityNodeLevel(
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
         }
+        abilities.currentState.charges["Ячейки_5"]?.let {
+            if (it.maximum < 3)
+                it.maximum = 3
+        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -563,6 +649,10 @@ var sorcerer19: AbilityNodeLevel = AbilityNodeLevel(
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
         }
+        abilities.currentState.charges["Ячейки_6"]?.let {
+            if (it.maximum < 2)
+                it.maximum = 2
+        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -579,6 +669,10 @@ var sorcerer20: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
+        }
+        abilities.currentState.charges["Ячейки_7"]?.let {
+            if (it.maximum < 2)
+                it.maximum = 2
         }
         abilities
     },

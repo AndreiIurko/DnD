@@ -39,7 +39,7 @@ var baseAN: AbilityNode = AbilityNode(
         Pair("commonAbilities", listOf(commonRoot.name)),
         Pair(
             "class",
-            listOf(monk1.name, barbarian1.name, fighter1.name, sorcerer1.name, cleric1.name, wizard1.name, bard1.name)
+            listOf(monk1.name, fighter1.name, sorcerer1.name, cleric1.name, wizard1.name, bard1.name)
         ),
         Pair("race", listOf(human.name, dwarf.name, elf.name, halfling.name))
     ),

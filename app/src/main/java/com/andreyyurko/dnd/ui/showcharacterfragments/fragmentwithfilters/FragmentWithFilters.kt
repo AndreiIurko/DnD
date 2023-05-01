@@ -54,6 +54,12 @@ open class FragmentWithFilters : BaseFragment {
             textView.isClickable = true
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, button.textSize)
             textView.text = enumValue.shownName
+
+            if (textView.text.length < 4) {
+                textView.width = (50 * requireActivity().resources.displayMetrics.density).toInt()
+                textView.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+            }
+
             if (set.contains(enumValue)) textView.setBackgroundColor(
                 ContextCompat.getColor(
                     button.context,
@@ -85,6 +91,12 @@ open class FragmentWithFilters : BaseFragment {
             textView.isClickable = true
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, button.textSize)
             textView.text = value
+
+            if (textView.text.length < 4) {
+                textView.width = (50 * requireActivity().resources.displayMetrics.density).toInt()
+                textView.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+            }
+
             parent.addView(textView)
 
             if (set.contains(value)) textView.setBackgroundColor(

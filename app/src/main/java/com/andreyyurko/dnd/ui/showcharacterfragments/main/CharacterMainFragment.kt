@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.activity.OnBackPressedCallback
 import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.core.view.children
 import androidx.lifecycle.Observer
 import androidx.lifecycle.coroutineScope
 import androidx.navigation.NavController
@@ -26,6 +28,7 @@ import com.andreyyurko.dnd.ui.base.BaseFragment
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.PhotoPicker
 import com.andreyyurko.dnd.utils.onPressAnimation
+import com.google.android.material.checkbox.MaterialCheckBox
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.applyInsetter
 import kotlinx.coroutines.flow.collectLatest
@@ -69,8 +72,28 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
             type(statusBars = true) { margin() }
         }
 
+        viewBinding.spellSlotsLinearLayout.applyInsetter {
+            type(statusBars = true) { margin() }
+        }
+
         characterViewModel.shownCharacter.image?.let {
             viewBinding.iconImageButton.setImageBitmap(it)
+        }
+        setupSlots()
+
+        viewBinding.spellSlotsButton.setOnClickListener {
+            if (viewBinding.spellSlotsLinearLayout.translationX == 0f) {
+                ObjectAnimator.ofFloat(viewBinding.spellSlotsLinearLayout, "translationX",
+                    viewBinding.spellSlotsLinearLayout.translationX, -252*resources.displayMetrics.density).start()
+                ObjectAnimator.ofFloat(viewBinding.spellSlotsButton, "translationX",
+                    viewBinding.spellSlotsButton.translationX, -2f).start()
+            }
+            else {
+                ObjectAnimator.ofFloat(viewBinding.spellSlotsLinearLayout, "translationX",
+                    viewBinding.spellSlotsLinearLayout.translationX, 0f).start()
+                ObjectAnimator.ofFloat(viewBinding.spellSlotsButton, "translationX",
+                    viewBinding.spellSlotsButton.translationX, 250*resources.displayMetrics.density).start()
+            }
         }
 
         viewBinding.iconImageButton.setOnClickListener {
@@ -250,6 +273,40 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
                 navController.navigate(destId)
                 destinationList.add(destId)
                 characterMenu.dismiss()
+            }
+        }
+    }
+
+    private fun setupSlots() {
+        for (i in 0 until viewBinding.spellSlotsLinearLayout.childCount) {
+            setupLinearLayout(viewBinding.spellSlotsLinearLayout.getChildAt(i) as LinearLayout, i+1)
+        }
+    }
+
+    private fun setupLinearLayout(linearLayout: LinearLayout, level: Int) {
+        for (i in 1 until linearLayout.childCount) {
+            val checkBox: MaterialCheckBox = linearLayout.getChildAt(i) as MaterialCheckBox
+            val charges = characterViewModel.shownCharacter.characterInfo.currentState.charges["Ячейки_$level"]
+            if (charges == null) {
+                checkBox.isEnabled = false
+                continue
+            }
+            if (charges.maximum < i) {
+                checkBox.isEnabled = false
+                continue
+            }
+
+            checkBox.isChecked = charges.current >= i
+
+            checkBox.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    charges.current += 1
+                    characterViewModel.updateCharacterInfo()
+                }
+                else {
+                    charges.current -= 1
+                    characterViewModel.updateCharacterInfo()
+                }
             }
         }
     }

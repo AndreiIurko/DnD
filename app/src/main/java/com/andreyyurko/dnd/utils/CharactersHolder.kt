@@ -269,6 +269,10 @@ class CharactersHolder @Inject constructor(
     }
 
     private fun deleteCharacter(character: Character) {
+
+        getApplication<Application>().applicationContext.deleteFile(character.id.toString() + DB_IMAGE)
+        characterImages.remove(character.id)
+
         db.putStringsAsync(
             listOf(
                 Pair(DB_CHARACTER_IDS, Gson().toJson(characters.keys))

@@ -1,311 +1,294 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/root"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
->
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/addInfoContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+        android:id="@+id/addInfoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <EditText
-                android:id="@+id/searchEditText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="Введите часть названия"
-                android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/searchButton"
-                android:layout_marginEnd="6dp"
-        />
+            android:id="@+id/searchEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Введите часть названия"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/searchButton"
+            android:layout_marginEnd="6dp" />
 
         <ImageButton
-                android:id="@+id/searchButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_search_32"
-                android:background="@color/base_background"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="84dp"/>
+            android:id="@+id/searchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_search_32"
+            android:background="@color/base_background"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="84dp" />
 
         <LinearLayout
-                android:id="@+id/changeListsButton"
-                android:layout_width="wrap_content"
+            android:id="@+id/changeListsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/searchEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="@drawable/border">
+
+            <TextView
+                android:id="@+id/preparedButton"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/searchEditText"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:background="@drawable/border"
-        >
+                app:layout_constraintEnd_toStartOf="@id/knownButton"
+                android:text="Подготовленные"
+                android:textAlignment="center"
+                android:clickable="true"
+                android:focusable="true" />
 
-            <TextView
-                    android:id="@+id/preparedButton"
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/searchEditText"
-                    app:layout_constraintEnd_toStartOf="@id/knownButton"
-                    android:text="Подготовленные"
-                    android:textAlignment="center"
-                    android:clickable="true"
-                    android:focusable="true"/>
             <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/on_primary"/>
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/on_primary" />
+
             <TextView
-                    android:id="@+id/knownButton"
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/searchEditText"
-                    app:layout_constraintStart_toEndOf="@id/preparedButton"
-                    android:textAlignment="center"
-                    android:text="Известные"
-                    android:textColor="@color/on_primary"
-                    android:clickable="true"
-                    android:focusable="true"/>
+                android:id="@+id/knownButton"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/searchEditText"
+                app:layout_constraintStart_toEndOf="@id/preparedButton"
+                android:textAlignment="center"
+                android:text="Известные"
+                android:textColor="@color/on_primary"
+                android:clickable="true"
+                android:focusable="true" />
         </LinearLayout>
 
         <LinearLayout
-                android:id="@+id/spellsCountContainer"
-                android:layout_width="wrap_content"
+            android:id="@+id/spellsCountContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/changeListsButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/changeListsButton"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="6dp"
-                android:orientation="horizontal"
-                android:gravity="center"
-        >
-            <LinearLayout
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-            >
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Заклинаний:"
-                        android:textSize="13dp"
-                />
+                android:gravity="center">
 
                 <TextView
-                        android:id="@+id/preparedSpellsCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="10"
-                        android:layout_marginStart="4dp"
-                        android:textSize="13dp"/>
-            </LinearLayout>
-            <LinearLayout
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-            >
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Максимум:"
-                        android:textSize="13dp"
-                />
-
-                <TextView
-                        android:id="@+id/maxSpellsCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="10"
-                        android:layout_marginStart="4dp"
-                        android:textSize="13dp"
-                />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-                android:id="@+id/cantripsCountContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/spellsCountContainer"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="6dp"
-                android:orientation="horizontal"
-                android:gravity="center"
-        >
-            <LinearLayout
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-            >
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Заговоров:"
-                        android:textSize="13dp"
-                />
-
-                <TextView
-                        android:id="@+id/preparedCantripsCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="10"
-                        android:layout_marginStart="4dp"
-                        android:textSize="13dp"
-                />
-            </LinearLayout>
-            <LinearLayout
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-            >
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Максимум:"
-                        android:textSize="13dp"
-                />
-
-                <TextView
-                        android:id="@+id/maxCantripsCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="10"
-                        android:layout_marginStart="4dp"
-                        android:textSize="13dp"
-                />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/cantripsCountContainer"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="6dp"
-        >
-            <TextView
-                    android:id="@+id/spellNameText"
-                    android:layout_marginStart="16dp"
-                    android:layout_width="160dp"
-                    android:layout_height="wrap_content"
-                    android:text="Имя"
-                    android:textColor="@color/on_primary"
-                    android:textSize="12sp"
-            />
-
-            <TextView
-                    android:id="@+id/spellLevelText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="уровень"
-                    android:textColor="@color/on_primary"
-                    android:textSize="12sp"
-            />
+                    android:text="Заклинаний:"
+                    android:textSize="13dp" />
 
-            <TextView
-                    android:layout_marginStart="14dp"
-                    android:id="@+id/spellTimeText"
+                <TextView
+                    android:id="@+id/preparedSpellsCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="время"
-                    android:textColor="@color/on_primary"
-                    android:textSize="12sp"
-            />
+                    android:text="10"
+                    android:layout_marginStart="4dp"
+                    android:textSize="13dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Максимум:"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/maxSpellsCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:layout_marginStart="4dp"
+                    android:textSize="13dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/cantripsCountContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/spellsCountContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Заговоров:"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/preparedCantripsCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:layout_marginStart="4dp"
+                    android:textSize="13dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Максимум:"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/maxCantripsCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:layout_marginStart="4dp"
+                    android:textSize="13dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/cantripsCountContainer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="6dp">
 
             <TextView
-                    android:id="@+id/isPrepared"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="подг"
-                    android:textColor="@color/on_primary"
-                    android:textSize="12sp"
-                    android:gravity="end"
-                    android:layout_marginEnd="10dp"
-            />
+                android:id="@+id/spellNameText"
+                android:layout_marginStart="16dp"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:text="Имя"
+                android:textColor="@color/on_primary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/spellLevelText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="уровень"
+                android:textColor="@color/on_primary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_marginStart="14dp"
+                android:id="@+id/spellTimeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="время"
+                android:textColor="@color/on_primary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/isPrepared"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="подг"
+                android:textColor="@color/on_primary"
+                android:textSize="12sp"
+                android:gravity="end"
+                android:layout_marginEnd="10dp" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/spellsRecyclerView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="56dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/addInfoContainer"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-    />
+        android:id="@+id/spellsRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="56dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/addInfoContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView
-            android:id="@+id/filtersButton"
-            android:layout_width="100dp"
-            android:layout_height="25dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/tab_background"
-            android:textAlignment="center"
-            android:text="фильтр"
-            android:textColor="@color/base_background"
-            android:paddingStart="20dp"
-            android:textSize="15sp"
-    />
+        android:id="@+id/filtersButton"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/tab_background"
+        android:textAlignment="center"
+        android:text="фильтр"
+        android:textColor="@color/base_background"
+        android:paddingStart="20dp"
+        android:textSize="15sp" />
 
     <LinearLayout
-            android:id="@+id/filtersView"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            app:layout_constraintTop_toTopOf="parent"
-            android:elevation="5dp"
-            android:padding="6dp"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            android:background="@color/background"
-    >
+        android:id="@+id/filtersView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="5dp"
+        android:padding="6dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:background="@color/background">
 
         <TextView
-                android:id="@+id/levelButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Уровень"
-                android:textSize="20sp"
-                android:background="@drawable/border"
-                android:paddingHorizontal="10dp"
-                android:layout_marginStart="12dp"
-        />
+            android:id="@+id/levelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Уровень"
+            android:textSize="20sp"
+            android:background="@drawable/border"
+            android:paddingHorizontal="10dp"
+            android:layout_marginStart="12dp" />
 
         <TextView
-                android:id="@+id/sourceButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Источник"
-                android:textSize="20sp"
-                android:background="@drawable/border"
-                android:paddingHorizontal="10dp"
-                android:layout_marginStart="12dp"
-        />
+            android:id="@+id/sourceButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Источник"
+            android:textSize="20sp"
+            android:background="@drawable/border"
+            android:paddingHorizontal="10dp"
+            android:layout_marginStart="12dp" />
 
         <TextView
-                android:id="@+id/schoolButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Школа"
-                android:textSize="20sp"
-                android:background="@drawable/border"
-                android:paddingHorizontal="10dp"
-                android:layout_marginStart="12dp"
-        />
+            android:id="@+id/schoolButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Школа"
+            android:textSize="20sp"
+            android:background="@drawable/border"
+            android:paddingHorizontal="10dp"
+            android:layout_marginStart="12dp" />
 
     </LinearLayout>
 
