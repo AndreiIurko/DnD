@@ -1,5 +1,8 @@
 package com.andreyyurko.dnd.data.abilities.races
 
+import com.andreyyurko.dnd.data.abilities.other.brewersSupplies
+import com.andreyyurko.dnd.data.abilities.other.masonsTools
+import com.andreyyurko.dnd.data.abilities.other.smithsTools
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
@@ -71,6 +74,7 @@ val dwarfAbilities = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(
+        Pair("tool", listOf(brewersSupplies.name, masonsTools.name, smithsTools.name)),
         Pair("subraces", listOf(mountainDwarf.name, hillDwarf.name))
     ),
     requirements = { true },

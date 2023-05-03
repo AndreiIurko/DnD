@@ -3,6 +3,7 @@ package com.andreyyurko.dnd.data.abilities.classes.monk
 import com.andreyyurko.dnd.data.characterData.Action
 import com.andreyyurko.dnd.data.characterData.ActionType
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
 import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
@@ -36,11 +37,18 @@ var openHandTechnique = AbilityNode(
 var wholenessOfBody = AbilityNode(
     name = "Исцеление тела",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        if (!abilities.currentState.charges.contains("Исцеление тела")) {
+            abilities.currentState.charges["Исцеление тела"] = ChargesCounter(
+                current = 1,
+                maximum = 1
+            )
+        }
         abilities.actionsList.add(
             Action(
                 name = "Исцеление тела",
                 description = "Вы получаете способность лечить себя. Вы можете действием восстановить количество хитов, равное вашему утроенному уровню монаха. Вы должны завершить продолжительный отдых, прежде чем сможете использовать это умение снова.\n",
-                type = ActionType.Action
+                type = ActionType.Action,
+                relatedCharges = "Исцеление тела"
             )
         )
         abilities

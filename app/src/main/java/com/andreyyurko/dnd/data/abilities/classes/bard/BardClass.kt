@@ -18,11 +18,55 @@ var classFeaturesBard: AbilityNode = AbilityNode(
         abilities.weaponProficiency.add(Weapon.ShortSword)
         abilities.weaponProficiency.add(Weapon.Rapier)
         abilities.weaponProficiency.add(Weapon.CrossbowHand)
-        // we need to add musical instruments
         abilities.armorProficiency.add(ArmorProf.LightArmor)
         abilities
     },
     alternatives = mutableMapOf(
+        Pair(
+            "musicalInstrument1",
+            listOf(
+                bagpipes.name,
+                drum.name,
+                dulcimer.name,
+                flute.name,
+                lute.name,
+                lyre.name,
+                horn.name,
+                panFlute.name,
+                shawm.name,
+                viol.name,
+            )
+        ),
+        Pair(
+            "musicalInstrument2",
+            listOf(
+                bagpipes.name,
+                drum.name,
+                dulcimer.name,
+                flute.name,
+                lute.name,
+                lyre.name,
+                horn.name,
+                panFlute.name,
+                shawm.name,
+                viol.name,
+            )
+        ),
+        Pair(
+            "musicalInstrument3",
+            listOf(
+                bagpipes.name,
+                drum.name,
+                dulcimer.name,
+                flute.name,
+                lute.name,
+                lyre.name,
+                horn.name,
+                panFlute.name,
+                shawm.name,
+                viol.name,
+            )
+        ),
         Pair(
             "skill1",
             listOf(

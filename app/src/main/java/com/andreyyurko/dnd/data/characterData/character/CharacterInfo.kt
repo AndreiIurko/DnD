@@ -23,7 +23,8 @@ data class CharacterInfo(
     var armorProficiency: MutableSet<ArmorProf> = mutableSetOf(),
     var weaponProficiency: MutableSet<Weapon> = mutableSetOf(),
     var armorAdditionalProficiency: MutableSet<Int> = mutableSetOf(), //every item has an id
-    var toolProficiency: MutableSet<Int> = mutableSetOf(), //every tool has an id
+    var toolProficiency: MutableSet<Tools> = mutableSetOf(),
+    var toolExpertise: MutableSet<Tools> = mutableSetOf(),
     var languageProficiency: MutableSet<Languages> = mutableSetOf(),
     var ac: Int = 0,
     var initiativeBonus: Int = 0,

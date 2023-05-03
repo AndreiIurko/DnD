@@ -23,6 +23,53 @@ enum class Skill(var skillName: String, var ability: Ability) {
     Survival("Выживание", Ability.Wisdom)
 }
 
+enum class ToolsType(var toolsType: String) {
+    ArtisansTools("Инструменты ремесленника"),
+    GamingSet("Игровой набор"),
+    MusicalInstrument("Музыкальный инструмент"),
+    Other("Особый инструмент"),
+}
+
+enum class Tools(var toolName: String, var toolsType: ToolsType) {
+    AlchemistsSupplies("Инструменты алхимика", ToolsType.ArtisansTools),
+    BrewersSupplies("Инструменты пивовара", ToolsType.ArtisansTools),
+    CalligraphersSupplies("Инструменты каллиграфа", ToolsType.ArtisansTools),
+    CarpentersTools("Инструменты плотника", ToolsType.ArtisansTools),
+    CartographersTools("Инструменты картографа", ToolsType.ArtisansTools),
+    CobblersTools("Инструменты сапожника", ToolsType.ArtisansTools),
+    CooksUtensils("Инструменты повара", ToolsType.ArtisansTools),
+    GlassblowersTools("Инструменты стеклодува", ToolsType.ArtisansTools),
+    JewelersTools("Инструменты ювелира", ToolsType.ArtisansTools),
+    LeatherworkersTools("Инструменты кожевника", ToolsType.ArtisansTools),
+    MasonsTools("Инструменты каменщика", ToolsType.ArtisansTools),
+    PaintersSupplies("Инструменты художника", ToolsType.ArtisansTools),
+    PottersTools("Инструменты гончара", ToolsType.ArtisansTools),
+    SmithsTools("Инструменты кузнеца", ToolsType.ArtisansTools),
+    TinkersTools("Инструменты ремонтника", ToolsType.ArtisansTools),
+    WeaversTools("Инструменты ткача", ToolsType.ArtisansTools),
+    WoodcarversTools("Инструменты резчика по дереву", ToolsType.ArtisansTools),
+    DiceSet("Кости", ToolsType.GamingSet),
+    PlayingCards("Игральные карты", ToolsType.GamingSet),
+    ThreeDragonAnte("Ставка трёх драконов", ToolsType.GamingSet),
+    DragonChess("Драконьи шахматы", ToolsType.GamingSet),
+    Bagpipes("Волынка", ToolsType.MusicalInstrument),
+    Drum("Барабан", ToolsType.MusicalInstrument),
+    Dulcimer("Цимбалы", ToolsType.MusicalInstrument),
+    Flute("Флейта", ToolsType.MusicalInstrument),
+    Lute("Лютня", ToolsType.MusicalInstrument),
+    Lyre("Лира", ToolsType.MusicalInstrument),
+    Horn("Рожок", ToolsType.MusicalInstrument),
+    PanFlute("Флейта Пана", ToolsType.MusicalInstrument),
+    Shawm("Шалмей", ToolsType.MusicalInstrument),
+    Viol("Виола", ToolsType.MusicalInstrument),
+    ThievesTools("Воровские инструменты", ToolsType.Other),
+    DisguiseTools("Набор для грима", ToolsType.Other),
+    Forgery("Набор для фальсификации", ToolsType.Other),
+    PoisonerTools("Инструменты отравителя", ToolsType.Other),
+    HerbalismTools("Инструменты травника", ToolsType.Other),
+    NavigatorTools("Инструменты навигатора", ToolsType.Other),
+}
+
 enum class Ability(var abilityName: String, var abilityShortName: String) {
     Strength("Сила", "Сил"),
     Dexterity("Ловкость", "Лвк"),

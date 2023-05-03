@@ -51,7 +51,6 @@ var baseActionsAN = AbilityNode(
                 )
             )
         }
-
         abilities.actionsList.add(
             Action(
                 name = "Засада",
