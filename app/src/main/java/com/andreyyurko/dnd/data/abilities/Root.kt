@@ -62,6 +62,9 @@ var mapOfAn: MutableMap<String, AbilityNode> = (
                 + mapOfFightingStyles
                 + mapOfAbilityScoreImprovement
                 + mapOfSkills
+                + mapOfExpertise
+                + mapOfSkillAndExpertise
                 + mapOfLanguages
                 + mapOfTools
+                + mapOfToolsExpertise
         ).toMutableMap()

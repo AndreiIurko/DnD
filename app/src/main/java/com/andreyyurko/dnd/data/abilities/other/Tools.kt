@@ -614,6 +614,9 @@ var mapOfTools = mutableMapOf(
     Pair(forgery.name, forgery),
     Pair(poisonerTools.name, poisonerTools),
     Pair(herbalismTools.name, herbalismTools),
-    Pair(navigatorTools.name, navigatorTools),
+    Pair(navigatorTools.name, navigatorTools)
+)
+
+var mapOfToolsExpertise = mutableMapOf(
     Pair(thievesToolsExpertise.name, thievesToolsExpertise)
 )

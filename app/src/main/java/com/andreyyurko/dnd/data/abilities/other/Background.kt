@@ -8,14 +8,10 @@ var customBackstory: AbilityNode = AbilityNode(
     name = "Предыстория",
     changesInCharacterInfo = {abilities: CharacterInfo -> abilities },
     alternatives = mutableMapOf(
-        Pair("first", listOf(acrobatics.name, animalHandling.name, arcana.name, athletics.name, deception.name,
-            history.name, insight.name, intimidation.name, investigation.name, medicine.name, nature.name,
-            perception.name, performance.name, persuasion.name, religion.name, sleightOfHand.name, stealth.name,
-            survival.name)),
-        Pair("second", listOf(acrobatics.name, animalHandling.name, arcana.name, athletics.name, deception.name,
-            history.name, insight.name, intimidation.name, investigation.name, medicine.name, nature.name,
-            perception.name, performance.name, persuasion.name, religion.name, sleightOfHand.name, stealth.name,
-            survival.name))
+        Pair("first", mapOfSkills.keys.toList()),
+        Pair("second", mapOfSkills.keys.toList()),
+        Pair("third", mapOfLanguages.keys.toList() + mapOfTools.keys.toList()),
+        Pair("fourth", mapOfLanguages.keys.toList() + mapOfTools.keys.toList())
     ),
     requirements = {true},
     description = "Выберите два навыка для вашей предыстории."

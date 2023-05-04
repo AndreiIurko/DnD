@@ -870,6 +870,9 @@ var mapOfSkills = mutableMapOf(
     Pair(sleightOfHand.name, sleightOfHand),
     Pair(stealth.name, stealth),
     Pair(survival.name, survival),
+)
+
+var mapOfExpertise = mutableMapOf(
     Pair(acrobaticsExpertise.name, acrobaticsExpertise),
     Pair(animalHandlingExpertise.name, animalHandlingExpertise),
     Pair(arcanaExpertise.name, arcanaExpertise),
@@ -888,6 +891,9 @@ var mapOfSkills = mutableMapOf(
     Pair(sleightOfHandExpertise.name, sleightOfHandExpertise),
     Pair(stealthExpertise.name, stealthExpertise),
     Pair(survivalExpertise.name, survivalExpertise),
+)
+
+var mapOfSkillAndExpertise = mutableMapOf(
     Pair(acrobaticsSkillAndExpertise.name, acrobaticsSkillAndExpertise),
     Pair(animalHandlingSkillAndExpertise.name, animalHandlingSkillAndExpertise),
     Pair(arcanaSkillAndExpertise.name, arcanaSkillAndExpertise),
