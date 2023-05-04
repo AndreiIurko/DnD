@@ -255,19 +255,19 @@ enum class Weapon(
     ),
     Blowgun(
         "Духовая трубка", "10 зм", "1", DamageType.Piercing,
-        listOf("боеприпас (25/100)", "перезарядка"), setOf(Ability.Dexterity)
+        listOf("боеприпас (25/100)", "перезарядка"), setOf(Ability.Dexterity), false
     ),
     CrossbowHand(
         "Арбалет, ручной", "75 зм", "1к6", DamageType.Piercing,
-        listOf("боеприпас (30/120)", "лёгкое", "перезарядка"), setOf(Ability.Dexterity)
+        listOf("боеприпас (30/120)", "лёгкое", "перезарядка"), setOf(Ability.Dexterity), false
     ),
     CrossbowHeavy(
         "Арбалет, тяжёлый", "50 зм", "1к10", DamageType.Piercing,
-        listOf("боеприпас (100/400)", "двуручное", "перезарядка", "тяжёлое"), setOf(Ability.Dexterity)
+        listOf("боеприпас (100/400)", "двуручное", "перезарядка", "тяжёлое"), setOf(Ability.Dexterity), false
     ),
     LongBow(
         "Длинный лук", "50 зм", "1к8", DamageType.Piercing,
-        listOf("боеприпас (150/600)", "двуручное", "тяжёлое"), setOf(Ability.Strength, Ability.Dexterity)
+        listOf("боеприпас (150/600)", "двуручное", "тяжёлое"), setOf(Ability.Strength, Ability.Dexterity), false
     ),
     Net(
         "Сеть", "1 зм", "0", DamageType.Slashing,

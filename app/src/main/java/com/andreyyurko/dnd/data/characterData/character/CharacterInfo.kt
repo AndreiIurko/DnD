@@ -5,6 +5,7 @@ import com.andreyyurko.dnd.data.spells.CharacterSpells
 
 data class CharacterInfo(
     var level: Int = 0,
+    var spellCasterLevel: Float = 0f,
     var race: String = "",
     var characterClass: Classes = Classes.NotImplemented,
     var passiveInsightBonus: Int = 0,
@@ -53,6 +54,7 @@ fun mergeCharacterInfo(characterInfoFirst: CharacterInfo, characterInfoSecond: C
     resultCharacterInfo.characterClass.className =
         characterInfoFirst.characterClass.className + characterInfoSecond.characterClass.className
     resultCharacterInfo.level = characterInfoFirst.level + characterInfoSecond.level
+    resultCharacterInfo.spellCasterLevel = characterInfoFirst.spellCasterLevel + characterInfoSecond.spellCasterLevel
     resultCharacterInfo.race = characterInfoFirst.race + characterInfoSecond.race
     resultCharacterInfo.strength = characterInfoFirst.strength + characterInfoSecond.strength
     resultCharacterInfo.dexterity = characterInfoFirst.dexterity + characterInfoSecond.dexterity

@@ -229,9 +229,9 @@ var extraAttack: AbilityNode = AbilityNode(
         for (action in abilities.actionsList) {
             if (action.name == "Атака") {
                 val actionSplit: MutableList<String> = action.description.split("\n") as MutableList<String>
-                actionSplit[0] = if (abilities.level >= 20) "Совершить четыре атаки рукопашным оружием"
-                else if (abilities.level >= 11) "Совершить три атаки рукопашным оружием"
-                else "Совершить 2 атаки рукопашным оружием"
+                actionSplit[0] = if (abilities.level >= 20) "Совершить четыре атаки оружием"
+                else if (abilities.level >= 11) "Совершить три атаки оружием"
+                else "Совершить две атаки оружием"
                 action.description = actionSplit.joinToString("\n")
             }
         }

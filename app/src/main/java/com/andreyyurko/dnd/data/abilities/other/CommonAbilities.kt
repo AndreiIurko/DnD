@@ -1,9 +1,11 @@
 package com.andreyyurko.dnd.data.abilities.other
 
 
+import android.util.Log
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
+import kotlin.math.floor
 
 var baseActionsAN = AbilityNode(
     "base_actions_an",
@@ -19,13 +21,14 @@ var baseActionsAN = AbilityNode(
         }
         damage = sumTwoDamages(damage, damageBonus.toString())
 
+
         abilities.currentState.firstWeapon.shownDamage = damage
         abilities.currentState.firstWeapon.shownToHit = toHitBonus
 
         abilities.actionsList.add(
             Action(
                 name = "Атака",
-                description = "Совершить одну атаку рукопашным оружием\n" +
+                description = "Совершить одну атаку оружием\n" +
                         "Бонус к попаданию: ${if (toHitBonus < 0) "" else "+"}${toHitBonus}\n" +
                         "Урон: $damage",
                 type = ActionType.Action
@@ -175,6 +178,7 @@ var baseActionsAN = AbilityNode(
                 type = ActionType.Additional
             )
         )
+        setupSpellSlots(abilities)
         abilities
     },
     mutableMapOf(),
@@ -238,6 +242,8 @@ fun calculateWeaponProp(weapon: Weapon, abilities: CharacterInfo): Pair<String, 
         toHitBonus += abilities.proficiencyBonus
     }
 
+    toHitBonus += weapon.toHitBonus
+
     var damage = weapon.damage
 
     abilities.currentState.inventoryRelevantData[abilities.currentState.firstWeaponName]?.let {
@@ -282,4 +288,46 @@ fun sumTwoDamages(damage1: String, damage2: String): String {
 
     if (result == "") result = "0"
     return result
+}
+
+fun getSpellSlotsCount(abilities: CharacterInfo): List<Int> {
+    when(floor(abilities.spellCasterLevel).toInt()) {
+        1 -> return listOf(2)
+        2 -> return listOf(3)
+        3 -> return listOf(4, 2)
+        4 -> return listOf(4, 3)
+        5 -> return listOf(4, 3, 2)
+        6 -> return listOf(4, 3, 3)
+        7 -> return listOf(4, 3, 3, 1)
+        8 -> return listOf(4, 3, 3, 2)
+        9 -> return listOf(4, 3, 3, 3, 1)
+        10 -> return listOf(4, 3, 3, 3, 2)
+        in 11..12 -> return listOf(4, 3, 3, 3, 2, 1)
+        in 13..14 -> return listOf(4, 3, 3, 3, 2, 1, 1)
+        in 14..16 -> return listOf(4, 3, 3, 3, 2, 1, 1, 1)
+        17 -> return listOf(4, 3, 3, 3, 2, 1, 1, 1, 1)
+        18 -> return listOf(4, 3, 3, 3, 3, 1, 1, 1, 1)
+        19 -> return listOf(4, 3, 3, 3, 3, 2, 1, 1, 1)
+        20 -> return listOf(4, 3, 3, 3, 3, 2, 2, 1, 1)
+        else -> return listOf()
+    }
+}
+
+fun setupSpellSlots(abilities: CharacterInfo) {
+    val spellSlots = getSpellSlotsCount(abilities)
+    for (i in spellSlots.indices) {
+        val spellLevel: String = (i+1).toString()
+        if (!abilities.currentState.charges.contains("Ячейки_$spellLevel")) {
+            abilities.currentState.charges["Ячейки_$spellLevel"] = ChargesCounter(
+                current = spellSlots[i],
+                maximum = spellSlots[i]
+            )
+        }
+        if (abilities.currentState.charges["Ячейки_$spellLevel"]!!.maximum < spellSlots[i]) {
+            abilities.currentState.charges["Ячейки_$spellLevel"] = ChargesCounter(
+                current = spellSlots[i],
+                maximum = spellSlots[i]
+            )
+        }
+    }
 }
