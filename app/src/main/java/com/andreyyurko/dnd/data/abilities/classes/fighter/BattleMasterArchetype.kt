@@ -1,5 +1,22 @@
 package com.andreyyurko.dnd.data.abilities.classes.fighter
 
+import com.andreyyurko.dnd.data.abilities.other.alchemistsSupplies
+import com.andreyyurko.dnd.data.abilities.other.brewersSupplies
+import com.andreyyurko.dnd.data.abilities.other.calligraphersSupplies
+import com.andreyyurko.dnd.data.abilities.other.carpentersTools
+import com.andreyyurko.dnd.data.abilities.other.cartographersTools
+import com.andreyyurko.dnd.data.abilities.other.cobblersTools
+import com.andreyyurko.dnd.data.abilities.other.cooksUtensils
+import com.andreyyurko.dnd.data.abilities.other.glassblowersTools
+import com.andreyyurko.dnd.data.abilities.other.jewelersTools
+import com.andreyyurko.dnd.data.abilities.other.leatherworkersTools
+import com.andreyyurko.dnd.data.abilities.other.masonsTools
+import com.andreyyurko.dnd.data.abilities.other.paintersSupplies
+import com.andreyyurko.dnd.data.abilities.other.pottersTools
+import com.andreyyurko.dnd.data.abilities.other.smithsTools
+import com.andreyyurko.dnd.data.abilities.other.tinkersTools
+import com.andreyyurko.dnd.data.abilities.other.weaversTools
+import com.andreyyurko.dnd.data.abilities.other.woodcarversTools
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
@@ -507,7 +524,30 @@ var combatSuperiority = AbilityNode(
 var studentOfWar = AbilityNode(
     name = "Ученик войны",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(),
+    alternatives = mutableMapOf(
+        Pair(
+            "tool",
+            listOf(
+                alchemistsSupplies.name,
+                brewersSupplies.name,
+                calligraphersSupplies.name,
+                carpentersTools.name,
+                cartographersTools.name,
+                cobblersTools.name,
+                cooksUtensils.name,
+                glassblowersTools.name,
+                jewelersTools.name,
+                leatherworkersTools.name,
+                masonsTools.name,
+                paintersSupplies.name,
+                pottersTools.name,
+                smithsTools.name,
+                tinkersTools.name,
+                weaversTools.name,
+                woodcarversTools.name
+            )
+        )
+    ),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Fighter
     },

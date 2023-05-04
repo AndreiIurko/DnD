@@ -14,6 +14,10 @@ var classFeaturesFighter: AbilityNode = AbilityNode(
         abilities.savingThrowProf.add(Ability.Constitution)
         addAllSimpleWeapons(abilities)
         addAllMartialWeapons(abilities)
+        abilities.armorProficiency.add(ArmorProf.LightArmor)
+        abilities.armorProficiency.add(ArmorProf.MediumArmor)
+        abilities.armorProficiency.add(ArmorProf.HeavyArmor)
+        abilities.armorProficiency.add(ArmorProf.Shield)
         abilities
     },
     alternatives = mutableMapOf(

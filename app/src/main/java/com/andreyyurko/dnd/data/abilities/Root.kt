@@ -8,6 +8,7 @@ import com.andreyyurko.dnd.data.abilities.classes.mapOfClasses
 import com.andreyyurko.dnd.data.abilities.classes.monk.monk1
 import com.andreyyurko.dnd.data.abilities.classes.sorcerer.sorcerer1
 import com.andreyyurko.dnd.data.abilities.classes.wizard.wizard1
+import com.andreyyurko.dnd.data.abilities.classes.rogue.rogue1
 import com.andreyyurko.dnd.data.abilities.other.*
 import com.andreyyurko.dnd.data.abilities.races.dwarf
 import com.andreyyurko.dnd.data.abilities.races.elf
@@ -39,7 +40,7 @@ var baseAN: AbilityNode = AbilityNode(
         Pair("commonAbilities", listOf(commonRoot.name)),
         Pair(
             "class",
-            listOf(monk1.name, fighter1.name, sorcerer1.name, cleric1.name, wizard1.name, bard1.name)
+            listOf(monk1.name, fighter1.name, sorcerer1.name, cleric1.name, wizard1.name, bard1.name, rogue1.name)
         ),
         Pair("race", listOf(human.name, dwarf.name, elf.name, halfling.name))
     ),
@@ -62,4 +63,5 @@ var mapOfAn: MutableMap<String, AbilityNode> = (
                 + mapOfAbilityScoreImprovement
                 + mapOfSkills
                 + mapOfLanguages
+                + mapOfTools
         ).toMutableMap()

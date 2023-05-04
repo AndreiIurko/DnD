@@ -18,6 +18,38 @@ var classFeaturesMonk: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(
         Pair(
+            "tool",
+            listOf(
+                alchemistsSupplies.name,
+                brewersSupplies.name,
+                calligraphersSupplies.name,
+                carpentersTools.name,
+                cartographersTools.name,
+                cobblersTools.name,
+                cooksUtensils.name,
+                glassblowersTools.name,
+                jewelersTools.name,
+                leatherworkersTools.name,
+                masonsTools.name,
+                paintersSupplies.name,
+                pottersTools.name,
+                smithsTools.name,
+                tinkersTools.name,
+                weaversTools.name,
+                woodcarversTools.name,
+                bagpipes.name,
+                drum.name,
+                dulcimer.name,
+                flute.name,
+                lute.name,
+                lyre.name,
+                horn.name,
+                panFlute.name,
+                shawm.name,
+                viol.name,
+            )
+        ),
+        Pair(
             "skill1",
             listOf(acrobatics.name, athletics.name, history.name, insight.name, religion.name, stealth.name)
         ),
