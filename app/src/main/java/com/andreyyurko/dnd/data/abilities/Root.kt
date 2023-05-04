@@ -1,6 +1,5 @@
 package com.andreyyurko.dnd.data.abilities
 
-import com.andreyyurko.dnd.data.abilities.classes.barbarian1
 import com.andreyyurko.dnd.data.abilities.classes.bard.bard1
 import com.andreyyurko.dnd.data.abilities.classes.cleric.cleric1
 import com.andreyyurko.dnd.data.abilities.classes.fighter.fighter1
@@ -9,6 +8,7 @@ import com.andreyyurko.dnd.data.abilities.classes.monk.monk1
 import com.andreyyurko.dnd.data.abilities.classes.sorcerer.sorcerer1
 import com.andreyyurko.dnd.data.abilities.classes.wizard.wizard1
 import com.andreyyurko.dnd.data.abilities.classes.rogue.rogue1
+import com.andreyyurko.dnd.data.abilities.classes.barbarian.barbarian1
 import com.andreyyurko.dnd.data.abilities.other.*
 import com.andreyyurko.dnd.data.abilities.races.dwarf
 import com.andreyyurko.dnd.data.abilities.races.elf
@@ -40,7 +40,16 @@ var baseAN: AbilityNode = AbilityNode(
         Pair("commonAbilities", listOf(commonRoot.name)),
         Pair(
             "class",
-            listOf(monk1.name, fighter1.name, sorcerer1.name, cleric1.name, wizard1.name, bard1.name, rogue1.name)
+            listOf(
+                monk1.name,
+                fighter1.name,
+                sorcerer1.name,
+                cleric1.name,
+                wizard1.name,
+                bard1.name,
+                rogue1.name,
+                barbarian1.name
+            )
         ),
         Pair("race", listOf(human.name, dwarf.name, elf.name, halfling.name))
     ),

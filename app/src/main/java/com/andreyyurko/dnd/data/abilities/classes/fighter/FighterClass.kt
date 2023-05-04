@@ -229,6 +229,27 @@ var extraAttack: AbilityNode = AbilityNode(
         for (action in abilities.actionsList) {
             if (action.name == "Атака") {
                 val actionSplit: MutableList<String> = action.description.split("\n") as MutableList<String>
+                actionSplit[0] = "Совершить две атаки оружием"
+                action.description = actionSplit.joinToString("\n")
+            }
+        }
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { true },
+    add_requirements = listOf(),
+    description = "Если вы в свой ход совершаете действие Атака, вы можете совершить две атаки вместо одной.\n" +
+            "\n" +
+            "Количество атак увеличивается до трёх на 11-м уровне этого класса, и до четырёх на 20-м уровне.",
+    priority = Priority.DoLast
+)
+
+var fighterExtraAttack: AbilityNode = AbilityNode(
+    name = "Дополнительная атака (воинская)",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        for (action in abilities.actionsList) {
+            if (action.name == "Атака") {
+                val actionSplit: MutableList<String> = action.description.split("\n") as MutableList<String>
                 actionSplit[0] = if (abilities.level >= 20) "Совершить четыре атаки оружием"
                 else if (abilities.level >= 11) "Совершить три атаки оружием"
                 else "Совершить две атаки оружием"
@@ -255,7 +276,7 @@ var fighter5: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     alternatives = mutableMapOf(
-        Pair("first", listOf(extraAttack.name)),
+        Pair("first", listOf(fighterExtraAttack.name)),
     ),
     requirements = { true },
     add_requirements = listOf(),
@@ -543,6 +564,7 @@ var mapOfFighterAbilities: MutableMap<String, AbilityNode> = (mutableMapOf(
     Pair(fighter3.name, fighter3),
     Pair(fighter4.name, fighter4),
     Pair(extraAttack.name, extraAttack),
+    Pair(fighterExtraAttack.name, fighterExtraAttack),
     Pair(fighter5.name, fighter5),
     Pair(fighter6.name, fighter6),
     Pair(fighter7.name, fighter7),

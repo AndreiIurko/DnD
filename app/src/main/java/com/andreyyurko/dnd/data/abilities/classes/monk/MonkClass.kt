@@ -86,8 +86,12 @@ var classFeaturesMonk: AbilityNode = AbilityNode(
 var monkUnarmedDefence: AbilityNode = AbilityNode(
     name = "Монашеская защита без доспехов",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        if (abilities.currentState.armor == Armor.NoArmor)
-            abilities.ac = abilities.ac + (abilities.wisdom - 10) / 2
+        if (abilities.currentState.armor == Armor.NoArmor) {
+            abilities.ac = Integer.max(
+                abilities.ac,
+                10 + abilityToModifier(abilities.wisdom) + abilityToModifier(abilities.dexterity)
+            )
+        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -171,7 +175,7 @@ var kiUsing = AbilityNode(
             )
         }
         abilities.currentState.charges["Ци"]?.let {
-            if (it.maximum < abilities.level) {
+            if (it.maximum != abilities.level) {
                 abilities.currentState.charges["Ци"] = ChargesCounter(
                     current = abilities.level,
                     maximum = abilities.level

@@ -1,5 +1,6 @@
 package com.andreyyurko.dnd.data.abilities.classes
 
+import com.andreyyurko.dnd.data.abilities.classes.barbarian.mapOfBarbarianAbilities
 import com.andreyyurko.dnd.data.abilities.classes.bard.mapOfBardAbilities
 import com.andreyyurko.dnd.data.abilities.classes.cleric.mapOfClericAbilities
 import com.andreyyurko.dnd.data.abilities.classes.fighter.mapOfFighterAbilities
