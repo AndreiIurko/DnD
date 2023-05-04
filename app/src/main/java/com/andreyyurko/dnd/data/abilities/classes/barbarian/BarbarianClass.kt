@@ -2,14 +2,9 @@ package com.andreyyurko.dnd.data.abilities.classes.barbarian
 
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.classes.fighter.extraAttack
-import com.andreyyurko.dnd.data.abilities.classes.rogue.arcaneTrickster
-import com.andreyyurko.dnd.data.abilities.classes.rogue.assassinArchetype
 import com.andreyyurko.dnd.data.abilities.other.abilityScoreImprovement
-import com.andreyyurko.dnd.data.abilities.other.acrobatics
 import com.andreyyurko.dnd.data.abilities.other.animalHandling
 import com.andreyyurko.dnd.data.abilities.other.athletics
-import com.andreyyurko.dnd.data.abilities.other.history
-import com.andreyyurko.dnd.data.abilities.other.insight
 import com.andreyyurko.dnd.data.abilities.other.intimidation
 import com.andreyyurko.dnd.data.abilities.other.nature
 import com.andreyyurko.dnd.data.abilities.other.perception
@@ -220,7 +215,7 @@ var recklessAttack: AbilityNode = AbilityNode(
             Action(
                 name = "Безрассудная атака",
                 description = "Вы способны отбросить любую заботу о защите, чтобы атаковать ожесточённо и безрассудно. Когда вы совершаете первую атаку в свой ход, вы можете решить, что будете атаковать безрассудно. Решившись на это, вы в этом ходу совершаете рукопашные атаки оружием, использующие Силу, с преимуществом, но все броски атаки по вам до вашего следующего хода тоже совершаются с преимуществом.\n",
-                type = ActionType.Additional
+                type = ActionType.PartOfAction
             )
         )
         abilities
@@ -270,7 +265,7 @@ var primalPath: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(
-        //Pair("first", listOf(assassinArchetype.name, arcaneTrickster.name))
+        Pair("first", listOf(pathOfTheBerserker.name, pathOfTheZealot.name))
     ),
     requirements = { true },
     add_requirements = listOf(),
@@ -669,38 +664,42 @@ var barbarian20: AbilityNode = AbilityNodeLevel(
     next_level = null
 )
 
-var mapOfBarbarianAbilities: MutableMap<String, AbilityNode> = mutableMapOf(
-    Pair(classFeaturesBarbarian.name, classFeaturesBarbarian),
-    Pair(barbarianUnarmedDefence.name, barbarianUnarmedDefence),
-    Pair(rage.name, rage),
-    Pair(barbarian1.name, barbarian1),
-    Pair(recklessAttack.name, recklessAttack),
-    Pair(dangerSense.name, dangerSense),
-    Pair(barbarian2.name, barbarian2),
-    Pair(primalPath.name, primalPath),
-    Pair(barbarian3.name, barbarian3),
-    Pair(barbarian4.name, barbarian4),
-    Pair(barbarianUnarmedMovement.name, barbarianUnarmedMovement),
-    Pair(barbarian5.name, barbarian5),
-    Pair(barbarian6.name, barbarian6),
-    Pair(feralInstinct.name, feralInstinct),
-    Pair(barbarian7.name, barbarian7),
-    Pair(barbarian8.name, barbarian8),
-    Pair(brutalCritical.name, brutalCritical),
-    Pair(barbarian9.name, barbarian9),
-    Pair(barbarian10.name, barbarian10),
-    Pair(relentlessRage.name, relentlessRage),
-    Pair(barbarian11.name, barbarian11),
-    Pair(barbarian12.name, barbarian12),
-    Pair(barbarian13.name, barbarian13),
-    Pair(barbarian14.name, barbarian14),
-    Pair(persistentRage.name, persistentRage),
-    Pair(barbarian15.name, barbarian15),
-    Pair(barbarian16.name, barbarian16),
-    Pair(barbarian17.name, barbarian17),
-    Pair(indominatableMight.name, indominatableMight),
-    Pair(barbarian18.name, barbarian18),
-    Pair(barbarian19.name, barbarian19),
-    Pair(primalChampion.name, primalChampion),
-    Pair(barbarian20.name, barbarian20),
-)
+var mapOfBarbarianAbilities: MutableMap<String, AbilityNode> = (
+    mutableMapOf(
+        Pair(classFeaturesBarbarian.name, classFeaturesBarbarian),
+        Pair(barbarianUnarmedDefence.name, barbarianUnarmedDefence),
+        Pair(rage.name, rage),
+        Pair(barbarian1.name, barbarian1),
+        Pair(recklessAttack.name, recklessAttack),
+        Pair(dangerSense.name, dangerSense),
+        Pair(barbarian2.name, barbarian2),
+        Pair(primalPath.name, primalPath),
+        Pair(barbarian3.name, barbarian3),
+        Pair(barbarian4.name, barbarian4),
+        Pair(barbarianUnarmedMovement.name, barbarianUnarmedMovement),
+        Pair(barbarian5.name, barbarian5),
+        Pair(barbarian6.name, barbarian6),
+        Pair(feralInstinct.name, feralInstinct),
+        Pair(barbarian7.name, barbarian7),
+        Pair(barbarian8.name, barbarian8),
+        Pair(brutalCritical.name, brutalCritical),
+        Pair(barbarian9.name, barbarian9),
+        Pair(barbarian10.name, barbarian10),
+        Pair(relentlessRage.name, relentlessRage),
+        Pair(barbarian11.name, barbarian11),
+        Pair(barbarian12.name, barbarian12),
+        Pair(barbarian13.name, barbarian13),
+        Pair(barbarian14.name, barbarian14),
+        Pair(persistentRage.name, persistentRage),
+        Pair(barbarian15.name, barbarian15),
+        Pair(barbarian16.name, barbarian16),
+        Pair(barbarian17.name, barbarian17),
+        Pair(indominatableMight.name, indominatableMight),
+        Pair(barbarian18.name, barbarian18),
+        Pair(barbarian19.name, barbarian19),
+        Pair(primalChampion.name, primalChampion),
+        Pair(barbarian20.name, barbarian20),
+    )
+    + mapOfPathOfTheBerserkerAbilities
+    + mapOfPathOfTheZealotAbilities
+).toMutableMap()
