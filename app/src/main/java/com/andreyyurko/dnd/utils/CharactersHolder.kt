@@ -73,21 +73,21 @@ class CharactersHolder @Inject constructor(
 
         // get custom info
         val characterCharacterInfoJson = db.getString(id.toString() + DB_CHARACTER_CUSTOM)
-        val characterCharacterInfo = Gson().fromJson(characterCharacterInfoJson, CharacterInfo::class.java)
+        val characterCharacterInfo = if (characterCharacterInfoJson != null) Gson().fromJson(characterCharacterInfoJson, CharacterInfo::class.java) else CharacterInfo()
 
         // get current state
         val currentStateJson = db.getString(id.toString() + DB_CHARACTER_STATE)
-        val currentState = Gson().fromJson(currentStateJson, CurrentState::class.java)
+        val currentState = if (currentStateJson != null) Gson().fromJson(currentStateJson, CurrentState::class.java) else CurrentState()
 
         //get inventory
         val inventoryMapType: Type = object : TypeToken<MutableMap<String, InventoryItemInfo>>() {}.type
         val inventoryJson = db.getString(id.toString() + DB_INVENTORY)
-        val inventory: MutableMap<String, InventoryItemInfo> = Gson().fromJson(inventoryJson, inventoryMapType)
+        val inventory: MutableMap<String, InventoryItemInfo> = if (inventoryJson != null) Gson().fromJson(inventoryJson, inventoryMapType) else mutableMapOf()
 
         // get spells
         val spellsMapType: Type = object : TypeToken<MutableMap<String, CharacterSpells>>() {}.type
         val spellsJson = db.getString(id.toString() + DB_SPELLS)
-        val spells: MutableMap<String, CharacterSpells> = Gson().fromJson(spellsJson, spellsMapType)
+        val spells: MutableMap<String, CharacterSpells> = if (spellsJson != null) Gson().fromJson(spellsJson, spellsMapType) else mutableMapOf()
 
         val notesListType: Type = object : TypeToken<MutableList<Note>>() {}.type
         val notesJson = db.getString(id.toString() + DB_NOTES)
