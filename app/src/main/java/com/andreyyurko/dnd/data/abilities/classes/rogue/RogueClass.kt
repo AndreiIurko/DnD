@@ -289,7 +289,7 @@ var roguishArchetype: AbilityNode = AbilityNode(
         abilities
     },
     alternatives = mutableMapOf(
-        //Pair("first", listOf())
+        Pair("first", listOf(assassinArchetype.name, arcaneTrickster.name))
     ),
     requirements = { true },
     add_requirements = listOf(),
@@ -721,6 +721,6 @@ var mapOfRogueAbilities: MutableMap<String, AbilityNode> = (mutableMapOf(
     Pair(strokeOfLuck.name, strokeOfLuck),
     Pair(rogue20.name, rogue20),
 )
-        //+ mapOfSchoolOfDivinationAbilities
-        //+ mapOfSchoolOfConjurationAbilities
+        + mapOfAssassinArchetypeAbilities
+        + mapOfArcaneTricksterArchetypeAbilities
         ).toMutableMap()
