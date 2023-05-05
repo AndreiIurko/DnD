@@ -105,7 +105,7 @@ var channelDivinityDestructiveWrath: AbilityNode = AbilityNode(
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 2 && abilities.characterClass == Classes.Cleric
     },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Вы можете использовать «Божественный канал», чтобы овладеть могуществом бури с необузданной свирепостью.\n" +
             "\n" +
             "Когда вы совершаете бросок урона звуком или электричеством, вы можете использовать «Божественный канал», чтобы нанести максимальный урон вместо броска.\n",

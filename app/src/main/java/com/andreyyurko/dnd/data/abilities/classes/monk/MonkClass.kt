@@ -1,7 +1,7 @@
 package com.andreyyurko.dnd.data.abilities.classes.monk
 
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
-import com.andreyyurko.dnd.data.abilities.classes.fighter.extraAttack
+import com.andreyyurko.dnd.data.abilities.classes.extraAttack
 import com.andreyyurko.dnd.data.abilities.other.*
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
@@ -302,7 +302,7 @@ var slowFall: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "Если вы упали, вы можете реакцией уменьшить урон от падения на значение, равное вашему уровню монаха, умноженному на пять.\n"
 )
 
@@ -338,7 +338,7 @@ var stunningStrike: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "Вы можете взаимодействовать с энергией ци, текущей в теле вашего противника. Если вы попали по другому существу рукопашной атакой оружием, вы можете потратить 1 очко ци, чтобы нанести ошеломляющий удар. Цель должна преуспеть в спасброске Телосложения, иначе она станет ошеломлённой до конца вашего следующего хода.\n"
 )
 
@@ -370,7 +370,7 @@ var kiImprovedStrike: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "Ваши безоружные удары считаются магическими при определении преодоления сопротивления и иммунитета к немагическим атакам и урону.\n"
 )
 
@@ -399,7 +399,7 @@ var monkEvasion: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "Ваше инстинктивное проворство позволяет вам уклоняться от эффектов, направленных на определённую область, вроде дыхания синего дракона или заклинания огненный шар. Если вы попадаете под действие эффекта, позволяющего совершить спасбросок Ловкости, чтобы получить только половину урона, вы вместо этого не получаете урона при успешном спасброске и получаете только половину урона при проваленном.\n"
 )
 
@@ -417,7 +417,7 @@ var stillnessOfMind: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "Вы можете действием окончить один из действующих на вас эффектов, делающих вас очарованным или испуганным.\n"
 )
 
@@ -483,7 +483,7 @@ var purityOfBody: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "Ваше мастерство ци даёт вам иммунитет к болезням и яду.\n"
 )
 
@@ -543,7 +543,7 @@ var tongueOfTheSunAndMoon: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "Вы понимаете, как взаимодействовать с энергией ци в чужом разуме, и теперь вы понимаете речь на любом языке. Кроме того, все существа, способные понимать хотя бы один язык, понимают то, что вы сказали.\n"
 )
 
@@ -584,7 +584,7 @@ var diamondSoul: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "Ваше мастерство ци предоставляет вам владение всеми спасбросками. Кроме того, если вы провалили спасбросок, вы можете повторить его, потратив 1 очко ци, и должны использовать второй результат.\n"
 )
 
@@ -613,7 +613,7 @@ var timelessBody: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "Ваша ци поддерживает вас, и ваше тело больше не подвержено признакам старения. Вы не можете быть состарены магически. Впрочем, вы всё еще можете умереть от старости. Кроме того, вам больше не требуется еда и вода.\n"
 )
 
@@ -688,7 +688,7 @@ var emptyBody: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "Вы можете действием потратить 4 очка ци, чтобы стать невидимым на 1 минуту. В течение этого времени вы получаете сопротивление всем видам урона, кроме урона силовым полем.\n" +
             "\n" +
             "Кроме того, вы можете потратить 8 очков ци, чтобы наложить заклинание проекция в астрал [astral projection] без применения материальных компонентов. Вы не можете перемещать кого-либо вместе с собой.\n"
@@ -735,7 +735,7 @@ var perfectSelf: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "Если при броске инициативы у вас нет очков ци, вы получаете 4 очка ци.\n"
 )
 

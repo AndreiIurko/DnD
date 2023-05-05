@@ -9,17 +9,19 @@ open class AbilityNode(
     val changesInCharacterInfo: (abilities: CharacterInfo) -> CharacterInfo,
     val alternatives: MutableMap<String, List<String>>,
     val requirements: (abilities: CharacterInfo) -> Boolean,
-    open val add_requirements: List<List<Triple<String, String, Int>>> = listOf(listOf()),
+    open val addRequirements: List<List<Triple<String, String, Int>>> = listOf(listOf()),
     var description: String,
     val isNeedsToBeShown: Boolean = true,
-    val priority: Priority = Priority.Basic
+    val priority: Priority = Priority.Basic,
+    val actionForChoice: Map<String, (choice: String, abilities: CharacterInfo) -> CharacterInfo>? = null,
+    val getChoices: MutableMap<String, (abilities: CharacterInfo) -> List<String>>? = null
 ) {
     constructor(name: String) : this(
         name = name,
         changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
         alternatives = mutableMapOf<String, List<String>>(),
         requirements = { true },
-        add_requirements = listOf<List<Triple<String, String, Int>>>(),
+        addRequirements = listOf<List<Triple<String, String, Int>>>(),
         description = ""
     )
 

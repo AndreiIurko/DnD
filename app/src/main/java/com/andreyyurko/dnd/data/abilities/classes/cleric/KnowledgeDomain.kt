@@ -103,7 +103,7 @@ var channelDivinityKnowledgeOfTheAges: AbilityNode = AbilityNode(
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 2 && abilities.characterClass == Classes.Cleric
     },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Вы можете использовать «Божественный канал», чтобы получить доступ к источнику знаний. Вы действием выбираете навык или инструмент. На 10 минут вы осваиваете владение выбранным навыком или инструментом.\n",
 )
 
@@ -128,7 +128,7 @@ var channelDivinityReadThoughts: AbilityNode = AbilityNode(
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 6 && abilities.characterClass == Classes.Cleric
     },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Вы можете использовать свой «Божественный канал», чтобы читать мысли существ. Затем вы можете использовать доступ к разуму существа, чтобы командовать им.\n" +
             "\n" +
             "Выберите действием одно существо, которое вы можете видеть, находящееся в пределах 60 футов от вас. Это существо должно совершить спасбросок Мудрости. Если существо преуспело, вы не можете использовать это умение на нём, пока не завершите продолжительный отдых. Если существо проваливает спасбросок, вы можете прочитать его поверхностные мысли (то, что у него на уме, его текущие эмоции и то, о чём оно активно думает), когда оно находится в пределах 60 футов от вас. Этот эффект длится в течение 1 минуты.\n" +

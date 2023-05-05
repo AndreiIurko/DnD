@@ -67,6 +67,25 @@ class CharacterAbilityNodeLevel(
     }
 }
 
+var extraAttack: AbilityNode = AbilityNode(
+    name = "Дополнительная атака",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        for (action in abilities.actionsList) {
+            if (action.name == "Атака") {
+                val actionSplit: MutableList<String> = action.description.split("\n") as MutableList<String>
+                actionSplit[0] = "Совершить две атаки оружием"
+                action.description = actionSplit.joinToString("\n")
+            }
+        }
+        abilities
+    },
+    alternatives = mutableMapOf(),
+    requirements = { true },
+    addRequirements = listOf(),
+    description = "Если вы в свой ход совершаете действие Атака, вы можете совершить две атаки вместо одной.\n",
+    priority = Priority.DoLast
+)
+
 val mapOfClasses = (
         mapOfMonkAbilities
                 + mapOfBarbarianAbilities
@@ -76,4 +95,5 @@ val mapOfClasses = (
                 + mapOfWizardAbilities
                 + mapOfBardAbilities
                 + mapOfRogueAbilities
+                + mapOf(Pair(extraAttack.name, extraAttack))
         ).toMutableMap()

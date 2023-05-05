@@ -5,6 +5,7 @@ import android.util.Log
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
+import kotlin.math.ceil
 import kotlin.math.floor
 
 var baseActionsAN = AbilityNode(
@@ -291,7 +292,7 @@ fun sumTwoDamages(damage1: String, damage2: String): String {
 }
 
 fun getSpellSlotsCount(abilities: CharacterInfo): List<Int> {
-    when(floor(abilities.spellCasterLevel).toInt()) {
+    when(ceil(abilities.spellCasterLevel).toInt()+1) {
         1 -> return listOf(2)
         2 -> return listOf(3)
         3 -> return listOf(4, 2)

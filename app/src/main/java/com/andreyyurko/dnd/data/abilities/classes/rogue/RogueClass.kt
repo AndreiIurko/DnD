@@ -1,7 +1,6 @@
 package com.andreyyurko.dnd.data.abilities.classes.rogue
 
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
-import com.andreyyurko.dnd.data.abilities.classes.rogue.*
 import com.andreyyurko.dnd.data.abilities.other.*
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
@@ -168,7 +167,7 @@ var expertiseRogue: AbilityNode = AbilityNode(
         )
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Выберите два ваших владения в навыках или одно владение навыком и владение воровскими инструментами. Ваш бонус мастерства удваивается для всех проверок характеристик, которые вы совершаете, используя любое из выбранных владений.\n"
 )
 
@@ -187,7 +186,7 @@ var sneakAttack: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Вы знаете, как точно наносить удар и использовать отвлечение врага. Один раз в ход вы можете причинить дополнительный урон 1к6 одному из существ, по которому вы попали атакой, совершённой с преимуществом к броску атаки. Атака должна использовать дальнобойное оружие или оружие со свойством «фехтовальное». Вам не нужно иметь преимущество при броске атаки, если другой враг цели находится в пределах 5 футов от неё. Этот враг не должен быть недееспособным, и у вас не должно быть помехи для броска атаки.\n" +
             "\n" +
             "Дополнительный урон увеличивается, когда вы получаете уровни в этом классе, как показано в колонке «скрытая атака».\n"
@@ -203,7 +202,7 @@ var thievesCant: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Во время плутовского обучения вы выучили воровской жаргон, тайную смесь диалекта, жаргона и шифра, который позволяет скрывать сообщения в, казалось бы, обычном разговоре. Только другое существо, знающее воровской жаргон, понимает такие сообщения. Это занимает в четыре раза больше времени, нежели передача тех же слов прямым текстом.\n" +
             "\n" +
             "Кроме того, вы понимаете набор секретных знаков и символов, используемый для передачи коротких и простых сообщений. Например, является ли область опасной или территорией гильдии воров, находится ли поблизости добыча, простодушны ли люди в округе, и предоставляют ли здесь безопасное убежище для воров в бегах.\n"
@@ -263,7 +262,7 @@ var cunningAction: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Ваше мышление и ловкость позволяют двигаться и действовать быстрее. Вы можете в каждом своем ходу боя совершать бонусное действие. Это действие может быть использовано только для Рывка, Отхода или Засады.\n"
 )
 
@@ -292,7 +291,7 @@ var roguishArchetype: AbilityNode = AbilityNode(
         Pair("first", listOf(assassinArchetype.name, arcaneTrickster.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Вы выбираете архетип, который отображает ваши плутовские способности. Подробности всех архетипов находятся ниже. Выбранный вами архетип предоставляет умения на 3-м, 9-м, 13-м и 17-м уровнях.\n"
 )
 
@@ -336,7 +335,7 @@ var uncannyDodge: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Когда нападающий, которого вы можете видеть, попадает по вам атакой, вы можете реакцией уменьшить вдвое урон, причиняемый вам этой атакой.\n"
 )
 
@@ -382,7 +381,7 @@ var rogueEvasion: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "Вы можете ловко увернуться от зональных эффектов, например, огненного дыхания красного дракона или заклинания град [ice storm]. Если вы попадаете под действие эффекта, который позволяет вам совершить спасбросок Ловкости, чтобы получить только половину урона, вместо этого вы не получаете вовсе никакого урона, если спасбросок был успешен, и получаете только половину урона, если он был провален.\n"
 )
 
@@ -458,7 +457,7 @@ var reliableTalent: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "Вы улучшаете выбранные навыки, пока они не достигнут совершенства. Каждый раз, когда вы совершаете проверку характеристики, которая позволяет добавить бонус мастерства, вы можете при выпадении на к20 результата «1–9» считать, что выпало «10».\n"
 )
 
@@ -518,7 +517,7 @@ var blindsense: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "Если вы можете слышать, то знаете о местонахождении всех скрытых и невидимых существ в пределах 10 футов от себя.\n"
 )
 
@@ -546,7 +545,7 @@ var slipperyMind: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "Вы увеличиваете силу мышления. Вы получаете владение спасбросками Мудрости.\n"
 )
 
@@ -605,7 +604,7 @@ var elusive: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "Вы можете уклоняться так хорошо, что противник крайне редко может взять над вами верх. Никакие броски атаки не получают преимущества над вами, пока вы не станете недееспособным.\n"
 )
 
@@ -664,7 +663,7 @@ var strokeOfLuck: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "Вы получаете сверхъестественный дар преуспевать, когда это нужнее всего. Если ваша атака промахивается по цели, находящейся в пределах досягаемости, вы можете изменить промах на попадание. В качестве альтернативы, если вы провалили проверку характеристики, вы можете заменить результат, выпавший на к20, на «20».\n" +
             "\n" +
             "Использовав это умение, вы не можете использовать его повторно, пока не завершите короткий или продолжительный отдых.\n"

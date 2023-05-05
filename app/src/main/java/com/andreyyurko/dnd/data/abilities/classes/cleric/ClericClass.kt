@@ -139,14 +139,9 @@ var cleric1: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.characterClass = Classes.Cleric
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.proficiencyBonus += 2
         abilities.hp += abilityToModifier(abilities.constitution) + 8
-        if (!abilities.currentState.charges.contains("Ячейки_1")) {
-            abilities.currentState.charges["Ячейки_1"] = ChargesCounter(
-                current = 2,
-                maximum = 2
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -194,7 +189,7 @@ var channelDivinity: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Вы получаете возможность направлять божественную энергию непосредственно от своего божества, используя её для подпитки магических эффектов. Вы начинаете с двумя такими эффектами: «Изгнание Нежити» и эффектом, определяемым вашим доменом. Некоторые домены дают вам дополнительные эффекты, как только вы получите новые уровни.\n" +
             "\n" +
             "Когда вы используете «Божественный канал», вы выбираете, какой эффект создать. Затем вы должны окончить короткий или продолжительный отдых, чтобы использовать «Божественный канал» снова. Некоторые эффекты «Божественного канала» требуют совершить спасбросок. Когда вы используете эффекты такого рода, Сл равна Сл спасброска от ваших заклинаний жреца.\n" +
@@ -206,11 +201,8 @@ var cleric2: AbilityNodeLevel = AbilityNodeLevel(
     name = "Жрец_2",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        abilities.currentState.charges["Ячейки_1"]?.let {
-            if (it.maximum < 3)
-                it.maximum = 3
-        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -227,17 +219,8 @@ var cleric3: AbilityNodeLevel = AbilityNodeLevel(
     name = "Жрец_3",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        if (!abilities.currentState.charges.contains("Ячейки_2")) {
-            abilities.currentState.charges["Ячейки_2"] = ChargesCounter(
-                current = 2,
-                maximum = 2
-            )
-        }
-        abilities.currentState.charges["Ячейки_1"]?.let {
-            if (it.maximum < 4)
-                it.maximum = 4
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -251,13 +234,10 @@ var cleric4: AbilityNodeLevel = AbilityNodeLevel(
     name = "Жрец_4",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownCantripsCount += 1
-        }
-        abilities.currentState.charges["Ячейки_2"]?.let {
-            if (it.maximum < 3)
-                it.maximum = 3
         }
         abilities
     },
@@ -291,7 +271,7 @@ var destroy_undead: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Когда Нежить проваливает спасбросок от вашего умения «Изгнание Нежити», существо мгновенно уничтожается, если его показатель опасности не превышает значения, указанного в таблице:\n" +
             "\n" +
             "Уровень жреца | Уничтожается нежить с ПО\n" +
@@ -307,13 +287,8 @@ var cleric5: AbilityNodeLevel = AbilityNodeLevel(
     name = "Жрец_5",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        if (!abilities.currentState.charges.contains("Ячейки_3")) {
-            abilities.currentState.charges["Ячейки_3"] = ChargesCounter(
-                current = 2,
-                maximum = 2
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -329,11 +304,8 @@ var cleric6: AbilityNodeLevel = AbilityNodeLevel(
     name = "Жрец_6",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        abilities.currentState.charges["Ячейки_3"]?.let {
-            if (it.maximum < 3)
-                it.maximum = 3
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -347,13 +319,8 @@ var cleric7: AbilityNodeLevel = AbilityNodeLevel(
     name = "Жрец_7",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        if (!abilities.currentState.charges.contains("Ячейки_4")) {
-            abilities.currentState.charges["Ячейки_4"] = ChargesCounter(
-                current = 1,
-                maximum = 1
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -367,11 +334,8 @@ var cleric8: AbilityNodeLevel = AbilityNodeLevel(
     name = "Жрец_8",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        abilities.currentState.charges["Ячейки_4"]?.let {
-            if (it.maximum < 2)
-                it.maximum = 2
-        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -387,17 +351,8 @@ var cleric9: AbilityNodeLevel = AbilityNodeLevel(
     name = "Жрец_9",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        abilities.currentState.charges["Ячейки_4"]?.let {
-            if (it.maximum < 3)
-                it.maximum = 3
-        }
-        if (!abilities.currentState.charges.contains("Ячейки_5")) {
-            abilities.currentState.charges["Ячейки_5"] = ChargesCounter(
-                current = 1,
-                maximum = 1
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -430,7 +385,7 @@ var divineIntervention: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Вы можете воззвать к своему божеству о помощи, когда сильно в этом нуждаетесь. Мольба о помощи совершается действием. Опишите помощь, которую вы ждёте, и киньте процентную кость. Если выпадет число, не превышающее ваш уровень жреца, ваше божество вмешается. Мастер сам выбирает природу вмешательства; подойдёт эффект какого-либо заклинания жреца или заклинания домена.\n" +
             "\n" +
             "Если божество вмешивается, вы не можете использовать это умение в течение 7 дней. В противном случае вы можете использовать это умение после продолжительного отдыха. На 20-м уровне ваше воззвание автоматически успешно и не требует проверки.\n",
@@ -440,11 +395,8 @@ var cleric10: AbilityNodeLevel = AbilityNodeLevel(
     name = "Жрец_10",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        abilities.currentState.charges["Ячейки_5"]?.let {
-            if (it.maximum < 2)
-                it.maximum = 2
-        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -460,13 +412,8 @@ var cleric11: AbilityNodeLevel = AbilityNodeLevel(
     name = "Жрец_11",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        if (!abilities.currentState.charges.contains("Ячейки_6")) {
-            abilities.currentState.charges["Ячейки_6"] = ChargesCounter(
-                current = 1,
-                maximum = 1
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -480,6 +427,7 @@ var cleric12: AbilityNodeLevel = AbilityNodeLevel(
     name = "Жрец_12",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -496,13 +444,8 @@ var cleric13: AbilityNodeLevel = AbilityNodeLevel(
     name = "Жрец_13",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        if (!abilities.currentState.charges.contains("Ячейки_7")) {
-            abilities.currentState.charges["Ячейки_7"] = ChargesCounter(
-                current = 1,
-                maximum = 1
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -516,6 +459,7 @@ var cleric14: AbilityNodeLevel = AbilityNodeLevel(
     name = "Жрец_14",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -530,13 +474,8 @@ var cleric15: AbilityNodeLevel = AbilityNodeLevel(
     name = "Жрец_15",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        if (!abilities.currentState.charges.contains("Ячейки_8")) {
-            abilities.currentState.charges["Ячейки_8"] = ChargesCounter(
-                current = 1,
-                maximum = 1
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -550,6 +489,7 @@ var cleric16: AbilityNodeLevel = AbilityNodeLevel(
     name = "Жрец_16",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -567,12 +507,6 @@ var cleric17: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        if (!abilities.currentState.charges.contains("Ячейки_9")) {
-            abilities.currentState.charges["Ячейки_9"] = ChargesCounter(
-                current = 1,
-                maximum = 1
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -587,10 +521,6 @@ var cleric18: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        abilities.currentState.charges["Ячейки_5"]?.let {
-            if (it.maximum < 3)
-                it.maximum = 3
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -605,10 +535,6 @@ var cleric19: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        abilities.currentState.charges["Ячейки_6"]?.let {
-            if (it.maximum < 2)
-                it.maximum = 2
-        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -625,10 +551,6 @@ var cleric20: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        abilities.currentState.charges["Ячейки_7"]?.let {
-            if (it.maximum < 2)
-                it.maximum = 2
-        }
         abilities
     },
     alternatives = mutableMapOf(),

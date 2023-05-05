@@ -223,7 +223,7 @@ var fighter4: AbilityNodeLevel = AbilityNodeLevel(
     next_level = "Воин_5",
 )
 
-var extraAttack: AbilityNode = AbilityNode(
+var extraAttackFighter: AbilityNode = AbilityNode(
     name = "Дополнительная атака",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         for (action in abilities.actionsList) {
@@ -239,7 +239,7 @@ var extraAttack: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Если вы в свой ход совершаете действие Атака, вы можете совершить две атаки вместо одной.\n" +
             "\n" +
             "Количество атак увеличивается до трёх на 11-м уровне этого класса, и до четырёх на 20-м уровне.",
@@ -255,7 +255,7 @@ var fighter5: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     alternatives = mutableMapOf(
-        Pair("first", listOf(extraAttack.name)),
+        Pair("first", listOf(extraAttackFighter.name)),
     ),
     requirements = { true },
     add_requirements = listOf(),
@@ -344,7 +344,7 @@ var indomitable: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Вы можете перебросить проваленный спасбросок и должны использовать новый результат. После этого вы можете повторно использовать это умение только после завершения продолжительного отдыха.\n" +
             "\n" +
             "Вы можете использовать это умение дважды между периодами продолжительного отдыха после достижения 13-го уровня, и трижды после достижения 17-го уровня."
@@ -542,7 +542,7 @@ var mapOfFighterAbilities: MutableMap<String, AbilityNode> = (mutableMapOf(
     Pair(martialArchetype.name, martialArchetype),
     Pair(fighter3.name, fighter3),
     Pair(fighter4.name, fighter4),
-    Pair(extraAttack.name, extraAttack),
+    Pair(extraAttackFighter.name, extraAttackFighter),
     Pair(fighter5.name, fighter5),
     Pair(fighter6.name, fighter6),
     Pair(fighter7.name, fighter7),

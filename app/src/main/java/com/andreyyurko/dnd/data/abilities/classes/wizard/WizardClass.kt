@@ -129,7 +129,7 @@ var arcaneRecovery: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Вы знаете как восстанавливать часть магической энергии, изучая книгу заклинаний. Один раз в день, когда вы заканчиваете короткий отдых, вы можете восстановить часть использованных ячеек заклинаний. Ячейки заклинаний могут иметь суммарный уровень, который не превышает половину уровня вашего волшебника (округляя в большую сторону), и ни одна из ячеек не может быть шестого уровня или выше.\n" +
             "\n" +
             "Например, если вы волшебник 4-го уровня, вы можете восстановить ячейки заклинаний с суммой уровней не больше двух. Вы можете восстановить одну ячейку заклинаний 2-го уровня, или две ячейки заклинаний 1-го уровня.\n"
@@ -140,14 +140,9 @@ var wizard1: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.characterClass = Classes.Wizard
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.proficiencyBonus += 2
         abilities.hp += abilityToModifier(abilities.constitution) + 6
-        if (!abilities.currentState.charges.contains("Ячейки_1")) {
-            abilities.currentState.charges["Ячейки_1"] = ChargesCounter(
-                current = 2,
-                maximum = 2
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -179,11 +174,8 @@ var wizard2: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_2",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        abilities.currentState.charges["Ячейки_1"]?.let {
-            if (it.maximum < 3)
-                it.maximum = 3
-        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -199,17 +191,8 @@ var wizard3: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_3",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        if (!abilities.currentState.charges.contains("Ячейки_2")) {
-            abilities.currentState.charges["Ячейки_2"] = ChargesCounter(
-                current = 2,
-                maximum = 2
-            )
-        }
-        abilities.currentState.charges["Ячейки_1"]?.let {
-            if (it.maximum < 4)
-                it.maximum = 4
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -223,11 +206,8 @@ var wizard4: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_4",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        abilities.currentState.charges["Ячейки_2"]?.let {
-            if (it.maximum < 3)
-                it.maximum = 3
-        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -243,14 +223,9 @@ var wizard5: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_5",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        if (!abilities.currentState.charges.contains("Ячейки_3")) {
-            abilities.currentState.charges["Ячейки_3"] = ChargesCounter(
-                current = 2,
-                maximum = 2
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -264,11 +239,8 @@ var wizard6: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_6",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        abilities.currentState.charges["Ячейки_3"]?.let {
-            if (it.maximum < 3)
-                it.maximum = 3
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -282,13 +254,8 @@ var wizard7: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_7",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        if (!abilities.currentState.charges.contains("Ячейки_4")) {
-            abilities.currentState.charges["Ячейки_4"] = ChargesCounter(
-                current = 1,
-                maximum = 1
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -302,11 +269,8 @@ var wizard8: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_8",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        abilities.currentState.charges["Ячейки_4"]?.let {
-            if (it.maximum < 2)
-                it.maximum = 2
-        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -322,18 +286,9 @@ var wizard9: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_9",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        abilities.currentState.charges["Ячейки_4"]?.let {
-            if (it.maximum < 3)
-                it.maximum = 3
-        }
-        if (!abilities.currentState.charges.contains("Ячейки_5")) {
-            abilities.currentState.charges["Ячейки_5"] = ChargesCounter(
-                current = 1,
-                maximum = 1
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -347,11 +302,8 @@ var wizard10: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_10",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        abilities.currentState.charges["Ячейки_5"]?.let {
-            if (it.maximum < 2)
-                it.maximum = 2
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -365,13 +317,8 @@ var wizard11: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_11",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
-        if (!abilities.currentState.charges.contains("Ячейки_6")) {
-            abilities.currentState.charges["Ячейки_6"] = ChargesCounter(
-                current = 1,
-                maximum = 1
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -385,6 +332,7 @@ var wizard12: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_12",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
@@ -401,6 +349,7 @@ var wizard13: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_13",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         if (!abilities.currentState.charges.contains("Ячейки_7")) {
@@ -422,6 +371,7 @@ var wizard14: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_14",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
@@ -436,6 +386,7 @@ var wizard15: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_15",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         if (!abilities.currentState.charges.contains("Ячейки_8")) {
             abilities.currentState.charges["Ячейки_8"] = ChargesCounter(
@@ -456,6 +407,7 @@ var wizard16: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_16",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
@@ -472,6 +424,7 @@ var wizard17: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_17",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         if (!abilities.currentState.charges.contains("Ячейки_9")) {
@@ -500,7 +453,7 @@ var spellMastery: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Вы достигаете такого мастерства в отношении некоторых заклинаний, что можете накладывать их неограниченное количество раз. Выберите одно заклинание волшебника 1-го уровня и одно заклинание волшебника 2-го уровня, которые есть в вашей книге заклинаний. Вы можете накладывать эти заклинания без увеличения их уровня, не тратя ячейки заклинаний, при условии, что вы их подготовили. Если вы хотите увеличить уровень этих заклинаний, вы должны потратить ячейку заклинаний как обычно.\n" +
             "\n" +
             "Потратив 8 часов на обучение, вы можете изменить одно или оба эти заклинания по своему усмотрению на заклинания тех же уровней.\n"
@@ -510,6 +463,7 @@ var wizard18: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_18",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.currentState.charges["Ячейки_5"]?.let {
             if (it.maximum < 3)
@@ -530,6 +484,7 @@ var wizard19: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_19",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.currentState.charges["Ячейки_6"]?.let {
             if (it.maximum < 2)
@@ -562,7 +517,7 @@ var signatureSpells: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Вы получаете власть над двумя мощными заклинаниями и можете накладывать их без усилий. Выберите два заклинания волшебника 3-го уровня из своей книги заклинаний в качестве фирменных заклинаний. Для вас эти заклинания всегда считаются подготовленными, они не учитываются в количестве подготовленных заклинаний, и вы можете наложить каждое из этих заклинаний 3-го уровня, не тратя ячейку заклинаний. Когда вы так поступаете, вы не можете наложить их повторно таким же образом, пока не закончите короткий или продолжительный отдых.\n" +
             "\n" +
             "Если вы хотите наложить заклинание более высокого уровня, вы должны потратить ячейку заклинаний как обычно.\n"
@@ -572,6 +527,7 @@ var wizard20: AbilityNode = AbilityNodeLevel(
     name = "Волшебник_20",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.currentState.charges["Ячейки_7"]?.let {
             if (it.maximum < 2)

@@ -13,7 +13,7 @@ var strengthAbilityImprovement: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = emptyList(),
+    addRequirements = emptyList(),
     description = "",
     isNeedsToBeShown = false,
     priority = Priority.DoFirst
@@ -27,7 +27,7 @@ var dexterityAbilityImprovement: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = emptyList(),
+    addRequirements = emptyList(),
     description = "",
     isNeedsToBeShown = false,
     priority = Priority.DoFirst
@@ -41,7 +41,7 @@ var constitutionAbilityImprovement: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = emptyList(),
+    addRequirements = emptyList(),
     description = "",
     isNeedsToBeShown = false,
     priority = Priority.DoFirst
@@ -55,7 +55,7 @@ var intelligenceAbilityImprovement: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = emptyList(),
+    addRequirements = emptyList(),
     description = "",
     isNeedsToBeShown = false,
     priority = Priority.DoFirst
@@ -70,7 +70,7 @@ var wisdomAbilityImprovement: AbilityNode = AbilityNode(
     alternatives = mutableMapOf(),
     requirements = { true },
     isNeedsToBeShown = false,
-    add_requirements = emptyList(),
+    addRequirements = emptyList(),
     description = "",
     priority = Priority.DoFirst
 )
@@ -83,7 +83,7 @@ var charismaAbilityImprovement: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = emptyList(),
+    addRequirements = emptyList(),
     description = "",
     isNeedsToBeShown = false,
     priority = Priority.DoFirst
@@ -117,7 +117,7 @@ var abilityScoreImprovement: AbilityNode = AbilityNode(
         )
     ),
     requirements = { true },
-    add_requirements = emptyList(),
+    addRequirements = emptyList(),
     description = "",
 )
 

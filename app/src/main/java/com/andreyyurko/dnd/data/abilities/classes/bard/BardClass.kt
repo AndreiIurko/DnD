@@ -254,7 +254,7 @@ var bardicInspiration: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Своими словами или музыкой вы можете вдохновлять других. Для этого вы должны бонусным действием выбрать одно существо, отличное от вас, в пределах 60 футов, которое может вас слышать. Это существо получает кость бардовского вдохновения — к6.\n" +
             "\n" +
             "В течение следующих 10 минут это существо может один раз бросить эту кость и добавить результат к проверке характеристики, броску атаки или спасброску, который оно совершает. Существо может принять решение о броске кости вдохновения уже после броска к20, но должно сделать это прежде, чем Мастер объявит результат броска. Как только кость бардовского вдохновения брошена, она исчезает. Существо может иметь только одну такую кость одновременно.\n" +
@@ -269,14 +269,9 @@ var bard1: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.characterClass = Classes.Bard
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.proficiencyBonus += 2
         abilities.hp += abilityToModifier(abilities.constitution) + 8
-        if (!abilities.currentState.charges.contains("Ячейки_1")) {
-            abilities.currentState.charges["Ячейки_1"] = ChargesCounter(
-                current = 2,
-                maximum = 2
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -300,7 +295,7 @@ var jackOfAllTrades: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Вы можете добавлять половину бонуса мастерства, округлённую в меньшую сторону, ко всем проверкам характеристики, куда этот бонус еще не включён.\n"
 )
 
@@ -320,7 +315,7 @@ var songOfRest: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Вы с помощью успокаивающей музыки или речей можете помочь своим раненым союзникам восстановить их силы во время короткого отдыха. Если вы или любые союзные существа, способные слышать ваше исполнение, восстанавливаете хиты в конце короткого отдыха, используя Кости Хитов, каждое потратившее Кость Хитов существо восстанавливает дополнительно 1к6 хитов.\n" +
             "\n" +
             "Количество дополнительно восстанавливаемых хитов растёт с вашим уровнем в этом классе: 1к8 на 9-м уровне, 1к10 на 13 уровне и 1к12 на 17 уровне.\n"
@@ -330,11 +325,8 @@ var bard2: AbilityNode = AbilityNodeLevel(
     name = "Бард_2",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        abilities.currentState.charges["Ячейки_1"]?.let {
-            if (it.maximum < 3)
-                it.maximum = 3
-        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -415,7 +407,7 @@ var expertise: AbilityNode = AbilityNode(
         )
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Выберите 2 навыка из тех, которыми вы владеете. Ваш бонус мастерства для этих навыков удваивается.\n"
 )
 
@@ -423,17 +415,8 @@ var bard3: AbilityNode = AbilityNodeLevel(
     name = "Бард_3",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        if (!abilities.currentState.charges.contains("Ячейки_2")) {
-            abilities.currentState.charges["Ячейки_2"] = ChargesCounter(
-                current = 2,
-                maximum = 2
-            )
-        }
-        abilities.currentState.charges["Ячейки_1"]?.let {
-            if (it.maximum < 4)
-                it.maximum = 4
-        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -450,11 +433,8 @@ var bard4: AbilityNode = AbilityNodeLevel(
     name = "Бард_4",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        abilities.currentState.charges["Ячейки_2"]?.let {
-            if (it.maximum < 3)
-                it.maximum = 3
-        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -475,7 +455,7 @@ var fontOfInspiration: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Вы восстанавливаете истраченные вдохновения барда и после короткого и после продолжительного отдыха.\n"
 )
 
@@ -483,15 +463,9 @@ var bard5: AbilityNode = AbilityNodeLevel(
     name = "Бард_5",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        if (!abilities.currentState.charges.contains("Ячейки_3")) {
-            abilities.currentState.charges["Ячейки_3"] = ChargesCounter(
-                current = 2,
-                maximum = 2
-            )
-        }
-
         abilities
     },
     alternatives = mutableMapOf(
@@ -517,7 +491,7 @@ var contercharm: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Вы получаете возможность использовать звуки или слова силы для разрушения воздействующих на разум эффектов. Вы можете действием начать исполнение, которое продлится до конца вашего следующего хода. В течение этого времени вы и все дружественные существа в пределах 30 футов от вас совершают спасброски от запугивания и очарования с преимуществом. Чтобы получить это преимущество, существа должны слышать вас. Исполнение заканчивается преждевременно, если вы оказываетесь недееспособны, теряете способность говорить, или прекращаете исполнение добровольно (на это не требуется действие).\n"
 )
 
@@ -525,11 +499,8 @@ var bard6: AbilityNode = AbilityNodeLevel(
     name = "Бард_6",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        abilities.currentState.charges["Ячейки_3"]?.let {
-            if (it.maximum < 3)
-                it.maximum = 3
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -543,13 +514,8 @@ var bard7: AbilityNode = AbilityNodeLevel(
     name = "Бард_7",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        if (!abilities.currentState.charges.contains("Ячейки_4")) {
-            abilities.currentState.charges["Ячейки_4"] = ChargesCounter(
-                current = 1,
-                maximum = 1
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -563,11 +529,8 @@ var bard8: AbilityNode = AbilityNodeLevel(
     name = "Бард_8",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        abilities.currentState.charges["Ячейки_4"]?.let {
-            if (it.maximum < 2)
-                it.maximum = 2
-        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -583,18 +546,9 @@ var bard9: AbilityNode = AbilityNodeLevel(
     name = "Бард_9",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        abilities.currentState.charges["Ячейки_4"]?.let {
-            if (it.maximum < 3)
-                it.maximum = 3
-        }
-        if (!abilities.currentState.charges.contains("Ячейки_5")) {
-            abilities.currentState.charges["Ячейки_5"] = ChargesCounter(
-                current = 1,
-                maximum = 1
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -608,11 +562,8 @@ var bard10: AbilityNode = AbilityNodeLevel(
     name = "Бард_10",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        abilities.currentState.charges["Ячейки_5"]?.let {
-            if (it.maximum < 2)
-                it.maximum = 2
-        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -629,13 +580,8 @@ var bard11: AbilityNode = AbilityNodeLevel(
     name = "Бард_11",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        if (!abilities.currentState.charges.contains("Ячейки_6")) {
-            abilities.currentState.charges["Ячейки_6"] = ChargesCounter(
-                current = 1,
-                maximum = 1
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -649,6 +595,7 @@ var bard12: AbilityNode = AbilityNodeLevel(
     name = "Бард_12",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -665,14 +612,9 @@ var bard13: AbilityNode = AbilityNodeLevel(
     name = "Бард_13",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        if (!abilities.currentState.charges.contains("Ячейки_7")) {
-            abilities.currentState.charges["Ячейки_7"] = ChargesCounter(
-                current = 1,
-                maximum = 1
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -686,6 +628,7 @@ var bard14: AbilityNode = AbilityNodeLevel(
     name = "Бард_14",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -700,13 +643,8 @@ var bard15: AbilityNode = AbilityNodeLevel(
     name = "Бард_15",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        if (!abilities.currentState.charges.contains("Ячейки_8")) {
-            abilities.currentState.charges["Ячейки_8"] = ChargesCounter(
-                current = 1,
-                maximum = 1
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -720,6 +658,7 @@ var bard16: AbilityNode = AbilityNodeLevel(
     name = "Бард_16",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -736,14 +675,9 @@ var bard17: AbilityNode = AbilityNodeLevel(
     name = "Бард_17",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        if (!abilities.currentState.charges.contains("Ячейки_9")) {
-            abilities.currentState.charges["Ячейки_9"] = ChargesCounter(
-                current = 1,
-                maximum = 1
-            )
-        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -757,11 +691,8 @@ var bard18: AbilityNode = AbilityNodeLevel(
     name = "Бард_18",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        abilities.currentState.charges["Ячейки_5"]?.let {
-            if (it.maximum < 3)
-                it.maximum = 3
-        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -777,11 +708,8 @@ var bard19: AbilityNode = AbilityNodeLevel(
     name = "Бард_19",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        abilities.currentState.charges["Ячейки_6"]?.let {
-            if (it.maximum < 2)
-                it.maximum = 2
-        }
         abilities
     },
     alternatives = mutableMapOf(
@@ -802,7 +730,7 @@ var superiorInspiration: AbilityNode = AbilityNode(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "Если на момент броска инициативы у вас не осталось неиспользованных вдохновений, вы получаете одно.\n"
 )
 
@@ -810,11 +738,8 @@ var bard20: AbilityNode = AbilityNodeLevel(
     name = "Бард_20",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
-        abilities.currentState.charges["Ячейки_7"]?.let {
-            if (it.maximum < 2)
-                it.maximum = 2
-        }
         abilities
     },
     alternatives = mutableMapOf(
