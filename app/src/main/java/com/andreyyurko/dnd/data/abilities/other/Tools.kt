@@ -11,7 +11,7 @@ var alchemistsSupplies: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.AlchemistsSupplies)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.AlchemistsSupplies)
     },
@@ -26,7 +26,7 @@ var brewersSupplies: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.BrewersSupplies)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.BrewersSupplies)
     },
@@ -41,7 +41,7 @@ var calligraphersSupplies: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.CalligraphersSupplies)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.CalligraphersSupplies)
     },
@@ -51,12 +51,12 @@ var calligraphersSupplies: AbilityNode = AbilityNode(
 )
 
 var carpentersTools: AbilityNode = AbilityNode(
-        name = "Инструменты плотника",
+    name = "Инструменты плотника",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.toolProficiency.add(Tools.CarpentersTools)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.CarpentersTools)
     },
@@ -71,7 +71,7 @@ var cartographersTools: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.CartographersTools)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.CartographersTools)
     },
@@ -86,7 +86,7 @@ var cobblersTools: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.CobblersTools)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.CobblersTools)
     },
@@ -101,7 +101,7 @@ var cooksUtensils: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.CooksUtensils)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.CooksUtensils)
     },
@@ -116,7 +116,7 @@ var glassblowersTools: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.GlassblowersTools)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.GlassblowersTools)
     },
@@ -131,7 +131,7 @@ var jewelersTools: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.JewelersTools)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.JewelersTools)
     },
@@ -146,7 +146,7 @@ var leatherworkersTools: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.LeatherworkersTools)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.LeatherworkersTools)
     },
@@ -161,7 +161,7 @@ var masonsTools: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.MasonsTools)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.MasonsTools)
     },
@@ -176,7 +176,7 @@ var paintersSupplies: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.PaintersSupplies)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.PaintersSupplies)
     },
@@ -191,7 +191,7 @@ var pottersTools: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.PottersTools)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.PottersTools)
     },
@@ -206,7 +206,7 @@ var smithsTools: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.SmithsTools)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.SmithsTools)
     },
@@ -221,7 +221,7 @@ var tinkersTools: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.TinkersTools)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.TinkersTools)
     },
@@ -236,7 +236,7 @@ var weaversTools: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.WeaversTools)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.WeaversTools)
     },
@@ -251,7 +251,7 @@ var woodcarversTools: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.WoodcarversTools)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.WoodcarversTools)
     },
@@ -266,7 +266,7 @@ var diceSet: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.DiceSet)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.DiceSet)
     },
@@ -281,7 +281,7 @@ var playingCards: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.PlayingCards)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.PlayingCards)
     },
@@ -296,7 +296,7 @@ var threeDragonAnte: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.ThreeDragonAnte)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.ThreeDragonAnte)
     },
@@ -311,7 +311,7 @@ var dragonChess: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.DragonChess)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.DragonChess)
     },
@@ -326,7 +326,7 @@ var bagpipes: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.Bagpipes)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.Bagpipes)
     },
@@ -341,7 +341,7 @@ var drum: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.Drum)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.Drum)
     },
@@ -356,7 +356,7 @@ var dulcimer: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.Dulcimer)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.Dulcimer)
     },
@@ -371,7 +371,7 @@ var flute: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.Flute)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.Flute)
     },
@@ -387,7 +387,7 @@ var lute: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.Lute)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.Lute)
     },
@@ -402,7 +402,7 @@ var lyre: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.Lyre)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.Lyre)
     },
@@ -417,7 +417,7 @@ var horn: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.Horn)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.Horn)
     },
@@ -432,7 +432,7 @@ var panFlute: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.PanFlute)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.PanFlute)
     },
@@ -447,7 +447,7 @@ var shawm: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.Shawm)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.Shawm)
     },
@@ -462,7 +462,7 @@ var viol: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.Viol)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.Viol)
     },
@@ -477,7 +477,7 @@ var thievesTools: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.ThievesTools)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.ThievesTools)
     },
@@ -492,7 +492,7 @@ var disguiseTools: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.DisguiseTools)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.DisguiseTools)
     },
@@ -507,7 +507,7 @@ var forgery: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.Forgery)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.Forgery)
     },
@@ -522,7 +522,7 @@ var poisonerTools: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.PoisonerTools)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.PoisonerTools)
     },
@@ -537,7 +537,7 @@ var herbalismTools: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.HerbalismTools)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.HerbalismTools)
     },
@@ -552,7 +552,7 @@ var navigatorTools: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.NavigatorTools)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolProficiency.contains(Tools.NavigatorTools)
     },
@@ -567,10 +567,10 @@ var thievesToolsExpertise: AbilityNode = AbilityNode(
         abilities.toolExpertise.add(Tools.ThievesTools)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.toolExpertise.contains(Tools.ThievesTools) and
-            abilities.toolProficiency.contains(Tools.ThievesTools)
+                abilities.toolProficiency.contains(Tools.ThievesTools)
     },
     description = "",
     isNeedsToBeShown = false,

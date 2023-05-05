@@ -1,12 +1,10 @@
 package com.andreyyurko.dnd.ui.addcharacterfragments.classfragment
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.classes.CharacterAbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.mapOfAn
 import com.andreyyurko.dnd.data.characterData.Classes
-import com.andreyyurko.dnd.data.characterData.character.CharacterAbilityNode
 import com.andreyyurko.dnd.data.characterData.character.checkIfSomeRequirementsSatisfied
 import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
 import com.andreyyurko.dnd.ui.addcharacterfragments.AbilityAdapter
@@ -60,7 +58,7 @@ class ClassViewModel @Inject constructor(
             nextLevel = can.chosen_alternatives["nextLevel"]
         }
 
-        val nextLevelName = can.data.name.split('_')[0] + '_' + (can.data.name.split('_')[1].toInt()+1).toString()
+        val nextLevelName = can.data.name.split('_')[0] + '_' + (can.data.name.split('_')[1].toInt() + 1).toString()
 
         can.makeChoice("nextLevel", nextLevelName)
         chosenLevel++

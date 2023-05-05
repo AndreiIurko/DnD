@@ -14,14 +14,14 @@ var classFeaturesSorcerer: AbilityNode = AbilityNode(
         abilities.savingThrowProf.add(Ability.Charisma)
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
             "skill1",
-            listOf(intimidation.name, arcana.name, deception.name, insight.name, religion.name, persuasion.name)
+            { listOf(intimidation.name, arcana.name, deception.name, insight.name, religion.name, persuasion.name) }
         ),
         Pair(
             "skill2",
-            listOf(intimidation.name, arcana.name, deception.name, insight.name, religion.name, persuasion.name)
+            { listOf(intimidation.name, arcana.name, deception.name, insight.name, religion.name, persuasion.name) }
         ),
     ),
     requirements = { abilities: CharacterInfo ->
@@ -62,7 +62,7 @@ var spellCastingSorcerer: AbilityNode = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Sorcerer
     },
@@ -98,8 +98,8 @@ var spellCastingSorcerer: AbilityNode = AbilityNode(
 var sorcerousOrigin: AbilityNode = AbilityNode(
     name = "Происхождение чародея",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(draconicBloodline.name, wildMagic.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(draconicBloodline.name, wildMagic.name) })
     ),
     requirements = { true },
     description = "Выберите источник, из которого ваш персонаж черпает свою силу.\n" +
@@ -117,10 +117,10 @@ var sorcerer1: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(classFeaturesSorcerer.name)),
-        Pair("second", listOf(spellCastingSorcerer.name)),
-        Pair("third", listOf(sorcerousOrigin.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(classFeaturesSorcerer.name) }),
+        Pair("second", { listOf(spellCastingSorcerer.name) }),
+        Pair("third", { listOf(sorcerousOrigin.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -169,7 +169,7 @@ var fontOfMagic: AbilityNode = AbilityNode(
 
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Sorcerer
     },
@@ -204,8 +204,8 @@ var sorcerer2: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(fontOfMagic.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(fontOfMagic.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -218,18 +218,22 @@ var metamagic: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
-            "first", listOf(
-                carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
-                heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name
-            )
+            "first", {
+                listOf(
+                    carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
+                    heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name
+                )
+            }
         ),
         Pair(
-            "second", listOf(
-                carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
-                heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name
-            )
+            "second", {
+                listOf(
+                    carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
+                    heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name
+                )
+            }
         ),
     ),
     requirements = { true },
@@ -249,8 +253,8 @@ var sorcerer3: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(metamagic.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(metamagic.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -272,7 +276,7 @@ var sorcerer4: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "4-й уровень, способности чародея",
@@ -291,7 +295,7 @@ var sorcerer5: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "5-й уровень, способности чародея",
@@ -309,7 +313,7 @@ var sorcerer6: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "6-й уровень, способности чародея",
@@ -327,7 +331,7 @@ var sorcerer7: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "7-й уровень, способности чародея",
@@ -345,7 +349,7 @@ var sorcerer8: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "8-й уровень, способности чародея",
@@ -364,7 +368,7 @@ var sorcerer9: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "9-й уровень, способности чародея",
@@ -376,12 +380,14 @@ var metamagic2: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
-            "first", listOf(
-                carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
-                heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name
-            )
+            "first", {
+                listOf(
+                    carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
+                    heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name
+                )
+            }
         ),
     ),
     requirements = { true },
@@ -399,8 +405,8 @@ var sorcerer10: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(metamagic2.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(metamagic2.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -419,7 +425,7 @@ var sorcerer11: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "11-й уровень, способности чародея",
@@ -437,7 +443,7 @@ var sorcerer12: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "12-й уровень, способности чародея",
@@ -456,7 +462,7 @@ var sorcerer13: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "13-й уровень, способности чародея",
@@ -474,7 +480,7 @@ var sorcerer14: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "14-й уровень, способности чародея",
@@ -498,7 +504,7 @@ var sorcerer15: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "15-й уровень, способности чародея",
@@ -516,7 +522,7 @@ var sorcerer16: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "16-й уровень, способности чародея",
@@ -528,12 +534,14 @@ var metamagic3: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
-            "first", listOf(
-                carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
-                heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name
-            )
+            "first", {
+                listOf(
+                    carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
+                    heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name
+                )
+            }
         ),
     ),
     requirements = { true },
@@ -558,8 +566,8 @@ var sorcerer17: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(metamagic3.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(metamagic3.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -582,7 +590,7 @@ var sorcerer18: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "18-й уровень, способности чародея",
@@ -604,7 +612,7 @@ var sorcerer19: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "19-й уровень, способности чародея",
@@ -626,7 +634,7 @@ var sorcerer20: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "20-й уровень, способности чародея",

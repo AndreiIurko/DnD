@@ -7,19 +7,18 @@ import com.andreyyurko.dnd.data.characterData.Priority
 open class AbilityNode(
     val name: String,
     val changesInCharacterInfo: (abilities: CharacterInfo) -> CharacterInfo,
-    val alternatives: MutableMap<String, List<String>>,
+    val getAlternatives: MutableMap<String, (abilities: CharacterInfo?) -> List<String>>,
     val requirements: (abilities: CharacterInfo) -> Boolean,
     open val addRequirements: List<List<Triple<String, String, Int>>> = listOf(listOf()),
     var description: String,
     val isNeedsToBeShown: Boolean = true,
     val priority: Priority = Priority.Basic,
     val actionForChoice: Map<String, (choice: String, abilities: CharacterInfo) -> CharacterInfo>? = null,
-    val getChoices: MutableMap<String, (abilities: CharacterInfo) -> List<String>>? = null
 ) {
     constructor(name: String) : this(
         name = name,
         changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-        alternatives = mutableMapOf<String, List<String>>(),
+        getAlternatives = mutableMapOf<String, (abilities: CharacterInfo?) -> List<String>>(),
         requirements = { true },
         addRequirements = listOf<List<Triple<String, String, Int>>>(),
         description = ""
@@ -40,16 +39,8 @@ open class AbilityNode(
 
     fun showOptions(abilities: CharacterInfo, option_name: String): List<String> {
         val result: MutableList<String> = mutableListOf()
-        for (option in alternatives[option_name]!!) {
+        for (option in getAlternatives[option_name]!!(abilities)) {
             if (mapOfAn[option]!!.isAddable(abilities)) result.add(option)
-        }
-        return result
-    }
-
-    fun showOptions(option_name: String): List<String> {
-        val result: MutableList<String> = mutableListOf()
-        for (option in alternatives[option_name]!!) {
-            result.add(option)
         }
         return result
     }

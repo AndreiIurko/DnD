@@ -1,6 +1,5 @@
 package com.andreyyurko.dnd.data.abilities.other
 
-import android.util.Log
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
@@ -17,7 +16,7 @@ var archery: AbilityNode = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { _: CharacterInfo ->
         true
     },
@@ -33,7 +32,7 @@ var defense: AbilityNode = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { _: CharacterInfo ->
         true
     },
@@ -47,11 +46,12 @@ var dueling: AbilityNode = AbilityNode(
             "Пока вы держите рукопашное оружие в одной руке и не используете другого оружия, вы получаете бонус +2 к броскам урона этим оружием."
         if (abilities.currentState.secondWeapon == null && abilities.currentState.firstWeapon.isMelee) {
             if (abilities.currentState.firstWeapon.damage.split('+').last().length > 1)
-                abilities.currentState.firstWeapon.damage = sumTwoDamages("2", abilities.currentState.firstWeapon.damage)
+                abilities.currentState.firstWeapon.damage =
+                    sumTwoDamages("2", abilities.currentState.firstWeapon.damage)
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { _: CharacterInfo ->
         true
     },
@@ -67,7 +67,7 @@ var greatWeaponFighting: AbilityNode = AbilityNode(
             "Если у вас выпало «1» или «2» на кости урона оружия при атаке, которую вы совершали рукопашным оружием, удерживая его двумя руками, то вы можете перебросить эту кость, и должны использовать новый результат, даже если снова выпало «1» или «2». Чтобы воспользоваться этим преимуществом, ваше оружие должно иметь свойство « двуручное» или «универсальное»."
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { _: CharacterInfo ->
         true
     },
@@ -86,7 +86,7 @@ var protection: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { _: CharacterInfo ->
         true
     },
@@ -120,7 +120,7 @@ var twoWeaponFighting: AbilityNode = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { _: CharacterInfo ->
         true
     },

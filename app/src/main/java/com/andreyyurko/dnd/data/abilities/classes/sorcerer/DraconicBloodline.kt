@@ -28,7 +28,7 @@ var ancestorBlack: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
@@ -46,7 +46,7 @@ var ancestorBlue: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
@@ -64,7 +64,7 @@ var ancestorBrass: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
@@ -82,7 +82,7 @@ var ancestorBronze: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
@@ -100,7 +100,7 @@ var ancestorCopper: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
@@ -118,7 +118,7 @@ var ancestorGold: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
@@ -136,7 +136,7 @@ var ancestorGreen: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
@@ -154,7 +154,7 @@ var ancestorRed: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
@@ -172,7 +172,7 @@ var ancestorSilver: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
@@ -190,7 +190,7 @@ var ancestorWhite: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
@@ -201,12 +201,14 @@ var ancestorWhite: AbilityNode = AbilityNode(
 var dragonAncestor: AbilityNode = AbilityNode(
     name = "Драконий предок",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
-            "first", listOf(
-                ancestorBlack.name, ancestorSilver.name, ancestorBlue.name, ancestorBrass.name, ancestorBronze.name,
-                ancestorCopper.name, ancestorGold.name, ancestorGreen.name, ancestorRed.name, ancestorWhite.name
-            )
+            "first", {
+                listOf(
+                    ancestorBlack.name, ancestorSilver.name, ancestorBlue.name, ancestorBrass.name, ancestorBronze.name,
+                    ancestorCopper.name, ancestorGold.name, ancestorGreen.name, ancestorRed.name, ancestorWhite.name
+                )
+            }
         )
     ),
     requirements = { abilities: CharacterInfo ->
@@ -241,7 +243,7 @@ var draconicResilience: AbilityNode = AbilityNode(
 
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
@@ -268,7 +270,7 @@ var elementalAffinity: AbilityNode = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 6 && abilities.characterClass == Classes.Sorcerer
     },
@@ -289,7 +291,7 @@ var dragonWings: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 14 && abilities.characterClass == Classes.Sorcerer
     },
@@ -310,7 +312,7 @@ var dragonPresence: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 18 && abilities.characterClass == Classes.Sorcerer
     },
@@ -320,12 +322,12 @@ var dragonPresence: AbilityNode = AbilityNode(
 var draconicBloodline: AbilityNode = AbilityNode(
     name = "Наследие драконьей крови",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(dragonAncestor.name)),
-        Pair("second", listOf(draconicResilience.name)),
-        Pair("third", listOf(elementalAffinity.name)),
-        Pair("forth", listOf(dragonWings.name)),
-        Pair("fifth", listOf(dragonPresence.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(dragonAncestor.name) }),
+        Pair("second", { listOf(draconicResilience.name) }),
+        Pair("third", { listOf(elementalAffinity.name) }),
+        Pair("forth", { listOf(dragonWings.name) }),
+        Pair("fifth", { listOf(dragonPresence.name) })
     ),
     requirements = { true },
     description = "",

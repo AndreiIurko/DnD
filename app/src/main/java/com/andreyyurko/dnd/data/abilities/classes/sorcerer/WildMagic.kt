@@ -10,7 +10,7 @@ var wildMagicSurge: AbilityNode = AbilityNode(
             "Ваше колдовство может вызвать волны дикой магии. Сразу после накладывания вами заклинания чародея как минимум 1-го уровня Мастер может попросить вас бросить к20. Если выпадает «1», бросьте кость по таблице «Волна дикой магии» для создания случайного магического эффекта. Волна может возникать только один раз за ход. Если эффект волны является заклинанием, он слишком непредсказуем, чтобы его можно было модифицировать метамагией. Если заклинание-эффект в обычных обстоятельствах требует концентрацию, то в данном случае оно не требует концентрацию и длится свою максимальную длительность."
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
@@ -39,7 +39,7 @@ var tidesOfChaos: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Sorcerer
     },
@@ -61,7 +61,7 @@ var bendLuck: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 6 && abilities.characterClass == Classes.Sorcerer
     },
@@ -77,7 +77,7 @@ var controlledChaos: AbilityNode = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 14 && abilities.characterClass == Classes.Sorcerer
     },
@@ -96,7 +96,7 @@ var spellBombardment: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 18 && abilities.characterClass == Classes.Sorcerer
     },
@@ -106,12 +106,12 @@ var spellBombardment: AbilityNode = AbilityNode(
 var wildMagic: AbilityNode = AbilityNode(
     name = "Дикая магия",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(wildMagicSurge.name)),
-        Pair("second", listOf(tidesOfChaos.name)),
-        Pair("third", listOf(bendLuck.name)),
-        Pair("fourth", listOf(controlledChaos.name)),
-        Pair("fifth", listOf(spellBombardment.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(wildMagicSurge.name) }),
+        Pair("second", { listOf(tidesOfChaos.name) }),
+        Pair("third", { listOf(bendLuck.name) }),
+        Pair("fourth", { listOf(controlledChaos.name) }),
+        Pair("fifth", { listOf(spellBombardment.name) })
     ),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Sorcerer

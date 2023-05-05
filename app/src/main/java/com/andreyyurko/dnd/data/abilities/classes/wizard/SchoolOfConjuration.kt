@@ -13,7 +13,7 @@ var conjurationSavant = AbilityNode(
             "Золото и время, которое вы тратите на копирование заклинания школы Вызова в свою книгу заклинаний, уменьшаются вдвое.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 2 && abilities.characterClass == Classes.Wizard
     },
@@ -34,7 +34,7 @@ var minorConjuration = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 2 && abilities.characterClass == Classes.Wizard
     },
@@ -55,7 +55,7 @@ var benignTransposition = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 6 && abilities.characterClass == Classes.Wizard
     },
@@ -69,7 +69,7 @@ var focusedConjuration = AbilityNode(
             "Когда вы концентрируетесь на заклинании школы Вызова, ваша концентрация не может быть нарушена в результате получения урона.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 10 && abilities.characterClass == Classes.Wizard
     },
@@ -83,7 +83,7 @@ var durableSummons = AbilityNode(
             "Все призванные или созданные вами заклинанием школы Вызова существа имеют 30 временных хитов.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 14 && abilities.characterClass == Classes.Wizard
     },
@@ -93,12 +93,12 @@ var durableSummons = AbilityNode(
 var schoolOfConjuration = AbilityNode(
     name = "Школа вызова",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(conjurationSavant.name)),
-        Pair("second", listOf(minorConjuration.name)),
-        Pair("third", listOf(benignTransposition.name)),
-        Pair("fourth", listOf(focusedConjuration.name)),
-        Pair("fifth", listOf(durableSummons.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(conjurationSavant.name) }),
+        Pair("second", { listOf(minorConjuration.name) }),
+        Pair("third", { listOf(benignTransposition.name) }),
+        Pair("fourth", { listOf(focusedConjuration.name) }),
+        Pair("fifth", { listOf(durableSummons.name) })
     ),
     requirements = { true },
     description = "",

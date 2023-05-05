@@ -1,12 +1,10 @@
 package com.andreyyurko.dnd.data.abilities.other
 
 
-import android.util.Log
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import kotlin.math.ceil
-import kotlin.math.floor
 
 var baseActionsAN = AbilityNode(
     "base_actions_an",
@@ -204,7 +202,7 @@ var lastCommonCalculations: AbilityNode = AbilityNode(
                 else 0
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     description = "",
     priority = Priority.DoLast,
@@ -214,9 +212,9 @@ var lastCommonCalculations: AbilityNode = AbilityNode(
 var commonRoot: AbilityNode = AbilityNode(
     name = "Common_root",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(baseActionsAN.name)),
-        Pair("second", listOf(lastCommonCalculations.name))
+    getAlternatives = mutableMapOf(
+        Pair("first") { listOf(baseActionsAN.name) },
+        Pair("second") { listOf(lastCommonCalculations.name) }
     ),
     requirements = { true },
     description = "",
@@ -292,7 +290,7 @@ fun sumTwoDamages(damage1: String, damage2: String): String {
 }
 
 fun getSpellSlotsCount(abilities: CharacterInfo): List<Int> {
-    when(ceil(abilities.spellCasterLevel).toInt()+1) {
+    when (ceil(abilities.spellCasterLevel).toInt()) {
         1 -> return listOf(2)
         2 -> return listOf(3)
         3 -> return listOf(4, 2)
@@ -317,7 +315,7 @@ fun getSpellSlotsCount(abilities: CharacterInfo): List<Int> {
 fun setupSpellSlots(abilities: CharacterInfo) {
     val spellSlots = getSpellSlotsCount(abilities)
     for (i in spellSlots.indices) {
-        val spellLevel: String = (i+1).toString()
+        val spellLevel: String = (i + 1).toString()
         if (!abilities.currentState.charges.contains("Ячейки_$spellLevel")) {
             abilities.currentState.charges["Ячейки_$spellLevel"] = ChargesCounter(
                 current = spellSlots[i],

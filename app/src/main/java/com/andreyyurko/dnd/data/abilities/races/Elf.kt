@@ -19,7 +19,7 @@ var woodElf = AbilityNode(
             "Вы можете предпринять попытку спрятаться, даже если вы слабо заслонены листвой, сильным дождём, снегопадом, туманом или другими природными явлениями.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Поскольку вы — лесной эльф, у вас обострённые чувства и интуиция, и ваши стремительные ноги несут вас быстро и незаметно через ваши родные леса. Эта категория включает диких эльфов Серого Ястреба и кагонести из Саги о Копье, а также расы, называемые лесными эльфами Серого Ястреба и Забытых Королевств. В Фаэруне лесные эльфы (также называемые дикими или зелёными) являются затворниками, не доверяющими не-эльфам.\n" +
@@ -52,8 +52,8 @@ var highElf = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("language", mapOfLanguages.keys.toList())
+    getAlternatives = mutableMapOf(
+        Pair("language", { mapOfLanguages.keys.toList() })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -128,7 +128,7 @@ var drow = AbilityNode(
         //weapon
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "\n" +
@@ -180,8 +180,8 @@ val elfAbilities = AbilityNode(
             "Эльфы не спят. Вместо этого они погружаются в глубокую медитацию, находясь в полубессознательном состоянии до 4 часов в сутки (обычно такую медитацию называют трансом). Во время этой медитации вы можете грезить о разных вещах. Некоторые из этих грёз являются ментальными упражнениями, выработанными за годы тренировок. После такого отдыха вы получаете все преимущества, которые получает человек после 8 часов сна.\n"
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("subrace", listOf(woodElf.name, highElf.name, drow.name))
+    getAlternatives = mutableMapOf(
+        Pair("subrace", { listOf(woodElf.name, highElf.name, drow.name) })
     ),
     requirements = { true },
     description = "Увеличение характеристик. Значение вашей Ловкости увеличивается на 2.\n" +
@@ -214,8 +214,8 @@ val elf = AbilityNode(
         abilities.race = "Эльф"
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("abilities", listOf(elfAbilities.name))
+    getAlternatives = mutableMapOf(
+        Pair("abilities", { listOf(elfAbilities.name) })
     ),
     requirements = { true },
     description = "Эльф",

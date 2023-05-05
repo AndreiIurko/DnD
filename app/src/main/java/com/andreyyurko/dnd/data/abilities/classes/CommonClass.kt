@@ -19,7 +19,7 @@ import com.andreyyurko.dnd.data.characterData.character.CharacterAbilityNode
 class AbilityNodeLevel(
     name: String,
     changesInCharacterInfo: (abilities: CharacterInfo) -> CharacterInfo,
-    alternatives: MutableMap<String, List<String>>,
+    getAlternatives: MutableMap<String, (abilities: CharacterInfo?) -> List<String>>,
     requirements: (abilities: CharacterInfo) -> Boolean,
     addRequirements: List<List<Triple<String, String, Int>>>,
     description: String,
@@ -27,7 +27,7 @@ class AbilityNodeLevel(
 ) : AbilityNode(
     name,
     changesInCharacterInfo,
-    alternatives,
+    getAlternatives,
     requirements,
     addRequirements,
     description,
@@ -49,12 +49,12 @@ class CharacterAbilityNodeLevel(
     )
 
     fun makeChoice() {
-        for (entries in data.alternatives.entries) {
+        for (entries in data.getAlternatives.entries) {
             // check if ability is next level
-            if (entries.value[0] == data.next_level) continue
+            if (entries.value(character?.characterInfo)[0] == data.next_level) continue
 
             // choose all abilities
-            (this as CharacterAbilityNode).makeChoice(entries.key, entries.value[0])
+            (this as CharacterAbilityNode).makeChoice(entries.key, entries.value(character?.characterInfo)[0])
         }
     }
 
@@ -80,7 +80,7 @@ var extraAttack: AbilityNode = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Если вы в свой ход совершаете действие Атака, вы можете совершить две атаки вместо одной.\n",

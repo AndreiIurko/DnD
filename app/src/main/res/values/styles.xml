@@ -28,13 +28,13 @@
     <style name="Widget.DnD.ImageButton.Delete">
         <item name="android:src">@drawable/ic_baseline_delete_36</item>
     </style>
+
     <style name="Widget.DnD.MenuButton" parent="Widget.AppCompat.Button">
 
     </style>
 
 
-    <style name="Text">
-    </style>
+    <style name="Text"></style>
 
     <style name="Text.Appearance">
         <item name="android:textColor">?colorOnBackground</item>

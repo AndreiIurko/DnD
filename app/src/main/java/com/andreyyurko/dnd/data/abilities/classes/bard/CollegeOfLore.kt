@@ -12,75 +12,81 @@ var collegeOfLoreBonusProficiencies = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
             "skill1",
-            listOf(
-                acrobatics.name,
-                animalHandling.name,
-                arcana.name,
-                athletics.name,
-                deception.name,
-                history.name,
-                insight.name,
-                intimidation.name,
-                investigation.name,
-                medicine.name,
-                nature.name,
-                perception.name,
-                performance.name,
-                persuasion.name,
-                religion.name,
-                sleightOfHand.name,
-                stealth.name,
-                survival.name
-            )
+            {
+                listOf(
+                    acrobatics.name,
+                    animalHandling.name,
+                    arcana.name,
+                    athletics.name,
+                    deception.name,
+                    history.name,
+                    insight.name,
+                    intimidation.name,
+                    investigation.name,
+                    medicine.name,
+                    nature.name,
+                    perception.name,
+                    performance.name,
+                    persuasion.name,
+                    religion.name,
+                    sleightOfHand.name,
+                    stealth.name,
+                    survival.name
+                )
+            }
         ),
         Pair(
             "skill2",
-            listOf(
-                acrobatics.name,
-                animalHandling.name,
-                arcana.name,
-                athletics.name,
-                deception.name,
-                history.name,
-                insight.name,
-                intimidation.name,
-                investigation.name,
-                medicine.name,
-                nature.name,
-                perception.name,
-                performance.name,
-                persuasion.name,
-                religion.name,
-                sleightOfHand.name,
-                stealth.name,
-                survival.name
-            )
+            {
+                listOf(
+                    acrobatics.name,
+                    animalHandling.name,
+                    arcana.name,
+                    athletics.name,
+                    deception.name,
+                    history.name,
+                    insight.name,
+                    intimidation.name,
+                    investigation.name,
+                    medicine.name,
+                    nature.name,
+                    perception.name,
+                    performance.name,
+                    persuasion.name,
+                    religion.name,
+                    sleightOfHand.name,
+                    stealth.name,
+                    survival.name
+                )
+            }
         ),
         Pair(
             "skill3",
-            listOf(
-                acrobatics.name,
-                animalHandling.name,
-                arcana.name,
-                athletics.name,
-                deception.name,
-                history.name,
-                insight.name,
-                intimidation.name,
-                investigation.name,
-                medicine.name,
-                nature.name,
-                perception.name,
-                performance.name,
-                persuasion.name,
-                religion.name,
-                sleightOfHand.name,
-                stealth.name,
-                survival.name
-            )
+            {
+                listOf(
+                    acrobatics.name,
+                    animalHandling.name,
+                    arcana.name,
+                    athletics.name,
+                    deception.name,
+                    history.name,
+                    insight.name,
+                    intimidation.name,
+                    investigation.name,
+                    medicine.name,
+                    nature.name,
+                    perception.name,
+                    performance.name,
+                    persuasion.name,
+                    religion.name,
+                    sleightOfHand.name,
+                    stealth.name,
+                    survival.name
+                )
+            }
         ),
     ),
     requirements = { abilities: CharacterInfo ->
@@ -102,7 +108,7 @@ var cuttingWords = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Bard
     },
@@ -115,7 +121,7 @@ var additionalMagicalSecrets = AbilityNode(
         abilities
     },
     // We need to do something
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 6 && abilities.characterClass == Classes.Bard
     },
@@ -135,7 +141,7 @@ var peerlessSkill = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 14 && abilities.characterClass == Classes.Bard
     },
@@ -145,11 +151,11 @@ var peerlessSkill = AbilityNode(
 var collegeOfLore = AbilityNode(
     name = "Коллегия знаний",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(collegeOfLoreBonusProficiencies.name)),
-        Pair("second", listOf(cuttingWords.name)),
-        Pair("third", listOf(additionalMagicalSecrets.name)),
-        Pair("fourth", listOf(peerlessSkill.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(collegeOfLoreBonusProficiencies.name) }),
+        Pair("second", { listOf(cuttingWords.name) }),
+        Pair("third", { listOf(additionalMagicalSecrets.name) }),
+        Pair("fourth", { listOf(peerlessSkill.name) })
     ),
     requirements = { true },
     description = "",

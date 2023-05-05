@@ -20,70 +20,78 @@ var classFeaturesRogue: AbilityNode = AbilityNode(
         abilities.toolProficiency.add(Tools.ThievesTools)
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
             "skill1",
-            listOf(
-                acrobatics.name,
-                athletics.name,
-                perception.name,
-                performance.name,
-                intimidation.name,
-                sleightOfHand.name,
-                deception.name,
-                investigation.name,
-                insight.name,
-                stealth.name,
-                persuasion.name
-            )
+            {
+                listOf(
+                    acrobatics.name,
+                    athletics.name,
+                    perception.name,
+                    performance.name,
+                    intimidation.name,
+                    sleightOfHand.name,
+                    deception.name,
+                    investigation.name,
+                    insight.name,
+                    stealth.name,
+                    persuasion.name
+                )
+            }
         ),
         Pair(
             "skill2",
-            listOf(
-                acrobatics.name,
-                athletics.name,
-                perception.name,
-                performance.name,
-                intimidation.name,
-                sleightOfHand.name,
-                deception.name,
-                investigation.name,
-                insight.name,
-                stealth.name,
-                persuasion.name
-            )
+            {
+                listOf(
+                    acrobatics.name,
+                    athletics.name,
+                    perception.name,
+                    performance.name,
+                    intimidation.name,
+                    sleightOfHand.name,
+                    deception.name,
+                    investigation.name,
+                    insight.name,
+                    stealth.name,
+                    persuasion.name
+                )
+            }
         ),
         Pair(
             "skill3",
-            listOf(
-                acrobatics.name,
-                athletics.name,
-                perception.name,
-                performance.name,
-                intimidation.name,
-                sleightOfHand.name,
-                deception.name,
-                investigation.name,
-                insight.name,
-                stealth.name,
-                persuasion.name
-            )
+            {
+                listOf(
+                    acrobatics.name,
+                    athletics.name,
+                    perception.name,
+                    performance.name,
+                    intimidation.name,
+                    sleightOfHand.name,
+                    deception.name,
+                    investigation.name,
+                    insight.name,
+                    stealth.name,
+                    persuasion.name
+                )
+            }
         ),
         Pair(
             "skill4",
-            listOf(
-                acrobatics.name,
-                athletics.name,
-                perception.name,
-                performance.name,
-                intimidation.name,
-                sleightOfHand.name,
-                deception.name,
-                investigation.name,
-                insight.name,
-                stealth.name,
-                persuasion.name
-            )
+            {
+                listOf(
+                    acrobatics.name,
+                    athletics.name,
+                    perception.name,
+                    performance.name,
+                    intimidation.name,
+                    sleightOfHand.name,
+                    deception.name,
+                    investigation.name,
+                    insight.name,
+                    stealth.name,
+                    persuasion.name
+                )
+            }
         )
     ),
     requirements = { abilities: CharacterInfo ->
@@ -116,54 +124,58 @@ var expertiseRogue: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
             "expertise1",
-            listOf(
-                acrobaticsExpertise.name,
-                animalHandlingExpertise.name,
-                arcanaExpertise.name,
-                athleticsExpertise.name,
-                deceptionExpertise.name,
-                historyExpertise.name,
-                insightExpertise.name,
-                intimidationExpertise.name,
-                investigationExpertise.name,
-                medicineExpertise.name,
-                natureExpertise.name,
-                perceptionExpertise.name,
-                performanceExpertise.name,
-                persuasionExpertise.name,
-                religionExpertise.name,
-                sleightOfHandExpertise.name,
-                stealthExpertise.name,
-                survivalExpertise.name,
-                thievesToolsExpertise.name
-            )
+            {
+                listOf(
+                    acrobaticsExpertise.name,
+                    animalHandlingExpertise.name,
+                    arcanaExpertise.name,
+                    athleticsExpertise.name,
+                    deceptionExpertise.name,
+                    historyExpertise.name,
+                    insightExpertise.name,
+                    intimidationExpertise.name,
+                    investigationExpertise.name,
+                    medicineExpertise.name,
+                    natureExpertise.name,
+                    perceptionExpertise.name,
+                    performanceExpertise.name,
+                    persuasionExpertise.name,
+                    religionExpertise.name,
+                    sleightOfHandExpertise.name,
+                    stealthExpertise.name,
+                    survivalExpertise.name,
+                    thievesToolsExpertise.name
+                )
+            }
         ),
         Pair(
             "expertise2",
-            listOf(
-                acrobaticsExpertise.name,
-                animalHandlingExpertise.name,
-                arcanaExpertise.name,
-                athleticsExpertise.name,
-                deceptionExpertise.name,
-                historyExpertise.name,
-                insightExpertise.name,
-                intimidationExpertise.name,
-                investigationExpertise.name,
-                medicineExpertise.name,
-                natureExpertise.name,
-                perceptionExpertise.name,
-                performanceExpertise.name,
-                persuasionExpertise.name,
-                religionExpertise.name,
-                sleightOfHandExpertise.name,
-                stealthExpertise.name,
-                survivalExpertise.name,
-                thievesToolsExpertise.name
-            )
+            {
+                listOf(
+                    acrobaticsExpertise.name,
+                    animalHandlingExpertise.name,
+                    arcanaExpertise.name,
+                    athleticsExpertise.name,
+                    deceptionExpertise.name,
+                    historyExpertise.name,
+                    insightExpertise.name,
+                    intimidationExpertise.name,
+                    investigationExpertise.name,
+                    medicineExpertise.name,
+                    natureExpertise.name,
+                    perceptionExpertise.name,
+                    performanceExpertise.name,
+                    persuasionExpertise.name,
+                    religionExpertise.name,
+                    sleightOfHandExpertise.name,
+                    stealthExpertise.name,
+                    survivalExpertise.name,
+                    thievesToolsExpertise.name
+                )
+            }
         )
     ),
     requirements = { true },
@@ -174,7 +186,7 @@ var expertiseRogue: AbilityNode = AbilityNode(
 var sneakAttack: AbilityNode = AbilityNode(
     name = "Скрытая атака",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        var dice = ((abilities.level+1)/2).toString() + "к6"
+        var dice = ((abilities.level + 1) / 2).toString() + "к6"
         abilities.actionsList.add(
             Action(
                 name = "Скрытая атака",
@@ -184,7 +196,7 @@ var sneakAttack: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Вы знаете, как точно наносить удар и использовать отвлечение врага. Один раз в ход вы можете причинить дополнительный урон 1к6 одному из существ, по которому вы попали атакой, совершённой с преимуществом к броску атаки. Атака должна использовать дальнобойное оружие или оружие со свойством «фехтовальное». Вам не нужно иметь преимущество при броске атаки, если другой враг цели находится в пределах 5 футов от неё. Этот враг не должен быть недееспособным, и у вас не должно быть помехи для броска атаки.\n" +
@@ -195,12 +207,13 @@ var sneakAttack: AbilityNode = AbilityNode(
 var thievesCant: AbilityNode = AbilityNode(
     name = "Воровской жаргон",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Воровской жаргон"] = "Во время плутовского обучения вы выучили воровской жаргон, тайную смесь диалекта, жаргона и шифра, который позволяет скрывать сообщения в, казалось бы, обычном разговоре. Только другое существо, знающее воровской жаргон, понимает такие сообщения. Это занимает в четыре раза больше времени, нежели передача тех же слов прямым текстом.\n" +
-                "\n" +
-                "Кроме того, вы понимаете набор секретных знаков и символов, используемый для передачи коротких и простых сообщений. Например, является ли область опасной или территорией гильдии воров, находится ли поблизости добыча, простодушны ли люди в округе, и предоставляют ли здесь безопасное убежище для воров в бегах.\n"
+        abilities.additionalAbilities["Воровской жаргон"] =
+            "Во время плутовского обучения вы выучили воровской жаргон, тайную смесь диалекта, жаргона и шифра, который позволяет скрывать сообщения в, казалось бы, обычном разговоре. Только другое существо, знающее воровской жаргон, понимает такие сообщения. Это занимает в четыре раза больше времени, нежели передача тех же слов прямым текстом.\n" +
+                    "\n" +
+                    "Кроме того, вы понимаете набор секретных знаков и символов, используемый для передачи коротких и простых сообщений. Например, является ли область опасной или территорией гильдии воров, находится ли поблизости добыча, простодушны ли люди в округе, и предоставляют ли здесь безопасное убежище для воров в бегах.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Во время плутовского обучения вы выучили воровской жаргон, тайную смесь диалекта, жаргона и шифра, который позволяет скрывать сообщения в, казалось бы, обычном разговоре. Только другое существо, знающее воровской жаргон, понимает такие сообщения. Это занимает в четыре раза больше времени, нежели передача тех же слов прямым текстом.\n" +
@@ -217,11 +230,11 @@ var rogue1: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 10
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(classFeaturesRogue.name)),
-        Pair("second", listOf(expertiseRogue.name)),
-        Pair("third", listOf(sneakAttack.name)),
-        Pair("fourth", listOf(thievesCant.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(classFeaturesRogue.name) }),
+        Pair("second", { listOf(expertiseRogue.name) }),
+        Pair("third", { listOf(sneakAttack.name) }),
+        Pair("fourth", { listOf(thievesCant.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -260,7 +273,7 @@ var cunningAction: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Ваше мышление и ловкость позволяют двигаться и действовать быстрее. Вы можете в каждом своем ходу боя совершать бонусное действие. Это действие может быть использовано только для Рывка, Отхода или Засады.\n"
@@ -273,8 +286,8 @@ var rogue2: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(cunningAction.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(cunningAction.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -287,8 +300,8 @@ var roguishArchetype: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(assassinArchetype.name, arcaneTrickster.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(assassinArchetype.name, arcaneTrickster.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -302,8 +315,8 @@ var rogue3: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(roguishArchetype.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(roguishArchetype.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -318,8 +331,8 @@ var rogue4: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -330,10 +343,11 @@ var rogue4: AbilityNodeLevel = AbilityNodeLevel(
 var uncannyDodge: AbilityNode = AbilityNode(
     name = "Невероятное уклонение",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Невероятное уклонение"] = "Когда нападающий, которого вы можете видеть, попадает по вам атакой, вы можете реакцией уменьшить вдвое урон, причиняемый вам этой атакой.\n"
+        abilities.additionalAbilities["Невероятное уклонение"] =
+            "Когда нападающий, которого вы можете видеть, попадает по вам атакой, вы можете реакцией уменьшить вдвое урон, причиняемый вам этой атакой.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Когда нападающий, которого вы можете видеть, попадает по вам атакой, вы можете реакцией уменьшить вдвое урон, причиняемый вам этой атакой.\n"
@@ -347,8 +361,8 @@ var rogue5: AbilityNodeLevel = AbilityNodeLevel(
         abilities.proficiencyBonus += 1
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(uncannyDodge.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(uncannyDodge.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -363,8 +377,8 @@ var rogue6: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("second", listOf(expertiseRogue.name)),
+    getAlternatives = mutableMapOf(
+        Pair("second", { listOf(expertiseRogue.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -379,7 +393,7 @@ var rogueEvasion: AbilityNode = AbilityNode(
             "Вы можете ловко увернуться от зональных эффектов, например, огненного дыхания красного дракона или заклинания град [ice storm]. Если вы попадаете под действие эффекта, который позволяет вам совершить спасбросок Ловкости, чтобы получить только половину урона, вместо этого вы не получаете вовсе никакого урона, если спасбросок был успешен, и получаете только половину урона, если он был провален.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(listOf()),
     description = "Вы можете ловко увернуться от зональных эффектов, например, огненного дыхания красного дракона или заклинания град [ice storm]. Если вы попадаете под действие эффекта, который позволяет вам совершить спасбросок Ловкости, чтобы получить только половину урона, вместо этого вы не получаете вовсе никакого урона, если спасбросок был успешен, и получаете только половину урона, если он был провален.\n"
@@ -392,8 +406,8 @@ var rogue7: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(rogueEvasion.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(rogueEvasion.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -408,8 +422,8 @@ var rogue8: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -425,7 +439,7 @@ var rogue9: AbilityNodeLevel = AbilityNodeLevel(
         abilities.proficiencyBonus += 1
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "9-й уровень, способности плута",
@@ -439,8 +453,8 @@ var rogue10: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -455,7 +469,7 @@ var reliableTalent: AbilityNode = AbilityNode(
             "Вы улучшаете выбранные навыки, пока они не достигнут совершенства. Каждый раз, когда вы совершаете проверку характеристики, которая позволяет добавить бонус мастерства, вы можете при выпадении на к20 результата «1–9» считать, что выпало «10».\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(listOf()),
     description = "Вы улучшаете выбранные навыки, пока они не достигнут совершенства. Каждый раз, когда вы совершаете проверку характеристики, которая позволяет добавить бонус мастерства, вы можете при выпадении на к20 результата «1–9» считать, что выпало «10».\n"
@@ -468,8 +482,8 @@ var rogue11: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(reliableTalent.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(reliableTalent.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -484,8 +498,8 @@ var rogue12: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -501,7 +515,7 @@ var rogue13: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "13-й уровень, способности плута",
@@ -515,7 +529,7 @@ var blindsense: AbilityNode = AbilityNode(
             "Если вы можете слышать, то знаете о местонахождении всех скрытых и невидимых существ в пределах 10 футов от себя.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(listOf()),
     description = "Если вы можете слышать, то знаете о местонахождении всех скрытых и невидимых существ в пределах 10 футов от себя.\n"
@@ -528,8 +542,8 @@ var rogue14: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(blindsense.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(blindsense.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -543,7 +557,7 @@ var slipperyMind: AbilityNode = AbilityNode(
         abilities.savingThrowProf.add(Ability.Wisdom)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(listOf()),
     description = "Вы увеличиваете силу мышления. Вы получаете владение спасбросками Мудрости.\n"
@@ -556,8 +570,8 @@ var rogue15: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(slipperyMind.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(slipperyMind.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -572,8 +586,8 @@ var rogue16: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -589,7 +603,7 @@ var rogue17: AbilityNodeLevel = AbilityNodeLevel(
         abilities.proficiencyBonus += 1
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "17-й уровень, способности плута",
@@ -599,10 +613,11 @@ var rogue17: AbilityNodeLevel = AbilityNodeLevel(
 var elusive: AbilityNode = AbilityNode(
     name = "Неуловимость",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Неуловимость"] = "Вы можете уклоняться так хорошо, что противник крайне редко может взять над вами верх. Никакие броски атаки не получают преимущества над вами, пока вы не станете недееспособным.\n"
+        abilities.additionalAbilities["Неуловимость"] =
+            "Вы можете уклоняться так хорошо, что противник крайне редко может взять над вами верх. Никакие броски атаки не получают преимущества над вами, пока вы не станете недееспособным.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(listOf()),
     description = "Вы можете уклоняться так хорошо, что противник крайне редко может взять над вами верх. Никакие броски атаки не получают преимущества над вами, пока вы не станете недееспособным.\n"
@@ -615,8 +630,8 @@ var rogue18: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(elusive.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(elusive.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -631,8 +646,8 @@ var rogue19: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -661,7 +676,7 @@ var strokeOfLuck: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(listOf()),
     description = "Вы получаете сверхъестественный дар преуспевать, когда это нужнее всего. Если ваша атака промахивается по цели, находящейся в пределах досягаемости, вы можете изменить промах на попадание. В качестве альтернативы, если вы провалили проверку характеристики, вы можете заменить результат, выпавший на к20, на «20».\n" +
@@ -676,8 +691,8 @@ var rogue20: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(strokeOfLuck.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(strokeOfLuck.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),

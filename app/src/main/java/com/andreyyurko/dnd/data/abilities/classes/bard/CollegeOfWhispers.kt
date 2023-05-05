@@ -20,7 +20,7 @@ var psychicBlades = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Bard
     },
@@ -52,7 +52,7 @@ var wordsOfTerror = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Bard
     },
@@ -88,7 +88,7 @@ var mantleOfWhispers = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 6 && abilities.characterClass == Classes.Bard
     },
@@ -124,7 +124,7 @@ var shadowLore = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 14 && abilities.characterClass == Classes.Bard
     },
@@ -140,11 +140,11 @@ var shadowLore = AbilityNode(
 var collegeOfWhispers = AbilityNode(
     name = "Коллегия шёпотов",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(psychicBlades.name)),
-        Pair("second", listOf(wordsOfTerror.name)),
-        Pair("third", listOf(mantleOfWhispers.name)),
-        Pair("fourth", listOf(shadowLore.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(psychicBlades.name) }),
+        Pair("second", { listOf(wordsOfTerror.name) }),
+        Pair("third", { listOf(mantleOfWhispers.name) }),
+        Pair("fourth", { listOf(shadowLore.name) })
     ),
     requirements = { true },
     description = "",

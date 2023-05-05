@@ -8,8 +8,6 @@ import android.os.Build
 import android.os.ext.SdkExtensions.getExtensionVersion
 import android.provider.MediaStore
 import androidx.activity.result.contract.ActivityResultContract
-import javax.inject.Inject
-import javax.inject.Singleton
 
 private const val MIME_TYPE_IMAGE = "image/*"
 
@@ -18,17 +16,18 @@ class PhotoPicker : ActivityResultContract<Unit, Uri?>() {
 
     override fun createIntent(context: Context, input: Unit): Intent {
 
-        return Intent(if (PhotoPickerAvailabilityChecker.isPhotoPickerAvailable()) {
-            Intent(MediaStore.ACTION_PICK_IMAGES)
-        } else {
-            Intent(Intent.ACTION_OPEN_DOCUMENT)
-        }).apply { type = MIME_TYPE_IMAGE }
+        return Intent(
+            if (PhotoPickerAvailabilityChecker.isPhotoPickerAvailable()) {
+                Intent(MediaStore.ACTION_PICK_IMAGES)
+            } else {
+                Intent(Intent.ACTION_OPEN_DOCUMENT)
+            }
+        ).apply { type = MIME_TYPE_IMAGE }
     }
 
     override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
         return intent.takeIf { resultCode == Activity.RESULT_OK }?.data
     }
-
 
 
     object PhotoPickerAvailabilityChecker {
@@ -45,6 +44,7 @@ class PhotoPicker : ActivityResultContract<Unit, Uri?>() {
                         false
                     }
                 }
+
                 else -> false
             }
         }

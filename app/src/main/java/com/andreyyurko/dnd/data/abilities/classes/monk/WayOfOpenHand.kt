@@ -1,10 +1,6 @@
 package com.andreyyurko.dnd.data.abilities.classes.monk
 
-import com.andreyyurko.dnd.data.characterData.Action
-import com.andreyyurko.dnd.data.characterData.ActionType
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
-import com.andreyyurko.dnd.data.characterData.ChargesCounter
-import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var openHandTechnique = AbilityNode(
@@ -23,7 +19,7 @@ var openHandTechnique = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Monk
     },
@@ -53,7 +49,7 @@ var wholenessOfBody = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 6 && abilities.characterClass == Classes.Monk
     },
@@ -72,7 +68,7 @@ var tranquility = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 11 && abilities.characterClass == Classes.Monk
     },
@@ -92,7 +88,7 @@ var quiveringPalm = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 17 && abilities.characterClass == Classes.Monk
     },
@@ -102,11 +98,11 @@ var quiveringPalm = AbilityNode(
 var wayOfOpenHand = AbilityNode(
     name = "Путь открытой ладони",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(openHandTechnique.name)),
-        Pair("second", listOf(wholenessOfBody.name)),
-        Pair("third", listOf(tranquility.name)),
-        Pair("fourth", listOf(quiveringPalm.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(openHandTechnique.name) }),
+        Pair("second", { listOf(wholenessOfBody.name) }),
+        Pair("third", { listOf(tranquility.name) }),
+        Pair("fourth", { listOf(quiveringPalm.name) })
     ),
     requirements = { true },
     description = "",

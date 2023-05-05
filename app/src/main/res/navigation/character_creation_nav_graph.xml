@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/character_creation_nav_graph"
-            app:startDestination="@id/abilitiesFragment"
->
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/character_creation_nav_graph"
+    app:startDestination="@id/abilitiesFragment">
 
     <fragment
-            android:id="@+id/abilitiesFragment"
-            android:name="com.andreyyurko.dnd.ui.addcharacterfragments.abilitiesfragment.AbilitiesFragment"
-            android:label="AbilitiesFragment">
-        <action android:id="@+id/action_abilitiesFragment_to_raceFragment" app:destination="@id/raceFragment"/>
+        android:id="@+id/abilitiesFragment"
+        android:name="com.andreyyurko.dnd.ui.addcharacterfragments.abilitiesfragment.AbilitiesFragment"
+        android:label="AbilitiesFragment">
+        <action
+            android:id="@+id/action_abilitiesFragment_to_raceFragment"
+            app:destination="@id/raceFragment" />
     </fragment>
 
     <fragment
-            android:id="@+id/raceFragment"
-            android:name="com.andreyyurko.dnd.ui.addcharacterfragments.racefragment.RaceFragment"
-            android:label="RaceFragment">
-        <action android:id="@+id/action_raceFragment_to_classFragment" app:destination="@id/classFragment"/>
+        android:id="@+id/raceFragment"
+        android:name="com.andreyyurko.dnd.ui.addcharacterfragments.racefragment.RaceFragment"
+        android:label="RaceFragment">
+        <action
+            android:id="@+id/action_raceFragment_to_classFragment"
+            app:destination="@id/classFragment" />
     </fragment>
 
     <fragment
-            android:id="@+id/classFragment"
-            android:name="com.andreyyurko.dnd.ui.addcharacterfragments.classfragment.ClassFragment"
-            android:label="ClassFragment">
-        <action android:id="@+id/action_classFragment_to_spellsFragment" app:destination="@id/spellsFragment"/>
+        android:id="@+id/classFragment"
+        android:name="com.andreyyurko.dnd.ui.addcharacterfragments.classfragment.ClassFragment"
+        android:label="ClassFragment">
+        <action
+            android:id="@+id/action_classFragment_to_spellsFragment"
+            app:destination="@id/spellsFragment" />
     </fragment>
 
     <fragment
-            android:id="@+id/spellsFragment"
-            android:name="com.andreyyurko.dnd.ui.addcharacterfragments.spellsfragment.SpellsFragment"
-            android:label="SpellsFragment"/>
+        android:id="@+id/spellsFragment"
+        android:name="com.andreyyurko.dnd.ui.addcharacterfragments.spellsfragment.SpellsFragment"
+        android:label="SpellsFragment" />
 
 </navigation>

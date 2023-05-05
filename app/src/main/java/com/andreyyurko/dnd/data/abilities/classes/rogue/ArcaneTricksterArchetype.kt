@@ -1,11 +1,6 @@
 package com.andreyyurko.dnd.data.abilities.classes.rogue
 
-import com.andreyyurko.dnd.data.characterData.Action
-import com.andreyyurko.dnd.data.characterData.ActionType
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
-import com.andreyyurko.dnd.data.characterData.ChargesCounter
-import com.andreyyurko.dnd.data.characterData.Classes
-import com.andreyyurko.dnd.data.characterData.Tools
+import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.spells.CharacterSpells
 import com.andreyyurko.dnd.data.spells.SpellLists
@@ -30,7 +25,7 @@ var spellCastingArcaneTrickster: AbilityNode = AbilityNode(
             }
             this["Заклинания подкласса"]?.className = Classes.Wizard.className
             this["Заклинания подкласса"]?.maxKnownSpellsCount = knownSpells
-            this["Заклинания подкласса"]?.maxKnownCantripsCount = 2 + (abilities.level+1)/11
+            this["Заклинания подкласса"]?.maxKnownCantripsCount = 2 + (abilities.level + 1) / 11
         }
         abilities.spellsInfo["Волшебная рука мистического ловкача"] = CharacterSpells(
             className = Classes.Wizard.className,
@@ -75,7 +70,7 @@ var spellCastingArcaneTrickster: AbilityNode = AbilityNode(
         }*/
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Rogue
     },
@@ -97,17 +92,18 @@ var spellCastingArcaneTrickster: AbilityNode = AbilityNode(
 var mageHandLegerdemain = AbilityNode(
     name = "Улучшенная магическая рука",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Улучшенная магическая рука"] = "Когда вы накладываете заклинание волшебная рука [mage hand], вы можете создать руку невидимой, и совершать ею следующие дополнительные действия:\n" +
-                "\n" +
-                "    Вы можете положить один предмет, удерживаемый рукой, в контейнер, носимый или несомый другим существом.\n" +
-                "    Вы можете достать предмет из контейнера, носимого или несомого другим существом.\n" +
-                "    Вы можете использовать воровские инструменты для вскрытия замков и обезвреживания ловушек в дистанции этого заклинания. \n" +
-                "\n" +
-                "Вы можете выполнить одно из этих действий, не будучи замеченным, если успешно совершите проверку Ловкости (Ловкость рук) против проверки Мудрости (Восприятие) существа.\n" +
-                "Кроме того, вы можете использовать бонусное действие, предоставленное умением «Хитрое действие», для управления рукой.\n"
+        abilities.additionalAbilities["Улучшенная магическая рука"] =
+            "Когда вы накладываете заклинание волшебная рука [mage hand], вы можете создать руку невидимой, и совершать ею следующие дополнительные действия:\n" +
+                    "\n" +
+                    "    Вы можете положить один предмет, удерживаемый рукой, в контейнер, носимый или несомый другим существом.\n" +
+                    "    Вы можете достать предмет из контейнера, носимого или несомого другим существом.\n" +
+                    "    Вы можете использовать воровские инструменты для вскрытия замков и обезвреживания ловушек в дистанции этого заклинания. \n" +
+                    "\n" +
+                    "Вы можете выполнить одно из этих действий, не будучи замеченным, если успешно совершите проверку Ловкости (Ловкость рук) против проверки Мудрости (Восприятие) существа.\n" +
+                    "Кроме того, вы можете использовать бонусное действие, предоставленное умением «Хитрое действие», для управления рукой.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Rogue
     },
@@ -124,10 +120,11 @@ var mageHandLegerdemain = AbilityNode(
 var magicalAmbush = AbilityNode(
     name = "Магическая засада",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Магическая засада"] = "Если вы накладываете заклинание на существо, от которого скрыты, существо в этом ходу совершает с помехой спасброски от этого заклинания.\n"
+        abilities.additionalAbilities["Магическая засада"] =
+            "Если вы накладываете заклинание на существо, от которого скрыты, существо в этом ходу совершает с помехой спасброски от этого заклинания.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 9 && abilities.characterClass == Classes.Rogue
     },
@@ -146,7 +143,7 @@ var versatileTrickster = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 13 && abilities.characterClass == Classes.Rogue
     },
@@ -176,7 +173,7 @@ var spellThief = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 17 && abilities.characterClass == Classes.Rogue
     },
@@ -190,12 +187,12 @@ var spellThief = AbilityNode(
 var arcaneTrickster = AbilityNode(
     name = "Мистический ловкач",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(spellCastingArcaneTrickster.name)),
-        Pair("second", listOf(mageHandLegerdemain.name)),
-        Pair("third", listOf(magicalAmbush.name)),
-        Pair("fourth", listOf(versatileTrickster.name)),
-        Pair("fifth", listOf(spellThief.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(spellCastingArcaneTrickster.name) }),
+        Pair("second", { listOf(mageHandLegerdemain.name) }),
+        Pair("third", { listOf(magicalAmbush.name) }),
+        Pair("fourth", { listOf(versatileTrickster.name) }),
+        Pair("fifth", { listOf(spellThief.name) })
     ),
     requirements = { true },
     description = "",

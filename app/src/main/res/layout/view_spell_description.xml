@@ -1,60 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="400dp"
-            android:orientation="vertical"
-            android:padding="17dp"
-    >
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        android:orientation="vertical"
+        android:padding="17dp">
 
         <TextView
-                android:id="@+id/nameTextView"
-                android:layout_width="320dp"
-                android:layout_height="wrap_content"
-                android:text="Name"
-                android:textSize="16sp"
-        />
+            android:id="@+id/nameTextView"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textSize="16sp" />
+
         <TextView
-                android:id="@+id/levelAndSchoolTextView"
-                android:layout_width="320dp"
-                android:layout_height="wrap_content"
-                android:text="Level, school"
-                android:textSize="12sp"
-        />
+            android:id="@+id/levelAndSchoolTextView"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:text="Level, school"
+            android:textSize="12sp" />
+
         <TextView
-                android:id="@+id/castTimeAndRangeAndConcentrationTextView"
-                android:layout_width="320dp"
-                android:layout_height="wrap_content"
-                android:text="cast time, range, concentration"
-                android:textSize="12sp"
-        />
+            android:id="@+id/castTimeAndRangeAndConcentrationTextView"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:text="cast time, range, concentration"
+            android:textSize="12sp" />
+
         <TextView
-                android:id="@+id/durationTextView"
-                android:layout_width="320dp"
-                android:layout_height="wrap_content"
-                android:text="duration"
-                android:textSize="12sp"
-        />
+            android:id="@+id/durationTextView"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:text="duration"
+            android:textSize="12sp" />
+
         <TextView
-                android:id="@+id/componentsAndMaterialsTextView"
-                android:layout_width="320dp"
-                android:layout_height="wrap_content"
-                android:text="Components, materials"
-                android:textSize="12sp"
-        />
+            android:id="@+id/componentsAndMaterialsTextView"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:text="Components, materials"
+            android:textSize="12sp" />
+
         <TextView
-                android:id="@+id/descriptionTextView"
-                android:layout_width="320dp"
-                android:layout_height="wrap_content"
-                android:text="description"
-                android:textSize="14sp"
-                android:layout_marginTop="6dp"
-        />
+            android:id="@+id/descriptionTextView"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:text="description"
+            android:textSize="14sp"
+            android:layout_marginTop="6dp" />
 
     </LinearLayout>
 

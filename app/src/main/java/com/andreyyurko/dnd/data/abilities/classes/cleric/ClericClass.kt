@@ -22,14 +22,14 @@ var classFeaturesCleric: AbilityNode = AbilityNode(
         addAllSimpleWeapons(abilities)
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
             "skill1",
-            listOf(history.name, medicine.name, insight.name, religion.name, persuasion.name)
+            { listOf(history.name, medicine.name, insight.name, religion.name, persuasion.name) }
         ),
         Pair(
             "skill2",
-            listOf(history.name, medicine.name, insight.name, religion.name, persuasion.name)
+            { listOf(history.name, medicine.name, insight.name, religion.name, persuasion.name) }
         ),
     ),
     requirements = { abilities: CharacterInfo ->
@@ -74,10 +74,11 @@ var spellCastingCleric: AbilityNode = AbilityNode(
             if (abilities.level > 9)
                 this["Заклинания класса"]?.maxKnownCantripsCount = 5
         }
-        abilities.additionalAbilities["Ритуальное колдовство"] = "Вы можете сотворить любое известное вам заклинание жреца в качестве ритуала, если заклинание позволяет это.\n"
+        abilities.additionalAbilities["Ритуальное колдовство"] =
+            "Вы можете сотворить любое известное вам заклинание жреца в качестве ритуала, если заклинание позволяет это.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Cleric
     },
@@ -119,8 +120,8 @@ var divineDomain: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("domain", listOf(tempestDomain.name, KnowledgeDomain.name))
+    getAlternatives = mutableMapOf(
+        Pair("domain", { listOf(tempestDomain.name, KnowledgeDomain.name) })
     ),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Cleric
@@ -144,10 +145,10 @@ var cleric1: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 8
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(classFeaturesCleric.name)),
-        Pair("second", listOf(spellCastingCleric.name)),
-        Pair("third", listOf(divineDomain.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(classFeaturesCleric.name) }),
+        Pair("second", { listOf(spellCastingCleric.name) }),
+        Pair("third", { listOf(divineDomain.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -187,7 +188,7 @@ var channelDivinity: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Вы получаете возможность направлять божественную энергию непосредственно от своего божества, используя её для подпитки магических эффектов. Вы начинаете с двумя такими эффектами: «Изгнание Нежити» и эффектом, определяемым вашим доменом. Некоторые домены дают вам дополнительные эффекты, как только вы получите новые уровни.\n" +
@@ -205,9 +206,9 @@ var cleric2: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(channelDivinity.name)),
-        //Pair("second", listOf(domain.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(channelDivinity.name) }),
+        //Pair("second", {listOf(domain.name)})
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -223,7 +224,7 @@ var cleric3: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "3-й уровень, способности жреца",
@@ -241,8 +242,8 @@ var cleric4: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -269,7 +270,7 @@ var destroy_undead: AbilityNode = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Когда Нежить проваливает спасбросок от вашего умения «Изгнание Нежити», существо мгновенно уничтожается, если его показатель опасности не превышает значения, указанного в таблице:\n" +
@@ -291,8 +292,8 @@ var cleric5: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(destroy_undead.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(destroy_undead.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -308,7 +309,7 @@ var cleric6: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "6-й уровень, способности жреца",
@@ -323,7 +324,7 @@ var cleric7: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "7-й уровень, способности жреца",
@@ -338,8 +339,8 @@ var cleric8: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -355,7 +356,7 @@ var cleric9: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "9-й уровень, способности жреца",
@@ -383,7 +384,7 @@ var divineIntervention: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Вы можете воззвать к своему божеству о помощи, когда сильно в этом нуждаетесь. Мольба о помощи совершается действием. Опишите помощь, которую вы ждёте, и киньте процентную кость. Если выпадет число, не превышающее ваш уровень жреца, ваше божество вмешается. Мастер сам выбирает природу вмешательства; подойдёт эффект какого-либо заклинания жреца или заклинания домена.\n" +
@@ -399,8 +400,8 @@ var cleric10: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(divineIntervention.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(divineIntervention.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -416,7 +417,7 @@ var cleric11: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "11-й уровень, способности жреца",
@@ -431,8 +432,8 @@ var cleric12: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -448,7 +449,7 @@ var cleric13: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "13-й уровень, способности жреца",
@@ -463,7 +464,7 @@ var cleric14: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "14-й уровень, способности жреца",
@@ -478,7 +479,7 @@ var cleric15: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "15-й уровень, способности жреца",
@@ -493,8 +494,8 @@ var cleric16: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -509,7 +510,7 @@ var cleric17: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "17-й уровень, способности жреца",
@@ -523,7 +524,7 @@ var cleric18: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "18-й уровень, способности жреца",
@@ -537,8 +538,8 @@ var cleric19: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -553,7 +554,7 @@ var cleric20: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "20-й уровень, способности жреца",

@@ -1,217 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.core.widget.NestedScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_marginBottom="56dp"
-        android:overScrollMode="never"
->
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="56dp"
+    android:overScrollMode="never">
+
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="12dp"
+        android:animateLayoutChanges="true">
+
+
+        <FrameLayout
+            android:id="@+id/mainActionsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="12dp"
-            android:animateLayoutChanges="true"
-    >
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:clickable="true"
+            android:focusable="true">
 
-
-        <FrameLayout
-                android:id="@+id/mainActionsButton"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="12dp"
-                android:clickable="true"
-                android:focusable="true">
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Основные действия"
-                    android:textSize="24sp"
-                    android:layout_marginEnd="24dp"
-            />
+                android:text="Основные действия"
+                android:textSize="24sp"
+                android:layout_marginEnd="24dp" />
 
             <ImageView
-                    android:id="@+id/mainActionsArrowImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-                    android:layout_gravity="end|center"
-            />
+                android:id="@+id/mainActionsArrowImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                android:layout_gravity="end|center" />
         </FrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-                android:visibility="gone"
-                android:id="@+id/mainActionsRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:visibility="gone"
+            android:id="@+id/mainActionsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
         <FrameLayout
-                android:id="@+id/bonusActionsButton"
+            android:id="@+id/bonusActionsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="12dp"
-                android:clickable="true"
-                android:focusable="true"
-        >
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Бонусные действия"
-                    android:textSize="24sp"
-                    android:layout_marginEnd="24dp"
-            />
+                android:text="Бонусные действия"
+                android:textSize="24sp"
+                android:layout_marginEnd="24dp" />
 
             <ImageView
-                    android:id="@+id/bonusActionsArrowImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-                    android:layout_gravity="end|center"
-            />
+                android:id="@+id/bonusActionsArrowImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                android:layout_gravity="end|center" />
         </FrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-                android:visibility="gone"
-                android:id="@+id/bonusActionsRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:visibility="gone"
+            android:id="@+id/bonusActionsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
         <FrameLayout
-                android:id="@+id/reactionsButton"
+            android:id="@+id/reactionsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="12dp"
-                android:clickable="true"
-                android:focusable="true">
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Реакции"
-                    android:textSize="24sp"
-                    android:layout_marginEnd="24dp"
-            />
+                android:text="Реакции"
+                android:textSize="24sp"
+                android:layout_marginEnd="24dp" />
 
             <ImageView
-                    android:id="@+id/reactionsArrowImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-                    android:layout_gravity="end|center"
-            />
+                android:id="@+id/reactionsArrowImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                android:layout_gravity="end|center" />
         </FrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-                android:visibility="gone"
-                android:id="@+id/reactionsRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:visibility="gone"
+            android:id="@+id/reactionsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
         <FrameLayout
-                android:id="@+id/partOfActionButton"
+            android:id="@+id/partOfActionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="12dp"
-                android:clickable="true"
-                android:focusable="true">
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Часть действия"
-                    android:textSize="24sp"
-                    android:layout_marginEnd="24dp"
-            />
+                android:text="Часть действия"
+                android:textSize="24sp"
+                android:layout_marginEnd="24dp" />
 
             <ImageView
-                    android:id="@+id/partOfActionArrowImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-                    android:layout_gravity="end|center"
-            />
+                android:id="@+id/partOfActionArrowImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                android:layout_gravity="end|center" />
         </FrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-                android:visibility="gone"
-                android:id="@+id/partOfActionRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:visibility="gone"
+            android:id="@+id/partOfActionRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <FrameLayout
-                android:id="@+id/longActionsButton"
+            android:id="@+id/longActionsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="12dp"
-                android:clickable="true"
-                android:focusable="true">
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Длительные действия"
-                    android:textSize="24sp"
-                    android:layout_marginEnd="24dp"
-            />
+                android:text="Длительные действия"
+                android:textSize="24sp"
+                android:layout_marginEnd="24dp" />
 
             <ImageView
-                    android:id="@+id/longActionsArrowImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-                    android:layout_gravity="end|center"
-            />
+                android:id="@+id/longActionsArrowImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                android:layout_gravity="end|center" />
         </FrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-                android:visibility="gone"
-                android:id="@+id/longActionsRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:visibility="gone"
+            android:id="@+id/longActionsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <FrameLayout
-                android:id="@+id/additionalActionButton"
+            android:id="@+id/additionalActionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="12dp"
-                android:clickable="true"
-                android:focusable="true">
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Особые"
-                    android:textSize="24sp"
-                    android:layout_marginEnd="24dp"
-            />
+                android:text="Особые"
+                android:textSize="24sp"
+                android:layout_marginEnd="24dp" />
 
             <ImageView
-                    android:id="@+id/additionalActionsArrowImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-                    android:layout_gravity="end|center"
-            />
+                android:id="@+id/additionalActionsArrowImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                android:layout_gravity="end|center" />
         </FrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-                android:visibility="gone"
-                android:id="@+id/additionalActionsRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:visibility="gone"
+            android:id="@+id/additionalActionsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </LinearLayout>
 

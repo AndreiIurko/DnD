@@ -1,6 +1,5 @@
 package com.andreyyurko.dnd.data.characterData.character
 
-import android.util.Log
 import com.andreyyurko.dnd.data.abilities.mapOfAn
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Priority
@@ -44,7 +43,7 @@ open class CharacterAbilityNode(
     private fun makeAllSimpleChoice(can: CharacterAbilityNode?) {
         if (can == null) return
 
-        for (optionName in can.data.alternatives.keys) {
+        for (optionName in can.data.getAlternatives.keys) {
             can.character?.let {
                 val optionList = can.showOptions(optionName)
                 if (optionList.size == 1 && can.chosen_alternatives[optionName] == null) {
@@ -57,10 +56,10 @@ open class CharacterAbilityNode(
 
 fun checkIfSomeRequirementsSatisfied(can: CharacterAbilityNode?) {
     if (can == null) return
-    for ((optionName, listOfOptions) in can.data.alternatives) {
-        if (can.chosen_alternatives[optionName] == null && listOfOptions.size == 1) {
-            if (mapOfAn[listOfOptions[0]]!!.isAddable(can.character?.characterInfo)) {
-                can.makeChoice(optionName, listOfOptions[0], false)
+    for ((optionName, listOfOptions) in can.data.getAlternatives) {
+        if (can.chosen_alternatives[optionName] == null && listOfOptions(can.character?.characterInfo).size == 1) {
+            if (mapOfAn[listOfOptions(can.character?.characterInfo)[0]]!!.isAddable(can.character?.characterInfo)) {
+                can.makeChoice(optionName, listOfOptions(can.character?.characterInfo)[0], false)
             }
         }
     }

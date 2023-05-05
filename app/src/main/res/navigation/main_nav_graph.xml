@@ -1,46 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/main_nav_graph"
-            app:startDestination="@id/homeFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/homeFragment">
 
     <fragment
-            android:id="@+id/homeFragment"
-            android:name="com.andreyyurko.dnd.ui.home.HomeFragment"
-            android:label="HomeFragment">
+        android:id="@+id/homeFragment"
+        android:name="com.andreyyurko.dnd.ui.home.HomeFragment"
+        android:label="HomeFragment">
 
         <action
-                android:id="@+id/action_homeFragment_to_spellsListFragment"
-                app:destination="@id/spellsListFragment"/>
-        <action android:id="@+id/action_homeFragment_to_charactersListFragment"
-                app:destination="@id/charactersListFragment"/>
+            android:id="@+id/action_homeFragment_to_spellsListFragment"
+            app:destination="@id/spellsListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_charactersListFragment"
+            app:destination="@id/charactersListFragment" />
     </fragment>
 
     <fragment
-            android:id="@+id/spellsListFragment"
-            android:name="com.andreyyurko.dnd.ui.spellslist.SpellsListFragment"
-            android:label="SpellsListFragment">
+        android:id="@+id/spellsListFragment"
+        android:name="com.andreyyurko.dnd.ui.spellslist.SpellsListFragment"
+        android:label="SpellsListFragment"></fragment>
+
+    <fragment
+        android:id="@+id/charactersListFragment"
+        android:name="com.andreyyurko.dnd.ui.characterlist.CharacterListFragment"
+        android:label="CharacterListFragment">
+        <action
+            android:id="@+id/action_charactersListFragment_to_characterMainFragment"
+            app:destination="@id/characterMainFragment" />
+        <action
+            android:id="@+id/action_charactersListFragment_to_character_creation_nav_grapg"
+            app:destination="@+id/character_creation_nav_graph" />
+
     </fragment>
 
     <fragment
-            android:id="@+id/charactersListFragment"
-            android:name="com.andreyyurko.dnd.ui.characterlist.CharacterListFragment"
-            android:label="CharacterListFragment">
-        <action android:id="@+id/action_charactersListFragment_to_characterMainFragment"
-                app:destination="@id/characterMainFragment"/>
-        <action android:id="@+id/action_charactersListFragment_to_character_creation_nav_grapg"
-                app:destination="@+id/character_creation_nav_graph"/>
-
+        android:id="@+id/characterMainFragment"
+        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.main.CharacterMainFragment"
+        android:label="CharacterMainFragment">
+        <action
+            android:id="@+id/action_characterMainFragment_to_character_creation_nav_graph"
+            app:destination="@id/character_creation_nav_graph" />
     </fragment>
 
-    <fragment
-            android:id="@+id/characterMainFragment"
-            android:name="com.andreyyurko.dnd.ui.showcharacterfragments.main.CharacterMainFragment"
-            android:label="CharacterMainFragment">
-        <action android:id="@+id/action_characterMainFragment_to_character_creation_nav_graph"
-                app:destination="@id/character_creation_nav_graph"/>
-    </fragment>
-
-    <include app:graph="@navigation/character_creation_nav_graph"/>
+    <include app:graph="@navigation/character_creation_nav_graph" />
 
 </navigation>

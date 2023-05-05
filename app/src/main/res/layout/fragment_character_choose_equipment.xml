@@ -1,277 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/addInfoContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-    >
+        android:id="@+id/addInfoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <EditText
-                android:visibility="gone"
-                android:id="@+id/searchEditText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="Введите часть названия"
-                android:textSize="16sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/cancelSearchButton"
-                android:layout_marginStart="6dp"
-        />
+            android:visibility="gone"
+            android:id="@+id/searchEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Введите часть названия"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/cancelSearchButton"
+            android:layout_marginStart="6dp" />
 
         <ImageButton
-                android:visibility="gone"
-                android:id="@+id/cancelSearchButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toStartOf="@id/searchButton"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/ic_baseline_close_32"
-                android:background="@color/background"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-        />
+            android:visibility="gone"
+            android:id="@+id/cancelSearchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/searchButton"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_baseline_close_32"
+            android:background="@color/background"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp" />
 
         <ImageButton
-                android:visibility="gone"
-                android:id="@+id/searchButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_search_32"
-                android:background="@color/base_background"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"/>
+            android:visibility="gone"
+            android:id="@+id/searchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_search_32"
+            android:background="@color/base_background"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp" />
 
         <LinearLayout
-                android:id="@+id/changeListsButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/searchEditText"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginVertical="6dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:background="@drawable/border"
-        >
+            android:id="@+id/changeListsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/searchEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginVertical="6dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="@drawable/border">
 
             <TextView
-                    android:id="@+id/equippedButton"
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/searchEditText"
-                    app:layout_constraintEnd_toStartOf="@id/allButton"
-                    android:text="Надетое"
-                    android:textColor="@color/on_primary"
-                    android:textAlignment="center"
-                    android:clickable="true"
-                    android:focusable="true"/>
+                android:id="@+id/equippedButton"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/searchEditText"
+                app:layout_constraintEnd_toStartOf="@id/allButton"
+                android:text="Надетое"
+                android:textColor="@color/on_primary"
+                android:textAlignment="center"
+                android:clickable="true"
+                android:focusable="true" />
+
             <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/on_primary"/>
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/on_primary" />
+
             <TextView
-                    android:id="@+id/allButton"
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/searchEditText"
-                    app:layout_constraintStart_toEndOf="@id/equippedButton"
-                    android:textAlignment="center"
-                    android:text="Все"
-                    android:clickable="true"
-                    android:focusable="true"/>
+                android:id="@+id/allButton"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/searchEditText"
+                app:layout_constraintStart_toEndOf="@id/equippedButton"
+                android:textAlignment="center"
+                android:text="Все"
+                android:clickable="true"
+                android:focusable="true" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/addInfoContainer"
+        android:layout_marginBottom="56dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/addInfoContainer"
-            android:layout_marginBottom="56dp"
-    >
-        <LinearLayout
+            android:orientation="vertical"
+            android:paddingHorizontal="12dp"
+            android:animateLayoutChanges="true">
+
+            <FrameLayout
+                android:id="@+id/weaponsButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingHorizontal="12dp"
-                android:animateLayoutChanges="true"
-        >
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp"
+                android:clickable="true"
+                android:focusable="true">
 
-            <FrameLayout
-                    android:id="@+id/weaponsButton"
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="12dp"
-                    android:clickable="true"
-                    android:focusable="true">
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Оружие"
-                        android:textSize="24sp"
-                        android:layout_marginEnd="24dp"
-                />
+                    android:text="Оружие"
+                    android:textSize="24sp"
+                    android:layout_marginEnd="24dp" />
 
                 <ImageView
-                        android:id="@+id/weaponsArrowImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-                        android:layout_gravity="end|center"
-                />
+                    android:id="@+id/weaponsArrowImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:layout_gravity="end|center" />
             </FrameLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:visibility="gone"
-                    android:id="@+id/weaponsRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                android:visibility="gone"
+                android:id="@+id/weaponsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
             <FrameLayout
-                    android:id="@+id/armorButton"
+                android:id="@+id/armorButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-            >
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Доспех"
-                        android:textSize="24sp"
-                        android:layout_marginEnd="24dp"
-                />
+                    android:text="Доспех"
+                    android:textSize="24sp"
+                    android:layout_marginEnd="24dp" />
 
                 <ImageView
-                        android:id="@+id/armorArrowImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-                        android:layout_gravity="end|center"
-                />
+                    android:id="@+id/armorArrowImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:layout_gravity="end|center" />
             </FrameLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:visibility="gone"
-                    android:id="@+id/armorRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                android:visibility="gone"
+                android:id="@+id/armorRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
             <FrameLayout
-                    android:id="@+id/magicWeaponsButton"
+                android:id="@+id/magicWeaponsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="12dp"
-                    android:clickable="true"
-                    android:focusable="true">
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Волшебные палочки, жезлы, посохи"
-                        android:textSize="24sp"
-                        android:layout_marginEnd="24dp"
-                />
+                    android:text="Волшебные палочки, жезлы, посохи"
+                    android:textSize="24sp"
+                    android:layout_marginEnd="24dp" />
 
                 <ImageView
-                        android:id="@+id/magicWeaponsArrowImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-                        android:layout_gravity="end|center"
-                />
+                    android:id="@+id/magicWeaponsArrowImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:layout_gravity="end|center" />
             </FrameLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:visibility="gone"
-                    android:id="@+id/magicWeaponsRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                android:visibility="gone"
+                android:id="@+id/magicWeaponsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
             <FrameLayout
-                    android:id="@+id/magicArtifactsButton"
+                android:id="@+id/magicArtifactsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="12dp"
-                    android:clickable="true"
-                    android:focusable="true">
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Кольца, чудесные предметы"
-                        android:textSize="24sp"
-                        android:layout_marginEnd="24dp"
-                />
+                    android:text="Кольца, чудесные предметы"
+                    android:textSize="24sp"
+                    android:layout_marginEnd="24dp" />
 
                 <ImageView
-                        android:id="@+id/magicArtifactsArrowImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-                        android:layout_gravity="end|center"
-                />
+                    android:id="@+id/magicArtifactsArrowImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:layout_gravity="end|center" />
             </FrameLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:visibility="gone"
-                    android:id="@+id/magicArtifactsRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                android:visibility="gone"
+                android:id="@+id/magicArtifactsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <FrameLayout
-                    android:id="@+id/consumablesButton"
+                android:id="@+id/consumablesButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="12dp"
-                    android:clickable="true"
-                    android:focusable="true">
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Зелья, свитки"
-                        android:textSize="24sp"
-                        android:layout_marginEnd="24dp"
-                />
+                    android:text="Зелья, свитки"
+                    android:textSize="24sp"
+                    android:layout_marginEnd="24dp" />
 
                 <ImageView
-                        android:id="@+id/consumablesArrowImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-                        android:layout_gravity="end|center"
-                />
+                    android:id="@+id/consumablesArrowImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:layout_gravity="end|center" />
             </FrameLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:visibility="gone"
-                    android:id="@+id/consumablesRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                android:visibility="gone"
+                android:id="@+id/consumablesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
         </LinearLayout>

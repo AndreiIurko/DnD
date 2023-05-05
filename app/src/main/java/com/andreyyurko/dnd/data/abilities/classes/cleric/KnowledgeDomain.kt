@@ -40,7 +40,7 @@ var KnowledgeDomainSpells = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Cleric
     },
@@ -56,26 +56,30 @@ var KnowledgeDomainSpells = AbilityNode(
 var blessingsOfKnowledge = AbilityNode(
     name = "Благословение знаний",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("language1", mapOfLanguages.keys.toList()),
-        Pair("language2", mapOfLanguages.keys.toList()),
+    getAlternatives = mutableMapOf(
+        Pair("language1", { mapOfLanguages.keys.toList() }),
+        Pair("language2", { mapOfLanguages.keys.toList() }),
         Pair(
             "expertise1",
-            listOf(
-                historySkillAndExpertise.name,
-                arcanaSkillAndExpertise.name,
-                natureSkillAndExpertise.name,
-                religionSkillAndExpertise.name,
-            )
+            {
+                listOf(
+                    historySkillAndExpertise.name,
+                    arcanaSkillAndExpertise.name,
+                    natureSkillAndExpertise.name,
+                    religionSkillAndExpertise.name,
+                )
+            }
         ),
         Pair(
             "expertise2",
-            listOf(
-                historySkillAndExpertise.name,
-                arcanaSkillAndExpertise.name,
-                natureSkillAndExpertise.name,
-                religionSkillAndExpertise.name,
-            )
+            {
+                listOf(
+                    historySkillAndExpertise.name,
+                    arcanaSkillAndExpertise.name,
+                    natureSkillAndExpertise.name,
+                    religionSkillAndExpertise.name,
+                )
+            }
         )
     ),
     requirements = { abilities: CharacterInfo ->
@@ -99,7 +103,7 @@ var channelDivinityKnowledgeOfTheAges: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 2 && abilities.characterClass == Classes.Cleric
     },
@@ -124,7 +128,7 @@ var channelDivinityReadThoughts: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 6 && abilities.characterClass == Classes.Cleric
     },
@@ -143,7 +147,7 @@ var potentSpellcasting = AbilityNode(
             "Вы добавляете модификатор Мудрости к урону, который причиняете заговорами жреца.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 8 && abilities.characterClass == Classes.Cleric
     },
@@ -175,7 +179,7 @@ var visionsOfThePast = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 17 && abilities.characterClass == Classes.Cleric
     },
@@ -191,13 +195,13 @@ var visionsOfThePast = AbilityNode(
 var KnowledgeDomain = AbilityNode(
     name = "Домен знаний",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(KnowledgeDomainSpells.name)),
-        Pair("second", listOf(blessingsOfKnowledge.name)),
-        Pair("third", listOf(channelDivinityKnowledgeOfTheAges.name)),
-        Pair("fourth", listOf(channelDivinityReadThoughts.name)),
-        Pair("fifth", listOf(potentSpellcasting.name)),
-        Pair("sixth", listOf(visionsOfThePast.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(KnowledgeDomainSpells.name) }),
+        Pair("second", { listOf(blessingsOfKnowledge.name) }),
+        Pair("third", { listOf(channelDivinityKnowledgeOfTheAges.name) }),
+        Pair("fourth", { listOf(channelDivinityReadThoughts.name) }),
+        Pair("fifth", { listOf(potentSpellcasting.name) }),
+        Pair("sixth", { listOf(visionsOfThePast.name) })
     ),
     requirements = { true },
     description = "",

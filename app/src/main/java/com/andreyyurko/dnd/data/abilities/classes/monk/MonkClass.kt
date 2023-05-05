@@ -16,46 +16,48 @@ var classFeaturesMonk: AbilityNode = AbilityNode(
         abilities.weaponProficiency.plus(Weapon.ShortSword)
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
             "tool",
-            listOf(
-                alchemistsSupplies.name,
-                brewersSupplies.name,
-                calligraphersSupplies.name,
-                carpentersTools.name,
-                cartographersTools.name,
-                cobblersTools.name,
-                cooksUtensils.name,
-                glassblowersTools.name,
-                jewelersTools.name,
-                leatherworkersTools.name,
-                masonsTools.name,
-                paintersSupplies.name,
-                pottersTools.name,
-                smithsTools.name,
-                tinkersTools.name,
-                weaversTools.name,
-                woodcarversTools.name,
-                bagpipes.name,
-                drum.name,
-                dulcimer.name,
-                flute.name,
-                lute.name,
-                lyre.name,
-                horn.name,
-                panFlute.name,
-                shawm.name,
-                viol.name,
-            )
+            {
+                listOf(
+                    alchemistsSupplies.name,
+                    brewersSupplies.name,
+                    calligraphersSupplies.name,
+                    carpentersTools.name,
+                    cartographersTools.name,
+                    cobblersTools.name,
+                    cooksUtensils.name,
+                    glassblowersTools.name,
+                    jewelersTools.name,
+                    leatherworkersTools.name,
+                    masonsTools.name,
+                    paintersSupplies.name,
+                    pottersTools.name,
+                    smithsTools.name,
+                    tinkersTools.name,
+                    weaversTools.name,
+                    woodcarversTools.name,
+                    bagpipes.name,
+                    drum.name,
+                    dulcimer.name,
+                    flute.name,
+                    lute.name,
+                    lyre.name,
+                    horn.name,
+                    panFlute.name,
+                    shawm.name,
+                    viol.name,
+                )
+            }
         ),
         Pair(
             "skill1",
-            listOf(acrobatics.name, athletics.name, history.name, insight.name, religion.name, stealth.name)
+            { listOf(acrobatics.name, athletics.name, history.name, insight.name, religion.name, stealth.name) }
         ),
         Pair(
             "skill2",
-            listOf(acrobatics.name, athletics.name, history.name, insight.name, religion.name, stealth.name)
+            { listOf(acrobatics.name, athletics.name, history.name, insight.name, religion.name, stealth.name) }
         ),
     ),
     requirements = { abilities: CharacterInfo ->
@@ -94,7 +96,7 @@ var monkUnarmedDefence: AbilityNode = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     description = "Если вы не носите ни доспех, ни щит, ваш Класс Доспеха равен 10 + модификатор Ловкости + модификатор Мудрости.\n",
 )
@@ -115,7 +117,7 @@ var martialArts: AbilityNode = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     description = "Ваше знание боевых искусств позволяет вам эффективно использовать в бою безоружные удары и монашеское оружие — короткие мечи, а также любое простое рукопашное оружие, не имеющее свойств двуручное и тяжёлое.\n" +
             "\n" +
@@ -138,10 +140,10 @@ var monk1: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 8
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(classFeaturesMonk.name)),
-        Pair("second", listOf(monkUnarmedDefence.name)),
-        Pair("third", listOf(martialArts.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(classFeaturesMonk.name) }),
+        Pair("second", { listOf(monkUnarmedDefence.name) }),
+        Pair("third", { listOf(martialArts.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -157,7 +159,7 @@ var monkUnarmedMovement = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     description = "Ваша скорость увеличивается на 10 футов, если вы не носите доспехов и щит. Этот бонус увеличивается с ростом вашего уровня, как показано в таблице.\n" +
             "\n" +
@@ -208,7 +210,7 @@ var kiUsing = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     description = "Ваши тренировки позволяют вам управлять мистической энергией ци. Ваш доступ к этой энергии выражается количеством очков ци. Ваш уровень монаха определяет это количество, согласно колонке «Очки ци». Вы можете использовать эти очки чтобы активировать различные умения ци. Вначале вам известны следующие три умения: «Поступь ветра», «Терпеливая оборона» и «Шквал ударов». С повышением уровня в этом классе вы выучите новые умения ци.\n" +
             "\n" +
@@ -231,9 +233,9 @@ var monk2: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(monkUnarmedMovement.name)),
-        Pair("second", listOf(kiUsing.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(monkUnarmedMovement.name) }),
+        Pair("second", { listOf(kiUsing.name) })
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -246,8 +248,8 @@ var monasticTradition: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(wayOfOpenHand.name, wayOfFourElements.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(wayOfOpenHand.name, wayOfFourElements.name) })
     ),
     requirements = { true },
     description = "Вы выбираете монастырскую традицию, которой следуете. Все они описаны в конце описания класса. Выбранная традиция обеспечивает вам дополнительные умения на 3-м, 6-м, 11-м и 17-м уровнях.\n"
@@ -268,7 +270,7 @@ var deflectMissiles: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     description = "Вы можете реакцией отразить или поймать снаряд, если по вам попали дальнобойной атакой оружием. Если вы делаете это, урон снижается на 1к10 + ваш модификатор Ловкости + ваш уровень монаха.\n" +
             "\n" +
@@ -282,9 +284,9 @@ var monk3: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(monasticTradition.name)),
-        Pair("second", listOf(deflectMissiles.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(monasticTradition.name) }),
+        Pair("second", { listOf(deflectMissiles.name) })
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -304,7 +306,7 @@ var slowFall: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(listOf()),
     description = "Если вы упали, вы можете реакцией уменьшить урон от падения на значение, равное вашему уровню монаха, умноженному на пять.\n"
@@ -317,9 +319,9 @@ var monk4: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
-        Pair("second", listOf(slowFall.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
+        Pair("second", { listOf(slowFall.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -340,7 +342,7 @@ var stunningStrike: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(listOf()),
     description = "Вы можете взаимодействовать с энергией ци, текущей в теле вашего противника. Если вы попали по другому существу рукопашной атакой оружием, вы можете потратить 1 очко ци, чтобы нанести ошеломляющий удар. Цель должна преуспеть в спасброске Телосложения, иначе она станет ошеломлённой до конца вашего следующего хода.\n"
@@ -355,9 +357,9 @@ var monk5: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(extraAttack.name)),
-        Pair("second", listOf(stunningStrike.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(extraAttack.name) }),
+        Pair("second", { listOf(stunningStrike.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -372,7 +374,7 @@ var kiImprovedStrike: AbilityNode = AbilityNode(
             "Ваши безоружные удары считаются магическими при определении преодоления сопротивления и иммунитета к немагическим атакам и урону."
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(listOf()),
     description = "Ваши безоружные удары считаются магическими при определении преодоления сопротивления и иммунитета к немагическим атакам и урону.\n"
@@ -385,8 +387,8 @@ var monk6: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(kiImprovedStrike.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(kiImprovedStrike.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -401,7 +403,7 @@ var monkEvasion: AbilityNode = AbilityNode(
             "Ваше инстинктивное проворство позволяет вам уклоняться от эффектов, направленных на определённую область, вроде дыхания синего дракона или заклинания огненный шар. Если вы попадаете под действие эффекта, позволяющего совершить спасбросок Ловкости, чтобы получить только половину урона, вы вместо этого не получаете урона при успешном спасброске и получаете только половину урона при проваленном."
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(listOf()),
     description = "Ваше инстинктивное проворство позволяет вам уклоняться от эффектов, направленных на определённую область, вроде дыхания синего дракона или заклинания огненный шар. Если вы попадаете под действие эффекта, позволяющего совершить спасбросок Ловкости, чтобы получить только половину урона, вы вместо этого не получаете урона при успешном спасброске и получаете только половину урона при проваленном.\n"
@@ -419,7 +421,7 @@ var stillnessOfMind: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(listOf()),
     description = "Вы можете действием окончить один из действующих на вас эффектов, делающих вас очарованным или испуганным.\n"
@@ -432,9 +434,9 @@ var monk7: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(monkEvasion.name)),
-        Pair("second", listOf(stillnessOfMind.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(monkEvasion.name) }),
+        Pair("second", { listOf(stillnessOfMind.name) })
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -449,8 +451,8 @@ var monk8: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -466,7 +468,7 @@ var monk9: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -485,7 +487,7 @@ var purityOfBody: AbilityNode = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(listOf()),
     description = "Ваше мастерство ци даёт вам иммунитет к болезням и яду.\n"
@@ -498,8 +500,8 @@ var monk10: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(purityOfBody.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(purityOfBody.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -514,7 +516,7 @@ var monk11: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -529,8 +531,8 @@ var monk12: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -545,7 +547,7 @@ var tongueOfTheSunAndMoon: AbilityNode = AbilityNode(
             "Вы понимаете, как взаимодействовать с энергией ци в чужом разуме, и теперь вы понимаете речь на любом языке. Кроме того, все существа, способные понимать хотя бы один язык, понимают то, что вы сказали."
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(listOf()),
     description = "Вы понимаете, как взаимодействовать с энергией ци в чужом разуме, и теперь вы понимаете речь на любом языке. Кроме того, все существа, способные понимать хотя бы один язык, понимают то, что вы сказали.\n"
@@ -559,8 +561,8 @@ var monk13: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(tongueOfTheSunAndMoon.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(tongueOfTheSunAndMoon.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -586,7 +588,7 @@ var diamondSoul: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(listOf()),
     description = "Ваше мастерство ци предоставляет вам владение всеми спасбросками. Кроме того, если вы провалили спасбросок, вы можете повторить его, потратив 1 очко ци, и должны использовать второй результат.\n"
@@ -599,8 +601,8 @@ var monk14: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(diamondSoul.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(diamondSoul.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -615,7 +617,7 @@ var timelessBody: AbilityNode = AbilityNode(
             "Ваша ци поддерживает вас, и ваше тело больше не подвержено признакам старения. Вы не можете быть состарены магически. Впрочем, вы всё еще можете умереть от старости. Кроме того, вам больше не требуется еда и вода."
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(listOf()),
     description = "Ваша ци поддерживает вас, и ваше тело больше не подвержено признакам старения. Вы не можете быть состарены магически. Впрочем, вы всё еще можете умереть от старости. Кроме того, вам больше не требуется еда и вода.\n"
@@ -628,8 +630,8 @@ var monk15: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(timelessBody.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(timelessBody.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -644,8 +646,8 @@ var monk16: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -661,7 +663,7 @@ var monk17: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -690,7 +692,7 @@ var emptyBody: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(listOf()),
     description = "Вы можете действием потратить 4 очка ци, чтобы стать невидимым на 1 минуту. В течение этого времени вы получаете сопротивление всем видам урона, кроме урона силовым полем.\n" +
@@ -705,8 +707,8 @@ var monk18: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(emptyBody.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(emptyBody.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -721,8 +723,8 @@ var monk19: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -737,7 +739,7 @@ var perfectSelf: AbilityNode = AbilityNode(
             "Если при броске инициативы у вас нет очков ци, вы получаете 4 очка ци."
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(listOf()),
     description = "Если при броске инициативы у вас нет очков ци, вы получаете 4 очка ци.\n"
@@ -750,8 +752,8 @@ var monk20: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(perfectSelf.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(perfectSelf.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),

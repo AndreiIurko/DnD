@@ -6,7 +6,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -15,7 +14,6 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.activity.OnBackPressedCallback
 import androidx.compose.ui.graphics.asAndroidBitmap
-import androidx.core.view.children
 import androidx.lifecycle.Observer
 import androidx.lifecycle.coroutineScope
 import androidx.navigation.NavController
@@ -83,16 +81,23 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
 
         viewBinding.spellSlotsButton.setOnClickListener {
             if (viewBinding.spellSlotsLinearLayout.translationX == 0f) {
-                ObjectAnimator.ofFloat(viewBinding.spellSlotsLinearLayout, "translationX",
-                    viewBinding.spellSlotsLinearLayout.translationX, -252*resources.displayMetrics.density).start()
-                ObjectAnimator.ofFloat(viewBinding.spellSlotsButton, "translationX",
-                    viewBinding.spellSlotsButton.translationX, -2f).start()
-            }
-            else {
-                ObjectAnimator.ofFloat(viewBinding.spellSlotsLinearLayout, "translationX",
-                    viewBinding.spellSlotsLinearLayout.translationX, 0f).start()
-                ObjectAnimator.ofFloat(viewBinding.spellSlotsButton, "translationX",
-                    viewBinding.spellSlotsButton.translationX, 250*resources.displayMetrics.density).start()
+                ObjectAnimator.ofFloat(
+                    viewBinding.spellSlotsLinearLayout, "translationX",
+                    viewBinding.spellSlotsLinearLayout.translationX, -252 * resources.displayMetrics.density
+                ).start()
+                ObjectAnimator.ofFloat(
+                    viewBinding.spellSlotsButton, "translationX",
+                    viewBinding.spellSlotsButton.translationX, -2f
+                ).start()
+            } else {
+                ObjectAnimator.ofFloat(
+                    viewBinding.spellSlotsLinearLayout, "translationX",
+                    viewBinding.spellSlotsLinearLayout.translationX, 0f
+                ).start()
+                ObjectAnimator.ofFloat(
+                    viewBinding.spellSlotsButton, "translationX",
+                    viewBinding.spellSlotsButton.translationX, 250 * resources.displayMetrics.density
+                ).start()
             }
         }
 
@@ -152,13 +157,15 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
         viewBinding.classTextView.text = characterViewModel.shownCharacter.characterInfo.characterClass.className
         viewBinding.levelTextView.text = characterViewModel.shownCharacter.characterInfo.level.toString()
         if (characterViewModel.shownCharacter.characterInfo.currentState.hp == null) {
-            characterViewModel.shownCharacter.characterInfo.currentState.hp = characterViewModel.shownCharacter.characterInfo.hp
+            characterViewModel.shownCharacter.characterInfo.currentState.hp =
+                characterViewModel.shownCharacter.characterInfo.hp
         }
         viewBinding.hpEditText.setText(characterViewModel.shownCharacter.characterInfo.currentState.hp.toString())
         viewBinding.hpEditText.setOnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                 viewBinding.hpEditText.clearFocus()
-                characterViewModel.shownCharacter.characterInfo.currentState.hp = viewBinding.hpEditText.text.toString().toInt()
+                characterViewModel.shownCharacter.characterInfo.currentState.hp =
+                    viewBinding.hpEditText.text.toString().toInt()
                 characterViewModel.updateCharacterInfo()
             }
             false
@@ -279,7 +286,7 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
 
     private fun setupSlots() {
         for (i in 0 until viewBinding.spellSlotsLinearLayout.childCount) {
-            setupLinearLayout(viewBinding.spellSlotsLinearLayout.getChildAt(i) as LinearLayout, i+1)
+            setupLinearLayout(viewBinding.spellSlotsLinearLayout.getChildAt(i) as LinearLayout, i + 1)
         }
     }
 
@@ -302,8 +309,7 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
                 if (isChecked) {
                     charges.current += 1
                     characterViewModel.updateCharacterInfo()
-                }
-                else {
+                } else {
                     charges.current -= 1
                     characterViewModel.updateCharacterInfo()
                 }

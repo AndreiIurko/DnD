@@ -39,7 +39,7 @@ var TempestDomainSpells = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Cleric
     },
@@ -59,7 +59,7 @@ var bonusProficiencyTempestDomain = AbilityNode(
         addAllMartialWeapons(abilities)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Cleric
     },
@@ -79,7 +79,7 @@ var wrathOfTheStorm = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 1 && abilities.characterClass == Classes.Cleric
     },
@@ -101,7 +101,7 @@ var channelDivinityDestructiveWrath: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 2 && abilities.characterClass == Classes.Cleric
     },
@@ -123,7 +123,7 @@ var thunderboltStrike = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 6 && abilities.characterClass == Classes.Cleric
     },
@@ -138,13 +138,13 @@ var divineStrikeTempestDomain = AbilityNode(
         abilities.actionsList.add(
             Action(
                 name = "Божественный удар домена бури",
-                description = "Вы получаете способность наполнять удары своего оружия божественной энергией. Один раз в каждый свой ход, когда вы попадаете по существу атакой оружием, вы можете причинить цели дополнительный урон звуком " + dice +".\n",
+                description = "Вы получаете способность наполнять удары своего оружия божественной энергией. Один раз в каждый свой ход, когда вы попадаете по существу атакой оружием, вы можете причинить цели дополнительный урон звуком " + dice + ".\n",
                 type = ActionType.PartOfAction,
             )
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 8 && abilities.characterClass == Classes.Cleric
     },
@@ -158,7 +158,7 @@ var stormBorn = AbilityNode(
             "У вас появляется скорость полёта, равная вашей текущей наземной скорости ходьбы, когда вы не под землёй и не в помещении.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 17 && abilities.characterClass == Classes.Cleric
     },
@@ -168,14 +168,14 @@ var stormBorn = AbilityNode(
 var tempestDomain = AbilityNode(
     name = "Домен бури",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(TempestDomainSpells.name)),
-        Pair("second", listOf(bonusProficiencyTempestDomain.name)),
-        Pair("third", listOf(wrathOfTheStorm.name)),
-        Pair("fourth", listOf(channelDivinityDestructiveWrath.name)),
-        Pair("fifth", listOf(thunderboltStrike.name)),
-        Pair("sixth", listOf(divineStrikeTempestDomain.name)),
-        Pair("seventh", listOf(stormBorn.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(TempestDomainSpells.name) }),
+        Pair("second", { listOf(bonusProficiencyTempestDomain.name) }),
+        Pair("third", { listOf(wrathOfTheStorm.name) }),
+        Pair("fourth", { listOf(channelDivinityDestructiveWrath.name) }),
+        Pair("fifth", { listOf(thunderboltStrike.name) }),
+        Pair("sixth", { listOf(divineStrikeTempestDomain.name) }),
+        Pair("seventh", { listOf(stormBorn.name) })
     ),
     requirements = { true },
     description = "",

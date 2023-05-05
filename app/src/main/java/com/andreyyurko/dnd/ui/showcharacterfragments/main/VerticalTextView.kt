@@ -33,7 +33,12 @@ class VerticalTextView @JvmOverloads constructor(context: Context, attrs: Attrib
         val text = getViewText()
 
         textPaint.getTextBounds(text, 0, text.length, _bounds)
-        canvas.drawText(text, compoundPaddingLeft.toFloat() - _measuredHeight, ((_bounds.height() + _measuredWidth) / 2).toFloat(), textPaint)
+        canvas.drawText(
+            text,
+            compoundPaddingLeft.toFloat() - _measuredHeight,
+            ((_bounds.height() + _measuredWidth) / 2).toFloat(),
+            textPaint
+        )
 
         canvas.restore()
     }

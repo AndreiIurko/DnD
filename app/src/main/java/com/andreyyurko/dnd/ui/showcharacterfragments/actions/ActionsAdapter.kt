@@ -9,8 +9,6 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.TextView
-import androidx.lifecycle.Observer
-import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.characterData.Action
@@ -58,8 +56,7 @@ class ActionsAdapter @Inject constructor(
         if (charges.current == 0) {
             holder.decreaseButton.alpha = 0.5F
             holder.decreaseButton.isEnabled = false
-        }
-        else {
+        } else {
             holder.decreaseButton.alpha = 1F
             holder.decreaseButton.isEnabled = true
         }
@@ -67,8 +64,7 @@ class ActionsAdapter @Inject constructor(
         if (charges.current == charges.maximum) {
             holder.increaseButton.alpha = 0.5F
             holder.increaseButton.isEnabled = false
-        }
-        else {
+        } else {
             holder.increaseButton.alpha = 1F
             holder.increaseButton.isEnabled = true
         }

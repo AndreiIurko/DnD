@@ -1,61 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/languagesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Языки:"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:id="@+id/languagesLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="6dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginBottom="12dp" />
 
         <TextView
-                android:id="@+id/languagesTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Языки:"
-                android:textSize="24sp"/>
+            android:id="@+id/resistancesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Сопротивления:"
+            android:textSize="24sp" />
 
         <LinearLayout
-                android:id="@+id/languagesLinearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="12dp"
-        />
+            android:id="@+id/resistancesLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="12dp" />
 
         <TextView
-                android:id="@+id/resistancesTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Сопротивления:"
-                android:textSize="24sp"/>
+            android:id="@+id/additionalInfoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Остальные способности:"
+            android:textSize="24sp" />
+
 
         <LinearLayout
-                android:id="@+id/resistancesLinearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="12dp"
-        />
-
-        <TextView
-                android:id="@+id/additionalInfoTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Остальные способности:"
-                android:textSize="24sp"/>
-
-
-       <LinearLayout
-               android:id="@+id/additionalInfoLinearLayout"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="vertical"
-               android:layout_marginBottom="56dp"
-       />
+            android:id="@+id/additionalInfoLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="56dp" />
     </LinearLayout>
 
 

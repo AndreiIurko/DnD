@@ -13,7 +13,7 @@ var improvedCritical = AbilityNode(
             "Ваши атаки оружием совершают критическое попадание при выпадении «19» или «20» на кости атаки."
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Fighter
     },
@@ -28,7 +28,7 @@ var remarkableAthlete = AbilityNode(
         abilities.halfProfSet.add(Ability.Constitution)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 7 && abilities.characterClass == Classes.Fighter
     },
@@ -40,8 +40,8 @@ var remarkableAthlete = AbilityNode(
 var additionalFightingStyle = AbilityNode(
     name = "Дополнительный боевой стиль",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("first", mapOfFightingStyles.keys.toList())
+    getAlternatives = mutableMapOf(
+        Pair("first", { mapOfFightingStyles.keys.toList() })
     ),
     requirements = { abilities: CharacterInfo -> abilities.level >= 10 && abilities.characterClass == Classes.Fighter },
     description = "На 10 уровне вы можете выбрать второй боевой стиль."
@@ -54,7 +54,7 @@ var superiorCritical = AbilityNode(
             "Ваши атаки оружием совершают критическое попадание при выпадении «18–20» на кости атаки."
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo -> abilities.level >= 15 && abilities.characterClass == Classes.Fighter },
     description = "Ваши атаки оружием совершают критическое попадание при выпадении «18–20» на кости атаки."
 )
@@ -66,7 +66,7 @@ var survivor = AbilityNode(
             "Вы достигаете вершин стойкости в бою. В начале каждого своего хода вы восстанавливаете количество хитов, равное 5 + ваш модификатор Телосложения, если количество ваших хитов не превышает половины от максимума. Это умение не работает, если у вас 0 хитов."
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo -> abilities.level >= 18 && abilities.characterClass == Classes.Fighter },
     description = "Вы достигаете вершин стойкости в бою. В начале каждого своего хода вы восстанавливаете количество хитов, равное 5 + ваш модификатор Телосложения, если количество ваших хитов не превышает половины от максимума. Это умение не работает, если у вас 0 хитов."
 )
@@ -74,12 +74,12 @@ var survivor = AbilityNode(
 var champion = AbilityNode(
     name = "Чемпион",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(improvedCritical.name)),
-        Pair("second", listOf(remarkableAthlete.name)),
-        Pair("third", listOf(additionalFightingStyle.name)),
-        Pair("fourth", listOf(superiorCritical.name)),
-        Pair("fifth", listOf(survivor.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(improvedCritical.name) }),
+        Pair("second", { listOf(remarkableAthlete.name) }),
+        Pair("third", { listOf(additionalFightingStyle.name) }),
+        Pair("fourth", { listOf(superiorCritical.name) }),
+        Pair("fifth", { listOf(survivor.name) })
     ),
     requirements = { true },
     description = "",

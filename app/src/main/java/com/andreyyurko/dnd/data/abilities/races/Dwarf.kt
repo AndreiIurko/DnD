@@ -14,7 +14,7 @@ var mountainDwarf = AbilityNode(
         abilities.armorProficiency.add(ArmorProf.MediumArmor)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Будучи горным дварфом, вы являетесь сильным и выносливым, приспособленным к жизни в суровой местности. Вы довольно высоки (по дварфской мерке), и скорее светлокожи. Щитовые дварфы из северного Фаэруна, а также правящий клан хиларов и благородный клан деваров из Саги о Копье, всё это горные дварфы.\n" +
@@ -31,7 +31,7 @@ var hillDwarf = AbilityNode(
         abilities.hp += abilities.level
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Будучи холмовым дварфом вы обладаете обострёнными чувствами, развитой интуицией и замечательной стойкостью. Золотые дварфы Фаэруна, в их могучем южном королевстве являются холмовыми дварфами, также как и изгнанные нейдары и свихнувшиеся клары из Кринна (мир Саги о Копье).\n" +
@@ -62,7 +62,8 @@ val dwarfAbilities = AbilityNode(
             abilities.additionalAbilities["Тёмное зрение"] =
                 "Привыкнув к сумраку леса и ночному небу, вы обладаете превосходным зрением в темноте и при тусклом освещении. На расстоянии в 60 футов вы при тусклом освещении можете видеть так, как будто это яркое освещение, и в темноте так, как будто это тусклое освещение. В темноте вы не можете различать цвета, только оттенки серого.\n"
         }
-        abilities.additionalAbilities["Дварфийская устойчивость"] = "Вы совершаете с преимуществом спасброски от яда, и вы получаете сопротивление урону ядом.\n"
+        abilities.additionalAbilities["Дварфийская устойчивость"] =
+            "Вы совершаете с преимуществом спасброски от яда, и вы получаете сопротивление урону ядом.\n"
         abilities.damageResistances.add(DamageType.Poison)
         abilities.weaponProficiency.add(Weapon.Battleaxe)
         abilities.weaponProficiency.add(Weapon.HandAxe)
@@ -70,12 +71,13 @@ val dwarfAbilities = AbilityNode(
         abilities.weaponProficiency.add(Weapon.Warhammer)
         // add tools
         abilities.additionalAbilities["Скорость"] = "Ношение тяжёлых доспехов не снижает вашу скорость.\n"
-        abilities.additionalAbilities["Знание камня"] = "Если вы совершаете проверку Интеллекта (История), связанную с происхождением работы по камню, вы считаетесь владеющим навыком История, и добавляете к проверке удвоенный бонус мастерства вместо обычного.\n"
+        abilities.additionalAbilities["Знание камня"] =
+            "Если вы совершаете проверку Интеллекта (История), связанную с происхождением работы по камню, вы считаетесь владеющим навыком История, и добавляете к проверке удвоенный бонус мастерства вместо обычного.\n"
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("tool", listOf(brewersSupplies.name, masonsTools.name, smithsTools.name)),
-        Pair("subraces", listOf(mountainDwarf.name, hillDwarf.name))
+    getAlternatives = mutableMapOf(
+        Pair("tool", { listOf(brewersSupplies.name, masonsTools.name, smithsTools.name) }),
+        Pair("subraces", { listOf(mountainDwarf.name, hillDwarf.name) })
     ),
     requirements = { true },
     description = "Ваш персонаж дварф обладает рядом врождённых способностей, являющихся частью его природы.\n" +
@@ -112,8 +114,8 @@ val dwarf = AbilityNode(
         abilities.race = "Дварф"
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("abilities", listOf(dwarfAbilities.name))
+    getAlternatives = mutableMapOf(
+        Pair("abilities", { listOf(dwarfAbilities.name) })
     ),
     requirements = { true },
     description = "Дварф",

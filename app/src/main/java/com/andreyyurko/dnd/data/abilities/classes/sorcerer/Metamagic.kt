@@ -19,7 +19,7 @@ var carefulSpell: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isChosen = false
         for (action in abilities.actionsList) {
@@ -45,7 +45,7 @@ var distantSpell: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isChosen = false
         for (action in abilities.actionsList) {
@@ -73,7 +73,7 @@ var empoweredSpell: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isChosen = false
         for (action in abilities.actionsList) {
@@ -99,7 +99,7 @@ var extendedSpell: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isChosen = false
         for (action in abilities.actionsList) {
@@ -123,7 +123,7 @@ var heightenedSpell: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isChosen = false
         for (action in abilities.actionsList) {
@@ -147,7 +147,7 @@ var quickenedSpell: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isChosen = false
         for (action in abilities.actionsList) {
@@ -171,7 +171,7 @@ var subtleSpell: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isChosen = false
         for (action in abilities.actionsList) {
@@ -197,7 +197,7 @@ var twinnedSpell: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isChosen = false
         for (action in abilities.actionsList) {

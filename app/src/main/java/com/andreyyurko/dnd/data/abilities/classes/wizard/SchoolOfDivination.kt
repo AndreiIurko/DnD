@@ -13,7 +13,7 @@ var divineSavant = AbilityNode(
             "Золото и время, которое вы тратите на копирование заклинания школы Прорицания в свою книгу заклинаний, уменьшаются вдвое.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 2 && abilities.characterClass == Classes.Wizard
     },
@@ -46,7 +46,7 @@ var portent = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 2 && abilities.characterClass == Classes.Wizard
     },
@@ -62,7 +62,7 @@ var expertDivination = AbilityNode(
             "Вы так легко накладываете заклинания школы Прорицания, что расходуете лишь малую часть своих сил. Когда вы накладываете заклинание школы Прорицания 2-го уровня или выше, используя ячейку заклинаний, вы восстанавливаете одну уже израсходованную ячейку заклинаний. Восстанавливаемая ячейка должна быть ниже уровнем, чем заклинание, которое вы накладываете, и не может быть выше 5-го уровня.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 6 && abilities.characterClass == Classes.Wizard
     },
@@ -89,7 +89,7 @@ var theThirdEye = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 10 && abilities.characterClass == Classes.Wizard
     },
@@ -107,7 +107,7 @@ var theThirdEye = AbilityNode(
 var greaterPortent = AbilityNode(
     name = "Великое знамение",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 14 && abilities.characterClass == Classes.Wizard
     },
@@ -117,12 +117,12 @@ var greaterPortent = AbilityNode(
 var schoolOfDivination = AbilityNode(
     name = "Школа прорицания",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(divineSavant.name)),
-        Pair("second", listOf(portent.name)),
-        Pair("third", listOf(expertDivination.name)),
-        Pair("fourth", listOf(theThirdEye.name)),
-        Pair("fifth", listOf(greaterPortent.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(divineSavant.name) }),
+        Pair("second", { listOf(portent.name) }),
+        Pair("third", { listOf(expertDivination.name) }),
+        Pair("fourth", { listOf(theThirdEye.name) }),
+        Pair("fifth", { listOf(greaterPortent.name) })
     ),
     requirements = { true },
     description = "",

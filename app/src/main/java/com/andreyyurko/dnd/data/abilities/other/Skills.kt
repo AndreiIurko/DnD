@@ -11,7 +11,7 @@ var acrobatics: AbilityNode = AbilityNode(
         abilities.skillProficiency.add(Skill.Acrobatics)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.skillProficiency.contains(Skill.Acrobatics)
     },
@@ -26,7 +26,7 @@ var animalHandling: AbilityNode = AbilityNode(
         abilities.skillProficiency.add(Skill.AnimalHandling)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.skillProficiency.contains(Skill.AnimalHandling)
     },
@@ -41,7 +41,7 @@ var arcana: AbilityNode = AbilityNode(
         abilities.skillProficiency.add(Skill.Arcana)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.skillProficiency.contains(Skill.Arcana)
     },
@@ -56,7 +56,7 @@ var athletics: AbilityNode = AbilityNode(
         abilities.skillProficiency.add(Skill.Athletics)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.skillProficiency.contains(Skill.Athletics)
     },
@@ -71,7 +71,7 @@ var deception: AbilityNode = AbilityNode(
         abilities.skillProficiency.add(Skill.Deception)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.skillProficiency.contains(Skill.Deception)
     },
@@ -86,7 +86,7 @@ var history: AbilityNode = AbilityNode(
         abilities.skillProficiency.add(Skill.History)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.skillProficiency.contains(Skill.History)
     },
@@ -101,7 +101,7 @@ var insight: AbilityNode = AbilityNode(
         abilities.skillProficiency.add(Skill.Insight)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.skillProficiency.contains(Skill.Insight)
     },
@@ -116,7 +116,7 @@ var intimidation: AbilityNode = AbilityNode(
         abilities.skillProficiency.add(Skill.Intimidation)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.skillProficiency.contains(Skill.Intimidation)
     },
@@ -131,7 +131,7 @@ var investigation: AbilityNode = AbilityNode(
         abilities.skillProficiency.add(Skill.Investigation)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.skillProficiency.contains(Skill.Investigation)
     },
@@ -146,7 +146,7 @@ var medicine: AbilityNode = AbilityNode(
         abilities.skillProficiency.add(Skill.Medicine)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.skillProficiency.contains(Skill.Medicine)
     },
@@ -161,7 +161,7 @@ var nature: AbilityNode = AbilityNode(
         abilities.skillProficiency.add(Skill.Nature)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.skillProficiency.contains(Skill.Nature)
     },
@@ -176,7 +176,7 @@ var perception: AbilityNode = AbilityNode(
         abilities.skillProficiency.add(Skill.Perception)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.skillProficiency.contains(Skill.Perception)
     },
@@ -191,7 +191,7 @@ var performance: AbilityNode = AbilityNode(
         abilities.skillProficiency.add(Skill.Performance)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.skillProficiency.contains(Skill.Performance)
     },
@@ -206,7 +206,7 @@ var persuasion: AbilityNode = AbilityNode(
         abilities.skillProficiency.add(Skill.Persuasion)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.skillProficiency.contains(Skill.Persuasion)
     },
@@ -221,7 +221,7 @@ var religion: AbilityNode = AbilityNode(
         abilities.skillProficiency.add(Skill.Religion)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.skillProficiency.contains(Skill.Religion)
     },
@@ -236,7 +236,7 @@ var sleightOfHand: AbilityNode = AbilityNode(
         abilities.skillProficiency.add(Skill.SleightOfHand)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.skillProficiency.contains(Skill.SleightOfHand)
     },
@@ -251,7 +251,7 @@ var stealth: AbilityNode = AbilityNode(
         abilities.skillProficiency.add(Skill.Stealth)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.skillProficiency.contains(Skill.Stealth)
     },
@@ -266,7 +266,7 @@ var survival: AbilityNode = AbilityNode(
         abilities.skillProficiency.add(Skill.Survival)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.skillProficiency.contains(Skill.Survival)
     },
@@ -281,7 +281,7 @@ var acrobaticsExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Acrobatics)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Acrobatics) and
                 abilities.skillProficiency.contains(Skill.Acrobatics)
@@ -297,7 +297,7 @@ var animalHandlingExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.AnimalHandling)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.AnimalHandling) and
                 abilities.skillProficiency.contains(Skill.AnimalHandling)
@@ -313,7 +313,7 @@ var arcanaExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Arcana)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Arcana) and
                 abilities.skillProficiency.contains(Skill.Arcana)
@@ -329,7 +329,7 @@ var athleticsExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Athletics)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Athletics) and
                 abilities.skillProficiency.contains(Skill.Athletics)
@@ -345,7 +345,7 @@ var deceptionExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Deception)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Deception) and
                 abilities.skillProficiency.contains(Skill.Deception)
@@ -361,7 +361,7 @@ var historyExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.History)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.History) and
                 abilities.skillProficiency.contains(Skill.History)
@@ -377,7 +377,7 @@ var insightExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Insight)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Insight) and
                 abilities.skillProficiency.contains(Skill.Insight)
@@ -393,7 +393,7 @@ var intimidationExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Intimidation)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Intimidation) and
                 abilities.skillProficiency.contains(Skill.Intimidation)
@@ -409,7 +409,7 @@ var investigationExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Investigation)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Investigation) and
                 abilities.skillProficiency.contains(Skill.Investigation)
@@ -425,7 +425,7 @@ var medicineExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Medicine)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Medicine) and
                 abilities.skillProficiency.contains(Skill.Medicine)
@@ -441,7 +441,7 @@ var natureExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Nature)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Nature) and
                 abilities.skillProficiency.contains(Skill.Nature)
@@ -457,7 +457,7 @@ var perceptionExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Perception)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Perception) and
                 abilities.skillProficiency.contains(Skill.Perception)
@@ -473,7 +473,7 @@ var performanceExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Performance)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Performance) and
                 abilities.skillProficiency.contains(Skill.Performance)
@@ -489,7 +489,7 @@ var persuasionExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Persuasion)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Persuasion) and
                 abilities.skillProficiency.contains(Skill.Persuasion)
@@ -505,7 +505,7 @@ var religionExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Religion)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Religion) and
                 abilities.skillProficiency.contains(Skill.Religion)
@@ -521,7 +521,7 @@ var sleightOfHandExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.SleightOfHand)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.SleightOfHand) and
                 abilities.skillProficiency.contains(Skill.SleightOfHand)
@@ -537,7 +537,7 @@ var stealthExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Stealth)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Stealth) and
                 abilities.skillProficiency.contains(Skill.Stealth)
@@ -553,7 +553,7 @@ var survivalExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Survival)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Survival) and
                 abilities.skillProficiency.contains(Skill.Survival)
@@ -570,7 +570,7 @@ var acrobaticsSkillAndExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Acrobatics)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Acrobatics)
     },
@@ -586,7 +586,7 @@ var animalHandlingSkillAndExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.AnimalHandling)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.AnimalHandling)
     },
@@ -602,7 +602,7 @@ var arcanaSkillAndExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Arcana)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Arcana)
     },
@@ -618,7 +618,7 @@ var athleticsSkillAndExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Athletics)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Athletics)
     },
@@ -634,7 +634,7 @@ var deceptionSkillAndExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Deception)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Deception)
     },
@@ -650,7 +650,7 @@ var historySkillAndExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.History)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.History)
     },
@@ -666,7 +666,7 @@ var insightSkillAndExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Insight)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Insight)
     },
@@ -682,7 +682,7 @@ var intimidationSkillAndExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Intimidation)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Intimidation)
     },
@@ -698,7 +698,7 @@ var investigationSkillAndExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Investigation)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Investigation)
     },
@@ -714,7 +714,7 @@ var medicineSkillAndExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Medicine)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Medicine)
     },
@@ -730,7 +730,7 @@ var natureSkillAndExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Nature)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Nature)
     },
@@ -746,7 +746,7 @@ var perceptionSkillAndExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Perception)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Perception)
     },
@@ -762,7 +762,7 @@ var performanceSkillAndExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Performance)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Performance)
     },
@@ -778,7 +778,7 @@ var persuasionSkillAndExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Persuasion)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Persuasion)
     },
@@ -794,7 +794,7 @@ var religionSkillAndExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Religion)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Religion)
     },
@@ -810,7 +810,7 @@ var sleightOfHandSkillAndExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.SleightOfHand)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.SleightOfHand)
     },
@@ -826,7 +826,7 @@ var stealthSkillAndExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Stealth)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Stealth)
     },
@@ -842,7 +842,7 @@ var survivalSkillAndExpertise: AbilityNode = AbilityNode(
         abilities.expertize.add(Skill.Survival)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.expertize.contains(Skill.Survival)
     },

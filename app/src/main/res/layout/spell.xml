@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="wrap_content"
-                                                   android:paddingTop="0dp"
-                                                   android:paddingBottom="16dp"
-                                                   android:paddingStart="16dp"
-                                                   android:paddingEnd="16dp"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   xmlns:tools="http://schemas.android.com/tools">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="0dp"
+    android:paddingBottom="16dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
-            android:id="@+id/nameTextView"
-            tools:text="Spell name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+        android:id="@+id/nameTextView"
+        tools:text="Spell name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-            android:id="@+id/levelAndSchoolTextView"
-            tools:text="Spell level"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/nameTextView"
-            app:layout_constraintStart_toStartOf="parent"/>
+        android:id="@+id/levelAndSchoolTextView"
+        tools:text="Spell level"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/nameTextView"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-            android:id="@+id/descriptionTextView"
-            tools:text="Spell description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/levelAndSchoolTextView"
-            app:layout_constraintStart_toStartOf="parent"
-            android:clickable="true"
-            android:focusable="true"/>
+        android:id="@+id/descriptionTextView"
+        tools:text="Spell description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/levelAndSchoolTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        android:clickable="true"
+        android:focusable="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

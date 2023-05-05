@@ -1,7 +1,6 @@
 package com.andreyyurko.dnd.data.characterData.character
 
 import android.graphics.Bitmap
-import android.net.Uri
 import com.andreyyurko.dnd.data.abilities.baseAN
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Note

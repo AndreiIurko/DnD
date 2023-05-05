@@ -1,10 +1,6 @@
 package com.andreyyurko.dnd.data.abilities.classes.rogue
 
-import com.andreyyurko.dnd.data.characterData.Action
-import com.andreyyurko.dnd.data.characterData.ActionType
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
-import com.andreyyurko.dnd.data.characterData.Classes
-import com.andreyyurko.dnd.data.characterData.Tools
+import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var bonusProficiencyAssassinArchetype = AbilityNode(
@@ -14,7 +10,7 @@ var bonusProficiencyAssassinArchetype = AbilityNode(
         abilities.toolProficiency.add(Tools.DisguiseTools)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Rogue
     },
@@ -24,10 +20,11 @@ var bonusProficiencyAssassinArchetype = AbilityNode(
 var assassinate = AbilityNode(
     name = "Ликвидация",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Ликвидация"] = "Вы совершаете с преимуществом броски атаки по всем существам, которые ещё не совершали ход в этом бою. Кроме того, все попадания по существам, захваченным врасплох, являются критическими попаданиями.\n"
+        abilities.additionalAbilities["Ликвидация"] =
+            "Вы совершаете с преимуществом броски атаки по всем существам, которые ещё не совершали ход в этом бою. Кроме того, все попадания по существам, захваченным врасплох, являются критическими попаданиями.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Rogue
     },
@@ -41,14 +38,14 @@ var infiltrationExpertise = AbilityNode(
             Action(
                 name = "Мастер проникновения",
                 description = "Вы можете создавать себе ложную биографию. Вы должны потратить семь дней и 25 зм, чтобы сделать её достоверной и установить нужные связи. Вы не можете взять биографию, принадлежащую другому лицу. Например, вы можете приобрести соответствующую одежду, рекомендательные письма и официального вида сертификаты, чтобы обозначить себя в качестве члена торгового дома из далёкого города, или внушить, что вы из группы богатых торговцев.\n" +
-            "\n" +
-                    "После принятия новой личности в качестве маскировки другие существа верят, что вы являетесь этой личностью, пока не подадите очевидный повод решить обратное.\n",
+                        "\n" +
+                        "После принятия новой личности в качестве маскировки другие существа верят, что вы являетесь этой личностью, пока не подадите очевидный повод решить обратное.\n",
                 type = ActionType.Long
             )
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 9 && abilities.characterClass == Classes.Rogue
     },
@@ -71,7 +68,7 @@ var impostor = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 13 && abilities.characterClass == Classes.Rogue
     },
@@ -83,10 +80,11 @@ var impostor = AbilityNode(
 var deathStrike = AbilityNode(
     name = "Смертельный удар",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Смертельный удар"] = "Если вы атакуете и попадаете по существу, захваченному врасплох, оно должно совершить спасбросок Телосложения (Сл 8 + ваш модификатор Ловкости + ваш бонус мастерства). Проваленный спасбросок означает удвоение урона от вашей атаки по этому существу.\n"
+        abilities.additionalAbilities["Смертельный удар"] =
+            "Если вы атакуете и попадаете по существу, захваченному врасплох, оно должно совершить спасбросок Телосложения (Сл 8 + ваш модификатор Ловкости + ваш бонус мастерства). Проваленный спасбросок означает удвоение урона от вашей атаки по этому существу.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 17 && abilities.characterClass == Classes.Rogue
     },
@@ -96,12 +94,12 @@ var deathStrike = AbilityNode(
 var assassinArchetype = AbilityNode(
     name = "Убийца",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(bonusProficiencyAssassinArchetype.name)),
-        Pair("second", listOf(assassinate.name)),
-        Pair("third", listOf(infiltrationExpertise.name)),
-        Pair("fourth", listOf(impostor.name)),
-        Pair("fifth", listOf(deathStrike.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(bonusProficiencyAssassinArchetype.name) }),
+        Pair("second", { listOf(assassinate.name) }),
+        Pair("third", { listOf(infiltrationExpertise.name) }),
+        Pair("fourth", { listOf(impostor.name) }),
+        Pair("fifth", { listOf(deathStrike.name) })
     ),
     requirements = { true },
     description = "",

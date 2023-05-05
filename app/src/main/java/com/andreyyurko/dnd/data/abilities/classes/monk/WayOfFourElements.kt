@@ -23,7 +23,7 @@ var elementalAttunement = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Monk
     },
@@ -48,7 +48,7 @@ var fangsOfTheFireSnake = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Monk
     },
@@ -68,7 +68,7 @@ var fistOfTheFourThunders = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Monk
     },
@@ -88,7 +88,7 @@ var fistOfUnbrokenAir = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Monk
     },
@@ -108,7 +108,7 @@ var rushOfTheGaleSpirits = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Monk
     },
@@ -128,7 +128,7 @@ var shapeTheFlowingRiver = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Monk
     },
@@ -148,7 +148,7 @@ var sweepingCinderStrike = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Monk
     },
@@ -168,7 +168,7 @@ var waterWhip = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Monk
     },
@@ -188,7 +188,7 @@ var clenchOfTheNorthWind = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 6 && abilities.characterClass == Classes.Monk
     },
@@ -208,7 +208,7 @@ var gongOfTheSummit = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 6 && abilities.characterClass == Classes.Monk
     },
@@ -228,7 +228,7 @@ var flamesOfThePhoenix = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 11 && abilities.characterClass == Classes.Monk
     },
@@ -248,7 +248,7 @@ var mistStance = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 11 && abilities.characterClass == Classes.Monk
     },
@@ -268,7 +268,7 @@ var rideTheWind = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 11 && abilities.characterClass == Classes.Monk
     },
@@ -288,7 +288,7 @@ var breathOfWinter = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 17 && abilities.characterClass == Classes.Monk
     },
@@ -308,7 +308,7 @@ var eternalMountainDefense = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 17 && abilities.characterClass == Classes.Monk
     },
@@ -328,7 +328,7 @@ var riverOfHungryFlame = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 17 && abilities.characterClass == Classes.Monk
     },
@@ -348,7 +348,7 @@ var waveOfRollingEarth = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 17 && abilities.characterClass == Classes.Monk
     },
@@ -358,27 +358,29 @@ var waveOfRollingEarth = AbilityNode(
 var elementalAdept = AbilityNode(
     name = "Адепт стихий",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(elementalAttunement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(elementalAttunement.name) }),
         Pair(
-            "second", listOf(
-                fangsOfTheFireSnake.name,
-                fistOfTheFourThunders.name,
-                fistOfUnbrokenAir.name,
-                rushOfTheGaleSpirits.name,
-                shapeTheFlowingRiver.name,
-                sweepingCinderStrike.name,
-                waterWhip.name,
-                clenchOfTheNorthWind.name,
-                gongOfTheSummit.name,
-                flamesOfThePhoenix.name,
-                mistStance.name,
-                rideTheWind.name,
-                breathOfWinter.name,
-                eternalMountainDefense.name,
-                riverOfHungryFlame.name,
-                waveOfRollingEarth.name
-            )
+            "second", {
+                listOf(
+                    fangsOfTheFireSnake.name,
+                    fistOfTheFourThunders.name,
+                    fistOfUnbrokenAir.name,
+                    rushOfTheGaleSpirits.name,
+                    shapeTheFlowingRiver.name,
+                    sweepingCinderStrike.name,
+                    waterWhip.name,
+                    clenchOfTheNorthWind.name,
+                    gongOfTheSummit.name,
+                    flamesOfThePhoenix.name,
+                    mistStance.name,
+                    rideTheWind.name,
+                    breathOfWinter.name,
+                    eternalMountainDefense.name,
+                    riverOfHungryFlame.name,
+                    waveOfRollingEarth.name
+                )
+            }
         )
     ),
     requirements = { abilities: CharacterInfo ->
@@ -406,26 +408,28 @@ var elementalAdept = AbilityNode(
 var elementalDisciplines6Level = AbilityNode(
     name = "Стихийные техники 6 уровня монаха",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
-            "first", listOf(
-                fangsOfTheFireSnake.name,
-                fistOfTheFourThunders.name,
-                fistOfUnbrokenAir.name,
-                rushOfTheGaleSpirits.name,
-                shapeTheFlowingRiver.name,
-                sweepingCinderStrike.name,
-                waterWhip.name,
-                clenchOfTheNorthWind.name,
-                gongOfTheSummit.name,
-                flamesOfThePhoenix.name,
-                mistStance.name,
-                rideTheWind.name,
-                breathOfWinter.name,
-                eternalMountainDefense.name,
-                riverOfHungryFlame.name,
-                waveOfRollingEarth.name
-            )
+            "first", {
+                listOf(
+                    fangsOfTheFireSnake.name,
+                    fistOfTheFourThunders.name,
+                    fistOfUnbrokenAir.name,
+                    rushOfTheGaleSpirits.name,
+                    shapeTheFlowingRiver.name,
+                    sweepingCinderStrike.name,
+                    waterWhip.name,
+                    clenchOfTheNorthWind.name,
+                    gongOfTheSummit.name,
+                    flamesOfThePhoenix.name,
+                    mistStance.name,
+                    rideTheWind.name,
+                    breathOfWinter.name,
+                    eternalMountainDefense.name,
+                    riverOfHungryFlame.name,
+                    waveOfRollingEarth.name
+                )
+            }
         )
     ),
     requirements = { abilities: CharacterInfo ->
@@ -437,26 +441,28 @@ var elementalDisciplines6Level = AbilityNode(
 var elementalDisciplines11Level = AbilityNode(
     name = "Стихийные техники 11 уровня монаха",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
-            "first", listOf(
-                fangsOfTheFireSnake.name,
-                fistOfTheFourThunders.name,
-                fistOfUnbrokenAir.name,
-                rushOfTheGaleSpirits.name,
-                shapeTheFlowingRiver.name,
-                sweepingCinderStrike.name,
-                waterWhip.name,
-                clenchOfTheNorthWind.name,
-                gongOfTheSummit.name,
-                flamesOfThePhoenix.name,
-                mistStance.name,
-                rideTheWind.name,
-                breathOfWinter.name,
-                eternalMountainDefense.name,
-                riverOfHungryFlame.name,
-                waveOfRollingEarth.name
-            )
+            "first", {
+                listOf(
+                    fangsOfTheFireSnake.name,
+                    fistOfTheFourThunders.name,
+                    fistOfUnbrokenAir.name,
+                    rushOfTheGaleSpirits.name,
+                    shapeTheFlowingRiver.name,
+                    sweepingCinderStrike.name,
+                    waterWhip.name,
+                    clenchOfTheNorthWind.name,
+                    gongOfTheSummit.name,
+                    flamesOfThePhoenix.name,
+                    mistStance.name,
+                    rideTheWind.name,
+                    breathOfWinter.name,
+                    eternalMountainDefense.name,
+                    riverOfHungryFlame.name,
+                    waveOfRollingEarth.name
+                )
+            }
         )
     ),
     requirements = { abilities: CharacterInfo ->
@@ -468,26 +474,28 @@ var elementalDisciplines11Level = AbilityNode(
 var elementalDisciplines17Level = AbilityNode(
     name = "Стихийные техники 17 уровня монаха",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
-            "first", listOf(
-                fangsOfTheFireSnake.name,
-                fistOfTheFourThunders.name,
-                fistOfUnbrokenAir.name,
-                rushOfTheGaleSpirits.name,
-                shapeTheFlowingRiver.name,
-                sweepingCinderStrike.name,
-                waterWhip.name,
-                clenchOfTheNorthWind.name,
-                gongOfTheSummit.name,
-                flamesOfThePhoenix.name,
-                mistStance.name,
-                rideTheWind.name,
-                breathOfWinter.name,
-                eternalMountainDefense.name,
-                riverOfHungryFlame.name,
-                waveOfRollingEarth.name
-            )
+            "first", {
+                listOf(
+                    fangsOfTheFireSnake.name,
+                    fistOfTheFourThunders.name,
+                    fistOfUnbrokenAir.name,
+                    rushOfTheGaleSpirits.name,
+                    shapeTheFlowingRiver.name,
+                    sweepingCinderStrike.name,
+                    waterWhip.name,
+                    clenchOfTheNorthWind.name,
+                    gongOfTheSummit.name,
+                    flamesOfThePhoenix.name,
+                    mistStance.name,
+                    rideTheWind.name,
+                    breathOfWinter.name,
+                    eternalMountainDefense.name,
+                    riverOfHungryFlame.name,
+                    waveOfRollingEarth.name
+                )
+            }
         )
     ),
     requirements = { abilities: CharacterInfo ->
@@ -499,11 +507,11 @@ var elementalDisciplines17Level = AbilityNode(
 var wayOfFourElements = AbilityNode(
     name = "Путь четырёх стихий",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(elementalAdept.name)),
-        Pair("second", listOf(elementalDisciplines6Level.name)),
-        Pair("third", listOf(elementalDisciplines11Level.name)),
-        Pair("fourth", listOf(elementalDisciplines17Level.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(elementalAdept.name) }),
+        Pair("second", { listOf(elementalDisciplines6Level.name) }),
+        Pair("third", { listOf(elementalDisciplines11Level.name) }),
+        Pair("fourth", { listOf(elementalDisciplines17Level.name) }),
     ),
     requirements = { true },
     description = "",

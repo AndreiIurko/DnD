@@ -1,68 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageButton
-            android:id="@+id/deleteButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/dateTextView"
-            android:src="@drawable/ic_baseline_delete_36"
-            android:background="@color/background"/>
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/dateTextView"
+        android:src="@drawable/ic_baseline_delete_36"
+        android:background="@color/background" />
 
     <TextView
-            android:id="@+id/nameTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Имя"
-            android:textSize="24sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/deleteButton"
-            android:layout_marginEnd="10dp"
-            android:clickable="true"
-            android:focusable="true"
-    />
+        android:id="@+id/nameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Имя"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/deleteButton"
+        android:layout_marginEnd="10dp"
+        android:clickable="true"
+        android:focusable="true" />
 
     <TextView
-            android:id="@+id/dateTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Дата"
-            android:textSize="16sp"
-            android:textStyle="italic"
-            app:layout_constraintTop_toBottomOf="@id/nameTextView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/deleteButton"
-            android:layout_marginEnd="10dp"
-            android:clickable="true"
-            android:focusable="true"
-    />
+        android:id="@+id/dateTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Дата"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        app:layout_constraintTop_toBottomOf="@id/nameTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/deleteButton"
+        android:layout_marginEnd="10dp"
+        android:clickable="true"
+        android:focusable="true" />
 
     <View
-            android:id="@+id/dividerView"
-            app:layout_constraintTop_toBottomOf="@id/dateTextView"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black"/>
+        android:id="@+id/dividerView"
+        app:layout_constraintTop_toBottomOf="@id/dateTextView"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black" />
 
     <TextView
-            android:id="@+id/noteTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:paddingTop="4dp"
-            android:text="Текст записи"
-            app:layout_constraintTop_toBottomOf="@id/dividerView"
-            android:clickable="true"
-            android:focusable="true"
-    />
+        android:id="@+id/noteTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingTop="4dp"
+        android:text="Текст записи"
+        app:layout_constraintTop_toBottomOf="@id/dividerView"
+        android:clickable="true"
+        android:focusable="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

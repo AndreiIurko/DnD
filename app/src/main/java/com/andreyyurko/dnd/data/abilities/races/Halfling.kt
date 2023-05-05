@@ -1,16 +1,20 @@
 package com.andreyyurko.dnd.data.abilities.races
 
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.DamageType
+import com.andreyyurko.dnd.data.characterData.Languages
+import com.andreyyurko.dnd.data.characterData.Priority
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var LightfootHalfling = AbilityNode(
     name = "Легконогий полурослик",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.charisma += 1
-        abilities.additionalAbilities["Естественная скрытность"] = "Вы можете предпринять попытку скрыться даже если заслонены только существом, превосходящими вас в размере как минимум на одну категорию.\n"
+        abilities.additionalAbilities["Естественная скрытность"] =
+            "Вы можете предпринять попытку скрыться даже если заслонены только существом, превосходящими вас в размере как минимум на одну категорию.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Коренастые полурослики выносливее других и обладают некоторой устойчивостью к ядам. Поговаривают, что в их жилах течёт толика дварфской крови. В мире Забытых Королевств таких полуросликов зовут сильными сердцем, и чаще всего они встречаются на юге.\n" +
@@ -24,11 +28,12 @@ var StoutHalfling = AbilityNode(
     name = "Коренастый полурослик",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.constitution += 1
-        abilities.additionalAbilities["Дварфийская устойчивость"] = "Вы совершаете с преимуществом спасброски от яда, и вы получаете сопротивление урону ядом.\n"
+        abilities.additionalAbilities["Дварфийская устойчивость"] =
+            "Вы совершаете с преимуществом спасброски от яда, и вы получаете сопротивление урону ядом.\n"
         abilities.damageResistances.add(DamageType.Poison)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Легконогие полурослики умеют отлично скрываться, в том числе используя других существ как укрытие. Они приветливы и хорошо ладят с другими. В мире Забытых Королевств легконогие являются самой распространённой ветвью полуросликов. Легконогие более других склонны к перемене мест, и часто селятся по соседству с другими народами, или ведут кочевую жизнь. В мире Серого Ястреба таких полуросликов называют мохноногими или великанчиками.\n" +
@@ -45,14 +50,16 @@ val halflingAbilities = AbilityNode(
         abilities.languageProficiency.add(Languages.Common)
         abilities.languageProficiency.add(Languages.Halfling)
         abilities.speed += 25
-        abilities.additionalAbilities["Везучий"] = "Если при броске атаки, проверке характеристики или спасброске у вас выпало «1», вы можете перебросить кость, и должны использовать новый результат, даже если это «1».\n"
+        abilities.additionalAbilities["Везучий"] =
+            "Если при броске атаки, проверке характеристики или спасброске у вас выпало «1», вы можете перебросить кость, и должны использовать новый результат, даже если это «1».\n"
         abilities.additionalAbilities["Храбрый"] = "Вы совершаете с преимуществом спасброски от состояния испуганный.\n"
-        abilities.additionalAbilities["Проворство полуросликов"] = "Вы можете проходить сквозь пространство, занятое существами, чей размер больше вашего.\n"
+        abilities.additionalAbilities["Проворство полуросликов"] =
+            "Вы можете проходить сквозь пространство, занятое существами, чей размер больше вашего.\n"
         // add tools
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("subraces", listOf(LightfootHalfling.name, StoutHalfling.name))
+    getAlternatives = mutableMapOf(
+        Pair("subraces", { listOf(LightfootHalfling.name, StoutHalfling.name) })
     ),
     requirements = { true },
     description = "Как и другие полурослики, ваш персонаж обладает определёнными качествами.\n" +
@@ -85,8 +92,8 @@ val halfling = AbilityNode(
         abilities.race = "Полурослик"
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("abilities", listOf(halflingAbilities.name))
+    getAlternatives = mutableMapOf(
+        Pair("abilities", { listOf(halflingAbilities.name) })
     ),
     requirements = { true },
     description = "Полурослик",

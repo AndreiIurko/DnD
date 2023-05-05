@@ -2,24 +2,8 @@ package com.andreyyurko.dnd.data.abilities.classes.barbarian
 
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.classes.extraAttack
-import com.andreyyurko.dnd.data.abilities.other.abilityScoreImprovement
-import com.andreyyurko.dnd.data.abilities.other.animalHandling
-import com.andreyyurko.dnd.data.abilities.other.athletics
-import com.andreyyurko.dnd.data.abilities.other.intimidation
-import com.andreyyurko.dnd.data.abilities.other.nature
-import com.andreyyurko.dnd.data.abilities.other.perception
-import com.andreyyurko.dnd.data.abilities.other.survival
-import com.andreyyurko.dnd.data.characterData.Ability
-import com.andreyyurko.dnd.data.characterData.Action
-import com.andreyyurko.dnd.data.characterData.ActionType
-import com.andreyyurko.dnd.data.characterData.Armor
-import com.andreyyurko.dnd.data.characterData.ArmorProf
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
-import com.andreyyurko.dnd.data.characterData.ChargesCounter
-import com.andreyyurko.dnd.data.characterData.Classes
-import com.andreyyurko.dnd.data.characterData.Priority
-import com.andreyyurko.dnd.data.characterData.addAllMartialWeapons
-import com.andreyyurko.dnd.data.characterData.addAllSimpleWeapons
+import com.andreyyurko.dnd.data.abilities.other.*
+import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 
@@ -35,28 +19,32 @@ var classFeaturesBarbarian: AbilityNode = AbilityNode(
         abilities.armorProficiency.add(ArmorProf.Shield)
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
             "skill1",
-            listOf(
-                athletics.name,
-                perception.name,
-                survival.name,
-                intimidation.name,
-                nature.name,
-                animalHandling.name
-            )
+            {
+                listOf(
+                    athletics.name,
+                    perception.name,
+                    survival.name,
+                    intimidation.name,
+                    nature.name,
+                    animalHandling.name
+                )
+            }
         ),
         Pair(
             "skill2",
-            listOf(
-                athletics.name,
-                perception.name,
-                survival.name,
-                intimidation.name,
-                nature.name,
-                animalHandling.name
-            )
+            {
+                listOf(
+                    athletics.name,
+                    perception.name,
+                    survival.name,
+                    intimidation.name,
+                    nature.name,
+                    animalHandling.name
+                )
+            }
         )
     ),
     requirements = { abilities: CharacterInfo ->
@@ -95,7 +83,7 @@ var barbarianUnarmedDefence: AbilityNode = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     description = "Если вы не носите ни доспех, ни щит, ваш Класс Доспеха равен 10 + модификатор Ловкости + модификатор Телосложения.\n",
 )
@@ -146,8 +134,7 @@ var rage: AbilityNode = AbilityNode(
                     relatedCharges = "Ярость"
                 )
             )
-        }
-        else {
+        } else {
             abilities.actionsList.add(
                 Action(
                     name = "Ярость",
@@ -170,7 +157,7 @@ var rage: AbilityNode = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     description = "В бою вы сражаетесь с первобытной свирепостью. В свой ход вы можете бонусным действием войти в состояние ярости.\n" +
             "\n" +
@@ -197,10 +184,10 @@ var barbarian1: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 12
         abilities
     },
-    alternatives =  mutableMapOf(
-        Pair("first", listOf(classFeaturesBarbarian.name)),
-        Pair("second", listOf(barbarianUnarmedDefence.name)),
-        Pair("third", listOf(rage.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(classFeaturesBarbarian.name) }),
+        Pair("second", { listOf(barbarianUnarmedDefence.name) }),
+        Pair("third", { listOf(rage.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -220,7 +207,7 @@ var recklessAttack: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Вы способны отбросить любую заботу о защите, чтобы атаковать ожесточённо и безрассудно. Когда вы совершаете первую атаку в свой ход, вы можете решить, что будете атаковать безрассудно. Решившись на это, вы в этом ходу совершаете рукопашные атаки оружием, использующие Силу, с преимуществом, но все броски атаки по вам до вашего следующего хода тоже совершаются с преимуществом.\n",
@@ -229,12 +216,13 @@ var recklessAttack: AbilityNode = AbilityNode(
 var dangerSense: AbilityNode = AbilityNode(
     name = "Чувство опасности",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Чувство опасности"] = "Вы получаете обострённое ощущение происходящего вокруг, помогающее вам избегать опасности.\n" +
-                "\n" +
-                "Вы совершаете с преимуществом спасброски Ловкости от эффектов, которые вы можете видеть, такие как заклинания и ловушки. Для использования этого преимущества вы не должны быть ослеплены, оглушены и не должны быть недееспособны.\n"
+        abilities.additionalAbilities["Чувство опасности"] =
+            "Вы получаете обострённое ощущение происходящего вокруг, помогающее вам избегать опасности.\n" +
+                    "\n" +
+                    "Вы совершаете с преимуществом спасброски Ловкости от эффектов, которые вы можете видеть, такие как заклинания и ловушки. Для использования этого преимущества вы не должны быть ослеплены, оглушены и не должны быть недееспособны.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Вы получаете обострённое ощущение происходящего вокруг, помогающее вам избегать опасности.\n" +
@@ -249,9 +237,9 @@ var barbarian2: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 7
         abilities
     },
-    alternatives =  mutableMapOf(
-        Pair("first", listOf(recklessAttack.name)),
-        Pair("second", listOf(dangerSense.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(recklessAttack.name) }),
+        Pair("second", { listOf(dangerSense.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -264,8 +252,8 @@ var primalPath: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(pathOfTheBerserker.name, pathOfTheZealot.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(pathOfTheBerserker.name, pathOfTheZealot.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -279,8 +267,8 @@ var barbarian3: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 7
         abilities
     },
-    alternatives =  mutableMapOf(
-        Pair("first", listOf(primalPath.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(primalPath.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -295,8 +283,8 @@ var barbarian4: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 7
         abilities
     },
-    alternatives =  mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -312,7 +300,7 @@ var barbarianUnarmedMovement = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     description = "Ваша скорость увеличивается на 10 футов, если вы не носите тяжёлые доспехи.\n",
     priority = Priority.DoLast
@@ -326,9 +314,9 @@ var barbarian5: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 7
         abilities
     },
-    alternatives =  mutableMapOf(
-        Pair("first", listOf(barbarianUnarmedMovement.name)),
-        Pair("second", listOf(extraAttack.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(barbarianUnarmedMovement.name) }),
+        Pair("second", { listOf(extraAttack.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -343,7 +331,7 @@ var barbarian6: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 7
         abilities
     },
-    alternatives =  mutableMapOf(
+    getAlternatives = mutableMapOf(
 
     ),
     requirements = { true },
@@ -355,12 +343,13 @@ var barbarian6: AbilityNode = AbilityNodeLevel(
 var feralInstinct: AbilityNode = AbilityNode(
     name = "Дикий инстинкт",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Дикий инстинкт"] = "Ваши инстинкты настолько обостряются, что вы совершаете с преимуществом броски инициативы.\n" +
-                "\n" +
-                "Кроме того, если вы были захвачены врасплох в начале боя, и вы не являетесь недееспособным, вы можете в первом ходу действовать нормальным образом, но только если вы впадёте в ярость раньше всех других действий в этом ходу.\n"
+        abilities.additionalAbilities["Дикий инстинкт"] =
+            "Ваши инстинкты настолько обостряются, что вы совершаете с преимуществом броски инициативы.\n" +
+                    "\n" +
+                    "Кроме того, если вы были захвачены врасплох в начале боя, и вы не являетесь недееспособным, вы можете в первом ходу действовать нормальным образом, но только если вы впадёте в ярость раньше всех других действий в этом ходу.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Ваши инстинкты настолько обостряются, что вы совершаете с преимуществом броски инициативы.\n" +
@@ -375,8 +364,8 @@ var barbarian7: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 7
         abilities
     },
-    alternatives =  mutableMapOf(
-        Pair("first", listOf(feralInstinct.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(feralInstinct.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -391,8 +380,8 @@ var barbarian8: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 7
         abilities
     },
-    alternatives =  mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -403,12 +392,15 @@ var barbarian8: AbilityNode = AbilityNodeLevel(
 var brutalCritical: AbilityNode = AbilityNode(
     name = "Сильный критический удар",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        if (abilities.level < 13) abilities.additionalAbilities["Сильный критический удар"] = "Вы можете бросать одну дополнительную кость урона оружия, когда определяете дополнительный урон от критического попадания рукопашной атакой.\n"
-        if ((abilities.level >= 13) && (abilities.level < 17)) abilities.additionalAbilities["Сильный критический удар"] = "Вы можете бросать две дополнительных кости урона оружия, когда определяете дополнительный урон от критического попадания рукопашной атакой.\n"
-        if (abilities.level >= 17) abilities.additionalAbilities["Сильный критический удар"] = "Вы можете бросать три дополнительных кости урона оружия, когда определяете дополнительный урон от критического попадания рукопашной атакой.\n"
+        if (abilities.level < 13) abilities.additionalAbilities["Сильный критический удар"] =
+            "Вы можете бросать одну дополнительную кость урона оружия, когда определяете дополнительный урон от критического попадания рукопашной атакой.\n"
+        if ((abilities.level >= 13) && (abilities.level < 17)) abilities.additionalAbilities["Сильный критический удар"] =
+            "Вы можете бросать две дополнительных кости урона оружия, когда определяете дополнительный урон от критического попадания рукопашной атакой.\n"
+        if (abilities.level >= 17) abilities.additionalAbilities["Сильный критический удар"] =
+            "Вы можете бросать три дополнительных кости урона оружия, когда определяете дополнительный урон от критического попадания рукопашной атакой.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Вы можете бросать одну дополнительную кость урона оружия, когда определяете дополнительный урон от критического попадания рукопашной атакой. Количество костей увеличивается до двух на 13-м уровне и трёх на 17-м уровне.\n"
@@ -422,8 +414,8 @@ var barbarian9: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 7
         abilities
     },
-    alternatives =  mutableMapOf(
-        Pair("first", listOf(brutalCritical.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(brutalCritical.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -438,7 +430,7 @@ var barbarian10: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 7
         abilities
     },
-    alternatives =  mutableMapOf(
+    getAlternatives = mutableMapOf(
 
     ),
     requirements = { true },
@@ -450,12 +442,13 @@ var barbarian10: AbilityNode = AbilityNodeLevel(
 var relentlessRage: AbilityNode = AbilityNode(
     name = "Непреклонная ярость",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Непреклонная ярость"] = "Ваша ярость позволяет вам сражаться, несмотря на тяжелейшие раны. Если ваши хиты опускаются до 0, когда вы в состоянии ярости, и вы не умерли сразу, вы можете совершить спасбросок Телосложения Сл 10. При успехе ваши хиты опускаются всего лишь до 1 хита.\n" +
-                "\n" +
-                "Каждый раз, когда вы используете это умение повторно, Сл спасброска повышается на 5. Когда вы закончите короткий либо продолжительный отдых, Сл снова равняется 10.\n"
+        abilities.additionalAbilities["Непреклонная ярость"] =
+            "Ваша ярость позволяет вам сражаться, несмотря на тяжелейшие раны. Если ваши хиты опускаются до 0, когда вы в состоянии ярости, и вы не умерли сразу, вы можете совершить спасбросок Телосложения Сл 10. При успехе ваши хиты опускаются всего лишь до 1 хита.\n" +
+                    "\n" +
+                    "Каждый раз, когда вы используете это умение повторно, Сл спасброска повышается на 5. Когда вы закончите короткий либо продолжительный отдых, Сл снова равняется 10.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Ваша ярость позволяет вам сражаться, несмотря на тяжелейшие раны. Если ваши хиты опускаются до 0, когда вы в состоянии ярости, и вы не умерли сразу, вы можете совершить спасбросок Телосложения Сл 10. При успехе ваши хиты опускаются всего лишь до 1 хита.\n" +
@@ -471,8 +464,8 @@ var barbarian11: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 7
         abilities
     },
-    alternatives =  mutableMapOf(
-        Pair("first", listOf(relentlessRage.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(relentlessRage.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -487,8 +480,8 @@ var barbarian12: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 7
         abilities
     },
-    alternatives =  mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -504,7 +497,7 @@ var barbarian13: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 7
         abilities
     },
-    alternatives =  mutableMapOf(
+    getAlternatives = mutableMapOf(
 
     ),
     requirements = { true },
@@ -520,7 +513,7 @@ var barbarian14: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 7
         abilities
     },
-    alternatives =  mutableMapOf(
+    getAlternatives = mutableMapOf(
 
     ),
     requirements = { true },
@@ -532,10 +525,11 @@ var barbarian14: AbilityNode = AbilityNodeLevel(
 var persistentRage: AbilityNode = AbilityNode(
     name = "Непрерывная ярость",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Непрерывная ярость"] = "Ваша ярость становится настолько сильной, что досрочно прекращается, только если вы теряете сознание или сами прекращаете её.\n"
+        abilities.additionalAbilities["Непрерывная ярость"] =
+            "Ваша ярость становится настолько сильной, что досрочно прекращается, только если вы теряете сознание или сами прекращаете её.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Ваша ярость становится настолько сильной, что досрочно прекращается, только если вы теряете сознание или сами прекращаете её.\n"
@@ -548,8 +542,8 @@ var barbarian15: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 7
         abilities
     },
-    alternatives =  mutableMapOf(
-        Pair("first", listOf(persistentRage.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(persistentRage.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -564,8 +558,8 @@ var barbarian16: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 7
         abilities
     },
-    alternatives =  mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -581,7 +575,7 @@ var barbarian17: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 7
         abilities
     },
-    alternatives =  mutableMapOf(
+    getAlternatives = mutableMapOf(
 
     ),
     requirements = { true },
@@ -593,10 +587,11 @@ var barbarian17: AbilityNode = AbilityNodeLevel(
 var indominatableMight: AbilityNode = AbilityNode(
     name = "Неукротимая мощь",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Неукротимая мощь"] = "Если результат вашей проверки Силы оказался меньше значения вашей Силы, то вы можете использовать значение характеристики вместо результата проверки.\n"
+        abilities.additionalAbilities["Неукротимая мощь"] =
+            "Если результат вашей проверки Силы оказался меньше значения вашей Силы, то вы можете использовать значение характеристики вместо результата проверки.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Если результат вашей проверки Силы оказался меньше значения вашей Силы, то вы можете использовать значение характеристики вместо результата проверки.\n"
@@ -609,8 +604,8 @@ var barbarian18: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 7
         abilities
     },
-    alternatives =  mutableMapOf(
-        Pair("first", listOf(indominatableMight.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(indominatableMight.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -625,8 +620,8 @@ var barbarian19: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 7
         abilities
     },
-    alternatives =  mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -641,7 +636,7 @@ var primalChampion: AbilityNode = AbilityNode(
         abilities.constitution += 4
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Вы становитесь воплощением силы дикой природы. Значение ваших Силы и Телосложения увеличивается на 4. Максимальное значение для этих характеристик теперь 24.\n"
@@ -655,8 +650,8 @@ var barbarian20: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 7
         abilities
     },
-    alternatives =  mutableMapOf(
-        Pair("first", listOf(primalChampion.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(primalChampion.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -665,41 +660,41 @@ var barbarian20: AbilityNode = AbilityNodeLevel(
 )
 
 var mapOfBarbarianAbilities: MutableMap<String, AbilityNode> = (
-    mutableMapOf(
-        Pair(classFeaturesBarbarian.name, classFeaturesBarbarian),
-        Pair(barbarianUnarmedDefence.name, barbarianUnarmedDefence),
-        Pair(rage.name, rage),
-        Pair(barbarian1.name, barbarian1),
-        Pair(recklessAttack.name, recklessAttack),
-        Pair(dangerSense.name, dangerSense),
-        Pair(barbarian2.name, barbarian2),
-        Pair(primalPath.name, primalPath),
-        Pair(barbarian3.name, barbarian3),
-        Pair(barbarian4.name, barbarian4),
-        Pair(barbarianUnarmedMovement.name, barbarianUnarmedMovement),
-        Pair(barbarian5.name, barbarian5),
-        Pair(barbarian6.name, barbarian6),
-        Pair(feralInstinct.name, feralInstinct),
-        Pair(barbarian7.name, barbarian7),
-        Pair(barbarian8.name, barbarian8),
-        Pair(brutalCritical.name, brutalCritical),
-        Pair(barbarian9.name, barbarian9),
-        Pair(barbarian10.name, barbarian10),
-        Pair(relentlessRage.name, relentlessRage),
-        Pair(barbarian11.name, barbarian11),
-        Pair(barbarian12.name, barbarian12),
-        Pair(barbarian13.name, barbarian13),
-        Pair(barbarian14.name, barbarian14),
-        Pair(persistentRage.name, persistentRage),
-        Pair(barbarian15.name, barbarian15),
-        Pair(barbarian16.name, barbarian16),
-        Pair(barbarian17.name, barbarian17),
-        Pair(indominatableMight.name, indominatableMight),
-        Pair(barbarian18.name, barbarian18),
-        Pair(barbarian19.name, barbarian19),
-        Pair(primalChampion.name, primalChampion),
-        Pair(barbarian20.name, barbarian20),
-    )
-    + mapOfPathOfTheBerserkerAbilities
-    + mapOfPathOfTheZealotAbilities
-).toMutableMap()
+        mutableMapOf(
+            Pair(classFeaturesBarbarian.name, classFeaturesBarbarian),
+            Pair(barbarianUnarmedDefence.name, barbarianUnarmedDefence),
+            Pair(rage.name, rage),
+            Pair(barbarian1.name, barbarian1),
+            Pair(recklessAttack.name, recklessAttack),
+            Pair(dangerSense.name, dangerSense),
+            Pair(barbarian2.name, barbarian2),
+            Pair(primalPath.name, primalPath),
+            Pair(barbarian3.name, barbarian3),
+            Pair(barbarian4.name, barbarian4),
+            Pair(barbarianUnarmedMovement.name, barbarianUnarmedMovement),
+            Pair(barbarian5.name, barbarian5),
+            Pair(barbarian6.name, barbarian6),
+            Pair(feralInstinct.name, feralInstinct),
+            Pair(barbarian7.name, barbarian7),
+            Pair(barbarian8.name, barbarian8),
+            Pair(brutalCritical.name, brutalCritical),
+            Pair(barbarian9.name, barbarian9),
+            Pair(barbarian10.name, barbarian10),
+            Pair(relentlessRage.name, relentlessRage),
+            Pair(barbarian11.name, barbarian11),
+            Pair(barbarian12.name, barbarian12),
+            Pair(barbarian13.name, barbarian13),
+            Pair(barbarian14.name, barbarian14),
+            Pair(persistentRage.name, persistentRage),
+            Pair(barbarian15.name, barbarian15),
+            Pair(barbarian16.name, barbarian16),
+            Pair(barbarian17.name, barbarian17),
+            Pair(indominatableMight.name, indominatableMight),
+            Pair(barbarian18.name, barbarian18),
+            Pair(barbarian19.name, barbarian19),
+            Pair(primalChampion.name, primalChampion),
+            Pair(barbarian20.name, barbarian20),
+        )
+                + mapOfPathOfTheBerserkerAbilities
+                + mapOfPathOfTheZealotAbilities
+        ).toMutableMap()

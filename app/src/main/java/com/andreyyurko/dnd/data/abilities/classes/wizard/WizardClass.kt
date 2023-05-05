@@ -20,14 +20,14 @@ var classFeaturesWizard: AbilityNode = AbilityNode(
         abilities.weaponProficiency.add(Weapon.CrossbowLight)
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
             "skill1",
-            listOf(history.name, arcana.name, medicine.name, insight.name, investigation.name, religion.name)
+            { listOf(history.name, arcana.name, medicine.name, insight.name, investigation.name, religion.name) }
         ),
         Pair(
             "skill2",
-            listOf(history.name, arcana.name, medicine.name, insight.name, investigation.name, religion.name)
+            { listOf(history.name, arcana.name, medicine.name, insight.name, investigation.name, religion.name) }
         ),
     ),
     requirements = { abilities: CharacterInfo ->
@@ -68,10 +68,11 @@ var spellCastingWizard: AbilityNode = AbilityNode(
                 max((abilityToModifier(abilities.intelligence) + abilities.level), 1)
             this["Заклинания класса"]?.maxKnownCantripsCount = kotlin.math.min((abilities.level + 20) / 6, 5)
         }
-        abilities.additionalAbilities["Ритуальное колдовство"] = "Вы можете сотворить любое известное вам заклинание волшебника в качестве ритуала, если заклинание позволяет это.\n"
+        abilities.additionalAbilities["Ритуальное колдовство"] =
+            "Вы можете сотворить любое известное вам заклинание волшебника в качестве ритуала, если заклинание позволяет это.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Wizard
     },
@@ -127,7 +128,7 @@ var arcaneRecovery: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Вы знаете как восстанавливать часть магической энергии, изучая книгу заклинаний. Один раз в день, когда вы заканчиваете короткий отдых, вы можете восстановить часть использованных ячеек заклинаний. Ячейки заклинаний могут иметь суммарный уровень, который не превышает половину уровня вашего волшебника (округляя в большую сторону), и ни одна из ячеек не может быть шестого уровня или выше.\n" +
@@ -145,10 +146,10 @@ var wizard1: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(classFeaturesWizard.name)),
-        Pair("second", listOf(spellCastingWizard.name)),
-        Pair("third", listOf(arcaneRecovery.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(classFeaturesWizard.name) }),
+        Pair("second", { listOf(spellCastingWizard.name) }),
+        Pair("third", { listOf(arcaneRecovery.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -161,8 +162,8 @@ var arcaneTradition: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(schoolOfDivination.name, schoolOfConjuration.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(schoolOfDivination.name, schoolOfConjuration.name) })
     ),
     requirements = { true },
     description = "Вы выбираете магическую традицию, определяющую вашу магическую практику. Подробнее обо всех традициях можно прочесть в конце описания класса.\n" +
@@ -178,8 +179,8 @@ var wizard2: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(arcaneTradition.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(arcaneTradition.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -195,7 +196,7 @@ var wizard3: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "3-й уровень, способности волшебника",
@@ -210,8 +211,8 @@ var wizard4: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -228,7 +229,7 @@ var wizard5: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "5-й уровень, способности волшебника",
@@ -243,7 +244,7 @@ var wizard6: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "6-й уровень, способности волшебника",
@@ -258,7 +259,7 @@ var wizard7: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "7-й уровень, способности волшебника",
@@ -273,8 +274,8 @@ var wizard8: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -291,7 +292,7 @@ var wizard9: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "9-й уровень, способности волшебника",
@@ -306,7 +307,7 @@ var wizard10: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "10-й уровень, способности волшебника",
@@ -321,7 +322,7 @@ var wizard11: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "11-й уровень, способности волшебника",
@@ -336,8 +337,8 @@ var wizard12: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -360,7 +361,7 @@ var wizard13: AbilityNode = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "13-й уровень, способности волшебника",
@@ -375,7 +376,7 @@ var wizard14: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "14-й уровень, способности волшебника",
@@ -396,7 +397,7 @@ var wizard15: AbilityNode = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "15-й уровень, способности волшебника",
@@ -411,8 +412,8 @@ var wizard16: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -435,7 +436,7 @@ var wizard17: AbilityNode = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "17-й уровень, способности волшебника",
@@ -451,7 +452,7 @@ var spellMastery: AbilityNode = AbilityNode(
                     "Потратив 8 часов на обучение, вы можете изменить одно или оба эти заклинания по своему усмотрению на заклинания тех же уровней.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Вы достигаете такого мастерства в отношении некоторых заклинаний, что можете накладывать их неограниченное количество раз. Выберите одно заклинание волшебника 1-го уровня и одно заклинание волшебника 2-го уровня, которые есть в вашей книге заклинаний. Вы можете накладывать эти заклинания без увеличения их уровня, не тратя ячейки заклинаний, при условии, что вы их подготовили. Если вы хотите увеличить уровень этих заклинаний, вы должны потратить ячейку заклинаний как обычно.\n" +
@@ -471,8 +472,8 @@ var wizard18: AbilityNode = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(spellMastery.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(spellMastery.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -492,8 +493,8 @@ var wizard19: AbilityNode = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -515,7 +516,7 @@ var signatureSpells: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Вы получаете власть над двумя мощными заклинаниями и можете накладывать их без усилий. Выберите два заклинания волшебника 3-го уровня из своей книги заклинаний в качестве фирменных заклинаний. Для вас эти заклинания всегда считаются подготовленными, они не учитываются в количестве подготовленных заклинаний, и вы можете наложить каждое из этих заклинаний 3-го уровня, не тратя ячейку заклинаний. Когда вы так поступаете, вы не можете наложить их повторно таким же образом, пока не закончите короткий или продолжительный отдых.\n" +
@@ -535,8 +536,8 @@ var wizard20: AbilityNode = AbilityNodeLevel(
         }
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(signatureSpells.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(signatureSpells.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),

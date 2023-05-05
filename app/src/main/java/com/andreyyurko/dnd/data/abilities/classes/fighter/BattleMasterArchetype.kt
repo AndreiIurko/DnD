@@ -1,22 +1,6 @@
 package com.andreyyurko.dnd.data.abilities.classes.fighter
 
-import com.andreyyurko.dnd.data.abilities.other.alchemistsSupplies
-import com.andreyyurko.dnd.data.abilities.other.brewersSupplies
-import com.andreyyurko.dnd.data.abilities.other.calligraphersSupplies
-import com.andreyyurko.dnd.data.abilities.other.carpentersTools
-import com.andreyyurko.dnd.data.abilities.other.cartographersTools
-import com.andreyyurko.dnd.data.abilities.other.cobblersTools
-import com.andreyyurko.dnd.data.abilities.other.cooksUtensils
-import com.andreyyurko.dnd.data.abilities.other.glassblowersTools
-import com.andreyyurko.dnd.data.abilities.other.jewelersTools
-import com.andreyyurko.dnd.data.abilities.other.leatherworkersTools
-import com.andreyyurko.dnd.data.abilities.other.masonsTools
-import com.andreyyurko.dnd.data.abilities.other.paintersSupplies
-import com.andreyyurko.dnd.data.abilities.other.pottersTools
-import com.andreyyurko.dnd.data.abilities.other.smithsTools
-import com.andreyyurko.dnd.data.abilities.other.tinkersTools
-import com.andreyyurko.dnd.data.abilities.other.weaversTools
-import com.andreyyurko.dnd.data.abilities.other.woodcarversTools
+import com.andreyyurko.dnd.data.abilities.other.*
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
@@ -34,7 +18,7 @@ var evasiveFootworkManeuver = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
@@ -59,7 +43,7 @@ var lungingAttackManeuver = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
@@ -84,7 +68,7 @@ var maneuveringAttackManeuver = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
@@ -109,7 +93,7 @@ var menacingAttackManeuver = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
@@ -134,7 +118,7 @@ var feintingAttackManeuver = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
@@ -159,7 +143,7 @@ var disarmingAttackManeuver = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
@@ -184,7 +168,7 @@ var tripAttackManeuver = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
@@ -209,7 +193,7 @@ var riposteManeuver = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
@@ -234,7 +218,7 @@ var distractingStrikeManeuver = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
@@ -259,7 +243,7 @@ var parryManeuver = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
@@ -284,7 +268,7 @@ var goadingAttackManeuver = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
@@ -309,7 +293,7 @@ var rallyManeuver = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
@@ -334,7 +318,7 @@ var pushingAttackManeuver = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
@@ -359,7 +343,7 @@ var precisionAttackManeuver = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
@@ -384,7 +368,7 @@ var commanderStrikeManeuver = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
@@ -409,7 +393,7 @@ var sweepingAttackManeuver = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         var isValid = true
         for (action in abilities.actionsList) {
@@ -443,66 +427,72 @@ var combatSuperiority = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
-            "first", listOf(
-                evasiveFootworkManeuver.name,
-                commanderStrikeManeuver.name,
-                distractingStrikeManeuver.name,
-                disarmingAttackManeuver.name,
-                feintingAttackManeuver.name,
-                goadingAttackManeuver.name,
-                lungingAttackManeuver.name,
-                maneuveringAttackManeuver.name,
-                menacingAttackManeuver.name,
-                parryManeuver.name,
-                pushingAttackManeuver.name,
-                precisionAttackManeuver.name,
-                rallyManeuver.name,
-                riposteManeuver.name,
-                sweepingAttackManeuver.name,
-                tripAttackManeuver.name
-            )
+            "first", {
+                listOf(
+                    evasiveFootworkManeuver.name,
+                    commanderStrikeManeuver.name,
+                    distractingStrikeManeuver.name,
+                    disarmingAttackManeuver.name,
+                    feintingAttackManeuver.name,
+                    goadingAttackManeuver.name,
+                    lungingAttackManeuver.name,
+                    maneuveringAttackManeuver.name,
+                    menacingAttackManeuver.name,
+                    parryManeuver.name,
+                    pushingAttackManeuver.name,
+                    precisionAttackManeuver.name,
+                    rallyManeuver.name,
+                    riposteManeuver.name,
+                    sweepingAttackManeuver.name,
+                    tripAttackManeuver.name
+                )
+            }
         ),
         Pair(
-            "second", listOf(
-                evasiveFootworkManeuver.name,
-                commanderStrikeManeuver.name,
-                distractingStrikeManeuver.name,
-                disarmingAttackManeuver.name,
-                feintingAttackManeuver.name,
-                goadingAttackManeuver.name,
-                lungingAttackManeuver.name,
-                maneuveringAttackManeuver.name,
-                menacingAttackManeuver.name,
-                parryManeuver.name,
-                pushingAttackManeuver.name,
-                precisionAttackManeuver.name,
-                rallyManeuver.name,
-                riposteManeuver.name,
-                sweepingAttackManeuver.name,
-                tripAttackManeuver.name
-            )
+            "second", {
+                listOf(
+                    evasiveFootworkManeuver.name,
+                    commanderStrikeManeuver.name,
+                    distractingStrikeManeuver.name,
+                    disarmingAttackManeuver.name,
+                    feintingAttackManeuver.name,
+                    goadingAttackManeuver.name,
+                    lungingAttackManeuver.name,
+                    maneuveringAttackManeuver.name,
+                    menacingAttackManeuver.name,
+                    parryManeuver.name,
+                    pushingAttackManeuver.name,
+                    precisionAttackManeuver.name,
+                    rallyManeuver.name,
+                    riposteManeuver.name,
+                    sweepingAttackManeuver.name,
+                    tripAttackManeuver.name
+                )
+            }
         ),
         Pair(
-            "third", listOf(
-                evasiveFootworkManeuver.name,
-                commanderStrikeManeuver.name,
-                distractingStrikeManeuver.name,
-                disarmingAttackManeuver.name,
-                feintingAttackManeuver.name,
-                goadingAttackManeuver.name,
-                lungingAttackManeuver.name,
-                maneuveringAttackManeuver.name,
-                menacingAttackManeuver.name,
-                parryManeuver.name,
-                pushingAttackManeuver.name,
-                precisionAttackManeuver.name,
-                rallyManeuver.name,
-                riposteManeuver.name,
-                sweepingAttackManeuver.name,
-                tripAttackManeuver.name
-            )
+            "third", {
+                listOf(
+                    evasiveFootworkManeuver.name,
+                    commanderStrikeManeuver.name,
+                    distractingStrikeManeuver.name,
+                    disarmingAttackManeuver.name,
+                    feintingAttackManeuver.name,
+                    goadingAttackManeuver.name,
+                    lungingAttackManeuver.name,
+                    maneuveringAttackManeuver.name,
+                    menacingAttackManeuver.name,
+                    parryManeuver.name,
+                    pushingAttackManeuver.name,
+                    precisionAttackManeuver.name,
+                    rallyManeuver.name,
+                    riposteManeuver.name,
+                    sweepingAttackManeuver.name,
+                    tripAttackManeuver.name
+                )
+            }
         ),
     ),
     requirements = { abilities: CharacterInfo ->
@@ -524,28 +514,30 @@ var combatSuperiority = AbilityNode(
 var studentOfWar = AbilityNode(
     name = "Ученик войны",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
             "tool",
-            listOf(
-                alchemistsSupplies.name,
-                brewersSupplies.name,
-                calligraphersSupplies.name,
-                carpentersTools.name,
-                cartographersTools.name,
-                cobblersTools.name,
-                cooksUtensils.name,
-                glassblowersTools.name,
-                jewelersTools.name,
-                leatherworkersTools.name,
-                masonsTools.name,
-                paintersSupplies.name,
-                pottersTools.name,
-                smithsTools.name,
-                tinkersTools.name,
-                weaversTools.name,
-                woodcarversTools.name
-            )
+            {
+                listOf(
+                    alchemistsSupplies.name,
+                    brewersSupplies.name,
+                    calligraphersSupplies.name,
+                    carpentersTools.name,
+                    cartographersTools.name,
+                    cobblersTools.name,
+                    cooksUtensils.name,
+                    glassblowersTools.name,
+                    jewelersTools.name,
+                    leatherworkersTools.name,
+                    masonsTools.name,
+                    paintersSupplies.name,
+                    pottersTools.name,
+                    smithsTools.name,
+                    tinkersTools.name,
+                    weaversTools.name,
+                    woodcarversTools.name
+                )
+            }
         )
     ),
     requirements = { abilities: CharacterInfo ->
@@ -559,26 +551,28 @@ var combatSuperiorityImprovement1 = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
-            "first", listOf(
-                evasiveFootworkManeuver.name,
-                commanderStrikeManeuver.name,
-                distractingStrikeManeuver.name,
-                disarmingAttackManeuver.name,
-                feintingAttackManeuver.name,
-                goadingAttackManeuver.name,
-                lungingAttackManeuver.name,
-                maneuveringAttackManeuver.name,
-                menacingAttackManeuver.name,
-                parryManeuver.name,
-                pushingAttackManeuver.name,
-                precisionAttackManeuver.name,
-                rallyManeuver.name,
-                riposteManeuver.name,
-                sweepingAttackManeuver.name,
-                tripAttackManeuver.name
-            )
+            "first", {
+                listOf(
+                    evasiveFootworkManeuver.name,
+                    commanderStrikeManeuver.name,
+                    distractingStrikeManeuver.name,
+                    disarmingAttackManeuver.name,
+                    feintingAttackManeuver.name,
+                    goadingAttackManeuver.name,
+                    lungingAttackManeuver.name,
+                    maneuveringAttackManeuver.name,
+                    menacingAttackManeuver.name,
+                    parryManeuver.name,
+                    pushingAttackManeuver.name,
+                    precisionAttackManeuver.name,
+                    rallyManeuver.name,
+                    riposteManeuver.name,
+                    sweepingAttackManeuver.name,
+                    tripAttackManeuver.name
+                )
+            }
         )
     ),
     requirements = { abilities: CharacterInfo ->
@@ -592,26 +586,28 @@ var combatSuperiorityImprovement2 = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
-            "first", listOf(
-                evasiveFootworkManeuver.name,
-                commanderStrikeManeuver.name,
-                distractingStrikeManeuver.name,
-                disarmingAttackManeuver.name,
-                feintingAttackManeuver.name,
-                goadingAttackManeuver.name,
-                lungingAttackManeuver.name,
-                maneuveringAttackManeuver.name,
-                menacingAttackManeuver.name,
-                parryManeuver.name,
-                pushingAttackManeuver.name,
-                precisionAttackManeuver.name,
-                rallyManeuver.name,
-                riposteManeuver.name,
-                sweepingAttackManeuver.name,
-                tripAttackManeuver.name
-            )
+            "first", {
+                listOf(
+                    evasiveFootworkManeuver.name,
+                    commanderStrikeManeuver.name,
+                    distractingStrikeManeuver.name,
+                    disarmingAttackManeuver.name,
+                    feintingAttackManeuver.name,
+                    goadingAttackManeuver.name,
+                    lungingAttackManeuver.name,
+                    maneuveringAttackManeuver.name,
+                    menacingAttackManeuver.name,
+                    parryManeuver.name,
+                    pushingAttackManeuver.name,
+                    precisionAttackManeuver.name,
+                    rallyManeuver.name,
+                    riposteManeuver.name,
+                    sweepingAttackManeuver.name,
+                    tripAttackManeuver.name
+                )
+            }
         )
     ),
     requirements = { abilities: CharacterInfo ->
@@ -625,26 +621,28 @@ var combatSuperiorityImprovement3 = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
-            "first", listOf(
-                evasiveFootworkManeuver.name,
-                commanderStrikeManeuver.name,
-                distractingStrikeManeuver.name,
-                disarmingAttackManeuver.name,
-                feintingAttackManeuver.name,
-                goadingAttackManeuver.name,
-                lungingAttackManeuver.name,
-                maneuveringAttackManeuver.name,
-                menacingAttackManeuver.name,
-                parryManeuver.name,
-                pushingAttackManeuver.name,
-                precisionAttackManeuver.name,
-                rallyManeuver.name,
-                riposteManeuver.name,
-                sweepingAttackManeuver.name,
-                tripAttackManeuver.name
-            )
+            "first", {
+                listOf(
+                    evasiveFootworkManeuver.name,
+                    commanderStrikeManeuver.name,
+                    distractingStrikeManeuver.name,
+                    disarmingAttackManeuver.name,
+                    feintingAttackManeuver.name,
+                    goadingAttackManeuver.name,
+                    lungingAttackManeuver.name,
+                    maneuveringAttackManeuver.name,
+                    menacingAttackManeuver.name,
+                    parryManeuver.name,
+                    pushingAttackManeuver.name,
+                    precisionAttackManeuver.name,
+                    rallyManeuver.name,
+                    riposteManeuver.name,
+                    sweepingAttackManeuver.name,
+                    tripAttackManeuver.name
+                )
+            }
         )
     ),
     requirements = { abilities: CharacterInfo ->
@@ -668,7 +666,7 @@ var knowYourEnemy = AbilityNode(
                     "    Количество уровней в классе Воин (если есть)\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 7 && abilities.characterClass == Classes.Fighter
     },
@@ -686,7 +684,7 @@ var knowYourEnemy = AbilityNode(
 var improvedCombatSuperiority = AbilityNode(
     name = "Улучшенное боевое превосходство",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 10 && abilities.characterClass == Classes.Fighter
     },
@@ -700,7 +698,7 @@ var relentless = AbilityNode(
             "Если вы совершаете бросок инициативы, не имея костей превосходства, вы получаете одну."
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 15 && abilities.characterClass == Classes.Fighter
     },
@@ -710,15 +708,15 @@ var relentless = AbilityNode(
 var battleMaster = AbilityNode(
     name = "Мастер боевых искусств",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(combatSuperiority.name)),
-        Pair("second", listOf(studentOfWar.name)),
-        Pair("third", listOf(knowYourEnemy.name)),
-        Pair("fourth", listOf(improvedCombatSuperiority.name)),
-        Pair("fifth", listOf(relentless.name)),
-        Pair("sixth", listOf(combatSuperiorityImprovement1.name)),
-        Pair("seventh", listOf(combatSuperiorityImprovement2.name)),
-        Pair("eighth", listOf(combatSuperiorityImprovement3.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(combatSuperiority.name) }),
+        Pair("second", { listOf(studentOfWar.name) }),
+        Pair("third", { listOf(knowYourEnemy.name) }),
+        Pair("fourth", { listOf(improvedCombatSuperiority.name) }),
+        Pair("fifth", { listOf(relentless.name) }),
+        Pair("sixth", { listOf(combatSuperiorityImprovement1.name) }),
+        Pair("seventh", { listOf(combatSuperiorityImprovement2.name) }),
+        Pair("eighth", { listOf(combatSuperiorityImprovement3.name) })
     ),
     requirements = { true },
     description = "",

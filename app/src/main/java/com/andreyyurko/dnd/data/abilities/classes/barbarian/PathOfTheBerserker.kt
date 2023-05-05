@@ -9,10 +9,11 @@ import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 var frenzy = AbilityNode(
     name = "Бешенство",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Бешенство"] = "Находясь в состоянии ярости, вы можете впасть в бешенство. В этом случае, пока ваша ярость не прекратилась, вы можете в каждый свой ход после текущего совершать бонусным действием одну рукопашную атаку оружием. После окончания ярости вы получаете одну степень истощения.\n"
+        abilities.additionalAbilities["Бешенство"] =
+            "Находясь в состоянии ярости, вы можете впасть в бешенство. В этом случае, пока ваша ярость не прекратилась, вы можете в каждый свой ход после текущего совершать бонусным действием одну рукопашную атаку оружием. После окончания ярости вы получаете одну степень истощения.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 3 && abilities.characterClass == Classes.Barbarian
     },
@@ -22,10 +23,11 @@ var frenzy = AbilityNode(
 var mindlessRage = AbilityNode(
     name = "Бездумная ярость",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Бездумная ярость"] = "Вы не можете быть испуганы или очарованы, пока находитесь в состоянии ярости. Если вы были испуганы или очарованы до того, как впали в состояние ярости, эти эффекты приостанавливаются до окончания вашей ярости.\n"
+        abilities.additionalAbilities["Бездумная ярость"] =
+            "Вы не можете быть испуганы или очарованы, пока находитесь в состоянии ярости. Если вы были испуганы или очарованы до того, как впали в состояние ярости, эти эффекты приостанавливаются до окончания вашей ярости.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 6 && abilities.characterClass == Classes.Barbarian
     },
@@ -46,7 +48,7 @@ var intimidatingPresence = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 10 && abilities.characterClass == Classes.Barbarian
     },
@@ -67,7 +69,7 @@ var retaliation = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 14 && abilities.characterClass == Classes.Barbarian
     },
@@ -77,11 +79,11 @@ var retaliation = AbilityNode(
 var pathOfTheBerserker = AbilityNode(
     name = "Путь берсерка",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(frenzy.name)),
-        Pair("second", listOf(mindlessRage.name)),
-        Pair("third", listOf(intimidatingPresence.name)),
-        Pair("fourth", listOf(retaliation.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(frenzy.name) }),
+        Pair("second", { listOf(mindlessRage.name) }),
+        Pair("third", { listOf(intimidatingPresence.name) }),
+        Pair("fourth", { listOf(retaliation.name) })
     ),
     requirements = { true },
     description = "",

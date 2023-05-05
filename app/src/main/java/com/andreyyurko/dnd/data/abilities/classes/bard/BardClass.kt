@@ -21,120 +21,132 @@ var classFeaturesBard: AbilityNode = AbilityNode(
         abilities.armorProficiency.add(ArmorProf.LightArmor)
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
             "musicalInstrument1",
-            listOf(
-                bagpipes.name,
-                drum.name,
-                dulcimer.name,
-                flute.name,
-                lute.name,
-                lyre.name,
-                horn.name,
-                panFlute.name,
-                shawm.name,
-                viol.name,
-            )
+            {
+                listOf(
+                    bagpipes.name,
+                    drum.name,
+                    dulcimer.name,
+                    flute.name,
+                    lute.name,
+                    lyre.name,
+                    horn.name,
+                    panFlute.name,
+                    shawm.name,
+                    viol.name,
+                )
+            }
         ),
         Pair(
             "musicalInstrument2",
-            listOf(
-                bagpipes.name,
-                drum.name,
-                dulcimer.name,
-                flute.name,
-                lute.name,
-                lyre.name,
-                horn.name,
-                panFlute.name,
-                shawm.name,
-                viol.name,
-            )
+            {
+                listOf(
+                    bagpipes.name,
+                    drum.name,
+                    dulcimer.name,
+                    flute.name,
+                    lute.name,
+                    lyre.name,
+                    horn.name,
+                    panFlute.name,
+                    shawm.name,
+                    viol.name,
+                )
+            }
         ),
         Pair(
             "musicalInstrument3",
-            listOf(
-                bagpipes.name,
-                drum.name,
-                dulcimer.name,
-                flute.name,
-                lute.name,
-                lyre.name,
-                horn.name,
-                panFlute.name,
-                shawm.name,
-                viol.name,
-            )
+            {
+                listOf(
+                    bagpipes.name,
+                    drum.name,
+                    dulcimer.name,
+                    flute.name,
+                    lute.name,
+                    lyre.name,
+                    horn.name,
+                    panFlute.name,
+                    shawm.name,
+                    viol.name,
+                )
+            }
         ),
         Pair(
             "skill1",
-            listOf(
-                acrobatics.name,
-                animalHandling.name,
-                arcana.name,
-                athletics.name,
-                deception.name,
-                history.name,
-                insight.name,
-                intimidation.name,
-                investigation.name,
-                medicine.name,
-                nature.name,
-                perception.name,
-                performance.name,
-                persuasion.name,
-                religion.name,
-                sleightOfHand.name,
-                stealth.name,
-                survival.name
-            )
+            {
+                listOf(
+                    acrobatics.name,
+                    animalHandling.name,
+                    arcana.name,
+                    athletics.name,
+                    deception.name,
+                    history.name,
+                    insight.name,
+                    intimidation.name,
+                    investigation.name,
+                    medicine.name,
+                    nature.name,
+                    perception.name,
+                    performance.name,
+                    persuasion.name,
+                    religion.name,
+                    sleightOfHand.name,
+                    stealth.name,
+                    survival.name
+                )
+            }
         ),
         Pair(
             "skill2",
-            listOf(
-                acrobatics.name,
-                animalHandling.name,
-                arcana.name,
-                athletics.name,
-                deception.name,
-                history.name,
-                insight.name,
-                intimidation.name,
-                investigation.name,
-                medicine.name,
-                nature.name,
-                perception.name,
-                performance.name,
-                persuasion.name,
-                religion.name,
-                sleightOfHand.name,
-                stealth.name,
-                survival.name
-            )
+            {
+                listOf(
+                    acrobatics.name,
+                    animalHandling.name,
+                    arcana.name,
+                    athletics.name,
+                    deception.name,
+                    history.name,
+                    insight.name,
+                    intimidation.name,
+                    investigation.name,
+                    medicine.name,
+                    nature.name,
+                    perception.name,
+                    performance.name,
+                    persuasion.name,
+                    religion.name,
+                    sleightOfHand.name,
+                    stealth.name,
+                    survival.name
+                )
+            }
         ),
         Pair(
             "skill3",
-            listOf(
-                acrobatics.name,
-                animalHandling.name,
-                arcana.name,
-                athletics.name,
-                deception.name,
-                history.name,
-                insight.name,
-                intimidation.name,
-                investigation.name,
-                medicine.name,
-                nature.name,
-                perception.name,
-                performance.name,
-                persuasion.name,
-                religion.name,
-                sleightOfHand.name,
-                stealth.name,
-                survival.name
-            )
+            {
+                listOf(
+                    acrobatics.name,
+                    animalHandling.name,
+                    arcana.name,
+                    athletics.name,
+                    deception.name,
+                    history.name,
+                    insight.name,
+                    intimidation.name,
+                    investigation.name,
+                    medicine.name,
+                    nature.name,
+                    perception.name,
+                    performance.name,
+                    persuasion.name,
+                    religion.name,
+                    sleightOfHand.name,
+                    stealth.name,
+                    survival.name
+                )
+            }
         ),
     ),
     requirements = { abilities: CharacterInfo ->
@@ -183,10 +195,11 @@ var spellCastingBard: AbilityNode = AbilityNode(
             if (abilities.level > 9)
                 this["Заклинания класса"]?.maxKnownCantripsCount = 4
         }
-        abilities.additionalAbilities["Ритуальное колдовство"] = "Вы можете сотворить любое известное вам заклинание барда в качестве ритуала, если заклинание позволяет это.\n"
+        abilities.additionalAbilities["Ритуальное колдовство"] =
+            "Вы можете сотворить любое известное вам заклинание барда в качестве ритуала, если заклинание позволяет это.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Bard
     },
@@ -252,7 +265,7 @@ var bardicInspiration: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Своими словами или музыкой вы можете вдохновлять других. Для этого вы должны бонусным действием выбрать одно существо, отличное от вас, в пределах 60 футов, которое может вас слышать. Это существо получает кость бардовского вдохновения — к6.\n" +
@@ -274,10 +287,10 @@ var bard1: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 8
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(classFeaturesBard.name)),
-        Pair("second", listOf(spellCastingBard.name)),
-        Pair("third", listOf(bardicInspiration.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(classFeaturesBard.name) }),
+        Pair("second", { listOf(spellCastingBard.name) }),
+        Pair("third", { listOf(bardicInspiration.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -293,7 +306,7 @@ var jackOfAllTrades: AbilityNode = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Вы можете добавлять половину бонуса мастерства, округлённую в меньшую сторону, ко всем проверкам характеристики, куда этот бонус еще не включён.\n"
@@ -313,7 +326,7 @@ var songOfRest: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Вы с помощью успокаивающей музыки или речей можете помочь своим раненым союзникам восстановить их силы во время короткого отдыха. Если вы или любые союзные существа, способные слышать ваше исполнение, восстанавливаете хиты в конце короткого отдыха, используя Кости Хитов, каждое потратившее Кость Хитов существо восстанавливает дополнительно 1к6 хитов.\n" +
@@ -329,9 +342,9 @@ var bard2: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(jackOfAllTrades.name)),
-        Pair("second", listOf(songOfRest.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(jackOfAllTrades.name) }),
+        Pair("second", { listOf(songOfRest.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -344,8 +357,8 @@ var bardCollege: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("college", listOf(collegeOfLore.name, collegeOfWhispers.name))
+    getAlternatives = mutableMapOf(
+        Pair("college", { listOf(collegeOfLore.name, collegeOfWhispers.name) })
     ),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Bard
@@ -358,52 +371,56 @@ var expertise: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
             "expertise1",
-            listOf(
-                acrobaticsExpertise.name,
-                animalHandlingExpertise.name,
-                arcanaExpertise.name,
-                athleticsExpertise.name,
-                deceptionExpertise.name,
-                historyExpertise.name,
-                insightExpertise.name,
-                intimidationExpertise.name,
-                investigationExpertise.name,
-                medicineExpertise.name,
-                natureExpertise.name,
-                perceptionExpertise.name,
-                performanceExpertise.name,
-                persuasionExpertise.name,
-                religionExpertise.name,
-                sleightOfHandExpertise.name,
-                stealthExpertise.name,
-                survivalExpertise.name
-            )
+            {
+                listOf(
+                    acrobaticsExpertise.name,
+                    animalHandlingExpertise.name,
+                    arcanaExpertise.name,
+                    athleticsExpertise.name,
+                    deceptionExpertise.name,
+                    historyExpertise.name,
+                    insightExpertise.name,
+                    intimidationExpertise.name,
+                    investigationExpertise.name,
+                    medicineExpertise.name,
+                    natureExpertise.name,
+                    perceptionExpertise.name,
+                    performanceExpertise.name,
+                    persuasionExpertise.name,
+                    religionExpertise.name,
+                    sleightOfHandExpertise.name,
+                    stealthExpertise.name,
+                    survivalExpertise.name
+                )
+            }
         ),
         Pair(
             "expertise2",
-            listOf(
-                acrobaticsExpertise.name,
-                animalHandlingExpertise.name,
-                arcanaExpertise.name,
-                athleticsExpertise.name,
-                deceptionExpertise.name,
-                historyExpertise.name,
-                insightExpertise.name,
-                intimidationExpertise.name,
-                investigationExpertise.name,
-                medicineExpertise.name,
-                natureExpertise.name,
-                perceptionExpertise.name,
-                performanceExpertise.name,
-                persuasionExpertise.name,
-                religionExpertise.name,
-                sleightOfHandExpertise.name,
-                stealthExpertise.name,
-                survivalExpertise.name
-            )
+            {
+                listOf(
+                    acrobaticsExpertise.name,
+                    animalHandlingExpertise.name,
+                    arcanaExpertise.name,
+                    athleticsExpertise.name,
+                    deceptionExpertise.name,
+                    historyExpertise.name,
+                    insightExpertise.name,
+                    intimidationExpertise.name,
+                    investigationExpertise.name,
+                    medicineExpertise.name,
+                    natureExpertise.name,
+                    perceptionExpertise.name,
+                    performanceExpertise.name,
+                    persuasionExpertise.name,
+                    religionExpertise.name,
+                    sleightOfHandExpertise.name,
+                    stealthExpertise.name,
+                    survivalExpertise.name
+                )
+            }
         )
     ),
     requirements = { true },
@@ -419,9 +436,9 @@ var bard3: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(bardCollege.name)),
-        Pair("second", listOf(expertise.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(bardCollege.name) }),
+        Pair("second", { listOf(expertise.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -437,8 +454,8 @@ var bard4: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -453,7 +470,7 @@ var fontOfInspiration: AbilityNode = AbilityNode(
             "Вы восстанавливаете истраченные вдохновения барда и после короткого и после продолжительного отдыха.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Вы восстанавливаете истраченные вдохновения барда и после короткого и после продолжительного отдыха.\n"
@@ -468,8 +485,8 @@ var bard5: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(fontOfInspiration.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(fontOfInspiration.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -489,7 +506,7 @@ var contercharm: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Вы получаете возможность использовать звуки или слова силы для разрушения воздействующих на разум эффектов. Вы можете действием начать исполнение, которое продлится до конца вашего следующего хода. В течение этого времени вы и все дружественные существа в пределах 30 футов от вас совершают спасброски от запугивания и очарования с преимуществом. Чтобы получить это преимущество, существа должны слышать вас. Исполнение заканчивается преждевременно, если вы оказываетесь недееспособны, теряете способность говорить, или прекращаете исполнение добровольно (на это не требуется действие).\n"
@@ -503,7 +520,7 @@ var bard6: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "6-й уровень, способности барда",
@@ -518,7 +535,7 @@ var bard7: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "7-й уровень, способности барда",
@@ -533,8 +550,8 @@ var bard8: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -551,7 +568,7 @@ var bard9: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "9-й уровень, способности барда",
@@ -566,9 +583,9 @@ var bard10: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(expertise.name)),
-        //Pair("second", listOf(magicalSecrets.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(expertise.name) }),
+        //Pair("second", { listOf(magicalSecrets.name)})
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -584,7 +601,7 @@ var bard11: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "11-й уровень, способности барда",
@@ -599,8 +616,8 @@ var bard12: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -617,7 +634,7 @@ var bard13: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "13-й уровень, способности барда",
@@ -632,7 +649,7 @@ var bard14: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "14-й уровень, способности барда",
@@ -647,7 +664,7 @@ var bard15: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "15-й уровень, способности барда",
@@ -662,8 +679,8 @@ var bard16: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -680,7 +697,7 @@ var bard17: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "17-й уровень, способности барда",
@@ -695,8 +712,8 @@ var bard18: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        //Pair("first", listOf(spellMastery.name)),
+    getAlternatives = mutableMapOf(
+        //Pair("first", { listOf(spellMastery.name)}),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -712,8 +729,8 @@ var bard19: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -728,7 +745,7 @@ var superiorInspiration: AbilityNode = AbilityNode(
             "Если на момент броска инициативы у вас не осталось неиспользованных вдохновений, вы получаете одно.\n"
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Если на момент броска инициативы у вас не осталось неиспользованных вдохновений, вы получаете одно.\n"
@@ -742,8 +759,8 @@ var bard20: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(superiorInspiration.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(superiorInspiration.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),

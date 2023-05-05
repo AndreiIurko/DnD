@@ -1,6 +1,5 @@
 package com.andreyyurko.dnd.ui.showcharacterfragments.additionalinfo
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.andreyyurko.dnd.data.characterData.DamageType
 import com.andreyyurko.dnd.data.characterData.Languages

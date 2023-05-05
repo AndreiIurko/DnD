@@ -10,7 +10,7 @@ var commonLanguage: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Common)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Common)
     },
@@ -24,7 +24,7 @@ var elvishLanguage: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Elvish)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Elvish)
     },
@@ -38,7 +38,7 @@ var dwarvishLanguage: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Dwarvish)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Dwarvish)
     },
@@ -52,7 +52,7 @@ var giantLanguage: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Giant)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Giant)
     },
@@ -66,7 +66,7 @@ var gnomishLanguage: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Gnomish)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Gnomish)
     },
@@ -80,7 +80,7 @@ var goblinLanguage: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Goblin)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Goblin)
     },
@@ -94,7 +94,7 @@ var halflingLanguage: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Halfling)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Halfling)
     },
@@ -108,7 +108,7 @@ var orcLanguage: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Orc)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Orc)
     },
@@ -122,7 +122,7 @@ var abyssalLanguage: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Abyssal)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Abyssal)
     },
@@ -136,7 +136,7 @@ var celestialLanguage: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Celestial)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Celestial)
     },
@@ -150,7 +150,7 @@ var draconicLanguage: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Draconic)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Draconic)
     },
@@ -164,7 +164,7 @@ var deepSpeechLanguage: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.DeepSpeech)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.DeepSpeech)
     },
@@ -178,7 +178,7 @@ var infernalLanguage: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Infernal)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Infernal)
     },
@@ -192,7 +192,7 @@ var primordialLanguage: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Primordial)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Primordial)
     },
@@ -206,7 +206,7 @@ var sylvanLanguage: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Sylvan)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Sylvan)
     },
@@ -220,7 +220,7 @@ var undercommonLanguage: AbilityNode = AbilityNode(
         abilities.languageProficiency.add(Languages.Undercommon)
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         !abilities.languageProficiency.contains(Languages.Undercommon)
     },

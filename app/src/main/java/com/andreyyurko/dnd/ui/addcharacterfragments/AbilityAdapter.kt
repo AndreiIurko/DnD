@@ -47,11 +47,11 @@ class AbilityAdapter : RecyclerView.Adapter<AbilityAdapter.ViewHolder>() {
         // search all available abilities and for each attach to card button
         // button allows to show popup menu on click with choices
         // so we need extract list of choices and setup popup menu
-        if (abilityCAN.data.alternatives.isNotEmpty()) {
+        if (abilityCAN.data.getAlternatives.isNotEmpty()) {
             // this line makes this ability view not reusable
             holder.parent.setHasTransientState(true)
 
-            for (optionName in abilityCAN.data.alternatives.keys) {
+            for (optionName in abilityCAN.data.getAlternatives.keys) {
                 // extract all available options
                 val optionsList = abilityCAN.showOptions(optionName)
 

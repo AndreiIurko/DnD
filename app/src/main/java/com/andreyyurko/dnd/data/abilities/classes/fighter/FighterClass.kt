@@ -20,9 +20,10 @@ var classFeaturesFighter: AbilityNode = AbilityNode(
         abilities.armorProficiency.add(ArmorProf.Shield)
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
-            "skill1",
+            "skill1"
+        ) {
             listOf(
                 acrobatics.name,
                 athletics.name,
@@ -33,9 +34,10 @@ var classFeaturesFighter: AbilityNode = AbilityNode(
                 insight.name,
                 animalHandling.name
             )
-        ),
+        },
         Pair(
-            "skill2",
+            "skill2"
+        ) {
             listOf(
                 acrobatics.name,
                 athletics.name,
@@ -46,7 +48,7 @@ var classFeaturesFighter: AbilityNode = AbilityNode(
                 insight.name,
                 animalHandling.name
             )
-        )
+        }
     ),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Fighter
@@ -72,8 +74,8 @@ var fightingStyle: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("style", mapOfFightingStyles.keys.toList())
+    getAlternatives = mutableMapOf(
+        Pair("style", { mapOfFightingStyles.keys.toList() })
     ),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Fighter
@@ -99,7 +101,7 @@ var secondWind: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Fighter
     },
@@ -117,10 +119,10 @@ var fighter1: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 10
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(classFeaturesFighter.name)),
-        Pair("second", listOf(fightingStyle.name)),
-        Pair("third", listOf(secondWind.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(classFeaturesFighter.name) }),
+        Pair("second", { listOf(fightingStyle.name) }),
+        Pair("third", { listOf(secondWind.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -154,7 +156,7 @@ var actionSurge: AbilityNode = AbilityNode(
 
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Fighter
     },
@@ -168,8 +170,8 @@ var fighter2: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(actionSurge.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(actionSurge.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -182,8 +184,8 @@ var martialArchetype: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("archetype", listOf(battleMaster.name, champion.name))
+    getAlternatives = mutableMapOf(
+        Pair("archetype", { listOf(battleMaster.name, champion.name) })
     ),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Fighter
@@ -198,8 +200,8 @@ var fighter3: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(martialArchetype.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(martialArchetype.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -214,8 +216,8 @@ var fighter4: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -237,7 +239,7 @@ var extraAttackFighter: AbilityNode = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Если вы в свой ход совершаете действие Атака, вы можете совершить две атаки вместо одной.\n" +
@@ -254,8 +256,8 @@ var fighter5: AbilityNodeLevel = AbilityNodeLevel(
         abilities.proficiencyBonus += 1
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(extraAttackFighter.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(extraAttackFighter.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -270,8 +272,8 @@ var fighter6: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -286,7 +288,7 @@ var fighter7: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "7-й уровень, способности воина",
@@ -300,8 +302,8 @@ var fighter8: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -342,7 +344,7 @@ var indomitable: AbilityNode = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "Вы можете перебросить проваленный спасбросок и должны использовать новый результат. После этого вы можете повторно использовать это умение только после завершения продолжительного отдыха.\n" +
@@ -359,8 +361,8 @@ var fighter9: AbilityNodeLevel = AbilityNodeLevel(
         abilities.proficiencyBonus += 1
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(indomitable.name))
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(indomitable.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -375,7 +377,7 @@ var fighter10: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "10-й уровень, способности воина",
@@ -389,7 +391,7 @@ var fighter11: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "11-й уровень, способности воина",
@@ -403,8 +405,8 @@ var fighter12: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -420,7 +422,7 @@ var fighter13: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "13-й уровень, способности воина",
@@ -434,8 +436,8 @@ var fighter14: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -450,7 +452,7 @@ var fighter15: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "15-й уровень, способности воина",
@@ -464,8 +466,8 @@ var fighter16: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -481,7 +483,7 @@ var fighter17: AbilityNodeLevel = AbilityNodeLevel(
         abilities.proficiencyBonus += 1
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "17-й уровень, способности воина",
@@ -495,7 +497,7 @@ var fighter18: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "18-й уровень, способности воина",
@@ -509,8 +511,8 @@ var fighter19: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -525,7 +527,7 @@ var fighter20: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "20-й уровень, способности воина",

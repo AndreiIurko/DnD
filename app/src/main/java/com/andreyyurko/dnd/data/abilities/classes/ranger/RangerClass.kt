@@ -20,45 +20,51 @@ var classFeaturesRanger: AbilityNode = AbilityNode(
         abilities.armorProficiency.add(ArmorProf.Shield)
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
             "skill1",
-            listOf(
-                athletics.name,
-                perception.name,
-                survival.name,
-                nature.name,
-                insight.name,
-                investigation.name,
-                stealth.name,
-                animalHandling.name
-            )
+            {
+                listOf(
+                    athletics.name,
+                    perception.name,
+                    survival.name,
+                    nature.name,
+                    insight.name,
+                    investigation.name,
+                    stealth.name,
+                    animalHandling.name
+                )
+            }
         ),
         Pair(
             "skill2",
-            listOf(
-                athletics.name,
-                perception.name,
-                survival.name,
-                nature.name,
-                insight.name,
-                investigation.name,
-                stealth.name,
-                animalHandling.name
-            )
+            {
+                listOf(
+                    athletics.name,
+                    perception.name,
+                    survival.name,
+                    nature.name,
+                    insight.name,
+                    investigation.name,
+                    stealth.name,
+                    animalHandling.name
+                )
+            }
         ),
         Pair(
             "skill3",
-            listOf(
-                athletics.name,
-                perception.name,
-                survival.name,
-                nature.name,
-                insight.name,
-                investigation.name,
-                stealth.name,
-                animalHandling.name
-            )
+            {
+                listOf(
+                    athletics.name,
+                    perception.name,
+                    survival.name,
+                    nature.name,
+                    insight.name,
+                    investigation.name,
+                    stealth.name,
+                    animalHandling.name
+                )
+            }
         )
     ),
     requirements = { abilities: CharacterInfo ->
@@ -91,8 +97,8 @@ var fightingStyleRanger: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("style", listOf(dueling.name, defense.name, twoWeaponFighting.name, archery.name))
+    getAlternatives = mutableMapOf(
+        Pair("style", { listOf(dueling.name, defense.name, twoWeaponFighting.name, archery.name) })
     ),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Ranger
@@ -110,8 +116,8 @@ var ranger1: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 10
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(classFeaturesRanger.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(classFeaturesRanger.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -126,8 +132,8 @@ var ranger2: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(fightingStyleRanger.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(fightingStyleRanger.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -140,8 +146,8 @@ var rangerConclave: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("archetype", listOf())
+    getAlternatives = mutableMapOf(
+        Pair("archetype", { listOf() })
     ),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Ranger
@@ -156,8 +162,8 @@ var ranger3: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(rangerConclave.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(rangerConclave.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -172,8 +178,8 @@ var ranger4: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -189,8 +195,8 @@ var ranger5: AbilityNodeLevel = AbilityNodeLevel(
         abilities.proficiencyBonus += 1
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(extraAttack.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(extraAttack.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -205,7 +211,7 @@ var ranger6: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -220,7 +226,7 @@ var ranger7: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "7-й уровень, способности следопыта",
@@ -234,8 +240,8 @@ var ranger8: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -251,8 +257,8 @@ var ranger9: AbilityNodeLevel = AbilityNodeLevel(
         abilities.proficiencyBonus += 1
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf())
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf() })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -267,7 +273,7 @@ var ranger10: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "10-й уровень, способности следопыта",
@@ -281,7 +287,7 @@ var ranger11: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "11-й уровень, способности следопыта",
@@ -295,8 +301,8 @@ var ranger12: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -312,7 +318,7 @@ var ranger13: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "13-й уровень, способности следопыта",
@@ -326,7 +332,7 @@ var ranger14: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -341,7 +347,7 @@ var ranger15: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "15-й уровень, способности следопыта",
@@ -355,8 +361,8 @@ var ranger16: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -372,7 +378,7 @@ var ranger17: AbilityNodeLevel = AbilityNodeLevel(
         abilities.proficiencyBonus += 1
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "17-й уровень, способности следопыта",
@@ -386,7 +392,7 @@ var ranger18: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "18-й уровень, способности следопыта",
@@ -400,8 +406,8 @@ var ranger19: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("first", listOf(abilityScoreImprovement.name)),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(abilityScoreImprovement.name) }),
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -416,7 +422,7 @@ var ranger20: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "20-й уровень, способности следопыта",
