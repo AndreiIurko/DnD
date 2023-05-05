@@ -114,7 +114,7 @@ var ranger1: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(classFeaturesRanger.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "1-й уровень, способности следопыта",
     next_level = "Следопыт_2",
 )
@@ -130,7 +130,7 @@ var ranger2: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(fightingStyleRanger.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "2-й уровень, способности следопыта",
     next_level = "Следопыт_3",
 )
@@ -160,7 +160,7 @@ var ranger3: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(rangerConclave.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "3-й уровень, способности следопыта",
     next_level = "Следопыт_4",
 )
@@ -176,7 +176,7 @@ var ranger4: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "4-й уровень, способности следопыта",
     next_level = "Следопыт_5",
 )
@@ -193,7 +193,7 @@ var ranger5: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(extraAttack.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "5-й уровень, способности следопыта",
     next_level = "Следопыт_6",
 )
@@ -208,7 +208,7 @@ var ranger6: AbilityNodeLevel = AbilityNodeLevel(
     alternatives = mutableMapOf(
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "6-й уровень, способности следопыта",
     next_level = "Следопыт_7",
 )
@@ -222,7 +222,7 @@ var ranger7: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "7-й уровень, способности следопыта",
     next_level = "Следопыт_8",
 )
@@ -238,7 +238,7 @@ var ranger8: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "8-й уровень, способности следопыта",
     next_level = "Следопыт_9",
 )
@@ -255,7 +255,7 @@ var ranger9: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf())
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "9-й уровень, способности следопыта",
     next_level = "Следопыт_10",
 )
@@ -269,7 +269,7 @@ var ranger10: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "10-й уровень, способности следопыта",
     next_level = "Следопыт_11",
 )
@@ -283,7 +283,7 @@ var ranger11: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "11-й уровень, способности следопыта",
     next_level = "Следопыт_12",
 )
@@ -299,7 +299,7 @@ var ranger12: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "12-й уровень, способности следопыта",
     next_level = "Следопыт_13",
 )
@@ -314,7 +314,7 @@ var ranger13: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "13-й уровень, способности следопыта",
     next_level = "Следопыт_14",
 )
@@ -329,7 +329,7 @@ var ranger14: AbilityNodeLevel = AbilityNodeLevel(
     alternatives = mutableMapOf(
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "14-й уровень, способности следопыта",
     next_level = "Следопыт_15",
 )
@@ -343,7 +343,7 @@ var ranger15: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "15-й уровень, способности следопыта",
     next_level = "Следопыт_16",
 )
@@ -359,7 +359,7 @@ var ranger16: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "16-й уровень, способности следопыта",
     next_level = "Следопыт_17",
 )
@@ -374,7 +374,7 @@ var ranger17: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "17-й уровень, способности следопыта",
     next_level = "Следопыт_18",
 )
@@ -388,7 +388,7 @@ var ranger18: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "18-й уровень, способности следопыта",
     next_level = "Следопыт_19",
 )
@@ -404,7 +404,7 @@ var ranger19: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "19-й уровень, способности следопыта",
     next_level = "Следопыт_20",
 )
@@ -418,7 +418,7 @@ var ranger20: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "20-й уровень, способности следопыта",
     next_level = null,
 )

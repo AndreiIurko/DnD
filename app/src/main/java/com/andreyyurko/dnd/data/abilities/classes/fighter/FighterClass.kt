@@ -123,7 +123,7 @@ var fighter1: AbilityNodeLevel = AbilityNodeLevel(
         Pair("third", listOf(secondWind.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "1-й уровень, способности воина",
     next_level = "Воин_2",
 )
@@ -172,7 +172,7 @@ var fighter2: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(actionSurge.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "2-й уровень, способности воина",
     next_level = "Воин_3",
 )
@@ -202,7 +202,7 @@ var fighter3: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(martialArchetype.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "3-й уровень, способности воина",
     next_level = "Воин_4",
 )
@@ -218,13 +218,13 @@ var fighter4: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "4-й уровень, способности воина",
     next_level = "Воин_5",
 )
 
 var extraAttackFighter: AbilityNode = AbilityNode(
-    name = "Дополнительная атака",
+    name = "Дополнительная атака (воинская)",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         for (action in abilities.actionsList) {
             if (action.name == "Атака") {
@@ -258,7 +258,7 @@ var fighter5: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(extraAttackFighter.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "5-й уровень, способности воина",
     next_level = "Воин_6",
 )
@@ -274,7 +274,7 @@ var fighter6: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "6-й уровень, способности воина",
     next_level = "Воин_7",
 )
@@ -288,7 +288,7 @@ var fighter7: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "7-й уровень, способности воина",
     next_level = "Воин_8",
 )
@@ -304,7 +304,7 @@ var fighter8: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "8-й уровень, способности воина",
     next_level = "Воин_9",
 )
@@ -363,7 +363,7 @@ var fighter9: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(indomitable.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "9-й уровень, способности воина",
     next_level = "Воин_10",
 )
@@ -377,7 +377,7 @@ var fighter10: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "10-й уровень, способности воина",
     next_level = "Воин_11",
 )
@@ -391,7 +391,7 @@ var fighter11: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "11-й уровень, способности воина",
     next_level = "Воин_12",
 )
@@ -407,7 +407,7 @@ var fighter12: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "12-й уровень, способности воина",
     next_level = "Воин_13",
 )
@@ -422,7 +422,7 @@ var fighter13: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "13-й уровень, способности воина",
     next_level = "Воин_14",
 )
@@ -438,7 +438,7 @@ var fighter14: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "14-й уровень, способности воина",
     next_level = "Воин_15",
 )
@@ -452,7 +452,7 @@ var fighter15: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "15-й уровень, способности воина",
     next_level = "Воин_16",
 )
@@ -468,7 +468,7 @@ var fighter16: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "16-й уровень, способности воина",
     next_level = "Воин_17",
 )
@@ -483,7 +483,7 @@ var fighter17: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "17-й уровень, способности воина",
     next_level = "Воин_18",
 )
@@ -497,7 +497,7 @@ var fighter18: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "18-й уровень, способности воина",
     next_level = "Воин_19",
 )
@@ -513,7 +513,7 @@ var fighter19: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "19-й уровень, способности воина",
     next_level = "Воин_20",
 )
@@ -527,7 +527,7 @@ var fighter20: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "20-й уровень, способности воина",
     next_level = null,
 )

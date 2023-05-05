@@ -150,7 +150,7 @@ var cleric1: AbilityNode = AbilityNodeLevel(
         Pair("third", listOf(divineDomain.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "1-й уровень, способности жреца",
     next_level = "Жрец_2"
 )
@@ -210,7 +210,7 @@ var cleric2: AbilityNodeLevel = AbilityNodeLevel(
         //Pair("second", listOf(domain.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "2-й уровень, способности жреца",
     next_level = "Жрец_3",
 )
@@ -225,7 +225,7 @@ var cleric3: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "3-й уровень, способности жреца",
     next_level = "Жрец_4",
 )
@@ -245,7 +245,7 @@ var cleric4: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "4-й уровень, способности жреца",
     next_level = "Жрец_5",
 )
@@ -295,7 +295,7 @@ var cleric5: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(destroy_undead.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "5-й уровень, способности жреца",
     next_level = "Жрец_6",
 )
@@ -310,7 +310,7 @@ var cleric6: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "6-й уровень, способности жреца",
     next_level = "Жрец_7",
 )
@@ -325,7 +325,7 @@ var cleric7: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "7-й уровень, способности жреца",
     next_level = "Жрец_8",
 )
@@ -342,7 +342,7 @@ var cleric8: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "8-й уровень, способности жреца",
     next_level = "Жрец_9",
 )
@@ -357,7 +357,7 @@ var cleric9: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "9-й уровень, способности жреца",
     next_level = "Жрец_10",
 )
@@ -403,7 +403,7 @@ var cleric10: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(divineIntervention.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "10-й уровень, способности жреца",
     next_level = "Жрец_11",
 )
@@ -418,7 +418,7 @@ var cleric11: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "11-й уровень, способности жреца",
     next_level = "Жрец_12",
 )
@@ -435,7 +435,7 @@ var cleric12: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "12-й уровень, способности жреца",
     next_level = "Жрец_13",
 )
@@ -450,7 +450,7 @@ var cleric13: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "13-й уровень, способности жреца",
     next_level = "Жрец_14",
 )
@@ -465,7 +465,7 @@ var cleric14: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "14-й уровень, способности жреца",
     next_level = "Жрец_15",
 )
@@ -480,7 +480,7 @@ var cleric15: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "15-й уровень, способности жреца",
     next_level = "Жрец_16",
 )
@@ -497,7 +497,7 @@ var cleric16: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "16-й уровень, способности жреца",
     next_level = "Жрец_17",
 )
@@ -511,7 +511,7 @@ var cleric17: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "17-й уровень, способности жреца",
     next_level = "Жрец_18",
 )
@@ -525,7 +525,7 @@ var cleric18: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "18-й уровень, способности жреца",
     next_level = "Жрец_19",
 )
@@ -541,7 +541,7 @@ var cleric19: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "19-й уровень, способности жреца",
     next_level = "Жрец_20",
 )
@@ -555,7 +555,7 @@ var cleric20: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "20-й уровень, способности жреца",
     next_level = null,
 )

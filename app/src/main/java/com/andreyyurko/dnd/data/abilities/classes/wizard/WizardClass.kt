@@ -151,7 +151,7 @@ var wizard1: AbilityNode = AbilityNodeLevel(
         Pair("third", listOf(arcaneRecovery.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "1-й уровень, способности волшебника",
     next_level = "Волшебник_2"
 )
@@ -182,7 +182,7 @@ var wizard2: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(arcaneTradition.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "2-й уровень, способности волшебника",
     next_level = "Волшебник_3"
 )
@@ -197,7 +197,7 @@ var wizard3: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "3-й уровень, способности волшебника",
     next_level = "Волшебник_4"
 )
@@ -214,7 +214,7 @@ var wizard4: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "4-й уровень, способности волшебника",
     next_level = "Волшебник_5"
 )
@@ -230,7 +230,7 @@ var wizard5: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "5-й уровень, способности волшебника",
     next_level = "Волшебник_6"
 )
@@ -245,7 +245,7 @@ var wizard6: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "6-й уровень, способности волшебника",
     next_level = "Волшебник_7"
 )
@@ -260,7 +260,7 @@ var wizard7: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "7-й уровень, способности волшебника",
     next_level = "Волшебник_8"
 )
@@ -277,7 +277,7 @@ var wizard8: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "8-й уровень, способности волшебника",
     next_level = "Волшебник_9"
 )
@@ -293,7 +293,7 @@ var wizard9: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "9-й уровень, способности волшебника",
     next_level = "Волшебник_10"
 )
@@ -308,7 +308,7 @@ var wizard10: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "10-й уровень, способности волшебника",
     next_level = "Волшебник_11"
 )
@@ -323,7 +323,7 @@ var wizard11: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "11-й уровень, способности волшебника",
     next_level = "Волшебник_12"
 )
@@ -340,7 +340,7 @@ var wizard12: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "12-й уровень, способности волшебника",
     next_level = "Волшебник_13"
 )
@@ -362,7 +362,7 @@ var wizard13: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "13-й уровень, способности волшебника",
     next_level = "Волшебник_14"
 )
@@ -377,7 +377,7 @@ var wizard14: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "14-й уровень, способности волшебника",
     next_level = "Волшебник_15"
 )
@@ -398,7 +398,7 @@ var wizard15: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "15-й уровень, способности волшебника",
     next_level = "Волшебник_16"
 )
@@ -415,7 +415,7 @@ var wizard16: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "16-й уровень, способности волшебника",
     next_level = "Волшебник_17"
 )
@@ -437,7 +437,7 @@ var wizard17: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "17-й уровень, способности волшебника",
     next_level = "Волшебник_18"
 )
@@ -475,7 +475,7 @@ var wizard18: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(spellMastery.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "18-й уровень, способности волшебника",
     next_level = "Волшебник_19"
 )
@@ -496,7 +496,7 @@ var wizard19: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "19-й уровень, способности волшебника",
     next_level = "Волшебник_20"
 )
@@ -539,7 +539,7 @@ var wizard20: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(signatureSpells.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "20-й уровень, способности волшебника",
     next_level = null
 )

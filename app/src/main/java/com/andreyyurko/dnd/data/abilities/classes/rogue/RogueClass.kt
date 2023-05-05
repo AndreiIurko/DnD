@@ -224,7 +224,7 @@ var rogue1: AbilityNodeLevel = AbilityNodeLevel(
         Pair("fourth", listOf(thievesCant.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "1-й уровень, способности плута",
     next_level = "Плут_2",
 )
@@ -277,7 +277,7 @@ var rogue2: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(cunningAction.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "2-й уровень, способности плута",
     next_level = "Плут_3",
 )
@@ -306,7 +306,7 @@ var rogue3: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(roguishArchetype.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "3-й уровень, способности плута",
     next_level = "Плут_4",
 )
@@ -322,7 +322,7 @@ var rogue4: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "4-й уровень, способности плута",
     next_level = "Плут_5",
 )
@@ -351,7 +351,7 @@ var rogue5: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(uncannyDodge.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "5-й уровень, способности плута",
     next_level = "Плут_6",
 )
@@ -367,7 +367,7 @@ var rogue6: AbilityNodeLevel = AbilityNodeLevel(
         Pair("second", listOf(expertiseRogue.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "6-й уровень, способности плута",
     next_level = "Плут_7",
 )
@@ -396,7 +396,7 @@ var rogue7: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(rogueEvasion.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "7-й уровень, способности плута",
     next_level = "Плут_8",
 )
@@ -412,7 +412,7 @@ var rogue8: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "8-й уровень, способности плута",
     next_level = "Плут_9",
 )
@@ -427,7 +427,7 @@ var rogue9: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "9-й уровень, способности плута",
     next_level = "Плут_10",
 )
@@ -443,7 +443,7 @@ var rogue10: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "10-й уровень, способности плута",
     next_level = "Плут_11",
 )
@@ -472,7 +472,7 @@ var rogue11: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(reliableTalent.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "11-й уровень, способности плута",
     next_level = "Плут_12",
 )
@@ -488,7 +488,7 @@ var rogue12: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "12-й уровень, способности плута",
     next_level = "Плут_13",
 )
@@ -503,7 +503,7 @@ var rogue13: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "13-й уровень, способности плута",
     next_level = "Плут_14",
 )
@@ -532,7 +532,7 @@ var rogue14: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(blindsense.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "14-й уровень, способности плута",
     next_level = "Плут_15",
 )
@@ -560,7 +560,7 @@ var rogue15: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(slipperyMind.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "15-й уровень, способности плута",
     next_level = "Плут_16",
 )
@@ -576,7 +576,7 @@ var rogue16: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "16-й уровень, способности плута",
     next_level = "Плут_17",
 )
@@ -591,7 +591,7 @@ var rogue17: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "17-й уровень, способности плута",
     next_level = "Плут_18",
 )
@@ -619,7 +619,7 @@ var rogue18: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(elusive.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "18-й уровень, способности плута",
     next_level = "Плут_19",
 )
@@ -635,7 +635,7 @@ var rogue19: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "19-й уровень, способности плута",
     next_level = "Плут_20",
 )
@@ -680,7 +680,7 @@ var rogue20: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(strokeOfLuck.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "20-й уровень, способности плута",
     next_level = null,
 )

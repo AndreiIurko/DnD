@@ -1,5 +1,6 @@
 package com.andreyyurko.dnd.data.abilities.classes
 
+import com.andreyyurko.dnd.data.abilities.classes.barbarian.mapOfBarbarianAbilities
 import com.andreyyurko.dnd.data.abilities.classes.bard.mapOfBardAbilities
 import com.andreyyurko.dnd.data.abilities.classes.cleric.mapOfClericAbilities
 import com.andreyyurko.dnd.data.abilities.classes.fighter.mapOfFighterAbilities
@@ -20,7 +21,7 @@ class AbilityNodeLevel(
     changesInCharacterInfo: (abilities: CharacterInfo) -> CharacterInfo,
     alternatives: MutableMap<String, List<String>>,
     requirements: (abilities: CharacterInfo) -> Boolean,
-    add_requirements: List<List<Triple<String, String, Int>>>,
+    addRequirements: List<List<Triple<String, String, Int>>>,
     description: String,
     var next_level: String?,
 ) : AbilityNode(
@@ -28,7 +29,7 @@ class AbilityNodeLevel(
     changesInCharacterInfo,
     alternatives,
     requirements,
-    add_requirements,
+    addRequirements,
     description,
     isNeedsToBeShown = false,
     priority = Priority.DoAsSoonAsPossible

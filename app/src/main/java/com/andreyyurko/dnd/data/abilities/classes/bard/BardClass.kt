@@ -280,7 +280,7 @@ var bard1: AbilityNode = AbilityNodeLevel(
         Pair("third", listOf(bardicInspiration.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "1-й уровень, способности барда",
     next_level = "Бард_2"
 )
@@ -334,7 +334,7 @@ var bard2: AbilityNode = AbilityNodeLevel(
         Pair("second", listOf(songOfRest.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "2-й уровень, способности барда",
     next_level = "Бард_3"
 )
@@ -424,7 +424,7 @@ var bard3: AbilityNode = AbilityNodeLevel(
         Pair("second", listOf(expertise.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "3-й уровень, способности барда",
     next_level = "Бард_4"
 )
@@ -441,7 +441,7 @@ var bard4: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "4-й уровень, способности барда",
     next_level = "Бард_5"
 )
@@ -472,7 +472,7 @@ var bard5: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(fontOfInspiration.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "5-й уровень, способности барда",
     next_level = "Бард_6"
 )
@@ -505,7 +505,7 @@ var bard6: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "6-й уровень, способности барда",
     next_level = "Бард_7"
 )
@@ -520,7 +520,7 @@ var bard7: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "7-й уровень, способности барда",
     next_level = "Бард_8"
 )
@@ -537,7 +537,7 @@ var bard8: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "8-й уровень, способности барда",
     next_level = "Бард_9"
 )
@@ -553,7 +553,7 @@ var bard9: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "9-й уровень, способности барда",
     next_level = "Бард_10"
 )
@@ -571,7 +571,7 @@ var bard10: AbilityNode = AbilityNodeLevel(
         //Pair("second", listOf(magicalSecrets.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "10-й уровень, способности барда",
     next_level = "Бард_11"
 )
@@ -586,7 +586,7 @@ var bard11: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "11-й уровень, способности барда",
     next_level = "Бард_12"
 )
@@ -603,7 +603,7 @@ var bard12: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "12-й уровень, способности барда",
     next_level = "Бард_13"
 )
@@ -619,7 +619,7 @@ var bard13: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "13-й уровень, способности барда",
     next_level = "Бард_14"
 )
@@ -634,7 +634,7 @@ var bard14: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "14-й уровень, способности барда",
     next_level = "Бард_15"
 )
@@ -649,7 +649,7 @@ var bard15: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "15-й уровень, способности барда",
     next_level = "Бард_16"
 )
@@ -666,7 +666,7 @@ var bard16: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "16-й уровень, способности барда",
     next_level = "Бард_17"
 )
@@ -682,7 +682,7 @@ var bard17: AbilityNode = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "17-й уровень, способности барда",
     next_level = "Бард_18"
 )
@@ -699,7 +699,7 @@ var bard18: AbilityNode = AbilityNodeLevel(
         //Pair("first", listOf(spellMastery.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "18-й уровень, способности барда",
     next_level = "Бард_19"
 )
@@ -716,7 +716,7 @@ var bard19: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "19-й уровень, способности барда",
     next_level = "Бард_20"
 )
@@ -746,7 +746,7 @@ var bard20: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(superiorInspiration.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "20-й уровень, способности барда",
     next_level = null
 )

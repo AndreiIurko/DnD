@@ -86,8 +86,12 @@ var classFeaturesMonk: AbilityNode = AbilityNode(
 var monkUnarmedDefence: AbilityNode = AbilityNode(
     name = "Монашеская защита без доспехов",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        if (abilities.currentState.armor == Armor.NoArmor)
-            abilities.ac = abilities.ac + (abilities.wisdom - 10) / 2
+        if (abilities.currentState.armor == Armor.NoArmor) {
+            abilities.ac = Integer.max(
+                abilities.ac,
+                10 + abilityToModifier(abilities.wisdom) + abilityToModifier(abilities.dexterity)
+            )
+        }
         abilities
     },
     alternatives = mutableMapOf(),
@@ -140,7 +144,7 @@ var monk1: AbilityNode = AbilityNodeLevel(
         Pair("third", listOf(martialArts.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "1-й уровень, способности монаха",
     next_level = "Монах_2"
 )
@@ -171,7 +175,7 @@ var kiUsing = AbilityNode(
             )
         }
         abilities.currentState.charges["Ци"]?.let {
-            if (it.maximum < abilities.level) {
+            if (it.maximum != abilities.level) {
                 abilities.currentState.charges["Ци"] = ChargesCounter(
                     current = abilities.level,
                     maximum = abilities.level
@@ -232,7 +236,7 @@ var monk2: AbilityNode = AbilityNodeLevel(
         Pair("second", listOf(kiUsing.name))
     ),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "2-й уровень, способности монаха",
     next_level = "Монах_3"
 )
@@ -283,7 +287,7 @@ var monk3: AbilityNode = AbilityNodeLevel(
         Pair("second", listOf(deflectMissiles.name))
     ),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "3-й уровень, способности монаха",
     next_level = "Монах_4"
 )
@@ -318,7 +322,7 @@ var monk4: AbilityNode = AbilityNodeLevel(
         Pair("second", listOf(slowFall.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "4-й уровень, способности монаха",
     next_level = "Монах_5"
 )
@@ -356,7 +360,7 @@ var monk5: AbilityNode = AbilityNodeLevel(
         Pair("second", listOf(stunningStrike.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "5-й уровень, способности монаха",
     next_level = "Монах_6"
 )
@@ -385,7 +389,7 @@ var monk6: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(kiImprovedStrike.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "6-й уровень, способности монаха",
     next_level = "Монах_7"
 )
@@ -433,7 +437,7 @@ var monk7: AbilityNode = AbilityNodeLevel(
         Pair("second", listOf(stillnessOfMind.name))
     ),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "7-й уровень, способности монаха",
     next_level = "Монах_8"
 )
@@ -449,7 +453,7 @@ var monk8: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "8-й уровень, способности монаха",
     next_level = "Монах_9"
 )
@@ -465,7 +469,7 @@ var monk9: AbilityNode = AbilityNodeLevel(
     alternatives = mutableMapOf(
     ),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "9-й уровень, способности монаха",
     next_level = "Монах_10"
 )
@@ -498,7 +502,7 @@ var monk10: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(purityOfBody.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "10-й уровень, способности монаха",
     next_level = "Монах_11"
 )
@@ -513,7 +517,7 @@ var monk11: AbilityNode = AbilityNodeLevel(
     alternatives = mutableMapOf(
     ),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "11-й уровень, способности монаха",
     next_level = "Монах_12"
 )
@@ -529,7 +533,7 @@ var monk12: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "12-й уровень, способности монаха",
     next_level = "Монах_13"
 )
@@ -559,7 +563,7 @@ var monk13: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(tongueOfTheSunAndMoon.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "13-й уровень, способности монаха",
     next_level = "Монах_14"
 )
@@ -599,7 +603,7 @@ var monk14: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(diamondSoul.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "14-й уровень, способности монаха",
     next_level = "Монах_15"
 )
@@ -628,7 +632,7 @@ var monk15: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(timelessBody.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "15-й уровень, способности монаха",
     next_level = "Монах_16"
 )
@@ -644,7 +648,7 @@ var monk16: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "16-й уровень, способности монаха",
     next_level = "Монах_17"
 )
@@ -660,7 +664,7 @@ var monk17: AbilityNode = AbilityNodeLevel(
     alternatives = mutableMapOf(
     ),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "17-й уровень, способности монаха",
     next_level = "Монах_18"
 )
@@ -705,7 +709,7 @@ var monk18: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(emptyBody.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "18-й уровень, способности монаха",
     next_level = "Монах_19"
 )
@@ -721,7 +725,7 @@ var monk19: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(abilityScoreImprovement.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "19-й уровень, способности монаха",
     next_level = "Монах_20"
 )
@@ -750,7 +754,7 @@ var monk20: AbilityNode = AbilityNodeLevel(
         Pair("first", listOf(perfectSelf.name)),
     ),
     requirements = { true },
-    add_requirements = listOf(listOf()),
+    addRequirements = listOf(listOf()),
     description = "20-й уровень, способности монаха",
     next_level = null
 )

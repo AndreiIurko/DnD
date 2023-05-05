@@ -123,7 +123,7 @@ var sorcerer1: AbilityNodeLevel = AbilityNodeLevel(
         Pair("third", listOf(sorcerousOrigin.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "1-й уровень, способности чародея",
     next_level = "Чародей_2",
 )
@@ -208,7 +208,7 @@ var sorcerer2: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(fontOfMagic.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "2-й уровень, способности чародея",
     next_level = "Чародей_3",
 )
@@ -253,7 +253,7 @@ var sorcerer3: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(metamagic.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "3-й уровень, способности чародея",
     next_level = "Чародей_4",
 )
@@ -274,7 +274,7 @@ var sorcerer4: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "4-й уровень, способности чародея",
     next_level = "Чародей_5",
 )
@@ -293,7 +293,7 @@ var sorcerer5: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "5-й уровень, способности чародея",
     next_level = "Чародей_6",
 )
@@ -311,7 +311,7 @@ var sorcerer6: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "6-й уровень, способности чародея",
     next_level = "Чародей_7",
 )
@@ -329,7 +329,7 @@ var sorcerer7: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "7-й уровень, способности чародея",
     next_level = "Чародей_8",
 )
@@ -347,7 +347,7 @@ var sorcerer8: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "8-й уровень, способности чародея",
     next_level = "Чародей_9",
 )
@@ -366,7 +366,7 @@ var sorcerer9: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "9-й уровень, способности чародея",
     next_level = "Чародей_10",
 )
@@ -403,7 +403,7 @@ var sorcerer10: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(metamagic2.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "10-й уровень, способности чародея",
     next_level = "Чародей_11",
 )
@@ -421,7 +421,7 @@ var sorcerer11: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "11-й уровень, способности чародея",
     next_level = "Чародей_12",
 )
@@ -439,7 +439,7 @@ var sorcerer12: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "12-й уровень, способности чародея",
     next_level = "Чародей_13",
 )
@@ -458,7 +458,7 @@ var sorcerer13: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "13-й уровень, способности чародея",
     next_level = "Чародей_14",
 )
@@ -476,7 +476,7 @@ var sorcerer14: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "14-й уровень, способности чародея",
     next_level = "Чародей_15",
 )
@@ -500,7 +500,7 @@ var sorcerer15: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "15-й уровень, способности чародея",
     next_level = "Чародей_16",
 )
@@ -518,7 +518,7 @@ var sorcerer16: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "16-й уровень, способности чародея",
     next_level = "Чародей_17",
 )
@@ -562,7 +562,7 @@ var sorcerer17: AbilityNodeLevel = AbilityNodeLevel(
         Pair("first", listOf(metamagic3.name))
     ),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "17-й уровень, способности чародея",
     next_level = "Чародей_18",
 )
@@ -584,7 +584,7 @@ var sorcerer18: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "18-й уровень, способности чародея",
     next_level = "Чародей_19",
 )
@@ -606,7 +606,7 @@ var sorcerer19: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "19-й уровень, способности чародея",
     next_level = "Чародей_20",
 )
@@ -628,7 +628,7 @@ var sorcerer20: AbilityNodeLevel = AbilityNodeLevel(
     },
     alternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = listOf(),
+    addRequirements = listOf(),
     description = "20-й уровень, способности чародея",
     next_level = null,
 )
