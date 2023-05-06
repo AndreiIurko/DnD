@@ -35,39 +35,7 @@ var spellCastingArcaneTrickster: AbilityNode = AbilityNode(
                 knownSpells = mutableSetOf("Волшебная рука")
             )
         )
-        /*if (!abilities.currentState.charges.contains("Ячейки_1")) {
-            var chargesNumber = 2
-            if (abilities.level >= 4) chargesNumber = 3
-            if (abilities.level >= 7) chargesNumber = 4
-            abilities.currentState.charges["Ячейки_1"] = ChargesCounter(
-                current = chargesNumber,
-                maximum = chargesNumber
-            )
-        }
-        if (abilities.level >= 7) {
-            if (!abilities.currentState.charges.contains("Ячейки_2")) {
-                abilities.currentState.charges["Ячейки_2"] = ChargesCounter(
-                    current = 2 + (abilities.level + 10)/20,
-                    maximum = 2 + (abilities.level + 10)/20
-                )
-            }
-        }
-        if (abilities.level >= 13){
-            if (!abilities.currentState.charges.contains("Ячейки_3")) {
-                abilities.currentState.charges["Ячейки_3"] = ChargesCounter(
-                    current = 2 + (abilities.level + 4)/20,
-                    maximum = 2 + (abilities.level + 4)/20
-                )
-            }
-        }
-        if (abilities.level >= 19){
-            if (!abilities.currentState.charges.contains("Ячейки_4")) {
-                abilities.currentState.charges["Ячейки_4"] = ChargesCounter(
-                    current = 1,
-                    maximum = 1
-                )
-            }
-        }*/
+        abilities.spellCasterLevel += abilities.level/3
         abilities
     },
     getAlternatives = mutableMapOf(),

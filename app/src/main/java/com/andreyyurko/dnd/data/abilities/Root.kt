@@ -9,6 +9,7 @@ import com.andreyyurko.dnd.data.abilities.classes.monk.monk1
 import com.andreyyurko.dnd.data.abilities.classes.rogue.rogue1
 import com.andreyyurko.dnd.data.abilities.classes.sorcerer.sorcerer1
 import com.andreyyurko.dnd.data.abilities.classes.wizard.wizard1
+import com.andreyyurko.dnd.data.abilities.classes.paladin.paladin1
 import com.andreyyurko.dnd.data.abilities.other.*
 import com.andreyyurko.dnd.data.abilities.races.*
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
@@ -45,7 +46,8 @@ var baseAN: AbilityNode = AbilityNode(
                     wizard1.name,
                     bard1.name,
                     rogue1.name,
-                    barbarian1.name
+                    barbarian1.name,
+                    paladin1.name
                 )
             }
         ),

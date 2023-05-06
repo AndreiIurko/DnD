@@ -8,6 +8,7 @@ import com.andreyyurko.dnd.data.abilities.classes.monk.mapOfMonkAbilities
 import com.andreyyurko.dnd.data.abilities.classes.rogue.mapOfRogueAbilities
 import com.andreyyurko.dnd.data.abilities.classes.sorcerer.mapOfSorcererAbilities
 import com.andreyyurko.dnd.data.abilities.classes.wizard.mapOfWizardAbilities
+import com.andreyyurko.dnd.data.abilities.classes.paladin.mapOfPaladinAbilities
 import com.andreyyurko.dnd.data.abilities.mapOfAn
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Priority
@@ -96,5 +97,6 @@ val mapOfClasses = (
                 + mapOfWizardAbilities
                 + mapOfBardAbilities
                 + mapOfRogueAbilities
+                + mapOfPaladinAbilities
                 + mapOf(Pair(extraAttack.name, extraAttack))
         ).toMutableMap()
