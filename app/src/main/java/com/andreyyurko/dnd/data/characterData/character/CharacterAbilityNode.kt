@@ -7,7 +7,8 @@ import com.andreyyurko.dnd.data.characterData.Priority
 open class CharacterAbilityNode(
     open val data: AbilityNode,
     var chosen_alternatives: MutableMap<String, CharacterAbilityNode>,
-    var character: Character? = null
+    var character: Character? = null,
+    var chosenAlternativesForActions: MutableMap<String, String> = mutableMapOf()
 ) {
     constructor(_data: AbilityNode, character: Character?) : this(
         data = _data,
@@ -20,6 +21,13 @@ open class CharacterAbilityNode(
         if (data.priority == priority) {
             result = data.merge(result)
         }
+
+        for ((option, choice) in chosenAlternativesForActions) {
+            data.actionForChoice[option]?.let {
+                result = it(choice, result)
+            }
+        }
+
         for ((_, value) in chosen_alternatives.entries) {
             result = value.merge(result, priority)
         }
@@ -34,6 +42,9 @@ open class CharacterAbilityNode(
         mapOfAn[choice]?.let {
             chosen_alternatives[option_name] = CharacterAbilityNode(it, character)
             makeAllSimpleChoice(chosen_alternatives[option_name])
+        }
+        data.actionForChoice[option_name]?.let {
+            chosenAlternativesForActions[option_name] = choice
         }
         if (isFirst && character != null) {
             mergeAllAbilities(character!!)

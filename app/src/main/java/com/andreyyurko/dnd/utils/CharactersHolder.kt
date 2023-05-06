@@ -325,6 +325,17 @@ class CharactersHolder @Inject constructor(
                 )
             )
         )
+
+        // save map option_name -> chosen_option_for_data_action
+        val chosenAlternativesForActionsJson = Gson().toJson(characterAbilityNode.chosenAlternativesForActions)
+        db.putStringsAsync(
+            listOf(
+                Pair(
+                    characterId.toString() + DB_CHARACTER_ABILITY_NODE2 + path + characterAbilityNode.data.name,
+                    chosenAlternativesForActionsJson
+                )
+            )
+        )
     }
 
     private fun loadCharacterNode(name: String, id: Int, path: String, character: Character): CharacterAbilityNode {
@@ -335,8 +346,14 @@ class CharactersHolder @Inject constructor(
         val chosenAlternativesNamesJson = db.getString(id.toString() + DB_CHARACTER_ABILITY_NODE + path + name)
         val chosenAlternatives = Gson().fromJson<Map<String, String>>(chosenAlternativesNamesJson, mapType)
 
+        // get map option_name -> chosen_option_for_data_action
+        val chosenAlternativesForActionsJson = db.getString(id.toString() + DB_CHARACTER_ABILITY_NODE2 + path + name)
+        val chosenAlternativesForActions = if (chosenAlternativesForActionsJson != null) Gson().fromJson<Map<String, String>>(chosenAlternativesForActionsJson, mapType) else mutableMapOf()
+
         // create CAN with reference to AN and empty chosen_alternatives
         val characterAbilityNode = CharacterAbilityNode(mapOfAn[name]!!, character)
+
+        characterAbilityNode.chosenAlternativesForActions = chosenAlternativesForActions as MutableMap<String, String>
 
         // add to chosen_alternatives all references to sub-nodes
         for (key in chosenAlternatives.keys) {
@@ -356,6 +373,12 @@ class CharactersHolder @Inject constructor(
         db.deleteDataAsync(
             listOf(
                 characterId.toString() + DB_CHARACTER_ABILITY_NODE + path + characterAbilityNode.data.name
+            )
+        )
+
+        db.deleteDataAsync(
+            listOf(
+                characterId.toString() + DB_CHARACTER_ABILITY_NODE2 + path + characterAbilityNode.data.name
             )
         )
     }
@@ -379,12 +402,13 @@ class CharactersHolder @Inject constructor(
     companion object {
         private const val DB_TAG = "charactersInfo"
 
-        private const val DB_CHARACTER_IDS = "CharacterIds"
-        private const val DB_CHARACTER_NAME = "CharacterName="
-        private const val DB_CHARACTER_STATE = "CharacterState"
-        private const val DB_CHARACTER_ABILITY_NODE = "_CharacterAbilityNode_"
-        private const val DB_CHARACTER_CUSTOM = "_CharacterCustom"
-        private const val DB_INVENTORY = "_Inventory"
+        private const val DB_CHARACTER_IDS = "ChaIds"
+        private const val DB_CHARACTER_NAME = "ChaName="
+        private const val DB_CHARACTER_STATE = "ChaState"
+        private const val DB_CHARACTER_ABILITY_NODE = "_ChAbNo_"
+        private const val DB_CHARACTER_ABILITY_NODE2 = "_ChAbNo2_"
+        private const val DB_CHARACTER_CUSTOM = "_ChaCustom"
+        private const val DB_INVENTORY = "_Inv"
         private const val DB_SPELLS = "_Spells"
         private const val DB_NOTES = "_Notes"
         private const val DB_IMAGE = "_Image"

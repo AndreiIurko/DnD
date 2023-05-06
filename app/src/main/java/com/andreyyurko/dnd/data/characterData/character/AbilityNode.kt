@@ -13,7 +13,7 @@ open class AbilityNode(
     var description: String,
     val isNeedsToBeShown: Boolean = true,
     val priority: Priority = Priority.Basic,
-    val actionForChoice: Map<String, (choice: String, abilities: CharacterInfo) -> CharacterInfo>? = null,
+    val actionForChoice: Map<String, (choice: String, abilities: CharacterInfo) -> CharacterInfo> = mutableMapOf(),
 ) {
     constructor(name: String) : this(
         name = name,
@@ -40,7 +40,12 @@ open class AbilityNode(
     fun showOptions(abilities: CharacterInfo, option_name: String): List<String> {
         val result: MutableList<String> = mutableListOf()
         for (option in getAlternatives[option_name]!!(abilities)) {
-            if (mapOfAn[option]!!.isAddable(abilities)) result.add(option)
+            mapOfAn[option]?.let {
+                if (it.isAddable(abilities)) result.add(option)
+            }
+            actionForChoice[option_name]?.let {
+                result.add(option)
+            }
         }
         return result
     }
