@@ -31,8 +31,10 @@ import kotlinx.coroutines.launch
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.lang.reflect.Type
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.concurrent.timerTask
 
 
 @Singleton
@@ -72,6 +74,14 @@ class CharactersHolder @Inject constructor(
                     worksQuery.removeObserver(observer)
                 }
             }
+
+            Timer().schedule(timerTask {
+                if (_initActionState.asStateFlow().value != InitializationState.Initialized) {
+                    viewModelScope.launch {
+                        loadCharacters()
+                    }
+                }
+            }, 20000)
         }
     }
 
