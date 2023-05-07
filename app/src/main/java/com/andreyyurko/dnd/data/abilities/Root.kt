@@ -3,6 +3,7 @@ package com.andreyyurko.dnd.data.abilities
 import com.andreyyurko.dnd.data.abilities.classes.barbarian.barbarian1
 import com.andreyyurko.dnd.data.abilities.classes.bard.bard1
 import com.andreyyurko.dnd.data.abilities.classes.cleric.cleric1
+import com.andreyyurko.dnd.data.abilities.classes.druid.druid1
 import com.andreyyurko.dnd.data.abilities.classes.fighter.fighter1
 import com.andreyyurko.dnd.data.abilities.classes.mapOfClasses
 import com.andreyyurko.dnd.data.abilities.classes.monk.monk1
@@ -37,22 +38,24 @@ var baseAN: AbilityNode = AbilityNode(
     mutableMapOf(
         Pair("commonAbilities") { listOf(commonRoot.name) },
         Pair(
-            "class"
-        ) {
-            listOf(
-                monk1.name,
-                fighter1.name,
-                sorcerer1.name,
-                cleric1.name,
-                wizard1.name,
-                bard1.name,
-                rogue1.name,
-                barbarian1.name,
-                paladin1.name,
-                ranger1.name
-            )
-        },
-        Pair("race") { listOf(human.name, dwarf.name, elf.name, halfling.name) }
+            "class",
+            {
+                listOf(
+                    monk1.name,
+                    fighter1.name,
+                    sorcerer1.name,
+                    cleric1.name,
+                    wizard1.name,
+                    bard1.name,
+                    rogue1.name,
+                    barbarian1.name,
+                    paladin1.name,
+                    druid1.name,
+                    ranger1.name
+                )
+            }
+        ),
+        Pair("race", { listOf(human.name, dwarf.name, elf.name, halfling.name) })
     ),
     { true },
     listOf(listOf()),
