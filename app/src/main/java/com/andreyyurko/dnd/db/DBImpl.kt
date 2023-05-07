@@ -2,6 +2,7 @@ package com.andreyyurko.dnd.db
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Parcelable
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
@@ -79,11 +80,11 @@ internal class DBImpl(
             inputData.putString(ParcelableWriter.WORKER_DATA + it.index, it.value.second)
         }
 
-        val request = OneTimeWorkRequestBuilder<ParcelableWriter>()
+        var request = OneTimeWorkRequestBuilder<ParcelableWriter>()
             .setInputData(inputData.build())
-            .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
             .addTag("saveCharacterInfo")
             .build()
+
         WorkManager.getInstance(appContext).enqueue(request)
     }
 

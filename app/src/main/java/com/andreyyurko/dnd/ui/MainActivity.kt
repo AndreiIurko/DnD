@@ -2,6 +2,7 @@ package com.andreyyurko.dnd.ui
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
@@ -28,7 +29,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
-
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         viewModel.initCharacterHolder()

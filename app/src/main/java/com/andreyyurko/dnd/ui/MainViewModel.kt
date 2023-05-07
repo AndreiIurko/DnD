@@ -30,7 +30,6 @@ class MainViewModel @Inject constructor(
                     CharactersHolder.InitializationState.Initialized -> {
                         _initState.emit(InitState.Initialized)
                         isReady = true
-                        Log.d("test", "ready")
                     }
                 }
             }

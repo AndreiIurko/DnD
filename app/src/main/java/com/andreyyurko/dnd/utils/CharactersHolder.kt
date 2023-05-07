@@ -52,36 +52,37 @@ class CharactersHolder @Inject constructor(
     private var _initActionState = MutableStateFlow<InitializationState>(InitializationState.NotInitialized)
     val initActionState: Flow<InitializationState> get() = _initActionState.asStateFlow()
     fun initialize() {
-        viewModelScope.launch {
-            val worksQuery = WorkManager.getInstance(getApplication<Application>().applicationContext).getWorkInfosByTagLiveData("saveCharacterInfo")
-            val observer = Observer<List<WorkInfo>> { workList ->
-                var isAllFinished = true
-                for (work in workList) {
-                    if (work.state != WorkInfo.State.SUCCEEDED) {
-                        isAllFinished = false
-                    }
-                }
-                if (isAllFinished) {
-                    viewModelScope.launch {
-                        loadCharacters()
-                    }
+        Timer().schedule(timerTask {
+            if (_initActionState.asStateFlow().value != InitializationState.Initialized) {
+                viewModelScope.launch {
+                    loadCharacters()
                 }
             }
+        }, 20000)
 
-            worksQuery.observeForever(observer)
+        val worksQuery = WorkManager.getInstance(getApplication<Application>().applicationContext).getWorkInfosByTagLiveData("saveCharacterInfo")
+
+        val observer = Observer<List<WorkInfo>> { workList ->
+            var isAllFinished = true
+            for (work in workList) {
+                if (work.state != WorkInfo.State.SUCCEEDED) {
+                    isAllFinished = false
+                }
+            }
+            if (isAllFinished) {
+                viewModelScope.launch {
+                    loadCharacters()
+                }
+            }
+        }
+        worksQuery.observeForever(observer)
+
+        viewModelScope.launch {
             initActionState.collect {
                 if (it == InitializationState.Initialized) {
                     worksQuery.removeObserver(observer)
                 }
             }
-
-            Timer().schedule(timerTask {
-                if (_initActionState.asStateFlow().value != InitializationState.Initialized) {
-                    viewModelScope.launch {
-                        loadCharacters()
-                    }
-                }
-            }, 20000)
         }
     }
 
