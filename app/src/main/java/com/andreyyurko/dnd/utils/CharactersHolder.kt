@@ -4,8 +4,13 @@ import android.app.Application
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
+import androidx.work.await
 import com.andreyyurko.dnd.data.abilities.mapOfAn
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.Character
@@ -17,6 +22,7 @@ import com.andreyyurko.dnd.db.DB
 import com.andreyyurko.dnd.db.DBProvider
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -44,17 +50,41 @@ class CharactersHolder @Inject constructor(
     val initActionState: Flow<InitializationState> get() = _initActionState.asStateFlow()
     fun initialize() {
         viewModelScope.launch {
-            val listIdsType: Type = object : TypeToken<List<Int>>() {}.type
-            val charactersListJson = db.getString(DB_CHARACTER_IDS)
-            val charactersList: List<Int> = Gson().fromJson(charactersListJson, listIdsType) ?: emptyList()
-            for (id in charactersList) {
-                val character = loadCharacter(id)
-
-                // add to character list
-                characters[id] = character
+            val worksQuery = WorkManager.getInstance(getApplication<Application>().applicationContext).getWorkInfosByTagLiveData("saveCharacterInfo")
+            val observer = Observer<List<WorkInfo>> { workList ->
+                var isAllFinished = true
+                for (work in workList) {
+                    if (work.state != WorkInfo.State.SUCCEEDED) {
+                        isAllFinished = false
+                    }
+                }
+                if (isAllFinished) {
+                    viewModelScope.launch {
+                        loadCharacters()
+                    }
+                }
             }
-            _initActionState.emit(InitializationState.Initialized)
+
+            worksQuery.observeForever(observer)
+            initActionState.collect {
+                if (it == InitializationState.Initialized) {
+                    worksQuery.removeObserver(observer)
+                }
+            }
         }
+    }
+
+    private suspend fun loadCharacters() {
+        val listIdsType: Type = object : TypeToken<List<Int>>() {}.type
+        val charactersListJson = db.getString(DB_CHARACTER_IDS)
+        val charactersList: List<Int> = Gson().fromJson(charactersListJson, listIdsType) ?: emptyList()
+        for (id in charactersList) {
+            val character = loadCharacter(id)
+
+            // add to character list
+            characters[id] = character
+        }
+        _initActionState.emit(InitializationState.Initialized)
     }
 
     private fun loadCharacter(id: Int): Character {
@@ -419,5 +449,11 @@ class CharactersHolder @Inject constructor(
     sealed class InitializationState {
         object NotInitialized : InitializationState()
         object Initialized : InitializationState()
+    }
+
+    sealed class WorkInfoStatus {
+        object NotCompleted : WorkInfoStatus()
+
+        object Completed : WorkInfoStatus()
     }
 }

@@ -26,16 +26,12 @@ class CreateCharacterViewModel @Inject constructor(
 
     fun updateCharacter() {
         mergeAllAbilities(character)
-
-        if (currentlyChangingCharacterId == null)
-            charactersHolder.updateCharacter(character)
     }
 
     fun saveChangesInCharacter() {
         if (currentlyChangingCharacterId != null) {
             character.id = currentlyChangingCharacterId!!
             mergeAllAbilities(character)
-            charactersHolder.updateCharacter(character)
         }
     }
 
