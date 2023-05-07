@@ -149,8 +149,9 @@ var paladin1: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(divineSense.name) }),
-        Pair("second", { listOf(layOnHands.name) })
+        Pair("first", { listOf(classFeaturesPaladin.name) }),
+        Pair("second", { listOf(divineSense.name) }),
+        Pair("third", { listOf(layOnHands.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),

@@ -3,6 +3,7 @@ package com.andreyyurko.dnd.data.abilities
 import com.andreyyurko.dnd.data.abilities.classes.barbarian.barbarian1
 import com.andreyyurko.dnd.data.abilities.classes.bard.bard1
 import com.andreyyurko.dnd.data.abilities.classes.cleric.cleric1
+import com.andreyyurko.dnd.data.abilities.classes.druid.druid1
 import com.andreyyurko.dnd.data.abilities.classes.fighter.fighter1
 import com.andreyyurko.dnd.data.abilities.classes.mapOfClasses
 import com.andreyyurko.dnd.data.abilities.classes.monk.monk1
@@ -47,7 +48,8 @@ var baseAN: AbilityNode = AbilityNode(
                     bard1.name,
                     rogue1.name,
                     barbarian1.name,
-                    paladin1.name
+                    paladin1.name,
+                    druid1.name,
                 )
             }
         ),

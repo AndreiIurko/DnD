@@ -3,6 +3,7 @@ package com.andreyyurko.dnd.data.abilities.classes
 import com.andreyyurko.dnd.data.abilities.classes.barbarian.mapOfBarbarianAbilities
 import com.andreyyurko.dnd.data.abilities.classes.bard.mapOfBardAbilities
 import com.andreyyurko.dnd.data.abilities.classes.cleric.mapOfClericAbilities
+import com.andreyyurko.dnd.data.abilities.classes.druid.mapOfDruidAbilities
 import com.andreyyurko.dnd.data.abilities.classes.fighter.mapOfFighterAbilities
 import com.andreyyurko.dnd.data.abilities.classes.monk.mapOfMonkAbilities
 import com.andreyyurko.dnd.data.abilities.classes.rogue.mapOfRogueAbilities
@@ -98,5 +99,6 @@ val mapOfClasses = (
                 + mapOfBardAbilities
                 + mapOfRogueAbilities
                 + mapOfPaladinAbilities
+                + mapOfDruidAbilities
                 + mapOf(Pair(extraAttack.name, extraAttack))
         ).toMutableMap()
