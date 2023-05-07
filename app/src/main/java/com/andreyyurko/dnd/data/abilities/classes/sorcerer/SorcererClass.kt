@@ -619,6 +619,25 @@ var sorcerer19: AbilityNodeLevel = AbilityNodeLevel(
     next_level = "Чародей_20",
 )
 
+var sorcerousRestoration: AbilityNode = AbilityNode(
+    name = "Чародейское восстановление",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsList.add(
+            Action(
+                name = "Чародейское восстановление",
+                description = "Вы восстанавливаете 4 единицы чародейства, когда заканчиваете короткий отдых.\n",
+                type = ActionType.Long,
+                relatedCharges = "Единицы чародейства"
+            )
+        )
+        abilities
+    },
+    getAlternatives = mutableMapOf(),
+    requirements = { true },
+    addRequirements = listOf(),
+    description = "Вы восстанавливаете 4 единицы чародейства, когда заканчиваете короткий отдых.\n",
+)
+
 var sorcerer20: AbilityNodeLevel = AbilityNodeLevel(
     name = "Чародей_20",
     changesInCharacterInfo = { abilities: CharacterInfo ->
@@ -634,7 +653,9 @@ var sorcerer20: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    getAlternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(sorcerousRestoration.name) })
+    ),
     requirements = { true },
     addRequirements = listOf(),
     description = "20-й уровень, способности чародея",
@@ -668,5 +689,6 @@ var mapOfSorcererAbilities = mutableMapOf(
     Pair(sorcerer17.name, sorcerer17),
     Pair(sorcerer18.name, sorcerer18),
     Pair(sorcerer19.name, sorcerer19),
+    Pair(sorcerousRestoration.name, sorcerousRestoration),
     Pair(sorcerer20.name, sorcerer20)
 ) + mapOfMetamagicOptions + draconicBloodlineMap + wildMagicMap

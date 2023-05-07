@@ -152,6 +152,7 @@ var druid1: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.characterClass = Classes.Druid
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.proficiencyBonus += 2
         abilities.hp += abilityToModifier(abilities.constitution) + 8
         abilities
@@ -242,6 +243,7 @@ var druid2: AbilityNode = AbilityNodeLevel(
     name = "Друид_2",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -259,6 +261,7 @@ var druid3: AbilityNode = AbilityNodeLevel(
     name = "Друид_3",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -274,6 +277,7 @@ var druid4: AbilityNode = AbilityNodeLevel(
     name = "Друид_4",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -290,6 +294,7 @@ var druid5: AbilityNode = AbilityNodeLevel(
     name = "Друид_5",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -306,6 +311,7 @@ var druid6: AbilityNode = AbilityNodeLevel(
     name = "Друид_6",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -321,6 +327,7 @@ var druid7: AbilityNode = AbilityNodeLevel(
     name = "Друид_7",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -336,6 +343,7 @@ var druid8: AbilityNode = AbilityNodeLevel(
     name = "Друид_8",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -352,6 +360,7 @@ var druid9: AbilityNode = AbilityNodeLevel(
     name = "Друид_9",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -368,6 +377,7 @@ var druid10: AbilityNode = AbilityNodeLevel(
     name = "Друид_10",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -383,6 +393,7 @@ var druid11: AbilityNode = AbilityNodeLevel(
     name = "Друид_11",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -398,6 +409,7 @@ var druid12: AbilityNode = AbilityNodeLevel(
     name = "Друид_12",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -414,6 +426,7 @@ var druid13: AbilityNode = AbilityNodeLevel(
     name = "Друид_13",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -430,6 +443,7 @@ var druid14: AbilityNode = AbilityNodeLevel(
     name = "Друид_14",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -445,6 +459,7 @@ var druid15: AbilityNode = AbilityNodeLevel(
     name = "Друид_15",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -460,6 +475,7 @@ var druid16: AbilityNode = AbilityNodeLevel(
     name = "Друид_16",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -476,6 +492,7 @@ var druid17: AbilityNode = AbilityNodeLevel(
     name = "Друид_17",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -536,6 +553,7 @@ var druid18: AbilityNode = AbilityNodeLevel(
     name = "Друид_18",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -553,6 +571,7 @@ var druid19: AbilityNode = AbilityNodeLevel(
     name = "Друид_19",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -585,6 +604,7 @@ var druid20: AbilityNode = AbilityNodeLevel(
     name = "Друид_20",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
