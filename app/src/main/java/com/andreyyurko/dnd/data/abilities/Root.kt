@@ -11,6 +11,7 @@ import com.andreyyurko.dnd.data.abilities.classes.rogue.rogue1
 import com.andreyyurko.dnd.data.abilities.classes.sorcerer.sorcerer1
 import com.andreyyurko.dnd.data.abilities.classes.wizard.wizard1
 import com.andreyyurko.dnd.data.abilities.classes.paladin.paladin1
+import com.andreyyurko.dnd.data.abilities.classes.ranger.ranger1
 import com.andreyyurko.dnd.data.abilities.other.*
 import com.andreyyurko.dnd.data.abilities.races.*
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
@@ -35,7 +36,7 @@ var baseAN: AbilityNode = AbilityNode(
         abilities
     },
     mutableMapOf(
-        Pair("commonAbilities", { listOf(commonRoot.name) }),
+        Pair("commonAbilities") { listOf(commonRoot.name) },
         Pair(
             "class",
             {
@@ -50,6 +51,7 @@ var baseAN: AbilityNode = AbilityNode(
                     barbarian1.name,
                     paladin1.name,
                     druid1.name,
+                    ranger1.name
                 )
             }
         ),

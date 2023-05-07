@@ -37,8 +37,14 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
         viewModel.chosenClass?.let {
             viewBinding.chooseClassTextView.text = it.split('_')[0]
             viewBinding.levelText.text = viewModel.chosenLevel.toString()
-            viewBinding.levelUpButton.alpha = 1F
-            viewBinding.levelUpButton.isEnabled = true
+            if (viewModel.chosenLevel < 20) {
+                viewBinding.levelUpButton.alpha = 1F
+                viewBinding.levelUpButton.isEnabled = true
+            }
+            else {
+                viewBinding.levelUpButton.alpha = 0.5F
+                viewBinding.levelUpButton.isEnabled = false
+            }
         }
 
         viewBinding.chooseClassButton.setOnClickListener {
@@ -55,6 +61,14 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
         viewBinding.levelUpButton.setOnClickListener {
             viewModel.levelUp()
             viewBinding.levelText.text = viewModel.chosenLevel.toString()
+            if (viewModel.chosenLevel < 20) {
+                viewBinding.levelUpButton.alpha = 1F
+                viewBinding.levelUpButton.isEnabled = true
+            }
+            else {
+                viewBinding.levelUpButton.alpha = 0.5F
+                viewBinding.levelUpButton.isEnabled = false
+            }
         }
 
         viewBinding.submitButton.setOnClickListener {
@@ -82,8 +96,14 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
             classNameTextView.setOnClickListener {
                 viewModel.chosenClass = classChoice
                 viewModel.makeChoice(classChoice)
-                viewBinding.levelUpButton.alpha = 1F
-                viewBinding.levelUpButton.isEnabled = true
+                if (viewModel.chosenLevel < 20) {
+                    viewBinding.levelUpButton.alpha = 1F
+                    viewBinding.levelUpButton.isEnabled = true
+                }
+                else {
+                    viewBinding.levelUpButton.alpha = 0.5F
+                    viewBinding.levelUpButton.isEnabled = false
+                }
                 viewBinding.chooseClassTextView.text = classChoice.split("_").first()
                 classChoiceList.dismiss()
             }
@@ -120,8 +140,14 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
                 viewModel.chosenLevel = level
                 viewModel.chosenClass?.let {
                     viewModel.makeChoice(it)
-                    viewBinding.levelUpButton.alpha = 1F
-                    viewBinding.levelUpButton.isEnabled = true
+                    if (level < 20) {
+                        viewBinding.levelUpButton.alpha = 1F
+                        viewBinding.levelUpButton.isEnabled = true
+                    }
+                    else {
+                        viewBinding.levelUpButton.alpha = 0.5F
+                        viewBinding.levelUpButton.isEnabled = false
+                    }
                 }
                 viewBinding.levelText.text = level.toString()
                 levelChoiceList.dismiss()

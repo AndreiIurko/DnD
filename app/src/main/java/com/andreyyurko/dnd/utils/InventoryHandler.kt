@@ -108,7 +108,6 @@ class InventoryHandler @Inject constructor(
             unequipItem(character, itemDescription.itemName)
             inventory.remove(itemDescription.itemName)
         }
-        charactersHolder.updateCharacter(character)
     }
 
     data class Filters(

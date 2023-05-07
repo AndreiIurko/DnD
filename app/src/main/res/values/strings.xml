@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dnd</string>
+    <string name="app_name">D&amp;D лист персонажа</string>
     <string name="spell_name">Название: %1$s</string>
     <string name="spell_level_and_school">%1$s уровень, %2$s</string>
     <string name="fragment_spell_list_search_edit_text_hint">Поиск заклинания</string>

@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Parcelable
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkManager
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
@@ -78,7 +79,11 @@ internal class DBImpl(
             inputData.putString(ParcelableWriter.WORKER_DATA + it.index, it.value.second)
         }
 
-        val request = OneTimeWorkRequestBuilder<ParcelableWriter>().setInputData(inputData.build()).build()
+        val request = OneTimeWorkRequestBuilder<ParcelableWriter>()
+            .setInputData(inputData.build())
+            .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+            .addTag("saveCharacterInfo")
+            .build()
         WorkManager.getInstance(appContext).enqueue(request)
     }
 

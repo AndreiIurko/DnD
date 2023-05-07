@@ -75,6 +75,9 @@ class AbilityAdapter : RecyclerView.Adapter<AbilityAdapter.ViewHolder>() {
                 abilityCAN.chosen_alternatives[optionName]?.let {
                     textView.text = it.data.name
                 }
+                abilityCAN.chosenAlternativesForActions[optionName]?.let {
+                    textView.text = it
+                }
 
                 // on press show options
                 choiceButton.setOnClickListener {
