@@ -1,6 +1,7 @@
 package com.andreyyurko.dnd.data.abilities.classes.rogue
 
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
+import com.andreyyurko.dnd.data.abilities.classes.evasion
 import com.andreyyurko.dnd.data.abilities.other.*
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
@@ -386,19 +387,6 @@ var rogue6: AbilityNodeLevel = AbilityNodeLevel(
     next_level = "Плут_7",
 )
 
-var rogueEvasion: AbilityNode = AbilityNode(
-    name = "Плутовская увёртливость",
-    changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Плутовская увёртливость"] =
-            "Вы можете ловко увернуться от зональных эффектов, например, огненного дыхания красного дракона или заклинания град [ice storm]. Если вы попадаете под действие эффекта, который позволяет вам совершить спасбросок Ловкости, чтобы получить только половину урона, вместо этого вы не получаете вовсе никакого урона, если спасбросок был успешен, и получаете только половину урона, если он был провален.\n"
-        abilities
-    },
-    getAlternatives = mutableMapOf(),
-    requirements = { true },
-    addRequirements = listOf(listOf()),
-    description = "Вы можете ловко увернуться от зональных эффектов, например, огненного дыхания красного дракона или заклинания град [ice storm]. Если вы попадаете под действие эффекта, который позволяет вам совершить спасбросок Ловкости, чтобы получить только половину урона, вместо этого вы не получаете вовсе никакого урона, если спасбросок был успешен, и получаете только половину урона, если он был провален.\n"
-)
-
 var rogue7: AbilityNodeLevel = AbilityNodeLevel(
     name = "Плут_7",
     changesInCharacterInfo = { abilities: CharacterInfo ->
@@ -407,7 +395,7 @@ var rogue7: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(rogueEvasion.name) })
+        Pair("first", { listOf(evasion.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -714,7 +702,6 @@ var mapOfRogueAbilities: MutableMap<String, AbilityNode> = (mutableMapOf(
     Pair(uncannyDodge.name, uncannyDodge),
     Pair(rogue5.name, rogue5),
     Pair(rogue6.name, rogue6),
-    Pair(rogueEvasion.name, rogueEvasion),
     Pair(rogue7.name, rogue7),
     Pair(rogue8.name, rogue8),
     Pair(rogue9.name, rogue9),

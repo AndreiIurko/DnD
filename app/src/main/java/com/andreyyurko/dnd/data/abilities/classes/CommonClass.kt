@@ -90,6 +90,19 @@ var extraAttack: AbilityNode = AbilityNode(
     priority = Priority.DoLast
 )
 
+var evasion: AbilityNode = AbilityNode(
+    name = "Увёртливость",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.additionalAbilities["Увёртливость"] =
+            "Вы можете ловко увернуться от зональных эффектов, например, огненного дыхания красного дракона или заклинания град [ice storm]. Если вы попадаете под действие эффекта, который позволяет вам совершить спасбросок Ловкости, чтобы получить только половину урона, вместо этого вы не получаете вовсе никакого урона, если спасбросок был успешен, и получаете только половину урона, если он был провален.\n"
+        abilities
+    },
+    getAlternatives = mutableMapOf(),
+    requirements = { true },
+    addRequirements = listOf(listOf()),
+    description = "Вы можете ловко увернуться от зональных эффектов, например, огненного дыхания красного дракона или заклинания град [ice storm]. Если вы попадаете под действие эффекта, который позволяет вам совершить спасбросок Ловкости, чтобы получить только половину урона, вместо этого вы не получаете вовсе никакого урона, если спасбросок был успешен, и получаете только половину урона, если он был провален.\n"
+)
+
 val mapOfClasses = (
         mapOfMonkAbilities
                 + mapOfBarbarianAbilities
@@ -103,4 +116,5 @@ val mapOfClasses = (
                 + mapOfDruidAbilities
                 + mapOfRangerAbilities
                 + mapOf(Pair(extraAttack.name, extraAttack))
+                + mapOf(Pair(evasion.name, evasion))
         ).toMutableMap()

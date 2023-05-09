@@ -5,7 +5,7 @@ import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.spells.CharacterSpells
 import com.andreyyurko.dnd.data.spells.SpellLists
 
-var TempestDomainSpells = AbilityNode(
+var tempestDomainSpells = AbilityNode(
     name = "Заклинания домена бури",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         val additionalSpellList = mutableSetOf<String>()
@@ -169,7 +169,7 @@ var tempestDomain = AbilityNode(
     name = "Домен бури",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(TempestDomainSpells.name) }),
+        Pair("first", { listOf(tempestDomainSpells.name) }),
         Pair("second", { listOf(bonusProficiencyTempestDomain.name) }),
         Pair("third", { listOf(wrathOfTheStorm.name) }),
         Pair("fourth", { listOf(channelDivinityDestructiveWrath.name) }),
@@ -183,7 +183,7 @@ var tempestDomain = AbilityNode(
 )
 
 var mapOfTempestDomainAbilities: MutableMap<String, AbilityNode> = mutableMapOf(
-    Pair(TempestDomainSpells.name, TempestDomainSpells),
+    Pair(tempestDomainSpells.name, tempestDomainSpells),
     Pair(bonusProficiencyTempestDomain.name, bonusProficiencyTempestDomain),
     Pair(wrathOfTheStorm.name, wrathOfTheStorm),
     Pair(channelDivinityDestructiveWrath.name, channelDivinityDestructiveWrath),

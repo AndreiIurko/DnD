@@ -1,6 +1,7 @@
 package com.andreyyurko.dnd.data.abilities.classes.monk
 
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
+import com.andreyyurko.dnd.data.abilities.classes.evasion
 import com.andreyyurko.dnd.data.abilities.classes.extraAttack
 import com.andreyyurko.dnd.data.abilities.other.*
 import com.andreyyurko.dnd.data.characterData.*
@@ -396,19 +397,6 @@ var monk6: AbilityNode = AbilityNodeLevel(
     next_level = "Монах_7"
 )
 
-var monkEvasion: AbilityNode = AbilityNode(
-    name = "Монашеская увёртливость",
-    changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Монашеская увёртливость"] =
-            "Ваше инстинктивное проворство позволяет вам уклоняться от эффектов, направленных на определённую область, вроде дыхания синего дракона или заклинания огненный шар. Если вы попадаете под действие эффекта, позволяющего совершить спасбросок Ловкости, чтобы получить только половину урона, вы вместо этого не получаете урона при успешном спасброске и получаете только половину урона при проваленном."
-        abilities
-    },
-    getAlternatives = mutableMapOf(),
-    requirements = { true },
-    addRequirements = listOf(listOf()),
-    description = "Ваше инстинктивное проворство позволяет вам уклоняться от эффектов, направленных на определённую область, вроде дыхания синего дракона или заклинания огненный шар. Если вы попадаете под действие эффекта, позволяющего совершить спасбросок Ловкости, чтобы получить только половину урона, вы вместо этого не получаете урона при успешном спасброске и получаете только половину урона при проваленном.\n"
-)
-
 var stillnessOfMind: AbilityNode = AbilityNode(
     name = "Спокойствие разума",
     changesInCharacterInfo = { abilities: CharacterInfo ->
@@ -435,7 +423,7 @@ var monk7: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(monkEvasion.name) }),
+        Pair("first", { listOf(evasion.name) }),
         Pair("second", { listOf(stillnessOfMind.name) })
     ),
     requirements = { true },
@@ -778,7 +766,6 @@ var mapOfMonkAbilities: MutableMap<String, AbilityNode> = (mutableMapOf(
     Pair(monk5.name, monk5),
     Pair(kiImprovedStrike.name, kiImprovedStrike),
     Pair(monk6.name, monk6),
-    Pair(monkEvasion.name, monkEvasion),
     Pair(stillnessOfMind.name, stillnessOfMind),
     Pair(monk7.name, monk7),
     Pair(monk8.name, monk8),

@@ -6,7 +6,7 @@ import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.spells.CharacterSpells
 import com.andreyyurko.dnd.data.spells.SpellLists
 
-var KnowledgeDomainSpells = AbilityNode(
+var knowledgeDomainSpells = AbilityNode(
     name = "Заклинания домена знаний",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         val additionalSpellList = mutableSetOf<String>()
@@ -196,7 +196,7 @@ var KnowledgeDomain = AbilityNode(
     name = "Домен знаний",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(KnowledgeDomainSpells.name) }),
+        Pair("first", { listOf(knowledgeDomainSpells.name) }),
         Pair("second", { listOf(blessingsOfKnowledge.name) }),
         Pair("third", { listOf(channelDivinityKnowledgeOfTheAges.name) }),
         Pair("fourth", { listOf(channelDivinityReadThoughts.name) }),
@@ -210,7 +210,7 @@ var KnowledgeDomain = AbilityNode(
 
 var mapOfKnowledgeDomainAbilities: MutableMap<String, AbilityNode> = mutableMapOf(
     Pair(blessingsOfKnowledge.name, blessingsOfKnowledge),
-    Pair(KnowledgeDomainSpells.name, KnowledgeDomainSpells),
+    Pair(knowledgeDomainSpells.name, knowledgeDomainSpells),
     Pair(channelDivinityKnowledgeOfTheAges.name, channelDivinityKnowledgeOfTheAges),
     Pair(channelDivinityReadThoughts.name, channelDivinityReadThoughts),
     Pair(potentSpellcasting.name, potentSpellcasting),

@@ -7,8 +7,6 @@ import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import com.andreyyurko.dnd.data.spells.CharacterSpells
-import kotlin.math.max
-
 
 var classFeaturesRanger: AbilityNode = AbilityNode(
     name = "Следопыт: классовые умения",
@@ -201,7 +199,7 @@ var naturalExplorer: AbilityNode = AbilityNode(
     name = "Исследователь природы",
     changesInCharacterInfo = {abilities: CharacterInfo -> abilities },
     getAlternatives = mutableMapOf(
-        Pair("first") { listOf("Арктика", "болота", "горы", "леса", "луга", "побережье", "Подземье", "пустыня") }
+        Pair("first") { listOf("Арктика", "Болота", "Горы", "Леса", "Луга", "Побережье", "Подземье", "Пустыня") }
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -277,7 +275,7 @@ var spellCastingRanger: AbilityNode = AbilityNode(
     },
     getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
-        abilities.characterClass == Classes.Wizard
+        abilities.characterClass == Classes.Ranger
     },
     description = "Вы обучаетесь использованию волшебной сущности природы для накладывания заклинаний подобно друиду.\n" +
             "Ячейки заклинаний\n" +
@@ -319,13 +317,13 @@ var ranger2: AbilityNodeLevel = AbilityNodeLevel(
     next_level = "Следопыт_3",
 )
 
-var rangerConclave: AbilityNode = AbilityNode(
+var rangerArchetype: AbilityNode = AbilityNode(
     name = "Архетип следопыта",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("archetype") { listOf() }
+        Pair("archetype") { listOf(hunter.name, monsterSlayer.name) }
     ),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Ranger
@@ -362,7 +360,7 @@ var ranger3: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first") { listOf(rangerConclave.name) },
+        Pair("first") { listOf(rangerArchetype.name) },
         Pair("second") { listOf(primevalAwareness.name) }
     ),
     requirements = { true },
@@ -768,7 +766,7 @@ var ranger20: AbilityNodeLevel = AbilityNodeLevel(
     next_level = null,
 )
 
-var mapOfRangerAbilities = mutableMapOf(
+var mapOfRangerAbilities = (mutableMapOf(
     Pair(classFeaturesRanger.name, classFeaturesRanger),
     Pair(fightingStyleRanger.name, fightingStyleRanger),
     Pair(favoredEnemy.name, favoredEnemy),
@@ -778,7 +776,7 @@ var mapOfRangerAbilities = mutableMapOf(
     Pair(ranger1.name, ranger1),
     Pair(spellCastingRanger.name, spellCastingRanger),
     Pair(ranger2.name, ranger2),
-    Pair(rangerConclave.name, rangerConclave),
+    Pair(rangerArchetype.name, rangerArchetype),
     Pair(primevalAwareness.name, primevalAwareness),
     Pair(ranger3.name, ranger3),
     Pair(ranger4.name, ranger4),
@@ -804,3 +802,6 @@ var mapOfRangerAbilities = mutableMapOf(
     Pair(feralSenses.name, feralSenses),
     Pair(foeSlayer.name, foeSlayer)
 )
+        + mapOfHunterAbilities
+        + mapOfMonsterSlayerAbilities
+        ).toMutableMap()
