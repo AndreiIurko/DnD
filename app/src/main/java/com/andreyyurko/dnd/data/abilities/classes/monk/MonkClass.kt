@@ -105,6 +105,10 @@ var monkUnarmedDefence: AbilityNode = AbilityNode(
 var martialArts: AbilityNode = AbilityNode(
     name = "Боевые искусства",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        var dice = "к4"
+        if (abilities.level >= 5) dice = "к6"
+        if (abilities.level >= 11) dice = "к8"
+        if (abilities.level >= 17) dice = "к10"
         if (abilities.currentState.armor == Armor.NoArmor && !abilities.currentState.hasShield) {
             checkProfs@ for (prof in abilities.weaponProficiency) {
                 for (prop in prof.properties) {
@@ -113,9 +117,16 @@ var martialArts: AbilityNode = AbilityNode(
                     }
                 }
                 prof.setOfSkills.plus(Ability.Dexterity)
+                if(prof.damage == "1") prof.damage = dice
             }
-            /// We need to change dice
         }
+        abilities.additionalAbilities["Боевые искусства"] = "Ваше знание боевых искусств позволяет вам эффективно использовать в бою безоружные удары и монашеское оружие — короткие мечи, а также любое простое рукопашное оружие, не имеющее свойств двуручное и тяжёлое.\n" +
+                "\n" +
+                "Если вы безоружны или используете только монашеское оружие, и не носите ни доспехов, ни щита, вы получаете следующие преимущества:\n" +
+                "\n" +
+                "\tВы можете использовать Ловкость вместо Силы для бросков атак и урона ваших безоружных ударов и атак монашеским оружием.\n" +
+                "\tВы можете использовать " + dice + " вместо обычной кости урона ваших безоружных ударов или атак монашеским оружием. Эта кость увеличивается с вашим уровнем, как показано в колонке «боевые искусства».\n" +
+                "\tЕсли в свой ход вы используете действие Атака для безоружного удара или атаки монашеским оружием, вы можете бонусным действием совершить ещё один безоружный удар. Например, если вы совершили действие Атака и атаковали боевым посохом, вы можете совершить бонусным действием безоружный удар, при условии, что в этом ходу вы еще не совершали бонусное действие.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),

@@ -32,8 +32,8 @@ class CreateCharacterViewModel @Inject constructor(
         if (currentlyChangingCharacterId != null) {
             character.id = currentlyChangingCharacterId!!
             mergeAllAbilities(character)
-            charactersHolder.updateCharacter(character)
         }
+        charactersHolder.updateCharacter(character)
     }
 
     fun deleteCharacter() {
