@@ -51,6 +51,10 @@ class CharactersHolder @Inject constructor(
 
     private var _initActionState = MutableStateFlow<InitializationState>(InitializationState.NotInitialized)
     val initActionState: Flow<InitializationState> get() = _initActionState.asStateFlow()
+
+    private var _savingCharactersState = MutableStateFlow<SavingCharactersState>(SavingCharactersState.NotCompleted)
+    var savingCharactersState: Flow<SavingCharactersState> = _savingCharactersState.asStateFlow()
+
     fun initialize() {
         Timer().schedule(timerTask {
             if (_initActionState.asStateFlow().value != InitializationState.Initialized) {
@@ -97,7 +101,13 @@ class CharactersHolder @Inject constructor(
             characters[id] = character
         }
         _initActionState.emit(InitializationState.Initialized)
+        while (true) {
+            delay(3 * 60 * 1000)
+            saveCharacters()
+        }
     }
+
+
 
     private fun loadCharacter(id: Int): Character {
         // get name
@@ -311,10 +321,42 @@ class CharactersHolder @Inject constructor(
         return bitmap
     }
 
-    fun saveCharacters() {
+    suspend fun saveCharacters() {
+        for (id in characters.keys) {
+            saveCharacter(id)
+        }
+    }
+
+    fun saveCharactersForService() {
         viewModelScope.launch {
+            _savingCharactersState.emit(SavingCharactersState.NotCompleted)
             for (id in characters.keys) {
                 saveCharacter(id)
+                Log.d("work", id.toString())
+            }
+            val worksQuery = WorkManager.getInstance(getApplication<Application>().applicationContext).getWorkInfosByTagLiveData("saveCharacterInfo")
+
+            val observer = Observer<List<WorkInfo>> { workList ->
+                var isAllFinished = true
+                for (work in workList) {
+                    if (work.state != WorkInfo.State.SUCCEEDED) {
+                        isAllFinished = false
+                    }
+                }
+                if (isAllFinished) {
+                    viewModelScope.launch {
+                        _savingCharactersState.emit(SavingCharactersState.Completed)
+                    }
+                }
+            }
+            worksQuery.observeForever(observer)
+
+            viewModelScope.launch {
+                savingCharactersState.collect {
+                    if (it == SavingCharactersState.Completed) {
+                        worksQuery.removeObserver(observer)
+                    }
+                }
             }
         }
     }
@@ -463,9 +505,10 @@ class CharactersHolder @Inject constructor(
         object Initialized : InitializationState()
     }
 
-    sealed class WorkInfoStatus {
-        object NotCompleted : WorkInfoStatus()
+    sealed class SavingCharactersState {
+        object NotCompleted : SavingCharactersState()
+        object Completed : SavingCharactersState()
 
-        object Completed : WorkInfoStatus()
+        object Waiting : SavingCharactersState()
     }
 }
