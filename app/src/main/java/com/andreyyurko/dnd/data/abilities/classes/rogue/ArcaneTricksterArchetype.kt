@@ -36,6 +36,7 @@ var spellCastingArcaneTrickster: AbilityNode = AbilityNode(
             )
         )
         abilities.spellCasterLevel += abilities.level/3
+        abilities.spellsLevel = (abilities.level/3 + 1) / 2
         abilities
     },
     getAlternatives = mutableMapOf(),

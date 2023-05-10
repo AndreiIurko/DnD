@@ -140,6 +140,7 @@ var cleric1: AbilityNode = AbilityNodeLevel(
         abilities.characterClass = Classes.Cleric
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.proficiencyBonus += 2
         abilities.hp += abilityToModifier(abilities.constitution) + 8
         abilities
@@ -220,6 +221,7 @@ var cleric3: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -288,6 +290,7 @@ var cleric5: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -320,6 +323,7 @@ var cleric7: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -352,6 +356,7 @@ var cleric9: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -413,6 +418,7 @@ var cleric11: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -445,6 +451,7 @@ var cleric13: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -475,6 +482,7 @@ var cleric15: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -506,6 +514,8 @@ var cleric17: AbilityNodeLevel = AbilityNodeLevel(
     name = "Жрец_17",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -520,6 +530,7 @@ var cleric18: AbilityNodeLevel = AbilityNodeLevel(
     name = "Жрец_18",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -534,6 +545,8 @@ var cleric19: AbilityNodeLevel = AbilityNodeLevel(
     name = "Жрец_19",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -550,6 +563,7 @@ var cleric20: AbilityNodeLevel = AbilityNodeLevel(
     name = "Жрец_20",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellCasterLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },

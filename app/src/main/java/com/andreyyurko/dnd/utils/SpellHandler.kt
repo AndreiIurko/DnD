@@ -40,7 +40,7 @@ class SpellsHandler @Inject constructor(
             val spell = Spell(spellDescription, listName, false)
             if (spell.data.classes.contains(className.lowercase()) &&
                 checkFilters(spell, filters) &&
-                spell.data.level.toInt() <= (character.characterInfo.spellCasterLevel + 1) / 2
+                spell.data.level.toInt() <= character.characterInfo.spellsLevel
             )
                 result.add(spell)
         }

@@ -153,6 +153,7 @@ var druid1: AbilityNode = AbilityNodeLevel(
         abilities.characterClass = Classes.Druid
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.proficiencyBonus += 2
         abilities.hp += abilityToModifier(abilities.constitution) + 8
         abilities
@@ -262,6 +263,7 @@ var druid3: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -295,6 +297,7 @@ var druid5: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -328,6 +331,7 @@ var druid7: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -361,6 +365,7 @@ var druid9: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -394,6 +399,7 @@ var druid11: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -427,6 +433,7 @@ var druid13: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -460,6 +467,7 @@ var druid15: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -493,6 +501,7 @@ var druid17: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -572,6 +581,7 @@ var druid19: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },

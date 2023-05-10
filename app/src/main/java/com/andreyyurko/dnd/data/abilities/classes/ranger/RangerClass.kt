@@ -305,6 +305,7 @@ var ranger2: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
+        abilities.spellsLevel += 1
         abilities
     },
     getAlternatives = mutableMapOf(
@@ -391,6 +392,7 @@ var ranger5: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 0.5f
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities.proficiencyBonus += 1
         abilities.spellsInfo["Заклинания класса"]?.let {
@@ -502,6 +504,7 @@ var ranger9: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 0.5f
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities.proficiencyBonus += 1
         abilities.spellsInfo["Заклинания класса"]?.let {
@@ -573,6 +576,7 @@ var ranger13: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 0.5f
+        abilities.spellsLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities.spellsInfo["Заклинания класса"]?.let {
@@ -666,6 +670,7 @@ var ranger17: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 0.5f
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1

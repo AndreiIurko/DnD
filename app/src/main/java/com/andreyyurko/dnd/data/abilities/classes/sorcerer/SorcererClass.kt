@@ -113,6 +113,7 @@ var sorcerer1: AbilityNodeLevel = AbilityNodeLevel(
         abilities.characterClass = Classes.Sorcerer
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.proficiencyBonus += 2
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
@@ -247,6 +248,7 @@ var sorcerer3: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
@@ -289,6 +291,7 @@ var sorcerer5: AbilityNodeLevel = AbilityNodeLevel(
         abilities.proficiencyBonus += 1
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
@@ -325,6 +328,7 @@ var sorcerer7: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
@@ -361,6 +365,7 @@ var sorcerer9: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.proficiencyBonus += 1
         abilities.spellsInfo["Заклинания класса"]?.let {
@@ -419,6 +424,7 @@ var sorcerer11: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
@@ -455,6 +461,7 @@ var sorcerer13: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.proficiencyBonus += 1
         abilities.spellsInfo["Заклинания класса"]?.let {
@@ -492,6 +499,7 @@ var sorcerer15: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1
@@ -553,6 +561,7 @@ var sorcerer17: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.proficiencyBonus += 1
         abilities.spellsInfo["Заклинания класса"]?.let {
@@ -602,6 +611,7 @@ var sorcerer19: AbilityNodeLevel = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.spellsInfo["Заклинания класса"]?.let {
             it.maxKnownSpellsCount += 1

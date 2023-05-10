@@ -142,6 +142,7 @@ var wizard1: AbilityNode = AbilityNodeLevel(
         abilities.characterClass = Classes.Wizard
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.proficiencyBonus += 2
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities
@@ -193,6 +194,7 @@ var wizard3: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
@@ -225,6 +227,7 @@ var wizard5: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
@@ -256,6 +259,7 @@ var wizard7: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
@@ -288,6 +292,7 @@ var wizard9: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
@@ -319,6 +324,7 @@ var wizard11: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities
     },
@@ -351,6 +357,7 @@ var wizard13: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         if (!abilities.currentState.charges.contains("Ячейки_7")) {
@@ -388,6 +395,7 @@ var wizard15: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         if (!abilities.currentState.charges.contains("Ячейки_8")) {
             abilities.currentState.charges["Ячейки_8"] = ChargesCounter(
@@ -426,6 +434,7 @@ var wizard17: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         if (!abilities.currentState.charges.contains("Ячейки_9")) {
@@ -486,6 +495,7 @@ var wizard19: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 4
         abilities.currentState.charges["Ячейки_6"]?.let {
             if (it.maximum < 2)

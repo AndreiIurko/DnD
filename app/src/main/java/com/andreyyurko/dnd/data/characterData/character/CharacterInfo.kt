@@ -6,6 +6,8 @@ import com.andreyyurko.dnd.data.spells.CharacterSpells
 data class CharacterInfo(
     var level: Int = 0,
     var spellCasterLevel: Float = 0f,
+    var spellsLevel: Int = 0,
+    //var spellsLevel: MutableMap<String, Int> = mutableMapOf(),
     var race: String = "",
     var characterClass: Classes = Classes.NotImplemented,
     var passiveInsightBonus: Int = 0,

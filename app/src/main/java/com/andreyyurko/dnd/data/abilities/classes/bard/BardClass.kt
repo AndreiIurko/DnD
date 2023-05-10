@@ -283,6 +283,7 @@ var bard1: AbilityNode = AbilityNodeLevel(
         abilities.characterClass = Classes.Bard
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.proficiencyBonus += 2
         abilities.hp += abilityToModifier(abilities.constitution) + 8
         abilities
@@ -433,6 +434,7 @@ var bard3: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -481,6 +483,7 @@ var bard5: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -532,6 +535,7 @@ var bard7: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -564,6 +568,7 @@ var bard9: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -598,6 +603,7 @@ var bard11: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -630,6 +636,7 @@ var bard13: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -661,6 +668,7 @@ var bard15: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
@@ -693,6 +701,7 @@ var bard17: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.proficiencyBonus += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
@@ -726,6 +735,7 @@ var bard19: AbilityNode = AbilityNodeLevel(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },

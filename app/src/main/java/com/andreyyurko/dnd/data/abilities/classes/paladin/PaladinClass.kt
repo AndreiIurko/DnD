@@ -230,6 +230,7 @@ var paladin2: AbilityNode = AbilityNodeLevel(
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
         abilities
     },
     getAlternatives = mutableMapOf(
@@ -324,6 +325,8 @@ var paladin5: AbilityNode = AbilityNodeLevel(
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
+        abilities.proficiencyBonus += 1
         abilities
     },
     getAlternatives = mutableMapOf(
@@ -403,6 +406,8 @@ var paladin9: AbilityNode = AbilityNodeLevel(
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
+        abilities.proficiencyBonus += 1
         abilities
     },
     getAlternatives = mutableMapOf(
@@ -499,6 +504,8 @@ var paladin13: AbilityNode = AbilityNodeLevel(
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
+        abilities.proficiencyBonus += 1
         abilities
     },
     getAlternatives = mutableMapOf(
@@ -588,6 +595,8 @@ var paladin17: AbilityNode = AbilityNodeLevel(
         abilities.level += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 6
         abilities.spellCasterLevel += 1
+        abilities.spellsLevel += 1
+        abilities.proficiencyBonus += 1
         abilities
     },
     getAlternatives = mutableMapOf(
