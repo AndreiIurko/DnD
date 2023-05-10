@@ -237,7 +237,7 @@ class CharactersHolder @Inject constructor(
     }
 
     // TODO: on start sync save with load (in case fast kill and restore)
-    fun saveCharacter(id: Int) {
+    private fun saveCharacter(id: Int) {
         saveCharacterBitmap(id, characters[id]!!.image)
         // in case changes in ids
         db.putStringsAsync(
