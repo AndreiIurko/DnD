@@ -6,7 +6,6 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
@@ -49,7 +48,7 @@ open class FragmentWithFilters : BaseFragment {
     }
 
     protected inline fun <reified T> setupFilter(button: TextView, set: MutableSet<T>) where T : Enum<T>, T : Filter {
-        val (choiceList, parent) = setupBasicPopUpMenu(button.context, null)
+        val (choiceList, parent) = setupBasicPopUpMenu(button.context)
         for (enumValue in enumValues<T>()) {
             val textView = TextView(context)
             textView.isClickable = true
@@ -82,13 +81,7 @@ open class FragmentWithFilters : BaseFragment {
         }
         val location = IntArray(2)
         button.getLocationOnScreen(location)
-        parent.measure(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-        choiceList.showAtLocation(
-            view,
-            Gravity.NO_GRAVITY,
-            location[0] + button.width / 2 - parent.measuredWidth / 2,
-            location[1] + button.height + (requireContext().resources.displayMetrics.density * 6).toInt()
-        )
+        choiceList.showAtLocation(view, Gravity.NO_GRAVITY, location[0], location[1] + button.height)
     }
 
     protected fun setupStringFilter(button: TextView, set: MutableSet<String>, values: List<String>) {
@@ -125,12 +118,6 @@ open class FragmentWithFilters : BaseFragment {
         }
         val location = IntArray(2)
         button.getLocationOnScreen(location)
-        parent.measure(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-        choiceList.showAtLocation(
-            view,
-            Gravity.NO_GRAVITY,
-            location[0] + button.width / 2 - parent.measuredWidth / 2,
-            location[1] + button.height + (requireContext().resources.displayMetrics.density * 6).toInt()
-        )
+        choiceList.showAtLocation(view, Gravity.NO_GRAVITY, location[0], location[1] + button.height)
     }
 }
