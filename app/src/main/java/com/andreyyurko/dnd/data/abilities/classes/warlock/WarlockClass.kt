@@ -10,13 +10,17 @@ import com.andreyyurko.dnd.data.abilities.other.investigation
 import com.andreyyurko.dnd.data.abilities.other.nature
 import com.andreyyurko.dnd.data.abilities.other.religion
 import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
 import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.Priority
 import com.andreyyurko.dnd.data.characterData.addAllSimpleWeapons
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import com.andreyyurko.dnd.data.spells.CharacterSpells
+import com.andreyyurko.dnd.data.spells.SpellLists
 import kotlin.math.max
 
 var classFeaturesWarlock: AbilityNode = AbilityNode(
@@ -65,15 +69,18 @@ var classFeaturesWarlock: AbilityNode = AbilityNode(
 var spellCastingWarlock: AbilityNode = AbilityNode(
     name = "Колдун: использование заклинаний",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        var spellNumber = abilities.level + 1
+        if (abilities.level > 9) spellNumber = (abilities.level + 11) / 2
+        var cantripNumber = 2
+        if (abilities.level > 3) cantripNumber = 3
+        if (abilities.level > 9) cantripNumber = 4
         abilities.spellsInfo.apply {
             if (!this.contains("Заклинания класса")) {
                 this["Заклинания класса"] = CharacterSpells()
             }
-            this["Заклинания класса"]?.className = Classes.Wizard.className
-            this["Заклинания класса"]?.maxKnownSpellsCount = 4 + 2 * (abilities.level)
-            this["Заклинания класса"]?.maxPreparedSpellsCount =
-                max((abilityToModifier(abilities.intelligence) + abilities.level), 1)
-            this["Заклинания класса"]?.maxKnownCantripsCount = kotlin.math.min((abilities.level + 20) / 6, 5)
+            this["Заклинания класса"]?.className = Classes.Warlock.className
+            this["Заклинания класса"]?.maxKnownSpellsCount = spellNumber
+            this["Заклинания класса"]?.maxKnownCantripsCount = cantripNumber
         }
         abilities.additionalAbilities["Ритуальное колдовство"] =
             "Вы можете сотворить любое известное вам заклинание волшебника в качестве ритуала, если заклинание позволяет это.\n"
@@ -83,53 +90,93 @@ var spellCastingWarlock: AbilityNode = AbilityNode(
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Wizard
     },
-    description = "Являясь учеником тайной магии, вы обладаете книгой, содержащей заклинания, показывающие первые проблески вашей истинной силы. Вы найдёте список заклинаний, доступных волшебнику в этом разделе: заклинания волшебника.\n" +
+    description = "Исследования тайн и магия, дарованная покровителем, дают вам возможность использовать заклинания. Вы найдёте список заклинаний, доступных колдуну в этом разделе: заклинания колдуна.\n" +
             "Заговоры (заклинания 0-го уровня)\n" +
             "\n" +
-            "На 1-м уровне вы знаете три заговора на ваш выбор из списка заклинаний волшебника. Вы узнаёте дополнительные заговоры волшебника на более высоких уровнях, как показано в колонке «Известные заговоры».\n" +
-            "Книга заклинаний\n" +
+            "Вы знаете два заговора на свой выбор из списка заклинаний колдуна. Вы узнаёте дополнительные заговоры колдуна на более высоких уровнях, как показано в колонке «Известные заговоры».\n" +
+            "Ячейки заклинаний\n" +
             "\n" +
-            "На 1-м уровне у вас есть книга заклинаний, содержащая шесть заклинаний волшебника 1-го уровня по вашему выбору. Ваша книга заклинаний является хранилищем известных вам заклинаний волшебника, за исключением заговоров, которые вы всегда помните.\nПодготовка и сотворение заклинаний\n" +
+            "Таблица «Колдун» показывает, какое количество ячеек для накладывания заклинаний колдуна с 1-го по 5-й уровень у вас есть, а также уровень этих ячеек — все ваши ячейки заклинаний одного уровня. Для накладывания одного из заклинаний колдуна 1-го уровня и выше вы должны потратить ячейку заклинаний. Вы восстановите все потраченные ячейки, когда завершите короткий или продолжительный отдых.\n" +
             "\n" +
-            "Таблица «Волшебник» показывает, какое количество ячеек для накладывания заклинаний волшебника у вас есть на первом и более высоких уровнях. Для накладывания одного из этих заклинаний вы должны потратить ячейку заклинаний того же уровня или выше, что и само заклинание. Вы восстановите все потраченные ячейки, когда завершите продолжительный отдых.\n" +
-            "\n" +
-            "Вы подготавливаете список заклинаний волшебника, доступных для накладывания. При этом вы выбираете число заклинаний волшебника из своей книги заклинаний, равное модификатору Интеллекта + уровень волшебника (минимум одно заклинание). Уровень заклинаний не должен превышать уровень самой высокой имеющейся у вас ячейки заклинаний. Например, если вы волшебник 3-го уровня, то у вас есть четыре ячейки заклинаний 1-го уровня и две ячейки 2-го уровня. При Интеллекте 16 ваш список подготовленных заклинаний может включать в себя шесть заклинаний 1-го или 2-го уровня в любой комбинации, выбранных из вашей книги заклинаний. Если вы подготовили заклинание 1-го уровня волшебная стрела [magic missile], вы можете наложить его, используя ячейку 1-го уровня или ячейку 2-го уровня. Накладывание заклинания не удаляет его из списка подготовленных заклинаний.\n" +
-            "\n" +
-            "Вы можете изменить список подготовленных заклинаний, когда заканчиваете продолжительный отдых. Подготовка нового списка заклинаний волшебника требует времени, проведённого в изучении книги заклинаний и запоминания слов и жестов, которые вы должны совершить, чтобы наложить заклинание: не менее 1 минуты за уровень заклинания для каждого заклинания в вашем списке.\n" +
-            "Базовая характеристика заклинаний\n" +
-            "\n" +
-            "При создании заклинаний волшебник использует Интеллект, так как вы узнаёте свои заклинания специальными исследованиями и запоминанием. Вы используете Интеллект в случаях, когда заклинание ссылается на базовую характеристику. Кроме того, вы используете модификатор Интеллекта при определении Сл спасбросков от ваших заклинаний волшебника, и при броске атаки заклинаниями.\n" +
-            "\n" +
-            "Сл спасброска = 8 + ваш бонус мастерства + ваш модификатор Интеллекта\n" +
-            "\n" +
-            "Модификатор броска атаки = ваш бонус мастерства + ваш модификатор Интеллекта\n" +
-            "Ритуальное колдовство\n" +
-            "\n" +
-            "Вы можете сотворить заклинание волшебника как ритуал, если у этого заклинания есть ключевое слово «ритуал», и оно есть в вашей книге заклинаний. Вам не нужно иметь это заклинание подготовленным.\n" +
-            "Фокусировка заклинания\n" +
-            "\n" +
-            "Вы можете использовать магическую фокусировку в качестве заклинательной фокусировки для заклинаний волшебника.\n" +
+            "Например, если ваш персонаж 5-го уровня, у вас есть две ячейки заклинаний 3-го уровня. Чтобы использовать заклинание 1-го уровня ведьмин снаряд [witch bolt] вы должны потратить одну из этих ячеек, и заклинание сработает как заклинание 3-го уровня.\n" +
             "Известные заклинания первого и более высоких уровней\n" +
             "\n" +
-            "Каждый раз, когда вы получаете уровень волшебника, вы можете добавить два заклинания волшебника по вашему выбору в книгу заклинаний. Уровень этих заклинаний не должен превышать уровень самой высокой имеющейся у вас ячейки заклинаний. Во время приключений вы можете найти другие заклинания, которые сможете добавить в книгу заклинаний.\n"
+            "На 1-м уровне вы знаете два заклинания 1-го уровня по своему выбору из списка заклинаний колдуна.\n" +
+            "\n" +
+            "Колонка «Известные заклинания» показывает, когда вы сможете выучить новые заклинания 1-го уровня и выше. Уровень заклинания, которое вы выбрали, не должен превышать уровень ячеек, указанный в таблице для колдуна вашего уровня. Например, когда вы получите 6-й уровень, вы изучите новое заклинание колдуна, которое может быть 1-го, 2-го или 3-го уровней.\n" +
+            "\n" +
+            "Кроме того, когда вы получаете уровень в этом классе, вы можете выбрать одно из известных вам заклинаний колдуна и заменить его другим заклинанием из списка заклинаний колдуна, с уровнем, не превышающим уровень ячеек заклинаний.\n" +
+            "Базовая характеристика заклинаний\n" +
+            "\n" +
+            "При накладывании заклинаний колдун использует Харизму. Вы используете Харизму в случаях, когда заклинание ссылается на базовую характеристику. Кроме того, вы используете модификатор Харизмы при определении Сл спасбросков от ваших заклинаний колдуна, и при броске атаки заклинаниями.\n" +
+            "\n" +
+            "Сл спасброска = 8 + ваш бонус мастерства + ваш модификатор Харизмы\n" +
+            "\n" +
+            "Модификатор броска атаки = ваш бонус мастерства + ваш модификатор Харизмы\n" +
+            "Фокусировка заклинания\n" +
+            "\n" +
+            "Вы можете использовать магическую фокусировку в качестве заклинательной фокусировки для заклинаний колдуна.\n"
+)
+
+var otherwordlyPatron: AbilityNode = AbilityNode(
+    name = "Потусторонний покровитель",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities
+    },
+    getAlternatives = mutableMapOf(
+        //Pair("first", { listOf(schoolOfDivination.name, schoolOfConjuration.name) })
+    ),
+    requirements = { true },
+    description = "Вы заключаете сделку с потусторонним существом на ваш выбор. Подробности всех покровителей смотрите ниже. Ваш выбор определит умения, предоставляемые вам на 1-м, 6-м, 10-м и 14-м уровнях.\n"
 )
 
 var warlock1: AbilityNodeLevel = AbilityNodeLevel(
     name = "Колдун_1",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellsLevel += 1
         abilities.proficiencyBonus += 2
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
     getAlternatives = mutableMapOf(
         Pair("first", { listOf(classFeaturesWarlock.name) }),
-        //Pair("second", { listOf(spellCastingWarlock.name) })
+        Pair("second", { listOf(spellCastingWarlock.name) }),
+        Pair("third", { listOf(otherwordlyPatron.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
     description = "1-й уровень, способности колдуна",
     next_level = "Колдун_2",
+)
+
+var eldritchInvocations: AbilityNode = AbilityNode(
+    name = "Таинственные воззвания",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities
+    },
+    getAlternatives = mutableMapOf(
+        Pair("first", { mapOfEldrichInvocations.keys.toList() }),
+        Pair("second", { mapOfEldrichInvocations.keys.toList() })
+    ),
+    requirements = { true },
+    description = "В процессе изучения оккультных знаний вы раскопали таинственные воззвания: фрагменты запрещенных знаний, которые даруют магические способности.\n" +
+            "\n" +
+            "Вы получаете два воззвания на свой выбор. Смотрите список воззваний. Получая новые уровни колдуна, вы получаете дополнительные воззвания на свой выбор, как показано в колонке «известные воззвания».\n" +
+            "\n" +
+            "Кроме того, когда вы получаете новый уровень этого класса, вы можете выбрать одно известное вам воззвание и заменить его другим, которое вы способны выучить на этом уровне.\n"
+)
+
+var newEldritchInvocation: AbilityNode = AbilityNode(
+    name = "Дополнительное таинственное воззвание",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities
+    },
+    getAlternatives = mutableMapOf(
+        Pair("first", { mapOfEldrichInvocations.keys.toList() })
+    ),
+    requirements = { true },
+    description = "Вы можете выбрать дополнительное таинственное воззвание\n"
 )
 
 var warlock2: AbilityNodeLevel = AbilityNodeLevel(
@@ -140,7 +187,7 @@ var warlock2: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        //Pair("first", { listOf(strokeOfLuck.name) })
+        Pair("first", { listOf(eldritchInvocations.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -148,15 +195,99 @@ var warlock2: AbilityNodeLevel = AbilityNodeLevel(
     next_level = "Колдун_3",
 )
 
+var pactOfTheBlade: AbilityNode = AbilityNode(
+    name = "Договор клинка",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsList.add(
+            Action(
+                name = "Оружие договора",
+                description = "Вы можете действием создать оружие договора в своей пустой руке. Вы сами выбираете форму этого рукопашного оружия каждый раз, когда создаёте. Вы получаете владение этим оружием, пока используете его. Оружие считается магическим при определении преодоления сопротивления и иммунитета от немагических атак и урона.\n" +
+                        "\n" +
+                        "Оружие договора исчезает, если оно в течении 1 минуты находится дальше 5 футов от вас. Оно также исчезает, если вы используете это умение еще раз, отзываете оружие (действие не требуется), или умираете. Вы можете трансформировать одно магическое оружие в своё оружие договора, проведя специальный ритуал, держа это оружие. Ритуал совершается 1 час, его можно провести во время короткого отдыха. Впоследствии вы можете отозвать оружие, помещая его между измерениями. Оно будет появляться в руке, когда вы будете в дальнейшем создавать оружие договора. Вы не можете сделать это с артефактом или разумным оружием. Оружие перестаёт быть оружием договора, когда вы умираете, выполняете часовой ритуал с другим оружием или когда вы исполните ритуал длиной в час для того, чтобы разорвать связь. Оружие материализуется у ваших ног, если в момент разрыва связи оно находилось между измерениями.\n",
+                type = ActionType.Action
+            )
+        )
+        abilities
+    },
+    getAlternatives = mutableMapOf(),
+    requirements = { true },
+    description = "Вы можете действием создать оружие договора в своей пустой руке. Вы сами выбираете форму этого рукопашного оружия каждый раз, когда создаёте. Вы получаете владение этим оружием, пока используете его. Оружие считается магическим при определении преодоления сопротивления и иммунитета от немагических атак и урона.\n" +
+            "\n" +
+            "Оружие договора исчезает, если оно в течении 1 минуты находится дальше 5 футов от вас. Оно также исчезает, если вы используете это умение еще раз, отзываете оружие (действие не требуется), или умираете. Вы можете трансформировать одно магическое оружие в своё оружие договора, проведя специальный ритуал, держа это оружие. Ритуал совершается 1 час, его можно провести во время короткого отдыха. Впоследствии вы можете отозвать оружие, помещая его между измерениями. Оно будет появляться в руке, когда вы будете в дальнейшем создавать оружие договора. Вы не можете сделать это с артефактом или разумным оружием. Оружие перестаёт быть оружием договора, когда вы умираете, выполняете часовой ритуал с другим оружием или когда вы исполните ритуал длиной в час для того, чтобы разорвать связь. Оружие материализуется у ваших ног, если в момент разрыва связи оно находилось между измерениями.\n"
+)
+
+var pactOfTheChain: AbilityNode = AbilityNode(
+    name = "Договор цепи",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.spellsInfo.apply {
+            if (!this.contains("Заклинания договора цепи")) {
+                this["Заклинания договора цепи"] = CharacterSpells()
+            }
+            this["Заклинания договора цепи"]?.className = Classes.Warlock.className
+            this["Заклинания договора цепи"]?.maxKnownSpellsCount = 0
+            this["Заклинания договора цепи"]?.maxKnownCantripsCount = 0
+            this["Заклинания договора цепи"]?.spellLists = SpellLists(
+                knownSpells = mutableSetOf("Поиск фамильяра")
+            )
+        }
+        abilities.additionalAbilities["Договор цепи"] = "Вы узнаёте заклинание поиск фамильяра [find familiar] и можете сотворять его как ритуал. Это заклинание не учитывается при подсчёте числа заклинаний, которые вы можете знать.\n" +
+                "\n" +
+                "Когда вы накладываете это заклинание, вы можете выбрать одну из обычных форм для вашего фамильяра, либо одну из особых форм: бес [imp], квазит [quasit], псевдодракон [pseudodragon] или спрайт [sprite].\n" +
+                "\n" +
+                "Кроме того, когда вы совершаете действие Атака, вы можете вместо одной своей атаки позволить атаковать один раз фамильяру. При этом он совершает свою атаку реакцией.\n"
+        abilities
+    },
+    getAlternatives = mutableMapOf(),
+    requirements = { true },
+    description = "Вы узнаёте заклинание поиск фамильяра [find familiar] и можете сотворять его как ритуал. Это заклинание не учитывается при подсчёте числа заклинаний, которые вы можете знать.\n" +
+            "\n" +
+            "Когда вы накладываете это заклинание, вы можете выбрать одну из обычных форм для вашего фамильяра, либо одну из особых форм: бес [imp], квазит [quasit], псевдодракон [pseudodragon] или спрайт [sprite].\n" +
+            "\n" +
+            "Кроме того, когда вы совершаете действие Атака, вы можете вместо одной своей атаки позволить атаковать один раз фамильяру. При этом он совершает свою атаку реакцией.\n"
+)
+
+var pactOfTheTome: AbilityNode = AbilityNode(
+    name = "Договор гримуара",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.spellsInfo.apply {
+            if (!this.contains("Заклинания договора гримуара")) {
+                this["Заклинания договора гримуара"] = CharacterSpells()
+            }
+            this["Заклинания договора гримуара"]?.className = Classes.Warlock.className
+            this["Заклинания договора гримуара"]?.maxKnownSpellsCount = 0
+            this["Заклинания договора гримуара"]?.maxKnownCantripsCount = 3
+        }
+        abilities
+    },
+    getAlternatives = mutableMapOf(),
+    requirements = { true },
+    description = "Ваш покровитель дарует вам гримуар, который называется «Книга теней». Когда вы получаете это умение, выберите 3 заговора из списков любых классов. Пока книга с вами, вы можете применять эти заговоры неограниченно. Они не учитываются при подсчёте максимального числа заговоров, которые вы можете знать, и считаются для вас заклинаниями колдуна.\n" +
+            "\n" +
+            "Если вы теряете книгу, вам нужно провести ритуал длительностью в 1 час, чтобы получить замену от своего покровителя. Вы можете провести этот ритуал во время короткого или продолжительного отдыха. Предыдущая книга при этом уничтожается. Книга обращается в прах при вашей смерти.\n"
+)
+
+var pactBoon: AbilityNode = AbilityNode(
+    name = "Предмет договора",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities
+    },
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(pactOfTheBlade.name, pactOfTheChain.name, pactOfTheTome.name) })
+    ),
+    requirements = { true },
+    description = "Потусторонний покровитель дарует вам подарок за верную службу. Вы получаете одно из следующих умений на выбор\n"
+)
+
 var warlock3: AbilityNodeLevel = AbilityNodeLevel(
     name = "Колдун_3",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
     getAlternatives = mutableMapOf(
-        //Pair("first", { listOf(strokeOfLuck.name) })
+        Pair("first", { listOf(pactBoon.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -184,12 +315,13 @@ var warlock5: AbilityNodeLevel = AbilityNodeLevel(
     name = "Колдун_5",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities.proficiencyBonus += 1
         abilities
     },
     getAlternatives = mutableMapOf(
-        //Pair("first", { listOf(strokeOfLuck.name) })
+        Pair("first", { listOf(newEldritchInvocation.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -204,9 +336,7 @@ var warlock6: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    getAlternatives = mutableMapOf(
-        //Pair("first", { listOf(strokeOfLuck.name) })
-    ),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "6-й уровень, способности колдуна",
@@ -217,11 +347,12 @@ var warlock7: AbilityNodeLevel = AbilityNodeLevel(
     name = "Колдун_7",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
     getAlternatives = mutableMapOf(
-        //Pair("first", { listOf(strokeOfLuck.name) })
+        Pair("first", { listOf(newEldritchInvocation.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -249,12 +380,13 @@ var warlock9: AbilityNodeLevel = AbilityNodeLevel(
     name = "Колдун_9",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.level += 1
+        abilities.spellsLevel += 1
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities.proficiencyBonus += 1
         abilities
     },
     getAlternatives = mutableMapOf(
-        //Pair("first", { listOf(strokeOfLuck.name) })
+        Pair("first", { listOf(newEldritchInvocation.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -269,13 +401,27 @@ var warlock10: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    getAlternatives = mutableMapOf(
-        //Pair("first", { listOf(strokeOfLuck.name) })
-    ),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "10-й уровень, способности колдуна",
     next_level = "Колдун_11",
+)
+
+var mysticArcanum: AbilityNode = AbilityNode(
+    name = "Таинственный арканум",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities
+    },
+    getAlternatives = mutableMapOf(
+        //Pair("first", { listOf() })
+    ),
+    requirements = { true },
+    description = "Ваш покровитель дарует вам магический секрет, называемый арканумом. Выберите одно заклинание 6-го уровня из списка заклинаний колдуна в качестве арканума.\n" +
+            "\n" +
+            "Вы можете наложить это заклинание, не используя ячейку заклинаний. Вы должны окончить продолжительный отдых, чтобы сделать это еще раз.\n" +
+            "\n" +
+            "На следующих уровнях вы получаете новые заклинания, которые можно применить таким образом — одно 7-го уровня на 13-м уровне, одно 8-го уровня на 15-м уровне и одно 9-го уровня на 17-м уровне. После окончания продолжительного отдыха вы восстанавливаете все потраченные использования арканумов.\n"
 )
 
 var warlock11: AbilityNodeLevel = AbilityNodeLevel(
@@ -286,7 +432,7 @@ var warlock11: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        //Pair("first", { listOf(strokeOfLuck.name) })
+        Pair("first", { listOf(mysticArcanum.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -303,6 +449,7 @@ var warlock12: AbilityNodeLevel = AbilityNodeLevel(
     },
     getAlternatives = mutableMapOf(
         Pair("first", { listOf(abilityScoreImprovement.name) }),
+        Pair("second", { listOf(newEldritchInvocation.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -334,9 +481,7 @@ var warlock14: AbilityNodeLevel = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    getAlternatives = mutableMapOf(
-        //Pair("first", { listOf(strokeOfLuck.name) })
-    ),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     addRequirements = listOf(),
     description = "14-й уровень, способности колдуна",
@@ -351,7 +496,7 @@ var warlock15: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        //Pair("first", { listOf(strokeOfLuck.name) })
+        Pair("first", { listOf(newEldritchInvocation.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -400,7 +545,7 @@ var warlock18: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        //Pair("first", { listOf(strokeOfLuck.name) })
+        Pair("first", { listOf(newEldritchInvocation.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -424,6 +569,30 @@ var warlock19: AbilityNodeLevel = AbilityNodeLevel(
     next_level = "Колдун_20",
 )
 
+var edritchMaster: AbilityNode = AbilityNode(
+    name = "Таинственный мастер",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        if (!abilities.currentState.charges.contains("Таинственный мастер")) {
+            abilities.currentState.charges["Таинственный мастер"] = ChargesCounter(
+                current = 1,
+                maximum = 1
+            )
+        }
+        abilities.actionsList.add(
+            Action(
+                name = "Отражение снарядов",
+                description = "Вы можете обратиться к внутреннему резерву мистической силы, умоляя при этом покровителя восстановить потраченные ячейки заклинаний. Вам надо потратить 1 минуту, умоляя покровителя, чтобы восстановить все использованные ячейки заклинаний, дарованные умением «Магия договора». Вы должны закончить продолжительный отдых, чтобы применить это умение вновь.\n",
+                type = ActionType.Long,
+                relatedCharges = "Таинственный мастер"
+            )
+        )
+        abilities
+    },
+    getAlternatives = mutableMapOf(),
+    requirements = { true },
+    description = "Вы можете обратиться к внутреннему резерву мистической силы, умоляя при этом покровителя восстановить потраченные ячейки заклинаний. Вам надо потратить 1 минуту, умоляя покровителя, чтобы восстановить все использованные ячейки заклинаний, дарованные умением «Магия договора». Вы должны закончить продолжительный отдых, чтобы применить это умение вновь.\n"
+)
+
 var warlock20: AbilityNodeLevel = AbilityNodeLevel(
     name = "Колдун_20",
     changesInCharacterInfo = { abilities: CharacterInfo ->
@@ -432,7 +601,7 @@ var warlock20: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        //Pair("first", { listOf(strokeOfLuck.name) })
+        Pair("first", { listOf(edritchMaster.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -443,8 +612,15 @@ var warlock20: AbilityNodeLevel = AbilityNodeLevel(
 var mapOfWarlockAbilities: MutableMap<String, AbilityNode> = (mutableMapOf(
     Pair(classFeaturesWarlock.name, classFeaturesWarlock),
     Pair(spellCastingWarlock.name, spellCastingWarlock),
+    Pair(otherwordlyPatron.name, otherwordlyPatron),
     Pair(warlock1.name, warlock1),
+    Pair(eldritchInvocations.name, eldritchInvocations),
+    Pair(newEldritchInvocation.name, newEldritchInvocation),
     Pair(warlock2.name, warlock2),
+    Pair(pactOfTheBlade.name, pactOfTheBlade),
+    Pair(pactOfTheChain.name, pactOfTheChain),
+    Pair(pactOfTheTome.name, pactOfTheTome),
+    Pair(pactBoon.name, pactBoon),
     Pair(warlock3.name, warlock3),
     Pair(warlock4.name, warlock4),
     Pair(warlock5.name, warlock5),
@@ -453,6 +629,7 @@ var mapOfWarlockAbilities: MutableMap<String, AbilityNode> = (mutableMapOf(
     Pair(warlock8.name, warlock8),
     Pair(warlock9.name, warlock9),
     Pair(warlock10.name, warlock10),
+    Pair(mysticArcanum.name, mysticArcanum),
     Pair(warlock11.name, warlock11),
     Pair(warlock12.name, warlock12),
     Pair(warlock13.name, warlock13),
@@ -462,8 +639,9 @@ var mapOfWarlockAbilities: MutableMap<String, AbilityNode> = (mutableMapOf(
     Pair(warlock17.name, warlock17),
     Pair(warlock18.name, warlock18),
     Pair(warlock19.name, warlock19),
+    Pair(edritchMaster.name, edritchMaster),
     Pair(warlock20.name, warlock20),
 )
-        //+ mapOfAssassinArchetypeAbilities
+        + mapOfEldrichInvocations
         //+ mapOfArcaneTricksterArchetypeAbilities
         ).toMutableMap()
