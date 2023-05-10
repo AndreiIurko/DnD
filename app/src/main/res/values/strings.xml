@@ -4,4 +4,6 @@
     <string name="spell_level_and_school">%1$s уровень, %2$s</string>
     <string name="fragment_spell_list_search_edit_text_hint">Поиск заклинания</string>
     <string name="fragment_spells_list_search_button">Найти</string>
+    <string name="saving_characters_notification_title">Сохраняем информацию</string>
+    <string name="saving_characters_notification_message">Рекомендуем не заходить в приложение на время сохранения чтобы не потерять данные</string>
 </resources>

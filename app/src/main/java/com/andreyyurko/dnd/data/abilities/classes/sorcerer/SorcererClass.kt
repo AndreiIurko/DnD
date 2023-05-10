@@ -16,13 +16,11 @@ var classFeaturesSorcerer: AbilityNode = AbilityNode(
     },
     getAlternatives = mutableMapOf(
         Pair(
-            "skill1",
-            { listOf(intimidation.name, arcana.name, deception.name, insight.name, religion.name, persuasion.name) }
-        ),
+            "skill1"
+        ) { listOf(intimidation.name, arcana.name, deception.name, insight.name, religion.name, persuasion.name) },
         Pair(
-            "skill2",
-            { listOf(intimidation.name, arcana.name, deception.name, insight.name, religion.name, persuasion.name) }
-        ),
+            "skill2"
+        ) { listOf(intimidation.name, arcana.name, deception.name, insight.name, religion.name, persuasion.name) },
     ),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Sorcerer
@@ -99,7 +97,7 @@ var sorcerousOrigin: AbilityNode = AbilityNode(
     name = "Происхождение чародея",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(draconicBloodline.name, wildMagic.name) })
+        Pair("first") { listOf(draconicBloodline.name, wildMagic.name) }
     ),
     requirements = { true },
     description = "Выберите источник, из которого ваш персонаж черпает свою силу.\n" +
@@ -119,9 +117,9 @@ var sorcerer1: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(classFeaturesSorcerer.name) }),
-        Pair("second", { listOf(spellCastingSorcerer.name) }),
-        Pair("third", { listOf(sorcerousOrigin.name) })
+        Pair("first") { listOf(classFeaturesSorcerer.name) },
+        Pair("second") { listOf(spellCastingSorcerer.name) },
+        Pair("third") { listOf(sorcerousOrigin.name) }
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -221,13 +219,13 @@ var metamagic: AbilityNode = AbilityNode(
     },
     getAlternatives = mutableMapOf(
         Pair(
-            "first", {
-                listOf(
-                    carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
-                    heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name
-                )
-            }
-        ),
+            "first"
+        ) {
+            listOf(
+                carefulSpell.name, distantSpell.name, empoweredSpell.name, extendedSpell.name,
+                heightenedSpell.name, quickenedSpell.name, subtleSpell.name, twinnedSpell.name
+            )
+        },
         Pair(
             "second", {
                 listOf(
@@ -278,7 +276,9 @@ var sorcerer4: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    getAlternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(
+        Pair("first") { listOf(abilityScoreImprovement.name) }
+    ),
     requirements = { true },
     addRequirements = listOf(),
     description = "4-й уровень, способности чародея",
@@ -353,7 +353,9 @@ var sorcerer8: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    getAlternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(
+        Pair("first") { listOf(abilityScoreImprovement.name) }
+    ),
     requirements = { true },
     addRequirements = listOf(),
     description = "8-й уровень, способности чародея",
@@ -449,7 +451,9 @@ var sorcerer12: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    getAlternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(
+        Pair("first") { listOf(abilityScoreImprovement.name) }
+    ),
     requirements = { true },
     addRequirements = listOf(),
     description = "12-й уровень, способности чародея",
@@ -530,7 +534,9 @@ var sorcerer16: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    getAlternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(
+        Pair("first") { listOf(abilityScoreImprovement.name) }
+    ),
     requirements = { true },
     addRequirements = listOf(),
     description = "16-й уровень, способности чародея",
@@ -622,7 +628,9 @@ var sorcerer19: AbilityNodeLevel = AbilityNodeLevel(
         }
         abilities
     },
-    getAlternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(
+        Pair("first") { listOf(abilityScoreImprovement.name) }
+    ),
     requirements = { true },
     addRequirements = listOf(),
     description = "19-й уровень, способности чародея",

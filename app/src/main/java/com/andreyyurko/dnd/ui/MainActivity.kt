@@ -1,8 +1,9 @@
 package com.andreyyurko.dnd.ui
 
 import android.animation.ObjectAnimator
+import android.app.ActivityManager
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
@@ -13,10 +14,11 @@ import androidx.lifecycle.ViewModelProvider
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.ActivityMainBinding
+import com.andreyyurko.dnd.utils.CharacterSavingService
 import com.andreyyurko.dnd.utils.CharactersHolder
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Delay
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
@@ -74,8 +76,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     override fun onPause() {
-        charactersHolder.saveCharacters()
+        val serviceIntent = Intent(this, CharacterSavingService::class.java)
+        startForegroundService(serviceIntent)
         super.onPause()
     }
-
 }

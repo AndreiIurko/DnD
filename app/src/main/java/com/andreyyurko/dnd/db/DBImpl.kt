@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Parcelable
+import android.util.Log
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.OutOfQuotaPolicy
@@ -80,9 +81,10 @@ internal class DBImpl(
             inputData.putString(ParcelableWriter.WORKER_DATA + it.index, it.value.second)
         }
 
-        var request = OneTimeWorkRequestBuilder<ParcelableWriter>()
+        val request = OneTimeWorkRequestBuilder<ParcelableWriter>()
             .setInputData(inputData.build())
             .addTag("saveCharacterInfo")
+            .addTag(data[0].first)
             .build()
 
         WorkManager.getInstance(appContext).enqueue(request)
