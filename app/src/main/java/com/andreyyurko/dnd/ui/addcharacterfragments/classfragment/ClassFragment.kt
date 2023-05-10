@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.ViewModelProvider
@@ -108,11 +109,15 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
                 classChoiceList.dismiss()
             }
         }
+
+        parent.measure(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         classChoiceList.showAtLocation(
             view,
             Gravity.NO_GRAVITY,
-            viewBinding.chooseClassButton.x.toInt(),
-            viewBinding.chooseClassButton.y.toInt() + viewBinding.chooseClassButton.height
+            viewBinding.chooseClassButton.x.toInt() + viewBinding.chooseClassButton.width / 2
+                    - parent.measuredWidth / 2,
+            viewBinding.chooseClassButton.y.toInt() + viewBinding.chooseClassButton.height +
+                    (context.resources.displayMetrics.density * 6).toInt()
         )
         viewBinding.arrowDropImageView.visibility = View.GONE
         viewBinding.arrowUpImageView.visibility = View.VISIBLE
