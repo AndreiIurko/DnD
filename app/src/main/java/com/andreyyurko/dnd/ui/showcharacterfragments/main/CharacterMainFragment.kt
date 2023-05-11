@@ -282,12 +282,18 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
     }
 
     private fun setupSlots() {
+        var isHaveSlots = false
         for (i in 0 until viewBinding.spellSlotsLinearLayout.childCount) {
-            setupLinearLayout(viewBinding.spellSlotsLinearLayout.getChildAt(i) as LinearLayout, i + 1)
+            isHaveSlots = isHaveSlots or setupLinearLayout(viewBinding.spellSlotsLinearLayout.getChildAt(i) as LinearLayout, i + 1)
+        }
+        if (!isHaveSlots) {
+            viewBinding.spellSlotsButton.visibility = View.GONE
+            viewBinding.spellSlotsLinearLayout.visibility = View.GONE
         }
     }
 
-    private fun setupLinearLayout(linearLayout: LinearLayout, level: Int) {
+    private fun setupLinearLayout(linearLayout: LinearLayout, level: Int): Boolean {
+        var isHaveSlots = false
         for (i in 1 until linearLayout.childCount) {
             val checkBox: MaterialCheckBox = linearLayout.getChildAt(i) as MaterialCheckBox
             val charges = characterViewModel.shownCharacter.characterInfo.currentState.charges["Ячейки_$level"]
@@ -299,7 +305,7 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
                 checkBox.isEnabled = false
                 continue
             }
-
+            isHaveSlots = true
             checkBox.isChecked = charges.current >= i
 
             checkBox.setOnCheckedChangeListener { _, isChecked ->
@@ -312,5 +318,6 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
                 }
             }
         }
+        return isHaveSlots
     }
 }

@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         super.onDestroy()
     }
 
-    suspend fun saveCharacters() {
+    private suspend fun saveCharacters() {
         // every 3 minutes save characters
         while (true) {
             delay(3 * 60 * 1000)
