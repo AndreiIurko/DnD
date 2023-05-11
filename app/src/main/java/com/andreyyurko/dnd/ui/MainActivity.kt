@@ -3,6 +3,7 @@ package com.andreyyurko.dnd.ui
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
@@ -92,14 +93,22 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     override fun onStop() {
-        val serviceIntent = Intent(this, CharacterSavingService::class.java)
-        startService(serviceIntent)
+        Log.d("test", charactersHolder.isSavingNeeded.toString())
+        if (charactersHolder.isSavingNeeded) {
+            val serviceIntent = Intent(this, CharacterSavingService::class.java)
+            startService(serviceIntent)
+            charactersHolder.isSavingNeeded = false
+        }
         super.onStop()
     }
 
     override fun onDestroy() {
-        val serviceIntent = Intent(this, CharacterSavingService::class.java)
-        startForegroundService(serviceIntent)
+        Log.d("test", charactersHolder.isSavingNeeded.toString())
+        if (charactersHolder.isSavingNeeded) {
+            val serviceIntent = Intent(this, CharacterSavingService::class.java)
+            startForegroundService(serviceIntent)
+            charactersHolder.isSavingNeeded = false
+        }
         super.onDestroy()
     }
 

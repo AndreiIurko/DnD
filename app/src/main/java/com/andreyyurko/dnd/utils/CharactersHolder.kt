@@ -51,6 +51,8 @@ class CharactersHolder @Inject constructor(
     private var _savingCharactersState = MutableStateFlow<SavingCharactersState>(SavingCharactersState.NotCompleted)
     var savingCharactersState: Flow<SavingCharactersState> = _savingCharactersState.asStateFlow()
 
+    var isSavingNeeded = false
+
     fun initialize() {
         Timer().schedule(timerTask {
             if (_initActionState.asStateFlow().value != InitializationState.Initialized) {

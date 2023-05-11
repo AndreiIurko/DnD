@@ -50,6 +50,7 @@ class CharacterViewModel @Inject constructor(
     }
 
     fun updateCharacterInfo() {
+        charactersHolder.isSavingNeeded = true
         dataState.value = DataState.Loading.stateName
         mergeAllAbilities(shownCharacter)
         dataState.value = DataState.Complete.stateName

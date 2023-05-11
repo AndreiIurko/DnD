@@ -34,6 +34,8 @@ class ClassViewModel @Inject constructor(
     }
 
     fun makeChoice(choice: String) {
+        character.characterInfo.currentState.charges = mutableMapOf()
+        // TODO: понять как лучше всего обработать смену класса
         character.characterInfo.spellsInfo.remove("Заклинания класса")
         // TODO: think about how to do it better
         mapOfAn[choice]?.let {
