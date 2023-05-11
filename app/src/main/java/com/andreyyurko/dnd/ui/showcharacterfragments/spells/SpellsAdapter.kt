@@ -11,25 +11,27 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.SpellSpecificLanguage
-import com.andreyyurko.dnd.utils.CharacterViewModel
-import com.andreyyurko.dnd.utils.SpellsHandler
+import com.andreyyurko.dnd.data.spells.Spell
 import javax.inject.Inject
 
 class SpellsAdapter @Inject constructor(
-    private val spellsHandler: SpellsHandler,
-    private val characterViewModel: CharacterViewModel,
-    private val preparedSpellsCountTextView: TextView,
-    private val preparedCantripsCountTextView: TextView,
-    private val root: ViewGroup
+    private val spellsCountTextView: TextView,
+    private val cantripsCountTextView: TextView,
+    private val root: ViewGroup,
+    private val showPopUpBackground: () -> Unit,
+    private val closePopUpBackground: () -> Unit,
+    private val addSpell: (spell: Spell) -> Unit,
+    private val removeSpell: (spell: Spell) -> Unit,
+    private val getChosenSpells: () -> List<Spell>,
 ) : RecyclerView.Adapter<SpellsAdapter.ViewHolder>() {
 
-    var spellsList: List<SpellSpecificLanguage> = listOf()
+    var shownSpellsList: List<Spell> = listOf()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.spellName)
         val levelTextView: TextView = itemView.findViewById(R.id.spellLevel)
         val castTimeTextView: TextView = itemView.findViewById(R.id.spellCastTime)
-        val isPreparedCheckbox: CheckBox = itemView.findViewById(R.id.isPrepared)
+        val isAddedCheckbox: CheckBox = itemView.findViewById(R.id.isAdded)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,38 +40,50 @@ class SpellsAdapter @Inject constructor(
     }
 
     override fun getItemCount(): Int {
-        return spellsList.size
+        return shownSpellsList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        spellsList[position].name.apply {
+        shownSpellsList[position].data.name.apply {
             if (this.length > 20) holder.nameTextView.text = this.substring(0..16) + "..."
             else holder.nameTextView.text = this
         }
-        holder.levelTextView.text = spellsList[position].level
-        spellsList[position].castingTime.apply {
+        holder.levelTextView.text = shownSpellsList[position].data.level
+        shownSpellsList[position].data.castingTime.apply {
             if (this.split(" ")[1][0] == 'м') holder.castTimeTextView.text =
-                spellsList[position].castingTime.split(",")[0]
+                shownSpellsList[position].data.castingTime.split(",")[0]
             else holder.castTimeTextView.text = this.split(" ")[1]
         }
-        holder.isPreparedCheckbox.setOnCheckedChangeListener(null)
-        holder.isPreparedCheckbox.isChecked =
-            spellsHandler.getPreparedSpells(characterViewModel.shownCharacter).contains(spellsList[position])
-
-        holder.isPreparedCheckbox.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                spellsHandler.addSpell(characterViewModel.shownCharacter, spellsList[position])
-            } else {
-                spellsHandler.removeSpell(characterViewModel.shownCharacter, spellsList[position])
+        holder.isAddedCheckbox.setOnCheckedChangeListener(null)
+        var isChecked = false
+        var isAlwaysIncluded = false
+        getChosenSpells().map { spell: Spell ->
+            if (spell.data.name == shownSpellsList[position].data.name) {
+                isChecked = true
+                isAlwaysIncluded = spell.isAlwaysIncluded
             }
-            preparedSpellsCountTextView.text =
-                spellsHandler.getPreparedSpellsCount(characterViewModel.shownCharacter).toString()
-            preparedCantripsCountTextView.text =
-                spellsHandler.getPreparedCantripsCount(characterViewModel.shownCharacter).toString()
+        }
+        holder.isAddedCheckbox.isChecked = isChecked
+        holder.isAddedCheckbox.isEnabled = !isAlwaysIncluded
+
+        holder.isAddedCheckbox.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                addSpell(shownSpellsList[position])
+                if (shownSpellsList[position].data.level.toInt() == 0)
+                    cantripsCountTextView.text = (cantripsCountTextView.text.toString().toInt() + 1).toString()
+                else
+                    spellsCountTextView.text = (spellsCountTextView.text.toString().toInt() + 1).toString()
+            } else {
+                removeSpell(shownSpellsList[position])
+                if (shownSpellsList[position].data.level.toInt() == 0)
+                    cantripsCountTextView.text = (cantripsCountTextView.text.toString().toInt() - 1).toString()
+                else
+                    spellsCountTextView.text = (spellsCountTextView.text.toString().toInt() - 1).toString()
+            }
         }
 
         holder.nameTextView.setOnClickListener {
-            showFullDescription(spellsList[position])
+            showFullDescription(shownSpellsList[position].data)
         }
     }
 
@@ -79,6 +93,7 @@ class SpellsAdapter @Inject constructor(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             400 * root.context.resources.displayMetrics.density.toInt()
         )
+        parent.setBackgroundColor(root.context.getColor(R.color.background))
 
         parent.findViewById<TextView>(R.id.nameTextView).text = spell.name
         parent.findViewById<TextView>(R.id.levelAndSchoolTextView).text =
@@ -100,11 +115,10 @@ class SpellsAdapter @Inject constructor(
 
         fullDescriptionPopUp.animationStyle = androidx.appcompat.R.style.Animation_AppCompat_Dialog
         fullDescriptionPopUp.showAtLocation(parent, Gravity.CENTER, 0, 0)
-        characterViewModel.showPopUpBackground()
+        showPopUpBackground()
 
         fullDescriptionPopUp.setOnDismissListener {
-            characterViewModel.closePopUpBackground()
+            closePopUpBackground()
         }
-
     }
 }

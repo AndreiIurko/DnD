@@ -13,9 +13,21 @@ class CharacterInventoryViewModel @Inject constructor(
     val inventoryHandler: InventoryHandler
 ) : ViewModel() {
 
-    val filters = InventoryHandler.Filters()
+    private val allItemsFilters = InventoryHandler.Filters()
+    private val chosenItemsFilters = InventoryHandler.Filters()
+    var isChosenListShown = false
 
     fun showItems(): MutableList<InventoryItemInfo> {
-        return inventoryHandler.getItems(characterViewModel.shownCharacter, filters)
+        return if (isChosenListShown)
+            inventoryHandler.getCharacterItems(characterViewModel.shownCharacter, chosenItemsFilters)
+        else
+            inventoryHandler.getItems(characterViewModel.shownCharacter, allItemsFilters)
+    }
+
+    fun getFilters(): InventoryHandler.Filters {
+        return if (isChosenListShown)
+            chosenItemsFilters
+        else
+            allItemsFilters
     }
 }

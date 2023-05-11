@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Имя предмета"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/chargesTextView"
+        android:clickable="true"
+        android:focusable="true"
+        android:textSize="19sp" />
+
+    <TextView
+        android:id="@+id/typeAndRarityTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/nameTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/chargesTextView"
+        android:text="Тип и редкость"
+        android:textStyle="italic"
+        android:clickable="true"
+        android:focusable="true"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/chargesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/increaseButton"
+        android:layout_marginEnd="6dp"
+        android:textSize="24sp"
+        android:text="10" />
+
+
+    <ImageButton
+        android:id="@+id/increaseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/decreaseButton"
+        android:background="@color/background"
+        android:src="@drawable/ic_baseline_keyboard_arrow_up_24" />
+
+    <ImageButton
+        android:id="@+id/decreaseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/increaseButton"
+        android:background="@color/background"
+        android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

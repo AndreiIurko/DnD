@@ -24,9 +24,9 @@ class ParcelableWriter(
     }
 
     companion object {
-        val WORKER_DB_TAG = "worker_db_tag"
-        val WORKER_TAG = "worker_tag"
-        val WORKER_DATA = "worker_data"
-        val WORKER_COUNT = "worker_count"
+        const val WORKER_DB_TAG = "worker_db_tag"
+        const val WORKER_TAG = "worker_tag"
+        const val WORKER_DATA = "worker_data"
+        const val WORKER_COUNT = "worker_count"
     }
 }

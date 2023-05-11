@@ -78,7 +78,12 @@ internal class DBImpl(
             inputData.putString(ParcelableWriter.WORKER_DATA + it.index, it.value.second)
         }
 
-        val request = OneTimeWorkRequestBuilder<ParcelableWriter>().setInputData(inputData.build()).build()
+        val request = OneTimeWorkRequestBuilder<ParcelableWriter>()
+            .setInputData(inputData.build())
+            .addTag("saveCharacterInfo")
+            .addTag(data[0].first)
+            .build()
+
         WorkManager.getInstance(appContext).enqueue(request)
     }
 

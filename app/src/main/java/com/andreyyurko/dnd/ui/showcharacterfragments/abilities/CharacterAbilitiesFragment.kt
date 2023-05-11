@@ -30,5 +30,8 @@ class CharacterAbilitiesFragment : BaseFragment(R.layout.fragment_character_abil
         viewBinding.intTextView.text = characterViewModel.shownCharacter.characterInfo.intelligence.toString()
         viewBinding.wisTextView.text = characterViewModel.shownCharacter.characterInfo.wisdom.toString()
         viewBinding.chaTextView.text = characterViewModel.shownCharacter.characterInfo.charisma.toString()
+        viewBinding.passiveInsight.text = characterViewModel.shownCharacter.characterInfo.passiveInsightBonus.toString()
+        viewBinding.passivePerception.text =
+            characterViewModel.shownCharacter.characterInfo.passivePerceptionBonus.toString()
     }
 }

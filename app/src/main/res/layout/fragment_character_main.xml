@@ -1,187 +1,445 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   xmlns:tools="http://schemas.android.com/tools"
-                                                   android:id="@+id/mainContainer"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/sharedInfoContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/sharedInfoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/arrowBackImageButton"
+            style="@style/Widget.DnD.ImageButton.Back"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-                android:id="@+id/arrowBackImageButton"
-                style="@style/Widget.DnD.ImageButton.Back"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-                android:id="@+id/nameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:text="Имя"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="@id/arrowBackImageButton"
-                app:layout_constraintEnd_toStartOf="@id/settingsButton"
-                app:layout_constraintStart_toEndOf="@id/arrowBackImageButton"/>
+            android:id="@+id/nameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Имя"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@id/arrowBackImageButton"
+            app:layout_constraintEnd_toStartOf="@id/settingsButton"
+            app:layout_constraintStart_toEndOf="@id/arrowBackImageButton" />
 
         <ImageButton
-                android:id="@+id/menuButton"
-                style="@style/Widget.DnD.ImageButton.Menu"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+            android:id="@+id/menuButton"
+            style="@style/Widget.DnD.ImageButton.Menu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-                android:id="@+id/settingsButton"
-                style="@style/Widget.DnD.ImageButton.Settings"
-                app:layout_constraintEnd_toStartOf="@id/menuButton"
-                app:layout_constraintTop_toTopOf="parent"/>
+            android:id="@+id/settingsButton"
+            style="@style/Widget.DnD.ImageButton.Settings"
+            app:layout_constraintEnd_toStartOf="@id/menuButton"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-                android:id="@+id/iconImageView"
-                android:layout_width="84dp"
-                android:layout_height="84dp"
-                android:layout_marginTop="6dp"
-                android:src="@drawable/dragonborn"
-                app:layout_constraintStart_toEndOf="@id/arrowBackImageButton"
-                app:layout_constraintTop_toBottomOf="@id/nameTextView"/>
+        <ImageButton
+            android:id="@+id/iconImageButton"
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            android:layout_marginTop="6dp"
+            android:src="@drawable/ic_baseline_person_84"
+            android:background="@color/background"
+            app:layout_constraintStart_toEndOf="@id/arrowBackImageButton"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            app:layout_constraintTop_toBottomOf="@id/nameTextView" />
 
         <TextView
-                android:id="@+id/hpTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:text="HP"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toTopOf="@id/classTextView"
-                app:layout_constraintStart_toEndOf="@id/iconImageView"
-                app:layout_constraintTop_toTopOf="@id/iconImageView"/>
+            android:id="@+id/hpTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="HP"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@id/classTextView"
+            app:layout_constraintStart_toEndOf="@id/iconImageButton"
+            app:layout_constraintTop_toTopOf="@id/iconImageButton" />
 
         <EditText
-                android:id="@+id/hpEditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:background="@null"
-                android:text="0"
-                android:textSize="24sp"
-                app:layout_constraintStart_toEndOf="@id/hpTextView"
-                app:layout_constraintTop_toTopOf="@id/hpTextView"/>
+            android:id="@+id/hpEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="0"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@id/hpTextView"
+            app:layout_constraintTop_toTopOf="@id/hpTextView"
+            app:layout_constraintBottom_toBottomOf="@id/hpTextView"
+            android:inputType="number" />
 
         <TextView
-                android:id="@+id/classTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Класс"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@id/iconImageView"
-                app:layout_constraintStart_toStartOf="@id/hpTextView"
-                app:layout_constraintTop_toBottomOf="@id/hpTextView"/>
+            android:id="@+id/maxHpTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/hpTextView"
+            app:layout_constraintBottom_toBottomOf="@id/hpTextView"
+            android:textSize="24sp"
+            android:text="/10"
+            app:layout_constraintStart_toEndOf="@id/hpEditText" />
+
 
         <TextView
-                android:id="@+id/levelTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="156dp"
-                android:text="Уровень"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@id/iconImageView"
-                app:layout_constraintStart_toStartOf="@id/hpTextView"
-                app:layout_constraintTop_toBottomOf="@id/hpTextView"/>
+            android:id="@+id/classTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Класс"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/iconImageButton"
+            app:layout_constraintStart_toStartOf="@id/hpTextView"
+            app:layout_constraintTop_toBottomOf="@id/hpTextView" />
+
+        <TextView
+            android:id="@+id/levelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="156dp"
+            android:text="Уровень"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/iconImageButton"
+            app:layout_constraintStart_toStartOf="@id/hpTextView"
+            app:layout_constraintTop_toBottomOf="@id/hpTextView" />
 
         <GridLayout
-                android:id="@+id/topGridLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:columnCount="4"
-                android:rowCount="1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iconImageView">
+            android:id="@+id/topGridLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:columnCount="4"
+            android:rowCount="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iconImageButton">
 
             <LinearLayout style="@style/MainLayoutStyle">
-                <TextView
-                        android:id="@+id/proficiencyTextView"
-                        style="@style/Text.MainNumber"
-                        android:text="+0"/>
 
                 <TextView
-                        style="@style/Text.MainName"
-                        android:text="Маст"/>
+                    android:id="@+id/proficiencyTextView"
+                    style="@style/Text.MainNumber"
+                    android:text="+0" />
+
+                <TextView
+                    style="@style/Text.MainName"
+                    android:text="Маст" />
             </LinearLayout>
 
             <LinearLayout style="@style/MainLayoutStyle">
-                <TextView
-                        android:id="@+id/speedTextView"
-                        style="@style/Text.MainNumber"
-                        android:text="30ft"/>
 
                 <TextView
-                        style="@style/Text.MainName"
-                        android:text="Скор"/>
+                    android:id="@+id/speedTextView"
+                    style="@style/Text.MainNumber"
+                    android:text="30ft" />
+
+                <TextView
+                    style="@style/Text.MainName"
+                    android:text="Скор" />
             </LinearLayout>
 
             <LinearLayout style="@style/MainLayoutStyle">
-                <TextView
-                        android:id="@+id/initiativeTextView"
-                        style="@style/Text.MainNumber"
-                        android:text="+4"/>
 
                 <TextView
-                        style="@style/Text.MainName"
-                        android:text="Ини"/>
+                    android:id="@+id/initiativeTextView"
+                    style="@style/Text.MainNumber"
+                    android:text="+4" />
+
+                <TextView
+                    style="@style/Text.MainName"
+                    android:text="Ини" />
             </LinearLayout>
 
             <LinearLayout style="@style/MainLayoutStyle">
-                <TextView
-                        android:id="@+id/acTextView"
-                        style="@style/Text.MainNumber"
-                        android:text="19"/>
 
                 <TextView
-                        style="@style/Text.MainName"
-                        android:text="КД"/>
+                    android:id="@+id/acTextView"
+                    style="@style/Text.MainNumber"
+                    android:text="19" />
+
+                <TextView
+                    style="@style/Text.MainName"
+                    android:text="КД" />
             </LinearLayout>
         </GridLayout>
 
         <View
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:layout_marginTop="4dp"
-                android:background="?attr/colorPrimary"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/topGridLayout"/>
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="4dp"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topGridLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/mainFragmentNavigationHost"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:defaultNavHost="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sharedInfoContainer"
-            app:navGraph="@navigation/character_nav_graph"
-            tools:layout="@layout/fragment_character_abilities"/>
+        android:id="@+id/mainFragmentNavigationHost"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:defaultNavHost="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sharedInfoContainer"
+        app:navGraph="@navigation/character_nav_graph"
+        tools:layout="@layout/fragment_character_abilities" />
 
     <View
-            android:id="@+id/popUpBackground"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:alpha="0"
-            android:background="?attr/backgroundColor"
-            tools:layout_editor_absoluteX="-45dp"
-            tools:layout_editor_absoluteY="0dp"/>
+        android:id="@+id/popUpBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:background="?attr/backgroundColor"
+        tools:layout_editor_absoluteX="-45dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+
+    <LinearLayout
+        android:id="@+id/spellSlotsLinearLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="56dp"
+        android:translationX="-252dp"
+        android:background="@drawable/spell_slots_border"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="1"
+                android:textSize="16dp"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="2"
+                android:textSize="16dp"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="3"
+                android:textSize="16dp"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="4"
+                android:textSize="16dp"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="5"
+                android:textSize="16dp"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="6"
+                android:textSize="16dp"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="7"
+                android:textSize="16dp"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="8"
+                android:textSize="16dp"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="9"
+                android:textSize="16dp"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.andreyyurko.dnd.ui.showcharacterfragments.main.VerticalTextView
+        android:id="@+id/spellSlotsButton"
+        android:translationX="-2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/spell_slots_border"
+        android:text="Ячейки"
+        android:textSize="16dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="6dp"
+        app:layout_constraintTop_toTopOf="@id/spellSlotsLinearLayout"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

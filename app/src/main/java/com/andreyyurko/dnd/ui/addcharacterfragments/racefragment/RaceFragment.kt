@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -31,6 +32,9 @@ class RaceFragment : BaseFragment(R.layout.fragment_race) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (viewModel.getRace() != "")
+            viewBinding.chooseRaceTextView.text = viewModel.getRace()
+
         setupRecyclerView()
 
         viewBinding.chooseRaceButton.setOnClickListener {
@@ -42,8 +46,7 @@ class RaceFragment : BaseFragment(R.layout.fragment_race) {
             findNavController().navigate(R.id.classFragment)
         }
         viewBinding.cancelButton.setOnClickListener {
-            viewModel.deleteCharacter()
-            findNavController().popBackStack(R.id.charactersListFragment, false)
+            findNavController().popBackStack()
         }
     }
 
@@ -53,10 +56,11 @@ class RaceFragment : BaseFragment(R.layout.fragment_race) {
         val adapter = AbilityAdapter()
         viewModel.adapter = adapter
         recyclerView.adapter = adapter
+        viewModel.showAbilities()
     }
 
     private fun setupRacePopUpMenu(context: Context) {
-        val (raceMenu, parent) = setupBasicPopUpMenu(context)
+        val (raceMenu, parent) = setupBasicPopUpMenu(context, null)
 
         for (raceChoice in viewModel.baseCAN.showOptions("race")) {
             val raceNameTextView = TextView(context)
@@ -71,11 +75,14 @@ class RaceFragment : BaseFragment(R.layout.fragment_race) {
                 raceMenu.dismiss()
             }
         }
+
+        parent.measure(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         raceMenu.showAtLocation(
             view,
             Gravity.NO_GRAVITY,
-            viewBinding.chooseRaceButton.x.toInt(),
+            viewBinding.chooseRaceButton.x.toInt() + viewBinding.chooseRaceButton.width / 2 - parent.measuredWidth / 2,
             viewBinding.chooseRaceButton.y.toInt() + viewBinding.chooseRaceButton.height
+                    + (context.resources.displayMetrics.density * 6).toInt()
         )
         viewBinding.arrowDropImageView.visibility = View.GONE
         viewBinding.arrowUpImageView.visibility = View.VISIBLE

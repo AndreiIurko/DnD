@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,21 +35,54 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
 
         setupRecyclerView()
 
+        viewModel.chosenClass?.let {
+            viewBinding.chooseClassTextView.text = it.split('_')[0]
+            viewBinding.levelText.text = viewModel.chosenLevel.toString()
+            if (viewModel.chosenLevel < 20) {
+                viewBinding.levelUpButton.alpha = 1F
+                viewBinding.levelUpButton.isEnabled = true
+            }
+            else {
+                viewBinding.levelUpButton.alpha = 0.5F
+                viewBinding.levelUpButton.isEnabled = false
+            }
+        }
+
         viewBinding.chooseClassButton.setOnClickListener {
             setupClassPopupMenu(requireContext())
         }
 
         viewBinding.chooseLevelButton.setOnClickListener {
             setupLevelPopupMenu(requireContext())
+            viewBinding.levelArrowImageView.setImageDrawable(
+                AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_arrow_drop_up_24)
+            )
+        }
+
+        viewBinding.levelUpButton.setOnClickListener {
+            viewModel.levelUp()
+            viewBinding.levelText.text = viewModel.chosenLevel.toString()
+            if (viewModel.chosenLevel < 20) {
+                viewBinding.levelUpButton.alpha = 1F
+                viewBinding.levelUpButton.isEnabled = true
+            }
+            else {
+                viewBinding.levelUpButton.alpha = 0.5F
+                viewBinding.levelUpButton.isEnabled = false
+            }
         }
 
         viewBinding.submitButton.setOnClickListener {
             viewModel.updateCharacter()
-            findNavController().popBackStack(R.id.charactersListFragment, false)
+            if (viewModel.isNeededToChooseKnownSpells())
+                findNavController().navigate(R.id.spellsFragment)
+            else {
+                viewModel.saveChangesInCharacter()
+                findNavController().popBackStack(R.id.charactersListFragment, false)
+            }
         }
         viewBinding.cancelButton.setOnClickListener {
-            viewModel.deleteCharacter()
-            findNavController().popBackStack(R.id.charactersListFragment, false)
+            findNavController().popBackStack()
         }
     }
 
@@ -62,15 +97,27 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
             classNameTextView.setOnClickListener {
                 viewModel.chosenClass = classChoice
                 viewModel.makeChoice(classChoice)
+                if (viewModel.chosenLevel < 20) {
+                    viewBinding.levelUpButton.alpha = 1F
+                    viewBinding.levelUpButton.isEnabled = true
+                }
+                else {
+                    viewBinding.levelUpButton.alpha = 0.5F
+                    viewBinding.levelUpButton.isEnabled = false
+                }
                 viewBinding.chooseClassTextView.text = classChoice.split("_").first()
                 classChoiceList.dismiss()
             }
         }
+
+        parent.measure(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         classChoiceList.showAtLocation(
             view,
             Gravity.NO_GRAVITY,
-            viewBinding.chooseClassButton.x.toInt(),
-            viewBinding.chooseClassButton.y.toInt() + viewBinding.chooseClassButton.height
+            viewBinding.chooseClassButton.x.toInt() + viewBinding.chooseClassButton.width / 2
+                    - parent.measuredWidth / 2,
+            viewBinding.chooseClassButton.y.toInt() + viewBinding.chooseClassButton.height +
+                    (context.resources.displayMetrics.density * 6).toInt()
         )
         viewBinding.arrowDropImageView.visibility = View.GONE
         viewBinding.arrowUpImageView.visibility = View.VISIBLE
@@ -90,15 +137,28 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
             levelTextView.isClickable = true
             levelTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, viewBinding.levelText.textSize)
             levelTextView.text = level.toString()
+            levelTextView.width = viewBinding.chooseLevelButton.width
+            levelTextView.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
             parent.addView(levelTextView)
             // TODO: make choice after level change as well
             levelTextView.setOnClickListener {
                 viewModel.chosenLevel = level
                 viewModel.chosenClass?.let {
                     viewModel.makeChoice(it)
+                    if (level < 20) {
+                        viewBinding.levelUpButton.alpha = 1F
+                        viewBinding.levelUpButton.isEnabled = true
+                    }
+                    else {
+                        viewBinding.levelUpButton.alpha = 0.5F
+                        viewBinding.levelUpButton.isEnabled = false
+                    }
                 }
                 viewBinding.levelText.text = level.toString()
                 levelChoiceList.dismiss()
+                viewBinding.levelArrowImageView.setImageDrawable(
+                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_arrow_drop_down_24)
+                )
             }
         }
 
@@ -117,5 +177,6 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
         val adapter = AbilityAdapter()
         viewModel.adapter = adapter
         recyclerView.adapter = adapter
+        viewModel.showAllClassAbilities()
     }
 }

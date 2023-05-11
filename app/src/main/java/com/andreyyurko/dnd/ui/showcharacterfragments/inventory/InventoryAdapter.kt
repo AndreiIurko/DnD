@@ -16,8 +16,7 @@ import javax.inject.Inject
 
 class InventoryAdapter @Inject constructor(
     private val inventoryHandler: InventoryHandler,
-    private val characterViewModel: CharacterViewModel,
-    private val parent: ViewGroup
+    private val characterViewModel: CharacterViewModel
 ) : RecyclerView.Adapter<InventoryAdapter.ViewHolder>() {
 
     var itemsList: MutableList<InventoryItemInfo> = mutableListOf()
@@ -72,14 +71,14 @@ class InventoryAdapter @Inject constructor(
     }
 
     private fun showFullDescription(itemDescription: InventoryItemInfo, context: Context, position: Int) {
-        val item = inventoryHandler.allItems[itemDescription.itemName]!!
+        val item = inventoryHandler.getItemInfo(itemDescription.itemName)!!
 
         val parent = LayoutInflater.from(context).inflate(R.layout.view_full_inventory_item, null)
         parent.layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             400 * context.resources.displayMetrics.density.toInt()
         )
-
+        parent.setBackgroundColor(context.getColor(R.color.background))
 
         parent.findViewById<TextView>(R.id.name).text = item.name
         parent.findViewById<TextView>(R.id.typeAndRarity).text = item.itemTypeAndRarity

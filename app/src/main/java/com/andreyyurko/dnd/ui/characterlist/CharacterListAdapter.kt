@@ -14,7 +14,8 @@ import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.characterData.CharacterBriefInfo
 
 class CharacterListAdapter(
-    private val viewModel: CharacterListViewModel
+    private val viewModel: CharacterListViewModel,
+    private val createDialog: (() -> Unit, () -> Unit) -> Unit
 ) : RecyclerView.Adapter<CharacterListAdapter.ViewHolder>() {
 
     var charactersList: List<CharacterBriefInfo> = emptyList()
@@ -42,13 +43,23 @@ class CharacterListAdapter(
         holder.nameTextView.text = charactersList[position].name
         holder.classTextView.text = charactersList[position].characterClass
         holder.levelTextView.text = charactersList[position].level
+
+        charactersList[position].bitmap?.let {
+            holder.iconImageView.setImageBitmap(it)
+        }
+
         holder.mainView.setOnClickListener {
             viewModel.setShownCharacter(charactersList[position].id)
             it.findNavController().navigate(R.id.characterMainFragment)
         }
         holder.deleteImageButton.setOnClickListener {
-            charactersList = viewModel.deleteCharacter(charactersList[position].id)
-            notifyDataSetChanged()
+            createDialog(
+                {
+                    charactersList = viewModel.deleteCharacter(charactersList[position].id)
+                    notifyDataSetChanged()
+                },
+                {}
+            )
         }
     }
 }

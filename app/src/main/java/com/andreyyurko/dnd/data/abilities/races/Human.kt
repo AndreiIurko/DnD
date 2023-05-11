@@ -9,8 +9,8 @@ import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 val humanChooseLanguage = AbilityNode(
     name = "Выбор языка: человек",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-    alternatives = mutableMapOf(
-        Pair("language", mapOfLanguages.keys.toList())
+    getAlternatives = mutableMapOf(
+        Pair("language", { mapOfLanguages.keys.toList() })
     ),
     requirements = { true },
     description = "Выберите любой язык:"
@@ -29,8 +29,8 @@ val humanAbilities = AbilityNode(
         abilities.speed += 30
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("languageFirst", listOf(humanChooseLanguage.name))
+    getAlternatives = mutableMapOf(
+        Pair("languageFirst", { listOf(humanChooseLanguage.name) })
     ),
     requirements = { true },
     description = "Увеличение характеристик. Значение всех ваших характеристик увеличивается на 1.\n" +
@@ -53,8 +53,8 @@ val human = AbilityNode(
         abilities.race = "Человек"
         abilities
     },
-    alternatives = mutableMapOf(
-        Pair("abilities", listOf(humanAbilities.name))
+    getAlternatives = mutableMapOf(
+        Pair("abilities", { listOf(humanAbilities.name) })
     ),
     requirements = { true },
     description = "Человек",

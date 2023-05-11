@@ -19,6 +19,23 @@ class AbilitiesViewModel @Inject constructor(
     }
 
     var characterInfo = createCharacterViewModel.character.customAbilities
+
+    init {
+        increaseAbility(Ability.Strength.abilityName, characterInfo.strength)
+        increaseAbility(Ability.Dexterity.abilityName, characterInfo.dexterity)
+        increaseAbility(Ability.Constitution.abilityName, characterInfo.constitution)
+        increaseAbility(Ability.Intelligence.abilityName, characterInfo.intelligence)
+        increaseAbility(Ability.Wisdom.abilityName, characterInfo.wisdom)
+        increaseAbility(Ability.Charisma.abilityName, characterInfo.charisma)
+    }
+
+    private fun increaseAbility(abilityName: String, end: Int) {
+        for (i in abilities[abilityName]!! + 1..end) {
+            increaseAbility(i)
+        }
+        if (abilities[abilityName]!! < end) abilities[abilityName] = end
+    }
+
     fun setAbility(name: String) {
         createCharacterViewModel.character.customAbilities = characterInfo
         createCharacterViewModel.character.name = name
@@ -56,6 +73,10 @@ class AbilitiesViewModel @Inject constructor(
                 totalPoints.value = it + 1
             }
         }
+    }
+
+    fun getName(): String {
+        return createCharacterViewModel.character.name
     }
 
 }

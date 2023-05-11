@@ -35,23 +35,152 @@ class CharacterSkillsViewModel @Inject constructor(
         } + profBonus
     }
 
-    fun getProf(skill: Skill): Int? {
-        //TODO("add half prof")
-        /*if (skill in shownCharacter.characterInfo.expertize) return 3
-        if (skill in shownCharacter.characterInfo.skillProficiency) return 2
-        return 0*/
-        return skillsProf[skill]
-    }
-
     private fun getProfBonusFromCharacter(skill: Skill): Int {
         return if (shownCharacter.characterInfo.expertize.contains(skill)) {
             3
         } else if (shownCharacter.characterInfo.skillProficiency.contains(skill)) {
             2
-        } else if (shownCharacter.characterInfo.isHasHalfProf) {
+        } else if (shownCharacter.characterInfo.halfProfSet.contains(skill.ability)) {
             1
         } else {
             0
         }
     }
+
+    //TODO change this function...
+    fun getListOfSkills(): MutableList<SkillInfo> {
+        val result: MutableList<SkillInfo> = mutableListOf()
+
+        for (skill in skillsList) {
+            result.add(
+                SkillInfo(
+                    skillName = skill.skillName,
+                    skillProf = skillsProf[skill]!!,
+                    skillAbility = skill.ability,
+                    skillBonus = getBonus(skill)
+                )
+            )
+        }
+
+        val savingThroughsNames = listOf(
+            "Спасбросок силы", "Спасбросок ловкости", "Спасбросок телосложения",
+            "Спасбросок интеллекта", "Спасбросок мудрости", "Спасбросок харизмы"
+        )
+
+        for (ability in Ability.values()) {
+            when (ability) {
+                Ability.Strength -> {
+                    var bonus = abilityToModifier(shownCharacter.characterInfo.strength)
+                    var skillProf = 0
+                    if (shownCharacter.characterInfo.savingThrowProf.contains(ability)) {
+                        bonus += shownCharacter.characterInfo.proficiencyBonus
+                        skillProf = 2
+                    }
+                    result.add(
+                        SkillInfo(
+                            skillName = savingThroughsNames[0],
+                            skillProf = skillProf,
+                            skillAbility = ability,
+                            skillBonus = bonus
+                        )
+                    )
+                }
+
+                Ability.Dexterity -> {
+                    var bonus = abilityToModifier(shownCharacter.characterInfo.dexterity)
+                    var skillProf = 0
+                    if (shownCharacter.characterInfo.savingThrowProf.contains(ability)) {
+                        bonus += shownCharacter.characterInfo.proficiencyBonus
+                        skillProf = 2
+                    }
+                    result.add(
+                        SkillInfo(
+                            skillName = savingThroughsNames[1],
+                            skillProf = skillProf,
+                            skillAbility = ability,
+                            skillBonus = bonus
+                        )
+                    )
+                }
+
+                Ability.Constitution -> {
+                    var bonus = abilityToModifier(shownCharacter.characterInfo.constitution)
+                    var skillProf = 0
+                    if (shownCharacter.characterInfo.savingThrowProf.contains(ability)) {
+                        bonus += shownCharacter.characterInfo.proficiencyBonus
+                        skillProf = 2
+                    }
+                    result.add(
+                        SkillInfo(
+                            skillName = savingThroughsNames[2],
+                            skillProf = skillProf,
+                            skillAbility = ability,
+                            skillBonus = bonus
+                        )
+                    )
+                }
+
+                Ability.Intelligence -> {
+                    var bonus = abilityToModifier(shownCharacter.characterInfo.intelligence)
+                    var skillProf = 0
+                    if (shownCharacter.characterInfo.savingThrowProf.contains(ability)) {
+                        bonus += shownCharacter.characterInfo.proficiencyBonus
+                        skillProf = 2
+                    }
+                    result.add(
+                        SkillInfo(
+                            skillName = savingThroughsNames[3],
+                            skillProf = skillProf,
+                            skillAbility = ability,
+                            skillBonus = bonus
+                        )
+                    )
+                }
+
+                Ability.Wisdom -> {
+                    var bonus = abilityToModifier(shownCharacter.characterInfo.wisdom)
+                    var skillProf = 0
+                    if (shownCharacter.characterInfo.savingThrowProf.contains(ability)) {
+                        bonus += shownCharacter.characterInfo.proficiencyBonus
+                        skillProf = 2
+                    }
+                    result.add(
+                        SkillInfo(
+                            skillName = savingThroughsNames[4],
+                            skillProf = skillProf,
+                            skillAbility = ability,
+                            skillBonus = bonus
+                        )
+                    )
+                }
+
+                Ability.Charisma -> {
+                    var bonus = abilityToModifier(shownCharacter.characterInfo.charisma)
+                    var skillProf = 0
+                    if (shownCharacter.characterInfo.savingThrowProf.contains(ability)) {
+                        bonus += shownCharacter.characterInfo.proficiencyBonus
+                        skillProf = 2
+                    }
+                    result.add(
+                        SkillInfo(
+                            skillName = savingThroughsNames[5],
+                            skillProf = skillProf,
+                            skillAbility = ability,
+                            skillBonus = bonus
+                        )
+                    )
+                }
+            }
+        }
+
+        return result
+    }
+
+    data class SkillInfo(
+        val skillName: String,
+        val skillProf: Int,
+        val skillAbility: Ability,
+        val skillBonus: Int
+    )
+
 }

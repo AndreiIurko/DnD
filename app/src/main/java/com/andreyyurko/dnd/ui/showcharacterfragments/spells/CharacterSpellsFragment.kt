@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
+import com.andreyyurko.dnd.data.spells.Spell
 import com.andreyyurko.dnd.databinding.FragmentCharacterSpellsBinding
 import com.andreyyurko.dnd.ui.showcharacterfragments.fragmentwithfilters.FragmentWithFilters
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,8 +18,6 @@ class CharacterSpellsFragment : FragmentWithFilters(R.layout.fragment_character_
 
     private val viewBinding by viewBinding(FragmentCharacterSpellsBinding::bind)
     private lateinit var viewModel: CharacterSpellsViewModel
-
-    private var isPreparedListShown = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,33 +29,31 @@ class CharacterSpellsFragment : FragmentWithFilters(R.layout.fragment_character_
 
         setupRecyclerView()
 
-        viewBinding.knownButton.setOnClickListener {
-            viewModel.filters.substring = viewBinding.searchEditText.text.toString()
-            viewBinding.preparedButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_primary))
-            viewBinding.knownButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
-            (viewBinding.spellsRecyclerView.adapter as SpellsAdapter).apply {
-                spellsList = viewModel.showKnownSpells()
-                notifyDataSetChanged()
+        if (viewModel.isAllPrepared()) {
+            viewBinding.changeListsButton.visibility = View.GONE
+            viewBinding.spellsCountContainer.visibility = View.GONE
+            viewBinding.cantripsCountContainer.visibility = View.GONE
+        } else {
+            viewBinding.knownButton.setOnClickListener {
+                viewBinding.preparedButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_primary))
+                viewBinding.knownButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                viewModel.isPreparedListShown = false
+                showItems()
             }
-            isPreparedListShown = false
-        }
 
-        viewBinding.preparedButton.setOnClickListener {
-            viewModel.filters.substring = viewBinding.searchEditText.text.toString()
-            viewBinding.knownButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_primary))
-            viewBinding.preparedButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
-            (viewBinding.spellsRecyclerView.adapter as SpellsAdapter).apply {
-                spellsList = viewModel.showPreparedSpells()
-                notifyDataSetChanged()
+            viewBinding.preparedButton.setOnClickListener {
+                viewBinding.knownButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_primary))
+                viewBinding.preparedButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                viewModel.isPreparedListShown = true
+                showItems()
             }
-            isPreparedListShown = true
+
+            viewBinding.preparedSpellsCount.text = viewModel.getPreparedSpellsCount().toString()
+            viewBinding.maxSpellsCount.text = viewModel.getMaxPreparedSpellsCount().toString()
+
+            viewBinding.preparedCantripsCount.text = viewModel.getPreparedCantripsCount().toString()
+            viewBinding.maxCantripsCount.text = viewModel.getMaxPreparedCantripsCount().toString()
         }
-
-        viewBinding.preparedSpellsCount.text = viewModel.getPreparedSpellsCount().toString()
-        viewBinding.maxSpellsCount.text = viewModel.getMaxPreparedSpellsCount().toString()
-
-        viewBinding.preparedCantripsCount.text = viewModel.getPreparedCantripsCount().toString()
-        viewBinding.maxCantripsCount.text = viewModel.getMaxPreparedCantripsCount().toString()
 
         viewBinding.searchButton.setOnClickListener {
             showItems()
@@ -72,15 +69,15 @@ class CharacterSpellsFragment : FragmentWithFilters(R.layout.fragment_character_
         }
 
         viewBinding.levelButton.setOnClickListener {
-            setupStringFilter(viewBinding.levelButton, viewModel.filters.levels, (0..9).map { i -> i.toString() })
+            setupStringFilter(viewBinding.levelButton, viewModel.getFilters().levels, (0..9).map { i -> i.toString() })
         }
 
         viewBinding.sourceButton.setOnClickListener {
-            setupFilter(viewBinding.sourceButton, viewModel.filters.source)
+            setupFilter(viewBinding.sourceButton, viewModel.getFilters().source)
         }
 
         viewBinding.schoolButton.setOnClickListener {
-            setupFilter(viewBinding.schoolButton, viewModel.filters.school)
+            setupFilter(viewBinding.schoolButton, viewModel.getFilters().school)
         }
     }
 
@@ -89,8 +86,13 @@ class CharacterSpellsFragment : FragmentWithFilters(R.layout.fragment_character_
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         val adapter = SpellsAdapter(
-            viewModel.spellsHandler, viewModel.characterViewModel,
-            viewBinding.preparedSpellsCount, viewBinding.preparedCantripsCount, viewBinding.root
+            viewBinding.preparedSpellsCount, viewBinding.preparedCantripsCount,
+            viewBinding.root,
+            { viewModel.characterViewModel.showPopUpBackground() },
+            { viewModel.characterViewModel.closePopUpBackground() },
+            { spell: Spell -> viewModel.addPreparedSpell(spell) },
+            { spell: Spell -> viewModel.removePreparedSpell(spell) },
+            { viewModel.showPreparedSpells() }
         )
 
         recyclerView.adapter = adapter
@@ -100,17 +102,17 @@ class CharacterSpellsFragment : FragmentWithFilters(R.layout.fragment_character_
         recyclerView.addItemDecoration(itemDecorator)
 
         adapter.apply {
-            spellsList = viewModel.showPreparedSpells().toMutableList()
+            shownSpellsList = viewModel.showPreparedSpells().toMutableList()
             notifyDataSetChanged()
         }
     }
 
     private fun showItems() {
-        viewModel.filters.substring = viewBinding.searchEditText.text.toString()
+        viewModel.getFilters().substring = viewBinding.searchEditText.text.toString()
         (viewBinding.spellsRecyclerView.adapter as SpellsAdapter).apply {
-            spellsList =
-                if (isPreparedListShown) viewModel.showPreparedSpells()
-                else viewModel.showKnownSpells().toMutableList()
+            shownSpellsList =
+                if (viewModel.isPreparedListShown) viewModel.showPreparedSpells()
+                else viewModel.showKnownSpells()
             notifyDataSetChanged()
         }
     }

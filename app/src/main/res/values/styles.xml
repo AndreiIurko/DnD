@@ -7,6 +7,7 @@
         <item name="android:layout_margin">4dp</item>
         <item name="android:background">?backgroundColor</item>
         <item name="android:tint">?colorPrimaryDark</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
     </style>
 
     <style name="Widget.DnD.ImageButton.Back">
@@ -28,13 +29,13 @@
     <style name="Widget.DnD.ImageButton.Delete">
         <item name="android:src">@drawable/ic_baseline_delete_36</item>
     </style>
+
     <style name="Widget.DnD.MenuButton" parent="Widget.AppCompat.Button">
 
     </style>
 
 
-    <style name="Text">
-    </style>
+    <style name="Text"></style>
 
     <style name="Text.Appearance">
         <item name="android:textColor">?colorOnBackground</item>

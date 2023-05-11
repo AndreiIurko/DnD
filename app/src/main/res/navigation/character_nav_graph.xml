@@ -1,74 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/character_nav_graph"
-            app:startDestination="@id/characterAbilitiesFragment"
->
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/character_nav_graph"
+    app:startDestination="@id/characterAbilitiesFragment">
 
     <fragment
-            android:id="@+id/characterAbilitiesFragment"
-            android:name="com.andreyyurko.dnd.ui.showcharacterfragments.abilities.CharacterAbilitiesFragment"
-            android:label="CharacterAbilitiesFragment"/>
+        android:id="@+id/characterAbilitiesFragment"
+        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.abilities.CharacterAbilitiesFragment"
+        android:label="CharacterAbilitiesFragment" />
 
     <action
-            android:id="@+id/action_abilitiesFragment"
-            app:destination="@+id/characterAbilitiesFragment"
-            app:popUpTo="@+id/characterAbilitiesFragment"
-            app:popUpToInclusive="true"/>
+        android:id="@+id/action_abilitiesFragment"
+        app:destination="@+id/characterAbilitiesFragment"
+        app:popUpTo="@+id/characterAbilitiesFragment"
+        app:popUpToInclusive="true" />
 
     <fragment
-            android:id="@+id/characterActionsFragment"
-            android:name="com.andreyyurko.dnd.ui.showcharacterfragments.actions.CharacterActionsFragment"
-            android:label="CharacterActionsFragment"/>
+        android:id="@+id/characterActionsFragment"
+        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.actions.CharacterActionsFragment"
+        android:label="CharacterActionsFragment" />
 
     <action
-            android:id="@+id/action_actionsFragment"
-            app:destination="@+id/characterActionsFragment"
-            app:popUpTo="@+id/characterAbilitiesFragment"
-            app:popUpToInclusive="true"/>
+        android:id="@+id/action_actionsFragment"
+        app:destination="@+id/characterActionsFragment"
+        app:popUpTo="@+id/characterAbilitiesFragment"
+        app:popUpToInclusive="true" />
 
     <fragment
-            android:id="@+id/characterAdditionalInfoFragment"
-            android:name="com.andreyyurko.dnd.ui.showcharacterfragments.additionalinfo.CharacterAdditionalInfoFragment"
-            android:label="CharacterAdditionalInfoFragment"/>
+        android:id="@+id/characterAdditionalInfoFragment"
+        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.additionalinfo.CharacterAdditionalInfoFragment"
+        android:label="CharacterAdditionalInfoFragment" />
 
     <action
-            android:id="@+id/action_additionalInfoFragment"
-            app:destination="@+id/characterAdditionalInfoFragment"
-            app:popUpTo="@+id/characterAbilitiesFragment"
-            app:popUpToInclusive="true"/>
+        android:id="@+id/action_additionalInfoFragment"
+        app:destination="@+id/characterAdditionalInfoFragment"
+        app:popUpTo="@+id/characterAbilitiesFragment"
+        app:popUpToInclusive="true" />
 
     <fragment
-            android:id="@+id/characterInventoryFragment"
-            android:name="com.andreyyurko.dnd.ui.showcharacterfragments.inventory.CharacterInventoryFragment"
-            android:label="CharacterInventoryFragment"/>
+        android:id="@+id/characterInventoryFragment"
+        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.inventory.CharacterInventoryFragment"
+        android:label="CharacterInventoryFragment" />
 
     <action
-            android:id="@+id/action_inventoryFragment"
-            app:destination="@+id/characterInventoryFragment"
-            app:popUpTo="@+id/characterAbilitiesFragment"
-            app:popUpToInclusive="true"/>
+        android:id="@+id/action_inventoryFragment"
+        app:destination="@+id/characterInventoryFragment"
+        app:popUpTo="@+id/characterAbilitiesFragment"
+        app:popUpToInclusive="true" />
 
     <fragment
-            android:id="@+id/characterSkillsFragment"
-            android:name="com.andreyyurko.dnd.ui.showcharacterfragments.skills.CharacterSkillsFragment"
-            android:label="CharacterSkillsFragment"/>
+        android:id="@+id/characterSkillsFragment"
+        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.skills.CharacterSkillsFragment"
+        android:label="CharacterSkillsFragment" />
 
     <action
-            android:id="@+id/action_skillsFragment"
-            app:destination="@+id/characterSkillsFragment"
-            app:popUpTo="@+id/characterAbilitiesFragment"
-            app:popUpToInclusive="true"/>
+        android:id="@+id/action_skillsFragment"
+        app:destination="@+id/characterSkillsFragment"
+        app:popUpTo="@+id/characterAbilitiesFragment"
+        app:popUpToInclusive="true" />
 
     <fragment
-            android:id="@+id/characterSpellsFragment"
-            android:name="com.andreyyurko.dnd.ui.showcharacterfragments.spells.CharacterSpellsFragment"
-            android:label="CharacterSpellsFragment"/>
+        android:id="@+id/characterSpellsFragment"
+        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.spells.CharacterSpellsFragment"
+        android:label="CharacterSpellsFragment" />
 
     <action
-            android:id="@+id/action_spellsFragment"
-            app:destination="@+id/characterSpellsFragment"
-            app:popUpTo="@+id/characterAbilitiesFragment"
-            app:popUpToInclusive="true"/>
+        android:id="@+id/action_spellsFragment"
+        app:destination="@+id/characterSpellsFragment"
+        app:popUpTo="@+id/characterAbilitiesFragment"
+        app:popUpToInclusive="true" />
+
+    <fragment
+        android:id="@+id/characterEquipmentFragment"
+        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.equipment.CharacterEquipmentFragment"
+        android:label="CharacterEquipmentFragment">
+        <action
+            android:id="@+id/action_characterEquipmentFragment_to_characterChooseEquipmentFragment"
+            app:destination="@id/characterChooseEquipmentFragment" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_equpmentFragment"
+        app:destination="@+id/characterEquipmentFragment"
+        app:popUpTo="@+id/characterAbilitiesFragment"
+        app:popUpToInclusive="true" />
+
+    <fragment
+        android:id="@+id/characterChooseEquipmentFragment"
+        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.chooseequipment.CharacterChooseEquipmentFragment"
+        android:label="CharacterChooseEquipmentFragment" />
+
+
+    <fragment
+        android:id="@+id/characterNotesFragment"
+        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.notes.CharacterNotesFragment"
+        android:label="CharacterNotesFragment">
+        <action
+            android:id="@+id/action_characterNotesFragment_to_characterCreateNoteFragment"
+            app:destination="@id/characterCreateNoteFragment" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_notesFragment"
+        app:destination="@+id/characterNotesFragment"
+        app:popUpTo="@+id/characterAbilitiesFragment"
+        app:popUpToInclusive="true" />
+
+    <fragment
+        android:id="@+id/characterCreateNoteFragment"
+        android:name="com.andreyyurko.dnd.ui.showcharacterfragments.createnote.CreateNoteFragment"
+        android:label="CharacterCreateNoteFragment" />
 
 </navigation>

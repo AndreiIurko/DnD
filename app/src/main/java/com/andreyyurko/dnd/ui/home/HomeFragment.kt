@@ -2,6 +2,7 @@ package com.andreyyurko.dnd.ui.home
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
@@ -17,9 +18,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewBinding.spellsListButton.setOnClickListener {
-            val controller = findNavController()
-            controller.navigate(R.id.action_homeFragment_to_spellsListFragment)
+        viewBinding.directoryButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Справочная будет в следующих версиях", Toast.LENGTH_LONG).show()
         }
 
         viewBinding.charactersListButton.setOnClickListener {

@@ -41,7 +41,7 @@ class CharacterListFragment : BaseFragment(R.layout.fragment_character_list) {
         viewBinding.addImageButton.setOnClickListener {
             viewModel.createNewCharacter()
             val controller = findNavController()
-            controller.navigate(R.id.abilitiesFragment)
+            controller.navigate(R.id.action_charactersListFragment_to_character_creation_nav_grapg)
         }
 
         viewBinding.arrowBackImageButton.setOnClickListener {
@@ -53,7 +53,7 @@ class CharacterListFragment : BaseFragment(R.layout.fragment_character_list) {
     private fun setupRecyclerView() {
         val recyclerView = viewBinding.charactersRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        val adapter = CharacterListAdapter(viewModel)
+        val adapter = CharacterListAdapter(viewModel, ::showDialog)
         recyclerView.adapter = adapter
         adapter.apply {
             viewModel.updateBriefInfo()

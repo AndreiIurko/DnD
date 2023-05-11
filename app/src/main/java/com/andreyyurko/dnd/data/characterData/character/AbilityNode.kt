@@ -7,19 +7,20 @@ import com.andreyyurko.dnd.data.characterData.Priority
 open class AbilityNode(
     val name: String,
     val changesInCharacterInfo: (abilities: CharacterInfo) -> CharacterInfo,
-    val alternatives: MutableMap<String, List<String>>,
+    val getAlternatives: MutableMap<String, (abilities: CharacterInfo?) -> List<String>>,
     val requirements: (abilities: CharacterInfo) -> Boolean,
-    open val add_requirements: List<List<Triple<String, String, Int>>> = listOf(listOf()),
+    open val addRequirements: List<List<Triple<String, String, Int>>> = listOf(listOf()),
     var description: String,
     val isNeedsToBeShown: Boolean = true,
-    val priority: Priority = Priority.Basic
+    val priority: Priority = Priority.Basic,
+    val actionForChoice: Map<String, (choice: String, abilities: CharacterInfo) -> CharacterInfo> = mutableMapOf(),
 ) {
     constructor(name: String) : this(
         name = name,
         changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-        alternatives = mutableMapOf<String, List<String>>(),
+        getAlternatives = mutableMapOf<String, (abilities: CharacterInfo?) -> List<String>>(),
         requirements = { true },
-        add_requirements = listOf<List<Triple<String, String, Int>>>(),
+        addRequirements = listOf<List<Triple<String, String, Int>>>(),
         description = ""
     )
 
@@ -31,22 +32,20 @@ open class AbilityNode(
         return requirements(abilities)
     }
 
-    fun isAddable(abilities: CharacterInfo): Boolean {
+    fun isAddable(abilities: CharacterInfo?): Boolean {
+        if (abilities == null) return false
         return isCorrect(abilities) and true
     }
 
     fun showOptions(abilities: CharacterInfo, option_name: String): List<String> {
         val result: MutableList<String> = mutableListOf()
-        for (option in alternatives[option_name]!!) {
-            if (mapOfAn[option]!!.isAddable(abilities)) result.add(option)
-        }
-        return result
-    }
-
-    fun showOptions(option_name: String): List<String> {
-        val result: MutableList<String> = mutableListOf()
-        for (option in alternatives[option_name]!!) {
-            result.add(option)
+        for (option in getAlternatives[option_name]!!(abilities)) {
+            mapOfAn[option]?.let {
+                if (it.isAddable(abilities)) result.add(option)
+            }
+            actionForChoice[option_name]?.let {
+                result.add(option)
+            }
         }
         return result
     }

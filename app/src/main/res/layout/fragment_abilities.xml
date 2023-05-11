@@ -1,72 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="12dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/nameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginHorizontal="12dp"
-            android:orientation="vertical"
-    >
-        <EditText
-                android:id="@+id/nameEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:hint="Имя"
-                android:textColorHint="@color/primary"
-        />
+            android:layout_marginBottom="12dp"
+            android:hint="Имя"
+            android:inputType="textCapSentences"
+            android:textColorHint="@color/primary" />
 
         <TextView
-                android:id="@+id/pointsCapacity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textSize="24sp"
-                android:text="Всего очков: 27"/>
+            android:id="@+id/pointsCapacity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:text="Всего очков: 27" />
 
         <LinearLayout
-                android:id="@+id/abilitiesLinearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="12dp"
-        />
+            android:id="@+id/abilitiesLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="12dp" />
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Система Point Buy. \n\nВы получаете 27 пунктов, которые распределяете между значениями характеристик. Цена повышения характеристики - 1 пункт. Исключения - с 13 на 14 и с 14 на 15, они стоят 2 пункта. 15 — наибольшее значение характеристики, которое вы можете получить в итоге, используя этот метод (перед применением расовых улучшений). Значение характеристики не может быть ниже 8."/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Система Point Buy. \n\nВы получаете 27 пунктов, которые распределяете между значениями характеристик. Цена повышения характеристики - 1 пункт. Исключения - с 13 на 14 и с 14 на 15, они стоят 2 пункта. 15 — наибольшее значение характеристики, которое вы можете получить в итоге, используя этот метод (перед применением расовых улучшений). Значение характеристики не может быть ниже 8." />
 
 
         <GridLayout
-                android:layout_width="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:rowCount="1"
+            android:layout_marginBottom="76dp">
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:columnCount="2"
-                android:rowCount="1"
-                android:layout_marginBottom="76dp"
-        >
+                android:layout_gravity="center"
+                android:layout_columnWeight="1"
+                android:text="Назад"
+                android:textAllCaps="false" />
+
             <Button
-                    android:id="@+id/cancelButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_columnWeight="1"
-                    android:text="Назад"
-                    android:textAllCaps="false"
-            />
-            <Button
-                    android:id="@+id/submitButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_columnWeight="1"
-                    android:text="Принять"
-                    android:textAllCaps="false"
-            />
+                android:id="@+id/submitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_columnWeight="1"
+                android:text="Принять"
+                android:textAllCaps="false" />
         </GridLayout>
     </LinearLayout>
 

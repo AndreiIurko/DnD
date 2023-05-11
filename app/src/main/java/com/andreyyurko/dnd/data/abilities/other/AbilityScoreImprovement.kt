@@ -11,9 +11,9 @@ var strengthAbilityImprovement: AbilityNode = AbilityNode(
         abilities.strength += 1
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = emptyList(),
+    addRequirements = emptyList(),
     description = "",
     isNeedsToBeShown = false,
     priority = Priority.DoFirst
@@ -25,9 +25,9 @@ var dexterityAbilityImprovement: AbilityNode = AbilityNode(
         abilities.dexterity += 1
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = emptyList(),
+    addRequirements = emptyList(),
     description = "",
     isNeedsToBeShown = false,
     priority = Priority.DoFirst
@@ -39,9 +39,9 @@ var constitutionAbilityImprovement: AbilityNode = AbilityNode(
         abilities.constitution += 1
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = emptyList(),
+    addRequirements = emptyList(),
     description = "",
     isNeedsToBeShown = false,
     priority = Priority.DoFirst
@@ -53,9 +53,9 @@ var intelligenceAbilityImprovement: AbilityNode = AbilityNode(
         abilities.intelligence += 1
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = emptyList(),
+    addRequirements = emptyList(),
     description = "",
     isNeedsToBeShown = false,
     priority = Priority.DoFirst
@@ -67,10 +67,10 @@ var wisdomAbilityImprovement: AbilityNode = AbilityNode(
         abilities.wisdom += 1
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
     isNeedsToBeShown = false,
-    add_requirements = emptyList(),
+    addRequirements = emptyList(),
     description = "",
     priority = Priority.DoFirst
 )
@@ -81,9 +81,9 @@ var charismaAbilityImprovement: AbilityNode = AbilityNode(
         abilities.charisma += 1
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { true },
-    add_requirements = emptyList(),
+    addRequirements = emptyList(),
     description = "",
     isNeedsToBeShown = false,
     priority = Priority.DoFirst
@@ -94,30 +94,34 @@ var abilityScoreImprovement: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    alternatives = mutableMapOf(
+    getAlternatives = mutableMapOf(
         Pair(
-            "firstAbility", listOf(
-                strengthAbilityImprovement.name,
-                dexterityAbilityImprovement.name,
-                constitutionAbilityImprovement.name,
-                intelligenceAbilityImprovement.name,
-                wisdomAbilityImprovement.name,
-                charismaAbilityImprovement.name
-            )
+            "firstAbility", {
+                listOf(
+                    strengthAbilityImprovement.name,
+                    dexterityAbilityImprovement.name,
+                    constitutionAbilityImprovement.name,
+                    intelligenceAbilityImprovement.name,
+                    wisdomAbilityImprovement.name,
+                    charismaAbilityImprovement.name
+                )
+            }
         ),
         Pair(
-            "secondAbility", listOf(
-                strengthAbilityImprovement.name,
-                dexterityAbilityImprovement.name,
-                constitutionAbilityImprovement.name,
-                intelligenceAbilityImprovement.name,
-                wisdomAbilityImprovement.name,
-                charismaAbilityImprovement.name
-            )
+            "secondAbility", {
+                listOf(
+                    strengthAbilityImprovement.name,
+                    dexterityAbilityImprovement.name,
+                    constitutionAbilityImprovement.name,
+                    intelligenceAbilityImprovement.name,
+                    wisdomAbilityImprovement.name,
+                    charismaAbilityImprovement.name
+                )
+            }
         )
     ),
     requirements = { true },
-    add_requirements = emptyList(),
+    addRequirements = emptyList(),
     description = "",
 )
 

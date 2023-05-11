@@ -1,10 +1,8 @@
 package com.andreyyurko.dnd.data.abilities.other
 
-import com.andreyyurko.dnd.data.characterData.Action
-import com.andreyyurko.dnd.data.characterData.ActionType
-import com.andreyyurko.dnd.data.characterData.Armor
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
+import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 
 var archery: AbilityNode = AbilityNode(
     name = "Стрельба",
@@ -13,16 +11,17 @@ var archery: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         for (weaponProf in abilities.weaponProficiency) {
             if (!weaponProf.isMelee) {
-                weaponProf.toHitBonus += 2
+                weaponProf.toHitBonus = 2
             }
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { _: CharacterInfo ->
         true
     },
     description = "Вы получаете бонус +2 к броску атаки, когда атакуете дальнобойным оружием.",
+    priority = Priority.DoFirst
 )
 
 var defense: AbilityNode = AbilityNode(
@@ -33,7 +32,7 @@ var defense: AbilityNode = AbilityNode(
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { _: CharacterInfo ->
         true
     },
@@ -42,27 +41,33 @@ var defense: AbilityNode = AbilityNode(
 
 var dueling: AbilityNode = AbilityNode(
     name = "Дуэлянт",
-    // don't know how to process this ability
-    // change current state is dangerous
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities.add("Боевой стиль: Дуэлянт")
+        abilities.additionalAbilities["Боевой стиль: Дуэлянт"] =
+            "Пока вы держите рукопашное оружие в одной руке и не используете другого оружия, вы получаете бонус +2 к броскам урона этим оружием."
+        if (abilities.currentState.secondWeapon == null && abilities.currentState.firstWeapon.isMelee) {
+            if (abilities.currentState.firstWeapon.damage.split('+').last().length > 1)
+                abilities.currentState.firstWeapon.damage =
+                    sumTwoDamages("2", abilities.currentState.firstWeapon.damage)
+        }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { _: CharacterInfo ->
         true
     },
     description = "Пока вы держите рукопашное оружие в одной руке и не используете другого оружия, вы получаете бонус +2 к броскам урона этим оружием.",
+    priority = Priority.DoFirst
 )
 
 var greatWeaponFighting: AbilityNode = AbilityNode(
     name = "Сражение большим оружием",
     // don't know how to process this ability
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities.add("Боевой стиль: Сражение большим оружием")
+        abilities.additionalAbilities["Боевой стиль: Сражение большим оружием"] =
+            "Если у вас выпало «1» или «2» на кости урона оружия при атаке, которую вы совершали рукопашным оружием, удерживая его двумя руками, то вы можете перебросить эту кость, и должны использовать новый результат, даже если снова выпало «1» или «2». Чтобы воспользоваться этим преимуществом, ваше оружие должно иметь свойство « двуручное» или «универсальное»."
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { _: CharacterInfo ->
         true
     },
@@ -81,7 +86,7 @@ var protection: AbilityNode = AbilityNode(
         )
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { _: CharacterInfo ->
         true
     },
@@ -93,19 +98,34 @@ var twoWeaponFighting: AbilityNode = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         for (action in abilities.actionsList) {
             if (action.name == "Атака второй рукой") {
-                action.description =
-                    "Если вы совершаете действие «Атака» и атакуете рукопашным оружием со свойством «лёгкое», удерживаемым в одной руке, вы можете бонусным действием атаковать другим рукопашным оружием со свойством «лёгкое», удерживаемым в другой руке.\n" +
-                            "\n" +
-                            "Если у любого из оружий есть свойство «метательное», вы можете не совершать им рукопашную атаку, а метнуть его."
+                abilities.currentState.secondWeapon?.let {
+                    val (damage, toHitBonus) = calculateWeaponProp(it, abilities)
+                    var damageBonus = -5
+                    if (it.setOfSkills.contains(Ability.Strength)) {
+                        damageBonus = Integer.max(damageBonus, abilityToModifier(abilities.strength))
+                    }
+                    if (it.setOfSkills.contains(Ability.Dexterity)) {
+                        damageBonus = Integer.max(damageBonus, abilityToModifier(abilities.dexterity))
+                    }
+                    it.shownSecondWeaponDamage = sumTwoDamages(damageBonus.toString(), damage)
+                    action.description =
+                        "Если вы совершаете действие «Атака» и атакуете рукопашным оружием со свойством «лёгкое», удерживаемым в одной руке, вы можете бонусным действием атаковать другим рукопашным оружием со свойством «лёгкое», удерживаемым в другой руке.\n" +
+                                "\n" +
+                                "Если у любого из оружий есть свойство «метательное», вы можете не совершать им рукопашную атаку, а метнуть его.\n" +
+                                "Бонус к попаданию: ${if (toHitBonus < 0) "" else "+"}${toHitBonus}\n" +
+                                "Урон: ${sumTwoDamages(damageBonus.toString(), damage)}"
+                }
+
             }
         }
         abilities
     },
-    alternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(),
     requirements = { _: CharacterInfo ->
         true
     },
     description = "Если вы сражаетесь двумя оружиями, вы можете добавить модификатор характеристики к урону от второй атаки.",
+    priority = Priority.DoLast
 )
 
 var mapOfFightingStyles = mutableMapOf<String, AbilityNode>(

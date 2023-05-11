@@ -10,16 +10,11 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentCharacterInventoryBinding
 import com.andreyyurko.dnd.ui.showcharacterfragments.fragmentwithfilters.FragmentWithFilters
-import com.andreyyurko.dnd.utils.CharacterViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class CharacterInventoryFragment : FragmentWithFilters(R.layout.fragment_character_inventory) {
-
-    @Inject
-    lateinit var characterViewModel: CharacterViewModel
 
     lateinit var viewModel: CharacterInventoryViewModel
 
@@ -39,6 +34,20 @@ class CharacterInventoryFragment : FragmentWithFilters(R.layout.fragment_charact
             showItems()
         }
 
+        viewBinding.allButton.setOnClickListener {
+            viewBinding.allButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+            viewBinding.chosenButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_primary))
+            viewModel.isChosenListShown = false
+            showItems()
+        }
+
+        viewBinding.chosenButton.setOnClickListener {
+            viewBinding.allButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_primary))
+            viewBinding.chosenButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+            viewModel.isChosenListShown = true
+            showItems()
+        }
+
         viewBinding.filtersButton.setOnClickListener {
             if (viewBinding.filtersView.visibility == View.GONE) {
                 showFilters(viewBinding.filtersView, viewBinding.filtersButton, viewBinding.searchEditText)
@@ -49,15 +58,15 @@ class CharacterInventoryFragment : FragmentWithFilters(R.layout.fragment_charact
         }
 
         viewBinding.rarityButton.setOnClickListener {
-            setupFilter(viewBinding.rarityButton, viewModel.filters.rarity)
+            setupFilter(viewBinding.rarityButton, viewModel.getFilters().rarity)
         }
 
         viewBinding.typeButton.setOnClickListener {
-            setupFilter(viewBinding.typeButton, viewModel.filters.type)
+            setupFilter(viewBinding.typeButton, viewModel.getFilters().type)
         }
 
         viewBinding.sourceButton.setOnClickListener {
-            setupFilter(viewBinding.sourceButton, viewModel.filters.source)
+            setupFilter(viewBinding.sourceButton, viewModel.getFilters().source)
         }
     }
 
@@ -65,7 +74,7 @@ class CharacterInventoryFragment : FragmentWithFilters(R.layout.fragment_charact
         val recyclerView = viewBinding.inventoryRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-        val adapter = InventoryAdapter(viewModel.inventoryHandler, viewModel.characterViewModel, viewBinding.root)
+        val adapter = InventoryAdapter(viewModel.inventoryHandler, viewModel.characterViewModel)
         recyclerView.adapter = adapter
 
         val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
@@ -79,7 +88,7 @@ class CharacterInventoryFragment : FragmentWithFilters(R.layout.fragment_charact
     }
 
     private fun showItems() {
-        viewModel.filters.substring = viewBinding.searchEditText.text.toString()
+        viewModel.getFilters().substring = viewBinding.searchEditText.text.toString()
         (viewBinding.inventoryRecyclerView.adapter as InventoryAdapter).apply {
             itemsList = viewModel.showItems()
             notifyDataSetChanged()

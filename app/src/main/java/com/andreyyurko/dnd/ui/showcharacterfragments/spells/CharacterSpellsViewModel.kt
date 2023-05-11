@@ -1,7 +1,7 @@
 package com.andreyyurko.dnd.ui.showcharacterfragments.spells
 
 import androidx.lifecycle.ViewModel
-import com.andreyyurko.dnd.data.SpellSpecificLanguage
+import com.andreyyurko.dnd.data.spells.Spell
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.SpellsHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,17 +10,38 @@ import javax.inject.Inject
 @HiltViewModel
 class CharacterSpellsViewModel @Inject constructor(
     val characterViewModel: CharacterViewModel,
-    val spellsHandler: SpellsHandler
+    private val spellsHandler: SpellsHandler
 ) : ViewModel() {
 
-    val filters = SpellsHandler.Filters()
+    private val preparedFilters = SpellsHandler.Filters()
+    private val knownFilters = SpellsHandler.Filters()
+    var isPreparedListShown = true
 
-    fun showPreparedSpells(): List<SpellSpecificLanguage> {
-        return spellsHandler.getPreparedSpells(characterViewModel.shownCharacter, filters)
+    fun isAllPrepared(): Boolean {
+        return spellsHandler.isAllKnownIsPrepared(characterViewModel.shownCharacter)
     }
 
-    fun showKnownSpells(): List<SpellSpecificLanguage> {
-        return spellsHandler.getKnownSpells(characterViewModel.shownCharacter, filters)
+    fun getFilters(): SpellsHandler.Filters {
+        return if (isPreparedListShown) preparedFilters
+        else knownFilters
+    }
+
+    fun showPreparedSpells(): List<Spell> {
+        return spellsHandler.getPreparedSpellsWithDescription(characterViewModel.shownCharacter, preparedFilters)
+    }
+
+    fun showKnownSpells(): List<Spell> {
+        return spellsHandler.getKnownSpellsWithDescription(characterViewModel.shownCharacter, knownFilters)
+    }
+
+    fun addPreparedSpell(spell: Spell) {
+        spellsHandler.addPreparedSpell(spell.data.name, spell.listName, characterViewModel.shownCharacter)
+        characterViewModel.updateCharacterInfo()
+    }
+
+    fun removePreparedSpell(spell: Spell) {
+        spellsHandler.removePreparedSpell(spell.data.name, spell.listName, characterViewModel.shownCharacter)
+        characterViewModel.updateCharacterInfo()
     }
 
     fun getPreparedSpellsCount(): Int {

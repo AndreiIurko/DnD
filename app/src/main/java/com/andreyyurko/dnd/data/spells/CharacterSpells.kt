@@ -4,13 +4,17 @@ data class CharacterSpells(
     var className: String = "",
     var spellLists: SpellLists = SpellLists(),
     // -1 means we know all spells from the list
+    // 0 means you cannot choose any additional spells (but it possible what you already have some known spell)
     var maxKnownSpellsCount: Int = -1,
-    var maxPreparedSpellsCount: Int = 0,
-    var maxPreparedCantripsCount: Int = 0
+    var maxKnownCantripsCount: Int = -1,
+    // -1 means all known spells are prepared
+    var maxPreparedSpellsCount: Int = -1,
+    var maxPreparedCantripsCount: Int = -1
 )
 
 data class SpellLists(
     var knownSpells: MutableSet<String> = mutableSetOf(),
+    var knownCantrips: MutableSet<String> = mutableSetOf(),
     var preparedSpells: MutableSet<String> = mutableSetOf(),
     var preparedCantrips: MutableSet<String> = mutableSetOf(),
 )
