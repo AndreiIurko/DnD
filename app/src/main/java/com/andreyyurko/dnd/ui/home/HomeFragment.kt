@@ -20,7 +20,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
         viewBinding.directoryButton.setOnClickListener {
             Toast.makeText(requireContext(), "Справочная будет в следующих версиях", Toast.LENGTH_LONG).show()
-
         }
 
         viewBinding.charactersListButton.setOnClickListener {

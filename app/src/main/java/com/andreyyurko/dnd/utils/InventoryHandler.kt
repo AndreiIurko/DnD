@@ -250,7 +250,11 @@ class InventoryHandler @Inject constructor(
             } else if (currentState.armor == Armor.NoArmor) {
                 var armor: Armor = Armor.NoArmor
                 for (armorType in Armor.values()) {
-                    if (item.itemTypeAndRarity.lowercase().contains(armorType.armorName.lowercase())) {
+                    val type = item.itemTypeAndRarity.slice(
+                        item.itemTypeAndRarity.indexOf('(') + 1 until
+                                item.itemTypeAndRarity.indexOf(')')
+                    )
+                    if (type.lowercase() == armorType.armorName.lowercase()) {
                         armor = armorType
                         break
                     }

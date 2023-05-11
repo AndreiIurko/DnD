@@ -25,7 +25,6 @@ import com.andreyyurko.dnd.databinding.FragmentCharacterMainBinding
 import com.andreyyurko.dnd.ui.base.BaseFragment
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.PhotoPicker
-import com.andreyyurko.dnd.utils.onPressAnimation
 import com.google.android.material.checkbox.MaterialCheckBox
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.applyInsetter
@@ -146,7 +145,6 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
             //TODO("navigate to changing character stats, abilities, etc.")
         }
 
-        onPressAnimation(viewBinding.arrowBackImageButton)
         viewBinding.arrowBackImageButton.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -275,7 +273,6 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
         characterMenu: PopupWindow
     ) {
         button.apply {
-            onPressAnimation(this)
             this.setOnClickListener {
                 navController.navigate(destId)
                 destinationList.add(destId)

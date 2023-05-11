@@ -6,7 +6,6 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import android.util.Log
 import com.andreyyurko.dnd.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -14,7 +13,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import javax.inject.Singleton
 
 
 @AndroidEntryPoint
@@ -47,7 +45,6 @@ class CharacterSavingService : Service() {
         scope.launch {
             charactersHolder.savingCharactersState.collect {
                 if (it == CharactersHolder.SavingCharactersState.Completed) {
-                    Log.d("work", "stopped!")
                     stopSelf()
                 }
             }

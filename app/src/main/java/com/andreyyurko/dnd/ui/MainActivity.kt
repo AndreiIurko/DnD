@@ -1,7 +1,6 @@
 package com.andreyyurko.dnd.ui
 
 import android.animation.ObjectAnimator
-import android.app.ActivityManager
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -17,6 +16,7 @@ import com.andreyyurko.dnd.databinding.ActivityMainBinding
 import com.andreyyurko.dnd.utils.CharacterSavingService
 import com.andreyyurko.dnd.utils.CharactersHolder
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 
@@ -28,6 +28,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val viewBinding by viewBinding(ActivityMainBinding::bind)
     private lateinit var viewModel: MainViewModel
+
+    private val job = SupervisorJob()
+    private val scope = CoroutineScope(Dispatchers.IO + job)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
@@ -75,9 +79,35 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
     }
 
+    override fun onResume() {
+        scope.launch {
+            saveCharacters()
+        }
+        super.onResume()
+    }
+
     override fun onPause() {
+        scope.cancel()
+        super.onPause()
+    }
+
+    override fun onStop() {
+        val serviceIntent = Intent(this, CharacterSavingService::class.java)
+        startService(serviceIntent)
+        super.onStop()
+    }
+
+    override fun onDestroy() {
         val serviceIntent = Intent(this, CharacterSavingService::class.java)
         startForegroundService(serviceIntent)
-        super.onPause()
+        super.onDestroy()
+    }
+
+    suspend fun saveCharacters() {
+        // every 3 minutes save characters
+        while (true) {
+            delay(3 * 60 * 1000)
+            charactersHolder.saveCharacters()
+        }
     }
 }

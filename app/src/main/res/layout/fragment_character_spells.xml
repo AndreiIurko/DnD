@@ -189,7 +189,7 @@
             <TextView
                 android:id="@+id/spellNameText"
                 android:layout_marginStart="16dp"
-                android:layout_width="160dp"
+                android:layout_width="158dp"
                 android:layout_height="wrap_content"
                 android:text="Имя"
                 android:textColor="@color/on_primary"
@@ -204,7 +204,7 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:layout_marginStart="14dp"
+                android:layout_marginStart="16dp"
                 android:id="@+id/spellTimeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

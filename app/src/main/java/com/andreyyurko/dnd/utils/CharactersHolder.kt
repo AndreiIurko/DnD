@@ -4,13 +4,11 @@ import android.app.Application
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
-import androidx.work.await
 import com.andreyyurko.dnd.data.abilities.mapOfAn
 import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.Character
@@ -22,8 +20,6 @@ import com.andreyyurko.dnd.db.DB
 import com.andreyyurko.dnd.db.DBProvider
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -101,10 +97,6 @@ class CharactersHolder @Inject constructor(
             characters[id] = character
         }
         _initActionState.emit(InitializationState.Initialized)
-        while (true) {
-            delay(3 * 60 * 1000)
-            saveCharacters()
-        }
     }
 
 
@@ -332,7 +324,6 @@ class CharactersHolder @Inject constructor(
             _savingCharactersState.emit(SavingCharactersState.NotCompleted)
             for (id in characters.keys) {
                 saveCharacter(id)
-                Log.d("work", id.toString())
             }
             val worksQuery = WorkManager.getInstance(getApplication<Application>().applicationContext).getWorkInfosByTagLiveData("saveCharacterInfo")
 

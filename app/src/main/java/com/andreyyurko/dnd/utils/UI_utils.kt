@@ -3,20 +3,14 @@ package com.andreyyurko.dnd.utils
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.TypedValue
-import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.ScrollView
-import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.compose.ui.unit.dp
 import androidx.core.animation.doOnEnd
 import com.andreyyurko.dnd.R
-import com.andreyyurko.dnd.data.characterData.character.CharacterAbilityNode
-import com.andreyyurko.dnd.ui.addcharacterfragments.AbilityAdapter
 
 @SuppressLint("ClickableViewAccessibility")
 fun onPressAnimation(view: View) {

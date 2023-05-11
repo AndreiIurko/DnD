@@ -2,12 +2,9 @@ package com.andreyyurko.dnd.db
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.os.Build
 import android.os.Parcelable
-import android.util.Log
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkManager
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException

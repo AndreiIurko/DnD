@@ -1,9 +1,9 @@
 package com.andreyyurko.dnd.data.abilities.classes.ranger
 
-import com.andreyyurko.dnd.data.characterData.Action
-import com.andreyyurko.dnd.data.characterData.ActionType
 import com.andreyyurko.dnd.data.abilities.classes.evasion
 import com.andreyyurko.dnd.data.abilities.classes.rogue.uncannyDodge
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode

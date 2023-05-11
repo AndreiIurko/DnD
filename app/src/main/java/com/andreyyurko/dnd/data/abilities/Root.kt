@@ -7,12 +7,12 @@ import com.andreyyurko.dnd.data.abilities.classes.druid.druid1
 import com.andreyyurko.dnd.data.abilities.classes.fighter.fighter1
 import com.andreyyurko.dnd.data.abilities.classes.mapOfClasses
 import com.andreyyurko.dnd.data.abilities.classes.monk.monk1
-import com.andreyyurko.dnd.data.abilities.classes.rogue.rogue1
-import com.andreyyurko.dnd.data.abilities.classes.sorcerer.sorcerer1
-import com.andreyyurko.dnd.data.abilities.classes.wizard.wizard1
 import com.andreyyurko.dnd.data.abilities.classes.paladin.paladin1
 import com.andreyyurko.dnd.data.abilities.classes.ranger.ranger1
+import com.andreyyurko.dnd.data.abilities.classes.rogue.rogue1
+import com.andreyyurko.dnd.data.abilities.classes.sorcerer.sorcerer1
 import com.andreyyurko.dnd.data.abilities.classes.warlock.warlock1
+import com.andreyyurko.dnd.data.abilities.classes.wizard.wizard1
 import com.andreyyurko.dnd.data.abilities.other.*
 import com.andreyyurko.dnd.data.abilities.races.*
 import com.andreyyurko.dnd.data.characterData.CharacterInfo

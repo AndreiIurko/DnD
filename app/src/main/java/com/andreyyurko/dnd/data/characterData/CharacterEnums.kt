@@ -94,7 +94,7 @@ enum class Armor(
     var StealthDisadvantage: Boolean,
     var dexRestriction: Int
 ) {
-    Padded("Стёганый", 11, "лёгкий", 0, true, 10),
+    Padded("Стеганый", 11, "лёгкий", 0, true, 10),
     Leather("Кожаный", 11, "лёгкий", 0, false, 10),
     StuddedLeather("Проклёпанный кожаный", 12, "лёгкий", 0, false, 10),
 

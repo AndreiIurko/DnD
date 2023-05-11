@@ -1,27 +1,12 @@
 package com.andreyyurko.dnd.data.abilities.classes.warlock
 
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
-import com.andreyyurko.dnd.data.abilities.other.abilityScoreImprovement
-import com.andreyyurko.dnd.data.abilities.other.arcana
-import com.andreyyurko.dnd.data.abilities.other.deception
-import com.andreyyurko.dnd.data.abilities.other.history
-import com.andreyyurko.dnd.data.abilities.other.intimidation
-import com.andreyyurko.dnd.data.abilities.other.investigation
-import com.andreyyurko.dnd.data.abilities.other.nature
-import com.andreyyurko.dnd.data.abilities.other.religion
-import com.andreyyurko.dnd.data.characterData.Ability
-import com.andreyyurko.dnd.data.characterData.Action
-import com.andreyyurko.dnd.data.characterData.ActionType
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
-import com.andreyyurko.dnd.data.characterData.ChargesCounter
-import com.andreyyurko.dnd.data.characterData.Classes
-import com.andreyyurko.dnd.data.characterData.Priority
-import com.andreyyurko.dnd.data.characterData.addAllSimpleWeapons
+import com.andreyyurko.dnd.data.abilities.other.*
+import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import com.andreyyurko.dnd.data.spells.CharacterSpells
 import com.andreyyurko.dnd.data.spells.SpellLists
-import kotlin.math.max
 
 var classFeaturesWarlock: AbilityNode = AbilityNode(
     name = "Колдун: классовые умения",
