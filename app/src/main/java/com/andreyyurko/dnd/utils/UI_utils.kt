@@ -67,6 +67,7 @@ fun setupBasicPopUpMenu(context: Context, maxHeight: Int? = 200): Pair<PopupWind
     val high = if (maxHeight != null) (context.resources.displayMetrics.density * maxHeight).toInt() else LinearLayout.LayoutParams.WRAP_CONTENT
     val scrollView = ScrollView(context)
     scrollView.background = AppCompatResources.getDrawable(context, R.drawable.filled_border)
+    scrollView.isScrollbarFadingEnabled = false
 
     scrollView.addView(parent)
     val popupWindow = PopupWindow(scrollView, wid, high, focus)

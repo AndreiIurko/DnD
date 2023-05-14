@@ -71,7 +71,8 @@ class InventoryAdapter @Inject constructor(
     }
 
     private fun showFullDescription(itemDescription: InventoryItemInfo, context: Context, position: Int) {
-        val item = inventoryHandler.getItemInfo(itemDescription.itemName)!!
+        val item = inventoryHandler.getItemInfo(itemDescription.itemName)
+        if (item == null) return
 
         val parent = LayoutInflater.from(context).inflate(R.layout.view_full_inventory_item, null)
         parent.layoutParams = LinearLayout.LayoutParams(

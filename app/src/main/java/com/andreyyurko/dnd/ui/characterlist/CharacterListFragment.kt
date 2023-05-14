@@ -2,6 +2,7 @@ package com.andreyyurko.dnd.ui.characterlist
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -51,15 +52,20 @@ class CharacterListFragment : BaseFragment(R.layout.fragment_character_list) {
     }
 
     private fun setupRecyclerView() {
-        val recyclerView = viewBinding.charactersRecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        val adapter = CharacterListAdapter(viewModel, ::showDialog)
-        recyclerView.adapter = adapter
-        adapter.apply {
-            viewModel.updateBriefInfo()
-            charactersList = viewModel.charactersBriefInfo
-            notifyDataSetChanged()
+        try {
+            val recyclerView = viewBinding.charactersRecyclerView
+            recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            val adapter = CharacterListAdapter(viewModel, ::showDialog)
+            recyclerView.adapter = adapter
+            adapter.apply {
+                viewModel.updateBriefInfo()
+                charactersList = viewModel.charactersBriefInfo
+                notifyDataSetChanged()
+            }
         }
-        //recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+        catch (e: Exception) {
+            Toast.makeText(requireContext(), "Произошла проблема с адаптером, пожалуйста, сообщите об этом", Toast.LENGTH_LONG).show()
+        }
+
     }
 }

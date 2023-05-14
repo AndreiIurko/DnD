@@ -35,7 +35,10 @@ open class CharacterAbilityNode(
     }
 
     fun showOptions(option_name: String): List<String> {
-        return data.showOptions(character!!.characterInfo, option_name)
+        character?.characterInfo?.let {
+            return data.showOptions(it, option_name)
+        }
+        return emptyList()
     }
 
     open fun makeChoice(option_name: String, choice: String, isFirst: Boolean = true) {

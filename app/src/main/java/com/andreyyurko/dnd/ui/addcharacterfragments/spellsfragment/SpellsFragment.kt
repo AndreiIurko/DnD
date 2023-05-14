@@ -3,6 +3,7 @@ package com.andreyyurko.dnd.ui.addcharacterfragments.spellsfragment
 import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -123,7 +124,9 @@ class SpellsFragment : FragmentWithFilters(R.layout.fragment_spells) {
         recyclerView.adapter = adapter
 
         val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-        itemDecorator.setDrawable(context?.let { ContextCompat.getDrawable(it, R.drawable.divider) }!!)
+        AppCompatResources.getDrawable(requireContext(), R.drawable.divider)?.let {
+            itemDecorator.setDrawable(it)
+        }
         recyclerView.addItemDecoration(itemDecorator)
 
         adapter.apply {

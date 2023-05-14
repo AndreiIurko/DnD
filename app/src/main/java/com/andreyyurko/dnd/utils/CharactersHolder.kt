@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
@@ -54,123 +55,146 @@ class CharactersHolder @Inject constructor(
     var isSavingNeeded = false
 
     fun initialize() {
-        Timer().schedule(timerTask {
-            if (_initActionState.asStateFlow().value != InitializationState.Initialized) {
-                viewModelScope.launch {
-                    loadCharacters()
+        try {
+            Timer().schedule(timerTask {
+                if (_initActionState.asStateFlow().value != InitializationState.Initialized) {
+                    viewModelScope.launch {
+                        loadCharacters()
+                    }
+                }
+            }, 20000)
+
+            val worksQuery = WorkManager.getInstance(getApplication<Application>().applicationContext)
+                .getWorkInfosByTagLiveData("saveCharacterInfo")
+
+            val observer = Observer<List<WorkInfo>> { workList ->
+                var isAllFinished = true
+                for (work in workList) {
+                    if (work.state != WorkInfo.State.SUCCEEDED) {
+                        isAllFinished = false
+                    }
+                }
+                if (isAllFinished) {
+                    viewModelScope.launch {
+                        loadCharacters()
+                    }
                 }
             }
-        }, 20000)
+            worksQuery.observeForever(observer)
 
-        val worksQuery = WorkManager.getInstance(getApplication<Application>().applicationContext).getWorkInfosByTagLiveData("saveCharacterInfo")
-
-        val observer = Observer<List<WorkInfo>> { workList ->
-            var isAllFinished = true
-            for (work in workList) {
-                if (work.state != WorkInfo.State.SUCCEEDED) {
-                    isAllFinished = false
-                }
-            }
-            if (isAllFinished) {
-                viewModelScope.launch {
-                    loadCharacters()
+            viewModelScope.launch {
+                initActionState.collect {
+                    if (it == InitializationState.Initialized) {
+                        worksQuery.removeObserver(observer)
+                    }
                 }
             }
         }
-        worksQuery.observeForever(observer)
-
-        viewModelScope.launch {
-            initActionState.collect {
-                if (it == InitializationState.Initialized) {
-                    worksQuery.removeObserver(observer)
-                }
+        catch (e: Exception) {
+            viewModelScope.launch {
+                loadCharacters()
             }
         }
     }
 
     private suspend fun loadCharacters() {
-        val listIdsType: Type = object : TypeToken<List<Int>>() {}.type
-        val charactersListJson = db.getString(DB_CHARACTER_IDS)
-        val charactersList: List<Int> = Gson().fromJson(charactersListJson, listIdsType) ?: emptyList()
-        for (id in charactersList) {
-            val character = loadCharacter(id)
+        try {
+            val listIdsType: Type = object : TypeToken<List<Int>>() {}.type
+            val charactersListJson = db.getString(DB_CHARACTER_IDS)
+            val charactersList: List<Int> = Gson().fromJson(charactersListJson, listIdsType) ?: emptyList()
+            for (id in charactersList) {
+                val character = loadCharacter(id)
 
-            // add to character list
-            characters[id] = character
+                // add to character list
+                character?.let {
+                    characters[id] = character
+                }
+
+            }
+        }
+        catch (e: Exception) {
+            characters = mutableMapOf()
         }
         _initActionState.emit(InitializationState.Initialized)
     }
 
 
-    private fun loadCharacter(id: Int): Character {
-        // get name
-        val name = db.getString(DB_CHARACTER_NAME + id.toString())
-        val bitmap = loadCharacterBitmap(id)
-        characterImages[id] = bitmap
+    private fun loadCharacter(id: Int): Character? {
+        var character: Character? = null
+        try {
+            // get name
+            val name = db.getString(DB_CHARACTER_NAME + id.toString())
+            val bitmap = loadCharacterBitmap(id)
+            characterImages[id] = bitmap
 
-        // init character
-        val character = Character(
-            id = id,
-            image = bitmap,
-            name = name!!,
-            characterInfo = CharacterInfo(),
-        )
+            // init character
+            character = Character(
+                id = id,
+                image = bitmap,
+                name = name!!,
+                characterInfo = CharacterInfo(),
+            )
 
-        // get custom info
-        val characterCharacterInfoJson = db.getString(id.toString() + DB_CHARACTER_CUSTOM)
-        val characterCharacterInfo = if (characterCharacterInfoJson != null) Gson().fromJson(
-            characterCharacterInfoJson,
-            CharacterInfo::class.java
-        ) else CharacterInfo()
+            // get custom info
+            val characterCharacterInfoJson = db.getString(id.toString() + DB_CHARACTER_CUSTOM)
+            val characterCharacterInfo = if (characterCharacterInfoJson != null) Gson().fromJson(
+                characterCharacterInfoJson,
+                CharacterInfo::class.java
+            ) else CharacterInfo()
 
-        // get current state
-        val currentStateJson = db.getString(id.toString() + DB_CHARACTER_STATE)
-        val currentState = if (currentStateJson != null) Gson().fromJson(
-            currentStateJson,
-            CurrentState::class.java
-        ) else CurrentState()
+            // get current state
+            val currentStateJson = db.getString(id.toString() + DB_CHARACTER_STATE)
+            val currentState = if (currentStateJson != null) Gson().fromJson(
+                currentStateJson,
+                CurrentState::class.java
+            ) else CurrentState()
 
-        //get inventory
-        val inventoryMapType: Type = object : TypeToken<MutableMap<String, InventoryItemInfo>>() {}.type
-        val inventoryJson = db.getString(id.toString() + DB_INVENTORY)
-        val inventory: MutableMap<String, InventoryItemInfo> =
-            if (inventoryJson != null) Gson().fromJson(inventoryJson, inventoryMapType) else mutableMapOf()
+            //get inventory
+            val inventoryMapType: Type = object : TypeToken<MutableMap<String, InventoryItemInfo>>() {}.type
+            val inventoryJson = db.getString(id.toString() + DB_INVENTORY)
+            val inventory: MutableMap<String, InventoryItemInfo> =
+                if (inventoryJson != null) Gson().fromJson(inventoryJson, inventoryMapType) else mutableMapOf()
 
-        // get spells
-        val spellsMapType: Type = object : TypeToken<MutableMap<String, CharacterSpells>>() {}.type
-        val spellsJson = db.getString(id.toString() + DB_SPELLS)
-        val spells: MutableMap<String, CharacterSpells> =
-            if (spellsJson != null) Gson().fromJson(spellsJson, spellsMapType) else mutableMapOf()
+            // get spells
+            val spellsMapType: Type = object : TypeToken<MutableMap<String, CharacterSpells>>() {}.type
+            val spellsJson = db.getString(id.toString() + DB_SPELLS)
+            val spells: MutableMap<String, CharacterSpells> =
+                if (spellsJson != null) Gson().fromJson(spellsJson, spellsMapType) else mutableMapOf()
 
-        val notesListType: Type = object : TypeToken<MutableList<Note>>() {}.type
-        val notesJson = db.getString(id.toString() + DB_NOTES)
-        val notes: MutableList<Note> =
-            if (notesJson != null) Gson().fromJson(notesJson, notesListType) else mutableListOf()
+            val notesListType: Type = object : TypeToken<MutableList<Note>>() {}.type
+            val notesJson = db.getString(id.toString() + DB_NOTES)
+            val notes: MutableList<Note> =
+                if (notesJson != null) Gson().fromJson(notesJson, notesListType) else mutableListOf()
 
-        // get base_an with all sub-nods
-        val baseCharacterAbilityNode = loadCharacterNode("base_an", id, ".", character)
+            // get base_an with all sub-nods
+            val baseCharacterAbilityNode = loadCharacterNode("base_an", id, ".", character)
 
-        // init essential props
-        character.customAbilities = characterCharacterInfo
-        character.baseCAN = baseCharacterAbilityNode
+            // init essential props
+            character.customAbilities = characterCharacterInfo
+            character.baseCAN = baseCharacterAbilityNode
 
-        // add all custom data
-        character.characterInfo = mergeCharacterInfo(character.characterInfo, character.customAbilities)
+            // add all custom data
+            character.characterInfo = mergeCharacterInfo(character.characterInfo, character.customAbilities)
 
-        // add current state
-        character.characterInfo.currentState = currentState
+            // add current state
+            character.characterInfo.currentState = currentState
 
-        // add inventory
-        character.characterInfo.inventory = inventory
+            // add inventory
+            character.characterInfo.inventory = inventory
 
-        // add chosen spells
-        character.characterInfo.spellsInfo = spells
+            // add chosen spells
+            character.characterInfo.spellsInfo = spells
 
-        // add notes
-        character.notes = notes
+            // add notes
+            character.notes = notes
 
-        // merge all CAN
-        mergeAllAbilities(character)
+            // merge all CAN
+            mergeAllAbilities(character)
+        }
+        catch (e: Exception) {
+            Log.d(LOG_TAG, e.message.toString())
+            character = null
+        }
 
         return character
     }
@@ -185,12 +209,14 @@ class CharactersHolder @Inject constructor(
             fileInputStream.close()
         } catch (e: Exception) {
             e.printStackTrace()
+            return null
         }
 
         return bitmap
     }
 
     private fun loadCharacterNode(name: String, id: Int, path: String, character: Character): CharacterAbilityNode {
+
         // init type to load from db
         val mapType: Type = object : TypeToken<Map<String, String>>() {}.type
 

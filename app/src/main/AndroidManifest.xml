@@ -25,6 +25,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.CrashActivity"
+            android:theme="@style/Theme.Dnd"
+            android:windowSoftInputMode="adjustPan"/>
+
         <service android:name=".utils.CharacterSavingService"/>
     </application>
 

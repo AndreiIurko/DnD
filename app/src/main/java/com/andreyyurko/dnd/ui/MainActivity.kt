@@ -93,21 +93,29 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     override fun onStop() {
-        Log.d("test", charactersHolder.isSavingNeeded.toString())
         if (charactersHolder.isSavingNeeded) {
-            val serviceIntent = Intent(this, CharacterSavingService::class.java)
-            startService(serviceIntent)
-            charactersHolder.isSavingNeeded = false
+            try {
+                val serviceIntent = Intent(this, CharacterSavingService::class.java)
+                startService(serviceIntent)
+                charactersHolder.isSavingNeeded = false
+            }
+            catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
         super.onStop()
     }
 
     override fun onDestroy() {
-        Log.d("test", charactersHolder.isSavingNeeded.toString())
         if (charactersHolder.isSavingNeeded) {
-            val serviceIntent = Intent(this, CharacterSavingService::class.java)
-            startForegroundService(serviceIntent)
-            charactersHolder.isSavingNeeded = false
+            try {
+                val serviceIntent = Intent(this, CharacterSavingService::class.java)
+                startForegroundService(serviceIntent)
+                charactersHolder.isSavingNeeded = false
+            }
+            catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
         super.onDestroy()
     }

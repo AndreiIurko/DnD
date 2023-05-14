@@ -45,7 +45,7 @@ class ChooseEquipmentAdapter @Inject constructor(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.nameTextView.text = itemsList[position].itemDescription.itemName
         holder.nameTextView.setOnClickListener {
-            showFullDescription(itemsList[position].itemDescription, it.context, position)
+            showFullDescription(itemsList[position].itemDescription, it.context)
         }
 
         if (!itemsList[position].isEquipped && !itemsList[position].isCanBeEquipped) {
@@ -130,7 +130,7 @@ class ChooseEquipmentAdapter @Inject constructor(
         return resultList
     }
 
-    private fun showFullDescription(itemDescription: InventoryItemInfo, context: Context, position: Int) {
+    private fun showFullDescription(itemDescription: InventoryItemInfo, context: Context) {
         val item = inventoryHandler.getItemInfo(itemDescription.itemName)!!
 
         val parent = LayoutInflater.from(context).inflate(R.layout.view_full_inventory_item, null)
