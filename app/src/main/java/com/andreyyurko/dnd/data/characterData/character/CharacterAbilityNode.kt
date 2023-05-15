@@ -20,11 +20,10 @@ open class CharacterAbilityNode(
         var result: CharacterInfo = abilities
         if (data.priority == priority) {
             result = data.merge(result)
-        }
-
-        for ((option, choice) in chosenAlternativesForActions) {
-            data.actionForChoice[option]?.let {
-                result = it(choice, result)
+            for ((option, choice) in chosenAlternativesForActions) {
+                data.actionForChoice[option]?.let {
+                    result = it(choice, result)
+                }
             }
         }
 

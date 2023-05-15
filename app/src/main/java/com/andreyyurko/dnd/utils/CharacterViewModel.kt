@@ -31,7 +31,7 @@ class CharacterViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
     var charactersBriefInfo = charactersHolder.getBriefInfo()
 
-    lateinit var shownCharacter: Character
+    private lateinit var shownCharacter: Character
 
     val dataState: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
@@ -39,6 +39,10 @@ class CharacterViewModel @Inject constructor(
 
     val backgroundIsShown: MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>(false)
+    }
+
+    fun getCharacter(): Character {
+        return shownCharacter
     }
 
     fun updateBriefInfo() {

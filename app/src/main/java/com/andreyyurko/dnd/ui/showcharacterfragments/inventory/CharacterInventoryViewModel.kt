@@ -19,9 +19,9 @@ class CharacterInventoryViewModel @Inject constructor(
 
     fun showItems(): MutableList<InventoryItemInfo> {
         return if (isChosenListShown)
-            inventoryHandler.getCharacterItems(characterViewModel.shownCharacter, chosenItemsFilters)
+            inventoryHandler.getCharacterItems(characterViewModel.getCharacter(), chosenItemsFilters)
         else
-            inventoryHandler.getItems(characterViewModel.shownCharacter, allItemsFilters)
+            inventoryHandler.getItems(characterViewModel.getCharacter(), allItemsFilters)
     }
 
     fun getFilters(): InventoryHandler.Filters {

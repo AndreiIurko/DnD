@@ -46,6 +46,8 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
     private val viewBinding by viewBinding(FragmentCharacterMainBinding::bind)
     private val destinationList: MutableList<Int> = mutableListOf(R.id.action_abilitiesFragment)
 
+    private var maxSlotLevel: Int = 0
+
     private val singlePhotoPickerLauncher = registerForActivityResult(PhotoPicker()) { imageUri: Uri? ->
         imageUri?.let(characterViewModel::setImageUri)
     }
@@ -75,7 +77,7 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
             type(statusBars = true) { margin() }
         }
 
-        characterViewModel.shownCharacter.image?.let {
+        characterViewModel.getCharacter().image?.let {
             viewBinding.iconImageButton.setImageBitmap(it)
         }
         setupSlots()
@@ -84,7 +86,7 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
             if (viewBinding.spellSlotsLinearLayout.translationX == 0f) {
                 ObjectAnimator.ofFloat(
                     viewBinding.spellSlotsLinearLayout, "translationX",
-                    viewBinding.spellSlotsLinearLayout.translationX, -252 * resources.displayMetrics.density
+                    viewBinding.spellSlotsLinearLayout.translationX, -28 * maxSlotLevel * resources.displayMetrics.density
                 ).start()
                 ObjectAnimator.ofFloat(
                     viewBinding.spellSlotsButton, "translationX",
@@ -97,7 +99,7 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
                 ).start()
                 ObjectAnimator.ofFloat(
                     viewBinding.spellSlotsButton, "translationX",
-                    viewBinding.spellSlotsButton.translationX, 250 * resources.displayMetrics.density
+                    viewBinding.spellSlotsButton.translationX, (28 * maxSlotLevel - 2) * resources.displayMetrics.density
                 ).start()
             }
         }
@@ -153,34 +155,34 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
     }
 
     private fun setupAll() {
-        viewBinding.nameTextView.text = characterViewModel.shownCharacter.name
-        viewBinding.classTextView.text = characterViewModel.shownCharacter.characterInfo.characterClass.className
-        viewBinding.levelTextView.text = characterViewModel.shownCharacter.characterInfo.level.toString()
-        if (characterViewModel.shownCharacter.characterInfo.currentState.hp == null) {
-            characterViewModel.shownCharacter.characterInfo.currentState.hp =
-                characterViewModel.shownCharacter.characterInfo.hp
+        viewBinding.nameTextView.text = characterViewModel.getCharacter().name
+        viewBinding.classTextView.text = characterViewModel.getCharacter().characterInfo.characterClass.className
+        viewBinding.levelTextView.text = characterViewModel.getCharacter().characterInfo.level.toString()
+        if (characterViewModel.getCharacter().characterInfo.currentState.hp == null) {
+            characterViewModel.getCharacter().characterInfo.currentState.hp =
+                characterViewModel.getCharacter().characterInfo.hp
         }
-        viewBinding.hpEditText.setText(characterViewModel.shownCharacter.characterInfo.currentState.hp.toString())
+        viewBinding.hpEditText.setText(characterViewModel.getCharacter().characterInfo.currentState.hp.toString())
         viewBinding.hpEditText.setOnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                 viewBinding.hpEditText.clearFocus()
-                characterViewModel.shownCharacter.characterInfo.currentState.hp =
+                characterViewModel.getCharacter().characterInfo.currentState.hp =
                     viewBinding.hpEditText.text.toString().toInt()
                 characterViewModel.updateCharacterInfo()
             }
             false
         }
 
-        viewBinding.maxHpTextView.text = "/" + characterViewModel.shownCharacter.characterInfo.hp.toString()
+        viewBinding.maxHpTextView.text = "/" + characterViewModel.getCharacter().characterInfo.hp.toString()
         viewBinding.proficiencyTextView.text =
-            "+ ${characterViewModel.shownCharacter.characterInfo.proficiencyBonus}"
-        viewBinding.speedTextView.text = "${characterViewModel.shownCharacter.characterInfo.speed}ft"
+            "+ ${characterViewModel.getCharacter().characterInfo.proficiencyBonus}"
+        viewBinding.speedTextView.text = "${characterViewModel.getCharacter().characterInfo.speed}ft"
         viewBinding.initiativeTextView.text =
-            if (characterViewModel.shownCharacter.characterInfo.initiativeBonus >= 0)
-                "+ ${characterViewModel.shownCharacter.characterInfo.initiativeBonus}"
+            if (characterViewModel.getCharacter().characterInfo.initiativeBonus >= 0)
+                "+ ${characterViewModel.getCharacter().characterInfo.initiativeBonus}"
             else
-                "- ${kotlin.math.abs(characterViewModel.shownCharacter.characterInfo.initiativeBonus)}"
-        viewBinding.acTextView.text = characterViewModel.shownCharacter.characterInfo.ac.toString()
+                "- ${kotlin.math.abs(characterViewModel.getCharacter().characterInfo.initiativeBonus)}"
+        viewBinding.acTextView.text = characterViewModel.getCharacter().characterInfo.ac.toString()
     }
 
     private fun setupPopupMenu(context: Context) {
@@ -286,7 +288,7 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
     private fun setupSlots() {
         var isHaveSlots = false
         for (i in 0 until viewBinding.spellSlotsLinearLayout.childCount) {
-            isHaveSlots = isHaveSlots or setupLinearLayout(viewBinding.spellSlotsLinearLayout.getChildAt(i) as LinearLayout, i + 1)
+            isHaveSlots = isHaveSlots or setupSlotsLinearLayout(viewBinding.spellSlotsLinearLayout.getChildAt(i) as LinearLayout, i + 1)
         }
         if (!isHaveSlots) {
             viewBinding.spellSlotsButton.visibility = View.GONE
@@ -294,17 +296,18 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
         }
     }
 
-    private fun setupLinearLayout(linearLayout: LinearLayout, level: Int): Boolean {
+    private fun setupSlotsLinearLayout(linearLayout: LinearLayout, level: Int): Boolean {
         var isHaveSlots = false
         for (i in 1 until linearLayout.childCount) {
             val checkBox: MaterialCheckBox = linearLayout.getChildAt(i) as MaterialCheckBox
-            val charges = characterViewModel.shownCharacter.characterInfo.currentState.charges["Ячейки_$level"]
+            val charges = characterViewModel.getCharacter().characterInfo.currentState.charges["Ячейки_$level"]
             if (charges == null) {
                 checkBox.isEnabled = false
                 continue
             }
             if (charges.maximum < i) {
                 checkBox.isEnabled = false
+                checkBox.visibility = View.GONE
                 continue
             }
             isHaveSlots = true
@@ -320,6 +323,11 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
                 }
             }
         }
+        if (!isHaveSlots) {
+            linearLayout.visibility = View.GONE
+            viewBinding.spellSlotsLinearLayout.translationX += 28 * resources.displayMetrics.density
+        }
+        else if (level > maxSlotLevel) maxSlotLevel = level
         return isHaveSlots
     }
 }

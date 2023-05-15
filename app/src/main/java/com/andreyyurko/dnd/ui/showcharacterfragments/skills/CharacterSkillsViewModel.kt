@@ -12,7 +12,7 @@ import javax.inject.Inject
 class CharacterSkillsViewModel @Inject constructor(
     private val characterViewModel: CharacterViewModel
 ) : ViewModel() {
-    private val shownCharacter = characterViewModel.shownCharacter
+    private val shownCharacter = characterViewModel.getCharacter()
 
     var skillsList = Skill.values()
     private var skillsProf = skillsList.associateWith { getProfBonusFromCharacter(it) }

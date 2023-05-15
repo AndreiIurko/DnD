@@ -14,6 +14,8 @@ class AbilitiesViewModel @Inject constructor(
 ) : ViewModel() {
 
     var abilities = Ability.values().associateBy({ it.abilityName }, { 8 }).toMutableMap()
+    var isPointBy: Boolean = false
+
     val totalPoints: MutableLiveData<Int> by lazy {
         MutableLiveData<Int>(27)
     }
@@ -27,6 +29,23 @@ class AbilitiesViewModel @Inject constructor(
         increaseAbility(Ability.Intelligence.abilityName, characterInfo.intelligence)
         increaseAbility(Ability.Wisdom.abilityName, characterInfo.wisdom)
         increaseAbility(Ability.Charisma.abilityName, characterInfo.charisma)
+    }
+
+    fun changeSystem() {
+        if (isPointBy) {
+            isPointBy = false
+        }
+        else {
+            isPointBy = true
+            val currentValues = abilities.values.toList()
+            abilities.keys.forEach {
+                abilities[it] = 8
+            }
+            totalPoints.value = 27
+            for ((i, ability) in Ability.values().withIndex()) {
+                increaseAbility(ability.abilityName, currentValues[i])
+            }
+        }
     }
 
     private fun increaseAbility(abilityName: String, end: Int) {
@@ -56,7 +75,7 @@ class AbilitiesViewModel @Inject constructor(
             totalPoints.value?.let {
                 totalPoints.value = it - 2
             }
-        } else {
+        } else if (newValue > 8) {
             totalPoints.value?.let {
                 totalPoints.value = it - 1
             }

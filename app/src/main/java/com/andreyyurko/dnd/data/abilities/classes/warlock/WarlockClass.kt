@@ -1,5 +1,6 @@
 package com.andreyyurko.dnd.data.abilities.classes.warlock
 
+import android.util.Log
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.other.*
 import com.andreyyurko.dnd.data.characterData.*
@@ -122,7 +123,8 @@ var warlock1: AbilityNodeLevel = AbilityNodeLevel(
         abilities.level += 1
         abilities.spellsLevel += 1
         abilities.proficiencyBonus += 2
-        abilities.hp += abilityToModifier(abilities.constitution) + 5
+        abilities.hp += abilityToModifier(abilities.constitution) + 8
+        abilities.characterClass = Classes.Warlock
         abilities
     },
     getAlternatives = mutableMapOf(
@@ -406,7 +408,7 @@ var mysticArcanum_6 = AbilityNode(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { spellist.filter{ (it.level == 6) && (it.classes.contains(Classes.Warlock)) }.map{ it.name } } )
+        Pair("first") { spellist.filter { (it.level == 6) && (it.classes.contains(Classes.Warlock)) }.map { it.name } }
     ),
     requirements = { true },
     description = "Ваш покровитель дарует вам магический секрет, называемый арканумом. Выберите одно заклинание 6-го уровня из списка заклинаний колдуна в качестве арканума.\n" +
@@ -416,6 +418,7 @@ var mysticArcanum_6 = AbilityNode(
             "На следующих уровнях вы получаете новые заклинания, которые можно применить таким образом — одно 7-го уровня на 13-м уровне, одно 8-го уровня на 15-м уровне и одно 9-го уровня на 17-м уровне. После окончания продолжительного отдыха вы восстанавливаете все потраченные использования арканумов.\n",
     actionForChoice = mutableMapOf(
         Pair("first") { choice: String, abilities: CharacterInfo ->
+            Log.d("test", choice)
             abilities.actionsList.add(
                 Action(
                     name = "Таинственный арканум 6 уровня",

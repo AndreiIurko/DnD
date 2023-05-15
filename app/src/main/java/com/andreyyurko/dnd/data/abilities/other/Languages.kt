@@ -131,7 +131,7 @@ var abyssalLanguage: AbilityNode = AbilityNode(
 )
 
 var celestialLanguage: AbilityNode = AbilityNode(
-    name = "Неьесный язык",
+    name = "Небесный язык",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.languageProficiency.add(Languages.Celestial)
         abilities

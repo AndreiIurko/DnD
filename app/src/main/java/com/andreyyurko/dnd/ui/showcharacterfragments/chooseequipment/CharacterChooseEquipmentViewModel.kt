@@ -17,7 +17,7 @@ class CharacterChooseEquipmentViewModel @Inject constructor(
     private fun getTypeItems(itemType: ItemType): MutableList<InventoryItemInfo> {
         val filters = InventoryHandler.Filters()
         filters.type.add(itemType)
-        return inventoryHandler.getCharacterItems(characterViewModel.shownCharacter, filters)
+        return inventoryHandler.getCharacterItems(characterViewModel.getCharacter(), filters)
     }
 
     fun getWeaponItems(): MutableList<InventoryItemInfo> {

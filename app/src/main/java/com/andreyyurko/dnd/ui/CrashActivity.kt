@@ -1,18 +1,14 @@
 package com.andreyyurko.dnd.ui
 
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.ActivityCrashBinding
-import by.kirich1409.viewbindingdelegate.viewBinding
 import java.io.FileOutputStream
 
 

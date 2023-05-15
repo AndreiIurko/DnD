@@ -51,6 +51,28 @@ class ClassViewModel @Inject constructor(
         mergeAllAbilities(createCharacterViewModel.character)
     }
 
+    fun changeLevel(level: Int) {
+        character.characterInfo.currentState.charges = mutableMapOf()
+        var can = baseCAN.chosen_alternatives["class"]
+        for (i in 1 until level) {
+            can?.let {
+                val nextLevelName = it.data.name.split('_')[0] + '_' +
+                        (it.data.name.split('_')[1].toInt() + 1).toString()
+                if (!it.chosen_alternatives.containsKey("nextLevel")) {
+                    it.makeChoice("nextLevel", nextLevelName)
+                }
+                can = it.chosen_alternatives["nextLevel"]
+            }
+        }
+
+        can?.chosen_alternatives?.remove("nextLevel")
+        chosenLevel = level
+
+        checkIfSomeRequirementsSatisfied(baseCAN.chosen_alternatives["class"])
+        mergeAllAbilities(createCharacterViewModel.character)
+        showAllClassAbilities()
+    }
+
     fun levelUp() {
         var can = baseCAN.chosen_alternatives["class"]!!
         var nextLevel = can.chosen_alternatives["nextLevel"]

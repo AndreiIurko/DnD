@@ -46,8 +46,14 @@ class ActionsAdapter @Inject constructor(
         }
 
         val charges =
-            characterViewModel.shownCharacter.characterInfo.currentState.charges[actionsList[position].relatedCharges]
-                ?: return
+            characterViewModel.getCharacter().characterInfo.currentState.charges[actionsList[position].relatedCharges]
+
+        if (charges == null) {
+            holder.countTextView.visibility = View.INVISIBLE
+            holder.increaseButton.visibility = View.INVISIBLE
+            holder.decreaseButton.visibility = View.INVISIBLE
+            return
+        }
 
         holder.countTextView.visibility = View.VISIBLE
         holder.increaseButton.visibility = View.VISIBLE

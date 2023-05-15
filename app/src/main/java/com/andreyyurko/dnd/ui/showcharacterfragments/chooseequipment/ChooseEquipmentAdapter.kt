@@ -67,12 +67,12 @@ class ChooseEquipmentAdapter @Inject constructor(
         holder.equipButton.setOnClickListener {
             if (itemsList[position].isEquipped) {
                 inventoryHandler.unequipItem(
-                    characterViewModel.shownCharacter,
+                    characterViewModel.getCharacter(),
                     itemsList[position].itemDescription.itemName
                 )
             } else {
                 inventoryHandler.equipItem(
-                    characterViewModel.shownCharacter,
+                    characterViewModel.getCharacter(),
                     itemsList[position].itemDescription.itemName
                 )
             }
@@ -87,8 +87,8 @@ class ChooseEquipmentAdapter @Inject constructor(
         for (item in itemsListWithoutCopies) {
             if (item.count <= 0) continue
 
-            val isEquipped = inventoryHandler.isItemEquipped(characterViewModel.shownCharacter, item.itemName)
-            val isCanBeEquipped = inventoryHandler.isItemEquitable(characterViewModel.shownCharacter, item.itemName)
+            val isEquipped = inventoryHandler.isItemEquipped(characterViewModel.getCharacter(), item.itemName)
+            val isCanBeEquipped = inventoryHandler.isItemEquitable(characterViewModel.getCharacter(), item.itemName)
 
             resultList.add(
                 EquipmentItem(
@@ -108,9 +108,9 @@ class ChooseEquipmentAdapter @Inject constructor(
                 )
             }
             if (isEquipped && !isCanBeEquipped && item.count >= 2) {
-                if (characterViewModel.shownCharacter.characterInfo.currentState.firstWeaponName ==
-                    characterViewModel.shownCharacter.characterInfo.currentState.secondWeaponName &&
-                    characterViewModel.shownCharacter.characterInfo.currentState.firstWeaponName == item.itemName
+                if (characterViewModel.getCharacter().characterInfo.currentState.firstWeaponName ==
+                    characterViewModel.getCharacter().characterInfo.currentState.secondWeaponName &&
+                    characterViewModel.getCharacter().characterInfo.currentState.firstWeaponName == item.itemName
                 )
                     resultList.add(
                         EquipmentItem(
@@ -173,7 +173,6 @@ class ChooseEquipmentAdapter @Inject constructor(
             itemDescription.count += 1
             decreaseButton.alpha = 1.0F
             decreaseButton.isEnabled = true
-            //inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, itemDescription)
             countTextView.text = itemDescription.count.toString()
         }
 
@@ -183,7 +182,6 @@ class ChooseEquipmentAdapter @Inject constructor(
                 decreaseButton.alpha = 0.5F
                 decreaseButton.isEnabled = false
             }
-            //inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, itemDescription)
             countTextView.text = itemDescription.count.toString()
         }
 
@@ -193,7 +191,7 @@ class ChooseEquipmentAdapter @Inject constructor(
         val fullDescriptionPopUp = PopupWindow(parent, wid, high, focus)
 
         parent.findViewById<Button>(R.id.saveButton).setOnClickListener {
-            inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, itemDescription)
+            inventoryHandler.changeItemDescription(characterViewModel.getCharacter(), itemDescription)
             fullDescriptionPopUp.dismiss()
         }
 

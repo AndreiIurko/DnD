@@ -194,15 +194,6 @@
         app:navGraph="@navigation/character_nav_graph"
         tools:layout="@layout/fragment_character_abilities" />
 
-    <View
-        android:id="@+id/popUpBackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="0"
-        android:background="?attr/backgroundColor"
-        tools:layout_editor_absoluteX="-45dp"
-        tools:layout_editor_absoluteY="0dp" />
-
 
     <LinearLayout
         android:id="@+id/spellSlotsLinearLayout"
@@ -442,5 +433,14 @@
         android:paddingVertical="6dp"
         app:layout_constraintTop_toTopOf="@id/spellSlotsLinearLayout"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/popUpBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:background="?attr/backgroundColor"
+        tools:layout_editor_absoluteX="-45dp"
+        tools:layout_editor_absoluteY="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

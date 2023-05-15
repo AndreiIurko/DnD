@@ -10,7 +10,6 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.LayoutRes
-import androidx.core.content.ContextCompat
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.characterData.character.Filter
 import com.andreyyurko.dnd.ui.base.BaseFragment

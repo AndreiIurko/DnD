@@ -39,6 +39,22 @@ class AbilitiesFragment : BaseFragment(R.layout.fragment_abilities) {
         }
         viewModel.totalPoints.observe(viewLifecycleOwner, onChangePoints)
 
+        viewBinding.changeSystemButton.setOnClickListener {
+            viewModel.changeSystem()
+            if (viewModel.isPointBy) {
+                viewBinding.systemDescription.text = requireContext().getText(R.string.fragment_abilities_point_by_description)
+                viewBinding.pointsCapacity.visibility = View.VISIBLE
+            }
+            else {
+                viewBinding.systemDescription.text = requireContext().getText(R.string.fragment_abilities_random_system_description)
+                viewBinding.pointsCapacity.visibility = View.INVISIBLE
+            }
+            viewBinding.abilitiesLinearLayout.removeAllViews()
+            for (ability in Ability.values()) {
+                setupAbilityView(ability.abilityName)
+            }
+        }
+
         viewBinding.nameEditText.setText(viewModel.getName())
 
         viewBinding.cancelButton.setOnClickListener {
@@ -85,7 +101,9 @@ class AbilitiesFragment : BaseFragment(R.layout.fragment_abilities) {
 
         val changeValueObserver = Observer<Int> { state ->
             val currentValue = score.text.toString().toInt()
-            if (currentValue == 8) {
+            val minValue = if (viewModel.isPointBy) 8 else 3
+            val maxValue = if (viewModel.isPointBy) 15 else 18
+            if (currentValue == minValue) {
                 decreaseButton.isEnabled = false
                 decreaseButton.alpha = 0.6f
             } else {
@@ -93,7 +111,13 @@ class AbilitiesFragment : BaseFragment(R.layout.fragment_abilities) {
                 decreaseButton.alpha = 1f
             }
 
-            if (currentValue == 15 || currentValue >= 13 && state < 2 || state == 0) {
+            val isIncreaseDisabled =
+                if (viewModel.isPointBy)
+                    currentValue == maxValue || currentValue >= 13 && state < 2 || state == 0
+                else
+                    currentValue == maxValue
+
+            if (isIncreaseDisabled) {
                 increaseButton.isEnabled = false
                 increaseButton.alpha = 0.6f
             } else {

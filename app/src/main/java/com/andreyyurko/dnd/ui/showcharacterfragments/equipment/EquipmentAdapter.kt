@@ -78,13 +78,13 @@ class EquipmentAdapter @Inject constructor(
 
                 holder.increaseButton.setOnClickListener { _ ->
                     listOfItems[position].currentCharges = it + 1
-                    inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, listOfItems[position])
+                    inventoryHandler.changeItemDescription(characterViewModel.getCharacter(), listOfItems[position])
                     notifyItemChanged(position)
                 }
 
                 holder.decreaseButton.setOnClickListener { _ ->
                     listOfItems[position].currentCharges = it - 1
-                    inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, listOfItems[position])
+                    inventoryHandler.changeItemDescription(characterViewModel.getCharacter(), listOfItems[position])
                     notifyItemChanged(position)
                 }
             }
@@ -133,7 +133,7 @@ class EquipmentAdapter @Inject constructor(
         val fullDescriptionPopUp = PopupWindow(parent, wid, high, focus)
 
         parent.findViewById<Button>(R.id.saveButton).setOnClickListener {
-            inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, itemDescription)
+            inventoryHandler.changeItemDescription(characterViewModel.getCharacter(), itemDescription)
             fullDescriptionPopUp.dismiss()
         }
 

@@ -14,11 +14,11 @@ class CharacterEquipmentViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun getEquippedMagicalItems(): MutableList<InventoryItemInfo> {
-        return inventoryHandler.getEquippedMagicalItems(characterViewModel.shownCharacter)
+        return inventoryHandler.getEquippedMagicalItems(characterViewModel.getCharacter())
     }
 
     fun getFirstWeaponInfo(): WeaponInfo {
-        val currentState = characterViewModel.shownCharacter.characterInfo.currentState
+        val currentState = characterViewModel.getCharacter().characterInfo.currentState
         return WeaponInfo(
             weaponName = currentState.firstWeaponName,
             properties = currentState.firstWeapon.properties,
@@ -27,7 +27,7 @@ class CharacterEquipmentViewModel @Inject constructor(
     }
 
     fun getSecondWeaponInfo(): WeaponInfo? {
-        val currentState = characterViewModel.shownCharacter.characterInfo.currentState
+        val currentState = characterViewModel.getCharacter().characterInfo.currentState
         currentState.secondWeapon?.let {
             return WeaponInfo(
                 weaponName = currentState.secondWeaponName,
@@ -39,7 +39,7 @@ class CharacterEquipmentViewModel @Inject constructor(
     }
 
     fun getArmorInfo(): ArmorInfo {
-        val currentState = characterViewModel.shownCharacter.characterInfo.currentState
+        val currentState = characterViewModel.getCharacter().characterInfo.currentState
         return ArmorInfo(
             armorName = currentState.armorName,
             type = "Тип",

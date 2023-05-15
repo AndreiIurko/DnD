@@ -59,19 +59,6 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
             )
         }
 
-        viewBinding.levelUpButton.setOnClickListener {
-            viewModel.levelUp()
-            viewBinding.levelText.text = viewModel.chosenLevel.toString()
-            if (viewModel.chosenLevel < 20) {
-                viewBinding.levelUpButton.alpha = 1F
-                viewBinding.levelUpButton.isEnabled = true
-            }
-            else {
-                viewBinding.levelUpButton.alpha = 0.5F
-                viewBinding.levelUpButton.isEnabled = false
-            }
-        }
-
         viewBinding.submitButton.setOnClickListener {
             viewModel.updateCharacter()
             if (viewModel.isNeededToChooseKnownSpells())
@@ -144,21 +131,13 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
             levelTextView.setOnClickListener {
                 viewModel.chosenLevel = level
                 viewModel.chosenClass?.let {
-                    viewModel.makeChoice(it)
-                    if (level < 20) {
-                        viewBinding.levelUpButton.alpha = 1F
-                        viewBinding.levelUpButton.isEnabled = true
-                    }
-                    else {
-                        viewBinding.levelUpButton.alpha = 0.5F
-                        viewBinding.levelUpButton.isEnabled = false
-                    }
+                    viewModel.changeLevel(level)
                 }
                 viewBinding.levelText.text = level.toString()
-                levelChoiceList.dismiss()
                 viewBinding.levelArrowImageView.setImageDrawable(
                     AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_arrow_drop_down_24)
                 )
+                levelChoiceList.dismiss()
             }
         }
 

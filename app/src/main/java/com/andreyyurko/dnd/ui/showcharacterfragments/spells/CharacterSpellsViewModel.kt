@@ -18,7 +18,7 @@ class CharacterSpellsViewModel @Inject constructor(
     var isPreparedListShown = true
 
     fun isAllPrepared(): Boolean {
-        return spellsHandler.isAllKnownIsPrepared(characterViewModel.shownCharacter)
+        return spellsHandler.isAllKnownIsPrepared(characterViewModel.getCharacter())
     }
 
     fun getFilters(): SpellsHandler.Filters {
@@ -27,36 +27,36 @@ class CharacterSpellsViewModel @Inject constructor(
     }
 
     fun showPreparedSpells(): List<Spell> {
-        return spellsHandler.getPreparedSpellsWithDescription(characterViewModel.shownCharacter, preparedFilters)
+        return spellsHandler.getPreparedSpellsWithDescription(characterViewModel.getCharacter(), preparedFilters)
     }
 
     fun showKnownSpells(): List<Spell> {
-        return spellsHandler.getKnownSpellsWithDescription(characterViewModel.shownCharacter, knownFilters)
+        return spellsHandler.getKnownSpellsWithDescription(characterViewModel.getCharacter(), knownFilters)
     }
 
     fun addPreparedSpell(spell: Spell) {
-        spellsHandler.addPreparedSpell(spell.data.name, spell.listName, characterViewModel.shownCharacter)
+        spellsHandler.addPreparedSpell(spell.data.name, spell.listName, characterViewModel.getCharacter())
         characterViewModel.updateCharacterInfo()
     }
 
     fun removePreparedSpell(spell: Spell) {
-        spellsHandler.removePreparedSpell(spell.data.name, spell.listName, characterViewModel.shownCharacter)
+        spellsHandler.removePreparedSpell(spell.data.name, spell.listName, characterViewModel.getCharacter())
         characterViewModel.updateCharacterInfo()
     }
 
     fun getPreparedSpellsCount(): Int {
-        return spellsHandler.getPreparedSpellsCount(characterViewModel.shownCharacter)
+        return spellsHandler.getPreparedSpellsCount(characterViewModel.getCharacter())
     }
 
     fun getMaxPreparedSpellsCount(): Int {
-        return spellsHandler.getMaxPreparedSpellsCount(characterViewModel.shownCharacter)
+        return spellsHandler.getMaxPreparedSpellsCount(characterViewModel.getCharacter())
     }
 
     fun getPreparedCantripsCount(): Int {
-        return spellsHandler.getPreparedCantripsCount(characterViewModel.shownCharacter)
+        return spellsHandler.getPreparedCantripsCount(characterViewModel.getCharacter())
     }
 
     fun getMaxPreparedCantripsCount(): Int {
-        return spellsHandler.getMaxPreparedCantripsCount(characterViewModel.shownCharacter)
+        return spellsHandler.getMaxPreparedCantripsCount(characterViewModel.getCharacter())
     }
 }

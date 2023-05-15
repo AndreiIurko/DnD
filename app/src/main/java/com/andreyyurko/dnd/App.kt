@@ -1,7 +1,6 @@
 package com.andreyyurko.dnd
 
 import android.app.Application
-import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Handler
@@ -14,8 +13,6 @@ import com.andreyyurko.dnd.utils.SpellsFavoritesHolder
 import com.andreyyurko.dnd.utils.SpellsParser
 import com.andreyyurko.dnd.utils.exceptionhandler.ExceptionListener
 import dagger.hilt.android.HiltAndroidApp
-import java.io.File
-import java.io.FileWriter
 import javax.inject.Inject
 
 

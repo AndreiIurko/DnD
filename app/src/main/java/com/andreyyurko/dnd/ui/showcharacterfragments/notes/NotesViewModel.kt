@@ -17,9 +17,9 @@ class NotesViewModel @Inject constructor(
     private var isNewNote = false
 
     fun createNewNote() {
-        val notesSize = characterViewModel.shownCharacter.notes.size
+        val notesSize = characterViewModel.getCharacter().notes.size
         val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm:ss")
-        characterViewModel.shownCharacter.notes.add(
+        characterViewModel.getCharacter().notes.add(
             Note(
                 createDate = "Last modified: " + LocalDateTime.now().format(formatter),
                 title = "Записка номер ${notesSize + 1}",
@@ -38,7 +38,7 @@ class NotesViewModel @Inject constructor(
     }
 
     fun getNotes(substring: String = ""): List<NoteDescription> {
-        val notes = characterViewModel.shownCharacter.notes
+        val notes = characterViewModel.getCharacter().notes
 
         val result: MutableList<NoteDescription> = mutableListOf()
         for (i in 0 until notes.size) {
@@ -70,21 +70,21 @@ class NotesViewModel @Inject constructor(
     }
 
     fun getOpenedNote(): Note {
-        return characterViewModel.shownCharacter.notes[openedNotePosition]
+        return characterViewModel.getCharacter().notes[openedNotePosition]
     }
 
     fun saveNote(note: Note) {
-        characterViewModel.shownCharacter.notes[openedNotePosition] = note
+        characterViewModel.getCharacter().notes[openedNotePosition] = note
         characterViewModel.updateCharacterInfo()
     }
 
     fun cancelEditing() {
         if (isNewNote)
-            characterViewModel.shownCharacter.notes.removeAt(openedNotePosition)
+            characterViewModel.getCharacter().notes.removeAt(openedNotePosition)
     }
 
     fun removeNote(position: Int) {
-        characterViewModel.shownCharacter.notes.removeAt(position)
+        characterViewModel.getCharacter().notes.removeAt(position)
         characterViewModel.updateCharacterInfo()
     }
 

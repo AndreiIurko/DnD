@@ -24,14 +24,14 @@ class CharacterAbilitiesFragment : BaseFragment(R.layout.fragment_character_abil
     }
 
     private fun setupAll() {
-        viewBinding.strTextView.text = characterViewModel.shownCharacter.characterInfo.strength.toString()
-        viewBinding.dexTextView.text = characterViewModel.shownCharacter.characterInfo.dexterity.toString()
-        viewBinding.conTextView.text = characterViewModel.shownCharacter.characterInfo.constitution.toString()
-        viewBinding.intTextView.text = characterViewModel.shownCharacter.characterInfo.intelligence.toString()
-        viewBinding.wisTextView.text = characterViewModel.shownCharacter.characterInfo.wisdom.toString()
-        viewBinding.chaTextView.text = characterViewModel.shownCharacter.characterInfo.charisma.toString()
-        viewBinding.passiveInsight.text = characterViewModel.shownCharacter.characterInfo.passiveInsightBonus.toString()
+        viewBinding.strTextView.text = characterViewModel.getCharacter().characterInfo.strength.toString()
+        viewBinding.dexTextView.text = characterViewModel.getCharacter().characterInfo.dexterity.toString()
+        viewBinding.conTextView.text = characterViewModel.getCharacter().characterInfo.constitution.toString()
+        viewBinding.intTextView.text = characterViewModel.getCharacter().characterInfo.intelligence.toString()
+        viewBinding.wisTextView.text = characterViewModel.getCharacter().characterInfo.wisdom.toString()
+        viewBinding.chaTextView.text = characterViewModel.getCharacter().characterInfo.charisma.toString()
+        viewBinding.passiveInsight.text = characterViewModel.getCharacter().characterInfo.passiveInsightBonus.toString()
         viewBinding.passivePerception.text =
-            characterViewModel.shownCharacter.characterInfo.passivePerceptionBonus.toString()
+            characterViewModel.getCharacter().characterInfo.passivePerceptionBonus.toString()
     }
 }

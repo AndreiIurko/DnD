@@ -52,7 +52,7 @@ class InventoryAdapter @Inject constructor(
             itemsList[position].count += 1
             holder.decreaseButton.alpha = 1.0F
             holder.decreaseButton.isEnabled = true
-            inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, itemsList[position])
+            inventoryHandler.changeItemDescription(characterViewModel.getCharacter(), itemsList[position])
             holder.countTextView.text = itemsList[position].count.toString()
         }
 
@@ -62,7 +62,7 @@ class InventoryAdapter @Inject constructor(
                 holder.decreaseButton.alpha = 0.5F
                 holder.decreaseButton.isEnabled = false
             }
-            inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, itemsList[position])
+            inventoryHandler.changeItemDescription(characterViewModel.getCharacter(), itemsList[position])
             holder.countTextView.text = itemsList[position].count.toString()
         }
 
@@ -116,7 +116,7 @@ class InventoryAdapter @Inject constructor(
             itemDescription.count += 1
             decreaseButton.alpha = 1.0F
             decreaseButton.isEnabled = true
-            //inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, itemDescription)
+            //inventoryHandler.changeItemDescription(characterViewModel.getCharacter(), itemDescription)
             countTextView.text = itemDescription.count.toString()
         }
 
@@ -126,7 +126,7 @@ class InventoryAdapter @Inject constructor(
                 decreaseButton.alpha = 0.5F
                 decreaseButton.isEnabled = false
             }
-            //inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, itemDescription)
+            //inventoryHandler.changeItemDescription(characterViewModel.getCharacter(), itemDescription)
             countTextView.text = itemDescription.count.toString()
         }
 
@@ -136,7 +136,7 @@ class InventoryAdapter @Inject constructor(
         val fullDescriptionPopUp = PopupWindow(parent, wid, high, focus)
 
         parent.findViewById<Button>(R.id.saveButton).setOnClickListener {
-            inventoryHandler.changeItemDescription(characterViewModel.shownCharacter, itemDescription)
+            inventoryHandler.changeItemDescription(characterViewModel.getCharacter(), itemDescription)
             fullDescriptionPopUp.dismiss()
         }
 
