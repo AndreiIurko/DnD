@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
@@ -26,6 +27,7 @@ import com.andreyyurko.dnd.ui.base.BaseFragment
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.PhotoPicker
 import com.google.android.material.checkbox.MaterialCheckBox
+import com.google.android.material.color.MaterialColors
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.applyInsetter
 import kotlinx.coroutines.flow.collectLatest
@@ -183,7 +185,7 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
 
     private fun setupPopupMenu(context: Context) {
         val parent = LayoutInflater.from(context).inflate(R.layout.character_menu, null)
-        parent.setBackgroundColor(context.getColor(R.color.background))
+        parent.setBackgroundColor(MaterialColors.getColor(context, R.attr.backgroundColor, Color.BLACK))
 
         val focus = true
         val wid = LinearLayout.LayoutParams.WRAP_CONTENT

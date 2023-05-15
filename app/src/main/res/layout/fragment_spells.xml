@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/black" />
+            android:background="?colorPrimary" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/addInfoContainer"
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_search_32"
                 android:foreground="?attr/selectableItemBackground"
-                android:background="@color/background"
+                android:background="?backgroundColor"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="8dp"
@@ -73,7 +73,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:background="@drawable/border">
+                android:background="@drawable/filled_border">
 
                 <TextView
                     android:id="@+id/knownButton"
@@ -82,7 +82,7 @@
                     app:layout_constraintTop_toBottomOf="@id/searchEditText"
                     app:layout_constraintEnd_toStartOf="@id/allButton"
                     android:text="Выбранные"
-                    android:textColor="@color/on_primary"
+                    android:textColor="?colorOnPrimary"
                     android:textAlignment="center"
                     android:clickable="true"
                     android:focusable="true" />
@@ -90,7 +90,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/on_primary" />
+                    android:background="?colorPrimary" />
 
                 <TextView
                     android:id="@+id/allButton"
@@ -222,7 +222,7 @@
                     android:layout_width="158dp"
                     android:layout_height="wrap_content"
                     android:text="Имя"
-                    android:textColor="@color/on_primary"
+                    android:textColor="?colorPrimary"
                     android:textSize="12sp" />
 
                 <TextView
@@ -230,7 +230,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="уровень"
-                    android:textColor="@color/on_primary"
+                    android:textColor="?colorPrimary"
                     android:textSize="12sp" />
 
                 <TextView
@@ -239,7 +239,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="время"
-                    android:textColor="@color/on_primary"
+                    android:textColor="?colorPrimary"
                     android:textSize="12sp" />
 
                 <TextView
@@ -247,7 +247,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="подг"
-                    android:textColor="@color/on_primary"
+                    android:textColor="?colorPrimary"
                     android:textSize="12sp"
                     android:gravity="end"
                     android:layout_marginEnd="10dp" />
@@ -304,7 +304,7 @@
             android:background="@drawable/tab_background"
             android:textAlignment="center"
             android:text="фильтр"
-            android:textColor="@color/base_background"
+            android:textColor="?backgroundColor"
             android:paddingStart="20dp"
             android:textSize="14sp" />
 
@@ -317,7 +317,7 @@
             android:padding="6dp"
             android:orientation="horizontal"
             android:visibility="gone"
-            android:background="@color/background">
+            android:background="?backgroundColor">
 
             <TextView
                 android:id="@+id/levelButton"
@@ -325,7 +325,7 @@
                 android:layout_height="wrap_content"
                 android:text="Уровень"
                 android:textSize="20sp"
-                android:background="@drawable/border"
+                android:background="@drawable/filled_border"
                 android:paddingHorizontal="10dp"
                 android:layout_marginStart="12dp" />
 
@@ -335,7 +335,7 @@
                 android:layout_height="wrap_content"
                 android:text="Источник"
                 android:textSize="20sp"
-                android:background="@drawable/border"
+                android:background="@drawable/filled_border"
                 android:paddingHorizontal="10dp"
                 android:layout_marginStart="12dp" />
 
@@ -345,7 +345,7 @@
                 android:layout_height="wrap_content"
                 android:text="Школа"
                 android:textSize="20sp"
-                android:background="@drawable/border"
+                android:background="@drawable/filled_border"
                 android:paddingHorizontal="10dp"
                 android:layout_marginStart="12dp" />
         </LinearLayout>

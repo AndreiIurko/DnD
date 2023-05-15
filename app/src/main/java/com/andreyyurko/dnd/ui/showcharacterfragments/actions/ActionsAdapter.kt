@@ -1,6 +1,7 @@
 package com.andreyyurko.dnd.ui.showcharacterfragments.actions
 
 import android.content.Context
+import android.graphics.Color
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.characterData.Action
 import com.andreyyurko.dnd.utils.CharacterViewModel
+import com.google.android.material.color.MaterialColors
 import javax.inject.Inject
 
 class ActionsAdapter @Inject constructor(
@@ -86,7 +88,7 @@ class ActionsAdapter @Inject constructor(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             400 * context.resources.displayMetrics.density.toInt()
         )
-        parent.setBackgroundColor(context.getColor(R.color.background))
+        parent.setBackgroundColor(MaterialColors.getColor(context, R.attr.backgroundColor, Color.BLACK))
 
         parent.findViewById<TextView>(R.id.descriptionTextView).text = action.description
 

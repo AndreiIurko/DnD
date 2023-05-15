@@ -24,7 +24,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginHorizontal="8dp"
             android:hint="Поле для записи"
-            android:background="@color/background"
+            android:background="?backgroundColor"
             android:gravity="top|left" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:text="Отменить"
                 android:textSize="24sp"
-                android:background="@drawable/border"
+                android:background="@drawable/filled_border"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:text="Сохранить"
                 android:textSize="24sp"
-                android:background="@drawable/border"
+                android:background="@drawable/filled_border"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -17,7 +17,7 @@
             android:layout_marginBottom="12dp"
             android:hint="Имя"
             android:inputType="textCapSentences"
-            android:textColorHint="@color/primary" />
+            android:textColorHint="?colorPrimary" />
 
         <TextView
             android:id="@+id/pointsCapacity"

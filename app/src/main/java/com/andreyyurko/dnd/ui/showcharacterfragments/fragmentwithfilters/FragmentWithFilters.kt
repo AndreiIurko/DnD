@@ -2,6 +2,7 @@ package com.andreyyurko.dnd.ui.showcharacterfragments.fragmentwithfilters
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.graphics.Color
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -14,6 +15,7 @@ import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.characterData.character.Filter
 import com.andreyyurko.dnd.ui.base.BaseFragment
 import com.andreyyurko.dnd.utils.setupBasicPopUpMenu
+import com.google.android.material.color.MaterialColors
 
 open class FragmentWithFilters : BaseFragment {
     constructor() : super()
@@ -62,21 +64,18 @@ open class FragmentWithFilters : BaseFragment {
             }
 
             if (set.contains(enumValue)) textView.setBackgroundColor(
-                ContextCompat.getColor(
-                    button.context,
-                    R.color.on_primary
-                )
+                MaterialColors.getColor(requireContext(), R.attr.colorOnPrimary, Color.BLACK)
             )
-            else textView.setBackgroundColor(ContextCompat.getColor(button.context, R.color.background))
+            else textView.setBackgroundColor(MaterialColors.getColor(requireContext(), R.attr.backgroundColor, Color.BLACK))
 
             parent.addView(textView)
             textView.setOnClickListener {
                 if (set.contains(enumValue)) {
                     set.remove(enumValue)
-                    textView.setBackgroundColor(ContextCompat.getColor(button.context, R.color.background))
+                    textView.setBackgroundColor(MaterialColors.getColor(requireContext(), R.attr.backgroundColor, Color.BLACK))
                 } else {
                     set.add(enumValue)
-                    textView.setBackgroundColor(ContextCompat.getColor(button.context, R.color.on_primary))
+                    textView.setBackgroundColor(MaterialColors.getColor(requireContext(), R.attr.colorOnPrimary, Color.BLACK))
                 }
             }
         }
@@ -107,19 +106,16 @@ open class FragmentWithFilters : BaseFragment {
             parent.addView(textView)
 
             if (set.contains(value)) textView.setBackgroundColor(
-                ContextCompat.getColor(
-                    button.context,
-                    R.color.on_primary
-                )
+                MaterialColors.getColor(requireContext(), R.attr.colorOnPrimary, Color.BLACK)
             )
-            else textView.setBackgroundColor(ContextCompat.getColor(button.context, R.color.background))
+            else textView.setBackgroundColor(MaterialColors.getColor(requireContext(), R.attr.backgroundColor, Color.BLACK))
             textView.setOnClickListener {
                 if (set.contains(value)) {
                     set.remove(value)
-                    textView.setBackgroundColor(ContextCompat.getColor(button.context, R.color.background))
+                    textView.setBackgroundColor(MaterialColors.getColor(requireContext(), R.attr.backgroundColor, Color.BLACK))
                 } else {
                     set.add(value)
-                    textView.setBackgroundColor(ContextCompat.getColor(button.context, R.color.on_primary))
+                    textView.setBackgroundColor(MaterialColors.getColor(requireContext(), R.attr.colorOnPrimary, Color.BLACK))
                 }
             }
         }

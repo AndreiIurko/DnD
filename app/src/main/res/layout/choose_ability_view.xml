@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/decreaseButton"
-        android:background="@color/background"
+        android:background="?backgroundColor"
         android:src="@drawable/ic_baseline_keyboard_arrow_up_24" />
 
     <ImageButton
@@ -45,7 +45,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/increaseButton"
-        android:background="@color/background"
+        android:background="?backgroundColor"
         android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
 
 

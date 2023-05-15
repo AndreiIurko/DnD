@@ -1,6 +1,7 @@
 package com.andreyyurko.dnd.ui.showcharacterfragments.chooseequipment
 
 import android.content.Context
+import android.graphics.Color
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
 import com.andreyyurko.dnd.utils.CharacterViewModel
 import com.andreyyurko.dnd.utils.InventoryHandler
+import com.google.android.material.color.MaterialColors
 import javax.inject.Inject
 
 class ChooseEquipmentAdapter @Inject constructor(
@@ -138,7 +140,7 @@ class ChooseEquipmentAdapter @Inject constructor(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             400 * context.resources.displayMetrics.density.toInt()
         )
-        parent.setBackgroundColor(context.getColor(R.color.background))
+        parent.setBackgroundColor(MaterialColors.getColor(context, R.attr.backgroundColor, Color.BLACK))
 
         parent.findViewById<TextView>(R.id.name).text = item.name
         parent.findViewById<TextView>(R.id.typeAndRarity).text = item.itemTypeAndRarity

@@ -1,29 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.Dnd" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <!--item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item-->
-        <!-- Secondary brand color. -->
-        <!--item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item-->
 
-        <!--AAAAAAAAAAAAAAAAA-->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary_variant</item>
         <item name="colorOnPrimary">@color/on_primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="backgroundColor">@color/background</item>
+        <item name="border">@color/border</item>
+
         <item name="android:windowBackground">@color/background</item>
 
         <item name="android:textColor">@color/primary_variant</item>
+        <item name="android:textColorHint">@color/on_primary</item>
         <item name="android:editTextColor">@color/primary_variant</item>
         <item name="colorOnBackground">@color/primary_variant</item>
         <item name="colorOnSurface">@color/primary_variant</item>
         <item name="colorOnContainer">@color/primary_variant</item>
         <item name="colorAccent">@color/primary_variant</item>
+
         <!-- Status bar color. -->
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>

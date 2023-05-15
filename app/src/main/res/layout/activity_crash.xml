@@ -28,7 +28,7 @@
         android:paddingHorizontal="12dp"
         android:paddingVertical="6dp"
         android:textStyle="bold"
-        android:background="@drawable/border"
+        android:background="@drawable/filled_border"
         android:text="Сохранить ошибку"/>
 
     <TextView
@@ -43,7 +43,7 @@
         android:paddingHorizontal="12dp"
         android:paddingVertical="6dp"
         android:textStyle="bold"
-        android:background="@drawable/border"
+        android:background="@drawable/filled_border"
         android:text="Выйти из приложения"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

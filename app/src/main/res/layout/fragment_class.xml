@@ -8,7 +8,7 @@
         android:id="@+id/levelUpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/border"
+        android:background="@drawable/filled_border"
         android:text="Повысить уровень"
         android:paddingHorizontal="12dp"
         android:layout_marginStart="12dp"
@@ -27,7 +27,7 @@
         android:layout_marginHorizontal="86dp"
         android:clickable="true"
         android:focusable="true"
-        android:background="@drawable/border">
+        android:background="@drawable/filled_border">
 
         <TextView
             android:id="@+id/chooseClassTextView"

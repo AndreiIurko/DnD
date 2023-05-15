@@ -3,6 +3,7 @@ package com.andreyyurko.dnd.utils
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
@@ -11,6 +12,7 @@ import android.widget.ScrollView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.animation.doOnEnd
 import com.andreyyurko.dnd.R
+import com.google.android.material.color.MaterialColors
 
 @SuppressLint("ClickableViewAccessibility")
 fun onPressAnimation(view: View) {
@@ -56,7 +58,7 @@ private fun startFadeIn(view: View) {
 // parent - Linear layout, root View of popUp window
 fun setupBasicPopUpMenu(context: Context, maxHeight: Int? = 200): Pair<PopupWindow, LinearLayout> {
     val parent = LinearLayout(context)
-    parent.setBackgroundColor(context.getColor(R.color.background))
+    parent.setBackgroundColor(MaterialColors.getColor(context, R.attr.backgroundColor, Color.BLACK))
 
     parent.layoutParams =
         LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)

@@ -6,7 +6,7 @@
     android:layout_marginHorizontal="100dp"
     android:clickable="true"
     android:focusable="true"
-    android:background="@drawable/border"
+    android:background="@drawable/filled_border"
     android:gravity="center">
 
     <TextView

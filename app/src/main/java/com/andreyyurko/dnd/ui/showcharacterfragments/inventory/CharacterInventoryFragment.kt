@@ -1,5 +1,6 @@
 package com.andreyyurko.dnd.ui.showcharacterfragments.inventory
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
@@ -11,6 +12,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.databinding.FragmentCharacterInventoryBinding
 import com.andreyyurko.dnd.ui.showcharacterfragments.fragmentwithfilters.FragmentWithFilters
+import com.google.android.material.color.MaterialColors
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -36,15 +38,15 @@ class CharacterInventoryFragment : FragmentWithFilters(R.layout.fragment_charact
         }
 
         viewBinding.allButton.setOnClickListener {
-            viewBinding.allButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
-            viewBinding.chosenButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_primary))
+            viewBinding.allButton.setTextColor(MaterialColors.getColor(requireContext(), R.attr.colorPrimary, Color.BLACK))
+            viewBinding.chosenButton.setTextColor(MaterialColors.getColor(requireContext(), R.attr.colorOnPrimary, Color.BLACK))
             viewModel.isChosenListShown = false
             showItems()
         }
 
         viewBinding.chosenButton.setOnClickListener {
-            viewBinding.allButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_primary))
-            viewBinding.chosenButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+            viewBinding.allButton.setTextColor(MaterialColors.getColor(requireContext(), R.attr.colorOnPrimary, Color.BLACK))
+            viewBinding.chosenButton.setTextColor(MaterialColors.getColor(requireContext(), R.attr.colorPrimary, Color.BLACK))
             viewModel.isChosenListShown = true
             showItems()
         }

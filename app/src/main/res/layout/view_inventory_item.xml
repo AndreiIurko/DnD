@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="16dp"
         android:layout_marginVertical="4dp"
-        android:background="@color/background" />
+        android:background="?backgroundColor" />
 
     <TextView
         android:id="@+id/count"
@@ -50,7 +50,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/count"
         android:layout_marginVertical="4dp"
-        android:background="@color/background" />
+        android:background="?backgroundColor" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

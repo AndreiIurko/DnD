@@ -5,4 +5,6 @@
     <attr name="colorPrimaryVariant" format="color" />
     <attr name="colorPrimaryDark" format="color" />
     <attr name="colorOnBackground" format="color" />
+    <attr name="backgroundColor" format="color" />
+    <attr name="border" format="color" />
 </resources>

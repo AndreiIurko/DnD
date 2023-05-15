@@ -24,6 +24,7 @@
     <color name="primary_dark">@color/base_dark_variant</color>
     <color name="background">@color/base_background</color>
 
+    <color name="border">#777777</color>
 
     <!-->
     <color name="primary">@color/my_bloody</color>

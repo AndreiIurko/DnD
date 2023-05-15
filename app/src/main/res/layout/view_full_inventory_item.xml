@@ -2,9 +2,11 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="?backgroundColor"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+        android:background="?backgroundColor"
         android:layout_width="300dp"
         android:layout_height="400dp"
         android:orientation="vertical">
@@ -73,7 +75,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/countText"
                 android:layout_marginBottom="4dp"
-                android:background="@color/background" />
+                android:background="?backgroundColor" />
 
             <TextView
                 android:id="@+id/count"
@@ -97,7 +99,7 @@
                 app:layout_constraintTop_toBottomOf="@id/countText"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="4dp"
-                android:background="@color/background" />
+                android:background="?backgroundColor" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -119,7 +121,7 @@
             android:textSize="10sp"
             android:textStyle="italic"
             android:text="Заметки:"
-            android:textColor="#777777" />
+            android:textColor="?border" />
 
         <EditText
             android:id="@+id/notesEditText"
@@ -130,9 +132,9 @@
             android:layout_marginHorizontal="8dp"
             android:padding="6dp"
             android:hint="Можно вводить любые заметки, например типы боеприпасов или особенности"
-            android:background="@drawable/border"
-            android:textColorHint="#777777"
-            android:textColor="#777777"
+            android:background="@drawable/filled_border"
+            android:textColorHint="?border"
+            android:textColor="?border"
             android:gravity="top|left" />
 
         <Button

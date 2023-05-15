@@ -1,5 +1,6 @@
 package com.andreyyurko.dnd.ui.showcharacterfragments.spells
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
@@ -12,6 +13,7 @@ import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.spells.Spell
 import com.andreyyurko.dnd.databinding.FragmentCharacterSpellsBinding
 import com.andreyyurko.dnd.ui.showcharacterfragments.fragmentwithfilters.FragmentWithFilters
+import com.google.android.material.color.MaterialColors
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,15 +38,15 @@ class CharacterSpellsFragment : FragmentWithFilters(R.layout.fragment_character_
             viewBinding.cantripsCountContainer.visibility = View.GONE
         } else {
             viewBinding.knownButton.setOnClickListener {
-                viewBinding.preparedButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_primary))
-                viewBinding.knownButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                viewBinding.preparedButton.setTextColor(MaterialColors.getColor(requireContext(), R.attr.colorOnPrimary, Color.BLACK))
+                viewBinding.knownButton.setTextColor(MaterialColors.getColor(requireContext(), R.attr.colorPrimary, Color.BLACK))
                 viewModel.isPreparedListShown = false
                 showItems()
             }
 
             viewBinding.preparedButton.setOnClickListener {
-                viewBinding.knownButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_primary))
-                viewBinding.preparedButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                viewBinding.knownButton.setTextColor(MaterialColors.getColor(requireContext(), R.attr.colorOnPrimary, Color.BLACK))
+                viewBinding.preparedButton.setTextColor(MaterialColors.getColor(requireContext(), R.attr.colorPrimary, Color.BLACK))
                 viewModel.isPreparedListShown = true
                 showItems()
             }

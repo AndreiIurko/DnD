@@ -1,5 +1,6 @@
 package com.andreyyurko.dnd.ui.showcharacterfragments.spells
 
+import android.graphics.Color
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
 import com.andreyyurko.dnd.data.SpellSpecificLanguage
 import com.andreyyurko.dnd.data.spells.Spell
+import com.google.android.material.color.MaterialColors
 import javax.inject.Inject
 
 class SpellsAdapter @Inject constructor(
@@ -93,7 +95,7 @@ class SpellsAdapter @Inject constructor(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             400 * root.context.resources.displayMetrics.density.toInt()
         )
-        parent.setBackgroundColor(root.context.getColor(R.color.background))
+        parent.setBackgroundColor(MaterialColors.getColor(root.context, R.attr.backgroundColor, Color.BLACK))
 
         parent.findViewById<TextView>(R.id.nameTextView).text = spell.name
         parent.findViewById<TextView>(R.id.levelAndSchoolTextView).text =
