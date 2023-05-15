@@ -6,6 +6,9 @@ import com.andreyyurko.dnd.data.characterData.ActionType
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
+import com.andreyyurko.dnd.data.spells.CharacterSpells
+import com.andreyyurko.dnd.data.spells.SpellLists
+import com.andreyyurko.dnd.data.spells.spellist
 
 var collegeOfLoreBonusProficiencies = AbilityNode(
     name = "Дополнительные навыки коллегии знаний",
@@ -120,12 +123,38 @@ var additionalMagicalSecrets = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities
     },
-    // We need to do something
-    getAlternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(
+        Pair("first", { spellist.filter{ it.level <= 3 }.map{ it.name } } ),
+        Pair("second", { spellist.filter{ it.level <= 3 }.map{ it.name } } )
+    ),
     requirements = { abilities: CharacterInfo ->
         abilities.level >= 6 && abilities.characterClass == Classes.Bard
     },
-    description = "Вы можете выучить 2 заклинания из доступных любому классу на свой выбор. Их уровень не должен превышать уровня заклинаний, которые вы можете использовать на этом уровне, как показано в таблице Барда. Они также могут быть заговорами. Выбранные заклинания теперь считаются для вас заклинаниями барда, но они не учитываются в общем количестве известных вам заклинаний барда.\n"
+    description = "Вы можете выучить 2 заклинания из доступных любому классу на свой выбор. Их уровень не должен превышать уровня заклинаний, которые вы можете использовать на этом уровне, как показано в таблице Барда. Они также могут быть заговорами. Выбранные заклинания теперь считаются для вас заклинаниями барда, но они не учитываются в общем количестве известных вам заклинаний барда.\n",
+    actionForChoice = mutableMapOf(
+        Pair("first") { choice: String, abilities: CharacterInfo ->
+            abilities.spellsInfo["Тайны магии 6 уровня 1 заклинание"] = CharacterSpells(
+                className = abilities.characterClass.className,
+                maxKnownSpellsCount = 0,
+                maxKnownCantripsCount = 0,
+                spellLists = SpellLists(
+                    knownSpells = mutableSetOf(choice)
+                )
+            )
+            abilities
+        },
+        Pair("second") { choice: String, abilities: CharacterInfo ->
+            abilities.spellsInfo["Тайны магии 6 уровня 2 заклинание"] = CharacterSpells(
+                className = abilities.characterClass.className,
+                maxKnownSpellsCount = 0,
+                maxKnownCantripsCount = 0,
+                spellLists = SpellLists(
+                    knownSpells = mutableSetOf(choice)
+                )
+            )
+            abilities
+        }
+    )
 )
 
 var peerlessSkill = AbilityNode(

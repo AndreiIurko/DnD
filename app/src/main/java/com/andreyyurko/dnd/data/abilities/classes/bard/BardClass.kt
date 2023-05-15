@@ -6,6 +6,8 @@ import com.andreyyurko.dnd.data.characterData.*
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import com.andreyyurko.dnd.data.spells.CharacterSpells
+import com.andreyyurko.dnd.data.spells.SpellLists
+import com.andreyyurko.dnd.data.spells.spellist
 import kotlin.math.max
 
 var classFeaturesBard: AbilityNode = AbilityNode(
@@ -580,6 +582,117 @@ var bard9: AbilityNode = AbilityNodeLevel(
     next_level = "Бард_10"
 )
 
+var magicalSecrets_10 = AbilityNode(
+    name = "Тайны магии 10 уровня",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities
+    },
+    getAlternatives = mutableMapOf(
+        Pair("first", { spellist.filter{ it.level <= 5 }.map{ it.name } } ),
+        Pair("second", { spellist.filter{ it.level <= 5 }.map{ it.name } } )
+    ),
+    requirements = { true },
+    description = "Вы можете выучить 2 заклинания из доступных любому классу на свой выбор. Их уровень не должен превышать уровня заклинаний, которые вы можете использовать на этом уровне, как показано в таблице Барда. Они также могут быть заговорами. Выбранные заклинания теперь считаются для вас заклинаниями барда, но они не учитываются в общем количестве известных вам заклинаний барда.\n",
+    actionForChoice = mutableMapOf(
+        Pair("first") { choice: String, abilities: CharacterInfo ->
+            abilities.spellsInfo["Тайны магии 10 уровня 1 заклинание"] = CharacterSpells(
+                className = abilities.characterClass.className,
+                maxKnownSpellsCount = 0,
+                maxKnownCantripsCount = 0,
+                spellLists = SpellLists(
+                    knownSpells = mutableSetOf(choice)
+                )
+            )
+            abilities
+        },
+        Pair("second") { choice: String, abilities: CharacterInfo ->
+            abilities.spellsInfo["Тайны магии 10 уровня 2 заклинание"] = CharacterSpells(
+                className = abilities.characterClass.className,
+                maxKnownSpellsCount = 0,
+                maxKnownCantripsCount = 0,
+                spellLists = SpellLists(
+                    knownSpells = mutableSetOf(choice)
+                )
+            )
+            abilities
+        }
+    )
+)
+
+var magicalSecrets_14 = AbilityNode(
+    name = "Тайны магии 14 уровня",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities
+    },
+    getAlternatives = mutableMapOf(
+        Pair("first", { spellist.filter{ it.level <= 7 }.map{ it.name } } ),
+        Pair("second", { spellist.filter{ it.level <= 7 }.map{ it.name } } )
+    ),
+    requirements = { true },
+    description = "Вы можете выучить 2 заклинания из доступных любому классу на свой выбор. Их уровень не должен превышать уровня заклинаний, которые вы можете использовать на этом уровне, как показано в таблице Барда. Они также могут быть заговорами. Выбранные заклинания теперь считаются для вас заклинаниями барда, но они не учитываются в общем количестве известных вам заклинаний барда.\n",
+    actionForChoice = mutableMapOf(
+        Pair("first") { choice: String, abilities: CharacterInfo ->
+            abilities.spellsInfo["Тайны магии 14 уровня 1 заклинание"] = CharacterSpells(
+                className = abilities.characterClass.className,
+                maxKnownSpellsCount = 0,
+                maxKnownCantripsCount = 0,
+                spellLists = SpellLists(
+                    knownSpells = mutableSetOf(choice)
+                )
+            )
+            abilities
+        },
+        Pair("second") { choice: String, abilities: CharacterInfo ->
+            abilities.spellsInfo["Тайны магии 14 уровня 2 заклинание"] = CharacterSpells(
+                className = abilities.characterClass.className,
+                maxKnownSpellsCount = 0,
+                maxKnownCantripsCount = 0,
+                spellLists = SpellLists(
+                    knownSpells = mutableSetOf(choice)
+                )
+            )
+            abilities
+        }
+    )
+)
+
+var magicalSecrets_18 = AbilityNode(
+    name = "Тайны магии 18 уровня",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities
+    },
+    getAlternatives = mutableMapOf(
+        Pair("first", { spellist.map{ it.name } } ),
+        Pair("second", { spellist.map{ it.name } } )
+    ),
+    requirements = { true },
+    description = "Вы можете выучить 2 заклинания из доступных любому классу на свой выбор. Их уровень не должен превышать уровня заклинаний, которые вы можете использовать на этом уровне, как показано в таблице Барда. Они также могут быть заговорами. Выбранные заклинания теперь считаются для вас заклинаниями барда, но они не учитываются в общем количестве известных вам заклинаний барда.\n",
+    actionForChoice = mutableMapOf(
+        Pair("first") { choice: String, abilities: CharacterInfo ->
+            abilities.spellsInfo["Тайны магии 18 уровня 1 заклинание"] = CharacterSpells(
+                className = abilities.characterClass.className,
+                maxKnownSpellsCount = 0,
+                maxKnownCantripsCount = 0,
+                spellLists = SpellLists(
+                    knownSpells = mutableSetOf(choice)
+                )
+            )
+            abilities
+        },
+        Pair("second") { choice: String, abilities: CharacterInfo ->
+            abilities.spellsInfo["Тайны магии 18 уровня 2 заклинание"] = CharacterSpells(
+                className = abilities.characterClass.className,
+                maxKnownSpellsCount = 0,
+                maxKnownCantripsCount = 0,
+                spellLists = SpellLists(
+                    knownSpells = mutableSetOf(choice)
+                )
+            )
+            abilities
+        }
+    )
+)
+
 var bard10: AbilityNode = AbilityNodeLevel(
     name = "Бард_10",
     changesInCharacterInfo = { abilities: CharacterInfo ->
@@ -590,7 +703,7 @@ var bard10: AbilityNode = AbilityNodeLevel(
     },
     getAlternatives = mutableMapOf(
         Pair("first", { listOf(expertise.name) }),
-        //Pair("second", { listOf(magicalSecrets.name)})
+        Pair("second", { listOf(magicalSecrets_10.name)})
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -656,7 +769,9 @@ var bard14: AbilityNode = AbilityNodeLevel(
         abilities.hp += abilityToModifier(abilities.constitution) + 5
         abilities
     },
-    getAlternatives = mutableMapOf(),
+    getAlternatives = mutableMapOf(
+        Pair("first", { listOf(magicalSecrets_14.name)})
+    ),
     requirements = { true },
     addRequirements = listOf(),
     description = "14-й уровень, способности барда",
@@ -722,7 +837,7 @@ var bard18: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        //Pair("first", { listOf(spellMastery.name)}),
+        Pair("first", { listOf(magicalSecrets_18.name)})
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -797,6 +912,9 @@ var mapOfBardAbilities: MutableMap<String, AbilityNode> = (mutableMapOf(
     Pair(bard7.name, bard7),
     Pair(bard8.name, bard8),
     Pair(bard9.name, bard9),
+    Pair(magicalSecrets_10.name, magicalSecrets_10),
+    Pair(magicalSecrets_14.name, magicalSecrets_14),
+    Pair(magicalSecrets_18.name, magicalSecrets_18),
     Pair(bard10.name, bard10),
     Pair(bard11.name, bard11),
     Pair(bard12.name, bard12),

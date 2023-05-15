@@ -7,6 +7,7 @@ import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import com.andreyyurko.dnd.data.spells.CharacterSpells
 import com.andreyyurko.dnd.data.spells.SpellLists
+import com.andreyyurko.dnd.data.spells.spellist
 
 var classFeaturesWarlock: AbilityNode = AbilityNode(
     name = "Колдун: классовые умения",
@@ -393,20 +394,39 @@ var warlock10: AbilityNodeLevel = AbilityNodeLevel(
     next_level = "Колдун_11",
 )
 
-var mysticArcanum: AbilityNode = AbilityNode(
-    name = "Таинственный арканум",
+var mysticArcanum_6 = AbilityNode(
+    name = "Таинственный арканум 6 уровня",
     changesInCharacterInfo = { abilities: CharacterInfo ->
+        if (!abilities.currentState.charges.contains("Таинственный арканум 6 уровня")) {
+            abilities.currentState.charges["Таинственный арканум 6 уровня"] = ChargesCounter(
+                current = 1,
+                maximum = 1
+            )
+        }
         abilities
     },
     getAlternatives = mutableMapOf(
-        //Pair("first", { listOf() })
+        Pair("first", { spellist.filter{ (it.level == 6) && (it.classes.contains(Classes.Warlock)) }.map{ it.name } } )
     ),
     requirements = { true },
     description = "Ваш покровитель дарует вам магический секрет, называемый арканумом. Выберите одно заклинание 6-го уровня из списка заклинаний колдуна в качестве арканума.\n" +
             "\n" +
             "Вы можете наложить это заклинание, не используя ячейку заклинаний. Вы должны окончить продолжительный отдых, чтобы сделать это еще раз.\n" +
             "\n" +
-            "На следующих уровнях вы получаете новые заклинания, которые можно применить таким образом — одно 7-го уровня на 13-м уровне, одно 8-го уровня на 15-м уровне и одно 9-го уровня на 17-м уровне. После окончания продолжительного отдыха вы восстанавливаете все потраченные использования арканумов.\n"
+            "На следующих уровнях вы получаете новые заклинания, которые можно применить таким образом — одно 7-го уровня на 13-м уровне, одно 8-го уровня на 15-м уровне и одно 9-го уровня на 17-м уровне. После окончания продолжительного отдыха вы восстанавливаете все потраченные использования арканумов.\n",
+    actionForChoice = mutableMapOf(
+        Pair("first") { choice: String, abilities: CharacterInfo ->
+            abilities.actionsList.add(
+                Action(
+                    name = "Таинственный арканум 6 уровня",
+                    description = "Вы можете наложить заклинание " + choice + ", не используя ячейку заклинаний. Вы должны окончить продолжительный отдых, чтобы сделать это еще раз.\n",
+                    type = ActionType.Additional,
+                    relatedCharges = "Таинственный арканум 6 уровня"
+                )
+            )
+            abilities
+        }
+    )
 )
 
 var warlock11: AbilityNodeLevel = AbilityNodeLevel(
@@ -417,7 +437,7 @@ var warlock11: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(mysticArcanum.name) })
+        Pair("first", { listOf(mysticArcanum_6.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -614,7 +634,7 @@ var mapOfWarlockAbilities: MutableMap<String, AbilityNode> = (mutableMapOf(
     Pair(warlock8.name, warlock8),
     Pair(warlock9.name, warlock9),
     Pair(warlock10.name, warlock10),
-    Pair(mysticArcanum.name, mysticArcanum),
+    Pair(mysticArcanum_6.name, mysticArcanum_6),
     Pair(warlock11.name, warlock11),
     Pair(warlock12.name, warlock12),
     Pair(warlock13.name, warlock13),
