@@ -47,7 +47,7 @@ var dueling: AbilityNode = AbilityNode(
         if (abilities.currentState.secondWeapon == null && abilities.currentState.firstWeapon.isMelee) {
             if (abilities.currentState.firstWeapon.damage.split('+').last().length > 1)
                 abilities.currentState.firstWeapon.damage =
-                    sumTwoDamages("2", abilities.currentState.firstWeapon.damage)
+                    sumTwoRolls("2", abilities.currentState.firstWeapon.damage)
         }
         abilities
     },
@@ -107,13 +107,13 @@ var twoWeaponFighting: AbilityNode = AbilityNode(
                     if (it.setOfSkills.contains(Ability.Dexterity)) {
                         damageBonus = Integer.max(damageBonus, abilityToModifier(abilities.dexterity))
                     }
-                    it.shownSecondWeaponDamage = sumTwoDamages(damageBonus.toString(), damage)
+                    it.shownSecondWeaponDamage = sumTwoRolls(damageBonus.toString(), damage)
                     action.description =
                         "Если вы совершаете действие «Атака» и атакуете рукопашным оружием со свойством «лёгкое», удерживаемым в одной руке, вы можете бонусным действием атаковать другим рукопашным оружием со свойством «лёгкое», удерживаемым в другой руке.\n" +
                                 "\n" +
                                 "Если у любого из оружий есть свойство «метательное», вы можете не совершать им рукопашную атаку, а метнуть его.\n" +
                                 "Бонус к попаданию: ${if (toHitBonus < 0) "" else "+"}${toHitBonus}\n" +
-                                "Урон: ${sumTwoDamages(damageBonus.toString(), damage)}"
+                                "Урон: ${sumTwoRolls(damageBonus.toString(), damage)}"
                 }
 
             }

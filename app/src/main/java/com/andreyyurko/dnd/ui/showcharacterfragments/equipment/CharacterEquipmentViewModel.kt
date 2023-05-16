@@ -22,6 +22,7 @@ class CharacterEquipmentViewModel @Inject constructor(
         return WeaponInfo(
             weaponName = currentState.firstWeaponName,
             properties = currentState.firstWeapon.properties,
+            toHitBonus = "+${currentState.firstWeapon.toHitBonus}",
             damage = currentState.firstWeapon.shownDamage
         )
     }
@@ -32,6 +33,7 @@ class CharacterEquipmentViewModel @Inject constructor(
             return WeaponInfo(
                 weaponName = currentState.secondWeaponName,
                 properties = it.properties,
+                toHitBonus = "+${currentState.firstWeapon.toHitBonus}",
                 damage = it.shownSecondWeaponDamage
             )
         }
@@ -42,7 +44,7 @@ class CharacterEquipmentViewModel @Inject constructor(
         val currentState = characterViewModel.getCharacter().characterInfo.currentState
         return ArmorInfo(
             armorName = currentState.armorName,
-            type = "Тип",
+            type = "",
             ac = currentState.armor.ac + (currentState.inventoryRelevantData[currentState.armorName]?.ac ?: 0)
         )
     }
@@ -50,6 +52,7 @@ class CharacterEquipmentViewModel @Inject constructor(
     data class WeaponInfo(
         val weaponName: String,
         val properties: List<String>,
+        val toHitBonus: String,
         var damage: String
     )
 

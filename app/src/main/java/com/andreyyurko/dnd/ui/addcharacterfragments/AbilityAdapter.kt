@@ -58,9 +58,10 @@ class AbilityAdapter : RecyclerView.Adapter<AbilityAdapter.ViewHolder>() {
             for (optionName in abilityCAN.data.getAlternatives.keys) {
                 // extract all available options
                 val optionsList = abilityCAN.showOptions(optionName)
+                val allOptions = abilityCAN.showAllOptions(optionName)
 
                 // if we have only one or zero options we don't need popup menu
-                if (optionsList.size <= 1) {
+                if (allOptions.size <= 1) {
                     continue
                 }
 

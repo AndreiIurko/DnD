@@ -279,6 +279,7 @@ class CharactersHolder @Inject constructor(
     fun updateCharacterImage(character: Character, bitmap: Bitmap) {
         character.image = bitmap
         characterImages[character.id] = bitmap
+        getApplication<Application>().applicationContext.deleteFile(character.id.toString() + DB_IMAGE)
         saveCharacterBitmap(character.id, bitmap)
     }
 

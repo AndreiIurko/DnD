@@ -73,10 +73,11 @@
             android:layout_marginStart="6dp"
             android:text="0"
             android:textSize="24sp"
+            android:imeOptions="actionDone"
             app:layout_constraintStart_toEndOf="@id/hpTextView"
             app:layout_constraintTop_toTopOf="@id/hpTextView"
             app:layout_constraintBottom_toBottomOf="@id/hpTextView"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
 
         <TextView
             android:id="@+id/maxHpTextView"

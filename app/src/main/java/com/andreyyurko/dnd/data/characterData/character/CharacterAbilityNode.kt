@@ -40,6 +40,10 @@ open class CharacterAbilityNode(
         return emptyList()
     }
 
+    fun showAllOptions(optionName: String): List<String> {
+        return data.getAlternatives[optionName]?.invoke(character?.characterInfo) ?: listOf()
+    }
+
     open fun makeChoice(option_name: String, choice: String, isFirst: Boolean = true) {
         mapOfAn[choice]?.let {
             chosen_alternatives[option_name] = CharacterAbilityNode(it, character)

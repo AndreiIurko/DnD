@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primary">#777779</color>
+    <color name="primary_variant">#515151</color>
     <color name="on_primary">#363636</color>
+    <color name="primary_dark">#3e3e3e</color>
+    <color name="background">#000320</color>
+
+    <color name="border">#3e3e3e</color>
 </resources>

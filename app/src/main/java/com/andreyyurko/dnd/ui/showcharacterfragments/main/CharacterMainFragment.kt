@@ -7,12 +7,15 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.lifecycle.Observer
@@ -163,12 +166,23 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
                 characterViewModel.getCharacter().characterInfo.hp
         }
         viewBinding.hpEditText.setText(characterViewModel.getCharacter().characterInfo.currentState.hp.toString())
-        viewBinding.hpEditText.setOnKeyListener { _, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+
+        viewBinding.hpEditText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
                 viewBinding.hpEditText.clearFocus()
+                try {
+                    characterViewModel.getCharacter().characterInfo.currentState.hp =
+                        viewBinding.hpEditText.text.toString().toInt()
+                } catch (e: Exception) {
+                    Toast.makeText(requireContext(), "Введите пожалуйста целое число", Toast.LENGTH_LONG).show()
+                }
+                characterViewModel.updateCharacterInfo()
+            }
+            try {
                 characterViewModel.getCharacter().characterInfo.currentState.hp =
                     viewBinding.hpEditText.text.toString().toInt()
-                characterViewModel.updateCharacterInfo()
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), "Введите пожалуйста целое число", Toast.LENGTH_LONG).show()
             }
             false
         }

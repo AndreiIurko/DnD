@@ -111,6 +111,9 @@ data class CurrentState(
     var equippedArtifacts: MutableSet<String> = mutableSetOf(),
     var inventoryRelevantData: MutableMap<String, InventoryRelevantData> = mutableMapOf(),
     var hp: Int? = null,
+    var temporaryHp: String = "0",
+    var hitDiceCount: String = "",
+    val coins: MutableMap<String, Int> = mutableMapOf(Pair("пм", 0), Pair("зм", 0), Pair("см", 0), Pair("мм", 0)),
     // String - AN name
     var charges: MutableMap<String, ChargesCounter> = mutableMapOf(),
 )
