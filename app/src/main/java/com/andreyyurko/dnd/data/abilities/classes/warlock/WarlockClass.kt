@@ -465,6 +465,40 @@ var warlock12: AbilityNodeLevel = AbilityNodeLevel(
     next_level = "Колдун_13",
 )
 
+var mysticArcanum_7 = AbilityNode(
+    name = "Таинственный арканум 7 уровня",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        if (!abilities.currentState.charges.contains("Таинственный арканум 7 уровня")) {
+            abilities.currentState.charges["Таинственный арканум 7 уровня"] = ChargesCounter(
+                current = 1,
+                maximum = 1
+            )
+        }
+        abilities
+    },
+    getAlternatives = mutableMapOf(
+        Pair("first") { spellist.filter { (it.level == 7) && (it.classes.contains(Classes.Warlock)) }.map { it.name } }
+    ),
+    requirements = { true },
+    description = "Ваш покровитель дарует вам магический секрет, называемый арканумом. Выберите одно заклинание 7-го уровня из списка заклинаний колдуна в качестве арканума.\n" +
+            "\n" +
+            "Вы можете наложить это заклинание, не используя ячейку заклинаний. Вы должны окончить продолжительный отдых, чтобы сделать это еще раз.\n",
+    actionForChoice = mutableMapOf(
+        Pair("first") { choice: String, abilities: CharacterInfo ->
+            Log.d("test", choice)
+            abilities.actionsList.add(
+                Action(
+                    name = "Таинственный арканум 7 уровня",
+                    description = "Вы можете наложить заклинание " + choice + ", не используя ячейку заклинаний. Вы должны окончить продолжительный отдых, чтобы сделать это еще раз.\n",
+                    type = ActionType.Additional,
+                    relatedCharges = "Таинственный арканум 7 уровня"
+                )
+            )
+            abilities
+        }
+    )
+)
+
 var warlock13: AbilityNodeLevel = AbilityNodeLevel(
     name = "Колдун_13",
     changesInCharacterInfo = { abilities: CharacterInfo ->
@@ -474,7 +508,7 @@ var warlock13: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        //Pair("first", { listOf(strokeOfLuck.name) })
+        Pair("first", { listOf(mysticArcanum_7.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -496,6 +530,40 @@ var warlock14: AbilityNodeLevel = AbilityNodeLevel(
     next_level = "Колдун_15",
 )
 
+var mysticArcanum_8 = AbilityNode(
+    name = "Таинственный арканум 8 уровня",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        if (!abilities.currentState.charges.contains("Таинственный арканум 8 уровня")) {
+            abilities.currentState.charges["Таинственный арканум 8 уровня"] = ChargesCounter(
+                current = 1,
+                maximum = 1
+            )
+        }
+        abilities
+    },
+    getAlternatives = mutableMapOf(
+        Pair("first") { spellist.filter { (it.level == 8) && (it.classes.contains(Classes.Warlock)) }.map { it.name } }
+    ),
+    requirements = { true },
+    description = "Ваш покровитель дарует вам магический секрет, называемый арканумом. Выберите одно заклинание 6-го уровня из списка заклинаний колдуна в качестве арканума.\n" +
+            "\n" +
+            "Вы можете наложить это заклинание, не используя ячейку заклинаний. Вы должны окончить продолжительный отдых, чтобы сделать это еще раз.\n",
+    actionForChoice = mutableMapOf(
+        Pair("first") { choice: String, abilities: CharacterInfo ->
+            Log.d("test", choice)
+            abilities.actionsList.add(
+                Action(
+                    name = "Таинственный арканум 8 уровня",
+                    description = "Вы можете наложить заклинание " + choice + ", не используя ячейку заклинаний. Вы должны окончить продолжительный отдых, чтобы сделать это еще раз.\n",
+                    type = ActionType.Additional,
+                    relatedCharges = "Таинственный арканум 8 уровня"
+                )
+            )
+            abilities
+        }
+    )
+)
+
 var warlock15: AbilityNodeLevel = AbilityNodeLevel(
     name = "Колдун_15",
     changesInCharacterInfo = { abilities: CharacterInfo ->
@@ -504,7 +572,8 @@ var warlock15: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(newEldritchInvocation.name) })
+        Pair("first", { listOf(newEldritchInvocation.name) }),
+        Pair("second", { listOf(mysticArcanum_8.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -528,6 +597,40 @@ var warlock16: AbilityNodeLevel = AbilityNodeLevel(
     next_level = "Колдун_17",
 )
 
+var mysticArcanum_9 = AbilityNode(
+    name = "Таинственный арканум 9 уровня",
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        if (!abilities.currentState.charges.contains("Таинственный арканум 9 уровня")) {
+            abilities.currentState.charges["Таинственный арканум 9 уровня"] = ChargesCounter(
+                current = 1,
+                maximum = 1
+            )
+        }
+        abilities
+    },
+    getAlternatives = mutableMapOf(
+        Pair("first") { spellist.filter { (it.level == 9) && (it.classes.contains(Classes.Warlock)) }.map { it.name } }
+    ),
+    requirements = { true },
+    description = "Ваш покровитель дарует вам магический секрет, называемый арканумом. Выберите одно заклинание 6-го уровня из списка заклинаний колдуна в качестве арканума.\n" +
+            "\n" +
+            "Вы можете наложить это заклинание, не используя ячейку заклинаний. Вы должны окончить продолжительный отдых, чтобы сделать это еще раз.\n",
+    actionForChoice = mutableMapOf(
+        Pair("first") { choice: String, abilities: CharacterInfo ->
+            Log.d("test", choice)
+            abilities.actionsList.add(
+                Action(
+                    name = "Таинственный арканум 9 уровня",
+                    description = "Вы можете наложить заклинание " + choice + ", не используя ячейку заклинаний. Вы должны окончить продолжительный отдых, чтобы сделать это еще раз.\n",
+                    type = ActionType.Additional,
+                    relatedCharges = "Таинственный арканум 9 уровня"
+                )
+            )
+            abilities
+        }
+    )
+)
+
 var warlock17: AbilityNodeLevel = AbilityNodeLevel(
     name = "Колдун_17",
     changesInCharacterInfo = { abilities: CharacterInfo ->
@@ -537,7 +640,7 @@ var warlock17: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        //Pair("first", { listOf(strokeOfLuck.name) })
+        Pair("first", { listOf(mysticArcanum_9.name) })
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -640,10 +743,13 @@ var mapOfWarlockAbilities: MutableMap<String, AbilityNode> = (mutableMapOf(
     Pair(mysticArcanum_6.name, mysticArcanum_6),
     Pair(warlock11.name, warlock11),
     Pair(warlock12.name, warlock12),
+    Pair(mysticArcanum_7.name, mysticArcanum_7),
     Pair(warlock13.name, warlock13),
     Pair(warlock14.name, warlock14),
+    Pair(mysticArcanum_8.name, mysticArcanum_8),
     Pair(warlock15.name, warlock15),
     Pair(warlock16.name, warlock16),
+    Pair(mysticArcanum_9.name, mysticArcanum_9),
     Pair(warlock17.name, warlock17),
     Pair(warlock18.name, warlock18),
     Pair(warlock19.name, warlock19),
