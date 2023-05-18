@@ -3,20 +3,20 @@
     <style name="Theme.Dnd" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryVariant">#515151</item>
+        <item name="colorPrimaryVariant">@color/primary_variant</item>
         <item name="colorOnPrimary">@color/on_primary</item>
-        <item name="colorPrimaryDark">#3e3e3e</item>
-        <item name="backgroundColor">#000320</item>
-        <item name="android:windowBackground">#000320</item>
-        <item name="border">#3e3e3e</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="backgroundColor">@color/background</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="border">@color/border</item>
 
-        <item name="android:textColor">@color/primary</item>
-        <item name="android:editTextColor">@color/primary</item>
-        <item name="colorOnBackground">@color/primary</item>
-        <item name="colorOnSurface">@color/primary</item>
-        <item name="colorOnContainer">@color/primary</item>
-        <item name="colorAccent">@color/primary</item>
+        <item name="android:textColor">@color/primary_variant</item>
         <item name="android:textColorHint">@color/on_primary</item>
+        <item name="android:editTextColor">@color/primary_variant</item>
+        <item name="colorOnBackground">@color/primary_variant</item>
+        <item name="colorOnSurface">@color/primary_variant</item>
+        <item name="colorOnContainer">@color/primary_variant</item>
+        <item name="colorAccent">@color/primary_variant</item>
         <!-- Status bar color. -->
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>

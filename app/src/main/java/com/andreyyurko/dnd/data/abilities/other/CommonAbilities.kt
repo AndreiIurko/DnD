@@ -18,7 +18,7 @@ var baseActionsAN = AbilityNode(
         if (abilities.currentState.firstWeapon.setOfSkills.contains(Ability.Dexterity)) {
             damageBonus = Integer.max(damageBonus, abilityToModifier(abilities.dexterity))
         }
-        damage = sumTwoDamages(damage, damageBonus.toString())
+        damage = sumTwoRolls(damage, damageBonus.toString())
 
 
         abilities.currentState.firstWeapon.shownDamage = damage
@@ -52,6 +52,9 @@ var baseActionsAN = AbilityNode(
                     type = ActionType.Bonus
                 )
             )
+        }
+        abilities.currentState.inventoryRelevantData.forEach { (_, v) ->
+            abilities.ac += v.ac
         }
         abilities.actionsList.add(
             Action(
@@ -247,13 +250,13 @@ fun calculateWeaponProp(weapon: Weapon, abilities: CharacterInfo): Pair<String, 
 
     abilities.currentState.inventoryRelevantData[abilities.currentState.firstWeaponName]?.let {
         toHitBonus += it.weaponToHit
-        damage = sumTwoDamages(damage, it.weaponDamage)
+        damage = sumTwoRolls(damage, it.weaponDamage)
     }
 
     return Pair(damage, toHitBonus)
 }
 
-fun sumTwoDamages(damage1: String, damage2: String): String {
+fun sumTwoRolls(roll1: String, roll2: String): String {
     val mapOfDices: MutableMap<String, Int> = mutableMapOf(
         Pair("к4", 0),
         Pair("к6", 0),
@@ -263,13 +266,13 @@ fun sumTwoDamages(damage1: String, damage2: String): String {
         Pair("", 0)
     )
 
-    for (dice in damage1.split('+')) {
+    for (dice in roll1.split('+')) {
         val count = if (dice.split('к')[0] == "") 1 else dice.split('к')[0].toInt()
         val diceType = if (dice.contains("к")) dice.substring(dice.indexOf('к')) else ""
         mapOfDices[diceType] = mapOfDices[diceType]!! + count
     }
 
-    for (dice in damage2.split('+')) {
+    for (dice in roll2.split('+')) {
         val count = if (dice.split('к')[0] == "") 1 else dice.split('к')[0].toInt()
         val diceType = if (dice.contains("к")) dice.substring(dice.indexOf('к')) else ""
         mapOfDices[diceType] = mapOfDices[diceType]!! + count

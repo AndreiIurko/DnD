@@ -248,6 +248,7 @@ class InventoryHandler @Inject constructor(
             ) {
                 currentState.hasShield = true
                 currentState.shieldItemName = itemName
+                currentState.inventoryRelevantData[itemName] = item.inventoryRelevantData
             } else if (currentState.armor == Armor.NoArmor) {
                 var armor: Armor = Armor.NoArmor
                 for (armorType in Armor.values()) {
