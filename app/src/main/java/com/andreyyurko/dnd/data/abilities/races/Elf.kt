@@ -51,8 +51,8 @@ var highElf = AbilityNode(
         abilities.weaponProficiency.add(Weapon.Longsword)
         abilities.weaponProficiency.add(Weapon.ShortBow)
         abilities.weaponProficiency.add(Weapon.LongBow)
-        if (!abilities.spellsInfo.contains("Заклинания Высшего эльфа")) {
-            abilities.spellsInfo["Заклинания Высшего эльфа"] = CharacterSpells(
+        if (!abilities.spellsInfo.contains("Заклинания высшего эльфа")) {
+            abilities.spellsInfo["Заклинания высшего эльфа"] = CharacterSpells(
                 className = Classes.Wizard.className,
                 maxKnownCantripsCount = 1,
                 maxKnownSpellsCount = 0
@@ -133,7 +133,6 @@ var drow = AbilityNode(
 
             }
         }
-        //weapon
         abilities
     },
     getAlternatives = mutableMapOf(),

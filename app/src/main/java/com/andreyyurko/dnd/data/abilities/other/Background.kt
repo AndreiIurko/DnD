@@ -14,5 +14,5 @@ var customBackstory: AbilityNode = AbilityNode(
         Pair("fourth", { mapOfLanguages.keys.toList() + mapOfTools.keys.toList() })
     ),
     requirements = { true },
-    description = "Выберите два навыка для вашей предыстории."
+    description = "Выберите два навыка и два языка или инструмента для вашей предыстории."
 )
