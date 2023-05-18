@@ -15,6 +15,7 @@ import com.andreyyurko.dnd.data.abilities.classes.warlock.warlock1
 import com.andreyyurko.dnd.data.abilities.classes.wizard.wizard1
 import com.andreyyurko.dnd.data.abilities.other.*
 import com.andreyyurko.dnd.data.abilities.races.*
+import com.andreyyurko.dnd.data.abilities.races.lineages.*
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Priority
 import com.andreyyurko.dnd.data.characterData.Weapon
@@ -57,7 +58,15 @@ var baseAN: AbilityNode = AbilityNode(
                 )
             }
         ),
-        Pair("race", { listOf(human.name, dwarf.name, elf.name, halfling.name) })
+        Pair("race", { listOf(
+            human.name,
+            dwarf.name,
+            elf.name,
+            halfling.name,
+            tabaxi.name,
+            aasimar.name,
+            commonLineage.name
+        ) })
     ),
     { true },
     listOf(listOf()),

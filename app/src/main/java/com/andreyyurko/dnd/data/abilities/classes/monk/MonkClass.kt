@@ -117,7 +117,8 @@ var martialArts: AbilityNode = AbilityNode(
                     }
                 }
                 prof.setOfSkills.plus(Ability.Dexterity)
-                if(prof.damage == "1") prof.damage = dice
+                if(prof.weaponName == "Безоружный удар") prof.damage = dice
+                // We need to check it with some other way
             }
         }
         abilities.additionalAbilities["Боевые искусства"] = "Ваше знание боевых искусств позволяет вам эффективно использовать в бою безоружные удары и монашеское оружие — короткие мечи, а также любое простое рукопашное оружие, не имеющее свойств двуручное и тяжёлое.\n" +
