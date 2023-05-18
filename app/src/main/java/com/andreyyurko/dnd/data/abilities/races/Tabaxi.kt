@@ -68,7 +68,7 @@ val tabaxiAbilities = AbilityNode(
                 maximum = 1
             )
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Кошачье проворство"] =
             Action(
                 name = "Кошачье проворство",
                 description = "Ваши рефлексы и проворство позволяют вам двигаться с увеличением скорости. Когда вы двигаетесь в бою в свой ход, вы можете удвоить свою скорость до конца хода.\n" +
@@ -77,7 +77,7 @@ val tabaxiAbilities = AbilityNode(
                 type = ActionType.PartOfAction,
                 relatedCharges = "Кошачье проворство"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(

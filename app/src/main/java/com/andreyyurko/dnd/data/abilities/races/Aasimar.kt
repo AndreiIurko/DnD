@@ -22,7 +22,7 @@ var protectorAasimar = AbilityNode(
                     maximum = 1
                 )
             }
-            abilities.actionsList.add(
+            abilities.actionsMap["Сияющая душа"] =
                 Action(
                     name = "Сияющая душа",
                     description = "Вы можете действием высвободить божественную энергию внутри себя, заставляя ваши глаза мерцать, а два светящихся, бестелесных крыла вырасти у вас за спиной. Ваше превращение длится 1 минуту или пока вы не окончите его бонусным действием.\n" +
@@ -33,7 +33,7 @@ var protectorAasimar = AbilityNode(
                     type = ActionType.Action,
                     relatedCharges = "Сияющая душа"
                 )
-            )
+
         }
         abilities
     },
@@ -64,7 +64,7 @@ var scourgeAasimar = AbilityNode(
                     maximum = 1
                 )
             }
-            abilities.actionsList.add(
+            abilities.actionsMap["Испускание сияния"] =
                 Action(
                     name = "Испускание сияния",
                     description = "Вы можете действием высвободить божественную энергию внутри себя, заставляя себя излучать испепеляющий свет, льющийся из ваших глаз и рта и угрожающий опалить вас. Ваше превращение длится 1 минуту или пока вы не окончите его бонусным действием.\n" +
@@ -77,7 +77,7 @@ var scourgeAasimar = AbilityNode(
                     type = ActionType.Action,
                     relatedCharges = "Испускание сияния"
                 )
-            )
+
         }
         abilities
     },
@@ -110,7 +110,7 @@ var fallenAasimar = AbilityNode(
                     maximum = 1
                 )
             }
-            abilities.actionsList.add(
+            abilities.actionsMap["Саван смерти"] =
                 Action(
                     name = "Саван смерти",
                     description = "Вы можете действием высвободить божественную энергию внутри себя, заставляя ваши глаза превратиться в бездну тьмы, а два призрачных, не способных взлететь скелета крыльев вырасти у вас за спиной.\n" +
@@ -123,7 +123,7 @@ var fallenAasimar = AbilityNode(
                     type = ActionType.Action,
                     relatedCharges = "Саван смерти"
                 )
-            )
+
         }
         abilities
     },
@@ -174,14 +174,14 @@ val aasimarAbilities = AbilityNode(
                 maximum = 1
             )
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Исцеляющие руки аасимара"] =
             Action(
                 name = "Исцеляющие руки аасимара",
                 description = "Действием вы можете коснуться существа и восстановить ему количество хитов, равное вашему уровню. Вы не сможете вновь воспользоваться этой способностью пока не закончите продолжительный отдых.\n",
                 type = ActionType.Action,
                 relatedCharges = "Исцеляющие руки аасимара"
             )
-        )
+
         if (!abilities.spellsInfo.contains("Заклинания аасимара")) {
             abilities.spellsInfo["Заклинания аасимара"] = CharacterSpells(
                 maxKnownSpellsCount = 0,

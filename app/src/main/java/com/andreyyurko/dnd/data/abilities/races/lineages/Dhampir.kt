@@ -37,14 +37,14 @@ val dhampir = AbilityNode(
                 maximum = abilities.proficiencyBonus
             )
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Укус вампира"] =
             Action(
                 name = "Укус вампира",
                 description = "...\n",
                 type = ActionType.Action,
                 relatedCharges = "Ци"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(
