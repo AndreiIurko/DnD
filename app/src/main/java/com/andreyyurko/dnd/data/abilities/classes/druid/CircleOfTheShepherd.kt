@@ -1,15 +1,21 @@
 package com.andreyyurko.dnd.data.abilities.classes.druid
 
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.Languages
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var speechOfTheWoods: AbilityNode = AbilityNode(
     name = "Речь лесов",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.languageProficiency.add(Languages.Sylvan)
-        abilities.additionalAbilities["Речь лесов"] = "Звери могут понять вашу речь, а вы можете расшифровывать звуки и движения, которые они производят. У большинства животных недостаточно интеллекта для передачи или понимания сложных концепций, но дружелюбный Зверь может рассказать то, что он видел или слышал в недавнем прошлом.\n" +
-        "\n" +
-                "Эта способность не делает животных вашими друзьями, хотя вы можете совмещать её вместе с подарками, как если бы вы пытались завоевать доверие других неигровых персонажей.\n"
+        abilities.additionalAbilities["Речь лесов"] =
+            "Звери могут понять вашу речь, а вы можете расшифровывать звуки и движения, которые они производят. У большинства животных недостаточно интеллекта для передачи или понимания сложных концепций, но дружелюбный Зверь может рассказать то, что он видел или слышал в недавнем прошлом.\n" +
+                    "\n" +
+                    "Эта способность не делает животных вашими друзьями, хотя вы можете совмещать её вместе с подарками, как если бы вы пытались завоевать доверие других неигровых персонажей.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -33,7 +39,7 @@ var spiritTotem: AbilityNode = AbilityNode(
                 maximum = 1
             )
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Тотем духа"] =
             Action(
                 name = "Тотем духа",
                 description = "Вы можете вызывать духов природы, чтобы влиять на окружающий вас мир. Вы можете бонусным действием магическим образом вызвать бестелесный дух в точке, которую вы можете видеть в 60 футах. Дух создает ауру в радиусе 30 футов вокруг этой точки. Он не считается ни существом, ни объектом, хотя он имеет спектральный вид того существа, которое представляет. Вы можете бонусным действием перемещать дух на расстояние до 60 футов в пределах видимости. Дух существует в течение 1 минуты или пока вы не станете недееспособным. Использовав это умение, вы не можете использовать его повторно до окончания короткого или продолжительного отдыха.\n" +
@@ -46,7 +52,7 @@ var spiritTotem: AbilityNode = AbilityNode(
                 type = ActionType.Bonus,
                 relatedCharges = "Тотем духа"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -66,11 +72,12 @@ var spiritTotem: AbilityNode = AbilityNode(
 var mightySummoner: AbilityNode = AbilityNode(
     name = "Могущественный призыватель",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Могущественный призыватель"] = "Звери и Феи, которых вы вызываете, становятся более стойкими, чем обычно. Любой Зверь или Фея, вызванные или созданные заклинанием, которое вы накладываете, получает следующие преимущества:\n" +
-                "\n" +
-                "    Вызванное существо появляется с дополнительными хитами: за каждую Кость Хитов, которые есть у существа, прибавляется дополнительно 2 хита.\n" +
-                "    Урон от природных оружий существа считается магическим при определении преодоления сопротивления и иммунитета к немагическим атакам и урону.\n" +
-                "\n"
+        abilities.additionalAbilities["Могущественный призыватель"] =
+            "Звери и Феи, которых вы вызываете, становятся более стойкими, чем обычно. Любой Зверь или Фея, вызванные или созданные заклинанием, которое вы накладываете, получает следующие преимущества:\n" +
+                    "\n" +
+                    "    Вызванное существо появляется с дополнительными хитами: за каждую Кость Хитов, которые есть у существа, прибавляется дополнительно 2 хита.\n" +
+                    "    Урон от природных оружий существа считается магическим при определении преодоления сопротивления и иммунитета к немагическим атакам и урону.\n" +
+                    "\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -88,7 +95,8 @@ var mightySummoner: AbilityNode = AbilityNode(
 var guardianSpirit: AbilityNode = AbilityNode(
     name = "Дух защитник",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Дух защитник"] = "Ваш тотем духа защищает Зверей и Фей, которых вы вызываете своей магией. Когда Зверь или Фея, которых вы вызвали или создали заклинанием, заканчивает свой ход в ауре вашего тотема духа, это существо восстанавливает хиты в количестве, равном половине вашего уровня друида.\n"
+        abilities.additionalAbilities["Дух защитник"] =
+            "Ваш тотем духа защищает Зверей и Фей, которых вы вызываете своей магией. Когда Зверь или Фея, которых вы вызвали или создали заклинанием, заканчивает свой ход в ауре вашего тотема духа, это существо восстанавливает хиты в количестве, равном половине вашего уровня друида.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -102,11 +110,12 @@ var guardianSpirit: AbilityNode = AbilityNode(
 var faithfulSummons: AbilityNode = AbilityNode(
     name = "Верные призванные",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Верные призванные"] = "Духи природы, с которыми вы общаетесь, защищают вас, когда вы беззащитны. Если ваши хиты упали до 0 или вы против своей воли недееспособны, вы можете немедленно получить эффекты заклинания призыв животных [conjure animals], как если бы оно было применено с использованием ячейки заклинаний 9-го уровня.\n" +
-                "\n" +
-                "Заклинание вызывает четырёх животных по вашему выбору с показателем опасности 2 или ниже. Призванные животные появляются в пределах 20 футов от вас. Если они не получат от вас никаких приказов, они защищают вас и нападают на ваших противников.\n" +
-                "\n" +
-                "Заклинание не требует концентрации и длится 1 час или пока вы не отмените его (отмена не тратит никаких действий). Использовав это умение, вы не можете использовать его повторно до окончания короткого или продолжительного отдыха.\n"
+        abilities.additionalAbilities["Верные призванные"] =
+            "Духи природы, с которыми вы общаетесь, защищают вас, когда вы беззащитны. Если ваши хиты упали до 0 или вы против своей воли недееспособны, вы можете немедленно получить эффекты заклинания призыв животных [conjure animals], как если бы оно было применено с использованием ячейки заклинаний 9-го уровня.\n" +
+                    "\n" +
+                    "Заклинание вызывает четырёх животных по вашему выбору с показателем опасности 2 или ниже. Призванные животные появляются в пределах 20 футов от вас. Если они не получат от вас никаких приказов, они защищают вас и нападают на ваших противников.\n" +
+                    "\n" +
+                    "Заклинание не требует концентрации и длится 1 час или пока вы не отмените его (отмена не тратит никаких действий). Использовав это умение, вы не можете использовать его повторно до окончания короткого или продолжительного отдыха.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -125,11 +134,11 @@ var circleOfTheShepherd = AbilityNode(
     name = "Круг пастыря",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(speechOfTheWoods.name) }),
-        Pair("second", { listOf(spiritTotem.name) }),
-        Pair("third", { listOf(mightySummoner.name) }),
-        Pair("fourth", { listOf(guardianSpirit.name) }),
-        Pair("fifth", { listOf(faithfulSummons.name) })
+        Pair("first") { listOf(speechOfTheWoods.name) },
+        Pair("second") { listOf(spiritTotem.name) },
+        Pair("third") { listOf(mightySummoner.name) },
+        Pair("fourth") { listOf(guardianSpirit.name) },
+        Pair("fifth") { listOf(faithfulSummons.name) }
     ),
     requirements = { true },
     description = "",

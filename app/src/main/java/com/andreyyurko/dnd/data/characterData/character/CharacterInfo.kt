@@ -36,7 +36,7 @@ data class CharacterInfo(
     var damageResistances: MutableSet<DamageType> = mutableSetOf(),
     var damageImmunities: MutableSet<DamageType> = mutableSetOf(),
     var conditionImmunities: MutableSet<Conditions> = mutableSetOf(),
-    var actionsList: MutableList<Action> = mutableListOf(),
+    var actionsMap: MutableMap<String, Action> = mutableMapOf(),
     var additionalAbilities: MutableMap<String, String> = mutableMapOf(), // like blind vision
 
     // String - name of inventory item
@@ -47,7 +47,10 @@ data class CharacterInfo(
     var currentState: CurrentState = CurrentState()
 )
 
-fun mergeCharacterInfo(characterInfoFirst: CharacterInfo, characterInfoSecond: CharacterInfo): CharacterInfo {
+fun mergeCharacterInfo(
+    characterInfoFirst: CharacterInfo,
+    characterInfoSecond: CharacterInfo
+): CharacterInfo {
     val resultCharacterInfo = CharacterInfo()
     resultCharacterInfo.inventory = characterInfoFirst.inventory
     resultCharacterInfo.currentState = characterInfoFirst.currentState
@@ -56,19 +59,24 @@ fun mergeCharacterInfo(characterInfoFirst: CharacterInfo, characterInfoSecond: C
     resultCharacterInfo.characterClass.className =
         characterInfoFirst.characterClass.className + characterInfoSecond.characterClass.className
     resultCharacterInfo.level = characterInfoFirst.level + characterInfoSecond.level
-    resultCharacterInfo.spellCasterLevel = characterInfoFirst.spellCasterLevel + characterInfoSecond.spellCasterLevel
+    resultCharacterInfo.spellCasterLevel =
+        characterInfoFirst.spellCasterLevel + characterInfoSecond.spellCasterLevel
     resultCharacterInfo.race = characterInfoFirst.race + characterInfoSecond.race
     resultCharacterInfo.strength = characterInfoFirst.strength + characterInfoSecond.strength
     resultCharacterInfo.dexterity = characterInfoFirst.dexterity + characterInfoSecond.dexterity
-    resultCharacterInfo.constitution = characterInfoFirst.constitution + characterInfoSecond.constitution
-    resultCharacterInfo.intelligence = characterInfoFirst.intelligence + characterInfoSecond.intelligence
+    resultCharacterInfo.constitution =
+        characterInfoFirst.constitution + characterInfoSecond.constitution
+    resultCharacterInfo.intelligence =
+        characterInfoFirst.intelligence + characterInfoSecond.intelligence
     resultCharacterInfo.wisdom = characterInfoFirst.wisdom + characterInfoSecond.wisdom
     resultCharacterInfo.charisma = characterInfoFirst.charisma + characterInfoSecond.charisma
-    resultCharacterInfo.proficiencyBonus = characterInfoFirst.proficiencyBonus + characterInfoSecond.proficiencyBonus
+    resultCharacterInfo.proficiencyBonus =
+        characterInfoFirst.proficiencyBonus + characterInfoSecond.proficiencyBonus
     resultCharacterInfo.halfProfSet =
         (characterInfoFirst.halfProfSet + characterInfoSecond.halfProfSet) as MutableSet<Ability>
     resultCharacterInfo.speed = characterInfoFirst.speed + characterInfoSecond.speed
-    resultCharacterInfo.initiativeBonus = characterInfoFirst.initiativeBonus + characterInfoSecond.initiativeBonus
+    resultCharacterInfo.initiativeBonus =
+        characterInfoFirst.initiativeBonus + characterInfoSecond.initiativeBonus
     resultCharacterInfo.ac = characterInfoFirst.ac + characterInfoSecond.ac
     resultCharacterInfo.hp = characterInfoFirst.hp + characterInfoSecond.hp
     resultCharacterInfo.passiveInsightBonus =
@@ -77,7 +85,8 @@ fun mergeCharacterInfo(characterInfoFirst: CharacterInfo, characterInfoSecond: C
         characterInfoFirst.passivePerceptionBonus + characterInfoSecond.passivePerceptionBonus
     resultCharacterInfo.skillProficiency =
         (characterInfoFirst.skillProficiency + characterInfoSecond.skillProficiency) as MutableSet<Skill>
-    resultCharacterInfo.expertize = (characterInfoFirst.expertize + characterInfoSecond.expertize) as MutableSet<Skill>
+    resultCharacterInfo.expertize =
+        (characterInfoFirst.expertize + characterInfoSecond.expertize) as MutableSet<Skill>
     resultCharacterInfo.savingThrowProf =
         ((characterInfoFirst.savingThrowProf + resultCharacterInfo.savingThrowProf) as MutableSet<Ability>)
     resultCharacterInfo.armorProficiency =
@@ -92,8 +101,8 @@ fun mergeCharacterInfo(characterInfoFirst: CharacterInfo, characterInfoSecond: C
         (characterInfoFirst.damageImmunities + characterInfoSecond.damageImmunities) as MutableSet<DamageType>
     resultCharacterInfo.conditionImmunities =
         (characterInfoFirst.conditionImmunities + characterInfoSecond.conditionImmunities) as MutableSet<Conditions>
-    resultCharacterInfo.actionsList =
-        (characterInfoFirst.actionsList + characterInfoSecond.actionsList) as MutableList<Action>
+    resultCharacterInfo.actionsMap =
+        (characterInfoFirst.actionsMap + characterInfoSecond.actionsMap) as MutableMap<String, Action>
 
     return resultCharacterInfo
 }
@@ -113,7 +122,12 @@ data class CurrentState(
     var hp: Int? = null,
     var temporaryHp: String = "0",
     var hitDiceCount: String = "",
-    val coins: MutableMap<String, Int> = mutableMapOf(Pair("пм", 0), Pair("зм", 0), Pair("см", 0), Pair("мм", 0)),
+    val coins: MutableMap<String, Int> = mutableMapOf(
+        Pair("пм", 0),
+        Pair("зм", 0),
+        Pair("см", 0),
+        Pair("мм", 0)
+    ),
     // String - AN name
     var charges: MutableMap<String, ChargesCounter> = mutableMapOf(),
 )

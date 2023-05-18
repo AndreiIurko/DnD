@@ -31,7 +31,8 @@ class RaceViewModel @Inject constructor(
         }
         baseCAN.makeChoice("race", raceChoice)
         val raceCAN = baseCAN.chosen_alternatives["race"]!!
-        raceCAN.chosen_alternatives["backstory"] = CharacterAbilityNode(customBackstory, raceCAN.character)
+        raceCAN.chosen_alternatives["backstory"] =
+            CharacterAbilityNode(customBackstory, raceCAN.character)
         showAbilities()
     }
 

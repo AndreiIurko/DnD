@@ -39,7 +39,8 @@ class ClassViewModel @Inject constructor(
         character.characterInfo.spellsInfo.remove("Заклинания класса")
         // TODO: think about how to do it better
         mapOfAn[choice]?.let {
-            baseCAN.chosen_alternatives["class"] = CharacterAbilityNodeLevel((it as AbilityNodeLevel), character)
+            baseCAN.chosen_alternatives["class"] =
+                CharacterAbilityNodeLevel((it as AbilityNodeLevel), character)
         }
         //baseCAN.makeChoice("class", choice)
 
@@ -82,7 +83,8 @@ class ClassViewModel @Inject constructor(
             nextLevel = can.chosen_alternatives["nextLevel"]
         }
 
-        val nextLevelName = can.data.name.split('_')[0] + '_' + (can.data.name.split('_')[1].toInt() + 1).toString()
+        val nextLevelName =
+            can.data.name.split('_')[0] + '_' + (can.data.name.split('_')[1].toInt() + 1).toString()
 
         can.makeChoice("nextLevel", nextLevelName)
         chosenLevel++

@@ -42,11 +42,12 @@ class AbilitiesFragment : BaseFragment(R.layout.fragment_abilities) {
         viewBinding.changeSystemButton.setOnClickListener {
             viewModel.changeSystem()
             if (viewModel.isPointBy) {
-                viewBinding.systemDescription.text = requireContext().getText(R.string.fragment_abilities_point_by_description)
+                viewBinding.systemDescription.text =
+                    requireContext().getText(R.string.fragment_abilities_point_by_description)
                 viewBinding.pointsCapacity.visibility = View.VISIBLE
-            }
-            else {
-                viewBinding.systemDescription.text = requireContext().getText(R.string.fragment_abilities_random_system_description)
+            } else {
+                viewBinding.systemDescription.text =
+                    requireContext().getText(R.string.fragment_abilities_random_system_description)
                 viewBinding.pointsCapacity.visibility = View.INVISIBLE
             }
             viewBinding.abilitiesLinearLayout.removeAllViews()
@@ -65,8 +66,10 @@ class AbilitiesFragment : BaseFragment(R.layout.fragment_abilities) {
         viewBinding.submitButton.setOnClickListener {
             viewModel.characterInfo.strength = viewModel.abilities[Ability.Strength.abilityName]!!
             viewModel.characterInfo.dexterity = viewModel.abilities[Ability.Dexterity.abilityName]!!
-            viewModel.characterInfo.constitution = viewModel.abilities[Ability.Constitution.abilityName]!!
-            viewModel.characterInfo.intelligence = viewModel.abilities[Ability.Intelligence.abilityName]!!
+            viewModel.characterInfo.constitution =
+                viewModel.abilities[Ability.Constitution.abilityName]!!
+            viewModel.characterInfo.intelligence =
+                viewModel.abilities[Ability.Intelligence.abilityName]!!
             viewModel.characterInfo.wisdom = viewModel.abilities[Ability.Wisdom.abilityName]!!
             viewModel.characterInfo.charisma = viewModel.abilities[Ability.Charisma.abilityName]!!
 

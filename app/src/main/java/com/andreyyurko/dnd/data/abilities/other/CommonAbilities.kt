@@ -1,7 +1,14 @@
 package com.andreyyurko.dnd.data.abilities.other
 
 
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.characterData.Skill
+import com.andreyyurko.dnd.data.characterData.Weapon
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import kotlin.math.ceil
@@ -9,7 +16,10 @@ import kotlin.math.ceil
 var baseActionsAN = AbilityNode(
     "base_actions_an",
     { abilities: CharacterInfo ->
-        var (damage, toHitBonus) = calculateWeaponProp(abilities.currentState.firstWeapon, abilities)
+        var (damage, toHitBonus) = calculateWeaponProp(
+            abilities.currentState.firstWeapon,
+            abilities
+        )
 
         var damageBonus = -5
         if (abilities.currentState.firstWeapon.setOfSkills.contains(Ability.Strength)) {
@@ -24,7 +34,7 @@ var baseActionsAN = AbilityNode(
         abilities.currentState.firstWeapon.shownDamage = damage
         abilities.currentState.firstWeapon.shownToHit = toHitBonus
 
-        abilities.actionsList.add(
+        abilities.actionsMap["Атака"] =
             Action(
                 name = "Атака",
                 description = "Совершить одну атаку оружием\n" +
@@ -32,14 +42,14 @@ var baseActionsAN = AbilityNode(
                         "Урон: $damage",
                 type = ActionType.Action
             )
-        )
+
 
         abilities.currentState.secondWeapon?.let {
             val (secondDamage, secondToHitBonus) = calculateWeaponProp(it, abilities)
 
             it.shownSecondWeaponDamage = secondDamage
             it.shownToHit = secondToHitBonus
-            abilities.actionsList.add(
+            abilities.actionsMap["Атака второй рукой"] =
                 Action(
                     name = "Атака второй рукой",
                     description = "Если вы совершаете действие «Атака» и атакуете рукопашным оружием со свойством «лёгкое», удерживаемым в одной руке, вы можете бонусным действием атаковать другим рукопашным оружием со свойством «лёгкое», удерживаемым в другой руке.\n" +
@@ -51,12 +61,12 @@ var baseActionsAN = AbilityNode(
                             "Урон: $secondDamage",
                     type = ActionType.Bonus
                 )
-            )
+
         }
         abilities.currentState.inventoryRelevantData.forEach { (_, v) ->
             abilities.ac += v.ac
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Засада"] =
             Action(
                 name = "Засада",
                 description = "Вы не можете прятаться от существа, которое видит вас, и если вы издадите шум (например, прокричите предупреждение или уроните вазу), вы выдаёте своё местоположение.\n" +
@@ -66,8 +76,8 @@ var baseActionsAN = AbilityNode(
                         "Если вы прячетесь, есть шанс, что вас заметят даже без активных поисков. Для определения того, заметило ли вас существо, Мастер сравнивает результат вашей проверки Ловкости (Скрытность) с пассивным значением Мудрости (Восприятие), которое равно 10 + модификатор Мудрости существа, плюс все уместные бонусы и штрафы.\n",
                 type = ActionType.Action
             )
-        )
-        abilities.actionsList.add(
+
+        abilities.actionsMap["Использование объекта"] =
             Action(
                 name = "Использование объекта",
                 description = "Как правило, вы взаимодействуете с объектами в ходе других действий, " +
@@ -78,16 +88,16 @@ var baseActionsAN = AbilityNode(
                         "с более чем одним объектом в свой ход.\n",
                 type = ActionType.Action
             )
-        )
-        abilities.actionsList.add(
+
+        abilities.actionsMap["Отступление"] =
             Action(
                 name = "Отступление",
                 description = "Если вы выполнили это действие, " +
                         "ваше перемещение не провоцирует внеочередных атак до конца этого хода\n",
                 type = ActionType.Action
             )
-        )
-        abilities.actionsList.add(
+
+        abilities.actionsMap["Подготовка действия"] =
             Action(
                 name = "Подготовка действия",
                 description = "\n" +
@@ -103,8 +113,8 @@ var baseActionsAN = AbilityNode(
                         "Если вы подготовили заклинание, вы накладываете его как обычно, но удерживаете энергию, пока не сработает условие. Для того чтобы заклинание можно было подготовить, у него должно быть время накладывания «1 действие», а удерживание магии требует концентрации. Если концентрация прервана, заклинание тратится без всякого эффекта.\n",
                 type = ActionType.Action
             )
-        )
-        abilities.actionsList.add(
+
+        abilities.actionsMap["Захват"] =
             Action(
                 name = "Захват",
                 description = "Если вы хотите схватить существо или побороться с ним, вы можете использовать действие «Атака» для совершения особой рукопашной атаки, захвата. Если вы можете совершать многочисленные атаки действием «Атака», эта атака заменяет одну из них.\n" +
@@ -118,8 +128,8 @@ var baseActionsAN = AbilityNode(
                         "Высвобождение из захвата. Захваченное существо может пытаться высвободиться. Для этого оно действием совершает проверку Силы (Атлетика) или Ловкость (Акробатика), противопоставленную вашей проверке Силы (Атлетика).\n",
                 type = ActionType.Action
             )
-        )
-        abilities.actionsList.add(
+
+        abilities.actionsMap["Толчок"] =
             Action(
                 name = "Толчок",
                 description = "При помощи действия «Атака» совершить особую рукопашную атаку, чтобы или сбить цель с ног, или оттолкнуть от себя. Если вы можете совершать многочисленные атаки действием «Атака», эта атака может заменить одну из них.\n" +
@@ -131,15 +141,15 @@ var baseActionsAN = AbilityNode(
                         "Если вы преуспеете, вы либо сбиваете цель с ног, либо толкаете её на 5 футов от себя.\n",
                 type = ActionType.Action
             )
-        )
-        abilities.actionsList.add(
+
+        abilities.actionsMap["Рывок"] =
             Action(
                 name = "Рывок",
                 description = "Если вы совершаете действие «Рывок», вы получаете дополнительное перемещение в текущем ходу, равное вашей скорости после применения всех модификаторов.\n",
                 type = ActionType.Action
             )
-        )
-        abilities.actionsList.add(
+
+        abilities.actionsMap["Помощь"] =
             Action(
                 name = "Помощь",
                 description = "Существо, которому вы помогаете, совершит свою следующую проверку характеристики для выполнения задачи с преимуществом, если она будет совершена до начала вашего следующего хода.\n" +
@@ -149,8 +159,8 @@ var baseActionsAN = AbilityNode(
                         "Преимущество длится до начала вашего следующего хода.\n",
                 type = ActionType.Action
             )
-        )
-        abilities.actionsList.add(
+
+        abilities.actionsMap["Стабилизация"] =
             Action(
                 name = "Стабилизация",
                 description = "Вы можете действием оказать первую помощь находящемуся без сознания существу и попытаться стабилизировать его, для чего требуется совершить проверку Мудрости (Медицина) Сл 10.\n" +
@@ -158,28 +168,28 @@ var baseActionsAN = AbilityNode(
                         "Стабилизированное существо не делает проверки спасброска от смерти, хотя всё ещё имеет 0 хитов и остаётся без сознания. Существо перестаёт быть стабилизированным, если снова получает урон. Стабилизированное существо восстанавливает 1 хит раз в 1к4 часов.\n",
                 type = ActionType.Action
             )
-        )
-        abilities.actionsList.add(
+
+        abilities.actionsMap["Использование подготовленного действия"] =
             Action(
                 name = "Использование подготовленного действия",
                 description = "При достижении условий, выбранных при подготовке вы можете реакцией совершить подготовленное действие\n",
                 type = ActionType.Reaction
             )
-        )
-        abilities.actionsList.add(
+
+        abilities.actionsMap["Разговор"] =
             Action(
                 name = "Разговор",
                 description = "Вы можете общаться любыми доступными вам средствами, короткими фразами и жестами без затраты действия.\n",
                 type = ActionType.Additional
             )
-        )
-        abilities.actionsList.add(
+
+        abilities.actionsMap["Прерывание концентрации"] =
             Action(
                 name = "Прерывание концентрации",
                 description = "Вы можете перестать концентрироваться на заклинании в любое время без затраты действия.\n",
                 type = ActionType.Additional
             )
-        )
+
         setupSpellSlots(abilities)
         abilities
     },

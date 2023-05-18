@@ -2,8 +2,29 @@ package com.andreyyurko.dnd.data.abilities.classes.ranger
 
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.classes.extraAttack
-import com.andreyyurko.dnd.data.abilities.other.*
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.abilities.other.abilityScoreImprovement
+import com.andreyyurko.dnd.data.abilities.other.animalHandling
+import com.andreyyurko.dnd.data.abilities.other.archery
+import com.andreyyurko.dnd.data.abilities.other.athletics
+import com.andreyyurko.dnd.data.abilities.other.defense
+import com.andreyyurko.dnd.data.abilities.other.dueling
+import com.andreyyurko.dnd.data.abilities.other.insight
+import com.andreyyurko.dnd.data.abilities.other.investigation
+import com.andreyyurko.dnd.data.abilities.other.mapOfLanguages
+import com.andreyyurko.dnd.data.abilities.other.nature
+import com.andreyyurko.dnd.data.abilities.other.perception
+import com.andreyyurko.dnd.data.abilities.other.stealth
+import com.andreyyurko.dnd.data.abilities.other.survival
+import com.andreyyurko.dnd.data.abilities.other.twoWeaponFighting
+import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.ArmorProf
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.characterData.addAllMartialWeapons
+import com.andreyyurko.dnd.data.characterData.addAllSimpleWeapons
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import com.andreyyurko.dnd.data.spells.CharacterSpells
@@ -105,10 +126,14 @@ var fightingStyleRanger: AbilityNode = AbilityNode(
 
 var favoredEnemySingleChoice: AbilityNode = AbilityNode(
     name = "Избранный враг: негуманоидиный выбор",
-    changesInCharacterInfo = {abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     getAlternatives = mutableMapOf(
-        Pair("first") { listOf("Аберрации", "Великаны", "Драконы", "Звери", "Исчадия", "Конструкты", "Монстры",
-            "Небожители", "Нежить", "Растения", "Слизи", "Феи", "Элементали") },
+        Pair("first") {
+            listOf(
+                "Аберрации", "Великаны", "Драконы", "Звери", "Исчадия", "Конструкты", "Монстры",
+                "Небожители", "Нежить", "Растения", "Слизи", "Феи", "Элементали"
+            )
+        },
         Pair("second") { mapOfLanguages.keys.toList() }
     ),
     requirements = { true },
@@ -123,9 +148,10 @@ var favoredEnemySingleChoice: AbilityNode = AbilityNode(
                     enemies += " $previousEnemies"
                 }
             }
-            abilities.additionalAbilities["Избранный враг"] = "Избранные враги:\n${enemies.split(" ").joinToString(", ")}" +
-                    "\n" +
-                    "Вы совершаете с преимуществом проверки Мудрости (Выживание) для выслеживания избранных врагов, а также проверки Интеллекта для вспоминания информации о них.\n"
+            abilities.additionalAbilities["Избранный враг"] =
+                "Избранные враги:\n${enemies.split(" ").joinToString(", ")}" +
+                        "\n" +
+                        "Вы совершаете с преимуществом проверки Мудрости (Выживание) для выслеживания избранных врагов, а также проверки Интеллекта для вспоминания информации о них.\n"
             abilities
         }
     )
@@ -133,12 +159,62 @@ var favoredEnemySingleChoice: AbilityNode = AbilityNode(
 
 var favoredEnemyDoubleChoice: AbilityNode = AbilityNode(
     name = "Избранный враг: гуманоидиный выбор",
-    changesInCharacterInfo = {abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     getAlternatives = mutableMapOf(
-        Pair("first") { listOf("Аасимар", "Багбир", "Гит", "Гном", "Гоблин", "Голифа", "Дворф", "Драконорождённый", "Кенку", "Кобольд",
-            "Людоящер", "Орк", "Полуорк", "Полурослик", "Полуэльф", "Табакси", "Тифлинг", "Тритон", "Фирболг", "Хобгоблин", "Человек", "Эльф", "Юань-ти") },
-        Pair("second") { listOf("Аасимар", "Багбир", "Гит", "Гном", "Гоблин", "Голифа", "Дворф", "Драконорождённый", "Кенку", "Кобольд",
-            "Людоящер", "Орк", "Полуорк", "Полурослик", "Полуэльф", "Табакси", "Тифлинг", "Тритон", "Фирболг", "Хобгоблин", "Человек", "Эльф", "Юань-ти") },
+        Pair("first") {
+            listOf(
+                "Аасимар",
+                "Багбир",
+                "Гит",
+                "Гном",
+                "Гоблин",
+                "Голифа",
+                "Дворф",
+                "Драконорождённый",
+                "Кенку",
+                "Кобольд",
+                "Людоящер",
+                "Орк",
+                "Полуорк",
+                "Полурослик",
+                "Полуэльф",
+                "Табакси",
+                "Тифлинг",
+                "Тритон",
+                "Фирболг",
+                "Хобгоблин",
+                "Человек",
+                "Эльф",
+                "Юань-ти"
+            )
+        },
+        Pair("second") {
+            listOf(
+                "Аасимар",
+                "Багбир",
+                "Гит",
+                "Гном",
+                "Гоблин",
+                "Голифа",
+                "Дворф",
+                "Драконорождённый",
+                "Кенку",
+                "Кобольд",
+                "Людоящер",
+                "Орк",
+                "Полуорк",
+                "Полурослик",
+                "Полуэльф",
+                "Табакси",
+                "Тифлинг",
+                "Тритон",
+                "Фирболг",
+                "Хобгоблин",
+                "Человек",
+                "Эльф",
+                "Юань-ти"
+            )
+        },
         Pair("third") { mapOfLanguages.keys.toList() },
     ),
     requirements = { true },
@@ -153,9 +229,10 @@ var favoredEnemyDoubleChoice: AbilityNode = AbilityNode(
                     enemies += " $previousEnemies"
                 }
             }
-            abilities.additionalAbilities["Избранный враг"] = "Избранные враги:\n${enemies.split(" ").joinToString(", ")}" +
-                    "\n" +
-                    "Вы совершаете с преимуществом проверки Мудрости (Выживание) для выслеживания избранных врагов, а также проверки Интеллекта для вспоминания информации о них.\n"
+            abilities.additionalAbilities["Избранный враг"] =
+                "Избранные враги:\n${enemies.split(" ").joinToString(", ")}" +
+                        "\n" +
+                        "Вы совершаете с преимуществом проверки Мудрости (Выживание) для выслеживания избранных врагов, а также проверки Интеллекта для вспоминания информации о них.\n"
             abilities
         },
         Pair("second") { choice: String, abilities: CharacterInfo ->
@@ -166,9 +243,10 @@ var favoredEnemyDoubleChoice: AbilityNode = AbilityNode(
                     enemies += " $previousEnemies"
                 }
             }
-            abilities.additionalAbilities["Избранный враг"] = "Избранные враги:\n${enemies.split(" ").joinToString(", ")}" +
-                    "\n" +
-                    "Вы совершаете с преимуществом проверки Мудрости (Выживание) для выслеживания избранных врагов, а также проверки Интеллекта для вспоминания информации о них.\n"
+            abilities.additionalAbilities["Избранный враг"] =
+                "Избранные враги:\n${enemies.split(" ").joinToString(", ")}" +
+                        "\n" +
+                        "Вы совершаете с преимуществом проверки Мудрости (Выживание) для выслеживания избранных врагов, а также проверки Интеллекта для вспоминания информации о них.\n"
             abilities
         }
     )
@@ -176,11 +254,11 @@ var favoredEnemyDoubleChoice: AbilityNode = AbilityNode(
 
 var favoredEnemy: AbilityNode = AbilityNode(
     name = "Избранный враг",
-    changesInCharacterInfo = {abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     getAlternatives = mutableMapOf(
         Pair("first") { listOf(favoredEnemySingleChoice.name, favoredEnemyDoubleChoice.name) }
     ),
-    requirements = {abilities: CharacterInfo ->
+    requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Ranger
     },
     addRequirements = listOf(),
@@ -197,9 +275,20 @@ var favoredEnemy: AbilityNode = AbilityNode(
 
 var naturalExplorer: AbilityNode = AbilityNode(
     name = "Исследователь природы",
-    changesInCharacterInfo = {abilities: CharacterInfo -> abilities },
+    changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     getAlternatives = mutableMapOf(
-        Pair("first") { listOf("Арктика", "Болота", "Горы", "Леса", "Луга", "Побережье", "Подземье", "Пустыня") }
+        Pair("first") {
+            listOf(
+                "Арктика",
+                "Болота",
+                "Горы",
+                "Леса",
+                "Луга",
+                "Побережье",
+                "Подземье",
+                "Пустыня"
+            )
+        }
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -216,7 +305,7 @@ var naturalExplorer: AbilityNode = AbilityNode(
             "\n" +
             "Вы можете выбрать дополнительную известную местность на 6-м и 10-м уровнях.",
     actionForChoice = mutableMapOf(
-        Pair("first") {choice: String, abilities: CharacterInfo ->
+        Pair("first") { choice: String, abilities: CharacterInfo ->
             var enviroments = "$choice"
             abilities.additionalAbilities["Исследователь природы"]?.let {
                 val otherEnviroments = it.split("\n")[1].split(", ").joinToString(" ")
@@ -224,16 +313,17 @@ var naturalExplorer: AbilityNode = AbilityNode(
                     enviroments += " $otherEnviroments"
                 }
             }
-            abilities.additionalAbilities["Исследователь природы"] = "Избранные местности:\n${enviroments.split(" ").joinToString(", ")}" +
-                    "\n" +
-                    "Путешествуя по избранной вами местности в течении часа или более, вы получаете следующие преимущества:\n" +
-                    "\n" +
-                    "    Труднопроходимая местность не замедляет путешествие группы.\n" +
-                    "    Ваша группа не может заблудиться, кроме как по вине магии.\n" +
-                    "    Даже когда вы занимаетесь другой деятельностью во время путешествия (например, ищете пищу, ориентируетесь или занимаетесь выслеживанием), вы остаётесь готовы к опасности.\n" +
-                    "    Если вы путешествуете в одиночку, вы можете перемещаться скрытно в нормальном темпе.\n" +
-                    "    Когда вы ищете пищу, то находите в два раза больше, чем обычно.\n" +
-                    "    Когда вы выслеживаете других существ, вы также узнаёте их точное количество, их размеры, и как давно они прошли через область. \n"
+            abilities.additionalAbilities["Исследователь природы"] =
+                "Избранные местности:\n${enviroments.split(" ").joinToString(", ")}" +
+                        "\n" +
+                        "Путешествуя по избранной вами местности в течении часа или более, вы получаете следующие преимущества:\n" +
+                        "\n" +
+                        "    Труднопроходимая местность не замедляет путешествие группы.\n" +
+                        "    Ваша группа не может заблудиться, кроме как по вине магии.\n" +
+                        "    Даже когда вы занимаетесь другой деятельностью во время путешествия (например, ищете пищу, ориентируетесь или занимаетесь выслеживанием), вы остаётесь готовы к опасности.\n" +
+                        "    Если вы путешествуете в одиночку, вы можете перемещаться скрытно в нормальном темпе.\n" +
+                        "    Когда вы ищете пищу, то находите в два раза больше, чем обычно.\n" +
+                        "    Когда вы выслеживаете других существ, вы также узнаёте их точное количество, их размеры, и как давно они прошли через область. \n"
             abilities
         }
     )
@@ -334,14 +424,14 @@ var rangerArchetype: AbilityNode = AbilityNode(
 
 var primevalAwareness: AbilityNode = AbilityNode(
     name = "Первозданная осведомленность",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.actionsList.add(
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsMap["Первозданная осведомленность"] =
             Action(
                 name = "Первозданная осведомленность",
                 description = "Вы можете действием потратить одну ячейку заклинаний следопыта, чтобы сосредоточиться на познании пространства вокруг себя. В течение 1 минуты за каждый уровень использованной ячейки заклинаний вы можете ощутить присутствие следующих видов существ в пределах 1 мили (или в пределах 6 миль, если вы находитесь в избранной местности): Аберрации, Драконы, Исчадия, Небожители, Нежить, Феи и Элементали. Это умение не раскрывает местоположение и количество существ.\n",
                 type = ActionType.Action
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -445,14 +535,15 @@ var ranger7: AbilityNodeLevel = AbilityNodeLevel(
 
 var landsStride: AbilityNode = AbilityNode(
     name = "Тропами земли",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.additionalAbilities["Тропами земли"] = "Перемещение по немагической труднопроходимой местности не стоит вам никакого дополнительного перемещения. Вы также можете проходить через немагические растения без замедления, и не получая от них урона, даже если у них есть шипы, колючки или аналогичная опасность.\n" +
-                "\n" +
-                "Кроме того, вы совершаете с преимуществом спасброски от растений, которые были магическим образом созданы или управляются магией, препятствуя движению, например, созданных заклинанием опутывание [entangle]."
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.additionalAbilities["Тропами земли"] =
+            "Перемещение по немагической труднопроходимой местности не стоит вам никакого дополнительного перемещения. Вы также можете проходить через немагические растения без замедления, и не получая от них урона, даже если у них есть шипы, колючки или аналогичная опасность.\n" +
+                    "\n" +
+                    "Кроме того, вы совершаете с преимуществом спасброски от растений, которые были магическим образом созданы или управляются магией, препятствуя движению, например, созданных заклинанием опутывание [entangle]."
         abilities
     },
     getAlternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     addRequirements = listOf(),
     description = "Перемещение по немагической труднопроходимой местности не стоит вам никакого дополнительного перемещения. Вы также можете проходить через немагические растения без замедления, и не получая от них урона, даже если у них есть шипы, колючки или аналогичная опасность.\n" +
             "\n" +
@@ -479,16 +570,16 @@ var ranger8: AbilityNodeLevel = AbilityNodeLevel(
 
 var hideInPlainSight: AbilityNode = AbilityNode(
     name = "Маскировка на виду",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.actionsList.add(
-            Action(
-                name = "Маскировка на виду",
-                description = "Вы можете потратить 1 минуту для создания персонального камуфляжа. У вас должен быть доступ к свежим илу, грязи, растениям, саже и другим природным материалам, с помощью которых будет создаваться камуфляж. После того как вы замаскировались подобным образом, вы можете попытаться спрятаться, прижавшись к твёрдой поверхности, такой как дерево или стена, не уступающей вам по высоте и ширине. Вы получаете бонус +10 к проверкам Ловкости (Скрытность), пока находитесь без движения и не предпринимаете действий.\n" +
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsMap["Маскировка на виду_Следопыт"]
+        Action(
+            name = "Маскировка на виду",
+            description = "Вы можете потратить 1 минуту для создания персонального камуфляжа. У вас должен быть доступ к свежим илу, грязи, растениям, саже и другим природным материалам, с помощью которых будет создаваться камуфляж. После того как вы замаскировались подобным образом, вы можете попытаться спрятаться, прижавшись к твёрдой поверхности, такой как дерево или стена, не уступающей вам по высоте и ширине. Вы получаете бонус +10 к проверкам Ловкости (Скрытность), пока находитесь без движения и не предпринимаете действий.\n" +
                     "\n" +
                     "После того как вы переместились, совершили действие или реакцию, вы должны снова маскироваться с самого начала, чтобы получить это преимущество.",
-                type = ActionType.Long
-            )
+            type = ActionType.Long
         )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -593,8 +684,8 @@ var ranger13: AbilityNodeLevel = AbilityNodeLevel(
 
 var vanish: AbilityNode = AbilityNode(
     name = "Исчезновение",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.actionsList.add(
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsMap["Исчезновение"] =
             Action(
                 name = "Засада",
                 description = "Вы не можете прятаться от существа, которое видит вас, и если вы издадите шум (например, прокричите предупреждение или уроните вазу), вы выдаёте своё местоположение.\n" +
@@ -604,11 +695,11 @@ var vanish: AbilityNode = AbilityNode(
                         "Если вы прячетесь, есть шанс, что вас заметят даже без активных поисков. Для определения того, заметило ли вас существо, Мастер сравнивает результат вашей проверки Ловкости (Скрытность) с пассивным значением Мудрости (Восприятие), которое равно 10 + модификатор Мудрости существа, плюс все уместные бонусы и штрафы.\n",
                 type = ActionType.Bonus
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     addRequirements = listOf(),
     description = "Вы можете в свой ход совершать действие Засада бонусным действием. Кроме того, вы не можете быть выслежены немагическими способом, если вы не оставите след намеренно."
 )
@@ -687,14 +778,15 @@ var ranger17: AbilityNodeLevel = AbilityNodeLevel(
 
 var feralSenses: AbilityNode = AbilityNode(
     name = "Дикие чувства",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.additionalAbilities["Дикие чувства"] = "Вы получаете сверхъестественные чувства, которые помогут вам сражаться с существами, которых вы не можете увидеть. Когда вы атакуете существо, которое не видите, ваша неспособность видеть не накладывает помеху броскам атаки по нему.\n" +
-                "\n" +
-                "Вам также известно о местонахождении всех невидимых существ в пределах 30 футов от вас, при условии, что они не скрыты от вас, и вы не ослеплены и не оглушены."
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.additionalAbilities["Дикие чувства"] =
+            "Вы получаете сверхъестественные чувства, которые помогут вам сражаться с существами, которых вы не можете увидеть. Когда вы атакуете существо, которое не видите, ваша неспособность видеть не накладывает помеху броскам атаки по нему.\n" +
+                    "\n" +
+                    "Вам также известно о местонахождении всех невидимых существ в пределах 30 футов от вас, при условии, что они не скрыты от вас, и вы не ослеплены и не оглушены."
         abilities
     },
     getAlternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     addRequirements = listOf(),
     description = "Вы получаете сверхъестественные чувства, которые помогут вам сражаться с существами, которых вы не можете увидеть. Когда вы атакуете существо, которое не видите, ваша неспособность видеть не накладывает помеху броскам атаки по нему.\n" +
             "\n" +
@@ -740,18 +832,18 @@ var ranger19: AbilityNodeLevel = AbilityNodeLevel(
 
 var foeSlayer: AbilityNode = AbilityNode(
     name = "Убийца врагов",
-    changesInCharacterInfo = {abilities: CharacterInfo ->
-        abilities.actionsList.add(
+    changesInCharacterInfo = { abilities: CharacterInfo ->
+        abilities.actionsMap["Убийца врагов"] =
             Action(
                 name = "Убийца врагов",
                 description = "Вы становитесь беспрецедентным охотником на своих врагов. Один раз в каждом своём ходу вы можете добавить модификатор Мудрости к броску атаки или урона по существу из списка ваших избранных врагов. Вы можете использовать это умение до или после броска, но до того, как эффекты броска вступят в силу.",
                 type = ActionType.PartOfAction
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
-    requirements = {true},
+    requirements = { true },
     description = "Вы становитесь беспрецедентным охотником на своих врагов. Один раз в каждом своём ходу вы можете добавить модификатор Мудрости к броску атаки или урона по существу из списка ваших избранных врагов. Вы можете использовать это умение до или после броска, но до того, как эффекты броска вступят в силу."
 )
 

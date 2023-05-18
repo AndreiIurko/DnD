@@ -37,24 +37,56 @@ class CharacterInventoryFragment : FragmentWithFilters(R.layout.fragment_charact
         }
 
         viewBinding.allButton.setOnClickListener {
-            viewBinding.allButton.setTextColor(MaterialColors.getColor(requireContext(), R.attr.colorPrimary, Color.BLACK))
-            viewBinding.chosenButton.setTextColor(MaterialColors.getColor(requireContext(), R.attr.colorOnPrimary, Color.BLACK))
+            viewBinding.allButton.setTextColor(
+                MaterialColors.getColor(
+                    requireContext(),
+                    R.attr.colorPrimary,
+                    Color.BLACK
+                )
+            )
+            viewBinding.chosenButton.setTextColor(
+                MaterialColors.getColor(
+                    requireContext(),
+                    R.attr.colorOnPrimary,
+                    Color.BLACK
+                )
+            )
             viewModel.isChosenListShown = false
             showItems()
         }
 
         viewBinding.chosenButton.setOnClickListener {
-            viewBinding.allButton.setTextColor(MaterialColors.getColor(requireContext(), R.attr.colorOnPrimary, Color.BLACK))
-            viewBinding.chosenButton.setTextColor(MaterialColors.getColor(requireContext(), R.attr.colorPrimary, Color.BLACK))
+            viewBinding.allButton.setTextColor(
+                MaterialColors.getColor(
+                    requireContext(),
+                    R.attr.colorOnPrimary,
+                    Color.BLACK
+                )
+            )
+            viewBinding.chosenButton.setTextColor(
+                MaterialColors.getColor(
+                    requireContext(),
+                    R.attr.colorPrimary,
+                    Color.BLACK
+                )
+            )
             viewModel.isChosenListShown = true
             showItems()
         }
 
         viewBinding.filtersButton.setOnClickListener {
             if (viewBinding.filtersView.visibility == View.GONE) {
-                showFilters(viewBinding.filtersView, viewBinding.filtersButton, viewBinding.searchEditText)
+                showFilters(
+                    viewBinding.filtersView,
+                    viewBinding.filtersButton,
+                    viewBinding.searchEditText
+                )
             } else {
-                closeFilters(viewBinding.filtersView, viewBinding.filtersButton, viewBinding.searchEditText)
+                closeFilters(
+                    viewBinding.filtersView,
+                    viewBinding.filtersButton,
+                    viewBinding.searchEditText
+                )
                 showItems()
             }
         }
@@ -74,7 +106,8 @@ class CharacterInventoryFragment : FragmentWithFilters(R.layout.fragment_charact
 
     private fun setupRecyclerView() {
         val recyclerView = viewBinding.inventoryRecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         val adapter = InventoryAdapter(viewModel.inventoryHandler, viewModel.characterViewModel)
         recyclerView.adapter = adapter

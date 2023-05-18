@@ -1,8 +1,24 @@
 package com.andreyyurko.dnd.data.abilities.classes.druid
 
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
-import com.andreyyurko.dnd.data.abilities.other.*
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.abilities.other.abilityScoreImprovement
+import com.andreyyurko.dnd.data.abilities.other.animalHandling
+import com.andreyyurko.dnd.data.abilities.other.arcana
+import com.andreyyurko.dnd.data.abilities.other.herbalismTools
+import com.andreyyurko.dnd.data.abilities.other.insight
+import com.andreyyurko.dnd.data.abilities.other.medicine
+import com.andreyyurko.dnd.data.abilities.other.nature
+import com.andreyyurko.dnd.data.abilities.other.perception
+import com.andreyyurko.dnd.data.abilities.other.survival
+import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.ArmorProf
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.characterData.Weapon
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import com.andreyyurko.dnd.data.spells.CharacterSpells
@@ -35,11 +51,31 @@ var classFeaturesDruid: AbilityNode = AbilityNode(
         ),
         Pair(
             "skill1",
-            { listOf(perception.name, survival.name, arcana.name, medicine.name, animalHandling.name, nature.name, insight.name) }
+            {
+                listOf(
+                    perception.name,
+                    survival.name,
+                    arcana.name,
+                    medicine.name,
+                    animalHandling.name,
+                    nature.name,
+                    insight.name
+                )
+            }
         ),
         Pair(
             "skill2",
-            { listOf(perception.name, survival.name, arcana.name, medicine.name, animalHandling.name, nature.name, insight.name) }
+            {
+                listOf(
+                    perception.name,
+                    survival.name,
+                    arcana.name,
+                    medicine.name,
+                    animalHandling.name,
+                    nature.name,
+                    insight.name
+                )
+            }
         ),
     ),
     requirements = { abilities: CharacterInfo ->
@@ -69,7 +105,8 @@ var classFeaturesDruid: AbilityNode = AbilityNode(
 var druidic: AbilityNode = AbilityNode(
     name = "Друидический язык",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities[""] = "Вы знаете Друидический язык — тайный язык друидов. Вы можете на нём говорить и оставлять тайные послания. Вы и все, кто знают этот язык, автоматически замечаете эти послания. Другие замечают присутствие послания при успешной проверке Мудрости (Восприятие) Сл 15, но без помощи магии не могут расшифровать его.\n"
+        abilities.additionalAbilities[""] =
+            "Вы знаете Друидический язык — тайный язык друидов. Вы можете на нём говорить и оставлять тайные послания. Вы и все, кто знают этот язык, автоматически замечаете эти послания. Другие замечают присутствие послания при успешной проверке Мудрости (Восприятие) Сл 15, но без помощи магии не могут расшифровать его.\n"
         abilities
     },
     getAlternatives = mutableMapOf(
@@ -140,9 +177,9 @@ var druid1: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(classFeaturesDruid.name) }),
-        Pair("second", { listOf(druidic.name) }),
-        Pair("third", { listOf(spellCastingDruid.name) })
+        Pair("first") { listOf(classFeaturesDruid.name) },
+        Pair("second") { listOf(druidic.name) },
+        Pair("third") { listOf(spellCastingDruid.name) }
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -159,7 +196,7 @@ var wildShape: AbilityNode = AbilityNode(
                 maximum = 2
             )
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Дикий облик"] =
             Action(
                 name = "Дикий облик",
                 description = "Действием вы можете магическим образом принять облик любого Зверя, которого вы видели. Вы можете использовать это умение два раза, восстанавливая использования после короткого или продолжительного отдыха.\n" +
@@ -183,7 +220,7 @@ var wildShape: AbilityNode = AbilityNode(
                 type = ActionType.Action,
                 relatedCharges = "Дикий облик"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(
@@ -215,7 +252,7 @@ var druidCircle: AbilityNode = AbilityNode(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(circleOfTheMoon.name, circleOfTheShepherd.name) })
+        Pair("first") { listOf(circleOfTheMoon.name, circleOfTheShepherd.name) }
     ),
     requirements = { true },
     description = "Вам необходимо выбрать, в каком круге друидов состоит персонаж. Этот выбор даёт дополнительные умения на 2-м, 6-м, 10-м и 14-м уровнях.\n"
@@ -230,8 +267,8 @@ var druid2: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(wildShape.name) }),
-        Pair("second", { listOf(druidCircle.name) })
+        Pair("first") { listOf(wildShape.name) },
+        Pair("second") { listOf(druidCircle.name) }
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -265,7 +302,7 @@ var druid4: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(abilityScoreImprovement.name) }),
+        Pair("first") { listOf(abilityScoreImprovement.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -333,7 +370,7 @@ var druid8: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(abilityScoreImprovement.name) }),
+        Pair("first") { listOf(abilityScoreImprovement.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -401,7 +438,7 @@ var druid12: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(abilityScoreImprovement.name) }),
+        Pair("first") { listOf(abilityScoreImprovement.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -469,7 +506,7 @@ var druid16: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(abilityScoreImprovement.name) }),
+        Pair("first") { listOf(abilityScoreImprovement.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -498,7 +535,8 @@ var druid17: AbilityNode = AbilityNodeLevel(
 var timelessBody: AbilityNode = AbilityNode(
     name = "Безвременное тело",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Безвременное тело"] = "Пронизывающая вас природная магия замедляет старение. За каждые 10 лет ваше тело стареет только на 1 год.\n"
+        abilities.additionalAbilities["Безвременное тело"] =
+            "Пронизывающая вас природная магия замедляет старение. За каждые 10 лет ваше тело стареет только на 1 год.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -509,9 +547,9 @@ var timelessBody: AbilityNode = AbilityNode(
 var beastSpells: AbilityNode = AbilityNode(
     name = "Заклинания зверя",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        for (action in abilities.actionsList) {
-            if (action.name == "Дикий облик") {
-                action.description = "Действием вы можете магическим образом принять облик любого Зверя, которого вы видели. Вы можете использовать это умение два раза, восстанавливая использования после короткого или продолжительного отдыха.\n" +
+        abilities.actionsMap["Дикий облик"]?.let { action ->
+            action.description =
+                "Действием вы можете магическим образом принять облик любого Зверя, которого вы видели. Вы можете использовать это умение два раза, восстанавливая использования после короткого или продолжительного отдыха.\n" +
                         "\n" +
                         "Уровень друида определяет, в каких Зверей можно превращаться. Например, на 2-м уровне можно превращаться в животное с показателем опасности не более 1/4 без скорости полёта и плавания.\n" +
                         "Облик ЗВЕРЯ\n" +
@@ -530,7 +568,7 @@ var beastSpells: AbilityNode = AbilityNode(
                         "    Ваши речь и действия, требующие рук, могут быть ограничены видом Зверя. Превращение не прерывает вашу концентрацию на уже наложенных заклинаниях и не мешает совершать действия, являющиеся частью заклинания, такие как в случае заклинания призыв молнии [call lightning].\n" +
                         "    Вы сохраняете преимущества от всех умений класса, расы и прочих источников и можете пользоваться ими, если этому не препятствует новый физический облик. Однако недоступны особые чувства, такие как тёмное зрение, если только их нет у Зверя.\n" +
                         "    Вы выбираете, упадет ли ваше снаряжение на землю в вашем пространстве, сольется с вашей новой формой или будет надето на нее. Носимое снаряжение функционирует как обычно, но Мастер решает, может ли новая форма, в зависимости от сложения и размера, носить тот или иной предмет снаряжения. Снаряжение не меняет форму и размер под новый облик, и если оно не подходит новому облику, оно должно остаться на земле или слиться с новым обликом. Слившееся с обликом снаряжение не работает, пока вы опять не примете свой облик.\n"
-            }
+
         }
         abilities
     },
@@ -548,8 +586,8 @@ var druid18: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(timelessBody.name) }),
-        Pair("second", { listOf(beastSpells.name) })
+        Pair("first") { listOf(timelessBody.name) },
+        Pair("second") { listOf(beastSpells.name) }
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -567,7 +605,7 @@ var druid19: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(abilityScoreImprovement.name) }),
+        Pair("first") { listOf(abilityScoreImprovement.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -578,12 +616,12 @@ var druid19: AbilityNode = AbilityNodeLevel(
 var archDruid: AbilityNode = AbilityNode(
     name = "Архидруид",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        for (action in abilities.actionsList) {
-            if (action.name == "Дикий облик") {
-                action.relatedCharges = ""
-            }
+        abilities.actionsMap["Дикий облик"]?.let { action ->
+            action.relatedCharges = ""
+
         }
-        abilities.additionalAbilities["Архидруид"] = "Вы можете игнорировать соматический и вербальный компоненты заклинаний друида, а также материальные компоненты без указанной стоимости и не расходуемые заклинанием. Это действует как в нормальном облике, так и в облике Зверя.\n"
+        abilities.additionalAbilities["Архидруид"] =
+            "Вы можете игнорировать соматический и вербальный компоненты заклинаний друида, а также материальные компоненты без указанной стоимости и не расходуемые заклинанием. Это действует как в нормальном облике, так и в облике Зверя.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -600,7 +638,7 @@ var druid20: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(archDruid.name) })
+        Pair("first") { listOf(archDruid.name) }
     ),
     requirements = { true },
     addRequirements = listOf(),

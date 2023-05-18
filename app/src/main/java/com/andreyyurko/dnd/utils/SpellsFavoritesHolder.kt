@@ -22,7 +22,8 @@ class SpellsFavoritesHolder @Inject constructor(
     }
 
     private var favoriteSpells: MutableSet<SpellSpecificLanguage> = mutableSetOf()
-    private var _initActionState = MutableStateFlow<InitializationState>(InitializationState.NotInitialized)
+    private var _initActionState =
+        MutableStateFlow<InitializationState>(InitializationState.NotInitialized)
     val initActionState: Flow<InitializationState> get() = _initActionState.asStateFlow()
 
     fun initialize() {
@@ -62,7 +63,8 @@ class SpellsFavoritesHolder @Inject constructor(
             )
             val spellsList = favoriteSpells.toList()
             for (i in spellsList.indices) {
-                val spellJson = Pair(DB_FAVORITE_SPELLS_TAG + i.toString(), Gson().toJson(spellsList[i]))
+                val spellJson =
+                    Pair(DB_FAVORITE_SPELLS_TAG + i.toString(), Gson().toJson(spellsList[i]))
                 db.putStringsAsync(listOf(spellJson))
             }
 

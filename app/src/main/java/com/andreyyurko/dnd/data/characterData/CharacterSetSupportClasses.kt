@@ -6,7 +6,12 @@ data class Action(
     var type: ActionType,
     var relatedCharges: String,
 ) {
-    constructor(name: String, description: String, type: ActionType) : this(name, description, type, "")
+    constructor(name: String, description: String, type: ActionType) : this(
+        name,
+        description,
+        type,
+        ""
+    )
 }
 
 data class ChargesCounter(

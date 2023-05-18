@@ -87,7 +87,8 @@ class SpellsListFragment : BaseFragment(R.layout.fragment_spells_list) {
 
     private fun setupRecyclerView() {
         val recyclerView = viewBinding.spellsRecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         val adapter = SpellsListAdapter(viewModel.spellsFavoritesHolder)
         adapter.viewModel = viewModel
         recyclerView.adapter = adapter
@@ -146,7 +147,10 @@ class SpellsListFragment : BaseFragment(R.layout.fragment_spells_list) {
                     viewModel.shownList = SpellsListViewModel.SpellListState.All
                 }
             }
-            viewModel.setShownSpellList("", viewBinding.spellsRecyclerView.adapter as SpellsListAdapter)
+            viewModel.setShownSpellList(
+                "",
+                viewBinding.spellsRecyclerView.adapter as SpellsListAdapter
+            )
             filtersMenu.dismiss()
         }
     }

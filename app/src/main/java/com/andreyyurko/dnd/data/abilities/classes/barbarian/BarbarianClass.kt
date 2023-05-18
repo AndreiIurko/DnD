@@ -2,8 +2,24 @@ package com.andreyyurko.dnd.data.abilities.classes.barbarian
 
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.classes.extraAttack
-import com.andreyyurko.dnd.data.abilities.other.*
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.abilities.other.abilityScoreImprovement
+import com.andreyyurko.dnd.data.abilities.other.animalHandling
+import com.andreyyurko.dnd.data.abilities.other.athletics
+import com.andreyyurko.dnd.data.abilities.other.intimidation
+import com.andreyyurko.dnd.data.abilities.other.nature
+import com.andreyyurko.dnd.data.abilities.other.perception
+import com.andreyyurko.dnd.data.abilities.other.survival
+import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.Armor
+import com.andreyyurko.dnd.data.characterData.ArmorProf
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.characterData.addAllMartialWeapons
+import com.andreyyurko.dnd.data.characterData.addAllSimpleWeapons
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 
@@ -114,7 +130,7 @@ var rage: AbilityNode = AbilityNode(
             var damageBonus = "+2"
             if (abilities.level >= 9) damageBonus = "+3"
             if (abilities.level >= 16) damageBonus = "+4"
-            abilities.actionsList.add(
+            abilities.actionsMap["Ярость"] =
                 Action(
                     name = "Ярость",
                     description = "В бою вы сражаетесь с первобытной свирепостью. В свой ход вы можете бонусным действием войти в состояние ярости.\n" +
@@ -133,9 +149,9 @@ var rage: AbilityNode = AbilityNode(
                     type = ActionType.Bonus,
                     relatedCharges = "Ярость"
                 )
-            )
+
         } else {
-            abilities.actionsList.add(
+            abilities.actionsMap["Ярость"] =
                 Action(
                     name = "Ярость",
                     description = "В бою вы сражаетесь с первобытной свирепостью. В свой ход вы можете бонусным действием войти в состояние ярости.\n" +
@@ -153,7 +169,7 @@ var rage: AbilityNode = AbilityNode(
                             "Вы можете впадать в ярость неограниченное число раз.\n",
                     type = ActionType.Bonus,
                 )
-            )
+
         }
         abilities
     },
@@ -198,13 +214,13 @@ var barbarian1: AbilityNode = AbilityNodeLevel(
 var recklessAttack: AbilityNode = AbilityNode(
     name = "Безрассудная атака",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Безрассудная атака"] =
             Action(
                 name = "Безрассудная атака",
                 description = "Вы способны отбросить любую заботу о защите, чтобы атаковать ожесточённо и безрассудно. Когда вы совершаете первую атаку в свой ход, вы можете решить, что будете атаковать безрассудно. Решившись на это, вы в этом ходу совершаете рукопашные атаки оружием, использующие Силу, с преимуществом, но все броски атаки по вам до вашего следующего хода тоже совершаются с преимуществом.\n",
                 type = ActionType.PartOfAction
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

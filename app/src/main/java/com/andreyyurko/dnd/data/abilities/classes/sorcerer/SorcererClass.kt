@@ -1,8 +1,20 @@
 package com.andreyyurko.dnd.data.abilities.classes.sorcerer
 
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
-import com.andreyyurko.dnd.data.abilities.other.*
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.abilities.other.abilityScoreImprovement
+import com.andreyyurko.dnd.data.abilities.other.arcana
+import com.andreyyurko.dnd.data.abilities.other.deception
+import com.andreyyurko.dnd.data.abilities.other.insight
+import com.andreyyurko.dnd.data.abilities.other.intimidation
+import com.andreyyurko.dnd.data.abilities.other.persuasion
+import com.andreyyurko.dnd.data.abilities.other.religion
+import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.Priority
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import com.andreyyurko.dnd.data.spells.CharacterSpells
@@ -17,10 +29,28 @@ var classFeaturesSorcerer: AbilityNode = AbilityNode(
     getAlternatives = mutableMapOf(
         Pair(
             "skill1"
-        ) { listOf(intimidation.name, arcana.name, deception.name, insight.name, religion.name, persuasion.name) },
+        ) {
+            listOf(
+                intimidation.name,
+                arcana.name,
+                deception.name,
+                insight.name,
+                religion.name,
+                persuasion.name
+            )
+        },
         Pair(
             "skill2"
-        ) { listOf(intimidation.name, arcana.name, deception.name, insight.name, religion.name, persuasion.name) },
+        ) {
+            listOf(
+                intimidation.name,
+                arcana.name,
+                deception.name,
+                insight.name,
+                religion.name,
+                persuasion.name
+            )
+        },
     ),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Sorcerer
@@ -141,16 +171,16 @@ var fontOfMagic: AbilityNode = AbilityNode(
             abilities.currentState.charges["Единицы чародейства"]!!.current = abilities.level
         }
 
-        abilities.actionsList.add(
+        abilities.actionsMap["Преобразование ячейки заклинания в единицы чародейства"] =
             Action(
                 name = "Преобразование ячейки заклинания в единицы чародейства",
                 description = "Вы можете в свой ход бонусным действием преобразовать одну ячейку заклинаний в единицы чародейства, количество которых равно уровню ячейки.",
                 type = ActionType.Bonus,
                 relatedCharges = "Единицы чародейства"
             )
-        )
 
-        abilities.actionsList.add(
+
+        abilities.actionsMap["Создание ячеек заклинаний"] =
             Action(
                 name = "Создание ячеек заклинаний",
                 description = " В свой ход вы можете бонусным действием превратить оставшиеся единицы чародейства в дополнительные ячейки заклинаний. Приведённая таблица отображает стоимость создания ячеек разных уровней. Вы не можете создавать ячейки с уровнем выше 5. Созданные ячейки заклинаний исчезают в конце длительного отдыха.\n" +
@@ -164,7 +194,7 @@ var fontOfMagic: AbilityNode = AbilityNode(
                 type = ActionType.Bonus,
                 relatedCharges = "Единицы чародейства"
             )
-        )
+
 
         abilities
     },
@@ -640,14 +670,14 @@ var sorcerer19: AbilityNodeLevel = AbilityNodeLevel(
 var sorcerousRestoration: AbilityNode = AbilityNode(
     name = "Чародейское восстановление",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Чародейское восстановление"] =
             Action(
                 name = "Чародейское восстановление",
                 description = "Вы восстанавливаете 4 единицы чародейства, когда заканчиваете короткий отдых.\n",
                 type = ActionType.Long,
                 relatedCharges = "Единицы чародейства"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

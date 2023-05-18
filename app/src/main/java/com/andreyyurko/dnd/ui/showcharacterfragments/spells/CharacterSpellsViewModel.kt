@@ -27,20 +27,34 @@ class CharacterSpellsViewModel @Inject constructor(
     }
 
     fun showPreparedSpells(): List<Spell> {
-        return spellsHandler.getPreparedSpellsWithDescription(characterViewModel.getCharacter(), preparedFilters)
+        return spellsHandler.getPreparedSpellsWithDescription(
+            characterViewModel.getCharacter(),
+            preparedFilters
+        )
     }
 
     fun showKnownSpells(): List<Spell> {
-        return spellsHandler.getKnownSpellsWithDescription(characterViewModel.getCharacter(), knownFilters)
+        return spellsHandler.getKnownSpellsWithDescription(
+            characterViewModel.getCharacter(),
+            knownFilters
+        )
     }
 
     fun addPreparedSpell(spell: Spell) {
-        spellsHandler.addPreparedSpell(spell.data.name, spell.listName, characterViewModel.getCharacter())
+        spellsHandler.addPreparedSpell(
+            spell.data.name,
+            spell.listName,
+            characterViewModel.getCharacter()
+        )
         characterViewModel.updateCharacterInfo()
     }
 
     fun removePreparedSpell(spell: Spell) {
-        spellsHandler.removePreparedSpell(spell.data.name, spell.listName, characterViewModel.getCharacter())
+        spellsHandler.removePreparedSpell(
+            spell.data.name,
+            spell.listName,
+            characterViewModel.getCharacter()
+        )
         characterViewModel.updateCharacterInfo()
     }
 

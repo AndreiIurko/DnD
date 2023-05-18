@@ -52,7 +52,8 @@ class RaceFragment : BaseFragment(R.layout.fragment_race) {
 
     private fun setupRecyclerView() {
         val recyclerView = viewBinding.abilitiesRecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         val adapter = AbilityAdapter()
         viewModel.adapter = adapter
         recyclerView.adapter = adapter
@@ -65,7 +66,10 @@ class RaceFragment : BaseFragment(R.layout.fragment_race) {
         for (raceChoice in viewModel.baseCAN.showOptions("race")) {
             val raceNameTextView = TextView(context)
             raceNameTextView.isClickable = true
-            raceNameTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, viewBinding.chooseRaceTextView.textSize)
+            raceNameTextView.setTextSize(
+                TypedValue.COMPLEX_UNIT_PX,
+                viewBinding.chooseRaceTextView.textSize
+            )
             raceNameTextView.text = raceChoice
             parent.addView(raceNameTextView)
             raceNameTextView.setOnClickListener {
@@ -76,7 +80,10 @@ class RaceFragment : BaseFragment(R.layout.fragment_race) {
             }
         }
 
-        parent.measure(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        parent.measure(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
         raceMenu.showAtLocation(
             view,
             Gravity.NO_GRAVITY,

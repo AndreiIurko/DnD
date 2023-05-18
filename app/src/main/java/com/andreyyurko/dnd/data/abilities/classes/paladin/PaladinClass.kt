@@ -2,8 +2,27 @@ package com.andreyyurko.dnd.data.abilities.classes.paladin
 
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.classes.extraAttack
-import com.andreyyurko.dnd.data.abilities.other.*
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.abilities.other.abilityScoreImprovement
+import com.andreyyurko.dnd.data.abilities.other.athletics
+import com.andreyyurko.dnd.data.abilities.other.defense
+import com.andreyyurko.dnd.data.abilities.other.dueling
+import com.andreyyurko.dnd.data.abilities.other.greatWeaponFighting
+import com.andreyyurko.dnd.data.abilities.other.insight
+import com.andreyyurko.dnd.data.abilities.other.intimidation
+import com.andreyyurko.dnd.data.abilities.other.medicine
+import com.andreyyurko.dnd.data.abilities.other.persuasion
+import com.andreyyurko.dnd.data.abilities.other.protection
+import com.andreyyurko.dnd.data.abilities.other.religion
+import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.ArmorProf
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.characterData.addAllMartialWeapons
+import com.andreyyurko.dnd.data.characterData.addAllSimpleWeapons
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import com.andreyyurko.dnd.data.spells.CharacterSpells
@@ -25,11 +44,29 @@ var classFeaturesPaladin: AbilityNode = AbilityNode(
     getAlternatives = mutableMapOf(
         Pair(
             "skill1",
-            { listOf(athletics.name, intimidation.name, medicine.name, insight.name, religion.name, persuasion.name) }
+            {
+                listOf(
+                    athletics.name,
+                    intimidation.name,
+                    medicine.name,
+                    insight.name,
+                    religion.name,
+                    persuasion.name
+                )
+            }
         ),
         Pair(
             "skill2",
-            { listOf(athletics.name, intimidation.name, medicine.name, insight.name, religion.name, persuasion.name) }
+            {
+                listOf(
+                    athletics.name,
+                    intimidation.name,
+                    medicine.name,
+                    insight.name,
+                    religion.name,
+                    persuasion.name
+                )
+            }
         ),
     ),
     requirements = { abilities: CharacterInfo ->
@@ -74,7 +111,7 @@ var divineSense: AbilityNode = AbilityNode(
                 )
             }
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Божественное чувство"] =
             Action(
                 name = "Божественное чувство",
                 description = "Присутствие сильного зла воспринимается вашими чувствами как неприятный запах, а могущественное добро звучит как небесная музыка в ваших ушах. Вы можете действием открыть своё сознание для обнаружения таких сил. Вы до конца своего следующего хода знаете местоположение всех Исчадий, Небожителей и Нежити в пределах 60 футов, не имеющих полного укрытия. Вы знаете вид (Исчадие, Небожитель, Нежить) любого существа, чьё присутствие вы чувствуете, но не можете определить, кто это конкретно (например, вампир граф Страд фон Зарович). В этом же радиусе вы также обнаруживаете присутствие мест и предметов, которые были освящены или осквернены, например, заклинанием святилище [hallow].\n" +
@@ -83,8 +120,9 @@ var divineSense: AbilityNode = AbilityNode(
                 type = ActionType.Action,
                 relatedCharges = "Божественное чувство"
             )
-        )
-        abilities.additionalAbilities["Божественное чувство"] = "Присутствие сильного зла воспринимается вашими чувствами как неприятный запах, а могущественное добро звучит как небесная музыка в ваших ушах.\n"
+
+        abilities.additionalAbilities["Божественное чувство"] =
+            "Присутствие сильного зла воспринимается вашими чувствами как неприятный запах, а могущественное добро звучит как небесная музыка в ваших ушах.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -112,7 +150,7 @@ var layOnHands = AbilityNode(
                 )
             }
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Наложение рук"] =
             Action(
                 name = "Наложение рук",
                 description = "Ваше благословенное касание может лечить раны. У вас есть запас целительной силы, который восстанавливается после продолжительного отдыха. При помощи этого запаса вы можете восстанавливать количество хитов, равное уровню паладина, умноженному на 5.\n" +
@@ -124,7 +162,7 @@ var layOnHands = AbilityNode(
                         "Это умение не оказывает никакого эффекта на Нежить и Конструктов.\n",
                 type = ActionType.Action
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -165,7 +203,9 @@ var fightingStylePaladin: AbilityNode = AbilityNode(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("style", { listOf(dueling.name, defense.name, protection.name, greatWeaponFighting.name) })
+        Pair(
+            "style",
+            { listOf(dueling.name, defense.name, protection.name, greatWeaponFighting.name) })
     ),
     requirements = { true },
     description = "Вы выбираете боевой стиль, соответствующий вашей специализации. Выберите один из следующих вариантов. Вы не можете выбирать один и тот же вариант боевого стиля, даже если позже у вас будет возможность выбрать еще один стиль."
@@ -180,7 +220,7 @@ var spellCastingPaladin: AbilityNode = AbilityNode(
             }
             this["Заклинания класса"]?.className = Classes.Paladin.className
             this["Заклинания класса"]?.maxPreparedSpellsCount =
-                max((abilityToModifier(abilities.charisma) + abilities.level/2), 1)
+                max((abilityToModifier(abilities.charisma) + abilities.level / 2), 1)
             this["Заклинания класса"]?.maxKnownCantripsCount = 0
         }
         abilities
@@ -210,13 +250,13 @@ var spellCastingPaladin: AbilityNode = AbilityNode(
 var divineSmite: AbilityNode = AbilityNode(
     name = "Божественная кара",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Божественная кара"] =
             Action(
                 name = "Божественная кара",
                 description = "Если вы попадаете по существу рукопашной атакой оружием, вы можете потратить одну ячейку заклинания любого своего класса для причинения цели урона излучением, который добавится к урону от оружия. Дополнительный урон равен 2к8 за ячейку 1-го уровня, плюс 1к8 за каждый уровень ячейки выше первого, до максимума 5к8. Если цель — Нежить или Исчадие, урон увеличивается на 1к8 с максимумом 6к8.\n",
                 type = ActionType.PartOfAction
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -236,7 +276,7 @@ var paladin2: AbilityNode = AbilityNodeLevel(
     getAlternatives = mutableMapOf(
         Pair("first", { listOf(fightingStylePaladin.name) }),
         Pair("second", { listOf(spellCastingPaladin.name) }),
-        Pair("third", { listOf(divineSmite.name) } )
+        Pair("third", { listOf(divineSmite.name) })
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -247,7 +287,8 @@ var paladin2: AbilityNode = AbilityNodeLevel(
 var divineHealth: AbilityNode = AbilityNode(
     name = "Божественное здоровье",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Божественное здоровье"] = "Божественная магия, текущая через вас, даёт вам иммунитет к болезням.\n"
+        abilities.additionalAbilities["Божественное здоровье"] =
+            "Божественная магия, текущая через вас, даёт вам иммунитет к болезням.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -451,13 +492,13 @@ var paladin10: AbilityNode = AbilityNodeLevel(
 var improvedDivineSmite: AbilityNode = AbilityNode(
     name = "Улучшенная божественная кара",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Улучшенная божественная кара"] =
             Action(
                 name = "Улучшенная божественная кара",
                 description = "Каждый раз, когда вы попадаете по существу рукопашным оружием, это существо получает дополнительные 1к8 урона излучением.\n",
                 type = ActionType.PartOfAction
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -525,14 +566,14 @@ var cleansingTouch: AbilityNode = AbilityNode(
                 maximum = max(1, abilityToModifier(abilities.charisma))
             )
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Очищающее касание"] =
             Action(
                 name = "Очищающее касание",
                 description = "Вы можете действием окончить действие заклинания на себе или на одном согласном существе, которого вы касаетесь. Вы можете использовать это умение количество раз, равное вашему модификатору Харизмы (минимум 1). Вы восстанавливаете возможность использования после продолжительного отдыха.\n",
                 type = ActionType.Action,
                 relatedCharges = "Очищающее касание"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -691,7 +732,7 @@ var mapOfPaladinAbilities: MutableMap<String, AbilityNode> = (mutableMapOf(
 )
         + mapOfOathOfDevotionAbilities
         + mapOfOathOfConquestAbilities
-    ).toMutableMap()
+        ).toMutableMap()
 
 
 

@@ -2,8 +2,22 @@ package com.andreyyurko.dnd.data.abilities.classes.warlock
 
 import android.util.Log
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
-import com.andreyyurko.dnd.data.abilities.other.*
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.abilities.other.abilityScoreImprovement
+import com.andreyyurko.dnd.data.abilities.other.arcana
+import com.andreyyurko.dnd.data.abilities.other.deception
+import com.andreyyurko.dnd.data.abilities.other.history
+import com.andreyyurko.dnd.data.abilities.other.intimidation
+import com.andreyyurko.dnd.data.abilities.other.investigation
+import com.andreyyurko.dnd.data.abilities.other.nature
+import com.andreyyurko.dnd.data.abilities.other.religion
+import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.characterData.addAllSimpleWeapons
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import com.andreyyurko.dnd.data.spells.CharacterSpells
@@ -21,11 +35,31 @@ var classFeaturesWarlock: AbilityNode = AbilityNode(
     getAlternatives = mutableMapOf(
         Pair(
             "skill1",
-            { listOf(intimidation.name, history.name, arcana.name, deception.name, nature.name, investigation.name, religion.name) }
+            {
+                listOf(
+                    intimidation.name,
+                    history.name,
+                    arcana.name,
+                    deception.name,
+                    nature.name,
+                    investigation.name,
+                    religion.name
+                )
+            }
         ),
         Pair(
             "skill2",
-            { listOf(intimidation.name, history.name, arcana.name, deception.name, nature.name, investigation.name, religion.name) }
+            {
+                listOf(
+                    intimidation.name,
+                    history.name,
+                    arcana.name,
+                    deception.name,
+                    nature.name,
+                    investigation.name,
+                    religion.name
+                )
+            }
         ),
     ),
     requirements = { abilities: CharacterInfo ->
@@ -186,7 +220,7 @@ var warlock2: AbilityNodeLevel = AbilityNodeLevel(
 var pactOfTheBlade: AbilityNode = AbilityNode(
     name = "Договор клинка",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Оружие договора"] =
             Action(
                 name = "Оружие договора",
                 description = "Вы можете действием создать оружие договора в своей пустой руке. Вы сами выбираете форму этого рукопашного оружия каждый раз, когда создаёте. Вы получаете владение этим оружием, пока используете его. Оружие считается магическим при определении преодоления сопротивления и иммунитета от немагических атак и урона.\n" +
@@ -194,7 +228,7 @@ var pactOfTheBlade: AbilityNode = AbilityNode(
                         "Оружие договора исчезает, если оно в течении 1 минуты находится дальше 5 футов от вас. Оно также исчезает, если вы используете это умение еще раз, отзываете оружие (действие не требуется), или умираете. Вы можете трансформировать одно магическое оружие в своё оружие договора, проведя специальный ритуал, держа это оружие. Ритуал совершается 1 час, его можно провести во время короткого отдыха. Впоследствии вы можете отозвать оружие, помещая его между измерениями. Оно будет появляться в руке, когда вы будете в дальнейшем создавать оружие договора. Вы не можете сделать это с артефактом или разумным оружием. Оружие перестаёт быть оружием договора, когда вы умираете, выполняете часовой ритуал с другим оружием или когда вы исполните ритуал длиной в час для того, чтобы разорвать связь. Оружие материализуется у ваших ног, если в момент разрыва связи оно находилось между измерениями.\n",
                 type = ActionType.Action
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -218,11 +252,12 @@ var pactOfTheChain: AbilityNode = AbilityNode(
                 knownSpells = mutableSetOf("Поиск фамильяра")
             )
         }
-        abilities.additionalAbilities["Договор цепи"] = "Вы узнаёте заклинание поиск фамильяра [find familiar] и можете сотворять его как ритуал. Это заклинание не учитывается при подсчёте числа заклинаний, которые вы можете знать.\n" +
-                "\n" +
-                "Когда вы накладываете это заклинание, вы можете выбрать одну из обычных форм для вашего фамильяра, либо одну из особых форм: бес [imp], квазит [quasit], псевдодракон [pseudodragon] или спрайт [sprite].\n" +
-                "\n" +
-                "Кроме того, когда вы совершаете действие Атака, вы можете вместо одной своей атаки позволить атаковать один раз фамильяру. При этом он совершает свою атаку реакцией.\n"
+        abilities.additionalAbilities["Договор цепи"] =
+            "Вы узнаёте заклинание поиск фамильяра [find familiar] и можете сотворять его как ритуал. Это заклинание не учитывается при подсчёте числа заклинаний, которые вы можете знать.\n" +
+                    "\n" +
+                    "Когда вы накладываете это заклинание, вы можете выбрать одну из обычных форм для вашего фамильяра, либо одну из особых форм: бес [imp], квазит [quasit], псевдодракон [pseudodragon] или спрайт [sprite].\n" +
+                    "\n" +
+                    "Кроме того, когда вы совершаете действие Атака, вы можете вместо одной своей атаки позволить атаковать один раз фамильяру. При этом он совершает свою атаку реакцией.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -408,7 +443,10 @@ var mysticArcanum_6 = AbilityNode(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first") { spellist.filter { (it.level == 6) && (it.classes.contains(Classes.Warlock)) }.map { it.name } }
+        Pair("first") {
+            spellist.filter { (it.level == 6) && (it.classes.contains(Classes.Warlock)) }
+                .map { it.name }
+        }
     ),
     requirements = { true },
     description = "Ваш покровитель дарует вам магический секрет, называемый арканумом. Выберите одно заклинание 6-го уровня из списка заклинаний колдуна в качестве арканума.\n" +
@@ -419,14 +457,14 @@ var mysticArcanum_6 = AbilityNode(
     actionForChoice = mutableMapOf(
         Pair("first") { choice: String, abilities: CharacterInfo ->
             Log.d("test", choice)
-            abilities.actionsList.add(
+            abilities.actionsMap["Таинственный арканум 6 уровня"] =
                 Action(
                     name = "Таинственный арканум 6 уровня",
                     description = "Вы можете наложить заклинание " + choice + ", не используя ячейку заклинаний. Вы должны окончить продолжительный отдых, чтобы сделать это еще раз.\n",
                     type = ActionType.Additional,
                     relatedCharges = "Таинственный арканум 6 уровня"
                 )
-            )
+
             abilities
         }
     )
@@ -477,7 +515,10 @@ var mysticArcanum_7 = AbilityNode(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first") { spellist.filter { (it.level == 7) && (it.classes.contains(Classes.Warlock)) }.map { it.name } }
+        Pair("first") {
+            spellist.filter { (it.level == 7) && (it.classes.contains(Classes.Warlock)) }
+                .map { it.name }
+        }
     ),
     requirements = { true },
     description = "Ваш покровитель дарует вам магический секрет, называемый арканумом. Выберите одно заклинание 7-го уровня из списка заклинаний колдуна в качестве арканума.\n" +
@@ -486,14 +527,14 @@ var mysticArcanum_7 = AbilityNode(
     actionForChoice = mutableMapOf(
         Pair("first") { choice: String, abilities: CharacterInfo ->
             Log.d("test", choice)
-            abilities.actionsList.add(
+            abilities.actionsMap["Таинственный арканум 7 уровня"] =
                 Action(
                     name = "Таинственный арканум 7 уровня",
                     description = "Вы можете наложить заклинание " + choice + ", не используя ячейку заклинаний. Вы должны окончить продолжительный отдых, чтобы сделать это еще раз.\n",
                     type = ActionType.Additional,
                     relatedCharges = "Таинственный арканум 7 уровня"
                 )
-            )
+
             abilities
         }
     )
@@ -542,7 +583,10 @@ var mysticArcanum_8 = AbilityNode(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first") { spellist.filter { (it.level == 8) && (it.classes.contains(Classes.Warlock)) }.map { it.name } }
+        Pair("first") {
+            spellist.filter { (it.level == 8) && (it.classes.contains(Classes.Warlock)) }
+                .map { it.name }
+        }
     ),
     requirements = { true },
     description = "Ваш покровитель дарует вам магический секрет, называемый арканумом. Выберите одно заклинание 6-го уровня из списка заклинаний колдуна в качестве арканума.\n" +
@@ -551,14 +595,14 @@ var mysticArcanum_8 = AbilityNode(
     actionForChoice = mutableMapOf(
         Pair("first") { choice: String, abilities: CharacterInfo ->
             Log.d("test", choice)
-            abilities.actionsList.add(
+            abilities.actionsMap["Таинственный арканум 8 уровня"] =
                 Action(
                     name = "Таинственный арканум 8 уровня",
                     description = "Вы можете наложить заклинание " + choice + ", не используя ячейку заклинаний. Вы должны окончить продолжительный отдых, чтобы сделать это еще раз.\n",
                     type = ActionType.Additional,
                     relatedCharges = "Таинственный арканум 8 уровня"
                 )
-            )
+
             abilities
         }
     )
@@ -609,7 +653,10 @@ var mysticArcanum_9 = AbilityNode(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first") { spellist.filter { (it.level == 9) && (it.classes.contains(Classes.Warlock)) }.map { it.name } }
+        Pair("first") {
+            spellist.filter { (it.level == 9) && (it.classes.contains(Classes.Warlock)) }
+                .map { it.name }
+        }
     ),
     requirements = { true },
     description = "Ваш покровитель дарует вам магический секрет, называемый арканумом. Выберите одно заклинание 6-го уровня из списка заклинаний колдуна в качестве арканума.\n" +
@@ -618,14 +665,14 @@ var mysticArcanum_9 = AbilityNode(
     actionForChoice = mutableMapOf(
         Pair("first") { choice: String, abilities: CharacterInfo ->
             Log.d("test", choice)
-            abilities.actionsList.add(
+            abilities.actionsMap["Таинственный арканум 9 уровня"] =
                 Action(
                     name = "Таинственный арканум 9 уровня",
                     description = "Вы можете наложить заклинание " + choice + ", не используя ячейку заклинаний. Вы должны окончить продолжительный отдых, чтобы сделать это еще раз.\n",
                     type = ActionType.Additional,
                     relatedCharges = "Таинственный арканум 9 уровня"
                 )
-            )
+
             abilities
         }
     )
@@ -689,14 +736,14 @@ var edritchMaster: AbilityNode = AbilityNode(
                 maximum = 1
             )
         }
-        abilities.actionsList.add(
-            Action(
-                name = "Отражение снарядов",
-                description = "Вы можете обратиться к внутреннему резерву мистической силы, умоляя при этом покровителя восстановить потраченные ячейки заклинаний. Вам надо потратить 1 минуту, умоляя покровителя, чтобы восстановить все использованные ячейки заклинаний, дарованные умением «Магия договора». Вы должны закончить продолжительный отдых, чтобы применить это умение вновь.\n",
-                type = ActionType.Long,
-                relatedCharges = "Таинственный мастер"
-            )
+        abilities.actionsMap["Таинственный мастер"]
+        Action(
+            name = "Таинственный мастер",
+            description = "Вы можете обратиться к внутреннему резерву мистической силы, умоляя при этом покровителя восстановить потраченные ячейки заклинаний. Вам надо потратить 1 минуту, умоляя покровителя, чтобы восстановить все использованные ячейки заклинаний, дарованные умением «Магия договора». Вы должны закончить продолжительный отдых, чтобы применить это умение вновь.\n",
+            type = ActionType.Long,
+            relatedCharges = "Таинственный мастер"
         )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

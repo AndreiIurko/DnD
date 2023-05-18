@@ -45,7 +45,8 @@ class CharacterEquipmentViewModel @Inject constructor(
         return ArmorInfo(
             armorName = currentState.armorName,
             type = "",
-            ac = currentState.armor.ac + (currentState.inventoryRelevantData[currentState.armorName]?.ac ?: 0)
+            ac = currentState.armor.ac + (currentState.inventoryRelevantData[currentState.armorName]?.ac
+                ?: 0)
         )
     }
 

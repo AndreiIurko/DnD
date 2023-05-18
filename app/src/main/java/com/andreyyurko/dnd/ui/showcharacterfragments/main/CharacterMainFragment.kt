@@ -7,9 +7,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -51,9 +49,10 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
 
     private var maxSlotLevel: Int = 0
 
-    private val singlePhotoPickerLauncher = registerForActivityResult(PhotoPicker()) { imageUri: Uri? ->
-        imageUri?.let(characterViewModel::setImageUri)
-    }
+    private val singlePhotoPickerLauncher =
+        registerForActivityResult(PhotoPicker()) { imageUri: Uri? ->
+            imageUri?.let(characterViewModel::setImageUri)
+        }
 
     private fun pickPhoto() = singlePhotoPickerLauncher.launch(Unit)
 
@@ -88,8 +87,10 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
         viewBinding.spellSlotsButton.setOnClickListener {
             if (viewBinding.spellSlotsLinearLayout.translationX == 0f) {
                 ObjectAnimator.ofFloat(
-                    viewBinding.spellSlotsLinearLayout, "translationX",
-                    viewBinding.spellSlotsLinearLayout.translationX, -28 * maxSlotLevel * resources.displayMetrics.density
+                    viewBinding.spellSlotsLinearLayout,
+                    "translationX",
+                    viewBinding.spellSlotsLinearLayout.translationX,
+                    -28 * maxSlotLevel * resources.displayMetrics.density
                 ).start()
                 ObjectAnimator.ofFloat(
                     viewBinding.spellSlotsButton, "translationX",
@@ -101,8 +102,10 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
                     viewBinding.spellSlotsLinearLayout.translationX, 0f
                 ).start()
                 ObjectAnimator.ofFloat(
-                    viewBinding.spellSlotsButton, "translationX",
-                    viewBinding.spellSlotsButton.translationX, (28 * maxSlotLevel - 2) * resources.displayMetrics.density
+                    viewBinding.spellSlotsButton,
+                    "translationX",
+                    viewBinding.spellSlotsButton.translationX,
+                    (28 * maxSlotLevel - 2) * resources.displayMetrics.density
                 ).start()
             }
         }
@@ -114,7 +117,8 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
                     imageState.imageBitmap?.let {
                         val out = ByteArrayOutputStream()
                         it.asAndroidBitmap().compress(Bitmap.CompressFormat.JPEG, 20, out)
-                        val bitmap = BitmapFactory.decodeStream(ByteArrayInputStream(out.toByteArray()))
+                        val bitmap =
+                            BitmapFactory.decodeStream(ByteArrayInputStream(out.toByteArray()))
                         characterViewModel.saveBitmap(bitmap)
                         viewBinding.iconImageButton.setImageBitmap(bitmap)
                     }
@@ -159,8 +163,10 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
 
     private fun setupAll() {
         viewBinding.nameTextView.text = characterViewModel.getCharacter().name
-        viewBinding.classTextView.text = characterViewModel.getCharacter().characterInfo.characterClass.className
-        viewBinding.levelTextView.text = characterViewModel.getCharacter().characterInfo.level.toString()
+        viewBinding.classTextView.text =
+            characterViewModel.getCharacter().characterInfo.characterClass.className
+        viewBinding.levelTextView.text =
+            characterViewModel.getCharacter().characterInfo.level.toString()
         if (characterViewModel.getCharacter().characterInfo.currentState.hp == null) {
             characterViewModel.getCharacter().characterInfo.currentState.hp =
                 characterViewModel.getCharacter().characterInfo.hp
@@ -174,7 +180,11 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
                     characterViewModel.getCharacter().characterInfo.currentState.hp =
                         viewBinding.hpEditText.text.toString().toInt()
                 } catch (e: Exception) {
-                    Toast.makeText(requireContext(), "Введите пожалуйста целое число", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Введите пожалуйста целое число",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
                 characterViewModel.updateCharacterInfo()
             }
@@ -182,15 +192,21 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
                 characterViewModel.getCharacter().characterInfo.currentState.hp =
                     viewBinding.hpEditText.text.toString().toInt()
             } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Введите пожалуйста целое число", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Введите пожалуйста целое число",
+                    Toast.LENGTH_LONG
+                ).show()
             }
             false
         }
 
-        viewBinding.maxHpTextView.text = "/" + characterViewModel.getCharacter().characterInfo.hp.toString()
+        viewBinding.maxHpTextView.text =
+            "/" + characterViewModel.getCharacter().characterInfo.hp.toString()
         viewBinding.proficiencyTextView.text =
             "+ ${characterViewModel.getCharacter().characterInfo.proficiencyBonus}"
-        viewBinding.speedTextView.text = "${characterViewModel.getCharacter().characterInfo.speed}ft"
+        viewBinding.speedTextView.text =
+            "${characterViewModel.getCharacter().characterInfo.speed}ft"
         viewBinding.initiativeTextView.text =
             if (characterViewModel.getCharacter().characterInfo.initiativeBonus >= 0)
                 "+ ${characterViewModel.getCharacter().characterInfo.initiativeBonus}"
@@ -201,7 +217,13 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
 
     private fun setupPopupMenu(context: Context) {
         val parent = LayoutInflater.from(context).inflate(R.layout.character_menu, null)
-        parent.setBackgroundColor(MaterialColors.getColor(context, R.attr.backgroundColor, Color.BLACK))
+        parent.setBackgroundColor(
+            MaterialColors.getColor(
+                context,
+                R.attr.backgroundColor,
+                Color.BLACK
+            )
+        )
 
         val focus = true
         val wid = LinearLayout.LayoutParams.WRAP_CONTENT
@@ -302,7 +324,9 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
     private fun setupSlots() {
         var isHaveSlots = false
         for (i in 0 until viewBinding.spellSlotsLinearLayout.childCount) {
-            isHaveSlots = isHaveSlots or setupSlotsLinearLayout(viewBinding.spellSlotsLinearLayout.getChildAt(i) as LinearLayout, i + 1)
+            isHaveSlots = isHaveSlots or setupSlotsLinearLayout(
+                viewBinding.spellSlotsLinearLayout.getChildAt(i) as LinearLayout, i + 1
+            )
         }
         if (!isHaveSlots) {
             viewBinding.spellSlotsButton.visibility = View.GONE
@@ -314,7 +338,8 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
         var isHaveSlots = false
         for (i in 1 until linearLayout.childCount) {
             val checkBox: MaterialCheckBox = linearLayout.getChildAt(i) as MaterialCheckBox
-            val charges = characterViewModel.getCharacter().characterInfo.currentState.charges["Ячейки_$level"]
+            val charges =
+                characterViewModel.getCharacter().characterInfo.currentState.charges["Ячейки_$level"]
             if (charges == null) {
                 checkBox.isEnabled = false
                 continue
@@ -340,8 +365,7 @@ class CharacterMainFragment : BaseFragment(R.layout.fragment_character_main) {
         if (!isHaveSlots) {
             linearLayout.visibility = View.GONE
             viewBinding.spellSlotsLinearLayout.translationX += 28 * resources.displayMetrics.density
-        }
-        else if (level > maxSlotLevel) maxSlotLevel = level
+        } else if (level > maxSlotLevel) maxSlotLevel = level
         return isHaveSlots
     }
 }

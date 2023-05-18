@@ -14,7 +14,7 @@ class CharacterActionsViewModel @Inject constructor(
 
     fun getActionList(actionType: ActionType): MutableList<Action> {
         val result: MutableList<Action> = mutableListOf()
-        for (action in characterViewModel.getCharacter().characterInfo.actionsList) {
+        for ((_, action) in characterViewModel.getCharacter().characterInfo.actionsMap) {
             if (action.type == actionType) result.add(action)
         }
 

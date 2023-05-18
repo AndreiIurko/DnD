@@ -19,7 +19,11 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         viewBinding.directoryButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Справочная будет в следующих версиях", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                requireContext(),
+                "Справочная будет в следующих версиях",
+                Toast.LENGTH_LONG
+            ).show()
         }
 
         viewBinding.charactersListButton.setOnClickListener {

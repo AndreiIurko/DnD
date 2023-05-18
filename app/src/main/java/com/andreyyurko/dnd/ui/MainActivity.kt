@@ -16,7 +16,12 @@ import com.andreyyurko.dnd.databinding.ActivityMainBinding
 import com.andreyyurko.dnd.utils.CharacterSavingService
 import com.andreyyurko.dnd.utils.CharactersHolder
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -97,8 +102,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 val serviceIntent = Intent(this, CharacterSavingService::class.java)
                 startService(serviceIntent)
                 charactersHolder.isSavingNeeded = false
-            }
-            catch (e: Exception) {
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
@@ -111,8 +115,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 val serviceIntent = Intent(this, CharacterSavingService::class.java)
                 startForegroundService(serviceIntent)
                 charactersHolder.isSavingNeeded = false
-            }
-            catch (e: Exception) {
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
         }

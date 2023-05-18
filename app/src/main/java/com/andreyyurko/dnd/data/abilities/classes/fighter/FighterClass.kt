@@ -1,8 +1,26 @@
 package com.andreyyurko.dnd.data.abilities.classes.fighter
 
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
-import com.andreyyurko.dnd.data.abilities.other.*
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.abilities.other.abilityScoreImprovement
+import com.andreyyurko.dnd.data.abilities.other.acrobatics
+import com.andreyyurko.dnd.data.abilities.other.animalHandling
+import com.andreyyurko.dnd.data.abilities.other.athletics
+import com.andreyyurko.dnd.data.abilities.other.history
+import com.andreyyurko.dnd.data.abilities.other.insight
+import com.andreyyurko.dnd.data.abilities.other.intimidation
+import com.andreyyurko.dnd.data.abilities.other.mapOfFightingStyles
+import com.andreyyurko.dnd.data.abilities.other.perception
+import com.andreyyurko.dnd.data.abilities.other.survival
+import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.ArmorProf
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.characterData.addAllMartialWeapons
+import com.andreyyurko.dnd.data.characterData.addAllSimpleWeapons
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 
@@ -75,7 +93,7 @@ var fightingStyle: AbilityNode = AbilityNode(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("style", { mapOfFightingStyles.keys.toList() })
+        Pair("style") { mapOfFightingStyles.keys.toList() }
     ),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Fighter
@@ -87,9 +105,10 @@ var secondWind: AbilityNode = AbilityNode(
     name = "Второе дыхание",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         if (!abilities.currentState.charges.contains("Второе дыхание")) {
-            abilities.currentState.charges["Второе дыхание"] = ChargesCounter(current = 1, maximum = 1)
+            abilities.currentState.charges["Второе дыхание"] =
+                ChargesCounter(current = 1, maximum = 1)
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Второе дыхание"] =
             Action(
                 name = "Второе дыхание",
                 description = "Вы обладаете ограниченным источником выносливости, которым можете воспользоваться, чтобы уберечь себя. В свой ход вы можете бонусным действием восстановить хиты в размере 1к10 + ваш уровень воина.\n" +
@@ -98,7 +117,7 @@ var secondWind: AbilityNode = AbilityNode(
                 type = ActionType.Bonus,
                 relatedCharges = "Второе дыхание"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -120,9 +139,9 @@ var fighter1: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(classFeaturesFighter.name) }),
-        Pair("second", { listOf(fightingStyle.name) }),
-        Pair("third", { listOf(secondWind.name) })
+        Pair("first") { listOf(classFeaturesFighter.name) },
+        Pair("second") { listOf(fightingStyle.name) },
+        Pair("third") { listOf(secondWind.name) }
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -133,14 +152,14 @@ var fighter1: AbilityNodeLevel = AbilityNodeLevel(
 var actionSurge: AbilityNode = AbilityNode(
     name = "Всплеск действий",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Всплеск действий"] =
             Action(
                 name = "Всплеск действий",
                 description = "Вы получаете возможность на мгновение преодолеть обычные возможности. В свой ход вы можете совершить одно дополнительное действие помимо обычного и бонусного действий. Использовав это умение, вы должны завершить короткий или продолжительный отдых, чтобы получить возможность использовать его снова. Начиная с 17-го уровня, вы можете использовать это умение дважды, прежде чем вам понадобится отдых, но в течение одного хода его всё равно можно использовать лишь один раз.",
                 type = ActionType.Additional,
                 relatedCharges = "Всплеск действий"
             )
-        )
+
         if (!abilities.currentState.charges.contains("Всплеск действий")) {
             abilities.currentState.charges["Всплеск действий"] = ChargesCounter(
                 current = 1,
@@ -171,7 +190,7 @@ var fighter2: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(actionSurge.name) }),
+        Pair("first") { listOf(actionSurge.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -185,7 +204,7 @@ var martialArchetype: AbilityNode = AbilityNode(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("archetype", { listOf(battleMaster.name, champion.name) })
+        Pair("archetype") { listOf(battleMaster.name, champion.name) }
     ),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Fighter
@@ -201,7 +220,7 @@ var fighter3: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(martialArchetype.name) }),
+        Pair("first") { listOf(martialArchetype.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -217,7 +236,7 @@ var fighter4: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(abilityScoreImprovement.name) }),
+        Pair("first") { listOf(abilityScoreImprovement.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -228,14 +247,14 @@ var fighter4: AbilityNodeLevel = AbilityNodeLevel(
 var extraAttackFighter: AbilityNode = AbilityNode(
     name = "Дополнительная атака (воинская)",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        for (action in abilities.actionsList) {
-            if (action.name == "Атака") {
-                val actionSplit: MutableList<String> = action.description.split("\n") as MutableList<String>
-                actionSplit[0] = if (abilities.level >= 20) "Совершить четыре атаки оружием"
-                else if (abilities.level >= 11) "Совершить три атаки оружием"
-                else "Совершить две атаки оружием"
-                action.description = actionSplit.joinToString("\n")
-            }
+        abilities.actionsMap["Атака"]?.let { action ->
+            val actionSplit: MutableList<String> =
+                action.description.split("\n") as MutableList<String>
+            actionSplit[0] = if (abilities.level >= 20) "Совершить четыре атаки оружием"
+            else if (abilities.level >= 11) "Совершить три атаки оружием"
+            else "Совершить две атаки оружием"
+            action.description = actionSplit.joinToString("\n")
+
         }
         abilities
     },
@@ -257,7 +276,7 @@ var fighter5: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(extraAttackFighter.name) }),
+        Pair("first") { listOf(extraAttackFighter.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -273,7 +292,7 @@ var fighter6: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(abilityScoreImprovement.name) }),
+        Pair("first") { listOf(abilityScoreImprovement.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -303,7 +322,7 @@ var fighter8: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(abilityScoreImprovement.name) }),
+        Pair("first") { listOf(abilityScoreImprovement.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -314,7 +333,7 @@ var fighter8: AbilityNodeLevel = AbilityNodeLevel(
 var indomitable: AbilityNode = AbilityNode(
     name = "Упорный",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Упорный"] =
             Action(
                 name = "Упорный",
                 description = "Вы можете перебросить проваленный спасбросок и должны использовать новый результат. После этого вы можете повторно использовать это умение только после завершения продолжительного отдыха.\n" +
@@ -323,7 +342,7 @@ var indomitable: AbilityNode = AbilityNode(
                 type = ActionType.Additional,
                 relatedCharges = "Упорный"
             )
-        )
+
         if (!abilities.currentState.charges.contains("Упорный")) {
             abilities.currentState.charges["Упорный"] = ChargesCounter(
                 current = 1,
@@ -362,7 +381,7 @@ var fighter9: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(indomitable.name) })
+        Pair("first") { listOf(indomitable.name) }
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -406,7 +425,7 @@ var fighter12: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(abilityScoreImprovement.name) }),
+        Pair("first") { listOf(abilityScoreImprovement.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -437,7 +456,7 @@ var fighter14: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(abilityScoreImprovement.name) }),
+        Pair("first") { listOf(abilityScoreImprovement.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -467,7 +486,7 @@ var fighter16: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(abilityScoreImprovement.name) }),
+        Pair("first") { listOf(abilityScoreImprovement.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -512,7 +531,7 @@ var fighter19: AbilityNodeLevel = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(abilityScoreImprovement.name) }),
+        Pair("first") { listOf(abilityScoreImprovement.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),

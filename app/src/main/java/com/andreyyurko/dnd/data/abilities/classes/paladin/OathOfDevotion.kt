@@ -1,6 +1,10 @@
 package com.andreyyurko.dnd.data.abilities.classes.paladin
 
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.spells.CharacterSpells
 import com.andreyyurko.dnd.data.spells.SpellLists
@@ -8,15 +12,15 @@ import com.andreyyurko.dnd.data.spells.SpellLists
 var oathOfDevotionChanelDivinity = AbilityNode(
     name = "Божественный канал клятвы преданности",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Священное оружие"] =
             Action(
                 name = "Священное оружие",
                 description = "Вы можете действием наполнить одно оружие, которое вы держите, позитивной энергией, используя «Божественный канал». На протяжении 1 минуты вы добавляете свой модификатор Харизмы к броскам атаки, сделанным этим оружием (минимальный бонус +1). Также оружие испускает яркий свет в радиусе 20 футов и тусклый свет в пределах еще 20 футов. Если оружие не является волшебным, то оно считается волшебным в течение этого времени. Вы можете закончить этот эффект в свой ход частью любого другого действия. Если вы не держите или не несёте это оружие, или теряете сознание, то этот эффект заканчивается.\n",
                 type = ActionType.Action,
                 relatedCharges = "Божественный канал"
             )
-        )
-        abilities.actionsList.add(
+
+        abilities.actionsMap["Изгнать нечистого"] =
             Action(
                 name = "Изгнать нечистого",
                 description = "Вы действием показываете свой священный символ и произносите слова молитвы, осуждающей Исчадия и Нежить, используя «Божественный канал». Все Исчадия и Нежить, которые могут видеть или слышать вас, находящиеся в пределах 30 футов от вас, должны совершить спасбросок Мудрости. Если они проваливают спасбросок, то изгоняются на 1 минуту или до тех пор, пока не получат урон.\n" +
@@ -25,7 +29,7 @@ var oathOfDevotionChanelDivinity = AbilityNode(
                 type = ActionType.Action,
                 relatedCharges = "Божественный канал"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -131,7 +135,7 @@ var holyNimbus: AbilityNode = AbilityNode(
                 maximum = 1
             )
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Святой нимб"] =
             Action(
                 name = "Святой нимб",
                 description = "Вы можете действием создать ауру солнечного света. В течение 1 минуты от вас исходит яркий свет в радиусе 30 футов, и тусклый свет в пределах еще 30 футов.\n" +
@@ -144,7 +148,7 @@ var holyNimbus: AbilityNode = AbilityNode(
                 type = ActionType.Action,
                 relatedCharges = "Святой нимб"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

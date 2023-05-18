@@ -1,7 +1,15 @@
 package com.andreyyurko.dnd.data.abilities.classes.cleric
 
-import com.andreyyurko.dnd.data.abilities.other.*
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.abilities.other.arcanaSkillAndExpertise
+import com.andreyyurko.dnd.data.abilities.other.historySkillAndExpertise
+import com.andreyyurko.dnd.data.abilities.other.mapOfLanguages
+import com.andreyyurko.dnd.data.abilities.other.natureSkillAndExpertise
+import com.andreyyurko.dnd.data.abilities.other.religionSkillAndExpertise
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.spells.CharacterSpells
 import com.andreyyurko.dnd.data.spells.SpellLists
@@ -93,14 +101,14 @@ var blessingsOfKnowledge = AbilityNode(
 var channelDivinityKnowledgeOfTheAges: AbilityNode = AbilityNode(
     name = "Божественный канал: знания веков",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Божественный канал: Знания веков"] =
             Action(
                 name = "Божественный канал: Знания веков",
                 description = "Вы можете использовать «Божественный канал», чтобы получить доступ к источнику знаний. Вы действием выбираете навык или инструмент. На 10 минут вы осваиваете владение выбранным навыком или инструментом.\n",
                 type = ActionType.Action,
                 relatedCharges = "Божественный канал"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -114,7 +122,7 @@ var channelDivinityKnowledgeOfTheAges: AbilityNode = AbilityNode(
 var channelDivinityReadThoughts: AbilityNode = AbilityNode(
     name = "Божественный канал: чтение мыслей",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Божественный канал: Чтение мыслей"] =
             Action(
                 name = "Божественный канал: Чтение мыслей",
                 description = "Вы можете использовать свой «Божественный канал», чтобы читать мысли существ. Затем вы можете использовать доступ к разуму существа, чтобы командовать им.\n" +
@@ -125,7 +133,7 @@ var channelDivinityReadThoughts: AbilityNode = AbilityNode(
                 type = ActionType.Action,
                 relatedCharges = "Божественный канал"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -163,7 +171,7 @@ var visionsOfThePast = AbilityNode(
                 maximum = 1
             )
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Видения прошлого"] =
             Action(
                 name = "Видения прошлого",
                 description = "Вы можете вызывать видения прошлого, связанные с предметом, который вы держите, или находящимся вокруг вас окружением. Вы проводите не менее 1 минуты медитируя и молясь, а затем получаете призрачные туманные видения последних событий. Вы можете медитировать таким образом количество минут, равное вашему значению Мудрости, и должны поддерживать концентрацию в течение этого времени, как если бы вы накладывали заклинание.\n" +
@@ -176,7 +184,7 @@ var visionsOfThePast = AbilityNode(
                 type = ActionType.Long,
                 relatedCharges = "Видения прошлого"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

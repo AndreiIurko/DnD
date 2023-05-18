@@ -1,6 +1,11 @@
 package com.andreyyurko.dnd.data.abilities.classes.cleric
 
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.ArmorProf
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.addAllMartialWeapons
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.spells.CharacterSpells
 import com.andreyyurko.dnd.data.spells.SpellLists
@@ -69,14 +74,14 @@ var bonusProficiencyTempestDomain = AbilityNode(
 var wrathOfTheStorm = AbilityNode(
     name = "Гнев бури",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Гнев бури"] =
             Action(
                 name = "Гнев бури",
                 description = "Вы можете громогласно покарать атакующих. Если существо в пределах 5 футов от вас, которое вы можете видеть, успешно попадает по вам атакой, вы можете реакцией заставить существо совершить спасбросок Ловкости. Существо получает урона звуком или электричеством (по вашему выбору) 2к8, если провалит спасбросок, и половину этого урона если преуспеет. Вы можете использовать это умение количество раз, равное вашему модификатору Мудрости (минимум 1 раз). Вы восстанавливаете все потраченные применения, когда завершаете продолжительный отдых.\n",
                 type = ActionType.Reaction,
                 relatedCharges = "Божественный канал"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -89,7 +94,7 @@ var wrathOfTheStorm = AbilityNode(
 var channelDivinityDestructiveWrath: AbilityNode = AbilityNode(
     name = "Божественный канал: разрушительный гнев",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Разрушительный гнев"] =
             Action(
                 name = "Разрушительный гнев",
                 description = "Вы можете использовать «Божественный канал», чтобы овладеть могуществом бури с необузданной свирепостью.\n" +
@@ -98,7 +103,7 @@ var channelDivinityDestructiveWrath: AbilityNode = AbilityNode(
                 type = ActionType.PartOfAction,
                 relatedCharges = "Божественный канал"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -114,13 +119,12 @@ var channelDivinityDestructiveWrath: AbilityNode = AbilityNode(
 var thunderboltStrike = AbilityNode(
     name = "Удар грома",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Удар грома"] =
             Action(
                 name = "Удар грома",
                 description = "Когда вы наносите урон электричеством существу с размером Большое или меньше, вы также можете оттолкнуть его на 10 футов от себя.\n",
                 type = ActionType.PartOfAction,
             )
-        )
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -135,13 +139,13 @@ var divineStrikeTempestDomain = AbilityNode(
     changesInCharacterInfo = { abilities: CharacterInfo ->
         var dice = "1к8"
         if (abilities.level >= 14) dice = "2к8"
-        abilities.actionsList.add(
+        abilities.actionsMap["Божественный удар домена бури"] =
             Action(
                 name = "Божественный удар домена бури",
                 description = "Вы получаете способность наполнять удары своего оружия божественной энергией. Один раз в каждый свой ход, когда вы попадаете по существу атакой оружием, вы можете причинить цели дополнительный урон звуком " + dice + ".\n",
                 type = ActionType.PartOfAction,
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

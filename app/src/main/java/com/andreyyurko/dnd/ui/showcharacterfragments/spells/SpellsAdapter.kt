@@ -37,7 +37,8 @@ class SpellsAdapter @Inject constructor(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.view_spell_item, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.view_spell_item, parent, false)
         return ViewHolder(itemView)
     }
 
@@ -72,15 +73,19 @@ class SpellsAdapter @Inject constructor(
             if (isChecked) {
                 addSpell(shownSpellsList[position])
                 if (shownSpellsList[position].data.level.toInt() == 0)
-                    cantripsCountTextView.text = (cantripsCountTextView.text.toString().toInt() + 1).toString()
+                    cantripsCountTextView.text =
+                        (cantripsCountTextView.text.toString().toInt() + 1).toString()
                 else
-                    spellsCountTextView.text = (spellsCountTextView.text.toString().toInt() + 1).toString()
+                    spellsCountTextView.text =
+                        (spellsCountTextView.text.toString().toInt() + 1).toString()
             } else {
                 removeSpell(shownSpellsList[position])
                 if (shownSpellsList[position].data.level.toInt() == 0)
-                    cantripsCountTextView.text = (cantripsCountTextView.text.toString().toInt() - 1).toString()
+                    cantripsCountTextView.text =
+                        (cantripsCountTextView.text.toString().toInt() - 1).toString()
                 else
-                    spellsCountTextView.text = (spellsCountTextView.text.toString().toInt() - 1).toString()
+                    spellsCountTextView.text =
+                        (spellsCountTextView.text.toString().toInt() - 1).toString()
             }
         }
 
@@ -90,12 +95,19 @@ class SpellsAdapter @Inject constructor(
     }
 
     private fun showFullDescription(spell: SpellSpecificLanguage) {
-        val parent = LayoutInflater.from(root.context).inflate(R.layout.view_spell_description, null)
+        val parent =
+            LayoutInflater.from(root.context).inflate(R.layout.view_spell_description, null)
         parent.layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             400 * root.context.resources.displayMetrics.density.toInt()
         )
-        parent.setBackgroundColor(MaterialColors.getColor(root.context, R.attr.backgroundColor, Color.BLACK))
+        parent.setBackgroundColor(
+            MaterialColors.getColor(
+                root.context,
+                R.attr.backgroundColor,
+                Color.BLACK
+            )
+        )
 
         parent.findViewById<TextView>(R.id.nameTextView).text = spell.name
         parent.findViewById<TextView>(R.id.levelAndSchoolTextView).text =
@@ -107,7 +119,8 @@ class SpellsAdapter @Inject constructor(
             parent.findViewById<TextView>(R.id.componentsAndMaterialsTextView).text =
                 "Компоненты: " + spell.components + ", " + spell.materials
         else
-            parent.findViewById<TextView>(R.id.componentsAndMaterialsTextView).text = "Компоненты: " + spell.components
+            parent.findViewById<TextView>(R.id.componentsAndMaterialsTextView).text =
+                "Компоненты: " + spell.components
         parent.findViewById<TextView>(R.id.descriptionTextView).text = spell.text
 
         val focus = true

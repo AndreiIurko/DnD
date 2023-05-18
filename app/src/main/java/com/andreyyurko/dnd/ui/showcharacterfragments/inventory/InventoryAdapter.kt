@@ -6,7 +6,12 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.LinearLayout
+import android.widget.PopupWindow
+import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
@@ -31,7 +36,8 @@ class InventoryAdapter @Inject constructor(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.view_inventory_item, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.view_inventory_item, parent, false)
         return ViewHolder(itemView)
     }
 
@@ -52,7 +58,10 @@ class InventoryAdapter @Inject constructor(
             itemsList[position].count += 1
             holder.decreaseButton.alpha = 1.0F
             holder.decreaseButton.isEnabled = true
-            inventoryHandler.changeItemDescription(characterViewModel.getCharacter(), itemsList[position])
+            inventoryHandler.changeItemDescription(
+                characterViewModel.getCharacter(),
+                itemsList[position]
+            )
             holder.countTextView.text = itemsList[position].count.toString()
         }
 
@@ -62,7 +71,10 @@ class InventoryAdapter @Inject constructor(
                 holder.decreaseButton.alpha = 0.5F
                 holder.decreaseButton.isEnabled = false
             }
-            inventoryHandler.changeItemDescription(characterViewModel.getCharacter(), itemsList[position])
+            inventoryHandler.changeItemDescription(
+                characterViewModel.getCharacter(),
+                itemsList[position]
+            )
             holder.countTextView.text = itemsList[position].count.toString()
         }
 
@@ -72,7 +84,11 @@ class InventoryAdapter @Inject constructor(
         }
     }
 
-    private fun showFullDescription(itemDescription: InventoryItemInfo, context: Context, position: Int) {
+    private fun showFullDescription(
+        itemDescription: InventoryItemInfo,
+        context: Context,
+        position: Int
+    ) {
         val item = inventoryHandler.getItemInfo(itemDescription.itemName)
         if (item == null) return
 
@@ -136,7 +152,10 @@ class InventoryAdapter @Inject constructor(
         val fullDescriptionPopUp = PopupWindow(parent, wid, high, focus)
 
         parent.findViewById<Button>(R.id.saveButton).setOnClickListener {
-            inventoryHandler.changeItemDescription(characterViewModel.getCharacter(), itemDescription)
+            inventoryHandler.changeItemDescription(
+                characterViewModel.getCharacter(),
+                itemDescription
+            )
             fullDescriptionPopUp.dismiss()
         }
 

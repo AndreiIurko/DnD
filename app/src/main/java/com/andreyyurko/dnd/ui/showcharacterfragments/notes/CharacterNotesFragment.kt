@@ -42,7 +42,8 @@ class CharacterNotesFragment : BaseFragment(R.layout.fragment_character_notes) {
     private fun setupRecyclerView() {
         val searchString = viewBinding.searchEditText.text.toString()
         val recyclerView = viewBinding.notesRecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         val adapter = NotesAdapter(notesViewModel, findNavController())
         adapter.searchString = searchString

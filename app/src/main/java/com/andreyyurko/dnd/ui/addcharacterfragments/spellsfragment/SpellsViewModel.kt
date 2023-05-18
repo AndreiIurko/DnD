@@ -35,7 +35,10 @@ class SpellsViewModel @Inject constructor(
     }
 
     fun getKnownSpellsCount(): Int {
-        return spellsHandler.getKnownSpellsCount(createCharacterViewModel.character, classesForSpells[currentClassList])
+        return spellsHandler.getKnownSpellsCount(
+            createCharacterViewModel.character,
+            classesForSpells[currentClassList]
+        )
     }
 
     fun getMaxKnownSpellsCount(): Int {
@@ -76,12 +79,20 @@ class SpellsViewModel @Inject constructor(
     }
 
     fun addKnownSpell(spell: Spell) {
-        spellsHandler.addKnownSpell(spell.data.name, spell.listName, createCharacterViewModel.character)
+        spellsHandler.addKnownSpell(
+            spell.data.name,
+            spell.listName,
+            createCharacterViewModel.character
+        )
         updateCharacter()
     }
 
     fun removeKnownSpell(spell: Spell) {
-        spellsHandler.removeKnownSpell(spell.data.name, spell.listName, createCharacterViewModel.character)
+        spellsHandler.removeKnownSpell(
+            spell.data.name,
+            spell.listName,
+            createCharacterViewModel.character
+        )
         updateCharacter()
     }
 

@@ -1,6 +1,10 @@
 package com.andreyyurko.dnd.data.abilities.classes.rogue
 
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.Tools
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var bonusProficiencyAssassinArchetype = AbilityNode(
@@ -34,7 +38,7 @@ var assassinate = AbilityNode(
 var infiltrationExpertise = AbilityNode(
     name = "Мастер проникновения",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Мастер проникновения"] =
             Action(
                 name = "Мастер проникновения",
                 description = "Вы можете создавать себе ложную биографию. Вы должны потратить семь дней и 25 зм, чтобы сделать её достоверной и установить нужные связи. Вы не можете взять биографию, принадлежащую другому лицу. Например, вы можете приобрести соответствующую одежду, рекомендательные письма и официального вида сертификаты, чтобы обозначить себя в качестве члена торгового дома из далёкого города, или внушить, что вы из группы богатых торговцев.\n" +
@@ -42,7 +46,7 @@ var infiltrationExpertise = AbilityNode(
                         "После принятия новой личности в качестве маскировки другие существа верят, что вы являетесь этой личностью, пока не подадите очевидный повод решить обратное.\n",
                 type = ActionType.Long
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -57,7 +61,7 @@ var infiltrationExpertise = AbilityNode(
 var impostor = AbilityNode(
     name = "Самозванец",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Самозванец"] =
             Action(
                 name = "Самозванец",
                 description = "Вы получаете способность безошибочно подражать чужой речи, почерку и привычкам. Вы должны провести не менее трёх часов изучения этих трёх компонентов поведения существа, слушая его речь, рассматривая почерк и наблюдая за привычками.\n" +
@@ -65,7 +69,7 @@ var impostor = AbilityNode(
                         "Ваши уловки не видны для случайного наблюдателя. Если осторожное существо подозревает что-то неладное, вы совершаете с преимуществом все проверки Харизмы (Обман), чтобы избежать обнаружения.\n",
                 type = ActionType.Long
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

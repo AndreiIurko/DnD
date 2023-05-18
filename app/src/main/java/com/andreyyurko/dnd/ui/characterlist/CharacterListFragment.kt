@@ -54,7 +54,8 @@ class CharacterListFragment : BaseFragment(R.layout.fragment_character_list) {
     private fun setupRecyclerView() {
         try {
             val recyclerView = viewBinding.charactersRecyclerView
-            recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            recyclerView.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             val adapter = CharacterListAdapter(viewModel, ::showDialog)
             recyclerView.adapter = adapter
             adapter.apply {
@@ -62,9 +63,12 @@ class CharacterListFragment : BaseFragment(R.layout.fragment_character_list) {
                 charactersList = viewModel.charactersBriefInfo
                 notifyDataSetChanged()
             }
-        }
-        catch (e: Exception) {
-            Toast.makeText(requireContext(), "Произошла проблема с адаптером, пожалуйста, сообщите об этом", Toast.LENGTH_LONG).show()
+        } catch (e: Exception) {
+            Toast.makeText(
+                requireContext(),
+                "Произошла проблема с адаптером, пожалуйста, сообщите об этом",
+                Toast.LENGTH_LONG
+            ).show()
         }
 
     }

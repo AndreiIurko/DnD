@@ -1,6 +1,10 @@
 package com.andreyyurko.dnd.data.abilities.classes.ranger
 
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import com.andreyyurko.dnd.data.spells.CharacterSpells
@@ -67,7 +71,7 @@ var huntersSense = AbilityNode(
                 )
             }
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Охотничьи чувства"] =
             Action(
                 name = "Охотничьи чувства",
                 description = "Вы получаете способность оценить существо и определить, как лучше всего навредить ему. Действием выберите одно существо, которое вы можете видеть в пределах 60 футов. Вы мгновенно узнаёте, имеет ли существо какие-либо иммунитеты, сопротивления или уязвимости, и какие они. Если существо скрыто от магии Прорицания, то вы чувствуете, что у него нет иммунитетов, сопротивлений или уязвимостей.\n" +
@@ -76,7 +80,7 @@ var huntersSense = AbilityNode(
                 type = ActionType.Action,
                 relatedCharges = "Охотничьи чувства"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -89,7 +93,7 @@ var huntersSense = AbilityNode(
 var slayersPrey = AbilityNode(
     name = "Добыча убийцы",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Добыча убийцы"] =
             Action(
                 name = "Добыча убийцы",
                 description = "Вы можете сфокусировать свой гнев на одном враге, увеличивая урон, который вы ему причиняете.\n" +
@@ -99,7 +103,7 @@ var slayersPrey = AbilityNode(
                         "Это преимущество действует до окончания вашего короткого или продолжительного отдыха. Оно заканчивается раньше, если вы выбираете другое существо.\n",
                 type = ActionType.Bonus,
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -114,7 +118,8 @@ var slayersPrey = AbilityNode(
 var supernaturalDefense = AbilityNode(
     name = "Сверхъестественная защита",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Сверхъестественная защита"] = "Вы получаете дополнительную устойчивость против нападений вашей добычи на ваш ум и тело. Всякий раз, когда цель умения «Добыча убийцы» заставляет вас совершить спасбросок или когда вы совершаете проверку способности, чтобы перестать быть схваченным этой целью — добавьте 1к6 к броску.\n"
+        abilities.additionalAbilities["Сверхъестественная защита"] =
+            "Вы получаете дополнительную устойчивость против нападений вашей добычи на ваш ум и тело. Всякий раз, когда цель умения «Добыча убийцы» заставляет вас совершить спасбросок или когда вы совершаете проверку способности, чтобы перестать быть схваченным этой целью — добавьте 1к6 к броску.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -131,7 +136,7 @@ var magicusersNemesis = AbilityNode(
                 maximum = 1
             )
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Враг заклинателя"] =
             Action(
                 name = "Враг заклинателя",
                 description = "Вы получаете способность разрушать чужую магию.\n" +
@@ -142,7 +147,7 @@ var magicusersNemesis = AbilityNode(
                 type = ActionType.Reaction,
                 relatedCharges = "Враг заклинателя"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -157,13 +162,13 @@ var magicusersNemesis = AbilityNode(
 var slayersCounter = AbilityNode(
     name = "Контратака убийцы",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Контратака убийцы"] =
             Action(
                 name = "Контратака убийцы",
                 description = "Вы получаете возможность контратаковать, когда ваша жертва пытается навредить вам. Если цель умения «Добыча убийцы» заставляет вас совершить спасбросок, то вы можете реакцией совершить одну атаку оружием по Добыче. Вы совершаете эту атаку непосредственно перед выполнением спасброска. Если атака попадает, вы автоматически проходите спасбросок в дополнение к обычным эффектам атаки.\n",
                 type = ActionType.Reaction,
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

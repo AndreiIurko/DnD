@@ -39,7 +39,8 @@ class CharacterAbilitiesFragment : BaseFragment(R.layout.fragment_character_abil
         viewBinding.passiveInsight.text = characterInfo.passiveInsightBonus.toString()
         viewBinding.passivePerception.text = characterInfo.passivePerceptionBonus.toString()
 
-        viewBinding.allHitDiceTextView.text = characterInfo.level.toString() + getHitDice(characterInfo.characterClass)
+        viewBinding.allHitDiceTextView.text =
+            characterInfo.level.toString() + getHitDice(characterInfo.characterClass)
         if (characterInfo.currentState.hitDiceCount == "")
             characterInfo.currentState.hitDiceCount = characterInfo.level.toString()
         viewBinding.currentHitDiceTextView.setText(characterInfo.currentState.hitDiceCount)
@@ -96,8 +97,8 @@ class CharacterAbilitiesFragment : BaseFragment(R.layout.fragment_character_abil
         }
     }
 
-    private fun getHitDice(characterClass: Classes) : String {
-        return when(characterClass) {
+    private fun getHitDice(characterClass: Classes): String {
+        return when (characterClass) {
             Classes.Wizard, Classes.Sorcerer -> "к6"
             Classes.Fighter, Classes.Ranger, Classes.Paladin -> "к10"
             Classes.Barbarian -> "к12"
@@ -111,16 +112,23 @@ class CharacterAbilitiesFragment : BaseFragment(R.layout.fragment_character_abil
                 editText.clearFocus()
                 try {
                     action(editText.text.toString().toInt())
-                }
-                catch (e: Exception) {
-                    Toast.makeText(requireContext(), "Введите пожалуйста целое число", Toast.LENGTH_LONG).show()
+                } catch (e: Exception) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Введите пожалуйста целое число",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
                 characterViewModel.updateCharacterInfo()
             }
             try {
                 action(editText.text.toString().toInt())
             } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Введите пожалуйста целое число", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Введите пожалуйста целое число",
+                    Toast.LENGTH_LONG
+                ).show()
             }
             false
         }

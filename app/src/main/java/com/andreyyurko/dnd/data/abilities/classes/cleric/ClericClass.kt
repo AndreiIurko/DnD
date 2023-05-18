@@ -4,8 +4,21 @@ package com.andreyyurko.dnd.data.abilities.classes.cleric
 //import com.andreyyurko.dnd.data.abilities.other.*
 //import com.andreyyurko.dnd.data.characterData.Priority
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
-import com.andreyyurko.dnd.data.abilities.other.*
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.abilities.other.abilityScoreImprovement
+import com.andreyyurko.dnd.data.abilities.other.history
+import com.andreyyurko.dnd.data.abilities.other.insight
+import com.andreyyurko.dnd.data.abilities.other.medicine
+import com.andreyyurko.dnd.data.abilities.other.persuasion
+import com.andreyyurko.dnd.data.abilities.other.religion
+import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.ArmorProf
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.characterData.addAllSimpleWeapons
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import com.andreyyurko.dnd.data.spells.CharacterSpells
@@ -173,7 +186,7 @@ var channelDivinity: AbilityNode = AbilityNode(
                 )
             }
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Изгнание нежити"] =
             Action(
                 name = "Изгнание нежити",
                 description = "Вы действием демонстрируете свой священный символ и читаете молитву, изгоняющую Нежить. " +
@@ -185,7 +198,7 @@ var channelDivinity: AbilityNode = AbilityNode(
                 type = ActionType.Action,
                 relatedCharges = "Божественный канал"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -255,19 +268,18 @@ var cleric4: AbilityNodeLevel = AbilityNodeLevel(
 var destroy_undead: AbilityNode = AbilityNode(
     name = "Уничтожение нежити",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        for (i in 0..abilities.actionsList.size - 1) {
-            if (abilities.actionsList[i].name == "Изгнание нежити") {
-                abilities.actionsList[i].description = abilities.actionsList[i].description +
-                        "\n" +
-                        "Когда Нежить проваливает спасбросок от вашего умения «Изгнание Нежити», существо мгновенно уничтожается, если его показатель опасности не превышает значения, указанного в таблице:\n" +
-                        "\n" +
-                        "Уровень жреца | Уничтожается нежить с ПО\n" +
-                        "       5      | 1/2 и ниже\n" +
-                        "       8      | 1 и ниже\n" +
-                        "      11      | 2 и ниже\n" +
-                        "      14      | 3 и ниже\n" +
-                        "      17      | 4 и ниже\n"
-            }
+        abilities.actionsMap["Изгнание нежити"]?.let { action ->
+            action.description = action.description +
+                    "\n" +
+                    "Когда Нежить проваливает спасбросок от вашего умения «Изгнание Нежити», существо мгновенно уничтожается, если его показатель опасности не превышает значения, указанного в таблице:\n" +
+                    "\n" +
+                    "Уровень жреца | Уничтожается нежить с ПО\n" +
+                    "       5      | 1/2 и ниже\n" +
+                    "       8      | 1 и ниже\n" +
+                    "      11      | 2 и ниже\n" +
+                    "      14      | 3 и ниже\n" +
+                    "      17      | 4 и ниже\n"
+
         }
         abilities
     },
@@ -376,7 +388,7 @@ var divineIntervention: AbilityNode = AbilityNode(
                 maximum = 1
             )
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Божественное вмешательство"] =
             Action(
                 name = "Божественное вмешательство",
                 description = "Вы можете воззвать к своему божеству о помощи, когда сильно в этом нуждаетесь. Мольба о помощи совершается действием. Опишите помощь, которую вы ждёте, и киньте процентную кость. Если выпадет число, не превышающее ваш уровень жреца, ваше божество вмешается. Мастер сам выбирает природу вмешательства; подойдёт эффект какого-либо заклинания жреца или заклинания домена.\n" +
@@ -385,7 +397,7 @@ var divineIntervention: AbilityNode = AbilityNode(
                 type = ActionType.Action,
                 relatedCharges = "Божественное вмешательство"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

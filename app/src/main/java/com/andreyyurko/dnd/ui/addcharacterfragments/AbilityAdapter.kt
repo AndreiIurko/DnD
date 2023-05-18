@@ -26,7 +26,8 @@ class AbilityAdapter : RecyclerView.Adapter<AbilityAdapter.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.class_ability_item, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.class_ability_item, parent, false)
         return ViewHolder(itemView)
     }
 
@@ -68,7 +69,8 @@ class AbilityAdapter : RecyclerView.Adapter<AbilityAdapter.ViewHolder>() {
                 // TODO: replace this shitty code with custom view
                 // creates a button
                 val choiceButton =
-                    LayoutInflater.from(holder.parent.context).inflate(R.layout.choose_option_button, null)
+                    LayoutInflater.from(holder.parent.context)
+                        .inflate(R.layout.choose_option_button, null)
                 val layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
                 )
@@ -110,7 +112,10 @@ class AbilityAdapter : RecyclerView.Adapter<AbilityAdapter.ViewHolder>() {
 
     // run through tree of can
     // returns can in DFS on pos == position
-    private fun getAbilityAtPosition(can: CharacterAbilityNode, initPosition: Int): Pair<AbilityCard?, Int> {
+    private fun getAbilityAtPosition(
+        can: CharacterAbilityNode,
+        initPosition: Int
+    ): Pair<AbilityCard?, Int> {
         var position = initPosition
         for ((_, chosenAbility) in can.chosen_alternatives) {
             // skip if ability is not supposed to be shown
@@ -182,12 +187,16 @@ class AbilityAdapter : RecyclerView.Adapter<AbilityAdapter.ViewHolder>() {
         // configure location of popup menu and show it
         val location = IntArray(2)
         triggerView.getLocationOnScreen(location)
-        parent.measure(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        parent.measure(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
         popupChoiceList.showAtLocation(
             triggerView,
             Gravity.NO_GRAVITY,
             location[0] + triggerView.width / 2 - parent.measuredWidth / 2,
-            location[1] + textView.height + (textView.context.resources.displayMetrics.density * 6).toInt())
+            location[1] + textView.height + (textView.context.resources.displayMetrics.density * 6).toInt()
+        )
         return popupChoiceList
     }
 }

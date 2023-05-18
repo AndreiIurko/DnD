@@ -1,6 +1,10 @@
 package com.andreyyurko.dnd.data.abilities.classes.bard
 
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var psychicBlades = AbilityNode(
@@ -10,14 +14,14 @@ var psychicBlades = AbilityNode(
         if (abilities.level >= 5) dice = "3к6"
         if (abilities.level >= 10) dice = "5к6"
         if (abilities.level >= 15) dice = "8к6"
-        abilities.actionsList.add(
+        abilities.actionsMap["Психические клинки"] =
             Action(
                 name = "Психические клинки",
                 description = "Когда вы попадаете по существу атакой оружием, вы можете потратить одно «Вдохновение барда» и нанести цели дополнительные " + dice + " урона психической энергией. Вы можете использовать это умение один раз за раунд в свой ход.\n",
                 type = ActionType.PartOfAction,
                 relatedCharges = "Бардовское вдохновение"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -39,7 +43,7 @@ var wordsOfTerror = AbilityNode(
                 maximum = 1
             )
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Слова ужаса"] =
             Action(
                 name = "Слова ужаса",
                 description = "Вы учитесь наполнять кажущиеся безобидными слова коварной магией, которая вызывает ужас. Если вы разговариваете с Гуманоидом наедине, в течение по крайней мере 1 минуты, то можете попытаться посеять семя паранойи в его разуме.\n" +
@@ -49,7 +53,7 @@ var wordsOfTerror = AbilityNode(
                 type = ActionType.Long,
                 relatedCharges = "Слова ужаса"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -71,21 +75,20 @@ var mantleOfWhispers = AbilityNode(
                 maximum = 1
             )
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Мантия шёпотов (поймать тень)"] =
             Action(
                 name = "Мантия шёпотов (поймать тень)",
                 description = "Вы получаете возможность принимать личность Гуманоида. Когда Гуманоид умирает в пределах 30 футов от вас, вы можете реакцией магическим образом поймать его тень. Вы удерживаете эту тень, пока не используете её, или до окончания короткого или продолжительного отдыха.\nКогда вы ловите тень этим умением, вы не можете поймать другую тень, до окончания короткого или продолжительного отдыха.\n",
                 type = ActionType.Reaction,
                 relatedCharges = "Мантия шёпотов"
             )
-        )
-        abilities.actionsList.add(
+
+        abilities.actionsMap["Мантия шёпотов (использовать тень)"] =
             Action(
                 name = "Мантия шёпотов (использовать тень)",
                 description = "Действием вы можете использовать тень. Когда вы это делаете, она исчезает, магически превращаясь в маскировку, которая появляется на вас. Теперь вы выглядите как этот мёртвый Гуманоид, но кажетесь живым и здоровым. Маскировка длится 1 час или пока вы не закончите её бонусным действием. Находясь под этой маскировкой, вы получаете доступ ко всей информации, которой это существо могло бы свободно поделиться со случайным знакомым. Эта информация включает в себя общие данные о его биографии и личной жизни, но не его секреты. Этой информации достаточно для того, чтобы вы смогли выдать себя за эту личность, используя его воспоминания. Другие существа могут обнаружить вашу истинную сущность, в состязании их Мудрости (Проницательность) против вашей Харизмы (Обман), при этом вы получаете бонус +5 к своей проверке.\n",
                 type = ActionType.Action
             )
-        )
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -108,7 +111,7 @@ var shadowLore = AbilityNode(
                 maximum = 1
             )
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Знание тени"] =
             Action(
                 name = "Знание тени",
                 description = "Вы получаете способность вплетать в свою речь тёмную магию и дергать за ниточки самых глубоких страхов существа.\n" +
@@ -121,7 +124,7 @@ var shadowLore = AbilityNode(
                 type = ActionType.Action,
                 relatedCharges = "Знание тени"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -141,10 +144,10 @@ var collegeOfWhispers = AbilityNode(
     name = "Коллегия шёпотов",
     changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(psychicBlades.name) }),
-        Pair("second", { listOf(wordsOfTerror.name) }),
-        Pair("third", { listOf(mantleOfWhispers.name) }),
-        Pair("fourth", { listOf(shadowLore.name) })
+        Pair("first") { listOf(psychicBlades.name) },
+        Pair("second") { listOf(wordsOfTerror.name) },
+        Pair("third") { listOf(mantleOfWhispers.name) },
+        Pair("fourth") { listOf(shadowLore.name) }
     ),
     requirements = { true },
     description = "",

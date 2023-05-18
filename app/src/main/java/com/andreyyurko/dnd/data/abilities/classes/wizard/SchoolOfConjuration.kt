@@ -23,7 +23,7 @@ var conjurationSavant = AbilityNode(
 var minorConjuration = AbilityNode(
     name = "Малый вызов",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Малый вызов"] =
             Action(
                 name = "Малый вызов",
                 description = "Вы можете действием создать неодушевлённый предмет в своей руке или на земле в свободном пространстве, которое вы можете видеть, и которое расположено в пределах 10 футов от вас. Этот предмет не должен превышать в длину 3 фута (90 сантиметров) и весить более 10 фунтов, и его форма должна быть как у немагического предмета, который вы уже видели. Видно, что предмет магический, и он излучает тусклый свет в пределах 5 футов.\n" +
@@ -31,7 +31,7 @@ var minorConjuration = AbilityNode(
                         "Предмет исчезает через 1 час, когда вы используете это умение вновь, или когда он получает или наносит любой урон.\n",
                 type = ActionType.Action
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -46,13 +46,13 @@ var minorConjuration = AbilityNode(
 var benignTransposition = AbilityNode(
     name = "Безопасное перемещение",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Безопасное перемещение"] =
             Action(
                 name = "Безопасное перемещение",
                 description = "Вы можете действием телепортироваться на 30 футов в свободное пространство, которое можете видеть. В качестве альтернативы, вы можете выбрать пространство в пределах этого диапазона, занятое существом Маленького или Среднего размера. Если это существо согласно, вы оба телепортируетесь, меняясь местами. Использовав это умение один раз, вы не можете использовать его вновь до окончания продолжительного отдыха или пока не наложите заклинание школы Вызова 1-го уровня или выше.\n",
                 type = ActionType.Action
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

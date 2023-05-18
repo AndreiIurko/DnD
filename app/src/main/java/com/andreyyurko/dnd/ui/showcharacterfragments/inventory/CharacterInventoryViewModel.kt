@@ -15,11 +15,14 @@ class CharacterInventoryViewModel @Inject constructor(
 
     private val allItemsFilters = InventoryHandler.Filters()
     private val chosenItemsFilters = InventoryHandler.Filters()
-    var isChosenListShown = false
+    var isChosenListShown = true
 
     fun showItems(): MutableList<InventoryItemInfo> {
         return if (isChosenListShown)
-            inventoryHandler.getCharacterItems(characterViewModel.getCharacter(), chosenItemsFilters)
+            inventoryHandler.getCharacterItems(
+                characterViewModel.getCharacter(),
+                chosenItemsFilters
+            )
         else
             inventoryHandler.getItems(characterViewModel.getCharacter(), allItemsFilters)
     }

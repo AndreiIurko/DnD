@@ -8,7 +8,11 @@ import androidx.appcompat.widget.AppCompatTextView
 
 private const val VERTICAL_ROTATION = 90f
 
-class VerticalTextView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
+class VerticalTextView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyle: Int = 0
+) :
     AppCompatTextView(context, attrs, defStyle) {
 
     private var _measuredWidth: Int = 0

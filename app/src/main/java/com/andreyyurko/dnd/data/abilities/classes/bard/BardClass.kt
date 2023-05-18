@@ -1,8 +1,63 @@
 package com.andreyyurko.dnd.data.abilities.classes.bard
 
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
-import com.andreyyurko.dnd.data.abilities.other.*
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.abilities.other.abilityScoreImprovement
+import com.andreyyurko.dnd.data.abilities.other.acrobatics
+import com.andreyyurko.dnd.data.abilities.other.acrobaticsExpertise
+import com.andreyyurko.dnd.data.abilities.other.animalHandling
+import com.andreyyurko.dnd.data.abilities.other.animalHandlingExpertise
+import com.andreyyurko.dnd.data.abilities.other.arcana
+import com.andreyyurko.dnd.data.abilities.other.arcanaExpertise
+import com.andreyyurko.dnd.data.abilities.other.athletics
+import com.andreyyurko.dnd.data.abilities.other.athleticsExpertise
+import com.andreyyurko.dnd.data.abilities.other.bagpipes
+import com.andreyyurko.dnd.data.abilities.other.deception
+import com.andreyyurko.dnd.data.abilities.other.deceptionExpertise
+import com.andreyyurko.dnd.data.abilities.other.drum
+import com.andreyyurko.dnd.data.abilities.other.dulcimer
+import com.andreyyurko.dnd.data.abilities.other.flute
+import com.andreyyurko.dnd.data.abilities.other.history
+import com.andreyyurko.dnd.data.abilities.other.historyExpertise
+import com.andreyyurko.dnd.data.abilities.other.horn
+import com.andreyyurko.dnd.data.abilities.other.insight
+import com.andreyyurko.dnd.data.abilities.other.insightExpertise
+import com.andreyyurko.dnd.data.abilities.other.intimidation
+import com.andreyyurko.dnd.data.abilities.other.intimidationExpertise
+import com.andreyyurko.dnd.data.abilities.other.investigation
+import com.andreyyurko.dnd.data.abilities.other.investigationExpertise
+import com.andreyyurko.dnd.data.abilities.other.lute
+import com.andreyyurko.dnd.data.abilities.other.lyre
+import com.andreyyurko.dnd.data.abilities.other.medicine
+import com.andreyyurko.dnd.data.abilities.other.medicineExpertise
+import com.andreyyurko.dnd.data.abilities.other.nature
+import com.andreyyurko.dnd.data.abilities.other.natureExpertise
+import com.andreyyurko.dnd.data.abilities.other.panFlute
+import com.andreyyurko.dnd.data.abilities.other.perception
+import com.andreyyurko.dnd.data.abilities.other.perceptionExpertise
+import com.andreyyurko.dnd.data.abilities.other.performance
+import com.andreyyurko.dnd.data.abilities.other.performanceExpertise
+import com.andreyyurko.dnd.data.abilities.other.persuasion
+import com.andreyyurko.dnd.data.abilities.other.persuasionExpertise
+import com.andreyyurko.dnd.data.abilities.other.religion
+import com.andreyyurko.dnd.data.abilities.other.religionExpertise
+import com.andreyyurko.dnd.data.abilities.other.shawm
+import com.andreyyurko.dnd.data.abilities.other.sleightOfHand
+import com.andreyyurko.dnd.data.abilities.other.sleightOfHandExpertise
+import com.andreyyurko.dnd.data.abilities.other.stealth
+import com.andreyyurko.dnd.data.abilities.other.stealthExpertise
+import com.andreyyurko.dnd.data.abilities.other.survival
+import com.andreyyurko.dnd.data.abilities.other.survivalExpertise
+import com.andreyyurko.dnd.data.abilities.other.viol
+import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.ArmorProf
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.characterData.Weapon
+import com.andreyyurko.dnd.data.characterData.addAllSimpleWeapons
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import com.andreyyurko.dnd.data.spells.CharacterSpells
@@ -251,7 +306,7 @@ var bardicInspiration: AbilityNode = AbilityNode(
                 )
             }
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Вдохновение барда"] =
             Action(
                 name = "Бардовское вдохновение",
                 description = "Своими словами или музыкой вы можете вдохновлять других. Для этого вы должны бонусным действием выбрать одно существо, отличное от вас, в пределах 60 футов, которое может вас слышать. Это существо получает кость бардовского вдохновения — к6.\n" +
@@ -263,8 +318,8 @@ var bardicInspiration: AbilityNode = AbilityNode(
                         "Ваша кость бардовского вдохновения изменяется с ростом вашего уровня в этом классе. Она становится к8 на 5-м уровне, к10 на 10-м уровне и к12 на 15-м уровне.\n",
                 type = ActionType.Bonus,
                 relatedCharges = "Бардовское вдохновение"
+
             )
-        )
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -318,7 +373,7 @@ var jackOfAllTrades: AbilityNode = AbilityNode(
 var songOfRest: AbilityNode = AbilityNode(
     name = "Песнь отдыха",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Песнь отдыха"] =
             Action(
                 name = "Песнь отдыха",
                 description = "Вы с помощью успокаивающей музыки или речей можете помочь своим раненым союзникам восстановить их силы во время короткого отдыха. Если вы или любые союзные существа, способные слышать ваше исполнение, восстанавливаете хиты в конце короткого отдыха, используя Кости Хитов, каждое потратившее Кость Хитов существо восстанавливает дополнительно 1к6 хитов.\n" +
@@ -326,7 +381,6 @@ var songOfRest: AbilityNode = AbilityNode(
                         "Количество дополнительно восстанавливаемых хитов растёт с вашим уровнем в этом классе: 1к8 на 9-м уровне, 1к10 на 13 уровне и 1к12 на 17 уровне.",
                 type = ActionType.Long
             )
-        )
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -346,8 +400,8 @@ var bard2: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(jackOfAllTrades.name) }),
-        Pair("second", { listOf(songOfRest.name) })
+        Pair("first") { listOf(jackOfAllTrades.name) },
+        Pair("second") { listOf(songOfRest.name) }
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -361,7 +415,7 @@ var bardCollege: AbilityNode = AbilityNode(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("college", { listOf(collegeOfLore.name, collegeOfWhispers.name) })
+        Pair("college") { listOf(collegeOfLore.name, collegeOfWhispers.name) }
     ),
     requirements = { abilities: CharacterInfo ->
         abilities.characterClass == Classes.Bard
@@ -441,8 +495,8 @@ var bard3: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(bardCollege.name) }),
-        Pair("second", { listOf(expertise.name) })
+        Pair("first") { listOf(bardCollege.name) },
+        Pair("second") { listOf(expertise.name) }
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -459,7 +513,7 @@ var bard4: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(abilityScoreImprovement.name) }),
+        Pair("first") { listOf(abilityScoreImprovement.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -491,7 +545,7 @@ var bard5: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(fontOfInspiration.name) })
+        Pair("first") { listOf(fontOfInspiration.name) }
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -502,13 +556,13 @@ var bard5: AbilityNode = AbilityNodeLevel(
 var contercharm: AbilityNode = AbilityNode(
     name = "Контрочарование",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Контрочарование"] =
             Action(
                 name = "Контрочарование",
                 description = "Вы получаете возможность использовать звуки или слова силы для разрушения воздействующих на разум эффектов. Вы можете действием начать исполнение, которое продлится до конца вашего следующего хода. В течение этого времени вы и все дружественные существа в пределах 30 футов от вас совершают спасброски от запугивания и очарования с преимуществом. Чтобы получить это преимущество, существа должны слышать вас. Исполнение заканчивается преждевременно, если вы оказываетесь недееспособны, теряете способность говорить, или прекращаете исполнение добровольно (на это не требуется действие).\n",
                 type = ActionType.Action
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -557,7 +611,7 @@ var bard8: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(abilityScoreImprovement.name) }),
+        Pair("first") { listOf(abilityScoreImprovement.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -588,8 +642,8 @@ var magicalSecrets_10 = AbilityNode(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { spellist.filter{ it.level <= 5 }.map{ it.name } } ),
-        Pair("second", { spellist.filter{ it.level <= 5 }.map{ it.name } } )
+        Pair("first", { spellist.filter { it.level <= 5 }.map { it.name } }),
+        Pair("second", { spellist.filter { it.level <= 5 }.map { it.name } })
     ),
     requirements = { true },
     description = "Вы можете выучить 2 заклинания из доступных любому классу на свой выбор. Их уровень не должен превышать уровня заклинаний, которые вы можете использовать на этом уровне, как показано в таблице Барда. Они также могут быть заговорами. Выбранные заклинания теперь считаются для вас заклинаниями барда, но они не учитываются в общем количестве известных вам заклинаний барда.\n",
@@ -625,8 +679,8 @@ var magicalSecrets_14 = AbilityNode(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { spellist.filter{ it.level <= 7 }.map{ it.name } } ),
-        Pair("second", { spellist.filter{ it.level <= 7 }.map{ it.name } } )
+        Pair("first", { spellist.filter { it.level <= 7 }.map { it.name } }),
+        Pair("second", { spellist.filter { it.level <= 7 }.map { it.name } })
     ),
     requirements = { true },
     description = "Вы можете выучить 2 заклинания из доступных любому классу на свой выбор. Их уровень не должен превышать уровня заклинаний, которые вы можете использовать на этом уровне, как показано в таблице Барда. Они также могут быть заговорами. Выбранные заклинания теперь считаются для вас заклинаниями барда, но они не учитываются в общем количестве известных вам заклинаний барда.\n",
@@ -662,8 +716,8 @@ var magicalSecrets_18 = AbilityNode(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { spellist.map{ it.name } } ),
-        Pair("second", { spellist.map{ it.name } } )
+        Pair("first", { spellist.map { it.name } }),
+        Pair("second", { spellist.map { it.name } })
     ),
     requirements = { true },
     description = "Вы можете выучить 2 заклинания из доступных любому классу на свой выбор. Их уровень не должен превышать уровня заклинаний, которые вы можете использовать на этом уровне, как показано в таблице Барда. Они также могут быть заговорами. Выбранные заклинания теперь считаются для вас заклинаниями барда, но они не учитываются в общем количестве известных вам заклинаний барда.\n",
@@ -702,8 +756,8 @@ var bard10: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(expertise.name) }),
-        Pair("second", { listOf(magicalSecrets_10.name)})
+        Pair("first") { listOf(expertise.name) },
+        Pair("second") { listOf(magicalSecrets_10.name) }
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -736,7 +790,7 @@ var bard12: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(abilityScoreImprovement.name) }),
+        Pair("first") { listOf(abilityScoreImprovement.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -770,7 +824,7 @@ var bard14: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(magicalSecrets_14.name)})
+        Pair("first") { listOf(magicalSecrets_14.name) }
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -803,7 +857,7 @@ var bard16: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(abilityScoreImprovement.name) }),
+        Pair("first") { listOf(abilityScoreImprovement.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -837,7 +891,7 @@ var bard18: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(magicalSecrets_18.name)})
+        Pair("first") { listOf(magicalSecrets_18.name) }
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -855,7 +909,7 @@ var bard19: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(abilityScoreImprovement.name) }),
+        Pair("first") { listOf(abilityScoreImprovement.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -885,7 +939,7 @@ var bard20: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(superiorInspiration.name) }),
+        Pair("first") { listOf(superiorInspiration.name) },
     ),
     requirements = { true },
     addRequirements = listOf(),

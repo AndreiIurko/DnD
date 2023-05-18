@@ -3,7 +3,11 @@ package com.andreyyurko.dnd.utils
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.Armor
+import com.andreyyurko.dnd.data.characterData.ItemRarity
+import com.andreyyurko.dnd.data.characterData.ItemType
+import com.andreyyurko.dnd.data.characterData.Source
+import com.andreyyurko.dnd.data.characterData.Weapon
 import com.andreyyurko.dnd.data.characterData.character.Character
 import com.andreyyurko.dnd.data.inventory.InventoryItem
 import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
@@ -35,9 +39,11 @@ class InventoryHandler @Inject constructor(
             Log.d("Inventory_parse", ioException.toString())
         }
 
-        val type: Type = Types.newParameterizedType(MutableList::class.java, InventoryItem::class.java)
+        val type: Type =
+            Types.newParameterizedType(MutableList::class.java, InventoryItem::class.java)
         val inventoryList: List<InventoryItem> = Gson().fromJson(jsonString, type)
-        allItems = inventoryList.associateBy({ it.name }, { it }) as MutableMap<String, InventoryItem>
+        allItems =
+            inventoryList.associateBy({ it.name }, { it }) as MutableMap<String, InventoryItem>
     }
 
     fun getItems(
@@ -131,7 +137,9 @@ class InventoryHandler @Inject constructor(
         if (filter.isEmpty()) return true
         var isCorrect = false
         for (filterItem in filter) {
-            if (target.lowercase().contains(", " + filterItem.lowercase().substring(0..2))) isCorrect = true
+            if (target.lowercase()
+                    .contains(", " + filterItem.lowercase().substring(0..2))
+            ) isCorrect = true
         }
         return isCorrect
     }
@@ -160,10 +168,15 @@ class InventoryHandler @Inject constructor(
         if (item.itemTypeAndRarity.lowercase().contains(ItemType.Weapon.shownName.lowercase())) {
             if (currentState.firstWeapon == Weapon.Unarmed) {
                 return true
-            } else if (currentState.secondWeapon == null && currentState.firstWeapon.properties.contains("лёгкое") && !currentState.hasShield) {
+            } else if (currentState.secondWeapon == null && currentState.firstWeapon.properties.contains(
+                    "лёгкое"
+                ) && !currentState.hasShield
+            ) {
                 var weapon: Weapon = Weapon.Unarmed
                 for (weaponType in Weapon.values()) {
-                    if (item.itemTypeAndRarity.lowercase().contains(weaponType.weaponName.lowercase())) {
+                    if (item.itemTypeAndRarity.lowercase()
+                            .contains(weaponType.weaponName.lowercase())
+                    ) {
                         weapon = weaponType
                         break
                     }
@@ -196,7 +209,8 @@ class InventoryHandler @Inject constructor(
         }
 
         // wondrous item/ring
-        if (item.itemTypeAndRarity.lowercase().contains(ItemType.WondrousItem.shownName.lowercase()) ||
+        if (item.itemTypeAndRarity.lowercase()
+                .contains(ItemType.WondrousItem.shownName.lowercase()) ||
             item.itemTypeAndRarity.lowercase().contains(ItemType.Ring.shownName.lowercase())
         ) {
             if (!currentState.equippedArtifacts.contains(itemName)) {
@@ -215,7 +229,9 @@ class InventoryHandler @Inject constructor(
             if (currentState.firstWeapon == Weapon.Unarmed) {
                 var weapon: Weapon = Weapon.Unarmed
                 for (weaponType in Weapon.values()) {
-                    if (item.itemTypeAndRarity.lowercase().contains(weaponType.weaponName.lowercase())) {
+                    if (item.itemTypeAndRarity.lowercase()
+                            .contains(weaponType.weaponName.lowercase())
+                    ) {
                         weapon = weaponType
                         break
                     }
@@ -224,10 +240,15 @@ class InventoryHandler @Inject constructor(
                 currentState.firstWeaponName = itemName
                 currentState.inventoryRelevantData[itemName] = item.inventoryRelevantData
                 return true
-            } else if (currentState.secondWeapon == null && currentState.firstWeapon.properties.contains("лёгкое") && !currentState.hasShield) {
+            } else if (currentState.secondWeapon == null && currentState.firstWeapon.properties.contains(
+                    "лёгкое"
+                ) && !currentState.hasShield
+            ) {
                 var weapon: Weapon = Weapon.Unarmed
                 for (weaponType in Weapon.values()) {
-                    if (item.itemTypeAndRarity.lowercase().contains(weaponType.weaponName.lowercase())) {
+                    if (item.itemTypeAndRarity.lowercase()
+                            .contains(weaponType.weaponName.lowercase())
+                    ) {
                         weapon = weaponType
                         break
                     }
@@ -281,7 +302,8 @@ class InventoryHandler @Inject constructor(
         }
 
         // adding wondrous item/ring
-        if (item.itemTypeAndRarity.lowercase().contains(ItemType.WondrousItem.shownName.lowercase()) ||
+        if (item.itemTypeAndRarity.lowercase()
+                .contains(ItemType.WondrousItem.shownName.lowercase()) ||
             item.itemTypeAndRarity.lowercase().contains(ItemType.Ring.shownName.lowercase())
         ) {
             if (!currentState.equippedArtifacts.contains(itemName)) {
@@ -347,7 +369,8 @@ class InventoryHandler @Inject constructor(
         }
 
         // removing wondrous item/ring
-        if (item.itemTypeAndRarity.lowercase().contains(ItemType.WondrousItem.shownName.lowercase()) ||
+        if (item.itemTypeAndRarity.lowercase()
+                .contains(ItemType.WondrousItem.shownName.lowercase()) ||
             item.itemTypeAndRarity.lowercase().contains(ItemType.Ring.shownName.lowercase())
         ) {
             currentState.inventoryRelevantData.remove(itemName)

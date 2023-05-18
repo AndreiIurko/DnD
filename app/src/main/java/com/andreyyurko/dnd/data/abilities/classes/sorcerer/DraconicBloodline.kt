@@ -1,6 +1,12 @@
 package com.andreyyurko.dnd.data.abilities.classes.sorcerer
 
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.Armor
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.DamageType
+import com.andreyyurko.dnd.data.characterData.Languages
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import java.lang.Integer.max
@@ -205,8 +211,16 @@ var dragonAncestor: AbilityNode = AbilityNode(
         Pair(
             "first", {
                 listOf(
-                    ancestorBlack.name, ancestorSilver.name, ancestorBlue.name, ancestorBrass.name, ancestorBronze.name,
-                    ancestorCopper.name, ancestorGold.name, ancestorGreen.name, ancestorRed.name, ancestorWhite.name
+                    ancestorBlack.name,
+                    ancestorSilver.name,
+                    ancestorBlue.name,
+                    ancestorBrass.name,
+                    ancestorBronze.name,
+                    ancestorCopper.name,
+                    ancestorGold.name,
+                    ancestorGreen.name,
+                    ancestorRed.name,
+                    ancestorWhite.name
                 )
             }
         )
@@ -259,13 +273,13 @@ var elementalAffinity: AbilityNode = AbilityNode(
             var colorType = ""
             abilities.additionalAbilities["Драконий предок"]?.let { colorType = it.split(' ')[4] }
             typeToDamageMap[colorType]?.let {
-                abilities.actionsList.add(
+                abilities.actionsMap["Родство со стихией"] =
                     Action(
                         name = "Родство со стихией",
                         description = "Когда вы накладываете заклинание, причиняющее урон вида ${it.typeName}, вы добавляете модификатор Харизмы к одному броску урона этого заклинания. В это же самое время вы можете потратить 1 единицу чародейства, чтобы получить сопротивление этому виду урона на 1 час.",
                         type = ActionType.PartOfAction
                     )
-                )
+
             }
         }
         abilities
@@ -280,7 +294,7 @@ var elementalAffinity: AbilityNode = AbilityNode(
 var dragonWings: AbilityNode = AbilityNode(
     name = "Крылья дракона",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Крылья дракона"] =
             Action(
                 name = "Крылья дракона",
                 description = "Вы получаете способность расправить драконьи крылья у себя за спиной, получая при этом скорость полёта, равную вашей текущей скорости. Вы можете создать их бонусным действием в свой ход. Крылья существуют, пока вы не развеете их бонусным действием в свой ход.\n" +
@@ -288,7 +302,7 @@ var dragonWings: AbilityNode = AbilityNode(
                         "Вы не можете призвать свои крылья, нося броню, если, конечно, броня не изготовлена специально для этого. Одежда, также не приспособленная под крылья, может быть уничтожена, когда вы призываете их.",
                 type = ActionType.Bonus
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -303,13 +317,13 @@ var dragonWings: AbilityNode = AbilityNode(
 var dragonPresence: AbilityNode = AbilityNode(
     name = "Образ дракона",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Образ дракона"] =
             Action(
                 name = "Образ дракона",
                 description = "Вы можете вызвать ужасный образ своего предка дракона, повергая им в ужас врагов. Вы можете действием потратить 5 единиц чародейства, чтобы окружить себя аурой страха или трепета (на ваш выбор), радиусом 60 футов. В течение 1 минуты, или пока вы не утратите концентрацию (как если бы вы концентрировались на заклинании), все враждебные существа, начинающие ход в этой ауре, должны преуспеть в спасброске Мудрости, иначе они станут очарованными (если вы выбрали трепет) или испуганными (если вы выбрали страх) до окончания действия ауры. Существо, преуспевшее в спасброске, получает иммунитет к вашей ауре на 24 часа.",
                 type = ActionType.Action
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

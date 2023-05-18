@@ -1,12 +1,16 @@
 package com.andreyyurko.dnd.data.abilities.classes.monk
 
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var openHandTechnique = AbilityNode(
     name = "Техники открытой ладони",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Техники открытой ладони"] =
             Action(
                 name = "Техники открытой ладони",
                 description = "Вы получаете возможность манипулировать вражеской энергией ци, направляя свою собственную. Если вы попадаете по существу одной из атак, дарованных «Шквалом ударов», вы можете наложить на цель один из следующих эффектов:\n" +
@@ -16,7 +20,7 @@ var openHandTechnique = AbilityNode(
                         "    Цель не может совершать реакции до конца вашего следующего хода.\n",
                 type = ActionType.PartOfAction
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -39,14 +43,14 @@ var wholenessOfBody = AbilityNode(
                 maximum = 1
             )
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Исцеление тела"] =
             Action(
                 name = "Исцеление тела",
                 description = "Вы получаете способность лечить себя. Вы можете действием восстановить количество хитов, равное вашему утроенному уровню монаха. Вы должны завершить продолжительный отдых, прежде чем сможете использовать это умение снова.\n",
                 type = ActionType.Action,
                 relatedCharges = "Исцеление тела"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -59,13 +63,13 @@ var wholenessOfBody = AbilityNode(
 var tranquility = AbilityNode(
     name = "Умиротворение",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Умиротворе"] =
             Action(
                 name = "Умиротворение",
                 description = "Вы можете совершить специальную медитацию, окружающую вас аурой мира. В конце продолжительного отдыха вы получаете эффект заклинания убежище [sanctuary], длящийся до начала вашего следующего продолжительного отдыха (эффект может окончиться ранее, согласно описанию заклинания). Сл спасброска от заклинания равна 8 + ваш модификатор Мудрости + ваш бонус мастерства.\n",
                 type = ActionType.Long
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -78,14 +82,14 @@ var tranquility = AbilityNode(
 var quiveringPalm = AbilityNode(
     name = "Дрожащая ладонь",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Дрожащая ладонь"] =
             Action(
                 name = "Дрожащая ладонь",
                 description = "Вы получаете возможность создавать смертельные колебания в чужом теле. Если вы попадёте по существу безоружным ударом, вы можете потратить 3 очка ци, чтобы создать неуловимые колебания в его теле, которые длятся в течение количества суток, равного вашему уровню монаха. Колебания безвредны, пока вы не остановите их действием. Для того чтобы остановить их, цель должна находится на одном плане существования с вами. При этом существо должно совершить спасбросок Телосложения. В случае успеха цель получает урон некротической энергией 10к10, а в случае провала её хиты опускаются до 0. Вы можете держать одновременно только одно существо под действием «Дрожащей ладони». Вы можете решить закончить колебания без вреда, не тратя действие.\n",
                 type = ActionType.PartOfAction,
                 relatedCharges = "Ци"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

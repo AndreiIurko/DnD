@@ -30,7 +30,8 @@ class CharacterEquipmentFragment : BaseFragment(R.layout.fragment_character_equi
         val firstWeaponInfo = viewModel.getFirstWeaponInfo()
 
         viewBinding.firstWeaponName.text = firstWeaponInfo.weaponName
-        viewBinding.firstWeaponDamage.text = firstWeaponInfo.toHitBonus + ", " + firstWeaponInfo.damage
+        viewBinding.firstWeaponDamage.text =
+            firstWeaponInfo.toHitBonus + ", " + firstWeaponInfo.damage
         viewBinding.firstWeaponProperties.text = firstWeaponInfo.properties.joinToString()
 
         val secondWeaponInfo = viewModel.getSecondWeaponInfo()

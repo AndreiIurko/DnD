@@ -6,7 +6,12 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.LinearLayout
+import android.widget.PopupWindow
+import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.andreyyurko.dnd.R
@@ -36,7 +41,8 @@ class ChooseEquipmentAdapter @Inject constructor(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.view_equipment_list_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.view_equipment_list_item, parent, false)
         return ViewHolder(itemView)
     }
 
@@ -87,8 +93,10 @@ class ChooseEquipmentAdapter @Inject constructor(
         for (item in itemsListWithoutCopies) {
             if (item.count <= 0) continue
 
-            val isEquipped = inventoryHandler.isItemEquipped(characterViewModel.getCharacter(), item.itemName)
-            val isCanBeEquipped = inventoryHandler.isItemEquitable(characterViewModel.getCharacter(), item.itemName)
+            val isEquipped =
+                inventoryHandler.isItemEquipped(characterViewModel.getCharacter(), item.itemName)
+            val isCanBeEquipped =
+                inventoryHandler.isItemEquitable(characterViewModel.getCharacter(), item.itemName)
 
             resultList.add(
                 EquipmentItem(
@@ -140,7 +148,13 @@ class ChooseEquipmentAdapter @Inject constructor(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             400 * context.resources.displayMetrics.density.toInt()
         )
-        parent.setBackgroundColor(MaterialColors.getColor(context, R.attr.backgroundColor, Color.BLACK))
+        parent.setBackgroundColor(
+            MaterialColors.getColor(
+                context,
+                R.attr.backgroundColor,
+                Color.BLACK
+            )
+        )
 
         parent.findViewById<TextView>(R.id.name).text = item.name
         parent.findViewById<TextView>(R.id.typeAndRarity).text = item.itemTypeAndRarity
@@ -191,7 +205,10 @@ class ChooseEquipmentAdapter @Inject constructor(
         val fullDescriptionPopUp = PopupWindow(parent, wid, high, focus)
 
         parent.findViewById<Button>(R.id.saveButton).setOnClickListener {
-            inventoryHandler.changeItemDescription(characterViewModel.getCharacter(), itemDescription)
+            inventoryHandler.changeItemDescription(
+                characterViewModel.getCharacter(),
+                itemDescription
+            )
             fullDescriptionPopUp.dismiss()
         }
 

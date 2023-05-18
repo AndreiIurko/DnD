@@ -33,7 +33,8 @@ class SpellsParser @Inject constructor() : ViewModel() {
         } catch (ioException: IOException) {
             Log.d(LOG_TAG, ioException.toString())
         }
-        val type: Type = Types.newParameterizedType(MutableList::class.java, SpellSpecificLanguage::class.java)
+        val type: Type =
+            Types.newParameterizedType(MutableList::class.java, SpellSpecificLanguage::class.java)
         spells = Gson().fromJson(jsonString, type)
         return spells ?: emptyList()
     }

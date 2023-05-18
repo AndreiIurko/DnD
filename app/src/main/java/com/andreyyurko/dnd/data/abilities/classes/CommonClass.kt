@@ -58,7 +58,10 @@ class CharacterAbilityNodeLevel(
             if (entries.value(character?.characterInfo)[0] == data.next_level) continue
 
             // choose all abilities
-            (this as CharacterAbilityNode).makeChoice(entries.key, entries.value(character?.characterInfo)[0])
+            (this as CharacterAbilityNode).makeChoice(
+                entries.key,
+                entries.value(character?.characterInfo)[0]
+            )
         }
     }
 
@@ -75,12 +78,11 @@ class CharacterAbilityNodeLevel(
 var extraAttack: AbilityNode = AbilityNode(
     name = "Дополнительная атака",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        for (action in abilities.actionsList) {
-            if (action.name == "Атака") {
-                val actionSplit: MutableList<String> = action.description.split("\n") as MutableList<String>
-                actionSplit[0] = "Совершить две атаки оружием"
-                action.description = actionSplit.joinToString("\n")
-            }
+        abilities.actionsMap["Атака"]?.let { action ->
+            val actionSplit: MutableList<String> =
+                action.description.split("\n") as MutableList<String>
+            actionSplit[0] = "Совершить две атаки оружием"
+            action.description = actionSplit.joinToString("\n")
         }
         abilities
     },

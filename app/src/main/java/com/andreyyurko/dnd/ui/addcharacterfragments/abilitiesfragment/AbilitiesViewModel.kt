@@ -34,8 +34,7 @@ class AbilitiesViewModel @Inject constructor(
     fun changeSystem() {
         if (isPointBy) {
             isPointBy = false
-        }
-        else {
+        } else {
             isPointBy = true
             val currentValues = abilities.values.toList()
             abilities.keys.forEach {

@@ -9,22 +9,19 @@ import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 var carefulSpell: AbilityNode = AbilityNode(
     name = "Аккуратное заклинание",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Аккуратное заклинание"] =
             Action(
                 name = "Аккуратное заклинание",
                 description = "Когда вы накладываете заклинание, которое вынуждает других существ совершить спасбросок, вы можете защитить некоторых из них от магического воздействия. Для этого вы тратите 1 единицу чародейства и выбираете существ в количестве, равном вашему модификатору Харизмы (минимум одно существо). Указанные существа автоматически преуспевают в спасброске от данного заклинания.",
                 type = ActionType.PartOfAction,
                 relatedCharges = "Единицы чародейства"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
-        var isChosen = false
-        for (action in abilities.actionsList) {
-            if (action.name == "Аккуратное заклинание") isChosen = true
-        }
+        val isChosen = abilities.actionsMap.contains("Аккуратное заклинание")
         abilities.characterClass == Classes.Sorcerer && abilities.level >= 3 && !isChosen
     },
     description = "Когда вы накладываете заклинание, которое вынуждает других существ совершить спасбросок, вы можете защитить некоторых из них от магического воздействия. Для этого вы тратите 1 единицу чародейства и выбираете существ в количестве, равном вашему модификатору Харизмы (минимум одно существо). Указанные существа автоматически преуспевают в спасброске от данного заклинания."
@@ -33,7 +30,7 @@ var carefulSpell: AbilityNode = AbilityNode(
 var distantSpell: AbilityNode = AbilityNode(
     name = "Далёкое заклинание",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Далёкое заклинание"] =
             Action(
                 name = "Далёкое заклинание",
                 description = "При накладывании заклинания, дистанция которого 5 футов и более, вы можете потратить 1 единицу чародейства, чтобы удвоить это расстояние.\n" +
@@ -42,15 +39,12 @@ var distantSpell: AbilityNode = AbilityNode(
                 type = ActionType.PartOfAction,
                 relatedCharges = "Единицы чародейства"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
-        var isChosen = false
-        for (action in abilities.actionsList) {
-            if (action.name == "Далёкое заклинание") isChosen = true
-        }
+        val isChosen = abilities.actionsMap.contains("Далёкое заклинание")
         abilities.characterClass == Classes.Sorcerer && abilities.level >= 3 && !isChosen
     },
     description = "При накладывании заклинания, дистанция которого 5 футов и более, вы можете потратить 1 единицу чародейства, чтобы удвоить это расстояние.\n" +
@@ -61,7 +55,7 @@ var distantSpell: AbilityNode = AbilityNode(
 var empoweredSpell: AbilityNode = AbilityNode(
     name = "Усиленное заклинание",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Усиленное заклинание"] =
             Action(
                 name = "Усиленное заклинание",
                 description = "При совершении броска урона от заклинания вы можете потратить 1 единицу чародейства, чтобы перебросить несколько костей урона в количестве не больше вашего модификатора Харизмы (минимум одна). Вы должны использовать новое выпавшее значение.\n" +
@@ -70,15 +64,12 @@ var empoweredSpell: AbilityNode = AbilityNode(
                 type = ActionType.PartOfAction,
                 relatedCharges = "Единицы чародейства"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
-        var isChosen = false
-        for (action in abilities.actionsList) {
-            if (action.name == "Усиленное заклинание") isChosen = true
-        }
+        val isChosen = abilities.actionsMap.contains("Усиленное заклинание")
         abilities.characterClass == Classes.Sorcerer && abilities.level >= 3 && !isChosen
     },
     description = "При совершении броска урона от заклинания вы можете потратить 1 единицу чародейства, чтобы перебросить несколько костей урона в количестве не больше вашего модификатора Харизмы (минимум одна). Вы должны использовать новое выпавшее значение.\n" +
@@ -89,22 +80,19 @@ var empoweredSpell: AbilityNode = AbilityNode(
 var extendedSpell: AbilityNode = AbilityNode(
     name = "Продлённое заклинание",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Продлённое заклинание"] =
             Action(
                 name = "Продлённое заклинание",
                 description = "При накладывании заклинания с длительностью 1 минута или более, вы можете потратить 1 единицу чародейства, чтобы удвоить это время, вплоть до максимального в 24 часа.",
                 type = ActionType.PartOfAction,
                 relatedCharges = "Единицы чародейства"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
-        var isChosen = false
-        for (action in abilities.actionsList) {
-            if (action.name == "Продлённое заклинание") isChosen = true
-        }
+        val isChosen = abilities.actionsMap.contains("Продлённое заклинание")
         abilities.characterClass == Classes.Sorcerer && abilities.level >= 3 && !isChosen
     },
     description = "При накладывании заклинания с длительностью 1 минута или более, вы можете потратить 1 единицу чародейства, чтобы удвоить это время, вплоть до максимального в 24 часа."
@@ -113,22 +101,19 @@ var extendedSpell: AbilityNode = AbilityNode(
 var heightenedSpell: AbilityNode = AbilityNode(
     name = "Непреодолимое заклинание",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Непреодолимое заклинание"] =
             Action(
                 name = "Непреодолимое заклинание",
                 description = "Когда вы накладываете заклинание, которое вынуждает существо совершить спасбросок для защиты от его эффектов, вы можете потратить 3 единицы чародейства, чтобы одна из целей заклинания совершила первый спасбросок от этого заклинания с помехой.",
                 type = ActionType.PartOfAction,
                 relatedCharges = "Единицы чародейства"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
-        var isChosen = false
-        for (action in abilities.actionsList) {
-            if (action.name == "") isChosen = true
-        }
+        val isChosen = abilities.actionsMap.contains("Непреодолимое заклинание")
         abilities.characterClass == Classes.Sorcerer && abilities.level >= 3 && !isChosen
     },
     description = "Когда вы накладываете заклинание, которое вынуждает существо совершить спасбросок для защиты от его эффектов, вы можете потратить 3 единицы чародейства, чтобы одна из целей заклинания совершила первый спасбросок от этого заклинания с помехой."
@@ -137,22 +122,19 @@ var heightenedSpell: AbilityNode = AbilityNode(
 var quickenedSpell: AbilityNode = AbilityNode(
     name = "Ускоренное заклинание",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Ускоренное заклинание"] =
             Action(
                 name = "Ускоренное заклинание",
                 description = "Если вы накладываете заклинание со временем накладывания «1 действие», вы можете потратить 2 единицы чародейства, чтобы наложить это заклинание бонусным действием.",
                 type = ActionType.PartOfAction,
                 relatedCharges = "Единицы чародейства"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
-        var isChosen = false
-        for (action in abilities.actionsList) {
-            if (action.name == "Ускоренное заклинание") isChosen = true
-        }
+        val isChosen = abilities.actionsMap.contains("Ускоренное заклинание")
         abilities.characterClass == Classes.Sorcerer && abilities.level >= 3 && !isChosen
     },
     description = "Если вы накладываете заклинание со временем накладывания «1 действие», вы можете потратить 2 единицы чародейства, чтобы наложить это заклинание бонусным действием."
@@ -161,22 +143,19 @@ var quickenedSpell: AbilityNode = AbilityNode(
 var subtleSpell: AbilityNode = AbilityNode(
     name = "Неуловимое заклинание",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Неуловимое заклинание"] =
             Action(
                 name = "Неуловимое заклинание",
                 description = "Во время накладывания заклинания вы можете потратить 1 единицу чародейства, чтоб наложить его без вербальных и соматических компонентов.",
                 type = ActionType.PartOfAction,
                 relatedCharges = "Единицы чародейства"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
-        var isChosen = false
-        for (action in abilities.actionsList) {
-            if (action.name == "Неуловимое заклинание") isChosen = true
-        }
+        val isChosen = abilities.actionsMap.contains("Неуловимое заклинание")
         abilities.characterClass == Classes.Sorcerer && abilities.level >= 3 && !isChosen
     },
     description = "Во время накладывания заклинания вы можете потратить 1 единицу чародейства, чтоб наложить его без вербальных и соматических компонентов."
@@ -185,7 +164,7 @@ var subtleSpell: AbilityNode = AbilityNode(
 var twinnedSpell: AbilityNode = AbilityNode(
     name = "Удвоенное заклинание",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Удвоенное заклинание"] =
             Action(
                 name = "Удвоенное заклинание",
                 description = "Если вы используете заклинание, нацеливаемое только на одно существо и не имеющее дистанцию «на себя», вы можете потратить количество единиц чародейства, равное уровню заклинания (1 для заговоров), чтобы нацелиться им на второе существо-цель в пределах дистанции этого заклинания.\n" +
@@ -194,15 +173,12 @@ var twinnedSpell: AbilityNode = AbilityNode(
                 type = ActionType.PartOfAction,
                 relatedCharges = "Единицы чародейства"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
     requirements = { abilities: CharacterInfo ->
-        var isChosen = false
-        for (action in abilities.actionsList) {
-            if (action.name == "Удвоенное заклинание") isChosen = true
-        }
+        val isChosen = abilities.actionsMap.contains("Удвоенное заклинание")
         abilities.characterClass == Classes.Sorcerer && abilities.level >= 3 && !isChosen
     },
     description = "Если вы используете заклинание, нацеливаемое только на одно существо и не имеющее дистанцию «на себя», вы можете потратить количество единиц чародейства, равное уровню заклинания (1 для заговоров), чтобы нацелиться им на второе существо-цель в пределах дистанции этого заклинания.\n" +

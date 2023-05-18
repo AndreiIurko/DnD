@@ -32,7 +32,8 @@ class CharacterSkillsAdapter @Inject constructor(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val skillNameTextView: TextView = itemView.findViewById(R.id.skillNameTextView)
         val skillBonusTextView: TextView = itemView.findViewById(R.id.skillBonusTextView)
-        val skillProficiencyImageView: ImageView = itemView.findViewById(R.id.skillProficiencyImageView)
+        val skillProficiencyImageView: ImageView =
+            itemView.findViewById(R.id.skillProficiencyImageView)
         val skillModifierTextView: TextView = itemView.findViewById(R.id.skillModifierTextView)
     }
 

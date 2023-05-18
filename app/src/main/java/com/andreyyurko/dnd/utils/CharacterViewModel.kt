@@ -96,7 +96,9 @@ class CharacterViewModel @Inject constructor(
                 contentResolver.takePersistableUriPermission(uri, readUriPermission)
                 contentResolver.openInputStream(uri)?.use { inputStream: InputStream ->
                     _imageState.update { currentState: ImageState ->
-                        currentState.copy(imageBitmap = BitmapFactory.decodeStream(inputStream).asImageBitmap())
+                        currentState.copy(
+                            imageBitmap = BitmapFactory.decodeStream(inputStream).asImageBitmap()
+                        )
                     }
                 }
             }

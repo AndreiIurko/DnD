@@ -3,8 +3,52 @@ package com.andreyyurko.dnd.data.abilities.classes.monk
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.classes.evasion
 import com.andreyyurko.dnd.data.abilities.classes.extraAttack
-import com.andreyyurko.dnd.data.abilities.other.*
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.abilities.other.abilityScoreImprovement
+import com.andreyyurko.dnd.data.abilities.other.acrobatics
+import com.andreyyurko.dnd.data.abilities.other.alchemistsSupplies
+import com.andreyyurko.dnd.data.abilities.other.athletics
+import com.andreyyurko.dnd.data.abilities.other.bagpipes
+import com.andreyyurko.dnd.data.abilities.other.brewersSupplies
+import com.andreyyurko.dnd.data.abilities.other.calligraphersSupplies
+import com.andreyyurko.dnd.data.abilities.other.carpentersTools
+import com.andreyyurko.dnd.data.abilities.other.cartographersTools
+import com.andreyyurko.dnd.data.abilities.other.cobblersTools
+import com.andreyyurko.dnd.data.abilities.other.cooksUtensils
+import com.andreyyurko.dnd.data.abilities.other.drum
+import com.andreyyurko.dnd.data.abilities.other.dulcimer
+import com.andreyyurko.dnd.data.abilities.other.flute
+import com.andreyyurko.dnd.data.abilities.other.glassblowersTools
+import com.andreyyurko.dnd.data.abilities.other.history
+import com.andreyyurko.dnd.data.abilities.other.horn
+import com.andreyyurko.dnd.data.abilities.other.insight
+import com.andreyyurko.dnd.data.abilities.other.jewelersTools
+import com.andreyyurko.dnd.data.abilities.other.leatherworkersTools
+import com.andreyyurko.dnd.data.abilities.other.lute
+import com.andreyyurko.dnd.data.abilities.other.lyre
+import com.andreyyurko.dnd.data.abilities.other.masonsTools
+import com.andreyyurko.dnd.data.abilities.other.paintersSupplies
+import com.andreyyurko.dnd.data.abilities.other.panFlute
+import com.andreyyurko.dnd.data.abilities.other.pottersTools
+import com.andreyyurko.dnd.data.abilities.other.religion
+import com.andreyyurko.dnd.data.abilities.other.shawm
+import com.andreyyurko.dnd.data.abilities.other.smithsTools
+import com.andreyyurko.dnd.data.abilities.other.stealth
+import com.andreyyurko.dnd.data.abilities.other.tinkersTools
+import com.andreyyurko.dnd.data.abilities.other.viol
+import com.andreyyurko.dnd.data.abilities.other.weaversTools
+import com.andreyyurko.dnd.data.abilities.other.woodcarversTools
+import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.Armor
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.Conditions
+import com.andreyyurko.dnd.data.characterData.DamageType
+import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.characterData.Weapon
+import com.andreyyurko.dnd.data.characterData.addAllSimpleWeapons
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 
@@ -54,11 +98,29 @@ var classFeaturesMonk: AbilityNode = AbilityNode(
         ),
         Pair(
             "skill1",
-            { listOf(acrobatics.name, athletics.name, history.name, insight.name, religion.name, stealth.name) }
+            {
+                listOf(
+                    acrobatics.name,
+                    athletics.name,
+                    history.name,
+                    insight.name,
+                    religion.name,
+                    stealth.name
+                )
+            }
         ),
         Pair(
             "skill2",
-            { listOf(acrobatics.name, athletics.name, history.name, insight.name, religion.name, stealth.name) }
+            {
+                listOf(
+                    acrobatics.name,
+                    athletics.name,
+                    history.name,
+                    insight.name,
+                    religion.name,
+                    stealth.name
+                )
+            }
         ),
     ),
     requirements = { abilities: CharacterInfo ->
@@ -112,21 +174,24 @@ var martialArts: AbilityNode = AbilityNode(
         if (abilities.currentState.armor == Armor.NoArmor && !abilities.currentState.hasShield) {
             checkProfs@ for (prof in abilities.weaponProficiency) {
                 for (prop in prof.properties) {
-                    if (prop.lowercase().contains("двуручное") or prop.lowercase().contains("тяжелое")) {
+                    if (prop.lowercase().contains("двуручное") or prop.lowercase()
+                            .contains("тяжелое")
+                    ) {
                         continue@checkProfs
                     }
                 }
                 prof.setOfSkills.plus(Ability.Dexterity)
-                if(prof.damage == "1") prof.damage = dice
+                if (prof.damage == "1") prof.damage = dice
             }
         }
-        abilities.additionalAbilities["Боевые искусства"] = "Ваше знание боевых искусств позволяет вам эффективно использовать в бою безоружные удары и монашеское оружие — короткие мечи, а также любое простое рукопашное оружие, не имеющее свойств двуручное и тяжёлое.\n" +
-                "\n" +
-                "Если вы безоружны или используете только монашеское оружие, и не носите ни доспехов, ни щита, вы получаете следующие преимущества:\n" +
-                "\n" +
-                "\tВы можете использовать Ловкость вместо Силы для бросков атак и урона ваших безоружных ударов и атак монашеским оружием.\n" +
-                "\tВы можете использовать " + dice + " вместо обычной кости урона ваших безоружных ударов или атак монашеским оружием. Эта кость увеличивается с вашим уровнем, как показано в колонке «боевые искусства».\n" +
-                "\tЕсли в свой ход вы используете действие Атака для безоружного удара или атаки монашеским оружием, вы можете бонусным действием совершить ещё один безоружный удар. Например, если вы совершили действие Атака и атаковали боевым посохом, вы можете совершить бонусным действием безоружный удар, при условии, что в этом ходу вы еще не совершали бонусное действие.\n"
+        abilities.additionalAbilities["Боевые искусства"] =
+            "Ваше знание боевых искусств позволяет вам эффективно использовать в бою безоружные удары и монашеское оружие — короткие мечи, а также любое простое рукопашное оружие, не имеющее свойств двуручное и тяжёлое.\n" +
+                    "\n" +
+                    "Если вы безоружны или используете только монашеское оружие, и не носите ни доспехов, ни щита, вы получаете следующие преимущества:\n" +
+                    "\n" +
+                    "\tВы можете использовать Ловкость вместо Силы для бросков атак и урона ваших безоружных ударов и атак монашеским оружием.\n" +
+                    "\tВы можете использовать " + dice + " вместо обычной кости урона ваших безоружных ударов или атак монашеским оружием. Эта кость увеличивается с вашим уровнем, как показано в колонке «боевые искусства».\n" +
+                    "\tЕсли в свой ход вы используете действие Атака для безоружного удара или атаки монашеским оружием, вы можете бонусным действием совершить ещё один безоружный удар. Например, если вы совершили действие Атака и атаковали боевым посохом, вы можете совершить бонусным действием безоружный удар, при условии, что в этом ходу вы еще не совершали бонусное действие.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -153,9 +218,9 @@ var monk1: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(classFeaturesMonk.name) }),
-        Pair("second", { listOf(monkUnarmedDefence.name) }),
-        Pair("third", { listOf(martialArts.name) })
+        Pair("first") { listOf(classFeaturesMonk.name) },
+        Pair("second") { listOf(monkUnarmedDefence.name) },
+        Pair("third") { listOf(martialArts.name) }
     ),
     requirements = { true },
     addRequirements = listOf(),
@@ -196,30 +261,30 @@ var kiUsing = AbilityNode(
                 )
             }
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Поступь ветра"] =
             Action(
                 name = "Поступь ветра",
                 description = "Вы можете потратить 1 очко ци в свой ход, чтобы совершить бонусным действием Отход или Рывок. В этот ход дальность ваших прыжков удваивается.\n",
                 type = ActionType.Bonus,
                 relatedCharges = "Ци"
             )
-        )
-        abilities.actionsList.add(
+
+        abilities.actionsMap["Терпеливая оборона"] =
             Action(
                 name = "Терпеливая оборона",
                 description = "Вы тратите 1 очко ци в свой ход, чтобы совершить бонусным действием Уклонение.\n",
                 type = ActionType.Bonus,
                 relatedCharges = "Ци"
             )
-        )
-        abilities.actionsList.add(
+
+        abilities.actionsMap["Шквал ударов"] =
             Action(
                 name = "Шквал ударов",
                 description = "Сразу же после того, как вы в свой ход совершили действие Атака, вы можете потратить 1 очко ци, чтобы бонусным действием совершить два безоружных удара.y\n",
                 type = ActionType.Bonus,
                 relatedCharges = "Ци"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -246,8 +311,8 @@ var monk2: AbilityNode = AbilityNodeLevel(
         abilities
     },
     getAlternatives = mutableMapOf(
-        Pair("first", { listOf(monkUnarmedMovement.name) }),
-        Pair("second", { listOf(kiUsing.name) })
+        Pair("first") { listOf(monkUnarmedMovement.name) },
+        Pair("second") { listOf(kiUsing.name) }
     ),
     requirements = { true },
     addRequirements = listOf(listOf()),
@@ -270,7 +335,7 @@ var monasticTradition: AbilityNode = AbilityNode(
 var deflectMissiles: AbilityNode = AbilityNode(
     name = "Отражение снарядов",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Отражение снарядов"] =
             Action(
                 name = "Отражение снарядов",
                 description = "Вы можете реакцией отразить или поймать снаряд, если по вам попали дальнобойной атакой оружием. Если вы делаете это, урон снижается на 1к10 + ваш модификатор Ловкости + ваш уровень монаха.\n" +
@@ -279,7 +344,7 @@ var deflectMissiles: AbilityNode = AbilityNode(
                 type = ActionType.Reaction,
                 relatedCharges = "Ци"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -309,13 +374,13 @@ var monk3: AbilityNode = AbilityNodeLevel(
 var slowFall: AbilityNode = AbilityNode(
     name = "Замедленное падение",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Замедленное падение"] =
             Action(
                 name = "Замедленное падение",
                 description = "Если вы упали, вы можете реакцией уменьшить урон от падения на значение, равное вашему уровню монаха, умноженному на пять.\n",
                 type = ActionType.Reaction
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -344,14 +409,14 @@ var monk4: AbilityNode = AbilityNodeLevel(
 var stunningStrike: AbilityNode = AbilityNode(
     name = "Ошеломляющий удар",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Ошеломляющий удар"] =
             Action(
                 name = "Ошеломляющий удар",
                 description = "Вы можете взаимодействовать с энергией ци, текущей в теле вашего противника. Если вы попали по другому существу рукопашной атакой оружием, вы можете потратить 1 очко ци, чтобы нанести ошеломляющий удар. Цель должна преуспеть в спасброске Телосложения, иначе она станет ошеломлённой до конца вашего следующего хода.\n",
                 type = ActionType.PartOfAction,
                 relatedCharges = "Ци"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -411,13 +476,13 @@ var monk6: AbilityNode = AbilityNodeLevel(
 var stillnessOfMind: AbilityNode = AbilityNode(
     name = "Спокойствие разума",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Спокойствие разума"] =
             Action(
                 name = "Спокойствие разума",
                 description = "Вы можете действием окончить один из действующих на вас эффектов, делающих вас очарованным или испуганным.\n",
                 type = ActionType.Action
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -578,13 +643,13 @@ var diamondSoul: AbilityNode = AbilityNode(
         abilities.savingThrowProf.add(Ability.Charisma)
         abilities.savingThrowProf.add(Ability.Constitution)
         abilities.savingThrowProf.add(Ability.Wisdom)
-        abilities.actionsList.add(
+        abilities.actionsMap["Алмазная душа"] =
             Action(
                 name = "Алмазная душа",
                 description = "Если вы провалили спасбросок, вы можете повторить его, потратив 1 очко ци, и должны использовать второй результат.\n",
                 type = ActionType.Additional
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -673,22 +738,22 @@ var monk17: AbilityNode = AbilityNodeLevel(
 var emptyBody: AbilityNode = AbilityNode(
     name = "Пустое тело",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Пустое тело"] =
             Action(
                 name = "Пустое тело",
                 description = "Вы можете действием потратить 4 очка ци, чтобы стать невидимым на 1 минуту. В течение этого времени вы получаете сопротивление всем видам урона, кроме урона силовым полем.\n",
                 type = ActionType.Action,
                 relatedCharges = "Ци"
             )
-        )
-        abilities.actionsList.add(
+
+        abilities.actionsMap["Пустое тело. Проекция в астрал"] =
             Action(
                 name = "Пустое тело. Проекция в астрал",
                 description = "Вы можете потратить 8 очков ци, чтобы наложить заклинание проекция в астрал [astral projection] без применения материальных компонентов. Вы не можете перемещать кого-либо вместе с собой.\n",
                 type = ActionType.Action,
                 relatedCharges = "Ци"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

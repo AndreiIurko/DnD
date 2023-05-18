@@ -49,12 +49,10 @@
             android:background="@drawable/filled_border">
 
             <TextView
-                android:id="@+id/allButton"
+                android:id="@+id/chosenButton"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/searchEditText"
-                app:layout_constraintEnd_toStartOf="@id/chosenButton"
-                android:text="Все"
+                android:text="Выбранные"
                 android:textAlignment="center"
                 android:clickable="true"
                 android:focusable="true" />
@@ -65,13 +63,11 @@
                 android:background="?colorPrimary" />
 
             <TextView
-                android:id="@+id/chosenButton"
+                android:id="@+id/allButton"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/searchEditText"
-                app:layout_constraintStart_toEndOf="@id/allButton"
                 android:textAlignment="center"
-                android:text="Выбранные"
+                android:text="Все"
                 android:textColor="?colorOnPrimary"
                 android:clickable="true"
                 android:focusable="true" />

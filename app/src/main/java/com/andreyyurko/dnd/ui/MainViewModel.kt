@@ -21,10 +21,11 @@ class MainViewModel @Inject constructor(
 
     fun initCharacterHolder() {
         viewModelScope.launch {
-            charactersHolder.initActionState.collect{
-                when(it) {
+            charactersHolder.initActionState.collect {
+                when (it) {
                     CharactersHolder.InitializationState.NotInitialized ->
                         _initState.emit(InitState.NotInitialized)
+
                     CharactersHolder.InitializationState.Initialized -> {
                         _initState.emit(InitState.Initialized)
                         isReady = true
@@ -35,7 +36,7 @@ class MainViewModel @Inject constructor(
     }
 
     sealed class InitState {
-        object NotInitialized: InitState()
-        object Initialized: InitState()
+        object NotInitialized : InitState()
+        object Initialized : InitState()
     }
 }

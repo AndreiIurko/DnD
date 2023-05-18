@@ -1,6 +1,11 @@
 package com.andreyyurko.dnd.data.abilities.other
 
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.Armor
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.Priority
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 
@@ -77,13 +82,12 @@ var greatWeaponFighting: AbilityNode = AbilityNode(
 var protection: AbilityNode = AbilityNode(
     name = "Защита",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Защита_СтильБоя"] =
             Action(
                 name = "Защита",
                 description = "Если существо, которое вы видите, атакует не вас, а другое существо, находящееся в пределах 5 футов от вас, вы можете реакцией создать помеху его броску атаки. Для этого вы должны использовать щит.",
                 type = ActionType.Reaction
             )
-        )
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -96,27 +100,25 @@ var protection: AbilityNode = AbilityNode(
 var twoWeaponFighting: AbilityNode = AbilityNode(
     name = "Сражение двумя оружиями",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        for (action in abilities.actionsList) {
-            if (action.name == "Атака второй рукой") {
-                abilities.currentState.secondWeapon?.let {
-                    val (damage, toHitBonus) = calculateWeaponProp(it, abilities)
-                    var damageBonus = -5
-                    if (it.setOfSkills.contains(Ability.Strength)) {
-                        damageBonus = Integer.max(damageBonus, abilityToModifier(abilities.strength))
-                    }
-                    if (it.setOfSkills.contains(Ability.Dexterity)) {
-                        damageBonus = Integer.max(damageBonus, abilityToModifier(abilities.dexterity))
-                    }
-                    it.shownSecondWeaponDamage = sumTwoRolls(damageBonus.toString(), damage)
-                    action.description =
-                        "Если вы совершаете действие «Атака» и атакуете рукопашным оружием со свойством «лёгкое», удерживаемым в одной руке, вы можете бонусным действием атаковать другим рукопашным оружием со свойством «лёгкое», удерживаемым в другой руке.\n" +
-                                "\n" +
-                                "Если у любого из оружий есть свойство «метательное», вы можете не совершать им рукопашную атаку, а метнуть его.\n" +
-                                "Бонус к попаданию: ${if (toHitBonus < 0) "" else "+"}${toHitBonus}\n" +
-                                "Урон: ${sumTwoRolls(damageBonus.toString(), damage)}"
+        abilities.actionsMap["Атака второй рукой"]?.let { action ->
+            abilities.currentState.secondWeapon?.let {
+                val (damage, toHitBonus) = calculateWeaponProp(it, abilities)
+                var damageBonus = -5
+                if (it.setOfSkills.contains(Ability.Strength)) {
+                    damageBonus = Integer.max(damageBonus, abilityToModifier(abilities.strength))
                 }
-
+                if (it.setOfSkills.contains(Ability.Dexterity)) {
+                    damageBonus = Integer.max(damageBonus, abilityToModifier(abilities.dexterity))
+                }
+                it.shownSecondWeaponDamage = sumTwoRolls(damageBonus.toString(), damage)
+                action.description =
+                    "Если вы совершаете действие «Атака» и атакуете рукопашным оружием со свойством «лёгкое», удерживаемым в одной руке, вы можете бонусным действием атаковать другим рукопашным оружием со свойством «лёгкое», удерживаемым в другой руке.\n" +
+                            "\n" +
+                            "Если у любого из оружий есть свойство «метательное», вы можете не совершать им рукопашную атаку, а метнуть его.\n" +
+                            "Бонус к попаданию: ${if (toHitBonus < 0) "" else "+"}${toHitBonus}\n" +
+                            "Урон: ${sumTwoRolls(damageBonus.toString(), damage)}"
             }
+
         }
         abilities
     },

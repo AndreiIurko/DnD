@@ -1,6 +1,10 @@
 package com.andreyyurko.dnd.data.abilities.classes.rogue
 
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.spells.CharacterSpells
 import com.andreyyurko.dnd.data.spells.SpellLists
@@ -35,8 +39,8 @@ var spellCastingArcaneTrickster: AbilityNode = AbilityNode(
                 knownSpells = mutableSetOf("Волшебная рука")
             )
         )
-        abilities.spellCasterLevel += abilities.level/3
-        abilities.spellsLevel = (abilities.level/3 + 1) / 2
+        abilities.spellCasterLevel += abilities.level / 3
+        abilities.spellsLevel = (abilities.level / 3 + 1) / 2
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -103,13 +107,13 @@ var magicalAmbush = AbilityNode(
 var versatileTrickster = AbilityNode(
     name = "Многогранный ловкач",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Многогранный ловкач"] =
             Action(
                 name = "Многогранный ловкач",
                 description = "Вы получаете возможность отвлекать цель своей волшебной рукой. В свой ход вы бонусным действием можете обозначить существо в пределах 5 футов от руки, наложенной этим заклинанием. Если вы так делаете, то до конца этого хода совершаете броски атаки по этому существу с преимуществом.\n",
                 type = ActionType.Bonus
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -128,7 +132,7 @@ var spellThief = AbilityNode(
                 maximum = 1
             )
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Вор заклинаний"] =
             Action(
                 name = "Вор заклинаний",
                 description = "Вы получаете способность магически воровать у другого колдующего знания о том, как накладывать заклинание.\n" +
@@ -139,7 +143,7 @@ var spellThief = AbilityNode(
                 type = ActionType.Bonus,
                 relatedCharges = "Вор заклинаний"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

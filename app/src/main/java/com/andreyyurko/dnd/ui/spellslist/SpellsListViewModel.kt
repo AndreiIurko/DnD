@@ -31,7 +31,8 @@ class SpellsListViewModel @Inject constructor(
         data class Error(val error: String) : LoadSpellsActionState()
     }
 
-    private val _loadSpellsActionState = MutableStateFlow<LoadSpellsActionState>(LoadSpellsActionState.Loading)
+    private val _loadSpellsActionState =
+        MutableStateFlow<LoadSpellsActionState>(LoadSpellsActionState.Loading)
     val loadSpellsActionState: Flow<LoadSpellsActionState> get() = _loadSpellsActionState.asStateFlow()
 
     enum class SpellListState {

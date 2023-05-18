@@ -12,7 +12,7 @@ import com.andreyyurko.dnd.databinding.ActivityCrashBinding
 import java.io.FileOutputStream
 
 
-class CrashActivity: AppCompatActivity(R.layout.activity_crash) {
+class CrashActivity : AppCompatActivity(R.layout.activity_crash) {
 
     private val viewBinding by viewBinding(ActivityCrashBinding::bind)
 
@@ -33,25 +33,26 @@ class CrashActivity: AppCompatActivity(R.layout.activity_crash) {
         }
     }
 
-    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == RESULT_OK) {
-            // There are no request codes
-            val uri: Uri? = result.data?.data
+    private var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                // There are no request codes
+                val uri: Uri? = result.data?.data
 
-            try {
-                val body = intent.getStringExtra("exception_value")
-                contentResolver.openFileDescriptor(uri!!, "w")?.use {
-                    FileOutputStream(it.fileDescriptor).use { stream ->
-                        stream.write(
-                            body!!.toByteArray()
-                        )
+                try {
+                    val body = intent.getStringExtra("exception_value")
+                    contentResolver.openFileDescriptor(uri!!, "w")?.use {
+                        FileOutputStream(it.fileDescriptor).use { stream ->
+                            stream.write(
+                                body!!.toByteArray()
+                            )
+                        }
                     }
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
             }
         }
-    }
 
     private fun createFile() {
         val intent = Intent()

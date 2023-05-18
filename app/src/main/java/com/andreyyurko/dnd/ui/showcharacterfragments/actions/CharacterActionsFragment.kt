@@ -36,12 +36,18 @@ class CharacterActionsFragment : BaseFragment(R.layout.fragment_character_action
                 setupRecyclerView(viewBinding.mainActionsRecyclerView, ActionType.Action)
                 viewBinding.mainActionsRecyclerView.visibility = View.VISIBLE
                 viewBinding.mainActionsArrowImage.setImageDrawable(
-                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_up_24)
+                    AppCompatResources.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_baseline_keyboard_arrow_up_24
+                    )
                 )
             } else {
                 viewBinding.mainActionsRecyclerView.visibility = View.GONE
                 viewBinding.mainActionsArrowImage.setImageDrawable(
-                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_down_24)
+                    AppCompatResources.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_baseline_keyboard_arrow_down_24
+                    )
                 )
             }
         }
@@ -51,12 +57,18 @@ class CharacterActionsFragment : BaseFragment(R.layout.fragment_character_action
                 setupRecyclerView(viewBinding.bonusActionsRecyclerView, ActionType.Bonus)
                 viewBinding.bonusActionsRecyclerView.visibility = View.VISIBLE
                 viewBinding.bonusActionsArrowImage.setImageDrawable(
-                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_up_24)
+                    AppCompatResources.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_baseline_keyboard_arrow_up_24
+                    )
                 )
             } else {
                 viewBinding.bonusActionsRecyclerView.visibility = View.GONE
                 viewBinding.bonusActionsArrowImage.setImageDrawable(
-                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_down_24)
+                    AppCompatResources.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_baseline_keyboard_arrow_down_24
+                    )
                 )
             }
         }
@@ -66,12 +78,18 @@ class CharacterActionsFragment : BaseFragment(R.layout.fragment_character_action
                 setupRecyclerView(viewBinding.reactionsRecyclerView, ActionType.Reaction)
                 viewBinding.reactionsRecyclerView.visibility = View.VISIBLE
                 viewBinding.reactionsArrowImage.setImageDrawable(
-                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_up_24)
+                    AppCompatResources.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_baseline_keyboard_arrow_up_24
+                    )
                 )
             } else {
                 viewBinding.reactionsRecyclerView.visibility = View.GONE
                 viewBinding.reactionsArrowImage.setImageDrawable(
-                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_down_24)
+                    AppCompatResources.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_baseline_keyboard_arrow_down_24
+                    )
                 )
             }
         }
@@ -81,12 +99,18 @@ class CharacterActionsFragment : BaseFragment(R.layout.fragment_character_action
                 setupRecyclerView(viewBinding.partOfActionRecyclerView, ActionType.PartOfAction)
                 viewBinding.partOfActionRecyclerView.visibility = View.VISIBLE
                 viewBinding.partOfActionArrowImage.setImageDrawable(
-                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_up_24)
+                    AppCompatResources.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_baseline_keyboard_arrow_up_24
+                    )
                 )
             } else {
                 viewBinding.partOfActionRecyclerView.visibility = View.GONE
                 viewBinding.partOfActionArrowImage.setImageDrawable(
-                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_down_24)
+                    AppCompatResources.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_baseline_keyboard_arrow_down_24
+                    )
                 )
             }
         }
@@ -96,12 +120,18 @@ class CharacterActionsFragment : BaseFragment(R.layout.fragment_character_action
                 setupRecyclerView(viewBinding.longActionsRecyclerView, ActionType.Long)
                 viewBinding.longActionsRecyclerView.visibility = View.VISIBLE
                 viewBinding.longActionsArrowImage.setImageDrawable(
-                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_up_24)
+                    AppCompatResources.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_baseline_keyboard_arrow_up_24
+                    )
                 )
             } else {
                 viewBinding.longActionsRecyclerView.visibility = View.GONE
                 viewBinding.longActionsArrowImage.setImageDrawable(
-                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_down_24)
+                    AppCompatResources.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_baseline_keyboard_arrow_down_24
+                    )
                 )
             }
         }
@@ -111,19 +141,26 @@ class CharacterActionsFragment : BaseFragment(R.layout.fragment_character_action
                 setupRecyclerView(viewBinding.additionalActionsRecyclerView, ActionType.Additional)
                 viewBinding.additionalActionsRecyclerView.visibility = View.VISIBLE
                 viewBinding.additionalActionsArrowImage.setImageDrawable(
-                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_up_24)
+                    AppCompatResources.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_baseline_keyboard_arrow_up_24
+                    )
                 )
             } else {
                 viewBinding.additionalActionsRecyclerView.visibility = View.GONE
                 viewBinding.additionalActionsArrowImage.setImageDrawable(
-                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_down_24)
+                    AppCompatResources.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_baseline_keyboard_arrow_down_24
+                    )
                 )
             }
         }
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView, actionType: ActionType) {
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         val adapter = ActionsAdapter(viewModel.characterViewModel)
         recyclerView.adapter = adapter
 

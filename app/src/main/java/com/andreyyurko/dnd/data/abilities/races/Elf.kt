@@ -1,7 +1,15 @@
 package com.andreyyurko.dnd.data.abilities.races
 
 import com.andreyyurko.dnd.data.abilities.other.mapOfLanguages
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.Languages
+import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.characterData.Skill
+import com.andreyyurko.dnd.data.characterData.Weapon
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.spells.CharacterSpells
 import com.andreyyurko.dnd.data.spells.SpellLists
@@ -106,23 +114,23 @@ var drow = AbilityNode(
                 )
             }
             if (abilities.level < 5) {
-                abilities.actionsList.add(
+                abilities.actionsMap["Магия дроу"] =
                     Action(
                         name = "Магия дроу",
                         description = "Начиная с 3-го уровня, вы можете накладывать заклинание огонь фей [faerie fire] с помощью магии дроу. После накладывания этого заклинания с помощью магии дроу вы должны закончить продолжительный отдых, прежде чем сможете вновь наложить его таким образом. \n",
                         type = ActionType.Action,
                         relatedCharges = "Магия дроу"
                     )
-                )
+
             } else {
-                abilities.actionsList.add(
+                abilities.actionsMap["Магия дроу"] =
                     Action(
                         name = "Магия дроу",
                         description = "Начиная с 3-го уровня, вы можете накладывать заклинание огонь фей [faerie fire] с помощью магии дроу. Начиная с 5-го уровня вы также можете накладывать заклинание тьма [darkness] с помощью этой особенности. После накладывания одного из этих заклинаний с помощью особенности вы должны закончить продолжительный отдых, прежде чем сможете вновь наложить его таким образом.\n",
                         type = ActionType.Action,
                         relatedCharges = "Магия дроу"
                     )
-                )
+
             }
         }
         //weapon

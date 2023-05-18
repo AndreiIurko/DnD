@@ -1,6 +1,10 @@
 package com.andreyyurko.dnd.data.abilities.classes.sorcerer
 
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var wildMagicSurge: AbilityNode = AbilityNode(
@@ -27,7 +31,7 @@ var tidesOfChaos: AbilityNode = AbilityNode(
             )
         }
 
-        abilities.actionsList.add(
+        abilities.actionsMap["Поток Хаоса"] =
             Action(
                 name = "Поток Хаоса",
                 description = "Вы можете манипулировать силами случая и хаоса, чтобы получить преимущество для одного броска атаки, проверки характеристики или спасброска. Сделав это, вы должны совершить продолжительный отдых, прежде чем вы сможете использовать это умение ещё раз.\n" +
@@ -36,7 +40,7 @@ var tidesOfChaos: AbilityNode = AbilityNode(
                 type = ActionType.PartOfAction,
                 relatedCharges = "Поток Хаоса"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -51,14 +55,14 @@ var tidesOfChaos: AbilityNode = AbilityNode(
 var bendLuck: AbilityNode = AbilityNode(
     name = "Подчинение удачи",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Подчинение удачи"] =
             Action(
                 name = "Подчинение удачи",
                 description = "Вы получаете возможность менять судьбу с помощью дикой магии. Когда другое существо, видимое вам, совершает бросок атаки, проверку характеристики или спасбросок, вы можете реакцией потратить 2 единицы чародейства и бросить 1к4. Результат броска станет бонусом или штрафом (на ваш выбор) к броску существа. Вы можете сделать это после броска существа, но до того, как начнут действовать эффекты от броска.",
                 type = ActionType.Reaction,
                 relatedCharges = "Единицы чародейства"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -87,13 +91,13 @@ var controlledChaos: AbilityNode = AbilityNode(
 var spellBombardment: AbilityNode = AbilityNode(
     name = "Разрушительные заклинания",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Разрушительные заклинания"] =
             Action(
                 name = "Разрушительные заклинания",
                 description = "Когда вы совершаете бросок урона от заклинания, и на одной из костей выпадает максимально возможное значение, выберите одну из этих костей и бросьте её ещё раз. Добавьте выпавшее значение к урону. Вы можете использовать это умение только один раз в ход.",
                 type = ActionType.PartOfAction
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

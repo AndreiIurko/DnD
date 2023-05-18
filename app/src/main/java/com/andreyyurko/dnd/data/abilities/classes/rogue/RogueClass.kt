@@ -2,8 +2,48 @@ package com.andreyyurko.dnd.data.abilities.classes.rogue
 
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
 import com.andreyyurko.dnd.data.abilities.classes.evasion
-import com.andreyyurko.dnd.data.abilities.other.*
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.abilities.other.abilityScoreImprovement
+import com.andreyyurko.dnd.data.abilities.other.acrobatics
+import com.andreyyurko.dnd.data.abilities.other.acrobaticsExpertise
+import com.andreyyurko.dnd.data.abilities.other.animalHandlingExpertise
+import com.andreyyurko.dnd.data.abilities.other.arcanaExpertise
+import com.andreyyurko.dnd.data.abilities.other.athletics
+import com.andreyyurko.dnd.data.abilities.other.athleticsExpertise
+import com.andreyyurko.dnd.data.abilities.other.deception
+import com.andreyyurko.dnd.data.abilities.other.deceptionExpertise
+import com.andreyyurko.dnd.data.abilities.other.historyExpertise
+import com.andreyyurko.dnd.data.abilities.other.insight
+import com.andreyyurko.dnd.data.abilities.other.insightExpertise
+import com.andreyyurko.dnd.data.abilities.other.intimidation
+import com.andreyyurko.dnd.data.abilities.other.intimidationExpertise
+import com.andreyyurko.dnd.data.abilities.other.investigation
+import com.andreyyurko.dnd.data.abilities.other.investigationExpertise
+import com.andreyyurko.dnd.data.abilities.other.medicineExpertise
+import com.andreyyurko.dnd.data.abilities.other.natureExpertise
+import com.andreyyurko.dnd.data.abilities.other.perception
+import com.andreyyurko.dnd.data.abilities.other.perceptionExpertise
+import com.andreyyurko.dnd.data.abilities.other.performance
+import com.andreyyurko.dnd.data.abilities.other.performanceExpertise
+import com.andreyyurko.dnd.data.abilities.other.persuasion
+import com.andreyyurko.dnd.data.abilities.other.persuasionExpertise
+import com.andreyyurko.dnd.data.abilities.other.religionExpertise
+import com.andreyyurko.dnd.data.abilities.other.sleightOfHand
+import com.andreyyurko.dnd.data.abilities.other.sleightOfHandExpertise
+import com.andreyyurko.dnd.data.abilities.other.stealth
+import com.andreyyurko.dnd.data.abilities.other.stealthExpertise
+import com.andreyyurko.dnd.data.abilities.other.survivalExpertise
+import com.andreyyurko.dnd.data.abilities.other.thievesToolsExpertise
+import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.ArmorProf
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.characterData.Tools
+import com.andreyyurko.dnd.data.characterData.Weapon
+import com.andreyyurko.dnd.data.characterData.addAllSimpleWeapons
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 
@@ -188,13 +228,13 @@ var sneakAttack: AbilityNode = AbilityNode(
     name = "Скрытая атака",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         var dice = ((abilities.level + 1) / 2).toString() + "к6"
-        abilities.actionsList.add(
+        abilities.actionsMap["Скрыатя атака"] =
             Action(
-                name = "Скрытая атака",
+                name = "Скрыатя атака",
                 description = "Вы знаете, как точно наносить удар и использовать отвлечение врага. Один раз в ход вы можете причинить дополнительный урон " + dice + " одному из существ, по которому вы попали атакой, совершённой с преимуществом к броску атаки. Атака должна использовать дальнобойное оружие или оружие со свойством «фехтовальное». Вам не нужно иметь преимущество при броске атаки, если другой враг цели находится в пределах 5 футов от неё. Этот враг не должен быть недееспособным, и у вас не должно быть помехи для броска атаки.\n",
                 type = ActionType.PartOfAction,
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -246,32 +286,32 @@ var rogue1: AbilityNodeLevel = AbilityNodeLevel(
 var cunningAction: AbilityNode = AbilityNode(
     name = "Хитрое действие",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Отступление_Хитрое действие"] =
             Action(
                 name = "Отступление",
                 description = "Если вы выполнили это действие, " +
                         "ваше перемещение не провоцирует внеочередных атак до конца этого хода\n",
                 type = ActionType.Bonus
             )
-        )
-        abilities.actionsList.add(
+
+        abilities.actionsMap["Рывок_Хитрое действие"] =
             Action(
                 name = "Рывок",
                 description = "Если вы совершаете действие «Рывок», вы получаете дополнительное перемещение в текущем ходу, равное вашей скорости после применения всех модификаторов.\n",
                 type = ActionType.Bonus
             )
+
+        abilities.actionsMap["Засада_Хитрое действие"]
+        Action(
+            name = "Засада",
+            description = "Вы не можете прятаться от существа, которое видит вас, и если вы издадите шум (например, прокричите предупреждение или уроните вазу), вы выдаёте своё местоположение.\n" +
+                    "\n" +
+                    "Когда вы пытаетесь спрятаться, совершите проверку Ловкости (Скрытность). Пока вас не найдут или вы не прекратите прятаться, результат этой проверки будет противостоять проверкам Мудрости (Восприятие) существ, активно ищущих вас.\n" +
+                    "\n" +
+                    "Если вы прячетесь, есть шанс, что вас заметят даже без активных поисков. Для определения того, заметило ли вас существо, Мастер сравнивает результат вашей проверки Ловкости (Скрытность) с пассивным значением Мудрости (Восприятие), которое равно 10 + модификатор Мудрости существа, плюс все уместные бонусы и штрафы.\n",
+            type = ActionType.Bonus
         )
-        abilities.actionsList.add(
-            Action(
-                name = "Засада",
-                description = "Вы не можете прятаться от существа, которое видит вас, и если вы издадите шум (например, прокричите предупреждение или уроните вазу), вы выдаёте своё местоположение.\n" +
-                        "\n" +
-                        "Когда вы пытаетесь спрятаться, совершите проверку Ловкости (Скрытность). Пока вас не найдут или вы не прекратите прятаться, результат этой проверки будет противостоять проверкам Мудрости (Восприятие) существ, активно ищущих вас.\n" +
-                        "\n" +
-                        "Если вы прячетесь, есть шанс, что вас заметят даже без активных поисков. Для определения того, заметило ли вас существо, Мастер сравнивает результат вашей проверки Ловкости (Скрытность) с пассивным значением Мудрости (Восприятие), которое равно 10 + модификатор Мудрости существа, плюс все уместные бонусы и штрафы.\n",
-                type = ActionType.Bonus
-            )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -652,7 +692,7 @@ var strokeOfLuck: AbilityNode = AbilityNode(
                 maximum = 1
             )
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Удача плута"] =
             Action(
                 name = "Удача плута",
                 description = "Вы получаете сверхъестественный дар преуспевать, когда это нужнее всего. Если ваша атака промахивается по цели, находящейся в пределах досягаемости, вы можете изменить промах на попадание. В качестве альтернативы, если вы провалили проверку характеристики, вы можете заменить результат, выпавший на к20, на «20».\n" +
@@ -661,7 +701,7 @@ var strokeOfLuck: AbilityNode = AbilityNode(
                 type = ActionType.Additional,
                 relatedCharges = "Удача плута"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

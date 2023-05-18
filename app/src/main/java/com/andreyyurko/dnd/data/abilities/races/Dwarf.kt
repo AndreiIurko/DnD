@@ -3,7 +3,12 @@ package com.andreyyurko.dnd.data.abilities.races
 import com.andreyyurko.dnd.data.abilities.other.brewersSupplies
 import com.andreyyurko.dnd.data.abilities.other.masonsTools
 import com.andreyyurko.dnd.data.abilities.other.smithsTools
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.ArmorProf
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.DamageType
+import com.andreyyurko.dnd.data.characterData.Languages
+import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.characterData.Weapon
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var mountainDwarf = AbilityNode(
@@ -70,7 +75,8 @@ val dwarfAbilities = AbilityNode(
         abilities.weaponProficiency.add(Weapon.LightHammer)
         abilities.weaponProficiency.add(Weapon.Warhammer)
         // add tools
-        abilities.additionalAbilities["Скорость"] = "Ношение тяжёлых доспехов не снижает вашу скорость.\n"
+        abilities.additionalAbilities["Скорость"] =
+            "Ношение тяжёлых доспехов не снижает вашу скорость.\n"
         abilities.additionalAbilities["Знание камня"] =
             "Если вы совершаете проверку Интеллекта (История), связанную с происхождением работы по камню, вы считаетесь владеющим навыком История, и добавляете к проверке удвоенный бонус мастерства вместо обычного.\n"
         abilities

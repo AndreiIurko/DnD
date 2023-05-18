@@ -1,6 +1,10 @@
 package com.andreyyurko.dnd.data.abilities.classes.paladin
 
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.spells.CharacterSpells
 import com.andreyyurko.dnd.data.spells.SpellLists
@@ -8,22 +12,22 @@ import com.andreyyurko.dnd.data.spells.SpellLists
 var oathOfConquestChanelDivinity = AbilityNode(
     name = "Божественный канал клятвы покорения",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Покоряющее присутствие_Божественный канал клятвы покорения"] =
             Action(
                 name = "Покоряющее присутствие",
                 description = "Вы можете использовать ваш «Божественный канал», чтобы источать ужасающее присутствие. Действием вы можете заставить каждое существо по вашему выбору в пределах 30 футов совершить спасбросок Мудрости. При провале существо становится испуганным на 1 минуту. Испуганное существо может повторять этот спасбросок в конце каждого своего хода оканчивая этот эффект на себе при успехе.\n",
                 type = ActionType.Action,
                 relatedCharges = "Божественный канал"
             )
-        )
-        abilities.actionsList.add(
+
+        abilities.actionsMap["Направленный удар_Божественный канал клятвы покорения"] =
             Action(
                 name = "Направленный удар",
                 description = "Вы можете использовать свой «Божественный канал», чтобы наносить удары со сверхъестественной точностью. Когда вы проводите атаку, вы можете использовать свой «Божественный канал», чтобы получить бонус +10 к этому броску. Вы можете использовать это свойство уже после того, как увидите результат броска, но обязаны сделать выбор до того, как Мастер объявит о попадании или промахе атаки.\n",
                 type = ActionType.PartOfAction,
                 relatedCharges = "Божественный канал"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -127,7 +131,7 @@ var invincibleConqueror: AbilityNode = AbilityNode(
                 maximum = 1
             )
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Непобедимый покоритель"] =
             Action(
                 name = "Непобедимый покоритель",
                 description = "Вы получаете способность овладевать необычайной воинской удалью. Действием вы можете магически превратиться в аватар покорения, получая следующие преимущества на 1 минуту:\n" +
@@ -140,7 +144,7 @@ var invincibleConqueror: AbilityNode = AbilityNode(
                 type = ActionType.Action,
                 relatedCharges = "Непобедимый покоритель"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

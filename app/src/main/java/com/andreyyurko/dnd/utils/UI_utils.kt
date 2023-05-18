@@ -61,12 +61,16 @@ fun setupBasicPopUpMenu(context: Context, maxHeight: Int? = 200): Pair<PopupWind
     parent.setBackgroundColor(MaterialColors.getColor(context, R.attr.backgroundColor, Color.BLACK))
 
     parent.layoutParams =
-        LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
     parent.orientation = LinearLayout.VERTICAL
 
     val focus = true
     val wid = LinearLayout.LayoutParams.WRAP_CONTENT
-    val high = if (maxHeight != null) (context.resources.displayMetrics.density * maxHeight).toInt() else LinearLayout.LayoutParams.WRAP_CONTENT
+    val high =
+        if (maxHeight != null) (context.resources.displayMetrics.density * maxHeight).toInt() else LinearLayout.LayoutParams.WRAP_CONTENT
     val scrollView = ScrollView(context)
     scrollView.background = AppCompatResources.getDrawable(context, R.drawable.filled_border)
     scrollView.isScrollbarFadingEnabled = false

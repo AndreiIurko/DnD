@@ -33,7 +33,8 @@ class SpellsHandler @Inject constructor(
     ): MutableList<Spell> {
         // spellInfo[listName] not null, but just in case if smth will go wrong we will use className from character
         val className =
-            character.characterInfo.spellsInfo[listName]?.className ?: character.characterInfo.characterClass.className
+            character.characterInfo.spellsInfo[listName]?.className
+                ?: character.characterInfo.characterClass.className
 
         val result: MutableList<Spell> = mutableListOf()
         for (spellDescription in allSpells.values) {
@@ -114,7 +115,8 @@ class SpellsHandler @Inject constructor(
             if (classListName == value.className) {
                 result += getKnownSpellsWithDescriptionFromList(character, filters, listName, value)
             } else {
-                val returnedValue = getKnownSpellsWithDescriptionFromList(character, filters, listName, value)
+                val returnedValue =
+                    getKnownSpellsWithDescriptionFromList(character, filters, listName, value)
                 for (spell in returnedValue)
                     spell.isAlwaysIncluded = true
                 result += returnedValue
@@ -123,11 +125,19 @@ class SpellsHandler @Inject constructor(
         return result
     }
 
-    fun getPreparedSpellsWithDescription(character: Character, filters: Filters = Filters()): MutableList<Spell> {
+    fun getPreparedSpellsWithDescription(
+        character: Character,
+        filters: Filters = Filters()
+    ): MutableList<Spell> {
         var result: MutableList<Spell> = mutableListOf()
         for ((listName, value) in character.characterInfo.spellsInfo.entries) {
             if (value.maxPreparedCantripsCount == -1) {
-                for (spell in getKnownSpellsWithDescriptionFromList(character, filters, listName, value)) {
+                for (spell in getKnownSpellsWithDescriptionFromList(
+                    character,
+                    filters,
+                    listName,
+                    value
+                )) {
                     if (spell.data.level == "0") {
                         spell.isAlwaysIncluded = true
                         result.add(spell)
@@ -135,7 +145,12 @@ class SpellsHandler @Inject constructor(
                 }
             }
             if (value.maxPreparedSpellsCount == -1) {
-                for (spell in getKnownSpellsWithDescriptionFromList(character, filters, listName, value)) {
+                for (spell in getKnownSpellsWithDescriptionFromList(
+                    character,
+                    filters,
+                    listName,
+                    value
+                )) {
                     if (spell.data.level != "0") {
                         spell.isAlwaysIncluded = true
                         result.add(spell)

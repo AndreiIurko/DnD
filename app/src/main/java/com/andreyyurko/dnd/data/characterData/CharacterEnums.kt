@@ -130,8 +130,12 @@ enum class Weapon(
         listOf("лёгкое"), setOf(Ability.Strength)
     ),
     Dagger(
-        "Кинжал", "2 зм", "1к4", DamageType.Piercing,
-        listOf("лёгкое", "метательное (дис. 20/60)", "фехтовальное"), setOf(Ability.Strength, Ability.Dexterity)
+        "Кинжал",
+        "2 зм",
+        "1к4",
+        DamageType.Piercing,
+        listOf("лёгкое", "метательное (дис. 20/60)", "фехтовальное"),
+        setOf(Ability.Strength, Ability.Dexterity)
     ),
     GreatClub(
         "Палица", "2 зм", "1к8", DamageType.Bludgeoning,
@@ -166,12 +170,22 @@ enum class Weapon(
         listOf("метательное (дис. 20/60)", "универсальное (1к8)"), setOf(Ability.Strength)
     ),
     CrossbowLight(
-        "Арбалет, легкий", "25 зм", "1к8", DamageType.Piercing,
-        listOf("боеприпас (дис. 80/320)", "двуручное", "перезарядка"), setOf(Ability.Dexterity), false
+        "Арбалет, легкий",
+        "25 зм",
+        "1к8",
+        DamageType.Piercing,
+        listOf("боеприпас (дис. 80/320)", "двуручное", "перезарядка"),
+        setOf(Ability.Dexterity),
+        false
     ),
     Dart(
-        "Дротик", "5 мм", "1к4", DamageType.Piercing,
-        listOf("метательное (дис. 20/60)", "фехтовальное"), setOf(Ability.Strength, Ability.Dexterity), false
+        "Дротик",
+        "5 мм",
+        "1к4",
+        DamageType.Piercing,
+        listOf("метательное (дис. 20/60)", "фехтовальное"),
+        setOf(Ability.Strength, Ability.Dexterity),
+        false
     ),
     ShortBow(
         "Короткий лук", "25 зм", "1к6", DamageType.Piercing,
@@ -262,12 +276,22 @@ enum class Weapon(
         listOf("боеприпас (30/120)", "лёгкое", "перезарядка"), setOf(Ability.Dexterity), false
     ),
     CrossbowHeavy(
-        "Арбалет, тяжёлый", "50 зм", "1к10", DamageType.Piercing,
-        listOf("боеприпас (100/400)", "двуручное", "перезарядка", "тяжёлое"), setOf(Ability.Dexterity), false
+        "Арбалет, тяжёлый",
+        "50 зм",
+        "1к10",
+        DamageType.Piercing,
+        listOf("боеприпас (100/400)", "двуручное", "перезарядка", "тяжёлое"),
+        setOf(Ability.Dexterity),
+        false
     ),
     LongBow(
-        "Длинный лук", "50 зм", "1к8", DamageType.Piercing,
-        listOf("боеприпас (150/600)", "двуручное", "тяжёлое"), setOf(Ability.Strength, Ability.Dexterity), false
+        "Длинный лук",
+        "50 зм",
+        "1к8",
+        DamageType.Piercing,
+        listOf("боеприпас (150/600)", "двуручное", "тяжёлое"),
+        setOf(Ability.Strength, Ability.Dexterity),
+        false
     ),
     Net(
         "Сеть", "1 зм", "0", DamageType.Slashing,
@@ -296,7 +320,8 @@ fun addAllSimpleWeapons(abilities: CharacterInfo): CharacterInfo {
         Weapon.ShortBow,
         Weapon.Sling
     )
-    abilities.weaponProficiency = abilities.weaponProficiency.union(simpleWeapons) as MutableSet<Weapon>
+    abilities.weaponProficiency =
+        abilities.weaponProficiency.union(simpleWeapons) as MutableSet<Weapon>
     return abilities
 }
 
@@ -326,7 +351,8 @@ fun addAllMartialWeapons(abilities: CharacterInfo): CharacterInfo {
         Weapon.LongBow,
         Weapon.Net
     )
-    abilities.weaponProficiency = abilities.weaponProficiency.union(simpleWeapons) as MutableSet<Weapon>
+    abilities.weaponProficiency =
+        abilities.weaponProficiency.union(simpleWeapons) as MutableSet<Weapon>
     return abilities
 }
 

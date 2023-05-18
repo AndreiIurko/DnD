@@ -13,8 +13,22 @@ import com.andreyyurko.dnd.data.abilities.classes.rogue.rogue1
 import com.andreyyurko.dnd.data.abilities.classes.sorcerer.sorcerer1
 import com.andreyyurko.dnd.data.abilities.classes.warlock.warlock1
 import com.andreyyurko.dnd.data.abilities.classes.wizard.wizard1
-import com.andreyyurko.dnd.data.abilities.other.*
-import com.andreyyurko.dnd.data.abilities.races.*
+import com.andreyyurko.dnd.data.abilities.other.commonRoot
+import com.andreyyurko.dnd.data.abilities.other.customBackstory
+import com.andreyyurko.dnd.data.abilities.other.mapOfAbilityScoreImprovement
+import com.andreyyurko.dnd.data.abilities.other.mapOfCommonAN
+import com.andreyyurko.dnd.data.abilities.other.mapOfExpertise
+import com.andreyyurko.dnd.data.abilities.other.mapOfFightingStyles
+import com.andreyyurko.dnd.data.abilities.other.mapOfLanguages
+import com.andreyyurko.dnd.data.abilities.other.mapOfSkillAndExpertise
+import com.andreyyurko.dnd.data.abilities.other.mapOfSkills
+import com.andreyyurko.dnd.data.abilities.other.mapOfTools
+import com.andreyyurko.dnd.data.abilities.other.mapOfToolsExpertise
+import com.andreyyurko.dnd.data.abilities.races.dwarf
+import com.andreyyurko.dnd.data.abilities.races.elf
+import com.andreyyurko.dnd.data.abilities.races.halfling
+import com.andreyyurko.dnd.data.abilities.races.human
+import com.andreyyurko.dnd.data.abilities.races.mapOfRaces
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Priority
 import com.andreyyurko.dnd.data.characterData.Weapon
@@ -57,7 +71,7 @@ var baseAN: AbilityNode = AbilityNode(
                 )
             }
         ),
-        Pair("race", { listOf(human.name, dwarf.name, elf.name, halfling.name) })
+        Pair("race") { listOf(human.name, dwarf.name, elf.name, halfling.name) }
     ),
     { true },
     listOf(listOf()),

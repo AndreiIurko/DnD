@@ -1,8 +1,21 @@
 package com.andreyyurko.dnd.data.abilities.classes.wizard
 
 import com.andreyyurko.dnd.data.abilities.classes.AbilityNodeLevel
-import com.andreyyurko.dnd.data.abilities.other.*
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.abilities.other.abilityScoreImprovement
+import com.andreyyurko.dnd.data.abilities.other.arcana
+import com.andreyyurko.dnd.data.abilities.other.history
+import com.andreyyurko.dnd.data.abilities.other.insight
+import com.andreyyurko.dnd.data.abilities.other.investigation
+import com.andreyyurko.dnd.data.abilities.other.medicine
+import com.andreyyurko.dnd.data.abilities.other.religion
+import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.Priority
+import com.andreyyurko.dnd.data.characterData.Weapon
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.abilityToModifier
 import com.andreyyurko.dnd.data.spells.CharacterSpells
@@ -23,11 +36,29 @@ var classFeaturesWizard: AbilityNode = AbilityNode(
     getAlternatives = mutableMapOf(
         Pair(
             "skill1",
-            { listOf(history.name, arcana.name, medicine.name, insight.name, investigation.name, religion.name) }
+            {
+                listOf(
+                    history.name,
+                    arcana.name,
+                    medicine.name,
+                    insight.name,
+                    investigation.name,
+                    religion.name
+                )
+            }
         ),
         Pair(
             "skill2",
-            { listOf(history.name, arcana.name, medicine.name, insight.name, investigation.name, religion.name) }
+            {
+                listOf(
+                    history.name,
+                    arcana.name,
+                    medicine.name,
+                    insight.name,
+                    investigation.name,
+                    religion.name
+                )
+            }
         ),
     ),
     requirements = { abilities: CharacterInfo ->
@@ -66,7 +97,8 @@ var spellCastingWizard: AbilityNode = AbilityNode(
             this["Заклинания класса"]?.maxKnownSpellsCount = 4 + 2 * (abilities.level)
             this["Заклинания класса"]?.maxPreparedSpellsCount =
                 max((abilityToModifier(abilities.intelligence) + abilities.level), 1)
-            this["Заклинания класса"]?.maxKnownCantripsCount = kotlin.math.min((abilities.level + 20) / 6, 5)
+            this["Заклинания класса"]?.maxKnownCantripsCount =
+                kotlin.math.min((abilities.level + 20) / 6, 5)
         }
         abilities.additionalAbilities["Ритуальное колдовство"] =
             "Вы можете сотворить любое известное вам заклинание волшебника в качестве ритуала, если заклинание позволяет это.\n"
@@ -116,7 +148,7 @@ var arcaneRecovery: AbilityNode = AbilityNode(
                 maximum = 1
             )
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Магическое восстановление"] =
             Action(
                 name = "Магическое восстановление",
                 description = "Вы знаете как восстанавливать часть магической энергии, изучая книгу заклинаний. Один раз в день, когда вы заканчиваете короткий отдых, вы можете восстановить часть использованных ячеек заклинаний. Ячейки заклинаний могут иметь суммарный уровень, который не превышает половину уровня вашего волшебника (округляя в большую сторону), и ни одна из ячеек не может быть шестого уровня или выше.\n" +
@@ -125,7 +157,7 @@ var arcaneRecovery: AbilityNode = AbilityNode(
                 type = ActionType.Long,
                 relatedCharges = "Магическое восстановление"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -515,7 +547,7 @@ var wizard19: AbilityNode = AbilityNodeLevel(
 var signatureSpells: AbilityNode = AbilityNode(
     name = "Фирменное заклинание",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Фирменное заклинание"] =
             Action(
                 name = "Фирменное заклинание",
                 description = "Вы получаете власть над двумя мощными заклинаниями и можете накладывать их без усилий. Выберите два заклинания волшебника 3-го уровня из своей книги заклинаний в качестве фирменных заклинаний. Для вас эти заклинания всегда считаются подготовленными, они не учитываются в количестве подготовленных заклинаний, и вы можете наложить каждое из этих заклинаний 3-го уровня, не тратя ячейку заклинаний. Когда вы так поступаете, вы не можете наложить их повторно таким же образом, пока не закончите короткий или продолжительный отдых.\n" +
@@ -523,7 +555,7 @@ var signatureSpells: AbilityNode = AbilityNode(
                         "Если вы хотите наложить заклинание более высокого уровня, вы должны потратить ячейку заклинаний как обычно.\n",
                 type = ActionType.Long,
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

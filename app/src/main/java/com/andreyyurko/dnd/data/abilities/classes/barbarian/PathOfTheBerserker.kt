@@ -37,7 +37,7 @@ var mindlessRage = AbilityNode(
 var intimidatingPresence = AbilityNode(
     name = "Пугающее присутствие",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Пугающее присутствие"] =
             Action(
                 name = "Пугающее присутствие",
                 description = "Вы можете действием пугать других своим ужасающим видом. Чтобы сделать это, выберите существо в пределах 30 футов от себя, которое вы можете видеть. Если оно может видеть или слышать вас, оно должно совершить успешный спасбросок Мудрости (Сл равна 8 + ваш бонус мастерства + ваш модификатор Харизмы), иначе станет испуганным вами до конца вашего следующего хода. В последующие ходы вы можете действием поддерживать этот эффект до конца своего следующего хода.\n" +
@@ -45,7 +45,7 @@ var intimidatingPresence = AbilityNode(
                         "Эффект оканчивается, если цель оказалась вне линии обзора, или далее чем в 60 футах от вас. Если существо преуспело в спасброске, вы не можете использовать на нём это умение следующие 24 часа.\n",
                 type = ActionType.Action
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -60,13 +60,13 @@ var intimidatingPresence = AbilityNode(
 var retaliation = AbilityNode(
     name = "Ответный удар берсерка",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Ответный удар берсерка"] =
             Action(
                 name = "Ответный удар берсерка",
                 description = "При получении урона от существа, находящегося в пределах 5 футов от вас, вы можете реакцией совершить по нему рукопашную атаку оружием.\n",
                 type = ActionType.Reaction
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

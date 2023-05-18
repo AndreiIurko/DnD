@@ -31,7 +31,8 @@ class ActionsAdapter @Inject constructor(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.view_action_list_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.view_action_list_item, parent, false)
         return ViewHolder(itemView)
     }
 
@@ -94,7 +95,13 @@ class ActionsAdapter @Inject constructor(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             400 * context.resources.displayMetrics.density.toInt()
         )
-        parent.setBackgroundColor(MaterialColors.getColor(context, R.attr.backgroundColor, Color.BLACK))
+        parent.setBackgroundColor(
+            MaterialColors.getColor(
+                context,
+                R.attr.backgroundColor,
+                Color.BLACK
+            )
+        )
 
         parent.findViewById<TextView>(R.id.descriptionTextView).text = action.description
 

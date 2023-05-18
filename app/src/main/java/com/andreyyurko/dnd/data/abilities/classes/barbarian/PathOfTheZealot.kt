@@ -1,16 +1,20 @@
 package com.andreyyurko.dnd.data.abilities.classes.barbarian
 
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.ActionType
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.Priority
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 var divineFuryNecrotic = AbilityNode(
     name = "Некротический урон божественного гнева",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        for (action in abilities.actionsList) {
-            if (action.name == "Божественный гнев") {
-                action.description =
-                    "Вы можете вкладывать божественный гнев в ваши удары оружием. Пока вы в ярости, первое существо, по которому вы попадаете атакой оружием в каждый свой ход, получает дополнительный урон некротической энергией, равный 1к6 + " + (abilities.level / 2).toString() + "\n"
-            }
+        abilities.actionsMap["Божественный гнев"]?.let { action ->
+            action.description =
+                "Вы можете вкладывать божественный гнев в ваши удары оружием. Пока вы в ярости, первое существо, по которому вы попадаете атакой оружием в каждый свой ход, получает дополнительный урон некротической энергией, равный 1к6 + " + (abilities.level / 2).toString() + "\n"
+
         }
         abilities
     },
@@ -25,11 +29,10 @@ var divineFuryNecrotic = AbilityNode(
 var divineFuryLight = AbilityNode(
     name = "Урон излучением божественного гнева",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        for (action in abilities.actionsList) {
-            if (action.name == "Божественный гнев") {
-                action.description =
-                    "Вы можете вкладывать божественный гнев в ваши удары оружием. Пока вы в ярости, первое существо, по которому вы попадаете атакой оружием в каждый свой ход, получает дополнительный урон излучением, равный 1к6 + " + (abilities.level / 2).toString() + "\n"
-            }
+        abilities.actionsMap["Божественный гнев"]?.let { action ->
+            action.description =
+                "Вы можете вкладывать божественный гнев в ваши удары оружием. Пока вы в ярости, первое существо, по которому вы попадаете атакой оружием в каждый свой ход, получает дополнительный урон излучением, равный 1к6 + " + (abilities.level / 2).toString() + "\n"
+
         }
         abilities
     },
@@ -44,7 +47,7 @@ var divineFuryLight = AbilityNode(
 var divineFury = AbilityNode(
     name = "Божественный гнев",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Божественный гнев"] =
             Action(
                 name = "Божественный гнев",
                 description = "Вы можете вкладывать божественный гнев в ваши удары оружием. Пока вы в ярости, первое существо, по которому вы попадаете атакой оружием в каждый свой ход, получает дополнительный урон, равный 1к6 + " + (abilities.level / 2).toString() + "\n" +
@@ -52,7 +55,7 @@ var divineFury = AbilityNode(
                         "Вы самостоятельно выбираете тип урона при получении этого умения из урона излучением или некротической энергией.\n",
                 type = ActionType.PartOfAction
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(
@@ -83,7 +86,7 @@ var warriorOfTheGods = AbilityNode(
 var fanaticalFocus = AbilityNode(
     name = "Концентрация фанатика",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.actionsList.add(
+        abilities.actionsMap["Концентрация фанатика"] =
             Action(
                 name = "Концентрация фанатика",
                 description = "Божественная сила, что питает вашу ярость, может защитить вас от вреда. Если вы провалили спасбросок, пребывая в ярости, вы можете перебросить его и будете обязаны использовать новое значение.\n" +
@@ -91,7 +94,7 @@ var fanaticalFocus = AbilityNode(
                         "Вы можете использовать эту способность только один раз в течение одной ярости.\n",
                 type = ActionType.Additional
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -112,7 +115,7 @@ var zealousPresence = AbilityNode(
                 maximum = 1
             )
         }
-        abilities.actionsList.add(
+        abilities.actionsMap["Фанатичное присутствие"] =
             Action(
                 name = "Фанатичное присутствие",
                 description = "До 10 существ по вашему выбору в пределах 60 футов, которые могут вас слышать, совершают броски атаки и спасброски с преимуществом до начала вашего следующего хода.\n" +
@@ -121,7 +124,7 @@ var zealousPresence = AbilityNode(
                 type = ActionType.Bonus,
                 relatedCharges = "Фанатичное присутствие"
             )
-        )
+
         abilities
     },
     getAlternatives = mutableMapOf(),

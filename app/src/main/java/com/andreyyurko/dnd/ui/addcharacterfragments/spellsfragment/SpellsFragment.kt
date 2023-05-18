@@ -35,15 +35,39 @@ class SpellsFragment : FragmentWithFilters(R.layout.fragment_spells) {
         setupRecyclerView()
 
         viewBinding.allButton.setOnClickListener {
-            viewBinding.knownButton.setTextColor(MaterialColors.getColor(requireContext(), R.attr.colorOnPrimary, Color.BLACK))
-            viewBinding.allButton.setTextColor(MaterialColors.getColor(requireContext(), R.attr.colorPrimary, Color.BLACK))
+            viewBinding.knownButton.setTextColor(
+                MaterialColors.getColor(
+                    requireContext(),
+                    R.attr.colorOnPrimary,
+                    Color.BLACK
+                )
+            )
+            viewBinding.allButton.setTextColor(
+                MaterialColors.getColor(
+                    requireContext(),
+                    R.attr.colorPrimary,
+                    Color.BLACK
+                )
+            )
             viewModel.isKnownListShown = false
             showItems()
         }
 
         viewBinding.knownButton.setOnClickListener {
-            viewBinding.allButton.setTextColor(MaterialColors.getColor(requireContext(), R.attr.colorOnPrimary, Color.BLACK))
-            viewBinding.knownButton.setTextColor(MaterialColors.getColor(requireContext(), R.attr.colorPrimary, Color.BLACK))
+            viewBinding.allButton.setTextColor(
+                MaterialColors.getColor(
+                    requireContext(),
+                    R.attr.colorOnPrimary,
+                    Color.BLACK
+                )
+            )
+            viewBinding.knownButton.setTextColor(
+                MaterialColors.getColor(
+                    requireContext(),
+                    R.attr.colorPrimary,
+                    Color.BLACK
+                )
+            )
             viewModel.isKnownListShown = true
             showItems()
         }
@@ -60,15 +84,26 @@ class SpellsFragment : FragmentWithFilters(R.layout.fragment_spells) {
 
         viewBinding.filtersButton.setOnClickListener {
             if (viewBinding.filtersView.visibility == View.GONE) {
-                showFilters(viewBinding.filtersView, viewBinding.filtersButton, viewBinding.searchEditText)
+                showFilters(
+                    viewBinding.filtersView,
+                    viewBinding.filtersButton,
+                    viewBinding.searchEditText
+                )
             } else {
-                closeFilters(viewBinding.filtersView, viewBinding.filtersButton, viewBinding.searchEditText)
+                closeFilters(
+                    viewBinding.filtersView,
+                    viewBinding.filtersButton,
+                    viewBinding.searchEditText
+                )
                 showItems()
             }
         }
 
         viewBinding.levelButton.setOnClickListener {
-            setupStringFilter(viewBinding.levelButton, viewModel.getFilters().levels, (0..9).map { i -> i.toString() })
+            setupStringFilter(
+                viewBinding.levelButton,
+                viewModel.getFilters().levels,
+                (0..9).map { i -> i.toString() })
         }
 
         viewBinding.sourceButton.setOnClickListener {
@@ -110,7 +145,8 @@ class SpellsFragment : FragmentWithFilters(R.layout.fragment_spells) {
 
     private fun setupRecyclerView() {
         val recyclerView = viewBinding.spellsRecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         val adapter = SpellsAdapter(
             viewBinding.knownSpellsCount, viewBinding.knownCantripsCount,

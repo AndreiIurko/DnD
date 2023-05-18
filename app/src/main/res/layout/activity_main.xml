@@ -1,9 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.fragment.app.FragmentContainerView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/mainActivityNavigationHost"
-    android:name="androidx.navigation.fragment.NavHostFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:defaultNavHost="true"
-    app:navGraph="@navigation/main_nav_graph" />
+    android:layout_height="match_parent">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/mainActivityNavigationHost"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/main_nav_graph" />
+
+    <ImageButton
+        android:id="@+id/showDicesButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="56dp"
+        android:src="@drawable/dice_background"
+        android:background="@color/background"
+        android:layout_marginEnd="24dp"
+        android:foreground="?attr/selectableItemBackground"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/d20"
+        app:tint="@color/background"
+        app:layout_constraintTop_toTopOf="@id/showDicesButton"
+        app:layout_constraintBottom_toBottomOf="@id/showDicesButton"
+        app:layout_constraintStart_toStartOf="@id/showDicesButton"
+        app:layout_constraintEnd_toEndOf="@id/showDicesButton"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

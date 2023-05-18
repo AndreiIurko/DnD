@@ -41,8 +41,7 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
             if (viewModel.chosenLevel < 20) {
                 viewBinding.levelUpButton.alpha = 1F
                 viewBinding.levelUpButton.isEnabled = true
-            }
-            else {
+            } else {
                 viewBinding.levelUpButton.alpha = 0.5F
                 viewBinding.levelUpButton.isEnabled = false
             }
@@ -55,7 +54,10 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
         viewBinding.chooseLevelButton.setOnClickListener {
             setupLevelPopupMenu(requireContext())
             viewBinding.levelArrowImageView.setImageDrawable(
-                AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_arrow_drop_up_24)
+                AppCompatResources.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_arrow_drop_up_24
+                )
             )
         }
 
@@ -78,7 +80,10 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
         for (classChoice in viewModel.baseCAN.showOptions("class")) {
             val classNameTextView = TextView(context)
             classNameTextView.isClickable = true
-            classNameTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, viewBinding.chooseClassTextView.textSize)
+            classNameTextView.setTextSize(
+                TypedValue.COMPLEX_UNIT_PX,
+                viewBinding.chooseClassTextView.textSize
+            )
             classNameTextView.text = classChoice.split("_").first()
             parent.addView(classNameTextView)
             classNameTextView.setOnClickListener {
@@ -87,8 +92,7 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
                 if (viewModel.chosenLevel < 20) {
                     viewBinding.levelUpButton.alpha = 1F
                     viewBinding.levelUpButton.isEnabled = true
-                }
-                else {
+                } else {
                     viewBinding.levelUpButton.alpha = 0.5F
                     viewBinding.levelUpButton.isEnabled = false
                 }
@@ -97,7 +101,10 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
             }
         }
 
-        parent.measure(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        parent.measure(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
         classChoiceList.showAtLocation(
             view,
             Gravity.NO_GRAVITY,
@@ -135,7 +142,10 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
                 }
                 viewBinding.levelText.text = level.toString()
                 viewBinding.levelArrowImageView.setImageDrawable(
-                    AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_arrow_drop_down_24)
+                    AppCompatResources.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_baseline_arrow_drop_down_24
+                    )
                 )
                 levelChoiceList.dismiss()
             }
@@ -152,7 +162,8 @@ class ClassFragment : BaseFragment(R.layout.fragment_class) {
 
     private fun setupRecyclerView() {
         val recyclerView = viewBinding.abilitiesRecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         val adapter = AbilityAdapter()
         viewModel.adapter = adapter
         recyclerView.adapter = adapter

@@ -16,7 +16,8 @@ import com.andreyyurko.dnd.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CharacterChooseEquipmentFragment : BaseFragment(R.layout.fragment_character_choose_equipment) {
+class CharacterChooseEquipmentFragment :
+    BaseFragment(R.layout.fragment_character_choose_equipment) {
 
     private val viewBinding by viewBinding(FragmentCharacterChooseEquipmentBinding::bind)
 
@@ -31,11 +32,19 @@ class CharacterChooseEquipmentFragment : BaseFragment(R.layout.fragment_characte
         super.onViewCreated(view, savedInstanceState)
 
         viewBinding.weaponsButton.setOnClickListener {
-            setupButton(viewBinding.weaponsRecyclerView, viewBinding.weaponsArrowImage, viewModel.getWeaponItems())
+            setupButton(
+                viewBinding.weaponsRecyclerView,
+                viewBinding.weaponsArrowImage,
+                viewModel.getWeaponItems()
+            )
         }
 
         viewBinding.armorButton.setOnClickListener {
-            setupButton(viewBinding.armorRecyclerView, viewBinding.armorArrowImage, viewModel.getArmorItems())
+            setupButton(
+                viewBinding.armorRecyclerView,
+                viewBinding.armorArrowImage,
+                viewModel.getArmorItems()
+            )
         }
 
         viewBinding.magicWeaponsButton.setOnClickListener {
@@ -69,8 +78,10 @@ class CharacterChooseEquipmentFragment : BaseFragment(R.layout.fragment_characte
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView, list: List<InventoryItemInfo>) {
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        val adapter = ChooseEquipmentAdapter(viewModel.inventoryHandler, viewModel.characterViewModel)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        val adapter =
+            ChooseEquipmentAdapter(viewModel.inventoryHandler, viewModel.characterViewModel)
         recyclerView.adapter = adapter
 
         adapter.apply {
@@ -80,17 +91,27 @@ class CharacterChooseEquipmentFragment : BaseFragment(R.layout.fragment_characte
         }
     }
 
-    private fun setupButton(recyclerView: RecyclerView, image: ImageView, list: List<InventoryItemInfo>) {
+    private fun setupButton(
+        recyclerView: RecyclerView,
+        image: ImageView,
+        list: List<InventoryItemInfo>
+    ) {
         if (recyclerView.visibility == View.GONE) {
             setupRecyclerView(recyclerView, list)
             recyclerView.visibility = View.VISIBLE
             image.setImageDrawable(
-                AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_up_24)
+                AppCompatResources.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_keyboard_arrow_up_24
+                )
             )
         } else {
             recyclerView.visibility = View.GONE
             image.setImageDrawable(
-                AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_keyboard_arrow_down_24)
+                AppCompatResources.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_keyboard_arrow_down_24
+                )
             )
         }
     }

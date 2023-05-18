@@ -21,7 +21,11 @@ open class FragmentWithFilters : BaseFragment {
 
     constructor(@LayoutRes contentLayoutId: Int) : super(contentLayoutId)
 
-    protected fun showFilters(filtersView: View, filtersButton: TextView, searchEditText: EditText) {
+    protected fun showFilters(
+        filtersView: View,
+        filtersButton: TextView,
+        searchEditText: EditText
+    ) {
         filtersView.y = -100 * resources.displayMetrics.density + filtersButton.y
         filtersView.visibility = View.VISIBLE
         filtersView.animate()
@@ -34,7 +38,11 @@ open class FragmentWithFilters : BaseFragment {
         searchEditText.isEnabled = false
     }
 
-    protected fun closeFilters(filtersView: View, filtersButton: TextView, searchEditText: EditText) {
+    protected fun closeFilters(
+        filtersView: View,
+        filtersButton: TextView,
+        searchEditText: EditText
+    ) {
         filtersView.animate()
             .translationY(-2 * filtersView.height.toFloat() + filtersButton.y)
             .setListener(object : AnimatorListenerAdapter() {
@@ -49,7 +57,10 @@ open class FragmentWithFilters : BaseFragment {
         searchEditText.isEnabled = true
     }
 
-    protected inline fun <reified T> setupFilter(button: TextView, set: MutableSet<T>) where T : Enum<T>, T : Filter {
+    protected inline fun <reified T> setupFilter(
+        button: TextView,
+        set: MutableSet<T>
+    ) where T : Enum<T>, T : Filter {
         val (choiceList, parent) = setupBasicPopUpMenu(button.context, null)
         for (enumValue in enumValues<T>()) {
             val textView = TextView(context)
@@ -65,22 +76,43 @@ open class FragmentWithFilters : BaseFragment {
             if (set.contains(enumValue)) textView.setBackgroundColor(
                 MaterialColors.getColor(requireContext(), R.attr.colorOnPrimary, Color.BLACK)
             )
-            else textView.setBackgroundColor(MaterialColors.getColor(requireContext(), R.attr.backgroundColor, Color.BLACK))
+            else textView.setBackgroundColor(
+                MaterialColors.getColor(
+                    requireContext(),
+                    R.attr.backgroundColor,
+                    Color.BLACK
+                )
+            )
 
             parent.addView(textView)
             textView.setOnClickListener {
                 if (set.contains(enumValue)) {
                     set.remove(enumValue)
-                    textView.setBackgroundColor(MaterialColors.getColor(requireContext(), R.attr.backgroundColor, Color.BLACK))
+                    textView.setBackgroundColor(
+                        MaterialColors.getColor(
+                            requireContext(),
+                            R.attr.backgroundColor,
+                            Color.BLACK
+                        )
+                    )
                 } else {
                     set.add(enumValue)
-                    textView.setBackgroundColor(MaterialColors.getColor(requireContext(), R.attr.colorOnPrimary, Color.BLACK))
+                    textView.setBackgroundColor(
+                        MaterialColors.getColor(
+                            requireContext(),
+                            R.attr.colorOnPrimary,
+                            Color.BLACK
+                        )
+                    )
                 }
             }
         }
         val location = IntArray(2)
         button.getLocationOnScreen(location)
-        parent.measure(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        parent.measure(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
         choiceList.showAtLocation(
             view,
             Gravity.NO_GRAVITY,
@@ -89,7 +121,11 @@ open class FragmentWithFilters : BaseFragment {
         )
     }
 
-    protected fun setupStringFilter(button: TextView, set: MutableSet<String>, values: List<String>) {
+    protected fun setupStringFilter(
+        button: TextView,
+        set: MutableSet<String>,
+        values: List<String>
+    ) {
         val (choiceList, parent) = setupBasicPopUpMenu(button.context)
         for (value in values) {
             val textView = TextView(context)
@@ -107,20 +143,41 @@ open class FragmentWithFilters : BaseFragment {
             if (set.contains(value)) textView.setBackgroundColor(
                 MaterialColors.getColor(requireContext(), R.attr.colorOnPrimary, Color.BLACK)
             )
-            else textView.setBackgroundColor(MaterialColors.getColor(requireContext(), R.attr.backgroundColor, Color.BLACK))
+            else textView.setBackgroundColor(
+                MaterialColors.getColor(
+                    requireContext(),
+                    R.attr.backgroundColor,
+                    Color.BLACK
+                )
+            )
             textView.setOnClickListener {
                 if (set.contains(value)) {
                     set.remove(value)
-                    textView.setBackgroundColor(MaterialColors.getColor(requireContext(), R.attr.backgroundColor, Color.BLACK))
+                    textView.setBackgroundColor(
+                        MaterialColors.getColor(
+                            requireContext(),
+                            R.attr.backgroundColor,
+                            Color.BLACK
+                        )
+                    )
                 } else {
                     set.add(value)
-                    textView.setBackgroundColor(MaterialColors.getColor(requireContext(), R.attr.colorOnPrimary, Color.BLACK))
+                    textView.setBackgroundColor(
+                        MaterialColors.getColor(
+                            requireContext(),
+                            R.attr.colorOnPrimary,
+                            Color.BLACK
+                        )
+                    )
                 }
             }
         }
         val location = IntArray(2)
         button.getLocationOnScreen(location)
-        parent.measure(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        parent.measure(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
         choiceList.showAtLocation(
             view,
             Gravity.NO_GRAVITY,

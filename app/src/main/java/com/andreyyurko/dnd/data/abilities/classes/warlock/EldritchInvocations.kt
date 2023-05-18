@@ -1,9 +1,6 @@
 package com.andreyyurko.dnd.data.abilities.classes.warlock
 
-import com.andreyyurko.dnd.data.characterData.Action
-import com.andreyyurko.dnd.data.characterData.ActionType
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
-import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.spells.CharacterSpells
 import com.andreyyurko.dnd.data.spells.SpellLists
@@ -11,7 +8,8 @@ import com.andreyyurko.dnd.data.spells.SpellLists
 var agonizingBlast = AbilityNode(
     name = "Мучительный взрыв",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Мучительный взрыв"] = "Когда вы накладываете мистический заряд, добавьте модификатор Харизмы к урону, причиняемому при попадании.\n"
+        abilities.additionalAbilities["Мучительный взрыв"] =
+            "Когда вы накладываете мистический заряд, добавьте модификатор Харизмы к урону, причиняемому при попадании.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -24,7 +22,8 @@ var agonizingBlast = AbilityNode(
 var armorOfShadows = AbilityNode(
     name = "Доспех теней",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Доспех теней"] = "Вы можете неограниченно накладывать на себя заклинание доспехи мага, не тратя ячейки заклинаний и материальные компоненты.\n"
+        abilities.additionalAbilities["Доспех теней"] =
+            "Вы можете неограниченно накладывать на себя заклинание доспехи мага, не тратя ячейки заклинаний и материальные компоненты.\n"
         abilities.spellsInfo["Заклинание доспеха теней"] = CharacterSpells(
             className = abilities.characterClass.className,
             maxKnownSpellsCount = 0,
@@ -45,7 +44,8 @@ var armorOfShadows = AbilityNode(
 var beastSpeech = AbilityNode(
     name = "Животная речь",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Животная речь"] = "Вы можете неограниченно накладывать заклинание разговор с животными, не тратя ячейки заклинаний.\n"
+        abilities.additionalAbilities["Животная речь"] =
+            "Вы можете неограниченно накладывать заклинание разговор с животными, не тратя ячейки заклинаний.\n"
         abilities.spellsInfo["Заклинание животной речи"] = CharacterSpells(
             className = abilities.characterClass.className,
             maxKnownSpellsCount = 0,
@@ -62,7 +62,7 @@ var beastSpeech = AbilityNode(
     },
     description = "Вы можете неограниченно накладывать заклинание разговор с животными, не тратя ячейки заклинаний.\n",
 )
-var mapOfEldrichInvocations = mutableMapOf (
+var mapOfEldrichInvocations = mutableMapOf(
     Pair(agonizingBlast.name, agonizingBlast),
     Pair(armorOfShadows.name, armorOfShadows),
     Pair(beastSpeech.name, beastSpeech)

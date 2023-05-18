@@ -21,7 +21,8 @@ class SpellsListAdapter @Inject constructor(
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val spellNameTextView: TextView = itemView.findViewById(R.id.nameTextView)
-        val spellLevelAndSchoolTextView: TextView = itemView.findViewById(R.id.levelAndSchoolTextView)
+        val spellLevelAndSchoolTextView: TextView =
+            itemView.findViewById(R.id.levelAndSchoolTextView)
         val spellDescriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
         val context: Context = itemView.context
     }

@@ -11,10 +11,14 @@ import androidx.lifecycle.viewModelScope
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.andreyyurko.dnd.data.abilities.mapOfAn
-import com.andreyyurko.dnd.data.characterData.*
+import com.andreyyurko.dnd.data.characterData.CharacterBriefInfo
+import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.CurrentState
+import com.andreyyurko.dnd.data.characterData.Note
 import com.andreyyurko.dnd.data.characterData.character.Character
 import com.andreyyurko.dnd.data.characterData.character.CharacterAbilityNode
 import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
+import com.andreyyurko.dnd.data.characterData.mergeCharacterInfo
 import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
 import com.andreyyurko.dnd.data.spells.CharacterSpells
 import com.andreyyurko.dnd.db.DB
@@ -28,7 +32,7 @@ import kotlinx.coroutines.launch
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.lang.reflect.Type
-import java.util.*
+import java.util.Timer
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.concurrent.timerTask
@@ -46,10 +50,12 @@ class CharactersHolder @Inject constructor(
     private var characters: MutableMap<Int, Character> = mutableMapOf()
     private var characterImages: MutableMap<Int, Bitmap?> = mutableMapOf()
 
-    private var _initActionState = MutableStateFlow<InitializationState>(InitializationState.NotInitialized)
+    private var _initActionState =
+        MutableStateFlow<InitializationState>(InitializationState.NotInitialized)
     val initActionState: Flow<InitializationState> get() = _initActionState.asStateFlow()
 
-    private var _savingCharactersState = MutableStateFlow<SavingCharactersState>(SavingCharactersState.NotCompleted)
+    private var _savingCharactersState =
+        MutableStateFlow<SavingCharactersState>(SavingCharactersState.NotCompleted)
     var savingCharactersState: Flow<SavingCharactersState> = _savingCharactersState.asStateFlow()
 
     var isSavingNeeded = false
@@ -64,8 +70,9 @@ class CharactersHolder @Inject constructor(
                 }
             }, 20000)
 
-            val worksQuery = WorkManager.getInstance(getApplication<Application>().applicationContext)
-                .getWorkInfosByTagLiveData("saveCharacterInfo")
+            val worksQuery =
+                WorkManager.getInstance(getApplication<Application>().applicationContext)
+                    .getWorkInfosByTagLiveData("saveCharacterInfo")
 
             val observer = Observer<List<WorkInfo>> { workList ->
                 var isAllFinished = true
@@ -89,8 +96,7 @@ class CharactersHolder @Inject constructor(
                     }
                 }
             }
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
             viewModelScope.launch {
                 loadCharacters()
             }
@@ -101,7 +107,8 @@ class CharactersHolder @Inject constructor(
         try {
             val listIdsType: Type = object : TypeToken<List<Int>>() {}.type
             val charactersListJson = db.getString(DB_CHARACTER_IDS)
-            val charactersList: List<Int> = Gson().fromJson(charactersListJson, listIdsType) ?: emptyList()
+            val charactersList: List<Int> =
+                Gson().fromJson(charactersListJson, listIdsType) ?: emptyList()
             for (id in charactersList) {
                 val character = loadCharacter(id)
 
@@ -111,8 +118,7 @@ class CharactersHolder @Inject constructor(
                 }
 
             }
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
             characters = mutableMapOf()
         }
         _initActionState.emit(InitializationState.Initialized)
@@ -150,21 +156,32 @@ class CharactersHolder @Inject constructor(
             ) else CurrentState()
 
             //get inventory
-            val inventoryMapType: Type = object : TypeToken<MutableMap<String, InventoryItemInfo>>() {}.type
+            val inventoryMapType: Type =
+                object : TypeToken<MutableMap<String, InventoryItemInfo>>() {}.type
             val inventoryJson = db.getString(id.toString() + DB_INVENTORY)
             val inventory: MutableMap<String, InventoryItemInfo> =
-                if (inventoryJson != null) Gson().fromJson(inventoryJson, inventoryMapType) else mutableMapOf()
+                if (inventoryJson != null) Gson().fromJson(
+                    inventoryJson,
+                    inventoryMapType
+                ) else mutableMapOf()
 
             // get spells
-            val spellsMapType: Type = object : TypeToken<MutableMap<String, CharacterSpells>>() {}.type
+            val spellsMapType: Type =
+                object : TypeToken<MutableMap<String, CharacterSpells>>() {}.type
             val spellsJson = db.getString(id.toString() + DB_SPELLS)
             val spells: MutableMap<String, CharacterSpells> =
-                if (spellsJson != null) Gson().fromJson(spellsJson, spellsMapType) else mutableMapOf()
+                if (spellsJson != null) Gson().fromJson(
+                    spellsJson,
+                    spellsMapType
+                ) else mutableMapOf()
 
             val notesListType: Type = object : TypeToken<MutableList<Note>>() {}.type
             val notesJson = db.getString(id.toString() + DB_NOTES)
             val notes: MutableList<Note> =
-                if (notesJson != null) Gson().fromJson(notesJson, notesListType) else mutableListOf()
+                if (notesJson != null) Gson().fromJson(
+                    notesJson,
+                    notesListType
+                ) else mutableListOf()
 
             // get base_an with all sub-nods
             val baseCharacterAbilityNode = loadCharacterNode("base_an", id, ".", character)
@@ -174,7 +191,8 @@ class CharactersHolder @Inject constructor(
             character.baseCAN = baseCharacterAbilityNode
 
             // add all custom data
-            character.characterInfo = mergeCharacterInfo(character.characterInfo, character.customAbilities)
+            character.characterInfo =
+                mergeCharacterInfo(character.characterInfo, character.customAbilities)
 
             // add current state
             character.characterInfo.currentState = currentState
@@ -190,8 +208,7 @@ class CharactersHolder @Inject constructor(
 
             // merge all CAN
             mergeAllAbilities(character)
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
             Log.d(LOG_TAG, e.message.toString())
             character = null
         }
@@ -215,28 +232,46 @@ class CharactersHolder @Inject constructor(
         return bitmap
     }
 
-    private fun loadCharacterNode(name: String, id: Int, path: String, character: Character): CharacterAbilityNode {
+    private fun loadCharacterNode(
+        name: String,
+        id: Int,
+        path: String,
+        character: Character
+    ): CharacterAbilityNode {
 
         // init type to load from db
         val mapType: Type = object : TypeToken<Map<String, String>>() {}.type
 
         // get map option_name -> chosen_option_name
-        val chosenAlternativesNamesJson = db.getString(id.toString() + DB_CHARACTER_ABILITY_NODE + path + name)
-        val chosenAlternatives = Gson().fromJson<Map<String, String>>(chosenAlternativesNamesJson, mapType)
+        val chosenAlternativesNamesJson =
+            db.getString(id.toString() + DB_CHARACTER_ABILITY_NODE + path + name)
+        val chosenAlternatives =
+            Gson().fromJson<Map<String, String>>(chosenAlternativesNamesJson, mapType)
 
         // get map option_name -> chosen_option_for_data_action
-        val chosenAlternativesForActionsJson = db.getString(id.toString() + DB_CHARACTER_ABILITY_NODE2 + path + name)
-        val chosenAlternativesForActions = if (chosenAlternativesForActionsJson != null) Gson().fromJson<Map<String, String>>(chosenAlternativesForActionsJson, mapType) else mutableMapOf()
+        val chosenAlternativesForActionsJson =
+            db.getString(id.toString() + DB_CHARACTER_ABILITY_NODE2 + path + name)
+        val chosenAlternativesForActions =
+            if (chosenAlternativesForActionsJson != null) Gson().fromJson<Map<String, String>>(
+                chosenAlternativesForActionsJson,
+                mapType
+            ) else mutableMapOf()
 
         // create CAN with reference to AN and empty chosen_alternatives
         val characterAbilityNode = CharacterAbilityNode(mapOfAn[name]!!, character)
 
-        characterAbilityNode.chosenAlternativesForActions = chosenAlternativesForActions as MutableMap<String, String>
+        characterAbilityNode.chosenAlternativesForActions =
+            chosenAlternativesForActions as MutableMap<String, String>
 
         // add to chosen_alternatives all references to sub-nodes
         for (key in chosenAlternatives.keys) {
             val chosenNode =
-                loadCharacterNode(chosenAlternatives[key]!!, id, path + characterAbilityNode.data.name + '.', character)
+                loadCharacterNode(
+                    chosenAlternatives[key]!!,
+                    id,
+                    path + characterAbilityNode.data.name + '.',
+                    character
+                )
             characterAbilityNode.chosen_alternatives[key] = chosenNode
         }
 
@@ -322,14 +357,17 @@ class CharactersHolder @Inject constructor(
         )
 
         val characterCharacterInfoJson = jsonMap[id.toString() + DB_CHARACTER_CUSTOM]!!
-        val characterCharacterInfo = Gson().fromJson(characterCharacterInfoJson, CharacterInfo::class.java)
+        val characterCharacterInfo =
+            Gson().fromJson(characterCharacterInfoJson, CharacterInfo::class.java)
 
         val currentStateJson = jsonMap[id.toString() + DB_CHARACTER_STATE]!!
         val currentState = Gson().fromJson(currentStateJson, CurrentState::class.java)
 
-        val inventoryMapType: Type = object : TypeToken<MutableMap<String, InventoryItemInfo>>() {}.type
+        val inventoryMapType: Type =
+            object : TypeToken<MutableMap<String, InventoryItemInfo>>() {}.type
         val inventoryJson = jsonMap[id.toString() + DB_INVENTORY]!!
-        val inventory: MutableMap<String, InventoryItemInfo> = Gson().fromJson(inventoryJson, inventoryMapType)
+        val inventory: MutableMap<String, InventoryItemInfo> =
+            Gson().fromJson(inventoryJson, inventoryMapType)
 
         val spellsMapType: Type = object : TypeToken<MutableMap<String, CharacterSpells>>() {}.type
         val spellsJson = jsonMap[id.toString() + DB_SPELLS]!!
@@ -344,7 +382,8 @@ class CharactersHolder @Inject constructor(
         character.customAbilities = characterCharacterInfo
         character.baseCAN = baseCharacterAbilityNode
 
-        character.characterInfo = mergeCharacterInfo(character.characterInfo, character.customAbilities)
+        character.characterInfo =
+            mergeCharacterInfo(character.characterInfo, character.customAbilities)
 
         character.characterInfo.currentState = currentState
 
@@ -358,7 +397,6 @@ class CharactersHolder @Inject constructor(
 
         return character
     }
-
 
 
     // see saving character for understanding (it works similarly)
@@ -385,11 +423,18 @@ class CharactersHolder @Inject constructor(
     }
 
     // see saving character nodes for understanding (it works similarly)
-    private fun getCharacterNodesJsons(jsonMap: MutableMap<String, String>, characterAbilityNode: CharacterAbilityNode,
-                                       characterId: Int, path: String) {
+    private fun getCharacterNodesJsons(
+        jsonMap: MutableMap<String, String>, characterAbilityNode: CharacterAbilityNode,
+        characterId: Int, path: String
+    ) {
 
         for (characterNode in characterAbilityNode.chosen_alternatives.values) {
-            getCharacterNodesJsons(jsonMap, characterNode, characterId, path + characterAbilityNode.data.name + '.')
+            getCharacterNodesJsons(
+                jsonMap,
+                characterNode,
+                characterId,
+                path + characterAbilityNode.data.name + '.'
+            )
         }
 
         val chosenAlternativesNames: MutableMap<String, String> = mutableMapOf()
@@ -400,33 +445,49 @@ class CharactersHolder @Inject constructor(
         }
 
         val chosenAlternativesJson = Gson().toJson(chosenAlternativesNames)
-        jsonMap[characterId.toString() + DB_CHARACTER_ABILITY_NODE + path + characterAbilityNode.data.name] = chosenAlternativesJson
+        jsonMap[characterId.toString() + DB_CHARACTER_ABILITY_NODE + path + characterAbilityNode.data.name] =
+            chosenAlternativesJson
 
         // save map option_name -> chosen_option_for_data_action
-        val chosenAlternativesForActionsJson = Gson().toJson(characterAbilityNode.chosenAlternativesForActions)
-        jsonMap[characterId.toString() + DB_CHARACTER_ABILITY_NODE2 + path + characterAbilityNode.data.name] = chosenAlternativesForActionsJson
+        val chosenAlternativesForActionsJson =
+            Gson().toJson(characterAbilityNode.chosenAlternativesForActions)
+        jsonMap[characterId.toString() + DB_CHARACTER_ABILITY_NODE2 + path + characterAbilityNode.data.name] =
+            chosenAlternativesForActionsJson
     }
 
     // see loading character nodes for understanding (it works similarly)
-    private fun copyCharacterNode(jsonMap: MutableMap<String, String>, name: String, id: Int,
-                                         path: String, character: Character): CharacterAbilityNode {
+    private fun copyCharacterNode(
+        jsonMap: MutableMap<String, String>, name: String, id: Int,
+        path: String, character: Character
+    ): CharacterAbilityNode {
 
         val mapType: Type = object : TypeToken<Map<String, String>>() {}.type
 
-        val chosenAlternativesNamesJson = jsonMap[id.toString() + DB_CHARACTER_ABILITY_NODE + path + name]!!
-        val chosenAlternatives = Gson().fromJson<Map<String, String>>(chosenAlternativesNamesJson, mapType)
+        val chosenAlternativesNamesJson =
+            jsonMap[id.toString() + DB_CHARACTER_ABILITY_NODE + path + name]!!
+        val chosenAlternatives =
+            Gson().fromJson<Map<String, String>>(chosenAlternativesNamesJson, mapType)
 
 
-        val chosenAlternativesForActionsJson = jsonMap[id.toString() + DB_CHARACTER_ABILITY_NODE2 + path + name]!!
-        val chosenAlternativesForActions = Gson().fromJson<Map<String, String>>(chosenAlternativesForActionsJson, mapType)
+        val chosenAlternativesForActionsJson =
+            jsonMap[id.toString() + DB_CHARACTER_ABILITY_NODE2 + path + name]!!
+        val chosenAlternativesForActions =
+            Gson().fromJson<Map<String, String>>(chosenAlternativesForActionsJson, mapType)
 
         val characterAbilityNode = CharacterAbilityNode(mapOfAn[name]!!, character)
 
-        characterAbilityNode.chosenAlternativesForActions = chosenAlternativesForActions as MutableMap<String, String>
+        characterAbilityNode.chosenAlternativesForActions =
+            chosenAlternativesForActions as MutableMap<String, String>
 
         for (key in chosenAlternatives.keys) {
             val chosenNode =
-                copyCharacterNode(jsonMap, chosenAlternatives[key]!!, id, path + characterAbilityNode.data.name + '.', character)
+                copyCharacterNode(
+                    jsonMap,
+                    chosenAlternatives[key]!!,
+                    id,
+                    path + characterAbilityNode.data.name + '.',
+                    character
+                )
             characterAbilityNode.chosen_alternatives[key] = chosenNode
         }
 
@@ -485,7 +546,10 @@ class CharactersHolder @Inject constructor(
         val fileOutputStream: FileOutputStream
         try {
             fileOutputStream =
-                getApplication<Application>().applicationContext.openFileOutput(name, Context.MODE_PRIVATE)
+                getApplication<Application>().applicationContext.openFileOutput(
+                    name,
+                    Context.MODE_PRIVATE
+                )
             bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fileOutputStream)
             fileOutputStream.close()
         } catch (e: Exception) {
@@ -506,7 +570,9 @@ class CharactersHolder @Inject constructor(
             for (id in characters.keys) {
                 saveCharacter(id)
             }
-            val worksQuery = WorkManager.getInstance(getApplication<Application>().applicationContext).getWorkInfosByTagLiveData("saveCharacterInfo")
+            val worksQuery =
+                WorkManager.getInstance(getApplication<Application>().applicationContext)
+                    .getWorkInfosByTagLiveData("saveCharacterInfo")
 
             val observer = Observer<List<WorkInfo>> { workList ->
                 var isAllFinished = true
@@ -533,10 +599,18 @@ class CharactersHolder @Inject constructor(
         }
     }
 
-    private fun saveCharacterNode(characterAbilityNode: CharacterAbilityNode, characterId: Int, path: String) {
+    private fun saveCharacterNode(
+        characterAbilityNode: CharacterAbilityNode,
+        characterId: Int,
+        path: String
+    ) {
         // save all sub-nodes
         for (characterNode in characterAbilityNode.chosen_alternatives.values) {
-            saveCharacterNode(characterNode, characterId, path + characterAbilityNode.data.name + '.')
+            saveCharacterNode(
+                characterNode,
+                characterId,
+                path + characterAbilityNode.data.name + '.'
+            )
         }
 
         // get chosen AN names and save it using current AN option_name as key
@@ -559,7 +633,8 @@ class CharactersHolder @Inject constructor(
         )
 
         // save map option_name -> chosen_option_for_data_action
-        val chosenAlternativesForActionsJson = Gson().toJson(characterAbilityNode.chosenAlternativesForActions)
+        val chosenAlternativesForActionsJson =
+            Gson().toJson(characterAbilityNode.chosenAlternativesForActions)
         db.putStringsAsync(
             listOf(
                 Pair(
@@ -596,9 +671,17 @@ class CharactersHolder @Inject constructor(
         deleteCharacterNode(character.baseCAN, character.id, ".")
     }
 
-    private fun deleteCharacterNode(characterAbilityNode: CharacterAbilityNode, characterId: Int, path: String) {
+    private fun deleteCharacterNode(
+        characterAbilityNode: CharacterAbilityNode,
+        characterId: Int,
+        path: String
+    ) {
         for (characterNode in characterAbilityNode.chosen_alternatives.values) {
-            deleteCharacterNode(characterNode, characterId, path + characterAbilityNode.data.name + '.')
+            deleteCharacterNode(
+                characterNode,
+                characterId,
+                path + characterAbilityNode.data.name + '.'
+            )
         }
 
         db.deleteDataAsync(
