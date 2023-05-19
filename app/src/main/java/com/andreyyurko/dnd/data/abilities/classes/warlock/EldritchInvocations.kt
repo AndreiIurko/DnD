@@ -66,7 +66,8 @@ var beastSpeech = AbilityNode(
 var beguilingInfluence = AbilityNode(
     name = "Обманчивое влияние",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Обманчивое влияние"] = "Вы получаете владение навыками Обман и Убеждение.\n"
+        abilities.additionalAbilities["Обманчивое влияние"] =
+            "Вы получаете владение навыками Обман и Убеждение.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -79,7 +80,8 @@ var beguilingInfluence = AbilityNode(
 var devilsSight = AbilityNode(
     name = "Дьявольский взор",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Дьявольский взор"] = "Вы можете нормально видеть в темноте, как магической, так и немагической, на расстоянии 120 футов.\n"
+        abilities.additionalAbilities["Дьявольский взор"] =
+            "Вы можете нормально видеть в темноте, как магической, так и немагической, на расстоянии 120 футов.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -92,7 +94,8 @@ var devilsSight = AbilityNode(
 var eldritchMind = AbilityNode(
     name = "Мистический разум",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Мистический разум"] = "Вы совершаете с преимуществом спасброски Телосложения для поддержания концентрации на вашем заклинании.\n"
+        abilities.additionalAbilities["Мистический разум"] =
+            "Вы совершаете с преимуществом спасброски Телосложения для поддержания концентрации на вашем заклинании.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -105,7 +108,8 @@ var eldritchMind = AbilityNode(
 var eldritchSight = AbilityNode(
     name = "Таинственный взгляд",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Таинственный взгляд"] = "Вы можете неограниченно накладывать заклинание обнаружение магии, не тратя ячейки заклинаний.\n"
+        abilities.additionalAbilities["Таинственный взгляд"] =
+            "Вы можете неограниченно накладывать заклинание обнаружение магии, не тратя ячейки заклинаний.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -118,7 +122,8 @@ var eldritchSight = AbilityNode(
 var eldritchSpear = AbilityNode(
     name = "Мистическое копьё",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Мистическое копьё"] = "Когда вы накладываете мистический заряд, его дистанция равна 300 футам.\n"
+        abilities.additionalAbilities["Мистическое копьё"] =
+            "Когда вы накладываете мистический заряд, его дистанция равна 300 футам.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -128,7 +133,7 @@ var eldritchSpear = AbilityNode(
     description = "Когда вы накладываете мистический заряд, его дистанция равна 300 футам.\n",
 )
 
-var eyesOfTheRuneKeeper= AbilityNode(
+var eyesOfTheRuneKeeper = AbilityNode(
     name = "Глаза хранителя рун",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.additionalAbilities["Глаза хранителя рун"] = "Вы можете читать любые письмена.\n"
@@ -144,7 +149,8 @@ var eyesOfTheRuneKeeper= AbilityNode(
 var fiendishVigor = AbilityNode(
     name = "Мощь исчадия",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Мощь исчадия"] = "Вы можете неограниченно накладывать на себя заклинание псевдожизнь как заклинание 1-го уровня, не тратя ячейки заклинаний и материальные компоненты.\n"
+        abilities.additionalAbilities["Мощь исчадия"] =
+            "Вы можете неограниченно накладывать на себя заклинание псевдожизнь как заклинание 1-го уровня, не тратя ячейки заклинаний и материальные компоненты.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -157,7 +163,8 @@ var fiendishVigor = AbilityNode(
 var gazeOfTwoMinds = AbilityNode(
     name = "Взор двух умов",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Взор двух умов"] = "Вы можете действием коснуться согласного гуманоида и до конца своего следующего хода воспринимать всё его чувствами. Пока существо находится на том же плане существования, что и вы, вы можете в последующие ходы действием продлевать эту связь до конца своего следующего хода. При восприятии чувствами другого существа, вы получаете все преимущества от особых чувств, которыми обладает это существо, а сами при этом слепы и глухи.\n"
+        abilities.additionalAbilities["Взор двух умов"] =
+            "Вы можете действием коснуться согласного гуманоида и до конца своего следующего хода воспринимать всё его чувствами. Пока существо находится на том же плане существования, что и вы, вы можете в последующие ходы действием продлевать эту связь до конца своего следующего хода. При восприятии чувствами другого существа, вы получаете все преимущества от особых чувств, которыми обладает это существо, а сами при этом слепы и глухи.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -170,7 +177,8 @@ var gazeOfTwoMinds = AbilityNode(
 var graspOfHadar = AbilityNode(
     name = "Хватка Хадара",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Хватка Хадара"] = "Один раз на каждом из ваших ходов, когда вы попадаете по существу мистическим зарядом [eldritch blast], вы можете переместить это существо по прямой линии на 10 футов ближе к вам.\n"
+        abilities.additionalAbilities["Хватка Хадара"] =
+            "Один раз на каждом из ваших ходов, когда вы попадаете по существу мистическим зарядом [eldritch blast], вы можете переместить это существо по прямой линии на 10 футов ближе к вам.\n"
         abilities
     },
     getAlternatives = mutableMapOf(),
@@ -180,7 +188,7 @@ var graspOfHadar = AbilityNode(
     description = "Один раз на каждом из ваших ходов, когда вы попадаете по существу мистическим зарядом [eldritch blast], вы можете переместить это существо по прямой линии на 10 футов ближе к вам.\n",
 )
 
-var mapOfEldrichInvocations = mutableMapOf (
+var mapOfEldrichInvocations = mutableMapOf(
     Pair(agonizingBlast.name, agonizingBlast),
     Pair(armorOfShadows.name, armorOfShadows),
     Pair(beastSpeech.name, beastSpeech),

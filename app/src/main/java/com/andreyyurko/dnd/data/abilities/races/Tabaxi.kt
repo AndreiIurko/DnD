@@ -25,7 +25,8 @@ val tabaxiChooseLanguage = AbilityNode(
 val tabaxiClaws = AbilityNode(
     name = "Когти табакси",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Скорость лазанья табакси"] = "Из-за ваших когтей у вас есть скорость лазания 20 футов.\n"
+        abilities.additionalAbilities["Скорость лазанья табакси"] =
+            "Из-за ваших когтей у вас есть скорость лазания 20 футов.\n"
         checkProfs@ for (prof in abilities.weaponProficiency) {
             if (prof.weaponName == "Безоружный удар") {
                 prof.damage = "1к4"

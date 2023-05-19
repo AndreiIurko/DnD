@@ -46,6 +46,7 @@ class InventoryAdapter @Inject constructor(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         holder.nameTextView.text = itemsList[position].itemName
         holder.countTextView.text = itemsList[position].count.toString()
 

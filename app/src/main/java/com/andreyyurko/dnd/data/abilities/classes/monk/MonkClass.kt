@@ -182,7 +182,7 @@ var martialArts: AbilityNode = AbilityNode(
                 }
                 prof.setOfSkills.plus(Ability.Dexterity)
 
-                if(prof.weaponName == "Безоружный удар") prof.damage = dice
+                if (prof.weaponName == "Безоружный удар") prof.damage = dice
                 // We need to check it with some other way
             }
         }

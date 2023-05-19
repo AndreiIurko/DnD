@@ -1,12 +1,9 @@
 package com.andreyyurko.dnd.data.abilities.races.lineages
 
-import com.andreyyurko.dnd.data.characterData.Ability
 import com.andreyyurko.dnd.data.characterData.Action
 import com.andreyyurko.dnd.data.characterData.ActionType
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.ChargesCounter
-import com.andreyyurko.dnd.data.characterData.DamageType
-import com.andreyyurko.dnd.data.characterData.Weapon
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 val dhampir = AbilityNode(
@@ -29,8 +26,10 @@ val dhampir = AbilityNode(
                 "На расстоянии 60 футов вы при тусклом освещении можете видеть так, как будто это яркое освещение, и в темноте так, как будто это тусклое освещение. В темноте вы не можете различать цвета, только оттенки серого.\n"
         }
         abilities.additionalAbilities["Природа нежити"] = "Вам не нужно дышать\n"
-        if (abilities.level < 3) abilities.additionalAbilities["Скорость лазания дампира"] = "Вы получаете скорость лазания, равную вашей скорости ходьбы\n"
-        else abilities.additionalAbilities["Скорость лазания дампира"] = "Вы получаете скорость лазания, равную вашей скорости ходьбы. При этом вы можете перемещаться вверх, вниз и вдоль вертикальных поверхностей, а также по потолкам, оставляя руки свободными.\n"
+        if (abilities.level < 3) abilities.additionalAbilities["Скорость лазания дампира"] =
+            "Вы получаете скорость лазания, равную вашей скорости ходьбы\n"
+        else abilities.additionalAbilities["Скорость лазания дампира"] =
+            "Вы получаете скорость лазания, равную вашей скорости ходьбы. При этом вы можете перемещаться вверх, вниз и вдоль вертикальных поверхностей, а также по потолкам, оставляя руки свободными.\n"
         if (!abilities.currentState.charges.contains("Укус вампира")) {
             abilities.currentState.charges["Укус вампира"] = ChargesCounter(
                 current = abilities.proficiencyBonus,

@@ -31,6 +31,17 @@ class CharacterViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
     var charactersBriefInfo = charactersHolder.getBriefInfo()
 
+    var isDiceMenuShown = false
+    var diceSet: MutableMap<String, Int> = mutableMapOf(
+        Pair("d4", 0),
+        Pair("d6", 0),
+        Pair("d8", 0),
+        Pair("d10", 0),
+        Pair("d12", 0),
+        Pair("d20", 0),
+        Pair("d100", 0)
+    )
+
     private lateinit var shownCharacter: Character
 
     val dataState: MutableLiveData<String> by lazy {

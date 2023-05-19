@@ -51,6 +51,8 @@ class App : Application(), ExceptionListener {
         val stackTrace = Log.getStackTraceString(throwable)
         exceptions.add(stackTrace)
 
+        Log.d("Exception", stackTrace)
+
         val intent = Intent(applicationContext, CrashActivity::class.java)
             .addFlags(FLAG_ACTIVITY_NEW_TASK)
             .putExtra("exception_value", exceptions.toString())

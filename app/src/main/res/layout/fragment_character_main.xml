@@ -435,6 +435,295 @@
         app:layout_constraintTop_toTopOf="@id/spellSlotsLinearLayout"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/diceMenuCardView"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="40dp"
+        android:translationY="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/showDicesButton"
+        app:layout_constraintEnd_toEndOf="@id/showDicesButton"
+        app:layout_constraintStart_toStartOf="@id/showDicesButton"
+        android:elevation="3dp">
+
+        <LinearLayout
+            android:id="@+id/diceMenuLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:paddingHorizontal="8dp"
+            android:background="@color/background"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp">
+
+                <ImageButton
+                    android:id="@+id/d20Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/d20"
+                    android:background="@drawable/dice_background"
+                    app:tint="@color/background"/>
+
+                <TextView
+                    android:id="@+id/d20TextView"
+                    android:visibility="gone"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/dice_background"
+                    android:backgroundTint="@color/on_primary"
+                    android:textAlignment="center"
+                    android:text="12"
+                    android:textSize="12sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp">
+
+                <LinearLayout
+                    android:id="@+id/d100Button"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/dice_background"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/d10"
+                        app:tint="@color/background"
+                        android:layout_marginEnd="2dp"/>
+                    <ImageView
+                        android:layout_marginStart="2dp"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/d10"
+                        app:tint="@color/background"/>
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/d100TextView"
+                    android:visibility="gone"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/dice_background"
+                    android:backgroundTint="@color/on_primary"
+                    android:textAlignment="center"
+                    android:text="12"
+                    android:textSize="12sp"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp">
+
+                <ImageButton
+                    android:id="@+id/d12Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/d12"
+                    android:background="@drawable/dice_background"
+                    app:tint="@color/background"/>
+
+                <TextView
+                    android:id="@+id/d12TextView"
+                    android:visibility="gone"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/dice_background"
+                    android:backgroundTint="@color/on_primary"
+                    android:textAlignment="center"
+                    android:text="12"
+                    android:textSize="12sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp">
+
+                <ImageButton
+                    android:id="@+id/d10Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/d10"
+                    android:background="@drawable/dice_background"
+                    app:tint="@color/background"/>
+
+                <TextView
+                    android:id="@+id/d10TextView"
+                    android:visibility="gone"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/dice_background"
+                    android:backgroundTint="@color/on_primary"
+                    android:textAlignment="center"
+                    android:text="12"
+                    android:textSize="12sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp">
+
+                <ImageButton
+                    android:id="@+id/d8Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/d8"
+                    android:background="@drawable/dice_background"
+                    app:tint="@color/background"/>
+
+                <TextView
+                    android:id="@+id/d8TextView"
+                    android:visibility="gone"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/dice_background"
+                    android:backgroundTint="@color/on_primary"
+                    android:textAlignment="center"
+                    android:text="12"
+                    android:textSize="12sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp">
+
+                <ImageButton
+                    android:id="@+id/d6Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/d6"
+                    android:background="@drawable/dice_background"
+                    app:tint="@color/background"/>
+
+                <TextView
+                    android:id="@+id/d6TextView"
+                    android:visibility="gone"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/dice_background"
+                    android:backgroundTint="@color/on_primary"
+                    android:textAlignment="center"
+                    android:text="12"
+                    android:textSize="12sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp">
+
+                <ImageButton
+                    android:id="@+id/d4Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/d4"
+                    android:background="@drawable/dice_background"
+                    app:tint="@color/background"/>
+
+                <TextView
+                    android:id="@+id/d4TextView"
+                    android:visibility="gone"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/dice_background"
+                    android:backgroundTint="@color/on_primary"
+                    android:textAlignment="center"
+                    android:text="12"
+                    android:textSize="12sp"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:translationY="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/showDicesButton"
+        app:layout_constraintEnd_toEndOf="@id/showDicesButton"
+        app:layout_constraintStart_toStartOf="@id/showDicesButton"
+        android:background="@drawable/button_dice_background"
+        android:backgroundTint="@color/background"
+        android:elevation="3dp"/>
+
+    <LinearLayout
+        android:id="@+id/rollLayout"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:layout_constraintBottom_toBottomOf="@id/showDicesButton"
+        app:layout_constraintEnd_toEndOf="@id/showDicesButton"
+        app:layout_constraintTop_toTopOf="@id/showDicesButton"
+        android:background="@drawable/border_roll_button"
+        android:orientation="horizontal"
+        android:clickable="true"
+        android:focusable="true"
+        android:elevation="4dp">
+
+        <TextView
+            android:id="@+id/rollButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:maxLines="1"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:text="Бросить"/>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/showDicesButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="56dp"
+        android:src="@drawable/d20"
+        app:tint="@color/background"
+        android:background="@drawable/dice_background"
+        android:layout_marginEnd="24dp"
+        android:elevation="5dp"
+        android:foreground="?attr/selectableItemBackground"/>
+
     <View
         android:id="@+id/popUpBackground"
         android:layout_width="match_parent"

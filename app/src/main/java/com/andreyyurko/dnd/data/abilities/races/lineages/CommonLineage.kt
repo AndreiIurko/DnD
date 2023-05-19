@@ -1,6 +1,16 @@
 package com.andreyyurko.dnd.data.abilities.races.lineages
 
-import com.andreyyurko.dnd.data.abilities.other.*
+import com.andreyyurko.dnd.data.abilities.other.charismaAbilityImprovement
+import com.andreyyurko.dnd.data.abilities.other.commonLanguage
+import com.andreyyurko.dnd.data.abilities.other.constitutionAbilityImprovement
+import com.andreyyurko.dnd.data.abilities.other.dexterityAbilityImprovement
+import com.andreyyurko.dnd.data.abilities.other.intelligenceAbilityImprovement
+import com.andreyyurko.dnd.data.abilities.other.mapOfLanguages
+import com.andreyyurko.dnd.data.abilities.other.mapOfSkills
+import com.andreyyurko.dnd.data.abilities.other.perception
+import com.andreyyurko.dnd.data.abilities.other.stealth
+import com.andreyyurko.dnd.data.abilities.other.strengthAbilityImprovement
+import com.andreyyurko.dnd.data.abilities.other.wisdomAbilityImprovement
 import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
@@ -67,7 +77,8 @@ val lineageSkills = AbilityNode(
 val tabaxiLegacy = AbilityNode(
     name = "Наследие табакси",
     changesInCharacterInfo = { abilities: CharacterInfo ->
-        abilities.additionalAbilities["Скорость лазанья табакси"] = "Из-за ваших когтей у вас есть скорость лазания 20 футов.\n"
+        abilities.additionalAbilities["Скорость лазанья табакси"] =
+            "Из-за ваших когтей у вас есть скорость лазания 20 футов.\n"
         abilities
     },
     getAlternatives = mutableMapOf(
@@ -152,6 +163,6 @@ val mapOfLineageAbilities = (
             Pair(commonLineageAbilities.name, commonLineageAbilities),
             Pair(commonLineage.name, commonLineage)
         )
-        + mapOfHexbloodAbilities
-        + mapOfDhampirAbilities
-    ).toMutableMap()
+                + mapOfHexbloodAbilities
+                + mapOfDhampirAbilities
+        ).toMutableMap()
