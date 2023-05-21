@@ -30,15 +30,15 @@ class RaceViewModel @Inject constructor(
             key.lowercase().contains(character.characterInfo.race.lowercase())
         }
         baseCAN.makeChoice("race", raceChoice)
-        val raceCAN = baseCAN.chosen_alternatives["race"]!!
-        raceCAN.chosen_alternatives["backstory"] =
+        val raceCAN = baseCAN.chosenAlternatives["race"]!!
+        raceCAN.chosenAlternatives["backstory"] =
             CharacterAbilityNode(customBackstory, raceCAN.character)
         showAbilities()
     }
 
     fun showAbilities() {
         adapter.apply {
-            rootCan = baseCAN.chosen_alternatives["race"]
+            rootCan = baseCAN.chosenAlternatives["race"]
             notifyDataSetChanged()
         }
     }

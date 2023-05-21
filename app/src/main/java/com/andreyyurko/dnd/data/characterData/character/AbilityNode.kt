@@ -1,12 +1,12 @@
 package com.andreyyurko.dnd.data.characterData.character
 
 import com.andreyyurko.dnd.data.abilities.mapOfAn
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Priority
 
 open class AbilityNode(
     val name: String,
-    val changesInCharacterInfo: (abilities: CharacterInfo) -> CharacterInfo,
+    val changesInCharacterInfo:
+        (abilities: CharacterInfo) -> CharacterInfo,
     val getAlternatives: MutableMap<String, (abilities: CharacterInfo?) -> List<String>>,
     val requirements: (abilities: CharacterInfo) -> Boolean,
     open val addRequirements: List<List<Triple<String, String, Int>>> = listOf(listOf()),
@@ -15,35 +15,22 @@ open class AbilityNode(
     val priority: Priority = Priority.Basic,
     val actionForChoice: Map<String, (choice: String, abilities: CharacterInfo) -> CharacterInfo> = mutableMapOf(),
 ) {
-    constructor(name: String) : this(
-        name = name,
-        changesInCharacterInfo = { abilities: CharacterInfo -> abilities },
-        getAlternatives = mutableMapOf<String, (abilities: CharacterInfo?) -> List<String>>(),
-        requirements = { true },
-        addRequirements = listOf<List<Triple<String, String, Int>>>(),
-        description = ""
-    )
-
     fun merge(abilities: CharacterInfo): CharacterInfo {
         return changesInCharacterInfo(abilities)
     }
 
-    fun isCorrect(abilities: CharacterInfo): Boolean {
+    fun isAddable(abilities: CharacterInfo?): Boolean {
+        if (abilities == null) return false
         return requirements(abilities)
     }
 
-    fun isAddable(abilities: CharacterInfo?): Boolean {
-        if (abilities == null) return false
-        return isCorrect(abilities) and true
-    }
-
-    fun showOptions(abilities: CharacterInfo, option_name: String): List<String> {
+    fun showOptions(abilities: CharacterInfo, optionName: String): List<String> {
         val result: MutableList<String> = mutableListOf()
-        for (option in getAlternatives[option_name]!!(abilities)) {
+        for (option in getAlternatives[optionName]!!(abilities)) {
             mapOfAn[option]?.let {
                 if (it.isAddable(abilities)) result.add(option)
             }
-            actionForChoice[option_name]?.let {
+            actionForChoice[optionName]?.let {
                 result.add(option)
             }
         }

@@ -79,7 +79,7 @@ class AbilityAdapter : RecyclerView.Adapter<AbilityAdapter.ViewHolder>() {
 
                 // finds textView what shows chosen option
                 val textView = choiceButton.findViewById<TextView>(R.id.choiceText)
-                abilityCAN.chosen_alternatives[optionName]?.let {
+                abilityCAN.chosenAlternatives[optionName]?.let {
                     textView.text = it.data.name
                 }
                 abilityCAN.chosenAlternativesForActions[optionName]?.let {
@@ -101,7 +101,7 @@ class AbilityAdapter : RecyclerView.Adapter<AbilityAdapter.ViewHolder>() {
             return 0
         }
         var count = initCount
-        for ((_, chosenAbility) in can.chosen_alternatives) {
+        for ((_, chosenAbility) in can.chosenAlternatives) {
             if (chosenAbility.data.isNeedsToBeShown) {
                 count += 1
             }
@@ -117,7 +117,7 @@ class AbilityAdapter : RecyclerView.Adapter<AbilityAdapter.ViewHolder>() {
         initPosition: Int
     ): Pair<AbilityCard?, Int> {
         var position = initPosition
-        for ((_, chosenAbility) in can.chosen_alternatives) {
+        for ((_, chosenAbility) in can.chosenAlternatives) {
             // skip if ability is not supposed to be shown
             if (chosenAbility.data.isNeedsToBeShown) {
                 // if position is zero we find our can

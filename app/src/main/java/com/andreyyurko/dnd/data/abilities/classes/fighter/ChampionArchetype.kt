@@ -2,7 +2,7 @@ package com.andreyyurko.dnd.data.abilities.classes.fighter
 
 import com.andreyyurko.dnd.data.abilities.other.mapOfFightingStyles
 import com.andreyyurko.dnd.data.characterData.Ability
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.character.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 

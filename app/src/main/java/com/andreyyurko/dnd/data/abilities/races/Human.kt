@@ -1,7 +1,7 @@
 package com.andreyyurko.dnd.data.abilities.races
 
 import com.andreyyurko.dnd.data.abilities.other.mapOfLanguages
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.character.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Languages
 import com.andreyyurko.dnd.data.characterData.Priority
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
@@ -48,7 +48,7 @@ val humanAbilities = AbilityNode(
 )
 
 val human = AbilityNode(
-    name = "Человек",
+    name = "Человек ",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.race = "Человек"
         abilities

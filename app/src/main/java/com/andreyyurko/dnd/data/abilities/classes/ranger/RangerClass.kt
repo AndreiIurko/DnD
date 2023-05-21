@@ -20,7 +20,7 @@ import com.andreyyurko.dnd.data.characterData.Ability
 import com.andreyyurko.dnd.data.characterData.Action
 import com.andreyyurko.dnd.data.characterData.ActionType
 import com.andreyyurko.dnd.data.characterData.ArmorProf
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.character.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.Priority
 import com.andreyyurko.dnd.data.characterData.addAllMartialWeapons
@@ -168,7 +168,7 @@ var favoredEnemyDoubleChoice: AbilityNode = AbilityNode(
                 "Гит",
                 "Гном",
                 "Гоблин",
-                "Голифа",
+                "Голиаф",
                 "Дворф",
                 "Драконорождённый",
                 "Кенку",
@@ -195,7 +195,7 @@ var favoredEnemyDoubleChoice: AbilityNode = AbilityNode(
                 "Гит",
                 "Гном",
                 "Гоблин",
-                "Голифа",
+                "Голиаф",
                 "Дворф",
                 "Драконорождённый",
                 "Кенку",

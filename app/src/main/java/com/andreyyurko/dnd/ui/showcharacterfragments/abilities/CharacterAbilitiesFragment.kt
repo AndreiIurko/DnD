@@ -44,30 +44,24 @@ class CharacterAbilitiesFragment : BaseFragment(R.layout.fragment_character_abil
         if (characterInfo.currentState.hitDiceCount == "")
             characterInfo.currentState.hitDiceCount = characterInfo.level.toString()
         viewBinding.currentHitDiceTextView.setText(characterInfo.currentState.hitDiceCount)
-        viewBinding.currentHitDiceTextView.setOnKeyListener { _, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+        viewBinding.currentHitDiceTextView.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
                 viewBinding.currentHitDiceTextView.clearFocus()
                 characterInfo.currentState.hitDiceCount =
                     viewBinding.currentHitDiceTextView.text.toString()
                 characterViewModel.updateCharacterInfo()
             }
-
-            characterInfo.currentState.hitDiceCount =
-                viewBinding.currentHitDiceTextView.text.toString()
             false
         }
 
         viewBinding.tempHitPointsEditText.setText(characterInfo.currentState.temporaryHp)
-        viewBinding.tempHitPointsEditText.setOnKeyListener { _, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+        viewBinding.tempHitPointsEditText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
                 viewBinding.tempHitPointsEditText.clearFocus()
                 characterViewModel.getCharacter().characterInfo.currentState.temporaryHp =
                     viewBinding.tempHitPointsEditText.text.toString()
                 characterViewModel.updateCharacterInfo()
             }
-
-            characterViewModel.getCharacter().characterInfo.currentState.temporaryHp =
-                viewBinding.tempHitPointsEditText.text.toString()
             false
         }
 
@@ -123,12 +117,7 @@ class CharacterAbilitiesFragment : BaseFragment(R.layout.fragment_character_abil
             }
             try {
                 action(editText.text.toString().toInt())
-            } catch (e: Exception) {
-                Toast.makeText(
-                    requireContext(),
-                    "Введите пожалуйста целое число",
-                    Toast.LENGTH_LONG
-                ).show()
+            } catch (_: Exception) {
             }
             false
         }

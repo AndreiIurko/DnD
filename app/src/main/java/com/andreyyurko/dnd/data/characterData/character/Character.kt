@@ -2,12 +2,10 @@ package com.andreyyurko.dnd.data.characterData.character
 
 import android.graphics.Bitmap
 import com.andreyyurko.dnd.data.abilities.baseAN
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Note
 import com.andreyyurko.dnd.data.characterData.Priority
-import com.andreyyurko.dnd.data.characterData.mergeCharacterInfo
 
-class Character(
+data class Character(
     var id: Int,
     var image: Bitmap? = null,
     var name: String = "",
@@ -27,7 +25,6 @@ fun mergeAllAbilities(character: Character) {
 
     characterInfo.currentState = character.characterInfo.currentState
     characterInfo.inventory = character.characterInfo.inventory
-    //characterInfo.spellsInfo.spellLists = character.characterInfo.spellsInfo.spellLists
     characterInfo.spellsInfo = character.characterInfo.spellsInfo
 
     characterInfo = mergeCharacterInfo(characterInfo, character.customAbilities)

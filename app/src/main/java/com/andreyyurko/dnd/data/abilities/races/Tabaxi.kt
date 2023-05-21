@@ -5,7 +5,7 @@ import com.andreyyurko.dnd.data.abilities.other.perception
 import com.andreyyurko.dnd.data.abilities.other.stealth
 import com.andreyyurko.dnd.data.characterData.Action
 import com.andreyyurko.dnd.data.characterData.ActionType
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.character.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.ChargesCounter
 import com.andreyyurko.dnd.data.characterData.DamageType
 import com.andreyyurko.dnd.data.characterData.Languages
@@ -117,7 +117,7 @@ val tabaxiAbilities = AbilityNode(
 )
 
 val tabaxi = AbilityNode(
-    name = "Табакси",
+    name = "Табакси ",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.race = "Табакси"
         abilities

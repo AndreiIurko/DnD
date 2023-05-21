@@ -30,7 +30,7 @@ class ClassViewModel @Inject constructor(
         if (character.characterInfo.level > 0)
             chosenLevel = character.characterInfo.level
         if (character.characterInfo.characterClass != Classes.NotImplemented)
-            chosenClass = baseCAN.chosen_alternatives["class"]?.data?.name
+            chosenClass = baseCAN.chosenAlternatives["class"]?.data?.name
     }
 
     fun makeChoice(choice: String) {
@@ -39,12 +39,12 @@ class ClassViewModel @Inject constructor(
         character.characterInfo.spellsInfo.remove("Заклинания класса")
         // TODO: think about how to do it better
         mapOfAn[choice]?.let {
-            baseCAN.chosen_alternatives["class"] =
+            baseCAN.chosenAlternatives["class"] =
                 CharacterAbilityNodeLevel((it as AbilityNodeLevel), character)
         }
         //baseCAN.makeChoice("class", choice)
 
-        val firstLevelCAN = baseCAN.chosen_alternatives["class"] as CharacterAbilityNodeLevel
+        val firstLevelCAN = baseCAN.chosenAlternatives["class"] as CharacterAbilityNodeLevel
         firstLevelCAN.makeChoice()
         levelUp(firstLevelCAN, 1)
         showAllClassAbilities()
@@ -54,33 +54,33 @@ class ClassViewModel @Inject constructor(
 
     fun changeLevel(level: Int) {
         character.characterInfo.currentState.charges = mutableMapOf()
-        var can = baseCAN.chosen_alternatives["class"]
+        var can = baseCAN.chosenAlternatives["class"]
         for (i in 1 until level) {
             can?.let {
                 val nextLevelName = it.data.name.split('_')[0] + '_' +
                         (it.data.name.split('_')[1].toInt() + 1).toString()
-                if (!it.chosen_alternatives.containsKey("nextLevel")) {
+                if (!it.chosenAlternatives.containsKey("nextLevel")) {
                     it.makeChoice("nextLevel", nextLevelName)
                 }
-                can = it.chosen_alternatives["nextLevel"]
+                can = it.chosenAlternatives["nextLevel"]
             }
         }
 
-        can?.chosen_alternatives?.remove("nextLevel")
+        can?.chosenAlternatives?.remove("nextLevel")
         chosenLevel = level
 
-        checkIfSomeRequirementsSatisfied(baseCAN.chosen_alternatives["class"])
+        checkIfSomeRequirementsSatisfied(baseCAN.chosenAlternatives["class"])
         mergeAllAbilities(createCharacterViewModel.character)
         showAllClassAbilities()
     }
 
     fun levelUp() {
-        var can = baseCAN.chosen_alternatives["class"]!!
-        var nextLevel = can.chosen_alternatives["nextLevel"]
+        var can = baseCAN.chosenAlternatives["class"]!!
+        var nextLevel = can.chosenAlternatives["nextLevel"]
 
         while (nextLevel != null) {
             can = nextLevel
-            nextLevel = can.chosen_alternatives["nextLevel"]
+            nextLevel = can.chosenAlternatives["nextLevel"]
         }
 
         val nextLevelName =
@@ -88,7 +88,7 @@ class ClassViewModel @Inject constructor(
 
         can.makeChoice("nextLevel", nextLevelName)
         chosenLevel++
-        checkIfSomeRequirementsSatisfied(baseCAN.chosen_alternatives["class"])
+        checkIfSomeRequirementsSatisfied(baseCAN.chosenAlternatives["class"])
         mergeAllAbilities(createCharacterViewModel.character)
         showAllClassAbilities()
     }
@@ -110,7 +110,7 @@ class ClassViewModel @Inject constructor(
     }
 
     fun showAllClassAbilities() {
-        val firstLevelCAN = character.baseCAN.chosen_alternatives["class"]
+        val firstLevelCAN = character.baseCAN.chosenAlternatives["class"]
 
         adapter.apply {
             rootCan = firstLevelCAN

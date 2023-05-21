@@ -32,7 +32,7 @@ import com.andreyyurko.dnd.data.abilities.races.human
 import com.andreyyurko.dnd.data.abilities.races.lineages.commonLineage
 import com.andreyyurko.dnd.data.abilities.races.mapOfRaces
 import com.andreyyurko.dnd.data.abilities.races.tabaxi
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.character.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Priority
 import com.andreyyurko.dnd.data.characterData.Weapon
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode

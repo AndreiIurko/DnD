@@ -3,7 +3,7 @@ package com.andreyyurko.dnd.data.abilities.classes.cleric
 import com.andreyyurko.dnd.data.characterData.Action
 import com.andreyyurko.dnd.data.characterData.ActionType
 import com.andreyyurko.dnd.data.characterData.ArmorProf
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.character.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.addAllMartialWeapons
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode

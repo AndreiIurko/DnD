@@ -1,6 +1,6 @@
 package com.andreyyurko.dnd.data.abilities.races
 
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.character.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.DamageType
 import com.andreyyurko.dnd.data.characterData.Languages
 import com.andreyyurko.dnd.data.characterData.Priority
@@ -88,7 +88,7 @@ val halflingAbilities = AbilityNode(
 )
 
 val halfling = AbilityNode(
-    name = "Полурослик",
+    name = "Полурослик ",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.race = "Полурослик"
         abilities

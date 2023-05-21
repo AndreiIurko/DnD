@@ -1,18 +1,17 @@
 package com.andreyyurko.dnd.data.characterData.character
 
 import com.andreyyurko.dnd.data.abilities.mapOfAn
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Priority
 
 open class CharacterAbilityNode(
     open val data: AbilityNode,
-    var chosen_alternatives: MutableMap<String, CharacterAbilityNode>,
+    var chosenAlternatives: MutableMap<String, CharacterAbilityNode> = mutableMapOf(),
     var character: Character? = null,
     var chosenAlternativesForActions: MutableMap<String, String> = mutableMapOf()
 ) {
     constructor(_data: AbilityNode, character: Character?) : this(
         data = _data,
-        chosen_alternatives = mutableMapOf(),
+        chosenAlternatives = mutableMapOf(),
         character = character
     )
 
@@ -27,7 +26,7 @@ open class CharacterAbilityNode(
             }
         }
 
-        for ((_, value) in chosen_alternatives.entries) {
+        for ((_, value) in chosenAlternatives.entries) {
             result = value.merge(result, priority)
         }
         return result
@@ -46,8 +45,8 @@ open class CharacterAbilityNode(
 
     open fun makeChoice(option_name: String, choice: String, isFirst: Boolean = true) {
         mapOfAn[choice]?.let {
-            chosen_alternatives[option_name] = CharacterAbilityNode(it, character)
-            makeAllSimpleChoice(chosen_alternatives[option_name])
+            chosenAlternatives[option_name] = CharacterAbilityNode(it, character)
+            makeAllSimpleChoice(chosenAlternatives[option_name])
         }
         data.actionForChoice[option_name]?.let {
             chosenAlternativesForActions[option_name] = choice
@@ -63,7 +62,7 @@ open class CharacterAbilityNode(
         for (optionName in can.data.getAlternatives.keys) {
             can.character?.let {
                 val optionList = can.showOptions(optionName)
-                if (optionList.size == 1 && can.chosen_alternatives[optionName] == null) {
+                if (optionList.size == 1 && can.chosenAlternatives[optionName] == null) {
                     can.makeChoice(optionName, optionList[0], false)
                 }
             }
@@ -74,14 +73,14 @@ open class CharacterAbilityNode(
 fun checkIfSomeRequirementsSatisfied(can: CharacterAbilityNode?) {
     if (can == null) return
     for ((optionName, listOfOptions) in can.data.getAlternatives) {
-        if (can.chosen_alternatives[optionName] == null && listOfOptions(can.character?.characterInfo).size == 1) {
+        if (can.chosenAlternatives[optionName] == null && listOfOptions(can.character?.characterInfo).size == 1) {
             if (mapOfAn[listOfOptions(can.character?.characterInfo)[0]]!!.isAddable(can.character?.characterInfo)) {
                 can.makeChoice(optionName, listOfOptions(can.character?.characterInfo)[0], false)
             }
         }
     }
 
-    for (next_can in can.chosen_alternatives.values) {
+    for (next_can in can.chosenAlternatives.values) {
         checkIfSomeRequirementsSatisfied(next_can)
     }
 }

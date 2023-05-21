@@ -1,6 +1,6 @@
 package com.andreyyurko.dnd.data.inventory
 
-import com.andreyyurko.dnd.data.characterData.InventoryRelevantData
+import com.andreyyurko.dnd.data.characterData.character.InventoryRelevantData
 
 data class InventoryItem(
     val name: String,

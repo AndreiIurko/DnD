@@ -11,7 +11,7 @@ import com.andreyyurko.dnd.data.abilities.other.perception
 import com.andreyyurko.dnd.data.abilities.other.stealth
 import com.andreyyurko.dnd.data.abilities.other.strengthAbilityImprovement
 import com.andreyyurko.dnd.data.abilities.other.wisdomAbilityImprovement
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.character.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 
 val lineageAbilityScoreImprovement = AbilityNode(

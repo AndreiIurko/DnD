@@ -1,5 +1,17 @@
-package com.andreyyurko.dnd.data.characterData
+package com.andreyyurko.dnd.data.characterData.character
 
+import com.andreyyurko.dnd.data.characterData.Ability
+import com.andreyyurko.dnd.data.characterData.Action
+import com.andreyyurko.dnd.data.characterData.Armor
+import com.andreyyurko.dnd.data.characterData.ArmorProf
+import com.andreyyurko.dnd.data.characterData.ChargesCounter
+import com.andreyyurko.dnd.data.characterData.Classes
+import com.andreyyurko.dnd.data.characterData.Conditions
+import com.andreyyurko.dnd.data.characterData.DamageType
+import com.andreyyurko.dnd.data.characterData.Languages
+import com.andreyyurko.dnd.data.characterData.Skill
+import com.andreyyurko.dnd.data.characterData.Tools
+import com.andreyyurko.dnd.data.characterData.Weapon
 import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
 import com.andreyyurko.dnd.data.spells.CharacterSpells
 
@@ -7,7 +19,6 @@ data class CharacterInfo(
     var level: Int = 0,
     var spellCasterLevel: Float = 0f,
     var spellsLevel: Int = 0,
-    //var spellsLevel: MutableMap<String, Int> = mutableMapOf(),
     var race: String = "",
     var characterClass: Classes = Classes.NotImplemented,
     var passiveInsightBonus: Int = 0,

@@ -12,13 +12,13 @@ import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.andreyyurko.dnd.data.abilities.mapOfAn
 import com.andreyyurko.dnd.data.characterData.CharacterBriefInfo
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
-import com.andreyyurko.dnd.data.characterData.CurrentState
+import com.andreyyurko.dnd.data.characterData.character.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.character.CurrentState
 import com.andreyyurko.dnd.data.characterData.Note
 import com.andreyyurko.dnd.data.characterData.character.Character
 import com.andreyyurko.dnd.data.characterData.character.CharacterAbilityNode
 import com.andreyyurko.dnd.data.characterData.character.mergeAllAbilities
-import com.andreyyurko.dnd.data.characterData.mergeCharacterInfo
+import com.andreyyurko.dnd.data.characterData.character.mergeCharacterInfo
 import com.andreyyurko.dnd.data.inventory.InventoryItemInfo
 import com.andreyyurko.dnd.data.spells.CharacterSpells
 import com.andreyyurko.dnd.db.DB
@@ -272,7 +272,7 @@ class CharactersHolder @Inject constructor(
                     path + characterAbilityNode.data.name + '.',
                     character
                 )
-            characterAbilityNode.chosen_alternatives[key] = chosenNode
+            characterAbilityNode.chosenAlternatives[key] = chosenNode
         }
 
         return characterAbilityNode
@@ -428,7 +428,7 @@ class CharactersHolder @Inject constructor(
         characterId: Int, path: String
     ) {
 
-        for (characterNode in characterAbilityNode.chosen_alternatives.values) {
+        for (characterNode in characterAbilityNode.chosenAlternatives.values) {
             getCharacterNodesJsons(
                 jsonMap,
                 characterNode,
@@ -438,8 +438,8 @@ class CharactersHolder @Inject constructor(
         }
 
         val chosenAlternativesNames: MutableMap<String, String> = mutableMapOf()
-        for (key in characterAbilityNode.chosen_alternatives.keys) {
-            characterAbilityNode.chosen_alternatives[key]?.apply {
+        for (key in characterAbilityNode.chosenAlternatives.keys) {
+            characterAbilityNode.chosenAlternatives[key]?.apply {
                 chosenAlternativesNames[key] = this.data.name
             }
         }
@@ -488,7 +488,7 @@ class CharactersHolder @Inject constructor(
                     path + characterAbilityNode.data.name + '.',
                     character
                 )
-            characterAbilityNode.chosen_alternatives[key] = chosenNode
+            characterAbilityNode.chosenAlternatives[key] = chosenNode
         }
 
         return characterAbilityNode
@@ -605,7 +605,7 @@ class CharactersHolder @Inject constructor(
         path: String
     ) {
         // save all sub-nodes
-        for (characterNode in characterAbilityNode.chosen_alternatives.values) {
+        for (characterNode in characterAbilityNode.chosenAlternatives.values) {
             saveCharacterNode(
                 characterNode,
                 characterId,
@@ -615,8 +615,8 @@ class CharactersHolder @Inject constructor(
 
         // get chosen AN names and save it using current AN option_name as key
         val chosenAlternativesNames: MutableMap<String, String> = mutableMapOf()
-        for (key in characterAbilityNode.chosen_alternatives.keys) {
-            characterAbilityNode.chosen_alternatives[key]?.apply {
+        for (key in characterAbilityNode.chosenAlternatives.keys) {
+            characterAbilityNode.chosenAlternatives[key]?.apply {
                 chosenAlternativesNames[key] = this.data.name
             }
         }
@@ -676,7 +676,7 @@ class CharactersHolder @Inject constructor(
         characterId: Int,
         path: String
     ) {
-        for (characterNode in characterAbilityNode.chosen_alternatives.values) {
+        for (characterNode in characterAbilityNode.chosenAlternatives.values) {
             deleteCharacterNode(
                 characterNode,
                 characterId,

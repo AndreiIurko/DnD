@@ -4,7 +4,7 @@ import com.andreyyurko.dnd.data.abilities.other.brewersSupplies
 import com.andreyyurko.dnd.data.abilities.other.masonsTools
 import com.andreyyurko.dnd.data.abilities.other.smithsTools
 import com.andreyyurko.dnd.data.characterData.ArmorProf
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.character.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.DamageType
 import com.andreyyurko.dnd.data.characterData.Languages
 import com.andreyyurko.dnd.data.characterData.Priority
@@ -115,7 +115,7 @@ val dwarfAbilities = AbilityNode(
 )
 
 val dwarf = AbilityNode(
-    name = "Дварф",
+    name = "Дварф ",
     changesInCharacterInfo = { abilities: CharacterInfo ->
         abilities.race = "Дварф"
         abilities

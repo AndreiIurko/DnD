@@ -13,7 +13,7 @@ import com.andreyyurko.dnd.data.abilities.classes.sorcerer.mapOfSorcererAbilitie
 import com.andreyyurko.dnd.data.abilities.classes.warlock.mapOfWarlockAbilities
 import com.andreyyurko.dnd.data.abilities.classes.wizard.mapOfWizardAbilities
 import com.andreyyurko.dnd.data.abilities.mapOfAn
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.character.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.Priority
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode
 import com.andreyyurko.dnd.data.characterData.character.Character
@@ -69,7 +69,7 @@ class CharacterAbilityNodeLevel(
         val nextAN = mapOfAn[data.next_level]
         nextAN?.let {
             next_level = CharacterAbilityNodeLevel(nextAN as AbilityNodeLevel, character)
-            chosen_alternatives["nextLevel"] = next_level as CharacterAbilityNode
+            chosenAlternatives["nextLevel"] = next_level as CharacterAbilityNode
         }
 
     }

@@ -7,7 +7,7 @@ import com.andreyyurko.dnd.data.abilities.other.natureSkillAndExpertise
 import com.andreyyurko.dnd.data.abilities.other.religionSkillAndExpertise
 import com.andreyyurko.dnd.data.characterData.Action
 import com.andreyyurko.dnd.data.characterData.ActionType
-import com.andreyyurko.dnd.data.characterData.CharacterInfo
+import com.andreyyurko.dnd.data.characterData.character.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.ChargesCounter
 import com.andreyyurko.dnd.data.characterData.Classes
 import com.andreyyurko.dnd.data.characterData.character.AbilityNode

@@ -1,5 +1,6 @@
 package com.andreyyurko.dnd.data.characterData
 
+import com.andreyyurko.dnd.data.characterData.character.CharacterInfo
 import com.andreyyurko.dnd.data.characterData.character.Filter
 
 enum class Skill(var skillName: String, var ability: Ability) {
